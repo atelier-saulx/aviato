@@ -10,7 +10,7 @@ import { SideMenu } from '../components/side-menu'
 const HeadContent = () => {
   return (
     <Head>
-      <title>Based-UI Documentation</title>
+      <title>Aviato-UI</title>
       <meta
         name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"

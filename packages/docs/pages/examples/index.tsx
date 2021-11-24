@@ -1,13 +1,6 @@
 import { ShowcaseComponent, ShowcaseComponentProps } from './showcaseComponent'
 
-import {
-  Title,
-  Button,
-  Text,
-  Avatar,
-  BasicCard,
-  ResultCard,
-} from '@based/ui-next'
+import { Title, Button, Text, Avatar, BasicCard, ResultCard } from '@aviato/ui'
 
 const Playground = () => {
   const components: ShowcaseComponentProps[] = [

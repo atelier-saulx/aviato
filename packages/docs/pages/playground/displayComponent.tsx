@@ -1,7 +1,7 @@
 import React from 'react'
 import { FunctionComponent } from 'react'
 
-import { Text } from '@based/ui-next'
+import { Text } from '@aviato/ui'
 
 export type DisplayComponentProps = {}
 

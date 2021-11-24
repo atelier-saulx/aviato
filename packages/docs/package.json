@@ -1,5 +1,5 @@
 {
-  "name": "@based/ui-docs",
+  "name": "@aviato/ui-docs",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -16,7 +16,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@based/ui-next": "3.0.0",
+    "@aviato/ui": "3.0.0",
     "@saulx/eslint-config": "^1.1.0",
     "@saulx/prettier-config": "^1.0.0",
     "@types/node": "16.11.7",

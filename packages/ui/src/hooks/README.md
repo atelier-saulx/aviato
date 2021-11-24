@@ -1,4 +1,4 @@
-# Based-UI hooks
+# UI hooks
 
 Our hooks are curated from internal development & from projects such as:
 

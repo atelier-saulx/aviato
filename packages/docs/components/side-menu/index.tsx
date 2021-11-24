@@ -1,7 +1,7 @@
 import { LogoWithTitle } from '../logo'
 import { useRouter } from 'next/router'
 
-import { SideMenu as Menu, MenuItem } from '@based/ui-next'
+import { SideMenu as Menu, MenuItem } from '@aviato/ui'
 
 const SideMenu = () => {
   const router = useRouter()

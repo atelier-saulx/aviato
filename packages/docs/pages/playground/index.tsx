@@ -1,13 +1,6 @@
 import { DisplayComponent, DisplayComponentProps } from './displayComponent'
 
-import {
-  Title,
-  Button,
-  Text,
-  Avatar,
-  BasicCard,
-  ResultCard,
-} from '@based/ui-next'
+import { Title, Button, Text, Avatar, BasicCard, ResultCard } from '@aviato/ui'
 
 const Playground = () => {
   const components: DisplayComponentProps[] = [

@@ -1,8 +1,8 @@
 {
-  "name": "@based/ui-next",
+  "name": "@aviato/ui",
   "version": "3.0.0",
-  "repository": "https://github.com/atelier-saulx/based-ui",
-  "description": "A library of front-end React components for Based",
+  "repository": "https://github.com/atelier-saulx/aviato-ui",
+  "description": "A library of front-end React components",
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
