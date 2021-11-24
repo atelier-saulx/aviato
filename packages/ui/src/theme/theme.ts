@@ -63,12 +63,6 @@ export type SizeTokenCollection = {
   [key: string]: SizeTokenConfig
 }
 
-const GlobalStyle = createGlobalStyle<{ cssVariables }>`
-  :root {
-    ${(props) => props.cssVariables};
-  }
-`
-
 type StyleElement = {
   token: string
   value: string | number
@@ -132,5 +126,11 @@ function useSize(
     console.warn('Size-resolve failed - error: ', error)
   }
 }
+
+const GlobalStyle = createGlobalStyle<{ cssVariables }>`
+  :root {
+    ${(props) => props.cssVariables};
+  }
+`
 
 export { globalCSSVariables, GlobalStyle, useColor, useSize }
