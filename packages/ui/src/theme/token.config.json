@@ -1,26 +1,26 @@
 {
   "color": {
-    "color-token-primary": "98, 0, 238",
-    "color-token-secondary": "217, 19, 174",
-    "color-token-background": "247, 247, 248",
+    "token-color-primary": "98, 0, 238",
+    "token-color-secondary": "217, 19, 174",
+    "token-color-background": "247, 247, 248",
 
-    "color-primary": "rgb(var(--color-token-primary))",
-    "color-secondary": "rgb(var(--color-token-secondary))",
-    "color-tertiary": "rgba(var(--color-token-primary), 0.5)",
-    "color-background": "rgb(var(--color-token-background))"
+    "color-primary": "rgb(var(--token-color-primary))",
+    "color-secondary": "rgb(var(--token-color-secondary))",
+    "color-tertiary": "rgba(var(--token-color-primary), 0.5)",
+    "color-background": "rgb(var(--token-color-background))"
   },
 
   "size": {
-    "size-token-xxs": "4",
-    "size-token-xs": "8",
-    "size-token-sm": "12",
-    "size-token-md": "16",
-    "size-token-lg": "200",
+    "token-size-xxs": "4",
+    "token-size-xs": "8",
+    "token-size-sm": "12",
+    "token-size-md": "16",
+    "token-size-lg": "200",
 
-    "size-xxs": "calc(var(--size-token-xxs) * 1px)",
-    "size-xs": "calc(var(--size-token-xs) * 1px)",
-    "size-sm": "calc(var(--size-token-sm) * 1px)",
-    "size-md": "calc(var(--size-token-md) * 1px)",
-    "size-lg": "calc(var(--size-token-lg) * 1px)"
+    "size-xxs": "calc(var(--token-size-xxs) * 1px)",
+    "size-xs": "calc(var(--token-size-xs) * 1px)",
+    "size-sm": "calc(var(--token-size-sm) * 1px)",
+    "size-md": "calc(var(--token-size-md) * 1px)",
+    "size-lg": "calc(var(--token-size-lg) * 1px)"
   }
 }

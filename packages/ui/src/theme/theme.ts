@@ -99,7 +99,14 @@ function getStyleCollection(): StyleElement[] {
   const colors = getColorCollection()
   const sizes = getSizeCollection()
 
-  return [...colors, ...sizes]
+  // Merge token collections together
+  const mergedCollection = [...colors, ...sizes]
+
+  // Sort alphabetically
+  const sortMethod = (a, b) => b.token.localeCompare(a.token)
+  const sortedCollection = mergedCollection.sort(sortMethod)
+
+  return sortedCollection
 }
 
 function globalCSSVariables(): string {
