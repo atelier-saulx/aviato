@@ -1,0 +1,32 @@
+* Text
+Text / Primary
+Text / Secondary
+Text / Disabled
+
+* Primary
+Primary / Main
+Primary / Main / Hover
+Primary / Main / Selected
+Primary / Light
+Primary / Light / Hover
+Primary / Light / Selected
+Primary / Outline / Border
+Primary / Outline / Background
+
+Primary / Contrast / High
+Primary / Contrast / Medium
+Primary / Contrast / Low
+
+* Action
+Action / Hover
+Action / Selected
+Action / Active
+Action / Disabled
+Action / Disabled Background
+
+* Other
+Other / Divider
+Other / Outline /  Border
+Other / Outline / Background
+Other / Input Line
+Other / Overlay
