@@ -87,10 +87,10 @@ function getSizeCollection(): StyleElement[] {
   const tokenConfig = tokenConfiguration()
   if (!tokenConfig.size) return []
 
-  return Object.entries(tokenConfig.size).map(([token]) => {
+  return Object.entries(tokenConfig.size).map(([token, value]) => {
     return {
       token,
-      value: useSize(token as SizeToken, tokenConfig),
+      value: `${value}`,
     }
   })
 }
