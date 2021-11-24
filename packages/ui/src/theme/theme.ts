@@ -116,4 +116,4 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-export { globalCSSVariables, GlobalStyle }
+export { GlobalStyle }
