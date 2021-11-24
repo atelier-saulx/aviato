@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 
 import TokenConfigFile from './token.config.json'
@@ -110,10 +111,21 @@ function globalCSSVariables(): string {
     .join('')
 }
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ variables }>`
   :root {
-    ${globalCSSVariables()};
+    ${(props) => props.variables};
   }
 `
 
-export { GlobalStyle }
+function useGlobalVariables(theme: 'light' | 'dark' = 'light') {
+  const [globalVariables, setGlobalVariables] = useState('')
+
+  useEffect(() => {
+    const variables = globalCSSVariables()
+    setGlobalVariables(variables)
+  }, [theme])
+
+  return globalVariables
+}
+
+export { useGlobalVariables, GlobalStyle }
