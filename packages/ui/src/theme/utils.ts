@@ -21,9 +21,9 @@ export function convertRGBToRGBA(input: string, opacity: number): string {
 
 export function resolveColor(
   token: ColorToken,
-  config: ColorTokenCollection
+  collection: ColorTokenCollection
 ): string {
-  const tokenConfig = config[token]
+  const tokenConfig = collection[token]
   if (!tokenConfig) {
     throw new Error(`Missing color token: ${token}`)
   }
@@ -39,6 +39,10 @@ export function resolveColor(
     opacity = Math.min(Math.max(inputOpacity, 0), 1)
   }
 
+  if (color.includes('--')) {
+    return color
+  }
+
   if (color.includes('#')) {
     return convertHexToRGBA(color, opacity)
   } else if (color.includes('rgb(')) {
@@ -52,9 +56,9 @@ export function resolveColor(
 
 export function resolveSize(
   token: SizeToken,
-  config: SizeTokenCollection
+  collection: SizeTokenCollection
 ): string {
-  const tokenConfig = config[token]
+  const tokenConfig = collection[token]
   if (!tokenConfig) {
     throw new Error(`Missing size token: ${token}`)
   }
