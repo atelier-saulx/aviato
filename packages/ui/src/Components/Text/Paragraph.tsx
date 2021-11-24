@@ -1,12 +1,12 @@
 import React, { CSSProperties, FunctionComponent } from 'react'
 
-export type TitleProps = {
+export type ParagraphProps = {
   value?: string
   style?: CSSProperties
   fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
-export const Title: FunctionComponent<TitleProps> = ({
+export const Paragraph: FunctionComponent<ParagraphProps> = ({
   children,
   value = '',
   style = {},
@@ -24,11 +24,11 @@ export const Title: FunctionComponent<TitleProps> = ({
   return (
     <div
       style={{
-        fontSize: '22px',
-        lineHeight: '24px',
-        letterSpacing: '-0.015em',
-        userSelect: 'text',
+        fontSize: '16px',
         fontWeight: targetWeight,
+        letterSpacing: '-0.015em',
+        lineHeight: '20px',
+        userSelect: 'text',
         ...style,
       }}
     >

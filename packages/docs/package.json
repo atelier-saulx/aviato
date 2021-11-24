@@ -1,0 +1,36 @@
+{
+  "name": "@based/ui-docs",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.0.4",
+    "prismjs": "^1.25.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@based/ui-next": "3.0.0",
+    "@saulx/eslint-config": "^1.1.0",
+    "@saulx/prettier-config": "^1.0.0",
+    "@types/node": "16.11.7",
+    "@types/prismjs": "^1.16.6",
+    "@types/react": "17.0.35",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.15",
+    "babel-plugin-prismjs": "^2.1.0",
+    "eslint": "7",
+    "eslint-config-next": "12.0.4",
+    "typescript": "4.4.3"
+  },
+  "prettier": "@saulx/prettier-config",
+  "eslintConfig": {
+    "extends": "@saulx/eslint-config"
+  }
+}
