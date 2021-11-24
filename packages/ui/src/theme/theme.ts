@@ -1,7 +1,7 @@
 import { resolveColor, resolveSize } from './utils'
 import { createGlobalStyle } from 'styled-components'
 
-import TokenConfig from './token.config.json'
+import TokenConfigFile from './token.config.json'
 
 export type ColorToken =
   | 'color-primary'
@@ -43,19 +43,16 @@ type SizeTokenConfig =
       size: string
     }
 
-type TokenConfig = ColorTokenConfig | SizeTokenConfig
+type TokenType = 'color' | 'size'
 
 export type TokenConfiguration = {
-  [key in string]: {
-    [key: string]: TokenConfig
+  [key in TokenType]: {
+    [key in TokenPrimitive]: ColorTokenConfig | SizeTokenConfig
   }
 }
 
 const tokenConfiguration: () => TokenConfiguration = () => {
-  const colors = TokenConfig.color ?? {}
-  const sizes = TokenConfig.size ?? {}
-
-  return { ...colors, ...sizes }
+  return TokenConfigFile as unknown as TokenConfiguration
 }
 
 export type ColorTokenCollection = {
@@ -79,6 +76,7 @@ type StyleElement = {
 
 function getColorCollection(): StyleElement[] {
   const tokenConfig = tokenConfiguration()
+  if (!tokenConfig.color) return []
 
   return Object.entries(tokenConfig.color).map(([token]) => {
     return {
@@ -90,6 +88,7 @@ function getColorCollection(): StyleElement[] {
 
 function getSizeCollection(): StyleElement[] {
   const tokenConfig = tokenConfiguration()
+  if (!tokenConfig.size) return []
 
   return Object.entries(tokenConfig.size).map(([token]) => {
     return {
@@ -112,19 +111,23 @@ function globalCSSVariables(): string {
     .join('')
 }
 
-function useColor(token: ColorToken, config?: TokenConfiguration): string {
+function useColor(
+  token: ColorToken,
+  config: TokenConfiguration = tokenConfiguration()
+): string {
   try {
-    const tokenConfig = config ?? tokenConfiguration()
-    return resolveColor(token, tokenConfig.color as ColorTokenCollection)
+    return resolveColor(token, config.color as ColorTokenCollection)
   } catch (error) {
     console.warn('Color-resolve failed - error: ', error)
   }
 }
 
-function useSize(token: SizeToken, config?: TokenConfiguration): string {
+function useSize(
+  token: SizeToken,
+  config: TokenConfiguration = tokenConfiguration()
+): string {
   try {
-    const tokenConfig = config ?? tokenConfiguration()
-    return resolveSize(token, tokenConfig.size as SizeTokenCollection)
+    return resolveSize(token, config.size as SizeTokenCollection)
   } catch (error) {
     console.warn('Size-resolve failed - error: ', error)
   }
