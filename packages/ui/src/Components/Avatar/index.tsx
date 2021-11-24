@@ -35,12 +35,12 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   return (
     <div
       style={{
-        background: 'red', // useColor({ color: 'primary' }),
+        background: 'var(--color-primary);',
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
         borderRadius: '50%',
-        color: 'red', // useColor({ color: 'background' }),
+        color: 'var(--color-background)',
         fontSize: avatarFontSize,
         width: avatarSize,
         height: avatarSize,

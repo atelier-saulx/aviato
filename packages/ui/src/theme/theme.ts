@@ -134,7 +134,7 @@ function getStyleCollection(): StyleElement[] {
 
 function globalCSSVariables(): string {
   return getStyleCollection()
-    .map(({ token, value }) => `--${token}: '${value}';`)
+    .map(({ token, value }) => `--${token}: ${value};`)
     .join('')
 }
 

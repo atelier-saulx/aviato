@@ -53,7 +53,7 @@ export const SideMenu: FunctionComponent<SideMenuProps> = ({
         width: 200,
         minWidth: 200,
         overflowX: 'hidden',
-        backgroundColor: 'red', // useColor
+        backgroundColor: 'var(--color-background)',
         ...style,
       }}
     >
