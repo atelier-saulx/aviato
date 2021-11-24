@@ -1,4 +1,5 @@
-import { resolveColor, resolveSize, setCSSProperty } from './utils'
+import { resolveColor, resolveSize } from './utils'
+import { createGlobalStyle } from 'styled-components'
 
 import TokenConfig from './token.config.json'
 
@@ -91,42 +92,68 @@ export type SizeTokenCollection = {
   [key: string]: SizeTokenConfig
 }
 
+const GlobalStyle = createGlobalStyle<{ cssVariables }>`
+  :root {
+    ${(props) => props.cssVariables};
+  }
+`
+
 type StyleElement = {
   token: string
   value: string | number
 }
 
-function getStyleCollection(): StyleElement[] {
-  return [
-    { token: 'test1', value: 'red' },
-    { token: 'test2', value: 'blue' },
-  ]
-}
+function getColorCollection(): StyleElement[] {
+  const tokenConfig = tokenConfiguration()
 
-function setGlobalStyles(): void {
-  const collection = getStyleCollection()
-
-  collection.forEach(({ token, value }) => {
-    setCSSProperty(`--${token}`, `${value}`)
+  return Object.entries(tokenConfig.color).map(([token]) => {
+    return {
+      token,
+      value: useColor(token as ColorToken, tokenConfig),
+    }
   })
 }
 
-function useColor(token: ColorToken): string {
+function getSizeCollection(): StyleElement[] {
+  const tokenConfig = tokenConfiguration()
+
+  return Object.entries(tokenConfig.size).map(([token]) => {
+    return {
+      token,
+      value: useSize(token as SizeToken, tokenConfig),
+    }
+  })
+}
+
+function getStyleCollection(): StyleElement[] {
+  const colors = getColorCollection()
+  const sizes = getSizeCollection()
+
+  return [...colors, ...sizes]
+}
+
+function globalCSSVariables(): string {
+  return getStyleCollection()
+    .map(({ token, value }) => `--${token}: '${value}';`)
+    .join('')
+}
+
+function useColor(token: ColorToken, config?: TokenConfiguration): string {
   try {
-    const tokenConfig = tokenConfiguration()
+    const tokenConfig = config ?? tokenConfiguration()
     return resolveColor(token, tokenConfig.color as ColorTokenCollection)
   } catch (error) {
     console.warn('Color-resolve failed - error: ', error)
   }
 }
 
-function useSize(token: SizeToken): string {
+function useSize(token: SizeToken, config?: TokenConfiguration): string {
   try {
-    const tokenConfig = tokenConfiguration()
+    const tokenConfig = config ?? tokenConfiguration()
     return resolveSize(token, tokenConfig.size as SizeTokenCollection)
   } catch (error) {
     console.warn('Size-resolve failed - error: ', error)
   }
 }
 
-export { setGlobalStyles, useColor, useSize }
+export { globalCSSVariables, GlobalStyle, useColor, useSize }

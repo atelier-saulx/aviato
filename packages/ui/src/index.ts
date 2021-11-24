@@ -1,3 +1,3 @@
 export * from './Components'
 export * from './hooks'
-export { setGlobalStyles } from './theme'
+export { globalCSSVariables, GlobalStyle } from './theme'

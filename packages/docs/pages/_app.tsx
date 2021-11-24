@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import { SideMenu } from '../components/side-menu'
-import { setGlobalStyles } from '@aviato/ui'
+import { globalCSSVariables, GlobalStyle } from '@aviato/ui'
 
 const HeadContent = () => {
   return (
@@ -21,8 +21,6 @@ const HeadContent = () => {
 }
 
 function App({ Component, pageProps }: AppProps) {
-  setGlobalStyles()
-
   const MainWrapper = ({ children }: any) => {
     return (
       <div
@@ -54,9 +52,12 @@ function App({ Component, pageProps }: AppProps) {
     )
   }
 
+  const cssVariables = globalCSSVariables()
+
   return (
     <>
       <HeadContent />
+      <GlobalStyle cssVariables={cssVariables} />
 
       <MainWrapper>
         <SideMenu />

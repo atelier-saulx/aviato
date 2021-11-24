@@ -65,9 +65,3 @@ export function resolveSize(
 
   return tokenConfig.size
 }
-
-export function setCSSProperty(variable: string, property: string) {
-  if (typeof document !== 'undefined' && document.documentElement !== null) {
-    document?.body.style.setProperty(`--${variable}`, `${property}`)
-  }
-}
