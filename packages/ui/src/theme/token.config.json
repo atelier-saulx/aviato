@@ -15,12 +15,16 @@
     "token-size-xs": "8",
     "token-size-sm": "12",
     "token-size-md": "16",
-    "token-size-lg": "200",
+    "token-size-lg": "20",
+    "token-size-xl": "24",
+    "token-size-xxl": "28",
 
     "size-xxs": "calc(var(--token-size-xxs) * 1px)",
     "size-xs": "calc(var(--token-size-xs) * 1px)",
     "size-sm": "calc(var(--token-size-sm) * 1px)",
     "size-md": "calc(var(--token-size-md) * 1px)",
-    "size-lg": "calc(var(--token-size-lg) * 1px)"
+    "size-lg": "calc(var(--token-size-lg) * 1px)",
+    "size-xl": "calc(var(--token-size-xl) * 1px)",
+    "size-xxl": "calc(var(--token-size-xxl) * 1px)"
   }
 }
