@@ -6,7 +6,7 @@
 
     "color-primary": "rgb(var(--token-color-primary))",
     "color-secondary": "rgb(var(--token-color-secondary))",
-    "color-tertiary": "rgba(var(--token-color-primary), 0.5)",
+    "color-tertiary": "rgba({token-color-primary}, 0.2)",
     "color-background": "rgb(var(--token-color-background))"
   },
 

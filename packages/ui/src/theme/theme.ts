@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { resolveColor, resolveSize } from './utils'
 import { createGlobalStyle } from 'styled-components'
 
 import TokenConfigFile from './token.config.json'
@@ -67,33 +63,36 @@ type StyleElement = {
   value: string | number
 }
 
-function getColorCollection(): StyleElement[] {
-  const tokenConfig = tokenConfiguration()
-  if (!tokenConfig.color) return []
+function parseVariable(input: string, lookupObject: object): string {
+  const hasVariable = input.includes('{')
+  if (hasVariable) {
+    return input.replace(/{([^{}]+)}/g, (_, key) => {
+      const matchingVariable = lookupObject[key]
+      return matchingVariable ?? input
+    })
+  }
 
-  return Object.entries(tokenConfig.color).map(([token, value]) => {
-    return {
-      token,
-      value: `${value}`,
-    }
-  })
+  return input
 }
 
-function getSizeCollection(): StyleElement[] {
-  const tokenConfig = tokenConfiguration()
-  if (!tokenConfig.size) return []
+function getCollection(entries: object | undefined | null): StyleElement[] {
+  if (!entries) {
+    return []
+  }
 
-  return Object.entries(tokenConfig.size).map(([token, value]) => {
+  return Object.entries(entries).map(([token, value]) => {
     return {
       token,
-      value: `${value}`,
+      value: `${parseVariable(value, entries)}`,
     }
   })
 }
 
 function getStyleCollection(): StyleElement[] {
-  const colors = getColorCollection()
-  const sizes = getSizeCollection()
+  const tokenConfig = tokenConfiguration()
+
+  const colors = getCollection(tokenConfig.color)
+  const sizes = getCollection(tokenConfig.size)
 
   // Merge token collections together
   const mergedCollection = [...colors, ...sizes]
@@ -109,28 +108,6 @@ function globalCSSVariables(): string {
   return getStyleCollection()
     .map(({ token, value }) => `--${token}: ${value};`)
     .join('')
-}
-
-function useColor(
-  token: ColorToken,
-  config: TokenConfiguration = tokenConfiguration()
-): string {
-  try {
-    return resolveColor(token, config.color as ColorTokenCollection)
-  } catch (error) {
-    console.warn('Color-resolve failed - error: ', error)
-  }
-}
-
-function useSize(
-  token: SizeToken,
-  config: TokenConfiguration = tokenConfiguration()
-): string {
-  try {
-    return resolveSize(token, config.size as SizeTokenCollection)
-  } catch (error) {
-    console.warn('Size-resolve failed - error: ', error)
-  }
 }
 
 const GlobalStyle = createGlobalStyle`
