@@ -137,9 +137,9 @@ function useSize(
   }
 }
 
-const GlobalStyle = createGlobalStyle<{ cssVariables }>`
+const GlobalStyle = createGlobalStyle`
   :root {
-    ${(props) => props.cssVariables};
+    ${globalCSSVariables()};
   }
 `
 
