@@ -35,7 +35,7 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   return (
     <div
       style={{
-        background: 'var(--color-primary);',
+        backgroundColor: 'var(--color-secondary)',
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center center',

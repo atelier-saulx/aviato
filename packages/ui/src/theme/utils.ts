@@ -23,18 +23,16 @@ export function resolveColor(
   token: ColorToken,
   collection: ColorTokenCollection
 ): string {
-  const tokenConfig = collection[token]
-  if (!tokenConfig) {
+  const tokenCollection = collection[token]
+  if (!tokenCollection) {
     throw new Error(`Missing color token: ${token}`)
   }
 
-  let color
+  let color: string = tokenCollection as string
   let opacity = 1.0
 
-  if (typeof tokenConfig === 'string') {
-    color = tokenConfig
-  } else {
-    const { color: inputColor, opacity: inputOpacity = 1.0 } = tokenConfig
+  if (typeof tokenCollection !== 'string') {
+    const { color: inputColor, opacity: inputOpacity = 1.0 } = tokenCollection
     color = inputColor
     opacity = Math.min(Math.max(inputOpacity, 0), 1)
   }
@@ -46,7 +44,7 @@ export function resolveColor(
   if (color.includes('#')) {
     return convertHexToRGBA(color, opacity)
   } else if (color.includes('rgb(')) {
-    return convertRGBToRGBA(color, opacity)
+    return color
   } else if (color.includes('rgba(')) {
     return color
   }
@@ -58,14 +56,14 @@ export function resolveSize(
   token: SizeToken,
   collection: SizeTokenCollection
 ): string {
-  const tokenConfig = collection[token]
-  if (!tokenConfig) {
+  const tokenCollection = collection[token]
+  if (!tokenCollection) {
     throw new Error(`Missing size token: ${token}`)
   }
 
-  if (typeof tokenConfig === 'string') {
-    return tokenConfig
+  if (typeof tokenCollection === 'string') {
+    return tokenCollection
   }
 
-  return tokenConfig.size
+  return tokenCollection.size
 }

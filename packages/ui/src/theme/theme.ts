@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { resolveColor, resolveSize } from './utils'
 import { createGlobalStyle } from 'styled-components'
 
@@ -72,10 +75,10 @@ function getColorCollection(): StyleElement[] {
   const tokenConfig = tokenConfiguration()
   if (!tokenConfig.color) return []
 
-  return Object.entries(tokenConfig.color).map(([token]) => {
+  return Object.entries(tokenConfig.color).map(([token, value]) => {
     return {
       token,
-      value: useColor(token as ColorToken, tokenConfig),
+      value: `${value}`,
     }
   })
 }
@@ -133,4 +136,4 @@ const GlobalStyle = createGlobalStyle<{ cssVariables }>`
   }
 `
 
-export { globalCSSVariables, GlobalStyle, useColor, useSize }
+export { globalCSSVariables, GlobalStyle }

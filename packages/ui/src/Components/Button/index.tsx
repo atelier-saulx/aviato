@@ -11,7 +11,7 @@ const StyledButton = styled.button({
   letterSpacing: '-0.015em',
   lineHeight: '24px',
   margin: '6px',
-  padding: '4px 8px',
+  padding: 'var(--size-xxs) var(--size-xs)',
 })
 
 export type ButtonProps = {

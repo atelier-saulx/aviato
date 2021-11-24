@@ -1,13 +1,26 @@
 {
   "color": {
-    "color-primary": "rgba(98, 0, 238, 1.0)",
-    "color-secondary": "rgba(217, 19, 174, 1.0)",
-    "color-background": "rgba(247, 247, 248, 1.0)"
+    "color-token-primary": "98, 0, 238",
+    "color-token-secondary": "217, 19, 174",
+    "color-token-background": "247, 247, 248",
+
+    "color-primary": "rgb(var(--color-token-primary))",
+    "color-secondary": "rgb(var(--color-token-secondary))",
+    "color-tertiary": "rgba(var(--color-token-primary), 0.5)",
+    "color-background": "rgb(var(--color-token-background))"
   },
 
   "size": {
-    "size-sm": "12px",
-    "size-md": { "size": "16px" },
-    "size-lg": { "size": "20px" }
+    "size-token-xxs": "4",
+    "size-token-xs": "8",
+    "size-token-sm": "12",
+    "size-token-md": "16",
+    "size-token-lg": "200",
+
+    "size-xxs": "calc(var(--size-token-xxs) * 1px)",
+    "size-xs": "calc(var(--size-token-xs) * 1px)",
+    "size-sm": "calc(var(--size-token-sm) * 1px)",
+    "size-md": "calc(var(--size-token-md) * 1px)",
+    "size-lg": "calc(var(--size-token-lg) * 1px)"
   }
 }
