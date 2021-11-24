@@ -2,10 +2,10 @@ import '../styles/reset.css'
 import '../styles/font.css'
 
 import type { AppProps } from 'next/app'
-
 import Head from 'next/head'
 
 import { SideMenu } from '../components/side-menu'
+import { setGlobalStyles } from '@aviato/ui'
 
 const HeadContent = () => {
   return (
@@ -21,6 +21,8 @@ const HeadContent = () => {
 }
 
 function App({ Component, pageProps }: AppProps) {
+  setGlobalStyles()
+
   const MainWrapper = ({ children }: any) => {
     return (
       <div

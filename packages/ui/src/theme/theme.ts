@@ -1,4 +1,4 @@
-import { resolveColor, resolveSize } from './utils'
+import { resolveColor, resolveSize, setCSSProperty } from './utils'
 
 import TokenConfig from './token.config.json'
 
@@ -91,6 +91,26 @@ export type SizeTokenCollection = {
   [key: string]: SizeTokenConfig
 }
 
+type StyleElement = {
+  token: string
+  value: string | number
+}
+
+function getStyleCollection(): StyleElement[] {
+  return [
+    { token: 'test1', value: 'red' },
+    { token: 'test2', value: 'blue' },
+  ]
+}
+
+function setGlobalStyles(): void {
+  const collection = getStyleCollection()
+
+  collection.forEach(({ token, value }) => {
+    setCSSProperty(`--${token}`, `${value}`)
+  })
+}
+
 function useColor(token: ColorToken): string {
   try {
     const tokenConfig = tokenConfiguration()
@@ -109,4 +129,4 @@ function useSize(token: SizeToken): string {
   }
 }
 
-export { useColor, useSize }
+export { setGlobalStyles, useColor, useSize }
