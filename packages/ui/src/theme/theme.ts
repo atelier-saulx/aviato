@@ -19,8 +19,6 @@ export type ColorToken =
   | 'color-error'
 
 export type SizeToken =
-  | 'size-xxxxs'
-  | 'size-xxxs'
   | 'size-xxs'
   | 'size-xs'
   | 'size-sm'
@@ -28,8 +26,6 @@ export type SizeToken =
   | 'size-lg'
   | 'size-xl'
   | 'size-xxl'
-  | 'size-xxxl'
-  | 'size-xxxxl'
 
 export type TokenPrimitive = ColorToken | SizeToken
 
