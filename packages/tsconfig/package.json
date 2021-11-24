@@ -1,0 +1,6 @@
+{
+  "name": "@based/tsconfig",
+  "main": "./index.js",
+  "bin": "./index.js",
+  "version": "0.1.0"
+}

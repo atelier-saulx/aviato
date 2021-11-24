@@ -1,0 +1,51 @@
+{
+  "name": "@based/ui",
+  "version": "2.6.0",
+  "repository": "https://github.com/atelier-saulx/based-ui",
+  "description": "A library of front-end React components for Based",
+  "dependencies": {
+    "@based/get-service": "0.1.2",
+    "@based/pretty-date": "1.0.3",
+    "@based/pretty-number": "1.0.3",
+    "@compiled/react": "^0.7.0",
+    "@saulx/hash": "^1.1.0",
+    "@saulx/utils": "^2.0.1",
+    "@types/css-font-loading-module": "^0.0.6",
+    "@types/mapbox-gl": "^2.4.2",
+    "csvtojson": "^2.0.10",
+    "hex-rgb": "^5.0.0",
+    "jsonexport": "^3.2.0",
+    "mapbox-gl": "^2.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-window": "^1.8.6",
+    "react-window-infinite-loader": "^1.0.7",
+    "rgb-hex": "^4.0.0",
+    "snarkdown": "^2.0.0",
+    "tarts": "^1.0.0",
+    "wouter": "^2.7.5"
+  },
+  "sideEffects": false,
+  "prettier": "@saulx/prettier-config",
+  "eslintConfig": {
+    "extends": "@saulx/eslint-config"
+  },
+  "scripts": {
+    "build": "yarn tsconfig && tsc -b && node postbuild.js",
+    "watch": "yarn build -w"
+  },
+  "devDependencies": {
+    "@based/tsconfig": "*",
+    "@saulx/eslint-config": "^1.1.0",
+    "@saulx/prettier-config": "^1.0.0",
+    "@types/node": "^16.9.4",
+    "@types/react": "^17.0.22",
+    "fs-extra": "^10.0.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "main": "dist/index.js",
+  "module": "src/index.ts",
+  "license": "MIT"
+}

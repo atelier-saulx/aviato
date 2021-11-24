@@ -1,0 +1,39 @@
+{
+  "name": "@based/ui-workspaces",
+  "version": "0.0.1",
+  "workspaces": [
+    "packages/*",
+    "tmp"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atelier-saulx/based-ui.git"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "react",
+    "based",
+    "saulx"
+  ],
+  "scripts": {
+    "build": "yarn workspace @based/ui build",
+    "start": "yarn workspace @based/ui-playground start"
+  },
+  "prettier": "@saulx/prettier-config",
+  "eslintConfig": {
+    "extends": "@saulx/eslint-config"
+  },
+  "devDependencies": {
+    "@saulx/eslint-config": "^1.1.0",
+    "@saulx/prettier-config": "^1.0.0"
+  },
+  "author": "Based",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atelier-saulx/based-ui/issues"
+  },
+  "homepage": "https://github.com/atelier-saulx/based-ui#readme",
+  "packageManager": "yarn@3.0.2"
+}
