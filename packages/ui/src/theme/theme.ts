@@ -12,6 +12,30 @@ const createdConfig = createStitches({
       2: '8px',
       3: '12px',
     },
+    fontSizes: {
+      1: '12px',
+    },
+    lineHeights: {
+      1: '24px',
+    },
+  },
+  utils: {
+    marginX: (value) => ({
+      marginLeft: value,
+      marginRight: value,
+    }),
+    marginY: (value) => ({
+      marginTop: value,
+      marginBottom: value,
+    }),
+    paddingX: (value) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    paddingY: (value) => ({
+      paddingTop: value,
+      paddingBottom: value,
+    }),
   },
 })
 
