@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react'
+import { styled } from '../../theme'
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
@@ -7,6 +8,19 @@ export type AvatarProps = {
   imageUrl?: string
   size?: AvatarSize
 }
+
+const StyledAvatar = styled('div', {
+  backgroundColor: '$secondary',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center center',
+  borderRadius: '50%',
+  color: '$background',
+  letterSpacing: '-0.015em',
+  lineHeight: '20px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
   children,
@@ -39,25 +53,15 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   const avatarFontSize = avatarFontSizeMap[size] ?? '16px'
 
   return (
-    <div
+    <StyledAvatar
       style={{
-        backgroundColor: 'var(--color-secondary)',
         backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        borderRadius: '50%',
-        color: 'var(--color-background)',
         fontSize: avatarFontSize,
         width: avatarSize,
         height: avatarSize,
-        letterSpacing: '-0.015em',
-        lineHeight: '20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
       }}
     >
       {children ?? value}
-    </div>
+    </StyledAvatar>
   )
 }
