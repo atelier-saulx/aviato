@@ -10,6 +10,7 @@ const Section = () => {
   const mappedSection = {
     menu: dynamic(() => import('./sections/menu')),
     buttons: dynamic(() => import('./sections/buttons')),
+    text: dynamic(() => import('./sections/text')),
   }
 
   const TargetSection = (mappedSection as any)[section as string]

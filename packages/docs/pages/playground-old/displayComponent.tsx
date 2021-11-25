@@ -20,14 +20,7 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
         margin: '20px',
       }}
     >
-      <Text
-        style={{
-          marginBottom: '10px',
-          fontSize: '12px',
-        }}
-      >
-        {componentName}
-      </Text>
+      <Text>{componentName}</Text>
 
       <div
         style={{

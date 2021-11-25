@@ -20,6 +20,21 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
     subMenu?: Items[]
   }
 
+  const playgroundMenu: Items[] = [
+    {
+      title: 'Buttons',
+      route: '/playground/buttons',
+    },
+    {
+      title: 'Menu',
+      route: '/playground/menu',
+    },
+    {
+      title: 'Text',
+      route: '/playground/text',
+    },
+  ]
+
   const mainMenu: Items[] = [
     {
       title: 'Home',
@@ -32,16 +47,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
     {
       title: 'Playground',
       route: '/playground',
-      subMenu: [
-        {
-          title: 'Menu',
-          route: '/playground/menu',
-        },
-        {
-          title: 'Buttons',
-          route: '/playground/buttons',
-        },
-      ],
+      subMenu: playgroundMenu,
     },
   ]
 
