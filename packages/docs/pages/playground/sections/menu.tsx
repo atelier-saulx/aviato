@@ -1,6 +1,11 @@
 import { DisplayComponent } from '../displayComponent'
 
-import { Title, Menu, MenuItem, Divider } from '@aviato/ui'
+import { Title, Menu, MenuItem, Divider, styled } from '@aviato/ui'
+
+const StyledDiv = styled('div', {
+  width: '250px',
+  background: '$background',
+})
 
 const MenuPage = () => {
   return (
@@ -19,7 +24,7 @@ const MenuPage = () => {
       </div>
 
       <DisplayComponent name="Menu">
-        <div style={{ background: 'var(--color-background)', width: '250px' }}>
+        <StyledDiv>
           <Menu>
             <MenuItem title="Item 1" onClick={() => console.log('1')} />
             <MenuItem title="Item 2" onClick={() => console.log('2')} />
@@ -40,7 +45,7 @@ const MenuPage = () => {
               />
             </MenuItem>
           </Menu>
-        </div>
+        </StyledDiv>
       </DisplayComponent>
     </div>
   )

@@ -1,4 +1,18 @@
 import React, { FunctionComponent } from 'react'
+import { styled } from '../../theme'
+
+const StyledAvatar = styled('div', {
+  backgroundColor: '$secondary',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center center',
+  borderRadius: '50%',
+  color: '$background',
+  letterSpacing: '-0.015em',
+  lineHeight: '20px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
@@ -14,50 +28,35 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   imageUrl = '',
   size = 'small',
 }) => {
-  type AvatarSizeMap = {
+  type AvatarMap = {
     [key in AvatarSize]: number | string
   }
 
-  const avatarSizeMap: AvatarSizeMap = {
+  const avatarSizeMap: AvatarMap = {
     small: '54px',
     medium: '96px',
     large: '128px',
   }
 
-  const avatarSize = avatarSizeMap[size] ?? '54px'
-
-  type AvatarFontSizeMap = {
-    [key in AvatarSize]: number | string
-  }
-
-  const avatarFontSizeMap: AvatarFontSizeMap = {
+  const avatarFontSizeMap: AvatarMap = {
     small: '16px',
     medium: '24px',
     large: '42px',
   }
 
+  const avatarSize = avatarSizeMap[size] ?? '54px'
   const avatarFontSize = avatarFontSizeMap[size] ?? '16px'
 
   return (
-    <div
-      style={{
-        backgroundColor: 'var(--color-secondary)',
+    <StyledAvatar
+      css={{
         backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        borderRadius: '50%',
-        color: 'var(--color-background)',
         fontSize: avatarFontSize,
         width: avatarSize,
         height: avatarSize,
-        letterSpacing: '-0.015em',
-        lineHeight: '20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
       }}
     >
       {children ?? value}
-    </div>
+    </StyledAvatar>
   )
 }

@@ -1,31 +1,34 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-
-import { Conditional } from '@aviato/ui'
+import { FunctionComponent } from 'react'
 
 const Section = () => {
   const router = useRouter()
   const { section = '' } = router.query
 
-  const mappedSection = {
-    menu: dynamic(() => import('./sections/menu')),
-    buttons: dynamic(() => import('./sections/buttons')),
-    text: dynamic(() => import('./sections/text')),
-    display: dynamic(() => import('./sections/display')),
+  if (Array.isArray(section)) {
+    return <div>This section does not exist</div>
   }
 
-  const TargetSection = (mappedSection as any)[section as string]
-  const sectionExists = Boolean(TargetSection)
+  type SectionMap = {
+    [key: string]: FunctionComponent
+  }
+
+  const mappedSection: SectionMap = {
+    menu: dynamic(() => import('./sections/menu')) as FunctionComponent,
+    buttons: dynamic(() => import('./sections/buttons')) as FunctionComponent,
+    text: dynamic(() => import('./sections/text')) as FunctionComponent,
+    display: dynamic(() => import('./sections/display')) as FunctionComponent,
+  }
+
+  const TargetSection = mappedSection[section]
+  if (!TargetSection) {
+    return <div>This section does not exist</div>
+  }
 
   return (
     <>
-      <Conditional test={sectionExists}>
-        <TargetSection />
-      </Conditional>
-
-      <Conditional test={!sectionExists}>
-        <div>This section does not exist</div>
-      </Conditional>
+      <TargetSection />
     </>
   )
 }

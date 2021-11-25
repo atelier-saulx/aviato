@@ -1,6 +1,11 @@
 import { DisplayComponent } from '../displayComponent'
 
-import { Title, Text, Paragraph } from '@aviato/ui'
+import { Title, Text, Paragraph, styled } from '@aviato/ui'
+
+const Column = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+})
 
 const MenuPage = () => {
   return (
@@ -27,7 +32,13 @@ const MenuPage = () => {
       </DisplayComponent>
 
       <DisplayComponent name="Paragraph">
-        <Paragraph>Paragraph</Paragraph>
+        <Column>
+          <Paragraph>Paragraph</Paragraph>
+          <Paragraph weight="semibold">Paragraph</Paragraph>
+          <Paragraph weight="bold">Paragraph</Paragraph>
+          <Paragraph size="medium">Paragraph</Paragraph>
+          <Paragraph size="large">Paragraph</Paragraph>
+        </Column>
       </DisplayComponent>
     </div>
   )

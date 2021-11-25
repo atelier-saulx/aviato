@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
     "jsx": "react",
     "incremental": true,
     "composite": true,
@@ -19,6 +17,12 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "tsBuildInfoFile": "./temp/buildcache",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
   "include": [
     "src/**/*",

@@ -1,41 +1,55 @@
 import React, { FunctionComponent } from 'react'
+import { styled } from '../../theme'
 
-type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
+const Text = styled('p', {
+  variants: {
+    size: {
+      small: {
+        fontSize: '$1',
+        lineHeight: '$1',
+      },
+      medium: {
+        fontSize: '$2',
+        lineHeight: '$2',
+      },
+      large: {
+        fontSize: '$3',
+        lineHeight: '$3',
+      },
+    },
+
+    weight: {
+      regular: {
+        fontWeight: 400,
+      },
+      medium: {
+        fontWeight: 500,
+      },
+      semibold: {
+        fontWeight: 600,
+      },
+      bold: {
+        fontWeight: 700,
+      },
+    },
+  },
+})
 
 export type ParagraphProps = {
   value?: string
-  fontWeight?: FontWeight
+  size?: 'small' | 'medium' | 'large'
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
 export const Paragraph: FunctionComponent<ParagraphProps> = ({
   children,
   value = '',
-  fontWeight = 'normal',
+  size = 'small',
+  weight: fontWeight = 'regular',
 }) => {
-  type FontWeightMap = {
-    [key in FontWeight]: number | string
-  }
-
-  const fontWeightMap: FontWeightMap = {
-    bold: 700,
-    semibold: 600,
-    medium: 500,
-    regular: 'normal',
-  }
-
-  const targetWeight = fontWeightMap[fontWeight] ?? 'normal'
-
   return (
-    <div
-      style={{
-        fontSize: '16px',
-        fontWeight: targetWeight,
-        letterSpacing: '-0.015em',
-        lineHeight: '20px',
-        userSelect: 'text',
-      }}
-    >
+    <Text size={size} weight={fontWeight}>
       {children ?? value}
-    </div>
+    </Text>
   )
 }
