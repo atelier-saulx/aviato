@@ -1,12 +1,6 @@
-import { LogoWithTitle } from '../logo'
 import { withRouter, NextRouter } from 'next/router'
 
-import {
-  SideMenu as AviatoSideMenu,
-  Menu,
-  MenuItem,
-  Conditional,
-} from '@aviato/ui'
+import { SideMenu as AviatoSideMenu, Menu, MenuItem, Text } from '@aviato/ui'
 import { FunctionComponent } from 'react'
 
 interface MainSideMenuProps {
@@ -27,15 +21,15 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
     },
     {
       title: 'Examples',
-      route: 'examples',
+      route: '/examples',
     },
     {
       title: 'Playground',
-      route: 'playground',
+      route: '/playground',
       subMenu: [
         {
           title: 'Inputs',
-          route: 'playground/inputs',
+          route: '/playground/inputs',
         },
       ],
     },
@@ -46,7 +40,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       return (
         <MenuItem
           title={title}
-          onClick={() => router.replace(route)}
+          onClick={() => router.push({ pathname: route })}
           key={`SubMenuItem-${submenuIndex}`}
         />
       )
@@ -55,7 +49,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
     return (
       <MenuItem
         title={title}
-        onClick={() => router.replace(route)}
+        onClick={() => router.push({ pathname: route })}
         key={`MenuItem-${menuIndex}`}
       >
         {subMenu ? mappedSubmenu : null}
@@ -66,12 +60,12 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const Header: FunctionComponent = () => {
     return (
       <div
-        onClick={() => router.replace('./')}
+        onClick={() => router.push({ pathname: '/' })}
         style={{
           padding: '10px',
         }}
       >
-        <LogoWithTitle />
+        <Text fontWeight="bold">Aviato-UI</Text>
       </div>
     )
   }

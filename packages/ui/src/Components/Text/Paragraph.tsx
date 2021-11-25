@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react'
 
+type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
+
 export type ParagraphProps = {
   value?: string
-  fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  fontWeight?: FontWeight
 }
 
 export const Paragraph: FunctionComponent<ParagraphProps> = ({
@@ -10,14 +12,18 @@ export const Paragraph: FunctionComponent<ParagraphProps> = ({
   value = '',
   fontWeight = 'normal',
 }) => {
-  const targetWeight =
-    fontWeight === 'bold'
-      ? 700
-      : fontWeight === 'semibold'
-      ? 600
-      : fontWeight === 'medium'
-      ? 500
-      : 'normal'
+  type FontWeightMap = {
+    [key in FontWeight]: number | string
+  }
+
+  const fontWeightMap: FontWeightMap = {
+    bold: 700,
+    semibold: 600,
+    medium: 500,
+    regular: 'normal',
+  }
+
+  const targetWeight = fontWeightMap[fontWeight] ?? 'normal'
 
   return (
     <div
