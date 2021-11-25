@@ -14,9 +14,13 @@ const createdConfig = createStitches({
     },
     fontSizes: {
       1: '12px',
+      2: '15px',
+      3: '18px',
     },
     lineHeights: {
       1: '24px',
+      2: '27px',
+      3: '30px',
     },
   },
   utils: {

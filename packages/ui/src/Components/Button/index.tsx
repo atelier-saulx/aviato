@@ -18,9 +18,5 @@ const StyledButton = styled('button', {
 })
 
 export const Button: FunctionComponent<ButtonProps> = ({ text, children }) => {
-  return (
-    <div>
-      <StyledButton>{text ?? children}</StyledButton>
-    </div>
-  )
+  return <StyledButton>{text ?? children}</StyledButton>
 }

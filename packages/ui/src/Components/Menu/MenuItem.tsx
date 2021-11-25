@@ -28,10 +28,10 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
       style={{
         display: 'flex',
         flexDirection: 'column',
+        flexWrap: 'nowrap',
         width: '100%',
         cursor: 'pointer',
         padding: '6px',
-        flexWrap: 'nowrap',
       }}
       onClick={triggerClick}
     >
