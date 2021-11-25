@@ -3,6 +3,6 @@ import styled from 'styled-components'
 
 const StyledDivider = styled.hr({})
 
-export const MenuDivider: FunctionComponent = () => {
+export const Divider: FunctionComponent = () => {
   return <StyledDivider />
 }

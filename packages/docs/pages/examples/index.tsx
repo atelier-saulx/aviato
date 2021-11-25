@@ -49,18 +49,17 @@ const Playground = () => {
   return (
     <div
       style={{
-        paddingTop: '20px',
-        paddingBottom: '20px',
+        paddingTop: 20,
+        paddingBottom: 20,
       }}
     >
-      <Title
-        fontWeight="bold"
+      <div
         style={{
-          marginBottom: '20px',
+          paddingLeft: 20,
         }}
       >
-        Examples
-      </Title>
+        <Title fontWeight="bold">Examples</Title>
+      </div>
 
       <div>
         {components.map((component, index) => (

@@ -8,7 +8,8 @@ const Section = () => {
   const { section = '' } = router.query
 
   const mappedSection = {
-    inputs: dynamic(() => import('./sections/inputs')),
+    menu: dynamic(() => import('./sections/menu')),
+    buttons: dynamic(() => import('./sections/buttons')),
   }
 
   const TargetSection = (mappedSection as any)[section as string]
