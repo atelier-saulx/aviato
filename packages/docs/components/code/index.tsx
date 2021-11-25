@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect } from 'react'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/components/prism-jsx.min'
+import { setupPrism } from './setup'
 
 export type CodeProps = {
   code: string
@@ -11,6 +12,7 @@ export type CodeProps = {
 export const Code: FunctionComponent<CodeProps> = ({ code, language }) => {
   useEffect(() => {
     Prism.highlightAll()
+    setupPrism()
   }, [])
 
   return (
