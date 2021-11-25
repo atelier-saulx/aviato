@@ -54,7 +54,7 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
 
   return (
     <StyledAvatar
-      style={{
+      css={{
         backgroundImage: `url(${imageUrl})`,
         fontSize: avatarFontSize,
         width: avatarSize,
