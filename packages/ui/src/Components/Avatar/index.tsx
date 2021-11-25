@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react'
 
+type AvatarSize = 'small' | 'medium' | 'large'
+
 export type AvatarProps = {
   value?: string
   imageUrl?: string
-  size?: 'small' | 'medium' | 'large'
+  size?: AvatarSize
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
@@ -12,23 +14,29 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   imageUrl = '',
   size = 'small',
 }) => {
-  const avatarSize =
-    size === 'small'
-      ? '54px'
-      : size === 'medium'
-      ? '96px'
-      : size === 'large'
-      ? '128px'
-      : 'small'
+  type AvatarSizeMap = {
+    [key in AvatarSize]: number | string
+  }
 
-  const avatarFontSize =
-    size === 'small'
-      ? '16px'
-      : size === 'medium'
-      ? '24px'
-      : size === 'large'
-      ? '42px'
-      : 'small'
+  const avatarSizeMap: AvatarSizeMap = {
+    small: '54px',
+    medium: '96px',
+    large: '128px',
+  }
+
+  const avatarSize = avatarSizeMap[size] ?? '54px'
+
+  type AvatarFontSizeMap = {
+    [key in AvatarSize]: number | string
+  }
+
+  const avatarFontSizeMap: AvatarFontSizeMap = {
+    small: '16px',
+    medium: '24px',
+    large: '42px',
+  }
+
+  const avatarFontSize = avatarFontSizeMap[size] ?? '16px'
 
   return (
     <div
