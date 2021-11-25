@@ -4,28 +4,21 @@ import { Title, Menu, MenuItem, MenuDivider } from '@aviato/ui'
 
 const Playground = () => {
   const components: DisplayComponentProps[] = [
-    <>
-      <div style={{ background: 'var(--color-background)', width: '220px' }}>
-        <Menu>
-          <MenuItem title="MenuItem 1" />
-          <MenuItem title="MenuItem 2" />
-          <MenuDivider />
-          <MenuItem
-            title="MenuItem Foobar"
-            onClick={() => console.log('Foobar')}
-          />
-          <MenuItem
-            title="MenuItem Accordion + Click"
-            onClick={() => console.log('Click')}
-          >
-            <div>Hello</div>
-          </MenuItem>
-          <MenuItem title="MenuItem Accordion">
-            <div>Hello</div>
-          </MenuItem>
-        </Menu>
-      </div>
-    </>,
+    <div
+      style={{ background: 'var(--color-background)', width: '250px' }}
+      key="test-1"
+    >
+      <Menu>
+        <MenuItem title="Item 1" onClick={() => console.log('1')} />
+        <MenuItem title="Item 2" onClick={() => console.log('2')} />
+        <MenuDivider />
+        <MenuItem title="Item Accordion">
+          <div style={{ padding: 10 }}>
+            <MenuItem title="Item Inner" onClick={() => console.log('Inner')} />
+          </div>
+        </MenuItem>
+      </Menu>
+    </div>,
   ]
 
   return (
