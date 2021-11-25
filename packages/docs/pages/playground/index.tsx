@@ -9,10 +9,20 @@ const Playground = () => {
         <Menu>
           <MenuItem title="MenuItem 1" />
           <MenuItem title="MenuItem 2" />
-          <MenuItem title="MenuItem 3" />
           <MenuDivider />
-          <MenuItem title="MenuItem 4" />
-          <MenuItem title="MenuItem 5" />
+          <MenuItem
+            title="MenuItem Foobar"
+            onClick={() => console.log('Foobar')}
+          />
+          <MenuItem
+            title="MenuItem Accordion + Click"
+            onClick={() => console.log('Click')}
+          >
+            <div>Hello</div>
+          </MenuItem>
+          <MenuItem title="MenuItem Accordion">
+            <div>Hello</div>
+          </MenuItem>
         </Menu>
       </div>
     </>,

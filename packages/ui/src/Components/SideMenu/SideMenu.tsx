@@ -1,46 +1,8 @@
 import React, { FunctionComponent } from 'react'
-import { SideMenuItem } from './SideMenuItem'
 
-export type SimpleMenuItem = {
-  title: string
-  route: string
-}
+export type SideMenuProps = {}
 
-export type SideMenuProps = {
-  menuItems: SimpleMenuItem[]
-  Header?: JSX.Element
-  Footer?: JSX.Element
-  onClick?: (value: SimpleMenuItem) => void
-}
-
-export const SideMenu: FunctionComponent<SideMenuProps> = ({
-  menuItems = [],
-  Header = null,
-  Footer = null,
-  onClick,
-}) => {
-  const StyledMenuItems = () => {
-    const mappedMenuItems = menuItems.map((itemProps, index) => {
-      return (
-        <SideMenuItem
-          key={`SideMenuItem-${index}`}
-          onClick={() => onClick(itemProps)}
-          {...itemProps}
-        />
-      )
-    })
-
-    return (
-      <div
-        style={{
-          padding: '10px',
-        }}
-      >
-        {mappedMenuItems}
-      </div>
-    )
-  }
-
+export const SideMenu: FunctionComponent<SideMenuProps> = ({ children }) => {
   return (
     <div
       style={{
@@ -53,9 +15,7 @@ export const SideMenu: FunctionComponent<SideMenuProps> = ({
         backgroundColor: 'var(--color-background)',
       }}
     >
-      {Header}
-      <StyledMenuItems />
-      {Footer}
+      {children}
     </div>
   )
 }

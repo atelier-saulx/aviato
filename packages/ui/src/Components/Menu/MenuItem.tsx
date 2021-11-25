@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Text } from '../Text'
+import { Conditional } from '../Conditional'
 
 const StyledDiv = styled.div({
   display: 'flex',
@@ -9,7 +10,7 @@ const StyledDiv = styled.div({
   cursor: 'pointer',
 
   '&:hover': {
-    background: 'red',
+    background: 'rgba(0, 0, 0, 0.2)',
   },
 })
 
@@ -21,7 +22,15 @@ export type MenuItemProps = {
 export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
   onClick,
+  children,
 }) => {
+  const [isOpen, setIsCollapsed] = useState(false)
+
+  const triggerClick = useCallback(() => {
+    onClick?.(this)
+    setIsCollapsed(!isOpen)
+  }, [isOpen])
+
   return (
     <StyledDiv
       style={{
@@ -30,9 +39,10 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
         width: '100%',
         cursor: 'pointer',
       }}
-      onClick={onClick}
+      onClick={triggerClick}
     >
       <Text>{title}</Text>
+      <Conditional test={isOpen}>{children}</Conditional>
     </StyledDiv>
   )
 }
