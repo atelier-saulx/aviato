@@ -8,13 +8,16 @@ export type DisplayComponentProps = {
 }
 
 const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
+  name,
   children,
 }) => {
-  let componentName = ''
+  let actualComponentName = ''
 
   React.Children.forEach(children, (child) => {
-    componentName = (child as any)?.type.name
+    actualComponentName = (child as any)?.type.name
   })
+
+  const componentName = name ?? actualComponentName
 
   return (
     <div
@@ -22,7 +25,14 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
         margin: '20px',
       }}
     >
-      <Text>{componentName}</Text>
+      <div
+        style={{
+          marginBottom: '10px',
+          fontSize: '12px',
+        }}
+      >
+        <Text>{componentName}</Text>
+      </div>
 
       <div
         style={{

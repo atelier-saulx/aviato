@@ -11,6 +11,7 @@ const Section = () => {
     menu: dynamic(() => import('./sections/menu')),
     buttons: dynamic(() => import('./sections/buttons')),
     text: dynamic(() => import('./sections/text')),
+    display: dynamic(() => import('./sections/display')),
   }
 
   const TargetSection = (mappedSection as any)[section as string]
@@ -21,6 +22,7 @@ const Section = () => {
       <Conditional test={sectionExists}>
         <TargetSection />
       </Conditional>
+
       <Conditional test={!sectionExists}>
         <div>This section does not exist</div>
       </Conditional>

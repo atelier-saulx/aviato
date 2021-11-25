@@ -33,6 +33,10 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       title: 'Text',
       route: '/playground/text',
     },
+    {
+      title: 'Display',
+      route: '/playground/display',
+    },
   ]
 
   const mainMenu: Items[] = [
@@ -41,13 +45,13 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       route: '/',
     },
     {
-      title: 'Examples',
-      route: '/examples',
-    },
-    {
       title: 'Playground',
       route: '/playground',
       subMenu: playgroundMenu,
+    },
+    {
+      title: 'Examples',
+      route: '/examples',
     },
   ]
 
