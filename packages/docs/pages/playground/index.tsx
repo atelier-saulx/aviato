@@ -12,10 +12,14 @@ const Playground = () => {
         <MenuItem title="Item 1" onClick={() => console.log('1')} />
         <MenuItem title="Item 2" onClick={() => console.log('2')} />
         <MenuDivider />
+        <MenuItem
+          title="Item Accordion"
+          onClick={() => console.log('Accordion')}
+        >
+          <MenuItem title="Item Inner" onClick={() => console.log('Inner')} />
+        </MenuItem>
         <MenuItem title="Item Accordion">
-          <div style={{ padding: 10 }}>
-            <MenuItem title="Item Inner" onClick={() => console.log('Inner')} />
-          </div>
+          <MenuItem title="Item Inner" onClick={() => console.log('Inner')} />
         </MenuItem>
       </Menu>
     </div>,

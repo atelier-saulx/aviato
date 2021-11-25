@@ -25,14 +25,16 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   onClick,
   children,
 }) => {
-  const [isOpen, setIsCollapsed] = useState(true)
+  const hasChildren = Boolean(children)
+  const [isOpen, setIsOpen] = useState(hasChildren)
 
   const triggerClick = useCallback(() => {
-    setIsCollapsed(!isOpen)
     onClick?.(this)
-  }, [isOpen])
 
-  const hasChildren = Boolean(children)
+    if (hasChildren) {
+      setIsOpen(!isOpen)
+    }
+  }, [isOpen])
 
   return (
     <StyledDiv

@@ -1,7 +1,12 @@
 import { LogoWithTitle } from '../logo'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu as AviatoSideMenu, Menu, MenuItem } from '@aviato/ui'
+import {
+  SideMenu as AviatoSideMenu,
+  Menu,
+  MenuItem,
+  Conditional,
+} from '@aviato/ui'
 import { FunctionComponent } from 'react'
 
 interface MainSideMenuProps {
@@ -53,7 +58,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
         onClick={() => router.replace(route)}
         key={`MenuItem-${menuIndex}`}
       >
-        {mappedSubmenu}
+        {subMenu ? mappedSubmenu : null}
       </MenuItem>
     )
   })
