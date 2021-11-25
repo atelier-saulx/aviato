@@ -1,7 +1,7 @@
 import { LogoWithTitle } from '../logo'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu as AviatoSideMenu, MenuItem } from '@aviato/ui'
+import { SideMenu as AviatoSideMenu, SimpleMenuItem } from '@aviato/ui'
 import { FunctionComponent } from 'react'
 
 interface MainSideMenuProps {
@@ -9,7 +9,7 @@ interface MainSideMenuProps {
 }
 
 const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
-  const menuItems: MenuItem[] = [
+  const menuItems: SimpleMenuItem[] = [
     {
       title: 'Home',
       route: '/',

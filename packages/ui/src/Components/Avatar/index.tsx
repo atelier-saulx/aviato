@@ -1,8 +1,7 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 export type AvatarProps = {
   value?: string
-  style?: CSSProperties
   imageUrl?: string
   size?: 'small' | 'medium' | 'large'
 }
@@ -10,7 +9,6 @@ export type AvatarProps = {
 export const Avatar: FunctionComponent<AvatarProps> = ({
   children,
   value = '',
-  style = {},
   imageUrl = '',
   size = 'small',
 }) => {
@@ -49,7 +47,6 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        ...style,
       }}
     >
       {children ?? value}

@@ -49,14 +49,7 @@ const PlaygroundOld = () => {
         paddingBottom: '20px',
       }}
     >
-      <Title
-        fontWeight="bold"
-        style={{
-          marginBottom: '20px',
-        }}
-      >
-        Playground-Old
-      </Title>
+      <Title fontWeight="bold">Playground-Old</Title>
 
       <div>
         {components.map((component, index) => (

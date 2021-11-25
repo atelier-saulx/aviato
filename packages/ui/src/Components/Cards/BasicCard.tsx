@@ -1,15 +1,13 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 export type BasicCardProps = {
   value?: string
-  style?: CSSProperties
   imageUrl?: string
 }
 
 export const BasicCard: FunctionComponent<BasicCardProps> = ({
   children,
   value = '',
-  style = {},
   imageUrl = '',
 }) => {
   return (
@@ -19,7 +17,6 @@ export const BasicCard: FunctionComponent<BasicCardProps> = ({
         borderRadius: '4px',
         width: '31%',
         margin: '1%',
-        ...style,
       }}
     >
       {imageUrl !== '' && (

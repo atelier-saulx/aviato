@@ -1,48 +1,45 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { SideMenuItem } from './SideMenuItem'
 
-export type MenuItem = {
+export type SimpleMenuItem = {
   title: string
   route: string
 }
 
 export type SideMenuProps = {
-  menuItems: MenuItem[]
+  menuItems: SimpleMenuItem[]
   Header?: JSX.Element
   Footer?: JSX.Element
-  onClick?: (value: MenuItem) => void
-  style?: CSSProperties
+  onClick?: (value: SimpleMenuItem) => void
 }
 
 export const SideMenu: FunctionComponent<SideMenuProps> = ({
-  style = {},
   menuItems = [],
   Header = null,
   Footer = null,
   onClick,
 }) => {
-  const SideMenuItems = menuItems.map((itemProps, index) => {
-    return (
-      <SideMenuItem
-        key={`SideMenuItem-${index}`}
-        onClick={() => onClick(itemProps)}
-        style={{
-          marginBottom: index !== menuItems.length - 1 ? '6px' : null,
-        }}
-        {...itemProps}
-      />
-    )
-  })
+  const StyledMenuItems = () => {
+    const mappedMenuItems = menuItems.map((itemProps, index) => {
+      return (
+        <SideMenuItem
+          key={`SideMenuItem-${index}`}
+          onClick={() => onClick(itemProps)}
+          {...itemProps}
+        />
+      )
+    })
 
-  const StyledMenuItems = (
-    <div
-      style={{
-        padding: '10px',
-      }}
-    >
-      {SideMenuItems}
-    </div>
-  )
+    return (
+      <div
+        style={{
+          padding: '10px',
+        }}
+      >
+        {mappedMenuItems}
+      </div>
+    )
+  }
 
   return (
     <div
@@ -54,12 +51,11 @@ export const SideMenu: FunctionComponent<SideMenuProps> = ({
         minWidth: 200,
         overflowX: 'hidden',
         backgroundColor: 'var(--color-background)',
-        ...style,
       }}
     >
-      <>{Header}</>
-      <>{StyledMenuItems}</>
-      <>{Footer}</>
+      {Header}
+      <StyledMenuItems />
+      {Footer}
     </div>
   )
 }

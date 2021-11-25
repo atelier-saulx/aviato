@@ -1,15 +1,13 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 export type ParagraphProps = {
   value?: string
-  style?: CSSProperties
   fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
 export const Paragraph: FunctionComponent<ParagraphProps> = ({
   children,
   value = '',
-  style = {},
   fontWeight = 'normal',
 }) => {
   const targetWeight =
@@ -29,7 +27,6 @@ export const Paragraph: FunctionComponent<ParagraphProps> = ({
         letterSpacing: '-0.015em',
         lineHeight: '20px',
         userSelect: 'text',
-        ...style,
       }}
     >
       {children ?? value}
