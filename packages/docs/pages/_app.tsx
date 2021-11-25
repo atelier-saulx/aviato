@@ -1,27 +1,28 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
+import React, { FunctionComponent } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import { SideMenu } from '../components/side-menu'
 import { useGlobalVariables, GlobalStyle } from '@aviato/ui'
 
-const HeadContent = () => {
-  return (
-    <Head>
-      <title>Aviato-UI</title>
-      <meta
-        name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
-      />
-      <meta property="og:title" content="Aviato-UI" key="title" />
-    </Head>
-  )
-}
+const MainApplication = ({ Component, pageProps }: AppProps) => {
+  const HeadContent = () => {
+    return (
+      <Head>
+        <title>Aviato-UI</title>
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+        />
+        <meta property="og:title" content="Aviato-UI" key="title" />
+      </Head>
+    )
+  }
 
-function App({ Component, pageProps }: AppProps) {
-  const MainWrapper = ({ children }: any) => {
+  const MainWrapper: FunctionComponent = ({ children }) => {
     return (
       <div
         style={{
@@ -67,6 +68,10 @@ function App({ Component, pageProps }: AppProps) {
       </MainWrapper>
     </>
   )
+}
+
+const App = (props: AppProps) => {
+  return MainApplication(props)
 }
 
 export default App
