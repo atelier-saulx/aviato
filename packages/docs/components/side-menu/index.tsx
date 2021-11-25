@@ -41,7 +41,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       return (
         <MenuItem
           title={title}
-          onClick={() => router.push(route)}
+          onClick={() => router.replace(route)}
           key={`SubMenuItem-${submenuIndex}`}
         />
       )
@@ -50,7 +50,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
     return (
       <MenuItem
         title={title}
-        onClick={() => router.push(route)}
+        onClick={() => router.replace(route)}
         key={`MenuItem-${menuIndex}`}
       >
         {mappedSubmenu}
@@ -61,7 +61,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const Header: FunctionComponent = () => {
     return (
       <div
-        onClick={() => router.push('/')}
+        onClick={() => router.replace('./')}
         style={{
           padding: '10px',
         }}
