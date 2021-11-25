@@ -1,4 +1,4 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const StyledButton = styled.button({
@@ -16,20 +16,11 @@ const StyledButton = styled.button({
 
 export type ButtonProps = {
   text?: string
-  style?: CSSProperties
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({
-  text,
-  style,
-  children,
-}) => {
+export const Button: FunctionComponent<ButtonProps> = ({ text, children }) => {
   return (
-    <div
-      style={{
-        ...style,
-      }}
-    >
+    <div>
       <StyledButton>{text ?? children}</StyledButton>
     </div>
   )

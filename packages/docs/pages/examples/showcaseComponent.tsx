@@ -25,14 +25,14 @@ const ShowcaseComponent: FunctionComponent<ShowcaseComponentProps> = ({
         margin: '20px',
       }}
     >
-      <Text
+      <div
         style={{
           marginBottom: '10px',
           fontSize: '12px',
         }}
       >
-        {componentName}
-      </Text>
+        <Text>{componentName}</Text>
+      </div>
 
       <div
         style={{

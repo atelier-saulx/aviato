@@ -23,14 +23,13 @@ const Home: NextPage = () => {
           padding: '20px',
         }}
       >
-        <Title
-          fontWeight="bold"
+        <div
           style={{
-            marginBottom: '20px',
+            paddingBottom: 20,
           }}
         >
-          Introduction to Aviato-UI
-        </Title>
+          <Title fontWeight="bold">Introduction to Aviato-UI</Title>
+        </div>
 
         <Text>
           Aviato-UI is a component-suite to enrich your web applications, or to

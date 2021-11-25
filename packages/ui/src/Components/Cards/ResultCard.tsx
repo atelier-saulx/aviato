@@ -1,14 +1,12 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 export type ResultCardProps = {
   value?: string
-  style?: CSSProperties
 }
 
 export const ResultCard: FunctionComponent<ResultCardProps> = ({
   children,
   value = '',
-  style = {},
 }) => {
   return (
     <div
@@ -23,7 +21,6 @@ export const ResultCard: FunctionComponent<ResultCardProps> = ({
         padding: '32px 16px',
         textAlign: 'center',
         userSelect: 'text',
-        ...style,
       }}
     >
       {children ?? value}

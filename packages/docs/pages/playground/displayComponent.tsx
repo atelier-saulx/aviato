@@ -3,16 +3,21 @@ import { FunctionComponent } from 'react'
 
 import { Text } from '@aviato/ui'
 
-export type DisplayComponentProps = {}
+export type DisplayComponentProps = {
+  name?: string
+}
 
 const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
+  name,
   children,
 }) => {
-  let componentName = ''
+  let actualComponentName = ''
 
   React.Children.forEach(children, (child) => {
-    componentName = (child as any)?.type.name
+    actualComponentName = (child as any)?.type.name
   })
+
+  const componentName = name ?? actualComponentName
 
   return (
     <div
@@ -20,14 +25,14 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
         margin: '20px',
       }}
     >
-      <Text
+      <div
         style={{
           marginBottom: '10px',
           fontSize: '12px',
         }}
       >
-        {componentName}
-      </Text>
+        <Text>{componentName}</Text>
+      </div>
 
       <div
         style={{

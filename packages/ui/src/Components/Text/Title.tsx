@@ -1,25 +1,29 @@
-import React, { CSSProperties, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
+
+type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
 
 export type TitleProps = {
   value?: string
-  style?: CSSProperties
-  fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  fontWeight?: FontWeight
 }
 
 export const Title: FunctionComponent<TitleProps> = ({
   children,
   value = '',
-  style = {},
   fontWeight = 'normal',
 }) => {
-  const targetWeight =
-    fontWeight === 'bold'
-      ? 700
-      : fontWeight === 'semibold'
-      ? 600
-      : fontWeight === 'medium'
-      ? 500
-      : 'normal'
+  type FontWeightMap = {
+    [key in FontWeight]: number | string
+  }
+
+  const fontWeightMap: FontWeightMap = {
+    bold: 700,
+    semibold: 600,
+    medium: 500,
+    regular: 'normal',
+  }
+
+  const targetWeight = fontWeightMap[fontWeight] ?? 'normal'
 
   return (
     <div
@@ -29,7 +33,6 @@ export const Title: FunctionComponent<TitleProps> = ({
         letterSpacing: '-0.015em',
         userSelect: 'text',
         fontWeight: targetWeight,
-        ...style,
       }}
     >
       {children ?? value}
