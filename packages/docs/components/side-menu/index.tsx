@@ -1,11 +1,13 @@
 import { LogoWithTitle } from '../logo'
-import { useRouter } from 'next/router'
+import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu as Menu, MenuItem } from '@aviato/ui'
+import { SideMenu as AviatoSideMenu, MenuItem } from '@aviato/ui'
 
-const SideMenu = () => {
-  const router = useRouter()
+interface MainSideMenuProps {
+  router?: NextRouter
+}
 
+const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const menuItems: MenuItem[] = [
     {
       title: 'Home',
@@ -23,7 +25,7 @@ const SideMenu = () => {
 
   const Header = (
     <div
-      onClick={() => router.push('/')}
+      onClick={() => router?.push('/')}
       style={{
         padding: '10px',
       }}
@@ -33,12 +35,12 @@ const SideMenu = () => {
   )
 
   return (
-    <Menu
+    <AviatoSideMenu
       menuItems={menuItems}
       Header={Header}
-      onClick={({ route }) => router.push(route)}
+      onClick={({ route }) => router?.push(route)}
     />
   )
-}
+})
 
 export { SideMenu }
