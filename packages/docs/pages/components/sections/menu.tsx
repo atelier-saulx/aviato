@@ -1,7 +1,7 @@
 import DisplayComponent from '../displayComponent'
 
 import { Title, Menu, MenuItem } from '@aviato/ui'
-import { styled } from '@aviato/theme'
+import { styled } from '@aviato/ui'
 
 const StyledDiv = styled('div', {
   width: '250px',
