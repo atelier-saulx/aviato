@@ -22,19 +22,14 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "run-s lint:*",
-    "lint:theme": "yarn workspace @aviato/theme lint",
-    "lint:ui": "yarn workspace @aviato/ui lint",
-    "lint:docs": "yarn workspace @aviato/docs type-check",
+    "lint": "yarn workspaces run lint",
     "start": "yarn watch",
     "watch": "run-p watch:*",
+    "watch:utils": "yarn workspace @aviato/utils watch",
     "watch:theme": "yarn workspace @aviato/theme watch",
     "watch:ui": "yarn workspace @aviato/ui watch",
     "watch:docs": "yarn workspace @aviato/docs dev",
-    "build": "run-s build:*",
-    "build:theme": "yarn workspace @aviato/theme build",
-    "build:ui": "yarn workspace @aviato/ui build",
-    "build:docs": "yarn workspace @aviato/docs build"
+    "build": "yarn workspaces run build"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5"
