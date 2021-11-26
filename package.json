@@ -22,13 +22,17 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "yarn workspaces run lint",
     "start": "yarn watch",
     "watch": "run-p watch:*",
     "watch:utils": "yarn workspace @aviato/utils watch",
     "watch:theme": "yarn workspace @aviato/theme watch",
     "watch:ui": "yarn workspace @aviato/ui watch",
     "watch:docs": "yarn workspace @aviato/docs dev",
+    "lint": "run-p lint:*",
+    "lint:utils": "yarn workspace @aviato/utils lint",
+    "lint:theme": "yarn workspace @aviato/theme lint",
+    "lint:ui": "yarn workspace @aviato/ui lint",
+    "lint:docs": "yarn workspace @aviato/docs lint",
     "build": "yarn workspaces run build"
   },
   "devDependencies": {
