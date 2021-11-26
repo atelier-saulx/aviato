@@ -1,24 +1,46 @@
 /* eslint-disable no-console */
 import ora from 'ora'
 import chalk from 'chalk'
+import { readFile } from 'fs/promises'
+
+import StyleDictionary from 'style-dictionary'
+const baseConfig = JSON.parse(
+  await readFile(new URL('./config.json', import.meta.url))
+)
 
 const spinner = ora('Parsing Theme').start()
 
 const green = chalk.bold.green
 const log = (message) => console.log(green(message))
 
-// Ask Maarten:
-// Why not this?
-// https://www.figma.com/community/plugin/888356646278934516/Design-Tokens
-// https://github.com/lukasoppermann/design-token-transformer
+StyleDictionary.registerTransform({
+  name: 'size/px',
+  type: 'value',
+  matcher: (token) => {
+    return token.unit === 'pixel' && token.value !== 0
+  },
+  transformer: (token) => {
+    return `${token.value}px`
+  },
+})
 
-// For now...
-// https://www.npmjs.com/package/token-transformer
+StyleDictionary.registerTransform({
+  name: 'size/percent',
+  type: 'value',
+  matcher: (token) => {
+    return token.unit === 'percent' && token.value !== 0
+  },
+  transformer: (token) => {
+    return `${token.value}%`
+  },
+})
 
-setTimeout(() => {
-  spinner.stop()
+const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)
 
-  log('Done parsing')
+StyleDictionaryExtended.buildAllPlatforms()
 
-  process.exit()
-}, 1500)
+spinner.stop()
+
+log('Done parsing')
+
+process.exit()

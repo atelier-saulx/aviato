@@ -1,0 +1,15 @@
+{
+  "source": ["tokens/*.json"],
+  "platforms": {
+    "json-flat": {
+      "transformGroup": "js",
+      "buildPath": "output/json/",
+      "files": [
+        {
+          "destination": "styles.json",
+          "format": "json/flat"
+        }
+      ]
+    }
+  }
+}
