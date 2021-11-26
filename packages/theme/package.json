@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "watch": "rollup -c --watch",
     "lint": "run-p lint:*",
     "lint:ts": "tsc --project ./tsconfig.json --noEmit"
   },
