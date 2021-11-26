@@ -1,11 +1,9 @@
 {
-  "name": "@aviato/theme",
+  "name": "@aviato/utils",
   "version": "1.0.0",
-  "description": "Theme for Aviato",
+  "description": "Utils for Aviato",
   "license": "MIT",
-  "dependencies": {
-    "@stitches/react": "^1.2.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "rollup": "^2.33.1",
     "rollup-plugin-typescript2": "^0.31.1",
