@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/components/prism-jsx.min'
@@ -10,10 +10,18 @@ export type CodeProps = {
 }
 
 export const Code: FunctionComponent<CodeProps> = ({ code, language }) => {
+  const [isMounted, setIsMounted] = useState(false)
+
   useEffect(() => {
-    Prism.highlightAll()
-    setupPrism()
-  }, [])
+    setIsMounted(true)
+  }, [isMounted])
+
+  if (!isMounted) {
+    return null
+  }
+
+  Prism.highlightAll()
+  setupPrism()
 
   return (
     <pre data-toolbar-order="select-code,copy-code">
