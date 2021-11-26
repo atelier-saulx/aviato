@@ -1,12 +1,37 @@
 /* eslint-disable no-console */
 import ora from 'ora'
 import chalk from 'chalk'
-import { readFile } from 'fs/promises'
-
 import StyleDictionary from 'style-dictionary'
-const baseConfig = JSON.parse(
-  await readFile(new URL('./config.json', import.meta.url))
-)
+
+const baseConfig = {
+  source: ['json/*.json'],
+  platforms: {
+    'json-flat': {
+      transformGroup: 'js',
+      buildPath: 'output/json/',
+      files: [
+        {
+          destination: 'styles.json',
+          format: 'json/flat',
+          options: {
+            showFileHeader: false,
+          },
+        },
+      ],
+    },
+
+    javascript: {
+      transformGroup: 'js',
+      buildPath: 'output/json/',
+      files: [
+        {
+          format: 'javascript/module-flat',
+          destination: 'colors.js',
+        },
+      ],
+    },
+  },
+}
 
 const spinner = ora('Parsing Theme').start()
 
@@ -33,6 +58,14 @@ StyleDictionary.registerTransform({
   transformer: (token) => {
     return `${token.value}%`
   },
+})
+
+StyleDictionary.registerTransformGroup({
+  name: 'custom/css',
+  transforms: StyleDictionary.transformGroup.css.concat([
+    'size/px',
+    'size/percent',
+  ]),
 })
 
 const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)
