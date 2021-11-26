@@ -85,7 +85,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   return (
     <AviatoSideMenu>
       <Header />
-      <Menu isCollapsable={false}>{mainMenuItems}</Menu>
+      <Menu>{mainMenuItems}</Menu>
     </AviatoSideMenu>
   )
 })
