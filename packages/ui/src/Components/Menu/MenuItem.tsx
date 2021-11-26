@@ -2,11 +2,15 @@ import React, { FunctionComponent, useState } from 'react'
 import { Text } from '../Text'
 import { Conditional } from '../Conditional'
 
+import { noop } from '@aviato/utils'
+
 export type MenuItemProps = {
   title: string
   onClick?: (value) => void
   isCollapsable?: boolean
 }
+
+type CoercedClick = () => void
 
 export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
@@ -16,16 +20,17 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
 }) => {
   const hasChildren = Boolean(children)
   const [isOpen, setIsOpen] = useState(hasChildren)
+  const click = (onClick as CoercedClick) ?? noop
 
   const toggle = () => {
     if (!isCollapsable) {
-      return onClick?.(this)
+      return click()
     }
 
     if (hasChildren) {
       setIsOpen(!isOpen)
     } else {
-      onClick?.(this)
+      click()
     }
   }
 
