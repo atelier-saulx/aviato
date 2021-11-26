@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Utils for Aviato",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "rollup": "^2.33.1",
     "rollup-plugin-typescript2": "^0.31.1",
