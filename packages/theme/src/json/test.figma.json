@@ -9,6 +9,10 @@
     "24": {
       "value": "24",
       "type": "lineHeights"
+    },
+    "32": {
+      "value": "32",
+      "type": "lineHeights"
     }
   },
   "fontWeights": {
@@ -167,7 +171,7 @@
   },
   "Colors": {
     "Blue": {
-      "value": "#3d53e7",
+      "value": "#3D53E7",
       "type": "color"
     },
     "White": {
@@ -199,6 +203,125 @@
     "Primary": {
       "Main": {
         "value": "$Colors.Blue",
+        "type": "color"
+      },
+      "Main-hover": {
+        "value": "#384CD5",
+        "type": "color"
+      },
+      "Main-selected": {
+        "value": "#3649CB",
+        "type": "color"
+      },
+      "Light": {
+        "value": "rgba($Colors.Primary.Main, 0.08)",
+        "description": "",
+        "type": "color"
+      },
+      "Light-hover": {
+        "value": "rgba($Colors.Primary.Main, 0.12)",
+        "description": "",
+        "type": "color"
+      },
+      "Light-selected": {
+        "value": "rgba($Colors.Primary.Main, 0.16)",
+        "description": "",
+        "type": "color"
+      },
+      "Outline-border": {
+        "value": "$Colors.Primary.Main",
+        "type": "color"
+      },
+      "Contrast": {
+        "High": {
+          "value": "$Colors.White.White-100",
+          "type": "color"
+        },
+        "Medium": {
+          "value": "rgba($Colors.White.White-100, 0.74)",
+          "type": "color"
+        },
+        "Low": {
+          "value": "rgba($Colors.White.White-100, 0.48)",
+          "type": "color"
+        }
+      }
+    },
+    "Action": {
+      "Main": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.03)",
+        "type": "color"
+      },
+      "Main-hover": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.06)",
+        "type": "color"
+      },
+      "Main-selected": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.10)",
+        "type": "color"
+      },
+      "Main-focus": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.14)",
+        "type": "color"
+      },
+      "Disabled-content": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.26)",
+        "type": "color"
+      },
+      "Disabled-background": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.12)",
+        "type": "color"
+      },
+      "Active": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.54)",
+        "type": "color"
+      }
+    },
+    "Other": {
+      "Divider": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.08)",
+        "type": "color"
+      },
+      "Outline": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.12)",
+        "type": "color"
+      },
+      "Input-border": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.42)",
+        "type": "color"
+      },
+      "Overlay": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.24)",
+        "type": "color"
+      }
+    },
+    "Error": {
+      "Main": {
+        "value": "#F44336",
+        "type": "color"
+      },
+      "Main-hover": {
+        "value": "#D73B30",
+        "type": "color"
+      },
+      "Main-selected": {
+        "value": "#CD382D",
+        "type": "color"
+      },
+      "Light": {
+        "value": "rgba($Colors.Error.Main, 0.08)",
+        "type": "color"
+      },
+      "Light-hover": {
+        "value": "rgba($Colors.Error.Main, 0.12)",
+        "type": "color"
+      },
+      "Light-selected": {
+        "value": "rgba($Colors.Error.Main, 0.16)",
+        "type": "color"
+      },
+      "Outline-border": {
+        "value": "rgba($Colors.Error.Main, 1)",
         "type": "color"
       }
     }
