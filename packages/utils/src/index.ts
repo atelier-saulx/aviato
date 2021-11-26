@@ -1,3 +1,1 @@
-export function test(): string {
-  return 'test'
-}
+export * from './logging'

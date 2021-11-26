@@ -19,6 +19,7 @@
   "devDependencies": {
     "@aviato/theme": "*",
     "@aviato/ui": "*",
+    "@aviato/utils": "*",
     "@saulx/eslint-config": "^1.1.0",
     "@saulx/prettier-config": "^1.0.0",
     "@types/node": "16.11.7",
