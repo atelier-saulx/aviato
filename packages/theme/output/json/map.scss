@@ -1,0 +1,381 @@
+
+/**
+ * Do not edit directly
+ * Generated on Fri, 26 Nov 2021 23:18:51 GMT
+ */
+
+$0: 0 !default;
+$15: 15 !default;
+$24: 24 !default;
+$32: 32 !default;
+$font-families-inter: Inter !default;
+$line-heights-24: 24 !default;
+$line-heights-32: 32 !default;
+$font-weights-semibold: Semi Bold !default;
+$font-weights-medium: Medium !default;
+$font-weights-regular: Regular !default;
+$font-weights-regular-italc: Italic !default;
+$font-size-15: 15 !default;
+$letter-spacing-minus15: -1.5% !default;
+$paragraph-spacing-0: 0 !default;
+$body-semibold-font-family: $fontFamilies.inter !default;
+$body-semibold-font-weight: [object Object] !default;
+$body-semibold-line-height: [object Object] !default;
+$body-semibold-font-size: [object Object] !default;
+$body-semibold-letter-spacing: [object Object] !default;
+$body-semibold-paragraph-spacing: $paragraphSpacing.0 !default;
+$body-semibold-text-case: $textCase.none !default;
+$body-semibold-text-decoration: $textDecoration.none !default;
+$body-medium-font-family: $fontFamilies.inter !default;
+$body-medium-font-weight: [object Object] !default;
+$body-medium-line-height: [object Object] !default;
+$body-medium-font-size: [object Object] !default;
+$body-medium-letter-spacing: [object Object] !default;
+$body-medium-paragraph-spacing: $paragraphSpacing.0 !default;
+$body-medium-text-case: $textCase.none !default;
+$body-medium-text-decoration: $textDecoration.none !default;
+$body-regular-font-family: $fontFamilies.inter !default;
+$body-regular-font-weight: [object Object] !default;
+$body-regular-line-height: [object Object] !default;
+$body-regular-font-size: [object Object] !default;
+$body-regular-letter-spacing: [object Object] !default;
+$body-regular-paragraph-spacing: $paragraphSpacing.0 !default;
+$body-regular-text-case: $textCase.none !default;
+$body-regular-text-decoration: $textDecoration.none !default;
+$body-regular-italic-font-family: $fontFamilies.inter !default;
+$body-regular-italic-font-weight: [object Object] !default;
+$body-regular-italic-line-height: [object Object] !default;
+$body-regular-italic-font-size: [object Object] !default;
+$body-regular-italic-letter-spacing: [object Object] !default;
+$body-regular-italic-paragraph-spacing: $paragraphSpacing.0 !default;
+$body-regular-italic-text-case: $textCase.none !default;
+$body-regular-italic-text-decoration: $textDecoration.none !default;
+$text-case-none: none !default;
+$text-decoration-none: none !default;
+$colors-blue: #3D53E7 !default;
+$colors-white-white-100: #ffffff !default;
+$colors-greyscale-grey-100: #0f1013 !default;
+$colors-text-primary: [object Object] !default;
+$colors-text-secondary: [object Object] !default;
+$colors-text-disabled: [object Object] !default;
+$colors-primary-main: $Colors.Blue !default;
+$colors-primary-main-hover: #384CD5 !default;
+$colors-primary-main-selected: #3649CB !default;
+$colors-primary-light: rgba($Colors.Primary.Main, 0.08) !default;
+$colors-primary-light-hover: rgba($Colors.Primary.Main, 0.12) !default;
+$colors-primary-light-selected: rgba($Colors.Primary.Main, 0.16) !default;
+$colors-primary-outline-border: $Colors.Primary.Main !default;
+$colors-primary-contrast-high: $Colors.White.White-100 !default;
+$colors-primary-contrast-medium: rgba($Colors.White.White-100, 0.74) !default;
+$colors-primary-contrast-low: rgba($Colors.White.White-100, 0.48) !default;
+$colors-action-main: rgba($Colors.Greyscale.Grey-100, 0.03) !default;
+$colors-action-main-hover: rgba($Colors.Greyscale.Grey-100, 0.06) !default;
+$colors-action-main-selected: rgba($Colors.Greyscale.Grey-100, 0.10) !default;
+$colors-action-main-focus: rgba($Colors.Greyscale.Grey-100, 0.14) !default;
+$colors-action-disabled-content: rgba($Colors.Greyscale.Grey-100, 0.26) !default;
+$colors-action-disabled-background: rgba($Colors.Greyscale.Grey-100, 0.12) !default;
+$colors-action-active: rgba($Colors.Greyscale.Grey-100, 0.54) !default;
+$colors-other-divider: rgba($Colors.Greyscale.Grey-100, 0.08) !default;
+$colors-other-outline: rgba($Colors.Greyscale.Grey-100, 0.12) !default;
+$colors-other-input-border: rgba($Colors.Greyscale.Grey-100, 0.42) !default;
+$colors-other-overlay: rgba($Colors.Greyscale.Grey-100, 0.24) !default;
+$colors-error-main: #F44336 !default;
+$colors-error-main-hover: #D73B30 !default;
+$colors-error-main-selected: #CD382D !default;
+$colors-error-light: rgba($Colors.Error.Main, 0.08) !default;
+$colors-error-light-hover: rgba($Colors.Error.Main, 0.12) !default;
+$colors-error-light-selected: rgba($Colors.Error.Main, 0.16) !default;
+$colors-error-outline-border: rgba($Colors.Error.Main, 1) !default;
+$blue: #3D53E7 !default;
+$white-white-100: #ffffff !default;
+$greyscale-grey-100: #0f1013 !default;
+$text-primary: [object Object] !default;
+$text-secondary: [object Object] !default;
+$text-disabled: [object Object] !default;
+$primary-main: $Colors.Blue !default;
+$primary-main-hover: #384CD5 !default;
+$primary-main-selected: #3649CB !default;
+$primary-light: rgba($Colors.Primary.Main, 0.08) !default;
+$primary-light-hover: rgba($Colors.Primary.Main, 0.12) !default;
+$primary-light-selected: rgba($Colors.Primary.Main, 0.16) !default;
+$primary-outline-border: $Colors.Primary.Main !default;
+$primary-contrast-high: $Colors.White.White-100 !default;
+$primary-contrast-medium: rgba($Colors.White.White-100, 0.74) !default;
+$primary-contrast-low: rgba($Colors.White.White-100, 0.48) !default;
+$action-main: rgba($Colors.Greyscale.Grey-100, 0.03) !default;
+$action-main-hover: rgba($Colors.Greyscale.Grey-100, 0.06) !default;
+$action-main-selected: rgba($Colors.Greyscale.Grey-100, 0.10) !default;
+$action-main-focus: rgba($Colors.Greyscale.Grey-100, 0.14) !default;
+$action-disabled-content: rgba($Colors.Greyscale.Grey-100, 0.26) !default;
+$action-disabled-background: rgba($Colors.Greyscale.Grey-100, 0.12) !default;
+$action-active: rgba($Colors.Greyscale.Grey-100, 0.54) !default;
+$other-divider: rgba($Colors.Greyscale.Grey-100, 0.08) !default;
+$other-outline: rgba($Colors.Greyscale.Grey-100, 0.12) !default;
+$other-input-border: rgba($Colors.Greyscale.Grey-100, 0.42) !default;
+$other-overlay: rgba($Colors.Greyscale.Grey-100, 0.24) !default;
+$error-main: #F44336 !default;
+$error-main-hover: #D73B30 !default;
+$error-main-selected: #CD382D !default;
+$error-light: rgba($Colors.Error.Main, 0.08) !default;
+$error-light-hover: rgba($Colors.Error.Main, 0.12) !default;
+$error-light-selected: rgba($Colors.Error.Main, 0.16) !default;
+$error-outline-border: rgba($Colors.Error.Main, 1) !default;
+$none: none !default;
+$semibold-font-family: $fontFamilies.inter !default;
+$semibold-font-weight: [object Object] !default;
+$semibold-line-height: [object Object] !default;
+$semibold-font-size: [object Object] !default;
+$semibold-letter-spacing: [object Object] !default;
+$semibold-paragraph-spacing: $paragraphSpacing.0 !default;
+$semibold-text-case: $textCase.none !default;
+$semibold-text-decoration: $textDecoration.none !default;
+$medium-font-family: $fontFamilies.inter !default;
+$medium-font-weight: [object Object] !default;
+$medium-line-height: [object Object] !default;
+$medium-font-size: [object Object] !default;
+$medium-letter-spacing: [object Object] !default;
+$medium-paragraph-spacing: $paragraphSpacing.0 !default;
+$medium-text-case: $textCase.none !default;
+$medium-text-decoration: $textDecoration.none !default;
+$regular-font-family: $fontFamilies.inter !default;
+$regular-font-weight: [object Object] !default;
+$regular-line-height: [object Object] !default;
+$regular-font-size: [object Object] !default;
+$regular-letter-spacing: [object Object] !default;
+$regular-paragraph-spacing: $paragraphSpacing.0 !default;
+$regular-text-case: $textCase.none !default;
+$regular-text-decoration: $textDecoration.none !default;
+$regular-italic-font-family: $fontFamilies.inter !default;
+$regular-italic-font-weight: [object Object] !default;
+$regular-italic-line-height: [object Object] !default;
+$regular-italic-font-size: [object Object] !default;
+$regular-italic-letter-spacing: [object Object] !default;
+$regular-italic-paragraph-spacing: $paragraphSpacing.0 !default;
+$regular-italic-text-case: $textCase.none !default;
+$regular-italic-text-decoration: $textDecoration.none !default;
+$minus15: -1.5% !default;
+$regular-italc: Italic !default;
+$inter: Inter !default;
+
+$tokens: (
+  '0': $0,
+  '15': $15,
+  '24': $24,
+  '32': $32,
+  'fontFamilies': (
+    'inter': $font-families-inter
+  ),
+  'lineHeights': (
+    '24': $line-heights-24,
+    '32': $line-heights-32
+  ),
+  'fontWeights': (
+    'semibold': $font-weights-semibold,
+    'medium': $font-weights-medium,
+    'regular': $font-weights-regular,
+    'regular-italc': $font-weights-regular-italc
+  ),
+  'fontSize': (
+    '15': $font-size-15
+  ),
+  'letterSpacing': (
+    'minus15': $letter-spacing-minus15
+  ),
+  'paragraphSpacing': (
+    '0': $paragraph-spacing-0
+  ),
+  'Body': (
+    'semibold': (
+      'fontFamily': $body-semibold-font-family,
+      'fontWeight': $body-semibold-font-weight,
+      'lineHeight': $body-semibold-line-height,
+      'fontSize': $body-semibold-font-size,
+      'letterSpacing': $body-semibold-letter-spacing,
+      'paragraphSpacing': $body-semibold-paragraph-spacing,
+      'textCase': $body-semibold-text-case,
+      'textDecoration': $body-semibold-text-decoration
+    ),
+    'medium': (
+      'fontFamily': $body-medium-font-family,
+      'fontWeight': $body-medium-font-weight,
+      'lineHeight': $body-medium-line-height,
+      'fontSize': $body-medium-font-size,
+      'letterSpacing': $body-medium-letter-spacing,
+      'paragraphSpacing': $body-medium-paragraph-spacing,
+      'textCase': $body-medium-text-case,
+      'textDecoration': $body-medium-text-decoration
+    ),
+    'regular': (
+      'fontFamily': $body-regular-font-family,
+      'fontWeight': $body-regular-font-weight,
+      'lineHeight': $body-regular-line-height,
+      'fontSize': $body-regular-font-size,
+      'letterSpacing': $body-regular-letter-spacing,
+      'paragraphSpacing': $body-regular-paragraph-spacing,
+      'textCase': $body-regular-text-case,
+      'textDecoration': $body-regular-text-decoration
+    ),
+    'regular-italic': (
+      'fontFamily': $body-regular-italic-font-family,
+      'fontWeight': $body-regular-italic-font-weight,
+      'lineHeight': $body-regular-italic-line-height,
+      'fontSize': $body-regular-italic-font-size,
+      'letterSpacing': $body-regular-italic-letter-spacing,
+      'paragraphSpacing': $body-regular-italic-paragraph-spacing,
+      'textCase': $body-regular-italic-text-case,
+      'textDecoration': $body-regular-italic-text-decoration
+    )
+  ),
+  'textCase': (
+    'none': $text-case-none
+  ),
+  'textDecoration': (
+    'none': $text-decoration-none
+  ),
+  'Colors': (
+    'Blue': $colors-blue,
+    'White': (
+      'White-100': $colors-white-white-100
+    ),
+    'Greyscale': (
+      'Grey-100': $colors-greyscale-grey-100
+    ),
+    'Text': (
+      'Primary': $colors-text-primary,
+      'Secondary': $colors-text-secondary,
+      'Disabled': $colors-text-disabled
+    ),
+    'Primary': (
+      'Main': $colors-primary-main,
+      'Main-hover': $colors-primary-main-hover,
+      'Main-selected': $colors-primary-main-selected,
+      'Light': $colors-primary-light,
+      'Light-hover': $colors-primary-light-hover,
+      'Light-selected': $colors-primary-light-selected,
+      'Outline-border': $colors-primary-outline-border,
+      'Contrast': (
+        'High': $colors-primary-contrast-high,
+        'Medium': $colors-primary-contrast-medium,
+        'Low': $colors-primary-contrast-low
+      )
+    ),
+    'Action': (
+      'Main': $colors-action-main,
+      'Main-hover': $colors-action-main-hover,
+      'Main-selected': $colors-action-main-selected,
+      'Main-focus': $colors-action-main-focus,
+      'Disabled-content': $colors-action-disabled-content,
+      'Disabled-background': $colors-action-disabled-background,
+      'Active': $colors-action-active
+    ),
+    'Other': (
+      'Divider': $colors-other-divider,
+      'Outline': $colors-other-outline,
+      'Input-border': $colors-other-input-border,
+      'Overlay': $colors-other-overlay
+    ),
+    'Error': (
+      'Main': $colors-error-main,
+      'Main-hover': $colors-error-main-hover,
+      'Main-selected': $colors-error-main-selected,
+      'Light': $colors-error-light,
+      'Light-hover': $colors-error-light-hover,
+      'Light-selected': $colors-error-light-selected,
+      'Outline-border': $colors-error-outline-border
+    )
+  ),
+  'Blue': $blue,
+  'White': (
+    'White-100': $white-white-100
+  ),
+  'Greyscale': (
+    'Grey-100': $greyscale-grey-100
+  ),
+  'Text': (
+    'Primary': $text-primary,
+    'Secondary': $text-secondary,
+    'Disabled': $text-disabled
+  ),
+  'Primary': (
+    'Main': $primary-main,
+    'Main-hover': $primary-main-hover,
+    'Main-selected': $primary-main-selected,
+    'Light': $primary-light,
+    'Light-hover': $primary-light-hover,
+    'Light-selected': $primary-light-selected,
+    'Outline-border': $primary-outline-border,
+    'Contrast': (
+      'High': $primary-contrast-high,
+      'Medium': $primary-contrast-medium,
+      'Low': $primary-contrast-low
+    )
+  ),
+  'Action': (
+    'Main': $action-main,
+    'Main-hover': $action-main-hover,
+    'Main-selected': $action-main-selected,
+    'Main-focus': $action-main-focus,
+    'Disabled-content': $action-disabled-content,
+    'Disabled-background': $action-disabled-background,
+    'Active': $action-active
+  ),
+  'Other': (
+    'Divider': $other-divider,
+    'Outline': $other-outline,
+    'Input-border': $other-input-border,
+    'Overlay': $other-overlay
+  ),
+  'Error': (
+    'Main': $error-main,
+    'Main-hover': $error-main-hover,
+    'Main-selected': $error-main-selected,
+    'Light': $error-light,
+    'Light-hover': $error-light-hover,
+    'Light-selected': $error-light-selected,
+    'Outline-border': $error-outline-border
+  ),
+  'none': $none,
+  'semibold': (
+    'fontFamily': $semibold-font-family,
+    'fontWeight': $semibold-font-weight,
+    'lineHeight': $semibold-line-height,
+    'fontSize': $semibold-font-size,
+    'letterSpacing': $semibold-letter-spacing,
+    'paragraphSpacing': $semibold-paragraph-spacing,
+    'textCase': $semibold-text-case,
+    'textDecoration': $semibold-text-decoration
+  ),
+  'medium': (
+    'fontFamily': $medium-font-family,
+    'fontWeight': $medium-font-weight,
+    'lineHeight': $medium-line-height,
+    'fontSize': $medium-font-size,
+    'letterSpacing': $medium-letter-spacing,
+    'paragraphSpacing': $medium-paragraph-spacing,
+    'textCase': $medium-text-case,
+    'textDecoration': $medium-text-decoration
+  ),
+  'regular': (
+    'fontFamily': $regular-font-family,
+    'fontWeight': $regular-font-weight,
+    'lineHeight': $regular-line-height,
+    'fontSize': $regular-font-size,
+    'letterSpacing': $regular-letter-spacing,
+    'paragraphSpacing': $regular-paragraph-spacing,
+    'textCase': $regular-text-case,
+    'textDecoration': $regular-text-decoration
+  ),
+  'regular-italic': (
+    'fontFamily': $regular-italic-font-family,
+    'fontWeight': $regular-italic-font-weight,
+    'lineHeight': $regular-italic-line-height,
+    'fontSize': $regular-italic-font-size,
+    'letterSpacing': $regular-italic-letter-spacing,
+    'paragraphSpacing': $regular-italic-paragraph-spacing,
+    'textCase': $regular-italic-text-case,
+    'textDecoration': $regular-italic-text-decoration
+  ),
+  'minus15': $minus15,
+  'regular-italc': $regular-italc,
+  'inter': $inter
+);

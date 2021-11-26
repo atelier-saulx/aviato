@@ -2,6 +2,7 @@
 import ora from 'ora'
 import chalk from 'chalk'
 import StyleDictionary from 'style-dictionary'
+import _ from 'lodash'
 
 const baseConfig = {
   source: ['json/*.json'],
@@ -27,6 +28,29 @@ const baseConfig = {
         {
           format: 'javascript/module-flat',
           destination: 'colors.js',
+        },
+      ],
+    },
+
+    scss: {
+      transformGroup: 'scss',
+      buildPath: 'output/json/',
+      files: [
+        {
+          mapName: 'tokens',
+          format: 'scss/map-deep',
+          destination: 'map.scss',
+        },
+      ],
+    },
+
+    css: {
+      transformGroup: 'css',
+      buildPath: 'output/json/',
+      files: [
+        {
+          destination: 'variables.css',
+          format: 'css/variables',
         },
       ],
     },
@@ -66,6 +90,29 @@ StyleDictionary.registerTransformGroup({
     'size/px',
     'size/percent',
   ]),
+})
+
+StyleDictionary.registerTransformGroup({
+  name: 'custom/scss',
+  transforms: StyleDictionary.transformGroup.less.concat([
+    'size/px',
+    'size/percent',
+  ]),
+})
+
+StyleDictionary.registerFilter({
+  name: 'group',
+  matcher: (prop) => {
+    const path = prop.path.join('-')
+
+    _.forEach(['font-style', 'color-theme'], function (name) {
+      if (path.startsWith(name)) {
+        prop.attributes.category = 'group'
+      }
+    })
+
+    return prop.attributes.category === 'group'
+  },
 })
 
 const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)

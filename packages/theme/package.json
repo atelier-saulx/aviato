@@ -12,6 +12,7 @@
     "@types/node": "^16.11.10",
     "chalk": "^5.0.0",
     "esm": "^3.2.25",
+    "lodash": "^4.17.21",
     "ora": "^6.0.1",
     "rollup": "^2.33.1",
     "rollup-plugin-delete": "^2.0.0",
