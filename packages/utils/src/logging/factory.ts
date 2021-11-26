@@ -1,3 +1,4 @@
+import { noop } from '../misc'
 import { createConsoleAdapter } from './adapters'
 import { Log, LogAdapter, Logger, LogLevel, LogOperation } from './types'
 
@@ -66,9 +67,6 @@ function createLoggerFactory(): LoggerFactory {
 }
 
 const loggerFactory: LoggerFactory = createLoggerFactory()
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const noop = (...args: any[]): any => {}
 
 let log = {
   debug: noop,
