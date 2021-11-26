@@ -1,4 +1,5 @@
 import Prism from 'prismjs'
+import { noop } from '@aviato/utils'
 
 let scriptWasSetup = false
 
@@ -6,7 +7,6 @@ export function setupPrism() {
   if (scriptWasSetup) return
   scriptWasSetup = true
 
-  const noop = () => {}
   const registerButton = Prism?.plugins?.toolbar?.registerButton ?? noop
 
   registerButton('select-code', (env: any) => {
