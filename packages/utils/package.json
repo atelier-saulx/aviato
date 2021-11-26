@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Utils for Aviato",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "rollup": "^2.33.1",
     "rollup-plugin-typescript2": "^0.31.1",
@@ -11,18 +10,12 @@
   },
   "sideEffects": false,
   "prettier": "@saulx/prettier-config",
-  "eslintConfig": {
-    "extends": "@saulx/eslint-config",
-    "rules": {
-      "react/jsx-curly-newline": 0,
-      "@typescript-eslint/no-unused-vars": "error"
-    }
-  },
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c --watch",
     "lint": "run-p lint:*",
-    "lint:ts": "tsc --project ./tsconfig.json --noEmit"
+    "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
+    "lint:eslint": "eslint --ignore-path .gitignore './**/*.{ts,tsx}'"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js"

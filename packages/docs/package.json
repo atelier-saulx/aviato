@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "run-p lint:*",
     "lint:next": "next lint",
-    "lint:ts": "tsc --project ./tsconfig.json --noEmit"
+    "lint:typescript": "tsc --project ./tsconfig.json --noEmit"
   },
   "dependencies": {
     "next": "12.0.4",
