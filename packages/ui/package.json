@@ -15,7 +15,8 @@
     "@types/node": "^16.9.4",
     "@types/react": "^17.0.22",
     "tsc-watch": "^4.5.0",
-    "typescript": "4.4.3"
+    "typescript": "4.4.3",
+    "npm-run-all": "^4.1.5"
   },
   "sideEffects": false,
   "prettier": "@saulx/prettier-config",
@@ -27,8 +28,10 @@
     }
   },
   "scripts": {
-    "start": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./postbuild.js\"",
-    "type-check": "tsc --project ./tsconfig.json --noEmit"
+    "watch": "tsc --project tsconfig.json -w",
+    "compile": "tsc --project ./tsconfig.json",
+    "lint": "run-p lint:*",
+    "lint:ts": "tsc --project ./tsconfig.json --noEmit"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",

@@ -1,0 +1,29 @@
+{
+  "name": "@aviato/theme",
+  "version": "1.0.0",
+  "description": "Theme for Aviato",
+  "dependencies": {
+    "@stitches/react": "^1.2.5"
+  },
+  "devDependencies": {
+    "typescript": "4.4.3",
+    "rollup": "^2.33.1",
+    "rollup-plugin-typescript2": "^0.29.0"
+  },
+  "sideEffects": false,
+  "prettier": "@saulx/prettier-config",
+  "eslintConfig": {
+    "extends": "@saulx/eslint-config",
+    "rules": {
+      "react/jsx-curly-newline": 0,
+      "@typescript-eslint/no-unused-vars": "error"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "type-check": "tsc --project ./tsconfig.json --noEmit"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "license": "MIT"
+}
