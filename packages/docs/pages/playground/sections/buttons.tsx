@@ -19,7 +19,9 @@ const MenuPage = () => {
       </div>
 
       <DisplayComponent name="Button">
-        <Button>Button</Button>
+        <Button variant="filled">Button</Button>
+        <Button variant="outlined">Button</Button>
+        <Button variant="transparent">Button</Button>
       </DisplayComponent>
     </div>
   )
