@@ -27,7 +27,7 @@
     }
   },
   "scripts": {
-    "start": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./postbuild.js\" --onFailure \"echo Build Failed\"",
+    "start": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./postbuild.js\"",
     "type-check": "tsc --project ./tsconfig.json --noEmit"
   },
   "main": "dist/index.js",
