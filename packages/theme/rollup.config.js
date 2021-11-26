@@ -13,6 +13,10 @@ export default {
       format: 'es',
     },
   ],
+  external: [
+    ...Object.keys(packageJson.dependencies || {}),
+    ...Object.keys(packageJson.peerDependencies || {}),
+  ],
   plugins: [
     typescript({
       clean: true,
