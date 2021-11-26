@@ -6,9 +6,7 @@ import {
 } from '@aviato/utils'
 
 const setupLogging = () => {
-  const logLevel = inDevEnvironment ? LogLevel.DEBUG : LogLevel.ERROR
-  setupApplicationLogging(logLevel)
-
+  setupApplicationLogging(inDevEnvironment ? LogLevel.DEBUG : LogLevel.ERROR)
   log.debug('Application has been started.')
 }
 
