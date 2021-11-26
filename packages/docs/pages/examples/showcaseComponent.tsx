@@ -54,4 +54,4 @@ const ShowcaseComponent: FunctionComponent<ShowcaseComponentProps> = ({
   )
 }
 
-export { ShowcaseComponent }
+export default ShowcaseComponent

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { styled } from '../../theme'
+import { styled } from '@aviato/theme'
 
 const Text = styled('p', {
   variants: {

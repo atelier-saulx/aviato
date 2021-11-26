@@ -16,7 +16,8 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@aviato/ui": "3.0.0",
+    "@aviato/ui": "*",
+    "@aviato/theme": "*",
     "@saulx/eslint-config": "^1.1.0",
     "@saulx/prettier-config": "^1.0.0",
     "@types/node": "16.11.7",

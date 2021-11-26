@@ -1,4 +1,4 @@
-import { ShowcaseComponent, ShowcaseComponentProps } from './showcaseComponent'
+import ShowcaseComponent, { ShowcaseComponentProps } from './showcaseComponent'
 
 import { Title } from '@aviato/ui'
 

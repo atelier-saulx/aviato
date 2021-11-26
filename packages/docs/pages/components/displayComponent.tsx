@@ -50,4 +50,4 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   )
 }
 
-export { DisplayComponent }
+export default DisplayComponent

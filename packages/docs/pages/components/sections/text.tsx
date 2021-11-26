@@ -1,6 +1,7 @@
-import { DisplayComponent } from '../displayComponent'
+import DisplayComponent from '../displayComponent'
 
-import { Title, Text, Paragraph, styled } from '@aviato/ui'
+import { Title, Text, Paragraph } from '@aviato/ui'
+import { styled } from '@aviato/theme'
 
 const Column = styled('div', {
   display: 'flex',

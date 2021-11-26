@@ -1,4 +1,4 @@
-import { DisplayComponent } from '../displayComponent'
+import DisplayComponent from '../displayComponent'
 
 import { Title } from '@aviato/ui'
 
