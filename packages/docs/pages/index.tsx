@@ -36,11 +36,11 @@ const Home: NextPage = () => {
           create CMS/DMS interfaces.
         </Text>
 
-        <div style={{ marginTop: '30px' }}>
-          <p>To see our component suite, go to {ExamplesLink}.</p>
-          <p style={{ marginTop: '10px' }}>
+        <div style={{ marginTop: '20px' }}>
+          <Text>To see our component suite, go to {ExamplesLink}.</Text>
+          <Text>
             To play around with the components, go to {PlaygroundLink}.
-          </p>
+          </Text>
         </div>
       </div>
     </div>

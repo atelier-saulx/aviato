@@ -48,6 +48,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
           title={title}
           onClick={() => router.push({ pathname: route })}
           key={`SubMenuItem-${submenuIndex}`}
+          isCollapsable={false}
         />
       )
     })
@@ -57,8 +58,11 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
         title={title}
         onClick={() => router.push({ pathname: route })}
         key={`MenuItem-${menuIndex}`}
+        isCollapsable={false}
       >
-        {subMenu ? mappedSubmenu : null}
+        {subMenu ? (
+          <div style={{ padding: '6px 10px' }}>{mappedSubmenu}</div>
+        ) : null}
       </MenuItem>
     )
   })
@@ -81,7 +85,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   return (
     <AviatoSideMenu>
       <Header />
-      <Menu>{mainMenuItems}</Menu>
+      <Menu isCollapsable={false}>{mainMenuItems}</Menu>
     </AviatoSideMenu>
   )
 })
