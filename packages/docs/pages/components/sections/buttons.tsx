@@ -1,6 +1,6 @@
 import { DisplayComponent } from '../displayComponent'
 
-import { Title, Button } from '@aviato/ui'
+import { Title } from '@aviato/ui'
 
 const MenuPage = () => {
   return (
@@ -19,7 +19,7 @@ const MenuPage = () => {
       </div>
 
       <DisplayComponent name="Button">
-        <Button>Button</Button>
+        <p>Button goes here</p>
       </DisplayComponent>
     </div>
   )

@@ -1,13 +1,13 @@
 import { ShowcaseComponent, ShowcaseComponentProps } from './showcaseComponent'
 
-import { Title, Button, Text, Avatar, BasicCard, ResultCard } from '@aviato/ui'
+import { Title } from '@aviato/ui'
 
 const Playground = () => {
   const components: ShowcaseComponentProps[] = [
-    {
-      component: <Button>Button</Button>,
-      code: '<Button>Button</Button>',
-    },
+    // {
+    //   component: <Button>Button</Button>,
+    //   code: '<Button>Button</Button>',
+    // },
   ]
 
   return (

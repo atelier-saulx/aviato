@@ -5,16 +5,16 @@ const Text = styled('p', {
   variants: {
     size: {
       small: {
-        fontSize: '$1',
-        lineHeight: '$1',
+        fontSize: '12px',
+        lineHeight: '12px',
       },
       medium: {
-        fontSize: '$2',
-        lineHeight: '$2',
+        fontSize: '15px',
+        lineHeight: '15px',
       },
       large: {
-        fontSize: '$3',
-        lineHeight: '$3',
+        fontSize: '18px',
+        lineHeight: '18px',
       },
     },
 
@@ -45,10 +45,10 @@ export const Paragraph: FunctionComponent<ParagraphProps> = ({
   children,
   value = '',
   size = 'small',
-  weight: fontWeight = 'regular',
+  weight = 'regular',
 }) => {
   return (
-    <Text size={size} weight={fontWeight}>
+    <Text size={size} weight={weight}>
       {children ?? value}
     </Text>
   )

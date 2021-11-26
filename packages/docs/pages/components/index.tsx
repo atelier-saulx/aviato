@@ -1,6 +1,6 @@
 import { Title } from '@aviato/ui'
 
-const Playground = () => {
+const Components = () => {
   return (
     <div
       style={{
@@ -13,10 +13,10 @@ const Playground = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Playground</Title>
+        <Title fontWeight="bold">Components</Title>
       </div>
     </div>
   )
 }
 
-export default Playground
+export default Components

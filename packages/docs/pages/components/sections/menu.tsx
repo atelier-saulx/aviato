@@ -1,6 +1,6 @@
 import { DisplayComponent } from '../displayComponent'
 
-import { Title, Menu, MenuItem, Divider, styled } from '@aviato/ui'
+import { Title, Menu, MenuItem, styled } from '@aviato/ui'
 
 const StyledDiv = styled('div', {
   width: '250px',
@@ -28,7 +28,6 @@ const MenuPage = () => {
           <Menu>
             <MenuItem title="Item 1" onClick={() => console.log('1')} />
             <MenuItem title="Item 2" onClick={() => console.log('2')} />
-            <Divider />
             <MenuItem
               title="Item Accordion"
               onClick={() => console.log('Accordion')}

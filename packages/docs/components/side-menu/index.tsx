@@ -1,12 +1,6 @@
 import { withRouter, NextRouter } from 'next/router'
 
-import {
-  SideMenu as AviatoSideMenu,
-  Menu,
-  MenuItem,
-  Title,
-  Divider,
-} from '@aviato/ui'
+import { SideMenu as AviatoSideMenu, Menu, MenuItem, Title } from '@aviato/ui'
 import { FunctionComponent } from 'react'
 
 interface MainSideMenuProps {
@@ -20,22 +14,18 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
     subMenu?: Items[]
   }
 
-  const playgroundMenu: Items[] = [
+  const componentsMenu: Items[] = [
     {
       title: 'Buttons',
-      route: '/playground/buttons',
+      route: '/components/buttons',
     },
     {
       title: 'Menu',
-      route: '/playground/menu',
+      route: '/components/menu',
     },
     {
       title: 'Text',
-      route: '/playground/text',
-    },
-    {
-      title: 'Display',
-      route: '/playground/display',
+      route: '/components/text',
     },
   ]
 
@@ -45,13 +35,9 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       route: '/',
     },
     {
-      title: 'Playground',
-      route: '/playground',
-      subMenu: playgroundMenu,
-    },
-    {
-      title: 'Examples',
-      route: '/examples',
+      title: 'Components',
+      route: '/components',
+      subMenu: componentsMenu,
     },
   ]
 
@@ -95,9 +81,6 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   return (
     <AviatoSideMenu>
       <Header />
-      <div>
-        <Divider />
-      </div>
       <Menu>{mainMenuItems}</Menu>
     </AviatoSideMenu>
   )
