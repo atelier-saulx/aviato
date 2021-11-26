@@ -1,8 +1,9 @@
 {
   "name": "@aviato/ui",
   "version": "3.0.0",
-  "repository": "https://github.com/atelier-saulx/aviato-ui",
   "description": "A library of front-end React components",
+  "license": "MIT",
+  "repository": "https://github.com/atelier-saulx/aviato-ui",
   "dependencies": {
     "@stitches/react": "^1.2.5",
     "react": "^17.0.2",
@@ -34,6 +35,5 @@
     "lint:ts": "tsc --project ./tsconfig.json --noEmit"
   },
   "main": "dist/index.js",
-  "module": "dist/index.js",
-  "license": "MIT"
+  "module": "dist/index.js"
 }

@@ -2,6 +2,7 @@
   "name": "@aviato/utils",
   "version": "1.0.0",
   "description": "Utils for Aviato",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "rollup": "^2.33.1",
@@ -24,6 +25,5 @@
     "lint:ts": "tsc --project ./tsconfig.json --noEmit"
   },
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "license": "MIT"
+  "module": "dist/index.es.js"
 }

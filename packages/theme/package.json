@@ -2,6 +2,7 @@
   "name": "@aviato/theme",
   "version": "1.0.0",
   "description": "Theme for Aviato",
+  "license": "MIT",
   "dependencies": {
     "@stitches/react": "^1.2.5"
   },
@@ -26,6 +27,5 @@
     "lint:ts": "tsc --project ./tsconfig.json --noEmit"
   },
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "license": "MIT"
+  "module": "dist/index.es.js"
 }
