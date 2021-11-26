@@ -34,6 +34,7 @@
     "lint:theme": "yarn workspace @aviato/theme lint",
     "lint:ui": "yarn workspace @aviato/ui lint",
     "lint:docs": "yarn workspace @aviato/docs lint",
+    "prebuild": "yarn lint",
     "build": "run-s build:*",
     "build:utils": "yarn workspace @aviato/utils build",
     "build:theme": "yarn workspace @aviato/theme build",
