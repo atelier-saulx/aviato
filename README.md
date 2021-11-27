@@ -28,6 +28,14 @@ For full documentation, visit [<--Link not yet published-->]().
 
 ---
 
+## Releases
+
+For changelog, visit [https://github.com/atelier-saulx/aviato-ui/releases](https://github.com/atelier-saulx/aviato-ui/releases).
+
+**Note**: _We are still in pre-release alpha._
+
+---
+
 ## Authors
 
 - Morten Broesby-Olsen ([@mortenbroesby](https://github.com/mortenbroesby)) - [Saulx](https://www.saulx.com/)
