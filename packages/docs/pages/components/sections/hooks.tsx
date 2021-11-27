@@ -19,6 +19,13 @@ const StyledDiv = styled('div', {
   padding: '12px',
 })
 
+const StyledButton = styled('button', {
+  cursor: 'pointer',
+  background: '#eeeeee',
+  padding: '10px 20px',
+  borderRadius: '6px',
+})
+
 const HooksPage = () => {
   const LongPressButton = () => {
     const onLongPress = () => {
@@ -28,18 +35,12 @@ const HooksPage = () => {
     const longPressEvent = useLongPress(onLongPress)
 
     return (
-      <button
-        style={{
-          cursor: 'pointer',
-          background: '#eeeeee',
-          padding: '10px 20px',
-          borderRadius: '6px',
-        }}
+      <StyledButton
         onClick={() => log.global.info('Regular press on release.')}
         {...longPressEvent}
       >
         Button
-      </button>
+      </StyledButton>
     )
   }
 
