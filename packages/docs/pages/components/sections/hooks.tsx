@@ -38,9 +38,8 @@ const HooksPage = () => {
           alignItems: 'center',
           flexWrap: 'nowrap',
           width: '200px',
-          height: '60px',
           background: '#eeeeee',
-          padding: '20px',
+          padding: '12px',
         }}
       >
         <p>Element scroll: {clampedOffset}</p>
@@ -59,9 +58,8 @@ const HooksPage = () => {
           flexDirection: 'column',
           alignItems: 'flex-start',
           width: '200px',
-          height: '60px',
           background: '#eeeeee',
-          padding: '20px',
+          padding: '12px',
         }}
       >
         <p>Height: {height}</p>
