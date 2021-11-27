@@ -10,17 +10,9 @@ const Section = () => {
     return <div>This section does not exist</div>
   }
 
-  type SectionMap = {
-    [key: string]: FunctionComponent
-  }
+  const matchingComponent = dynamic(() => import(`./sections/${section}`))
 
-  const mappedSection: SectionMap = {
-    menu: dynamic(() => import('./sections/menu')) as FunctionComponent,
-    buttons: dynamic(() => import('./sections/buttons')) as FunctionComponent,
-    text: dynamic(() => import('./sections/text')) as FunctionComponent,
-  }
-
-  const TargetSection = mappedSection[section]
+  const TargetSection = matchingComponent
   if (!TargetSection) {
     return (
       <div

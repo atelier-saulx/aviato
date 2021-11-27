@@ -8,7 +8,7 @@ const Column = styled('div', {
   flexDirection: 'column',
 })
 
-const MenuPage = () => {
+const TextPage = () => {
   return (
     <div
       style={{
@@ -45,4 +45,4 @@ const MenuPage = () => {
   )
 }
 
-export default MenuPage
+export default TextPage
