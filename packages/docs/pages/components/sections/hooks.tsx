@@ -1,6 +1,6 @@
 import DisplayComponent from '../displayComponent'
 
-import { Title, useLongPress, useMouseWheel } from '@aviato/ui'
+import { Title, useLongPress, useMouseWheel, useWindowSize } from '@aviato/ui'
 
 const HooksPage = () => {
   const LongPressButton = () => {
@@ -49,6 +49,28 @@ const HooksPage = () => {
     )
   }
 
+  const WindowDiv = () => {
+    const { width, height } = useWindowSize()
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          width: '200px',
+          height: '60px',
+          background: '#eeeeee',
+          padding: '20px',
+        }}
+      >
+        <p>Height: {height}</p>
+        <p>Width: {width}</p>
+      </div>
+    )
+  }
+
   return (
     <div
       style={{
@@ -70,6 +92,10 @@ const HooksPage = () => {
 
       <DisplayComponent name="Scroll">
         <ScrollDiv />
+      </DisplayComponent>
+
+      <DisplayComponent name="Window Size">
+        <WindowDiv />
       </DisplayComponent>
     </div>
   )

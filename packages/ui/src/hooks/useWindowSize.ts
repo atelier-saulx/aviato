@@ -1,34 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useRafState } from './useRafState'
+import { isClient, off, on } from './utils'
 
-function useWindowSize(): {
-  width: number
-  height: number
-} {
-  if (typeof window === 'undefined') {
-    return { width: 0, height: 0 }
-  }
-
-  const [position, update] = useState({
-    width: global.innerWidth ?? 0,
-    height: global.innerHeight ?? 0,
+function useWindowSize(initialWidth = Infinity, initialHeight = Infinity) {
+  const [state, setState] = useRafState<{ width: number; height: number }>({
+    width: isClient ? window.innerWidth : initialWidth,
+    height: isClient ? window.innerHeight : initialHeight,
   })
 
-  useEffect(() => {
-    const handler = () => {
-      update({
-        width: global.innerWidth ?? 0,
-        height: global.innerHeight ?? 0,
-      })
-    }
+  useEffect((): (() => void) | void => {
+    if (isClient) {
+      const handler = () => {
+        setState({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }
 
-    global.addEventListener('resize', handler)
+      on(window, 'resize', handler)
 
-    return () => {
-      global.removeEventListener('resize', handler)
+      return () => {
+        off(window, 'resize', handler)
+      }
     }
   }, [])
 
-  return position
+  return state
 }
 
 export { useWindowSize }
