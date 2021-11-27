@@ -14,8 +14,7 @@ const HooksPage = () => {
       <button
         style={{
           cursor: 'pointer',
-          background: 'lightblue',
-          color: 'white',
+          background: '#eeeeee',
           padding: '10px 20px',
           borderRadius: '6px',
         }}

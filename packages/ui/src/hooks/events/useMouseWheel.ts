@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { off, on } from './utils'
+import { off, on } from '../../utils'
 
 function useMouseWheel() {
   const [wasMouseWheelScrolled, setMouseWheelScrolled] = useState(0)

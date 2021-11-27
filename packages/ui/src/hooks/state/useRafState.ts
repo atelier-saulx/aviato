@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react'
 
-import { useUnmount } from './useUnmount'
+import { useUnmount } from '../events/useUnmount'
 
 const useRafState = <State>(
   initialState: State | (() => State)
