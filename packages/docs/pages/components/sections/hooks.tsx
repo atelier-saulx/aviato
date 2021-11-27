@@ -71,8 +71,8 @@ const HooksPage = () => {
 
     return (
       <StyledDiv {...hover}>
-        <p>Hover?: {isHovered ? 'Yes' : 'No'}</p>
-        <p>Active?: {isActive ? 'Yes' : 'No'}</p>
+        <p>Hover? - {isHovered ? '😃' : '🙂'}</p>
+        <p>Active? - {isActive ? '😎' : '🙂'}</p>
       </StyledDiv>
     )
   }
