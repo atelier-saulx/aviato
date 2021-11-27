@@ -7,7 +7,17 @@ import {
   useMouseWheel,
   useWindowSize,
   useHover,
+  styled,
 } from '@aviato/ui'
+
+const StyledDiv = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  background: '#eeeeee',
+  padding: '12px',
+})
 
 const HooksPage = () => {
   const LongPressButton = () => {
@@ -38,19 +48,9 @@ const HooksPage = () => {
     const clampedOffset = Math.floor(wheelOffset)
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          flexWrap: 'nowrap',
-          width: '200px',
-          background: '#eeeeee',
-          padding: '12px',
-        }}
-      >
+      <StyledDiv>
         <p>Element scroll: {clampedOffset}</p>
-      </div>
+      </StyledDiv>
     )
   }
 
@@ -58,20 +58,21 @@ const HooksPage = () => {
     const { width, height } = useWindowSize()
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          width: '200px',
-          background: '#eeeeee',
-          padding: '12px',
-        }}
-      >
+      <StyledDiv>
         <p>Height: {height}</p>
         <p>Width: {width}</p>
-      </div>
+      </StyledDiv>
+    )
+  }
+
+  const HoverDiv = () => {
+    const [hover, isHovered, isActive] = useHover()
+
+    return (
+      <StyledDiv {...hover}>
+        <p>Hover?: {isHovered ? 'Yes' : 'No'}</p>
+        <p>Active?: {isActive ? 'Yes' : 'No'}</p>
+      </StyledDiv>
     )
   }
 
@@ -100,6 +101,10 @@ const HooksPage = () => {
 
       <DisplayComponent name="Window Size">
         <WindowDiv />
+      </DisplayComponent>
+
+      <DisplayComponent name="Hover">
+        <HoverDiv />
       </DisplayComponent>
     </div>
   )
