@@ -66,6 +66,7 @@ function useIdle(
       for (let index = 0; index < events.length; index++) {
         off(window, events[index], onEvent)
       }
+
       off(document, 'visibilitychange', onVisibility)
     }
   }, [milliseconds, events])
