@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useRafState } from '../state/useRafState'
-import { isClient, off, on } from '../../utils'
+import { useRafState } from '../../state/useRafState'
+import { isClient, off, on } from '../../../utils'
 
 function useWindowSize(initialWidth = Infinity, initialHeight = Infinity) {
   const [state, setState] = useRafState<{ width: number; height: number }>({
