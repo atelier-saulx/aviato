@@ -27,16 +27,28 @@ const MenuPage = () => {
       <DisplayComponent name="Menu">
         <StyledDiv>
           <Menu>
-            <MenuItem title="Item 1" onClick={() => log.info('1')} />
-            <MenuItem title="Item 2" onClick={() => log.info('2')} />
+            <MenuItem
+              title="Item 1"
+              onClick={() => log.global.info('Item 1')}
+            />
+            <MenuItem
+              title="Item 2"
+              onClick={() => log.global.info('Item 2')}
+            />
             <MenuItem
               title="Item Accordion"
-              onClick={() => log.info('Accordion')}
+              onClick={() => log.global.info('Accordion')}
             >
-              <MenuItem title="Item Inner" onClick={() => log.info('Inner')} />
+              <MenuItem
+                title="Item Inner"
+                onClick={() => log.global.info('Item Inner')}
+              />
             </MenuItem>
             <MenuItem title="Item Accordion">
-              <MenuItem title="Item Inner" onClick={() => log.info('Inner')} />
+              <MenuItem
+                title="Item Inner"
+                onClick={() => log.global.info('Item Inner')}
+              />
             </MenuItem>
           </Menu>
         </StyledDiv>

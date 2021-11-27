@@ -11,7 +11,7 @@ import {
 const HooksPage = () => {
   const LongPressButton = () => {
     const onLongPress = () => {
-      log.info('Long-press after pressing for 300ms.')
+      log.global.info('Long-press after pressing for 300ms.')
     }
 
     const longPressEvent = useLongPress(onLongPress)
@@ -24,7 +24,7 @@ const HooksPage = () => {
           padding: '10px 20px',
           borderRadius: '6px',
         }}
-        onClick={() => log.info('Regular press on release.')}
+        onClick={() => log.global.info('Regular press on release.')}
         {...longPressEvent}
       >
         Button
