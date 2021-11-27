@@ -35,12 +35,13 @@ const HooksPage = () => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           flexWrap: 'nowrap',
-          width: '300px',
-          height: '100px',
+          width: '200px',
+          height: '60px',
           background: '#eeeeee',
+          padding: '20px',
         }}
       >
         <p>Element scroll: {clampedOffset}</p>
