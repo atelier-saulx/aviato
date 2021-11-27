@@ -1,3 +1,19 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 
-export const Conditional = ({ test, children }) => <>{test && children}</>
+type ConditionalProps = {
+  test: boolean
+}
+
+/**
+ * Render children conditionally, if test returns true.
+ */
+export const Conditional: FunctionComponent<ConditionalProps> = ({
+  test,
+  children,
+}) => {
+  if (test) {
+    return <>{children}</>
+  }
+
+  return null
+}

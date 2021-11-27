@@ -6,7 +6,7 @@ type LongpressOptions = {
   delay?: number
 }
 
-const preventDefault = (event: Event) => {
+function preventDefault(event: Event) {
   if (!isTouchEvent(event)) return
 
   if (event.touches.length < 2 && event.preventDefault) {

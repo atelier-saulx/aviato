@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect } from 'react'
 
-const isEventCheck = (event) => {
+function isEventCheck(event) {
   return !!event
 }
 
