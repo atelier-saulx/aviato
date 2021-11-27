@@ -67,11 +67,12 @@ const HooksPage = () => {
   }
 
   const HoverDiv = () => {
-    const [hoverRef, isHovered] = useHover<HTMLDivElement>()
+    const [hoverRef, isHovered, isActive] = useHover<HTMLDivElement>()
 
     return (
       <StyledDiv ref={hoverRef}>
         <p>Hover? - {isHovered ? '😃' : '🙂'}</p>
+        <p>Active? - {isActive ? '😎' : '🙂'}</p>
       </StyledDiv>
     )
   }

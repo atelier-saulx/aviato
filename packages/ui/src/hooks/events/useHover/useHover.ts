@@ -1,22 +1,32 @@
 import { useState, useCallback, useRef } from 'react'
 import { off, on } from '../../../utils'
 
-function useHover<T extends HTMLElement>(): [
-  (node?: T | null) => void,
-  boolean
+type IsHovering = boolean
+type IsActive = boolean
+
+function useHover<Element extends HTMLElement>(): [
+  (node?: Element | null) => void,
+  IsHovering,
+  IsActive
 ] {
-  const [value, setValue] = useState(false)
+  const [isHovering, setHoverState] = useState(false)
+  const [isActive, setActiveState] = useState(false)
 
-  const handleMouseOver = useCallback(() => setValue(true), [])
-  const handleMouseOut = useCallback(() => setValue(false), [])
+  const handleMouseOver = useCallback(() => setHoverState(true), [])
+  const handleMouseOut = useCallback(() => setHoverState(false), [])
 
-  const ref = useRef<T>()
+  const handleMouseDown = useCallback(() => setActiveState(true), [])
+  const handleMouseUp = useCallback(() => setActiveState(false), [])
 
-  const callbackRef = useCallback<(node?: null | T) => void>(
+  const ref = useRef<Element>()
+
+  const callbackRef = useCallback<(node?: null | Element) => void>(
     (node) => {
       if (ref.current) {
         off(ref.current, 'mouseover', handleMouseOver)
         off(ref.current, 'mouseout', handleMouseOut)
+        off(ref.current, 'mousedown', handleMouseDown)
+        off(ref.current, 'mouseup', handleMouseUp)
       }
 
       ref.current = node ?? undefined
@@ -24,12 +34,14 @@ function useHover<T extends HTMLElement>(): [
       if (ref.current) {
         on(ref.current, 'mouseover', handleMouseOver)
         on(ref.current, 'mouseout', handleMouseOut)
+        on(ref.current, 'mousedown', handleMouseDown)
+        on(ref.current, 'mouseup', handleMouseUp)
       }
     },
-    [handleMouseOver, handleMouseOut]
+    [handleMouseOver, handleMouseOut, handleMouseDown, handleMouseUp]
   )
 
-  return [callbackRef, value]
+  return [callbackRef, isHovering, isActive]
 }
 
 export { useHover }
