@@ -8,20 +8,22 @@
     "@aviato/theme": "*",
     "@aviato/utils": "*",
     "@stitches/react": "^1.2.5",
+    "react-dom": "^17.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
     "@saulx/eslint-config": "^1.1.1",
     "@saulx/prettier-config": "^1.0.0",
     "@types/node": "^16.9.4",
     "@types/react": "^17.0.22",
+    "@types/throttle-debounce": "^2.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.0",
-    "rollup": "^2.33.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-typescript2": "^0.31.1",
+    "rollup": "^2.33.1",
     "typescript": "4.4.3"
   },
   "sideEffects": false,
