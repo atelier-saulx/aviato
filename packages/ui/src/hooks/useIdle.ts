@@ -1,8 +1,3 @@
-/**
- * Full credits:
- * https://github.com/streamich/react-use/blob/master/src/useIdle.ts
- */
-
 import { useEffect, useState } from 'react'
 import { throttle } from 'throttle-debounce'
 import { off, on } from './utils'
