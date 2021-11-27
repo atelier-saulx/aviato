@@ -1,13 +1,13 @@
 import DisplayComponent from '../displayComponent'
 
+import { styled } from '@aviato/ui/theme'
+import { log } from '@aviato/ui/utils'
 import {
-  log,
   Title,
   useLongPress,
   useMouseWheel,
   useWindowSize,
   useHover,
-  styled,
 } from '@aviato/ui'
 
 const StyledDiv = styled('div', {

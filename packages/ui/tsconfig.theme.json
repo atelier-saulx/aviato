@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/theme",
+    "rootDir": "./theme"
+  },
+  "include": [
+    "theme/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+}

@@ -19,21 +19,13 @@
     "tsBuildInfoFile": "./temp/buildcache",
     "outDir": "dist",
     "baseUrl": ".",
-    "rootDir": "./src",
-    "paths": {
-      "~/*": ["src/*"]
-    }
+    "rootDir": "./src"
   },
   "include": [
-    "src/**/*",
-    "src/**/*.json"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
-    "test",
     "dist",
-    "tmp",
-    "examples"
   ],
-  "references": []
 }

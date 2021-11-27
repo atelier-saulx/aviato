@@ -31,8 +31,10 @@
   "sideEffects": false,
   "prettier": "@saulx/prettier-config",
   "scripts": {
-    "build": "rollup -c",
-    "watch": "rollup -c --watch",
+    "build": "run-p build:*",
+    "build:ui": "rollup -c --config rollup.config.js",
+    "watch": "run-p watch:*",
+    "watch:ui": "rollup -c --watch",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",

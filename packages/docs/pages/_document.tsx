@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import { getCssText } from '@aviato/ui'
+import { getCssText } from '@aviato/ui/theme'
 
 export default class Document extends NextDocument {
   render() {

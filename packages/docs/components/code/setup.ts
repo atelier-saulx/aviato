@@ -1,5 +1,5 @@
 import Prism from 'prismjs'
-import { noop } from '@aviato/ui'
+import { noop } from '@aviato/ui/utils'
 
 let scriptWasSetup = false
 

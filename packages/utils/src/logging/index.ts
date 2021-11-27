@@ -1,3 +1,3 @@
 export { Logger, LogLevel } from './types'
 export { createConsoleAdapter } from './adapters'
-export { loggerFactory, setupLogging, log } from './factory'
+export { setupLogging, log } from './factory'
