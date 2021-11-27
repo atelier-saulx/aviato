@@ -28,7 +28,8 @@ const HooksPage = () => {
   }
 
   const ScrollDiv = () => {
-    const mouseWheel = useMouseWheel()
+    const wheelOffset = useMouseWheel()
+    const clampedOffset = Math.floor(wheelOffset)
 
     return (
       <div
@@ -36,13 +37,13 @@ const HooksPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          flexWrap: 'nowrap',
           width: '300px',
           height: '100px',
           background: '#eeeeee',
         }}
       >
-        <p>Element scroll:</p>
-        <p>{mouseWheel}</p>
+        <p>Element scroll: {clampedOffset}</p>
       </div>
     )
   }
