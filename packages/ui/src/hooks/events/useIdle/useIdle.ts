@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { throttle } from 'throttle-debounce'
-import { off, on } from '../../../utils'
+import { off, on } from '~/utils'
 
 const defaultEvents = [
   'mousemove',

@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
-import { off, on } from '../../../utils'
+import { off, on } from '~/utils'
 
 type IsHovering = boolean
 type IsActive = boolean

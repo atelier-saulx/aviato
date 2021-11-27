@@ -1,6 +1,8 @@
+import path from 'path'
 import packageJson from './package.json'
 import remove from 'rollup-plugin-delete'
 import typescript from 'rollup-plugin-typescript2'
+import alias from 'rollup-plugin-alias'
 
 const plugins = []
 
@@ -37,6 +39,9 @@ const indexConfig = {
       clean: true,
       tsconfig: 'tsconfig.json',
       typescript: require('typescript'),
+    }),
+    alias({
+      '~': path.join(__dirname, '/src'),
     }),
   ]),
 }
