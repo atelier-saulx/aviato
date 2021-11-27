@@ -1,6 +1,6 @@
 import DisplayComponent from '../displayComponent'
 
-import { Title, useLongPress } from '@aviato/ui'
+import { Title, useLongPress, useMouseWheel } from '@aviato/ui'
 
 const HooksPage = () => {
   const LongPressButton = () => {
@@ -26,6 +26,26 @@ const HooksPage = () => {
     )
   }
 
+  const ScrollDiv = () => {
+    const mouseWheel = useMouseWheel()
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '300px',
+          height: '100px',
+          background: '#eeeeee',
+        }}
+      >
+        <p>Element scroll:</p>
+        <p>{mouseWheel}</p>
+      </div>
+    )
+  }
+
   return (
     <div
       style={{
@@ -43,6 +63,10 @@ const HooksPage = () => {
 
       <DisplayComponent name="Button">
         <LongPressButton />
+      </DisplayComponent>
+
+      <DisplayComponent name="Scroll">
+        <ScrollDiv />
       </DisplayComponent>
     </div>
   )
