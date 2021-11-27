@@ -1,7 +1,8 @@
-import DisplayComponent from '../displayComponent'
-
+import { styled } from '@aviato/ui/theme'
+import { log } from '@aviato/ui/utils'
 import { Title, Menu, MenuItem } from '@aviato/ui'
-import { styled } from '@aviato/ui'
+
+import DisplayComponent from '../displayComponent'
 
 const StyledDiv = styled('div', {
   width: '250px',
@@ -27,21 +28,27 @@ const MenuPage = () => {
       <DisplayComponent name="Menu">
         <StyledDiv>
           <Menu>
-            <MenuItem title="Item 1" onClick={() => console.log('1')} />
-            <MenuItem title="Item 2" onClick={() => console.log('2')} />
+            <MenuItem
+              title="Item 1"
+              onClick={() => log.global.info('Item 1')}
+            />
+            <MenuItem
+              title="Item 2"
+              onClick={() => log.global.info('Item 2')}
+            />
             <MenuItem
               title="Item Accordion"
-              onClick={() => console.log('Accordion')}
+              onClick={() => log.global.info('Accordion')}
             >
               <MenuItem
                 title="Item Inner"
-                onClick={() => console.log('Inner')}
+                onClick={() => log.global.info('Item Inner')}
               />
             </MenuItem>
             <MenuItem title="Item Accordion">
               <MenuItem
                 title="Item Inner"
-                onClick={() => console.log('Inner')}
+                onClick={() => log.global.info('Item Inner')}
               />
             </MenuItem>
           </Menu>

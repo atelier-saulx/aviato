@@ -1,28 +1,46 @@
 import DisplayComponent from '../displayComponent'
 
-import { Title, useLongPress, useMouseWheel, useWindowSize } from '@aviato/ui'
+import { styled } from '@aviato/ui/theme'
+import { log } from '@aviato/ui/utils'
+import {
+  Title,
+  useLongPress,
+  useMouseWheel,
+  useWindowSize,
+  useHover,
+} from '@aviato/ui'
+
+const StyledDiv = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  background: '#eeeeee',
+  padding: '12px',
+})
+
+const StyledButton = styled('button', {
+  cursor: 'pointer',
+  background: '#eeeeee',
+  padding: '10px 20px',
+  borderRadius: '6px',
+})
 
 const HooksPage = () => {
   const LongPressButton = () => {
     const onLongPress = () => {
-      console.log('Long-press after pressing for 300ms.')
+      log.global.info('Long-press after pressing for 300ms.')
     }
 
     const longPressEvent = useLongPress(onLongPress)
 
     return (
-      <button
-        style={{
-          cursor: 'pointer',
-          background: '#eeeeee',
-          padding: '10px 20px',
-          borderRadius: '6px',
-        }}
-        onClick={() => console.log('Regular press on release.')}
+      <StyledButton
+        onClick={() => log.global.info('Regular press on release.')}
         {...longPressEvent}
       >
         Button
-      </button>
+      </StyledButton>
     )
   }
 
@@ -31,19 +49,9 @@ const HooksPage = () => {
     const clampedOffset = Math.floor(wheelOffset)
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          flexWrap: 'nowrap',
-          width: '200px',
-          background: '#eeeeee',
-          padding: '12px',
-        }}
-      >
+      <StyledDiv>
         <p>Element scroll: {clampedOffset}</p>
-      </div>
+      </StyledDiv>
     )
   }
 
@@ -51,20 +59,21 @@ const HooksPage = () => {
     const { width, height } = useWindowSize()
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          width: '200px',
-          background: '#eeeeee',
-          padding: '12px',
-        }}
-      >
+      <StyledDiv>
         <p>Height: {height}</p>
         <p>Width: {width}</p>
-      </div>
+      </StyledDiv>
+    )
+  }
+
+  const HoverDiv = () => {
+    const [hoverRef, isHovered, isActive] = useHover<HTMLDivElement>()
+
+    return (
+      <StyledDiv ref={hoverRef}>
+        <p>Hover? - {isHovered ? '😃' : '🙂'}</p>
+        <p>Active? - {isActive ? '😎' : '🙂'}</p>
+      </StyledDiv>
     )
   }
 
@@ -93,6 +102,10 @@ const HooksPage = () => {
 
       <DisplayComponent name="Window Size">
         <WindowDiv />
+      </DisplayComponent>
+
+      <DisplayComponent name="Hover">
+        <HoverDiv />
       </DisplayComponent>
     </div>
   )

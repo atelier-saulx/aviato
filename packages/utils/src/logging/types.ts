@@ -23,4 +23,10 @@ export type Logger = {
   info: Log
   warn: Log
   error: Log
+  global: {
+    debug: Log
+    info: Log
+    warn: Log
+    error: Log
+  }
 }

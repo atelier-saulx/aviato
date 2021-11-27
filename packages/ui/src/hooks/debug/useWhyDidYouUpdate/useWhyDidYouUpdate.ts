@@ -21,7 +21,7 @@ function useWhyDidYouUpdate(componentName: string, props: IProps) {
       })
 
       if (Object.keys(changedProps).length) {
-        log.debug('[why-did-you-update]', componentName, changedProps)
+        log.global.debug('[why-did-you-update]', componentName, changedProps)
       }
     }
 

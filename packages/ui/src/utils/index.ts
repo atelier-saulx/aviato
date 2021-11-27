@@ -22,7 +22,7 @@ function off<T extends Window | Document | HTMLElement | EventTarget>(
   }
 }
 
-const isTouchEvent = (event: Event): event is TouchEvent => {
+function isTouchEvent(event: Event): event is TouchEvent {
   return 'touches' in event
 }
 

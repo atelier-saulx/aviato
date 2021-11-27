@@ -1,12 +1,12 @@
 import { useCallback, useRef } from 'react'
-import { isTouchEvent, off, on } from '../../utils'
+import { isTouchEvent, off, on } from '~/utils'
 
 type LongpressOptions = {
   isPreventDefault?: boolean
   delay?: number
 }
 
-const preventDefault = (event: Event) => {
+function preventDefault(event: Event) {
   if (!isTouchEvent(event)) return
 
   if (event.touches.length < 2 && event.preventDefault) {
