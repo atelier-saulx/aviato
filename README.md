@@ -8,23 +8,35 @@ Aviato is UI component library with a focus on accessibility, customization and 
 
 ## ✨ Features
 
-- 🗳 A UI suite designed for and web applications.
-- 📦 A set of high-quality React components out of the box.
-- 🛡 Written in TypeScript with predictable static types.
-- 🎨 Powerful theme customization.
+- 🗳 - A UI suite designed for and web applications.
+- 📦 - A set of high-quality React components out of the box.
+- 🛡 - Written in TypeScript with predictable static types.
+- 🎨 - Powerful theme customization.
+- 🪝 - Contains a comprehensive collection of basic Hooks.
+- 📡 - Supports SSR.
 
 ---
 
 ## 🖥 Environment Support
 
 - Modern browsers. [Evergreens](https://www.techopedia.com/definition/31094/evergreen-browser).
-- Server-side Rendering
+- Supports both Client-side and Server-side Rendering (CSR & SSR).
 
 ---
 
-## Documentation
+## 📕 Documentation
 
 For full documentation, visit [<--Link not yet published-->]().
+
+---
+
+## 📦 Install
+
+```bash
+yarn add @aviato/ui
+# or
+npm install --save @aviato/ui
+```
 
 ---
 
@@ -32,7 +44,7 @@ For full documentation, visit [<--Link not yet published-->]().
 
 For changelog, visit [https://github.com/atelier-saulx/aviato-ui/releases](https://github.com/atelier-saulx/aviato-ui/releases).
 
-**Note**: _We are still in pre-release alpha._
+_**Note**: We are still in pre-release alpha._
 
 ---
 
