@@ -1,6 +1,6 @@
 {
   "extends": "@saulx/eslint-config",
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "simple-import-sort"],
   "rules": {
     "react/jsx-curly-newline": 0,
     "@typescript-eslint/no-unused-vars": "error",
