@@ -1,11 +1,17 @@
 import DisplayComponent from '../displayComponent'
 
-import { Title, useLongPress, useMouseWheel, useWindowSize } from '@aviato/ui'
+import {
+  Title,
+  useLongPress,
+  useMouseWheel,
+  useWindowSize,
+  log,
+} from '@aviato/ui'
 
 const HooksPage = () => {
   const LongPressButton = () => {
     const onLongPress = () => {
-      console.log('Long-press after pressing for 300ms.')
+      log.info('Long-press after pressing for 300ms.')
     }
 
     const longPressEvent = useLongPress(onLongPress)
@@ -18,7 +24,7 @@ const HooksPage = () => {
           padding: '10px 20px',
           borderRadius: '6px',
         }}
-        onClick={() => console.log('Regular press on release.')}
+        onClick={() => log.info('Regular press on release.')}
         {...longPressEvent}
       >
         Button
