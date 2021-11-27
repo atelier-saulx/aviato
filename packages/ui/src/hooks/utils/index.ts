@@ -22,10 +22,14 @@ function off<T extends Window | Document | HTMLElement | EventTarget>(
   }
 }
 
-const isBrowser = typeof window !== 'undefined'
-
 const isTouchEvent = (event: Event): event is TouchEvent => {
   return 'touches' in event
 }
 
-export { on, off, isBrowser, isTouchEvent }
+const isClient = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+)
+
+export { on, off, isTouchEvent, isClient }

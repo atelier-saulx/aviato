@@ -6,6 +6,10 @@ const Section = () => {
   const router = useRouter()
   const { section = '' } = router.query
 
+  if (!section) {
+    return null
+  }
+
   if (Array.isArray(section)) {
     return <div>This section does not exist</div>
   }

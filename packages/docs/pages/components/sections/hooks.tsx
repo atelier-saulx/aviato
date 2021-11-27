@@ -19,6 +19,7 @@ const HooksPage = () => {
           padding: '10px 20px',
           borderRadius: '6px',
         }}
+        onClick={() => console.log('Regular press on release.')}
         {...longPressEvent}
       >
         Button
