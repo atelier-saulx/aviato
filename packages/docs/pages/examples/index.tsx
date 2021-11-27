@@ -4,10 +4,10 @@ import { Title } from '@aviato/ui'
 
 const Playground = () => {
   const components: ShowcaseComponentProps[] = [
-    // {
-    //   component: <Button>Button</Button>,
-    //   code: '<Button>Button</Button>',
-    // },
+    {
+      component: <Title>Title</Title>,
+      code: '<Title>Title</Title>',
+    },
   ]
 
   return (

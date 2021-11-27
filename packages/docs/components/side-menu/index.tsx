@@ -27,6 +27,10 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       title: 'Text',
       route: '/components/text',
     },
+    {
+      title: 'Hooks',
+      route: '/components/hooks',
+    },
   ]
 
   const mainMenu: Items[] = [

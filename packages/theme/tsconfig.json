@@ -15,6 +15,6 @@
     "strict": true,
     "target": "es2017"
   },
-  "exclude": ["node_modules", "pages"],
+  "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
 }

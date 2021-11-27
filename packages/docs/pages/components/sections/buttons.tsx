@@ -2,7 +2,7 @@ import DisplayComponent from '../displayComponent'
 
 import { Title } from '@aviato/ui'
 
-const MenuPage = () => {
+const ButtonsPage = () => {
   return (
     <div
       style={{
@@ -25,4 +25,4 @@ const MenuPage = () => {
   )
 }
 
-export default MenuPage
+export default ButtonsPage

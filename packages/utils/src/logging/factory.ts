@@ -14,7 +14,7 @@ function createLoggerFactory(): LoggerFactory {
   let minimumLogLevel: LogLevel = LogLevel.DEBUG
 
   const createLogger = (namespace: string): Logger => {
-    const log = (level: LogLevel): Log => {
+    const log = (level: LogLevel, override = false): Log => {
       const entryLevels: {
         [log in LogLevel]: keyof LogAdapter
       } = {
@@ -25,7 +25,7 @@ function createLoggerFactory(): LoggerFactory {
       }
 
       return (message: string, ...data: unknown[]) => {
-        if (level < minimumLogLevel) {
+        if (level < minimumLogLevel && !override) {
           return
         }
 
@@ -48,6 +48,12 @@ function createLoggerFactory(): LoggerFactory {
       info: log(LogLevel.INFO) as Log,
       warn: log(LogLevel.WARN) as Log,
       error: log(LogLevel.ERROR) as Log,
+      global: {
+        debug: log(LogLevel.DEBUG, true) as Log,
+        info: log(LogLevel.INFO, true) as Log,
+        warn: log(LogLevel.WARN, true) as Log,
+        error: log(LogLevel.ERROR, true) as Log,
+      },
     }
   }
 
@@ -68,11 +74,17 @@ function createLoggerFactory(): LoggerFactory {
 
 const loggerFactory: LoggerFactory = createLoggerFactory()
 
-let log = {
+let log: Logger = {
   debug: noop,
   info: noop,
   warn: noop,
   error: noop,
+  global: {
+    debug: noop,
+    info: noop,
+    warn: noop,
+    error: noop,
+  },
 }
 
 const setupLogging = (logLevel: LogLevel) => {

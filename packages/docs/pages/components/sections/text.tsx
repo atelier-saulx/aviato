@@ -1,14 +1,14 @@
-import DisplayComponent from '../displayComponent'
-
+import { styled } from '@aviato/ui/theme'
 import { Title, Text, Paragraph } from '@aviato/ui'
-import { styled } from '@aviato/ui'
+
+import DisplayComponent from '../displayComponent'
 
 const Column = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 })
 
-const MenuPage = () => {
+const TextPage = () => {
   return (
     <div
       style={{
@@ -45,4 +45,4 @@ const MenuPage = () => {
   )
 }
 
-export default MenuPage
+export default TextPage
