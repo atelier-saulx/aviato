@@ -1,11 +1,12 @@
 import DisplayComponent from '../displayComponent'
 
 import {
+  log,
   Title,
   useLongPress,
   useMouseWheel,
   useWindowSize,
-  log,
+  useHover,
 } from '@aviato/ui'
 
 const HooksPage = () => {
