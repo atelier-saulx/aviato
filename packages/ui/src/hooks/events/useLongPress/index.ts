@@ -1,1 +1,1 @@
-export * from '../useLongPress'
+export * from './useLongPress'

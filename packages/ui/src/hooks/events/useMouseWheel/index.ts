@@ -1,1 +1,1 @@
-export * from '../useMouseWheel'
+export * from './useMouseWheel'
