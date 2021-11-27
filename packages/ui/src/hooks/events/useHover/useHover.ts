@@ -1,43 +1,35 @@
-import { useState, useCallback, EventHandler, SyntheticEvent } from 'react'
+import { useState, useCallback, useRef } from 'react'
+import { off, on } from '../../../utils'
 
-export type Hover = [
-  {
-    onMouseDown: EventHandler<SyntheticEvent>
-    onMouseUp: EventHandler<SyntheticEvent>
-    onMouseEnter: EventHandler<SyntheticEvent>
-    onMouseLeave: EventHandler<SyntheticEvent>
-    onDragStart: EventHandler<SyntheticEvent>
-  },
-  boolean,
+function useHover<T extends HTMLElement>(): [
+  (node?: T | null) => void,
   boolean
-]
+] {
+  const [value, setValue] = useState(false)
 
-function useHover(onHover?: EventHandler<SyntheticEvent>): Hover {
-  const [isHover, setHover] = useState(false)
-  const [isActive, setActive] = useState(false)
+  const handleMouseOver = useCallback(() => setValue(true), [])
+  const handleMouseOut = useCallback(() => setValue(false), [])
 
-  const handleMouseOver = useCallback((e) => {
-    setHover(true)
-    if (onHover) {
-      onHover(e)
-    }
-  }, [])
+  const ref = useRef<T>()
 
-  const handleMouseOut = useCallback(() => setHover(false), [])
-  const handleDown = useCallback(() => setActive(true), [])
-  const handleUp = useCallback(() => setActive(false), [])
+  const callbackRef = useCallback<(node?: null | T) => void>(
+    (node) => {
+      if (ref.current) {
+        off(ref.current, 'mouseover', handleMouseOver)
+        off(ref.current, 'mouseout', handleMouseOut)
+      }
 
-  return [
-    {
-      onMouseDown: handleDown,
-      onMouseUp: handleUp,
-      onMouseEnter: handleMouseOver,
-      onMouseLeave: handleMouseOut,
-      onDragStart: handleMouseOut,
+      ref.current = node ?? undefined
+
+      if (ref.current) {
+        on(ref.current, 'mouseover', handleMouseOver)
+        on(ref.current, 'mouseout', handleMouseOut)
+      }
     },
-    isHover,
-    isActive,
-  ]
+    [handleMouseOver, handleMouseOut]
+  )
+
+  return [callbackRef, value]
 }
 
 export { useHover }
