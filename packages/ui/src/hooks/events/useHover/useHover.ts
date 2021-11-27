@@ -23,8 +23,8 @@ function useHover<Element extends HTMLElement>(): [
   const callbackRef = useCallback<(node?: null | Element) => void>(
     (node) => {
       if (ref.current) {
-        off(ref.current, 'mouseover', handleMouseOver)
-        off(ref.current, 'mouseout', handleMouseOut)
+        off(ref.current, 'mouseenter', handleMouseOver)
+        off(ref.current, 'mouseleave', handleMouseOut)
         off(ref.current, 'mousedown', handleMouseDown)
         off(ref.current, 'mouseup', handleMouseUp)
       }
@@ -32,8 +32,8 @@ function useHover<Element extends HTMLElement>(): [
       ref.current = node ?? undefined
 
       if (ref.current) {
-        on(ref.current, 'mouseover', handleMouseOver)
-        on(ref.current, 'mouseout', handleMouseOut)
+        on(ref.current, 'mouseenter', handleMouseOver)
+        on(ref.current, 'mouseleave', handleMouseOut)
         on(ref.current, 'mousedown', handleMouseDown)
         on(ref.current, 'mouseup', handleMouseUp)
       }
