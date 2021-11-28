@@ -6,6 +6,11 @@
   <p align="center">
     A UI component library for building high-quality CMS interfaces web apps.
   </p>
+
+[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Repo status](https://www.repostatus.org/badges/latest/wip.svg)](./README)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atelier-saulx/aviato-ui/graphs/commit-activity)
+
 </div>
 
 ---
