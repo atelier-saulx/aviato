@@ -65,9 +65,10 @@ _**Note**: We are still in pre-release alpha. No release has been made._
 
 ## Authors
 
-- Morten Broesby-Olsen ([@mortenbroesby](https://github.com/mortenbroesby)) - [Saulx](https://www.saulx.com/)
-- Maarten de Winther ([@maartensaulx](https://github.com/maartensaulx)) - [Saulx](https://www.saulx.com/)
-- Yves Beer ([@cowboybeer](https://github.com/cowboybeer)) - [Saulx](https://www.saulx.com/)
+- Morten Broesby-Olsen ([@mortenbroesby](https://github.com/mortenbroesby))
+- Maarten de Winther ([@maartensaulx](https://github.com/maartensaulx))
+- Yves Beer ([@cowboybeer](https://github.com/cowboybeer))
+- Atelier Saulx ([@atelier-saulx](https://github.com/atelier-saulx)) - [Saulx](https://www.saulx.com/)
 
 ---
 
