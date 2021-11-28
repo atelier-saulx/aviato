@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react'
-import { Conditional } from '~/component/Conditional'
-import { Text } from '~/component/Text'
+import { Conditional } from '~/components/Conditional'
+import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 
 export type MenuItemProps = {

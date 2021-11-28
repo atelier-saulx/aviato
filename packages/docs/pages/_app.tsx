@@ -5,7 +5,7 @@ import React, { FunctionComponent } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { SideMenu } from '../component/side-menu'
+import { SideMenu } from '../components/side-menu'
 import { setupLogging } from '../utils/log'
 
 setupLogging()

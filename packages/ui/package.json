@@ -32,7 +32,7 @@
   "prettier": "@saulx/prettier-config",
   "scripts": {
     "start": "yarn watch",
-    "build": "rollup -c --config rollup.config.js",
+    "build": "rollup -c",
     "watch": "rollup -c --watch",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
