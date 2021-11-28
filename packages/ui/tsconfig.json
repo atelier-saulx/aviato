@@ -17,12 +17,16 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "tsBuildInfoFile": "./temp/buildcache",
+    "allowSyntheticDefaultImports": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "lib": ["DOM", "ESNext"],
     "outDir": "dist",
     "baseUrl": ".",
     "rootDir": "./src",
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
   },
   "include": [
     "src/**/*"
