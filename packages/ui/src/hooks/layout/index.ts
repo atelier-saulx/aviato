@@ -1,3 +1,4 @@
 export * from './useDimensions'
-export * from './useWindowSize'
+export * from './useElementSize'
 export * from './useSafeLayoutEffect'
+export * from './useWindowSize'
