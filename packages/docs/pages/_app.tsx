@@ -6,9 +6,9 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import { SideMenu } from '../components/side-menu'
-import { setupLogging } from '../utils/log'
+import { initialiseApplication } from '../utils'
 
-setupLogging()
+initialiseApplication()
 
 const MainApplication = ({ Component, pageProps }: AppProps) => {
   const HeadContent = () => {

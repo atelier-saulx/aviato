@@ -87,11 +87,19 @@ let log: Logger = {
   },
 }
 
-const setupLogging = (logLevel: LogLevel) => {
+type SetupLoggingProps = {
+  logLevel: LogLevel
+  adapters?: LogAdapter[]
+}
+
+const setupLogging = ({ logLevel, adapters = [] }: SetupLoggingProps) => {
   loggerFactory.setLevel(logLevel)
-  loggerFactory.attachAdapter(createConsoleAdapter())
+
+  adapters.forEach((adapter) => {
+    loggerFactory.attachAdapter(adapter)
+  })
 
   log = loggerFactory.createLogger('app')
 }
 
-export { setupLogging, log, loggerFactory }
+export { setupLogging, log, loggerFactory, createConsoleAdapter }
