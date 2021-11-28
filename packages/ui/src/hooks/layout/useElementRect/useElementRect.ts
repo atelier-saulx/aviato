@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDimensions } from '../useDimensions'
-import { Rect } from '~/utils'
+import { Rect } from '@aviato/utils'
 
 /**
  * Reack hook to measure a component's dimensions.

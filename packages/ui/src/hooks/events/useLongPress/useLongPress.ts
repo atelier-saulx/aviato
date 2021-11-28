@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { isTouchEvent, off, on } from '~/utils'
+import { isTouchEvent, off, on } from '@aviato/utils'
 
 type LongpressOptions = {
   isPreventDefault?: boolean

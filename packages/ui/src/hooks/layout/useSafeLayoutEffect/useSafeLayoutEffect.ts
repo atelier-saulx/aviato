@@ -1,5 +1,5 @@
 import React from 'react'
-import { isBrowser } from '~/utils'
+import { isBrowser } from '@aviato/utils'
 
 export const useSafeLayoutEffect = isBrowser
   ? React.useLayoutEffect

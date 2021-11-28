@@ -2,7 +2,7 @@ import React from 'react'
 import { FunctionComponent } from 'react'
 
 import { Text } from '@aviato/ui'
-import { Code } from '../../components'
+import { Code } from '../../Components'
 
 export type ShowcaseComponentProps = {
   component: JSX.Element
