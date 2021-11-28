@@ -37,7 +37,7 @@ const indexConfig = {
   plugins: plugins.concat([
     typescript({
       clean: true,
-      tsconfig: 'tsconfig.json',
+      tsconfig: isProduction ? 'tsconfig.build.json' : 'tsconfig.json',
       typescript: require('typescript'),
     }),
     alias({
