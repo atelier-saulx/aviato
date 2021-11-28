@@ -1,5 +1,3 @@
-import { log } from '~/utils/logging'
-
 /**
  * Calculate the value based on percentage, lower and upper bound values
  *
@@ -37,9 +35,9 @@ export function clamp(value: number, [min, max]: [number, number]): number {
   }
 
   if (isUndefined) {
-    log.global.warn(warningMessage.undefined)
+    console.warn(warningMessage.undefined)
   } else {
-    log.global.warn(warningMessage.invalidBounds)
+    console.warn(warningMessage.invalidBounds)
   }
 
   return 0

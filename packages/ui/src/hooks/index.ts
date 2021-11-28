@@ -1,5 +1,6 @@
 export * from './debug'
 export * from './events'
+export * from './layout'
 export * from './lifecycle'
 export * from './state'
 export * from './utility'

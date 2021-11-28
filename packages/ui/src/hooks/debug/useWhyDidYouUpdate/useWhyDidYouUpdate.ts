@@ -3,6 +3,12 @@ import { useEffect, useRef } from 'react'
 
 export type IProps = Record<string, any>
 
+/**
+ * Reack hook to help developers troubleshoot what changes have caused component rerender.
+ *
+ * @param componentName - name of component
+ * @param props - component properties
+ */
 function useWhyDidYouUpdate(componentName: string, props: IProps) {
   const prevProps = useRef<IProps>({})
 

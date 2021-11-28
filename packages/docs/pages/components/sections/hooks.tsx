@@ -4,11 +4,13 @@ import { styled } from '@aviato/ui'
 import { log } from '@aviato/ui'
 import {
   Title,
+  useDimensions,
+  useHover,
   useLongPress,
   useMouseWheel,
   useWindowSize,
-  useHover,
 } from '@aviato/ui'
+import { useRef } from 'react'
 
 const StyledDiv = styled('div', {
   display: 'flex',
@@ -55,13 +57,19 @@ const HooksPage = () => {
     )
   }
 
-  const WindowDiv = () => {
-    const { width, height } = useWindowSize()
+  const DimensionDiv = () => {
+    const ref = useRef<HTMLDivElement>(null)
+    const { width: windowWidth, height: windowHeight } = useWindowSize()
+    const {
+      borderBox: { width, height },
+    } = useDimensions(ref, true)
 
     return (
-      <StyledDiv>
-        <p>Height: {height}</p>
-        <p>Width: {width}</p>
+      <StyledDiv ref={ref}>
+        <p>Page Width: {windowWidth}</p>
+        <p>Page Height: {windowHeight}</p>
+        <p>Element Width: {Math.ceil(width)}</p>
+        <p>Element Height: {Math.ceil(height)}</p>
       </StyledDiv>
     )
   }
@@ -101,7 +109,7 @@ const HooksPage = () => {
       </DisplayComponent>
 
       <DisplayComponent name="Window Size">
-        <WindowDiv />
+        <DimensionDiv />
       </DisplayComponent>
 
       <DisplayComponent name="Hover">
