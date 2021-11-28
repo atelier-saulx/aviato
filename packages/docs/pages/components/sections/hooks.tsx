@@ -5,7 +5,7 @@ import { log } from '@aviato/ui'
 import { Title } from '@aviato/ui'
 
 import {
-  useElementSize,
+  useElementRect,
   useHover,
   useLongPress,
   useMouseWheel,
@@ -63,7 +63,7 @@ const HooksPage = () => {
     const ref = useRef<HTMLDivElement>(null)
 
     const { width: windowWidth, height: windowHeight } = useWindowSize()
-    const { width: elementWidth, height: elementHeight } = useElementSize(
+    const { width: elementWidth, height: elementHeight } = useElementRect(
       ref,
       true
     )

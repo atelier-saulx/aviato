@@ -8,7 +8,7 @@ import { Rect } from '~/utils'
  * @param ref - ref of the component to measure
  * @param shouldObserve - if `true`, resize and scroll observers will be turned on
  */
-export function useElementSize(
+export function useElementRect(
   ref: React.RefObject<HTMLElement>,
   shouldObserve: boolean = false,
   preciseNumbers: boolean = false
