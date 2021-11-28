@@ -3,7 +3,7 @@ import {
   LogLevel,
   setupLogging as setupApplicationLogging,
   log,
-} from '@aviato/ui/utils'
+} from '@aviato/ui'
 
 const setupLogging = () => {
   setupApplicationLogging(inDevEnvironment ? LogLevel.DEBUG : LogLevel.ERROR)

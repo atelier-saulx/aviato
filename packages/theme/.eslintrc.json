@@ -1,9 +1,0 @@
-{
-  "extends": "@saulx/eslint-config",
-  "plugins": ["prettier"],
-  "rules": {
-    "react/jsx-curly-newline": 0,
-    "@typescript-eslint/no-unused-vars": "error",
-    "prettier/prettier": "error"
-  }
-}

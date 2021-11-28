@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useState } from 'react'
 import { Conditional } from '~/components/Conditional'
 import { Text } from '~/components/Text'
-
-import { noop } from '@aviato/utils'
+import { noop } from '~/utils'
 
 export type MenuItemProps = {
   title: string

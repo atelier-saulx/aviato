@@ -1,4 +1,4 @@
-import { styled } from '@aviato/ui/theme'
+import { styled } from '@aviato/ui'
 import { Title, Text, Paragraph } from '@aviato/ui'
 
 import DisplayComponent from '../displayComponent'
