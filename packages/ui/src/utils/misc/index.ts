@@ -35,10 +35,10 @@ function isTouchEvent(event: Event): event is TouchEvent {
   return 'touches' in event
 }
 
-const isClient = !!(
+const isBrowser = !!(
   typeof window !== 'undefined' &&
   window.document &&
   window.document.createElement
 )
 
-export { on, off, isTouchEvent, isClient, noop, clamp }
+export { on, off, isTouchEvent, isBrowser, noop, clamp }
