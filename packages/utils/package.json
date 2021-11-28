@@ -1,14 +1,13 @@
 {
-  "name": "@aviato/ui",
-  "version": "3.0.0",
-  "description": "A library of front-end React components",
+  "name": "@aviato/utils",
+  "version": "0.1.0",
+  "description": "A library of utility functions for Aviato",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "dependencies": {
-    "@aviato/utils": "*",
     "@stitches/react": "^1.2.5",
-    "react-dom": "^17.0.2",
     "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {

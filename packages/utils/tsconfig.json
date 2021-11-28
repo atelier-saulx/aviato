@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "incremental": true,
+    "composite": true,
+    "target": "es2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "tsBuildInfoFile": "./temp/buildcache",
+    "allowSyntheticDefaultImports": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "lib": ["DOM", "ESNext"],
+    "outDir": "dist",
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+}

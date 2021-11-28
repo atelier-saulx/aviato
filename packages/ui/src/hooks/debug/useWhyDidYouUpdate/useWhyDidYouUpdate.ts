@@ -1,4 +1,4 @@
-import { log } from '~/utils'
+import { log } from '@aviato/utils'
 import { useEffect, useRef } from 'react'
 
 export type IProps = Record<string, any>

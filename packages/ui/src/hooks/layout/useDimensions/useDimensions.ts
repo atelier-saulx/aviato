@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSafeLayoutEffect } from '../useSafeLayoutEffect'
-import { BoxModel, getBox, defaultBox, off, on } from '~/utils'
+import { BoxModel, getBox, defaultBox, off, on } from '@aviato/utils'
 
 /**
  * Reack hook to measure a component's dimensions.

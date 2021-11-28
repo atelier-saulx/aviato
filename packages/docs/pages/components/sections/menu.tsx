@@ -1,5 +1,5 @@
+import { log } from '@aviato/utils'
 import { styled } from '@aviato/ui'
-import { log } from '@aviato/ui'
 import { Title, Menu, MenuItem } from '@aviato/ui'
 
 import DisplayComponent from '../displayComponent'
