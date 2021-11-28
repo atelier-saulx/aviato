@@ -5,8 +5,6 @@
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "dependencies": {
-    "@aviato/theme": "*",
-    "@aviato/utils": "*",
     "@stitches/react": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -32,10 +30,9 @@
   "sideEffects": false,
   "prettier": "@saulx/prettier-config",
   "scripts": {
-    "build": "run-p build:*",
-    "build:ui": "rollup -c --config rollup.config.js",
-    "watch": "run-p watch:*",
-    "watch:ui": "rollup -c --watch",
+    "start": "yarn watch",
+    "build": "rollup -c --config rollup.config.js",
+    "watch": "rollup -c --watch",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",

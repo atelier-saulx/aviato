@@ -46,48 +46,4 @@ const indexConfig = {
   ]),
 }
 
-const themeConfig = {
-  input: './theme/index.ts',
-  output: [
-    {
-      file: 'dist/theme/index.js',
-      format: 'cjs',
-    },
-    {
-      file: 'dist/theme/index.es.js',
-      format: 'es',
-    },
-  ],
-  ...baseConfig,
-  plugins: plugins.concat([
-    typescript({
-      clean: true,
-      tsconfig: 'tsconfig.theme.json',
-      typescript: require('typescript'),
-    }),
-  ]),
-}
-
-const utilsConfig = {
-  input: './utils/index.ts',
-  output: [
-    {
-      file: 'dist/utils/index.js',
-      format: 'cjs',
-    },
-    {
-      file: 'dist/utils/index.es.js',
-      format: 'es',
-    },
-  ],
-  ...baseConfig,
-  plugins: plugins.concat([
-    typescript({
-      clean: true,
-      tsconfig: 'tsconfig.utils.json',
-      typescript: require('typescript'),
-    }),
-  ]),
-}
-
-export default [indexConfig, themeConfig, utilsConfig]
+export default [indexConfig]

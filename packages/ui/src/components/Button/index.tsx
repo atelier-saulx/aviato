@@ -1,4 +1,4 @@
-import { styled } from '@aviato/theme'
+import { styled } from '~/theme'
 import React, { FunctionComponent } from 'react'
 
 const StyledButton = styled('button', {

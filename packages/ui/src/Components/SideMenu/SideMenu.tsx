@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { styled } from '@aviato/theme'
+import { styled } from '~/theme'
 
 const StyledDiv = styled('div', {
   display: 'flex',
