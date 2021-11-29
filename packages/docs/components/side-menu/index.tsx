@@ -34,6 +34,10 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       route: '/playground/text',
     },
     {
+      title: 'Icons',
+      route: '/playground/icons',
+    },
+    {
       title: 'Display',
       route: '/playground/display',
     },

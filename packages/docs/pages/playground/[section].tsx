@@ -18,6 +18,7 @@ const Section = () => {
     menu: dynamic(() => import('./sections/menu')) as FunctionComponent,
     buttons: dynamic(() => import('./sections/buttons')) as FunctionComponent,
     text: dynamic(() => import('./sections/text')) as FunctionComponent,
+    icons: dynamic(() => import('./sections/icons')) as FunctionComponent,
     display: dynamic(() => import('./sections/display')) as FunctionComponent,
   }
 

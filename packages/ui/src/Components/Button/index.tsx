@@ -51,7 +51,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
           '&:hover': {
             backgroundColor: variant !== 'filled' && '$hoverAlt',
           },
-          border: variant === 'outlined' && '2px solid $primary',
+          border: variant === 'outlined' && '1px solid $primary',
           color: variant !== 'filled' && '$primary',
         }}
       >
@@ -68,7 +68,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
             backgroundColor:
               variant === 'filled' && disabled ? '$disabledBg' : 'transparent',
           },
-          border: variant === 'outlined' && '2px solid $disabledColor',
+          border: variant === 'outlined' && '1px solid $disabledColor',
           color: '$disabledColor',
           cursor: 'default',
         }}
