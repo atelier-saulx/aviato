@@ -53,12 +53,17 @@ async function parseTokens() {
     .readdirSync(inputDir)
     .filter((fileName) => path.extname(fileName) === '.json')
 
-  const mappedJsons = jsonsInDir.map((fileName) => {
-    const fileData = fs.readFileSync(path.join(inputDir, fileName))
-    const json = JSON.parse(fileData.toString())
-    const parsedObject = formatJSON(json)
-    return [fileName, parsedObject]
-  })
+  const mappedJsons = jsonsInDir
+    .map((fileName) => {
+      const fileData = fs.readFileSync(path.join(inputDir, fileName))
+      const json = JSON.parse(fileData.toString())
+      const parsedObject = formatJSON(json)
+      return [fileName, parsedObject]
+    })
+    .filter(([fileName]) => {
+      return true
+      return fileName.includes('dark')
+    })
 
   if (mappedJsons.length === 0) {
     return logWarning('\n\n Warning: No JSON to read.')
@@ -94,20 +99,25 @@ function formatJSON(input) {
 }
 
 async function writeTypescriptFiles({ outputDir, jsonTuple }) {
-  await fs.emptyDir(outputDir)
-
   const [fileName, parsedObject] = jsonTuple
+
   const trimmedFileName = fileName.replace('.json', '')
   const outputJSON = JSON.stringify(parsedObject, null, 2)
+  const outputFilename = `${trimmedFileName}.ts`
+  const outputFullPath = path.join(outputDir, outputFilename)
+
+  // Delete the file, just for good measure
+  if (fs.existsSync(outputFullPath)) {
+    await fs.unlink(outputFullPath)
+  }
 
   logProgress('\n Parsing: ' + fileName)
 
   const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
 
   const outputContent = typescriptTemplate
-  const outputFilename = path.join(outputDir, `${trimmedFileName}.ts`)
 
-  return fs.writeFile(outputFilename, outputContent)
+  return fs.writeFile(outputFullPath, outputContent)
 }
 
 /***
