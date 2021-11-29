@@ -119,7 +119,7 @@ function getPropertyRecursive({ object, property, parent = {} }) {
     }
 
     if (value === 'color') {
-      values[key] = parent.value
+      values = parent.value
     }
   })
 
@@ -147,16 +147,21 @@ function flattenObject(object) {
   return toReturn
 }
 
+function lookupVariablesAndReplace(object) {
+  return object
+}
+
 function formatJSON(object) {
-  const parsedColors = getPropertyRecursive({
+  const getColors = getPropertyRecursive({
     object,
     type: 'color',
   })
 
-  const flattened = flattenObject(parsedColors)
+  const flatColors = flattenObject(getColors)
+  const parsedColors = lookupVariablesAndReplace(flatColors)
 
   return {
-    colors: flattened,
+    colors: parsedColors,
   }
 }
 
