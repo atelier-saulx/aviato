@@ -211,11 +211,26 @@ function lookupVariablesAndReplace(object) {
   return object
 }
 
+const restrictedList = ['colors_']
+
 // https://stitches.dev/docs/tokens#naming-convention
 function sanitiseObject(object) {
   return Object.fromEntries(
     Object.entries(object).map(([key, value]) => {
-      return [key.toLowerCase().replace(/\./g, '_'), value]
+      let cleanedKey = key.toLowerCase().replace(/\./g, '_').replace(/-/g, '_')
+
+      restrictedList.forEach((item) => {
+        cleanedKey = cleanedKey.replace(item, '')
+      })
+
+      const uppercaseKeyEntries = cleanedKey
+        .split('_')
+        .map((partial) => {
+          return partial[0].toUpperCase() + partial.slice(1)
+        })
+        .join('')
+
+      return [uppercaseKeyEntries, value]
     })
   )
 }
