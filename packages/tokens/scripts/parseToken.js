@@ -146,13 +146,8 @@ function flattenObject(object) {
 function lookupVariablesAndReplace(object) {
   const braceRegex = /\[[^\]]+\]|\{[^}]+\}|<[^>]+>/
 
-  const isDollarToken = (input) => {
-    return input.includes('$')
-  }
-
-  const isTemplateToken = (input) => {
-    return braceRegex.test(input)
-  }
+  const isDollarToken = (input) => input.includes('$')
+  const isTemplateToken = (input) => braceRegex.test(input)
 
   const findToken = (token, object) => {
     const tokenTuple = Object.entries(object).filter(([item]) => {
@@ -163,19 +158,44 @@ function lookupVariablesAndReplace(object) {
   }
 
   _.each(object, (value, key) => {
-    const isTemplate = isTemplateToken(value)
-    if (isTemplate) {
+    if (isTemplateToken(value)) {
       const sanitisedToken = braceRegex
         .exec(value)[0]
         .replace('{', '')
         .replace('}', '')
 
-      object[key] = value.replace(braceRegex, findToken(sanitisedToken, object))
+      const matchingToken = findToken(sanitisedToken, object)
+      object[key] = value.replace(braceRegex, matchingToken)
     }
 
-    const isDollar = isDollarToken(value)
-    if (isDollar) {
-      // Parse $ tokens
+    if (isDollarToken(value)) {
+      let mappedOutput = []
+
+      const splitString = value.split('$')
+
+      if (value.includes(',')) {
+        mappedOutput = splitString.map((partial) => {
+          if (partial.includes(',')) {
+            const splitPartial = partial.split(',')
+            const token = splitPartial[0]
+            const matchingToken = findToken(token, object)
+            if (matchingToken) {
+              return [matchingToken, splitPartial[1]].join(',')
+            }
+          }
+
+          return partial
+        })
+      } else {
+        const matchingToken = findToken(splitString[1], object)
+        if (matchingToken) {
+          mappedOutput.push(matchingToken)
+        }
+      }
+
+      if (mappedOutput.length > 0) {
+        object[key] = mappedOutput.join('')
+      }
     }
   })
 
