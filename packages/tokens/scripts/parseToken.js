@@ -78,13 +78,13 @@ function formatJSON(input) {
 }
 
 function writeTypescriptFiles(jsonTuple) {
-  const targetDir = path.join('./src', 'theme')
+  const outputDir = path.join('./src', 'theme')
 
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true })
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true })
   }
 
-  fs.emptyDirSync(targetDir)
+  fs.emptyDirSync(outputDir)
 
   const [fileName, parsedObject] = jsonTuple
   const trimmedFileName = fileName.replace('.json', '')
@@ -93,7 +93,7 @@ function writeTypescriptFiles(jsonTuple) {
   const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
 
   const outputContent = typescriptTemplate
-  const outputFilename = path.join(targetDir, `${trimmedFileName}.ts`)
+  const outputFilename = path.join(outputDir, `${trimmedFileName}.ts`)
 
   fs.writeFileSync(outputFilename, outputContent)
 }
