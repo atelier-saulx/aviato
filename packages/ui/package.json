@@ -7,13 +7,14 @@
   "dependencies": {
     "@aviato/utils": "*",
     "@stitches/react": "^1.2.5",
-    "react-dom": "^17.0.2",
     "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
     "@saulx/eslint-config": "^1.1.1",
     "@saulx/prettier-config": "^1.0.0",
+    "@svgr/cli": "^6.0.0",
     "@types/node": "^16.9.4",
     "@types/react": "^17.0.22",
     "@types/throttle-debounce": "^2.1.0",
