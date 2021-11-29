@@ -51,6 +51,11 @@
       "yarn lint"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn lint"
+    }
+  },
   "dependencies": {
     "shx": "^0.3.3"
   }
