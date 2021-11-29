@@ -10,9 +10,9 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-const green = chalk.bold.green
-const blue = chalk.bold.blue
-const yellow = chalk.bold.yellow
+const green = chalk.green
+const blue = chalk.blue
+const yellow = chalk.yellow
 
 const logSuccess = (message) => console.log(green(message))
 const logProgress = (message) => console.log(blue(message))
@@ -31,14 +31,21 @@ async function start() {
 
   spinner.stop()
 
-  logSuccess('\nDone parsing.')
+  logSuccess('\n Done parsing.')
 
   process.exit()
 }
 
 function parseTokens() {
+  const inputDir = path.join('./json')
+
+  if (!fs.existsSync(inputDir)) {
+    fs.mkdirSync(inputDir, { recursive: true })
+    fs.writeFileSync(path.join(inputDir, '.gitkeep'), '')
+  }
+
   const jsonsInDir = fs
-    .readdirSync('./tokens')
+    .readdirSync(inputDir)
     .filter((fileName) => path.extname(fileName) === '.json')
 
   const mappedJsons = jsonsInDir.map((fileName) => {
