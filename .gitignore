@@ -135,5 +135,3 @@ dists
 tmp/
 
 local-cloud/
-
-# packages/ui/icons/*
