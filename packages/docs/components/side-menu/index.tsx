@@ -20,6 +20,10 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       route: '/components/buttons',
     },
     {
+      title: 'Checkbox',
+      route: '/components/checkbox',
+    },
+    {
       title: 'Menu',
       route: '/components/menu',
     },
