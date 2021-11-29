@@ -53,7 +53,7 @@ function IsJsonString(string) {
 }
 
 async function parseTokens() {
-  const inputDir = path.join('./json')
+  const inputDir = path.join('./src', 'json')
 
   if (!fs.existsSync(inputDir)) {
     await fs.mkdir(inputDir, { recursive: true })
@@ -105,15 +105,58 @@ async function parseTokens() {
   await Promise.all(writeFilesPromises)
 }
 
-function recursiveFind(input, output) {
-  return output
+function getPropertyRecursive({ object, property, parent = {} }) {
+  var values = {}
+
+  _.each(object, (value, key) => {
+    if (_.isObject(value)) {
+      values[key] = getPropertyRecursive({
+        object: value,
+        property,
+        parent: value,
+      })
+    } else if (key === 'type') {
+    }
+
+    if (value === 'color') {
+      values[key] = parent.value
+    }
+  })
+
+  return values
 }
 
-function formatJSON(input) {
-  const parseColors = recursiveFind(input, {})
+function flattenObject(object) {
+  var toReturn = {}
+
+  for (var index in object) {
+    if (!object.hasOwnProperty(index)) continue
+
+    if (typeof object[index] == 'object' && object[index] !== null) {
+      var flatObject = flattenObject(object[index])
+      for (var x in flatObject) {
+        if (!flatObject.hasOwnProperty(x)) continue
+
+        toReturn[index + '.' + x] = flatObject[x]
+      }
+    } else {
+      toReturn[index] = object[index]
+    }
+  }
+
+  return toReturn
+}
+
+function formatJSON(object) {
+  const parsedColors = getPropertyRecursive({
+    object,
+    type: 'color',
+  })
+
+  const flattened = flattenObject(parsedColors)
 
   return {
-    colors: parseColors,
+    colors: flattened,
   }
 }
 
