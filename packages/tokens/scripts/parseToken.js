@@ -2,7 +2,8 @@
 import ora from 'ora'
 import chalk from 'chalk'
 import _ from 'lodash'
-import fs from 'fs'
+import fs from 'fs-extra'
+import rimraf from 'rimraf'
 import path from 'path'
 
 function sleep(ms) {
@@ -36,46 +37,47 @@ async function start() {
 function parseTokens() {
   const jsonsInDir = fs
     .readdirSync('./tokens')
-    .filter((file) => path.extname(file) === '.json')
+    .filter((fileName) => path.extname(fileName) === '.json')
 
-  jsonsInDir.map((file) => {
-    const fileData = fs.readFileSync(path.join('./tokens', file))
+  const mappedJsons = jsonsInDir.map((fileName) => {
+    const fileData = fs.readFileSync(path.join('./tokens', fileName))
     const json = JSON.parse(fileData.toString())
-    const parsedJson = formatJSON(json)
-    return parsedJson
+    const parsedObject = formatJSON(json)
+    return [fileName, parsedObject]
   })
 
-  return writeTypescriptFile({})
+  mappedJsons.forEach((jsonTuple) => {
+    return writeTypescriptFiles(jsonTuple)
+  })
 }
 
 function formatJSON(input) {
-  return {}
+  return {
+    colors: {
+      $primary: 'rgb(0,0,0)',
+    },
+  }
 }
 
-function writeTypescriptFile(input) {
+function writeTypescriptFiles(jsonTuple) {
   const targetDir = path.join('./test', 'typescript')
 
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true })
   }
 
-  const typescriptTemplate = `
-export const theme = {
-  colors: {
-    primary: 'rgb(98, 0, 238)',
-    secondary: 'rgb(217, 19, 174)',
-    background: 'rgb(247, 247, 248)',
-    hover: 'rgb(56,76,213)',
-    hoverAlt: 'rgba(61, 83, 231, 0.12)',
-    active: 'rgba(98, 0, 238, 0.8)',
-  },
-}
-  `.trim()
+  fs.emptyDirSync(targetDir)
+
+  const [fileName, parsedObject] = jsonTuple
+  const trimmedFileName = fileName.replace('.json', '')
+  const outputJSON = JSON.stringify(parsedObject, null, 2)
+
+  const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
 
   const outputContent = typescriptTemplate
-  const filePath = path.join(targetDir, 'theme.ts')
+  const outputFilename = path.join(targetDir, `${trimmedFileName}.ts`)
 
-  fs.writeFileSync(filePath, outputContent)
+  fs.writeFileSync(outputFilename, outputContent)
 }
 
 /***
