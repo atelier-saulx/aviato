@@ -3,7 +3,6 @@ import ora from 'ora'
 import chalk from 'chalk'
 import _ from 'lodash'
 import fs from 'fs-extra'
-import rimraf from 'rimraf'
 import path from 'path'
 
 function sleep(ms) {
@@ -14,11 +13,13 @@ const green = chalk.green
 const blue = chalk.blue
 const yellow = chalk.yellow
 const white = chalk.white
+const red = chalk.red
 
 const logInfo = (message) => console.log(white(message))
 const logSuccess = (message) => console.log(green(message))
 const logProgress = (message) => console.log(blue(message))
 const logWarning = (message) => console.log(yellow(message))
+const logError = (message) => console.log(red(message))
 
 /***
  * Setup spinner
@@ -26,10 +27,11 @@ const logWarning = (message) => console.log(yellow(message))
 const spinner = ora('Parsing Theme').start()
 
 async function start() {
-  parseTokens()
-
-  // Simulate progress
-  await sleep(250)
+  try {
+    parseTokens()
+  } catch (error) {
+    return logError(`Error parsing tokens. ${error}`)
+  }
 
   spinner.stop()
 

@@ -17,7 +17,6 @@
     "lodash": "^4.17.21",
     "nodemon": "^2.0.15",
     "ora": "^6.0.1",
-    "rimraf": "^3.0.2",
     "rollup": "^2.33.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-typescript2": "^0.31.1",
