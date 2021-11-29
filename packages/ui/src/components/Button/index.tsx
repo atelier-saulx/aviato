@@ -16,6 +16,32 @@ const StyledButton = styled('button', {
   '&:hover': {
     backgroundColor: '$hover',
   },
+
+  variants: {
+    type: {
+      filled: {
+        background: '$primary',
+
+        '&:hover': {
+          backgroundColor: '$hoverAlt',
+        },
+      },
+      outlined: {
+        background: '$primary',
+
+        '&:hover': {
+          backgroundColor: '$hoverAlt',
+        },
+      },
+      transparent: {
+        background: '$primary',
+
+        '&:hover': {
+          backgroundColor: '$hoverAlt',
+        },
+      },
+    },
+  },
 })
 
 type ButtonVariant = 'filled' | 'outlined' | 'transparent'
@@ -30,31 +56,5 @@ export const Button: FunctionComponent<ButtonProps> = ({
   children,
   variant = 'filled',
 }) => {
-  type ButtonMap = {
-    [key in ButtonVariant]: string
-  }
-
-  const buttonVariantBackground: ButtonMap = {
-    filled: '$primary',
-    outlined: 'rgba(0,0,0,0)',
-    transparent: 'rgba(0,0,0,0)',
-  }
-
-  const buttonVariantBg = buttonVariantBackground[variant] ?? 'filled'
-
-  return (
-    <StyledButton
-      css={{
-        backgroundColor: buttonVariantBg,
-        border: variant === 'outlined' && '2px solid $primary',
-        color: variant !== 'filled' && '$primary',
-
-        '&:hover': {
-          backgroundColor: variant !== 'filled' && '$hoverAlt',
-        },
-      }}
-    >
-      {text ?? children}
-    </StyledButton>
-  )
+  return <StyledButton type={variant}>{text ?? children}</StyledButton>
 }
