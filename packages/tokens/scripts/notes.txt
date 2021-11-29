@@ -5,3 +5,5 @@ https://github.com/lukasoppermann/design-token-transformer
 
 For now...
 https://www.npmjs.com/package/token-transformer
+
+Lets try manually!

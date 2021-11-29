@@ -35,7 +35,9 @@ async function start() {
 
   spinner.stop()
 
-  logInfo('\n Done parsing \n')
+  logInfo('\n Done parsing')
+
+  logSuccess('\n Success! \n')
 
   process.exit()
 }
@@ -44,7 +46,7 @@ async function parseTokens() {
   const inputDir = path.join('./json')
 
   if (!fs.existsSync(inputDir)) {
-    fs.mkdirSync(inputDir, { recursive: true })
+    await fs.mkdir(inputDir, { recursive: true })
   }
 
   const jsonsInDir = fs
@@ -55,7 +57,6 @@ async function parseTokens() {
     const fileData = fs.readFileSync(path.join(inputDir, fileName))
     const json = JSON.parse(fileData.toString())
     const parsedObject = formatJSON(json)
-
     return [fileName, parsedObject]
   })
 
@@ -66,7 +67,7 @@ async function parseTokens() {
   const outputDir = path.join('./src', 'theme')
 
   if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true })
+    await fs.mkdir(outputDir, { recursive: true })
   }
 
   console.log('')
@@ -93,7 +94,7 @@ function formatJSON(input) {
 }
 
 async function writeTypescriptFiles({ outputDir, jsonTuple }) {
-  fs.emptyDirSync(outputDir)
+  await fs.emptyDir(outputDir)
 
   const [fileName, parsedObject] = jsonTuple
   const trimmedFileName = fileName.replace('.json', '')
