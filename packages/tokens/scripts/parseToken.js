@@ -42,6 +42,16 @@ async function start() {
   process.exit()
 }
 
+function IsJsonString(string) {
+  try {
+    JSON.parse(string)
+  } catch (error) {
+    return false
+  }
+
+  return true
+}
+
 async function parseTokens() {
   const inputDir = path.join('./json')
 
@@ -56,10 +66,19 @@ async function parseTokens() {
   const mappedJsons = jsonsInDir
     .map((fileName) => {
       const fileData = fs.readFileSync(path.join(inputDir, fileName))
-      const json = JSON.parse(fileData.toString())
-      const parsedObject = formatJSON(json)
+      const stringData = fileData.toString()
+
+      const isValidJSON = IsJsonString(stringData)
+      if (!isValidJSON) {
+        logWarning('Malformed data')
+        return [fileName, undefined]
+      }
+
+      const parsedJSON = JSON.parse(stringData)
+      const parsedObject = formatJSON(parsedJSON)
       return [fileName, parsedObject]
     })
+    .filter(([, data]) => data !== undefined)
     .filter(([fileName]) => {
       return true
       return fileName.includes('dark')
