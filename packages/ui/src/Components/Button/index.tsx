@@ -22,12 +22,14 @@ type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 export type ButtonProps = {
   text?: string
   variant?: ButtonVariant
+  disabled?: boolean
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
   text,
   children,
   variant = 'filled',
+  disabled = false,
 }) => {
   type ButtonMap = {
     [key in ButtonVariant]: string
@@ -41,18 +43,38 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
   const buttonVariantBg = buttonVariantBackground[variant] ?? 'filled'
 
-  return (
-    <StyledButton
-      css={{
-        backgroundColor: buttonVariantBg,
-        '&:hover': {
-          backgroundColor: variant !== 'filled' && '$hoverAlt',
-        },
-        border: variant === 'outlined' && '2px solid $primary',
-        color: variant !== 'filled' && '$primary',
-      }}
-    >
-      {text ?? children}
-    </StyledButton>
-  )
+  if (!disabled) {
+    return (
+      <StyledButton
+        css={{
+          backgroundColor: buttonVariantBg,
+          '&:hover': {
+            backgroundColor: variant !== 'filled' && '$hoverAlt',
+          },
+          border: variant === 'outlined' && '2px solid $primary',
+          color: variant !== 'filled' && '$primary',
+        }}
+      >
+        {text ?? children}
+      </StyledButton>
+    )
+  } else {
+    return (
+      <StyledButton
+        css={{
+          backgroundColor:
+            variant === 'filled' && disabled ? '$disabledBg' : 'transparent',
+          '&:hover': {
+            backgroundColor:
+              variant === 'filled' && disabled ? '$disabledBg' : 'transparent',
+          },
+          border: variant === 'outlined' && '2px solid $disabledColor',
+          color: '$disabledColor',
+          cursor: 'default',
+        }}
+      >
+        {text ?? children}
+      </StyledButton>
+    )
+  }
 }

@@ -9,6 +9,8 @@ const createdConfig = createStitches({
       active: 'rgba(98, 0, 238, 0.8)',
       secondary: 'rgb(217, 19, 174)',
       background: 'rgb(247, 247, 248)',
+      disabledBg: 'rgba(15,16,19,0.12)',
+      disabledColor: 'rgba(15,16,19,0.26)',
     },
     space: {
       1: '4px',
