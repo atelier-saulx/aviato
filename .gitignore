@@ -136,4 +136,4 @@ tmp/
 
 local-cloud/
 
-# packages/ui/icons/*
+.husky
