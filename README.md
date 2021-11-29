@@ -4,7 +4,7 @@
   </h1>
 
   <p align="center">
-    A UI component library for building high-quality CMS interfaces web apps.
+    A UI component library for building high-quality CMS & DMS interfaces web apps.
   </p>
 
 [![Repo status](https://www.repostatus.org/badges/latest/wip.svg)](./README)
@@ -24,7 +24,7 @@ Aviato is UI component library with a focus on accessibility, customization and 
 
 ## ✨ Features
 
-- 🗳 - A UI suite designed for and web applications.
+- 🗳 - A UI suite designed for CMS + DMS interfaces and web applications.
 - 📦 - A set of high-quality React components out of the box.
 - 🛡 - Written in TypeScript with predictable static types.
 - 🎨 - Powerful theme customization.
@@ -49,7 +49,9 @@ For full documentation, visit [<--Link not yet published-->]().
 
 ```bash
 yarn add @aviato/ui
+
 # or
+
 npm install --save @aviato/ui
 ```
 
