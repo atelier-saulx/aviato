@@ -28,7 +28,7 @@ const spinner = ora('Parsing Theme').start()
 
 async function start() {
   try {
-    parseTokens()
+    await parseTokens()
   } catch (error) {
     return logError(`Error parsing tokens. ${error}`)
   }
@@ -40,7 +40,7 @@ async function start() {
   process.exit()
 }
 
-function parseTokens() {
+async function parseTokens() {
   const inputDir = path.join('./json')
 
   if (!fs.existsSync(inputDir)) {
@@ -71,9 +71,13 @@ function parseTokens() {
 
   console.log('')
 
-  return mappedJsons.forEach((jsonTuple) => {
-    return writeTypescriptFiles({ outputDir, jsonTuple })
+  const promises = []
+
+  mappedJsons.forEach((jsonTuple) => {
+    promises.push(writeTypescriptFiles({ outputDir, jsonTuple }))
   })
+
+  await Promise.all(promises)
 }
 
 function recursiveFind(input, output) {
@@ -88,7 +92,7 @@ function formatJSON(input) {
   }
 }
 
-function writeTypescriptFiles({ outputDir, jsonTuple }) {
+async function writeTypescriptFiles({ outputDir, jsonTuple }) {
   fs.emptyDirSync(outputDir)
 
   const [fileName, parsedObject] = jsonTuple
@@ -102,7 +106,7 @@ function writeTypescriptFiles({ outputDir, jsonTuple }) {
   const outputContent = typescriptTemplate
   const outputFilename = path.join(outputDir, `${trimmedFileName}.ts`)
 
-  return fs.writeFileSync(outputFilename, outputContent)
+  return fs.writeFile(outputFilename, outputContent)
 }
 
 /***
