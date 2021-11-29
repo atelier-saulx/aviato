@@ -1,13 +1,12 @@
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable no-console */
+/* eslint-disable no-unreachable */
+
 import ora from 'ora'
 import chalk from 'chalk'
 import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
 
 const green = chalk.green
 const blue = chalk.blue
@@ -106,7 +105,7 @@ async function parseTokens() {
 }
 
 function getPropertyRecursive({ object, property, parent = {} }) {
-  var values = {}
+  let values = {}
 
   _.each(object, (value, key) => {
     if (_.isObject(value)) {
@@ -115,10 +114,7 @@ function getPropertyRecursive({ object, property, parent = {} }) {
         property,
         parent: value,
       })
-    } else if (key === 'type') {
-    }
-
-    if (value === 'color') {
+    } else if (value === 'color') {
       values = parent.value
     }
   })
@@ -127,14 +123,14 @@ function getPropertyRecursive({ object, property, parent = {} }) {
 }
 
 function flattenObject(object) {
-  var toReturn = {}
+  const toReturn = {}
 
-  for (var index in object) {
+  for (const index in object) {
     if (!object.hasOwnProperty(index)) continue
 
-    if (typeof object[index] == 'object' && object[index] !== null) {
-      var flatObject = flattenObject(object[index])
-      for (var x in flatObject) {
+    if (typeof object[index] === 'object' && object[index] !== null) {
+      const flatObject = flattenObject(object[index])
+      for (const x in flatObject) {
         if (!flatObject.hasOwnProperty(x)) continue
 
         toReturn[index + '.' + x] = flatObject[x]
@@ -148,17 +144,61 @@ function flattenObject(object) {
 }
 
 function lookupVariablesAndReplace(object) {
+  const braceRegex = /\[[^\]]+\]|\{[^}]+\}|<[^>]+>/
+
+  const isDollarToken = (input) => {
+    return input.includes('$')
+  }
+
+  const isTemplateToken = (input) => {
+    return braceRegex.test(input)
+  }
+
+  const findToken = (token, object) => {
+    const tokenTuple = Object.entries(object).filter(([item]) => {
+      return item === token
+    })[0]
+
+    return tokenTuple[1]
+  }
+
+  _.each(object, (value, key) => {
+    const isTemplate = isTemplateToken(value)
+    if (isTemplate) {
+      const sanitisedToken = braceRegex
+        .exec(value)[0]
+        .replace('{', '')
+        .replace('}', '')
+
+      object[key] = value.replace(braceRegex, findToken(sanitisedToken, object))
+    }
+
+    const isDollar = isDollarToken(value)
+    if (isDollar) {
+      // Parse $ tokens
+    }
+  })
+
   return object
 }
 
+function parseObject({ object, type }) {
+  const getProperties = getPropertyRecursive({
+    object,
+    type,
+  })
+
+  const flattenProperties = flattenObject(getProperties)
+  const findVariables = lookupVariablesAndReplace(flattenProperties)
+
+  return findVariables
+}
+
 function formatJSON(object) {
-  const getColors = getPropertyRecursive({
+  const parsedColors = parseObject({
     object,
     type: 'color',
   })
-
-  const flatColors = flattenObject(getColors)
-  const parsedColors = lookupVariablesAndReplace(flatColors)
 
   return {
     colors: parsedColors,
