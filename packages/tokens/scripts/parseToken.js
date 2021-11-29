@@ -43,24 +43,29 @@ function parseTokens() {
     const fileData = fs.readFileSync(path.join('./tokens', fileName))
     const json = JSON.parse(fileData.toString())
     const parsedObject = formatJSON(json)
+
     return [fileName, parsedObject]
   })
 
-  mappedJsons.forEach((jsonTuple) => {
+  return mappedJsons.forEach((jsonTuple) => {
     return writeTypescriptFiles(jsonTuple)
   })
 }
 
+function recursiveFind(input, output) {
+  return output
+}
+
 function formatJSON(input) {
+  const parseColors = recursiveFind(input, {})
+
   return {
-    colors: {
-      $primary: 'rgb(0,0,0)',
-    },
+    colors: parseColors,
   }
 }
 
 function writeTypescriptFiles(jsonTuple) {
-  const targetDir = path.join('./test', 'typescript')
+  const targetDir = path.join('./src', 'theme')
 
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true })

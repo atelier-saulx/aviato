@@ -15,6 +15,7 @@
     "esm": "^3.2.25",
     "fs-extra": "^10.0.0",
     "lodash": "^4.17.21",
+    "nodemon": "^2.0.15",
     "ora": "^6.0.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.33.1",
@@ -29,6 +30,7 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c --watch",
+    "watch:parse": "nodemon --exec yarn parse",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint --ignore-path .gitignore './**/*.{ts,tsx}'",
