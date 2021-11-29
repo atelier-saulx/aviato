@@ -11,10 +11,12 @@ function sleep(ms) {
 }
 
 const green = chalk.bold.green
+const blue = chalk.bold.blue
 const yellow = chalk.bold.yellow
 
 const logSuccess = (message) => console.log(green(message))
-const logProgress = (message) => console.log(yellow(message))
+const logProgress = (message) => console.log(blue(message))
+const logWarning = (message) => console.log(yellow(message))
 
 /***
  * Setup spinner
@@ -46,6 +48,10 @@ function parseTokens() {
 
     return [fileName, parsedObject]
   })
+
+  if (mappedJsons.length === 0) {
+    return logWarning('\n\n Warning: No JSON to read.')
+  }
 
   return mappedJsons.forEach((jsonTuple) => {
     return writeTypescriptFiles(jsonTuple)
