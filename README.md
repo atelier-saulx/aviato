@@ -55,6 +55,10 @@ yarn add @aviato/ui
 npm install --save @aviato/ui
 ```
 
+### Example
+
+See how to use the library under [Getting Started](./docs/getting-started-with-ui.md).
+
 ---
 
 ## Releases
