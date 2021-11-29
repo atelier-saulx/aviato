@@ -77,13 +77,13 @@ async function parseTokens() {
 
   console.log('')
 
-  const promises = []
+  const writeFilesPromises = []
 
   mappedJsons.forEach((jsonTuple) => {
-    promises.push(writeTypescriptFiles({ outputDir, jsonTuple }))
+    writeFilesPromises.push(writeTypescriptFiles({ outputDir, jsonTuple }))
   })
 
-  await Promise.all(promises)
+  await Promise.all(writeFilesPromises)
 }
 
 function recursiveFind(input, output) {
@@ -105,11 +105,6 @@ async function writeTypescriptFiles({ outputDir, jsonTuple }) {
   const outputJSON = JSON.stringify(parsedObject, null, 2)
   const outputFilename = `${trimmedFileName}.ts`
   const outputFullPath = path.join(outputDir, outputFilename)
-
-  // Delete the file, just for good measure
-  if (fs.existsSync(outputFullPath)) {
-    await fs.unlink(outputFullPath)
-  }
 
   logProgress('\n Parsing: ' + fileName)
 
