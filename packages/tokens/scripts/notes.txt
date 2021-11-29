@@ -1,9 +1,0 @@
-Ask Maarten
-Why not this?
-https://www.figma.com/community/plugin/888356646278934516/Design-Tokens
-https://github.com/lukasoppermann/design-token-transformer
-
-For now...
-https://www.npmjs.com/package/token-transformer
-
-Lets try manually!

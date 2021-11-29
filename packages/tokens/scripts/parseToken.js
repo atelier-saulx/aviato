@@ -7,6 +7,7 @@ import chalk from 'chalk'
 import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
+import { exec } from 'promisify-child-process'
 
 const green = chalk.green
 const blue = chalk.blue
@@ -28,8 +29,10 @@ const spinner = ora('Parsing Theme').start()
 async function start() {
   try {
     await parseTokens()
+    await exec('yarn lint')
   } catch (error) {
-    return logError(`Error parsing tokens. ${error}`)
+    logError(`\nError parsing tokens. ${error}\n`)
+    throw new Error(error)
   }
 
   spinner.stop()
@@ -150,11 +153,17 @@ function lookupVariablesAndReplace(object) {
   const isTemplateToken = (input) => braceRegex.test(input)
 
   const findToken = (token, object) => {
-    const tokenTuple = Object.entries(object).filter(([item]) => {
-      return item === token
-    })[0]
+    try {
+      const tokenTuple = Object.entries(object).filter(([item]) => {
+        return item === token
+      })[0]
 
-    return tokenTuple[1]
+      return tokenTuple[1]
+    } catch (error) {
+      logError(`\n\nError: Could not find token: ${token}`)
+
+      throw new Error(error)
+    }
   }
 
   _.each(object, (value, key) => {
@@ -202,16 +211,22 @@ function lookupVariablesAndReplace(object) {
   return object
 }
 
+// https://stitches.dev/docs/tokens#naming-convention
+function sanitiseObject(object) {
+  return Object.fromEntries(
+    Object.entries(object).map(([key, value]) => {
+      return [key.toLowerCase().replace(/\./g, '_'), value]
+    })
+  )
+}
+
 function parseObject({ object, type }) {
-  const getProperties = getPropertyRecursive({
-    object,
-    type,
-  })
-
+  const getProperties = getPropertyRecursive({ object, type })
   const flattenProperties = flattenObject(getProperties)
-  const findVariables = lookupVariablesAndReplace(flattenProperties)
+  const withoutVariables = lookupVariablesAndReplace(flattenProperties)
+  const sanitiseProperties = sanitiseObject(withoutVariables)
 
-  return findVariables
+  return sanitiseProperties
 }
 
 function formatJSON(object) {
