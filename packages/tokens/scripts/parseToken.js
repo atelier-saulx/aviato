@@ -13,7 +13,9 @@ function sleep(ms) {
 const green = chalk.green
 const blue = chalk.blue
 const yellow = chalk.yellow
+const white = chalk.white
 
+const logInfo = (message) => console.log(white(message))
 const logSuccess = (message) => console.log(green(message))
 const logProgress = (message) => console.log(blue(message))
 const logWarning = (message) => console.log(yellow(message))
@@ -31,7 +33,7 @@ async function start() {
 
   spinner.stop()
 
-  logSuccess('\n Done parsing.')
+  logInfo('\n Done parsing \n')
 
   process.exit()
 }
@@ -41,7 +43,6 @@ function parseTokens() {
 
   if (!fs.existsSync(inputDir)) {
     fs.mkdirSync(inputDir, { recursive: true })
-    fs.writeFileSync(path.join(inputDir, '.gitkeep'), '')
   }
 
   const jsonsInDir = fs
@@ -49,7 +50,7 @@ function parseTokens() {
     .filter((fileName) => path.extname(fileName) === '.json')
 
   const mappedJsons = jsonsInDir.map((fileName) => {
-    const fileData = fs.readFileSync(path.join('./tokens', fileName))
+    const fileData = fs.readFileSync(path.join(inputDir, fileName))
     const json = JSON.parse(fileData.toString())
     const parsedObject = formatJSON(json)
 
@@ -60,8 +61,16 @@ function parseTokens() {
     return logWarning('\n\n Warning: No JSON to read.')
   }
 
+  const outputDir = path.join('./src', 'theme')
+
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true })
+  }
+
+  console.log('')
+
   return mappedJsons.forEach((jsonTuple) => {
-    return writeTypescriptFiles(jsonTuple)
+    return writeTypescriptFiles({ outputDir, jsonTuple })
   })
 }
 
@@ -77,25 +86,21 @@ function formatJSON(input) {
   }
 }
 
-function writeTypescriptFiles(jsonTuple) {
-  const outputDir = path.join('./src', 'theme')
-
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true })
-  }
-
+function writeTypescriptFiles({ outputDir, jsonTuple }) {
   fs.emptyDirSync(outputDir)
 
   const [fileName, parsedObject] = jsonTuple
   const trimmedFileName = fileName.replace('.json', '')
   const outputJSON = JSON.stringify(parsedObject, null, 2)
 
+  logProgress('\n Parsing: ' + fileName)
+
   const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
 
   const outputContent = typescriptTemplate
   const outputFilename = path.join(outputDir, `${trimmedFileName}.ts`)
 
-  fs.writeFileSync(outputFilename, outputContent)
+  return fs.writeFileSync(outputFilename, outputContent)
 }
 
 /***
