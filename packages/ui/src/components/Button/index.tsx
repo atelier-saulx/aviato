@@ -2,10 +2,8 @@ import { styled } from '~/theme'
 import React, { FunctionComponent } from 'react'
 
 const StyledButton = styled('button', {
-  backgroundColor: '$primary',
   alignItems: 'flex-start',
   borderRadius: '4px',
-  color: 'white', // Foreground Color??
   cursor: 'pointer',
   fontSize: '15px',
   fontWeight: '500',
@@ -13,44 +11,60 @@ const StyledButton = styled('button', {
   margin: '6px',
   padding: '4px 8px',
 
-  '&:hover': {
-    backgroundColor: '$hover',
+  '&:disabled': {
+    cursor: 'not-allowed',
   },
 
   variants: {
     type: {
       filled: {
-        background: '$primary',
+        color: '$PrimaryContrastHigh',
+        background: '$PrimaryMain',
+        border: '1px solid $PrimaryMain',
+
+        '&:hover': {
+          background: '$PrimaryMainHover',
+        },
+        '&:active': {
+          background: '$PrimaryMainSelected',
+        },
         '&:disabled': {
-          backgroundColor: 'rgba(15,16,19,0.12)',
-          color: 'rgba(15,16,19,0.26)',
-          cursor: 'not-allowed',
+          color: '$ActionDisabledContent',
+          background: '$ActionDisabledBackground',
+          border: '1px transparent $ActionDisabledBackground',
         },
       },
+
       outlined: {
-        background: '$transparent',
-        color: '$primary',
-        border: '1px solid $primary',
+        border: '1px solid $PrimaryOutlineBorder',
+        color: '$PrimaryMain',
+
         '&:hover': {
-          backgroundColor: '$hoverAlt',
+          backgroundColor: '$PrimaryLightHover',
+        },
+        '&:active': {
+          background: '$PrimaryLightSelected',
         },
         '&:disabled': {
-          background: '$transparent',
-          color: 'rgba(15,16,19,0.26)',
-          border: '1px solid rgba(15,16,19,0.26)',
-          cursor: 'not-allowed',
+          color: '$ActionDisabledContent',
+          border: '1px solid $ActionDisabledBackground',
+          background: 'none',
         },
       },
+
       transparent: {
-        background: '$transparent',
-        color: '$primary',
+        border: '1px solid transparent',
+        color: '$PrimaryMain',
+
         '&:hover': {
-          backgroundColor: '$hoverAlt',
+          backgroundColor: '$PrimaryLightHover',
+        },
+        '&:active': {
+          background: '$PrimaryLightSelected',
         },
         '&:disabled': {
-          background: '$transparent',
-          color: 'rgba(15,16,19,0.26)',
-          cursor: 'not-allowed',
+          color: '$ActionDisabledContent',
+          background: 'none',
         },
       },
     },
@@ -72,7 +86,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   disabled = false,
 }) => {
   return (
-    <StyledButton disabled={disabled} type={variant}>
+    <StyledButton type={variant} disabled={disabled}>
       {text ?? children}
     </StyledButton>
   )

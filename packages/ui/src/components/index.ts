@@ -1,5 +1,4 @@
 export * from './Button'
-export * from './Checkbox'
 export * from './Conditional'
 export * from './Menu'
 export * from './SideMenu'
