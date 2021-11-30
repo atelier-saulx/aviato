@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react'
-import { Conditional } from '~/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { styled, classNames } from '~/theme'
