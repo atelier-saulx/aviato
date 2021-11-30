@@ -5,11 +5,6 @@ const CheckboxContainer = styled('div', {
   display: 'inline-block',
   verticalAlign: 'middle',
   margin: '6px',
-  '&:disabled': {
-    backgroundColor: '#f9f9f9',
-    border: '1px solid rgba(15,16,19,0.06)',
-    cursor: 'not-allowed',
-  },
 })
 
 /* Temporary Icon */
@@ -34,20 +29,10 @@ const StyledCheckbox = styled('div', {
       medium: {
         backgroundColor: 'rgba(15,16,19,0.06)',
         border: '1px solid rgba(15,16,19,0.12)',
-        '&:disabled': {
-          backgroundColor: '#f9f9f9',
-          border: '1px solid rgba(15,16,19,0.06)',
-          cursor: 'not-allowed',
-        },
       },
       primary: {
         backgroundColor: '$primary',
         border: '1px solid $primary',
-        '&:disabled': {
-          backgroundColor: '#f9f9f9',
-          border: '1px solid rgba(15,16,19,0.06)',
-          cursor: 'not-allowed',
-        },
       },
       secondary: {
         backgroundColor: 'rgba(15,16,19,0.12)',
@@ -69,16 +54,24 @@ const StyledCheckbox = styled('div', {
         height: '20px',
       },
     },
+    disabled: {
+      true: {
+        backgroundColor: '#f9f9f9',
+        border: '1px solid rgba(15,16,19,0.06)',
+        cursor: 'not-allowed',
+      },
+    },
   },
 })
 
 type CheckboxVariant = 'medium' | 'primary' | 'secondary'
 type CheckboxSize = 'small' | 'medium'
+type CheckboxDisabled = true | false
 
 export type CheckboxProps = {
   variant?: CheckboxVariant
   size?: CheckboxSize
-  disabled?: boolean
+  disabled?: CheckboxDisabled
 }
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
@@ -88,14 +81,14 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
 }) => {
   const [check, setCheck] = useState(false)
 
-  function checkboxHandler() {
-    setCheck(!check)
-    console.log(check)
-  }
-
   return (
-    <CheckboxContainer onClick={checkboxHandler}>
-      <StyledCheckbox type={variant} size={size} disabled={disabled}>
+    <CheckboxContainer>
+      <StyledCheckbox
+        onClick={() => setCheck(!check)}
+        type={variant}
+        size={size}
+        disabled={disabled}
+      >
         {check && (
           <Icon viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
