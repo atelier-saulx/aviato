@@ -57,6 +57,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   isCollapsable = false,
   isActive = false,
   isHeader = false,
+  ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
   const [isOpen, setIsOpen] = useState(hasChildren)
@@ -81,7 +82,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
 
   return (
     <>
-      <StyledButton onClick={toggle} className={classes}>
+      <StyledButton onClick={toggle} className={classes} {...remainingProps}>
         <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
       </StyledButton>
 

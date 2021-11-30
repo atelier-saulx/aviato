@@ -13,10 +13,10 @@ const StyledChild = styled('div', {
   paddingBottom: '2px',
 })
 
-export const Menu: FunctionComponent = ({ children }) => {
+export const Menu: FunctionComponent = ({ children, ...remainingProps }) => {
   const WrappedChildren = React.Children.map(children, (child, index) => {
     return <StyledChild key={`StyledChild-${index}`}>{child}</StyledChild>
   })
 
-  return <StyledWrapper>{WrappedChildren}</StyledWrapper>
+  return <StyledWrapper {...remainingProps}>{WrappedChildren}</StyledWrapper>
 }
