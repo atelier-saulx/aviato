@@ -19,7 +19,7 @@ const CheckboxPage = () => {
       </div>
 
       <DisplayComponent name="Checkbox">
-        <Checkbox variant="light" />
+        <Checkbox disabled variant="medium" />
         <Checkbox variant="medium" />
         <Checkbox variant="primary" />
         <Checkbox variant="secondary" />
