@@ -2,10 +2,10 @@ import { styled } from '~/theme'
 
 export const BaseText = styled('p', {
   display: 'block',
-  lineHeight: 1,
-  margin: '0',
-  fontWeight: 400,
+  lineHeight: '1.5',
+  margin: 0,
   fontVariantNumeric: 'tabular-nums',
+  fontSize: '15px',
 
   variants: {
     weight: {

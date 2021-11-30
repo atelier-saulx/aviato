@@ -1,5 +1,6 @@
 import { styled } from '~/theme'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, MouseEventHandler } from 'react'
+import { noop } from '@aviato/utils'
 
 const StyledButton = styled('button', {
   alignItems: 'flex-start',
@@ -76,6 +77,7 @@ export type ButtonProps = {
   text?: string
   variant?: ButtonVariant
   disabled?: boolean
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -83,9 +85,16 @@ export const Button: FunctionComponent<ButtonProps> = ({
   children,
   variant = 'filled',
   disabled = false,
+  onClick = noop,
+  ...rest
 }) => {
   return (
-    <StyledButton type={variant} disabled={disabled}>
+    <StyledButton
+      type={variant}
+      disabled={disabled}
+      onClick={(event) => onClick(event)}
+      {...rest}
+    >
       {text ?? children}
     </StyledButton>
   )

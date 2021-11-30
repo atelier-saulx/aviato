@@ -2,7 +2,7 @@ import { useRef } from 'react'
 
 import { log } from '@aviato/utils'
 import { styled } from '@aviato/ui'
-import { Title } from '@aviato/ui'
+import { Button, Title, Text } from '@aviato/ui'
 
 import {
   useElementRect,
@@ -39,12 +39,12 @@ const HooksPage = () => {
     const longPressEvent = useLongPress(onLongPress)
 
     return (
-      <StyledButton
+      <Button
         onClick={() => log.global.info('Regular press on release.')}
         {...longPressEvent}
       >
         Button
-      </StyledButton>
+      </Button>
     )
   }
 
@@ -70,10 +70,10 @@ const HooksPage = () => {
 
     return (
       <StyledDiv ref={ref}>
-        <p>Page Width: {windowWidth}</p>
-        <p>Page Height: {windowHeight}</p>
-        <p>Element Width: {elementWidth}</p>
-        <p>Element Height: {elementHeight}</p>
+        <Text>Page Width: {windowWidth}</Text>
+        <Text>Page Height: {windowHeight}</Text>
+        <Text>Element Width: {elementWidth}</Text>
+        <Text>Element Height: {elementHeight}</Text>
       </StyledDiv>
     )
   }
@@ -83,8 +83,8 @@ const HooksPage = () => {
 
     return (
       <StyledDiv ref={hoverRef}>
-        <p>Hover? - {isHovered ? '😃' : '🙂'}</p>
-        <p>Active? - {isActive ? '😎' : '🙂'}</p>
+        <Text>Hover? - {isHovered ? '😃' : '🙂'}</Text>
+        <Text>Active? - {isActive ? '😎' : '🙂'}</Text>
       </StyledDiv>
     )
   }
