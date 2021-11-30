@@ -15,8 +15,8 @@ const StyledButton = styled('button', {
     type: {
       filled: {
         background: '$PrimaryMain',
-        border: '1px solid $PrimaryMain',
         color: '$PrimaryContrastHigh',
+        border: '1px solid $PrimaryMain',
 
         '&:hover': {
           background: '$PrimaryMainHover',
@@ -27,7 +27,6 @@ const StyledButton = styled('button', {
       },
 
       outlined: {
-        backgroundColor: '$PrimaryLightHover',
         border: '1px solid $PrimaryOutlineBorder',
         color: '$PrimaryMain',
 
@@ -40,8 +39,15 @@ const StyledButton = styled('button', {
       },
 
       transparent: {
-        background: 'none',
+        border: '1px solid transparent',
         color: '$PrimaryMain',
+
+        '&:hover': {
+          backgroundColor: '$PrimaryLightHover',
+        },
+        '&:active': {
+          background: '$PrimaryLightSelected',
+        },
       },
     },
   },
@@ -62,7 +68,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   disabled = false,
 }) => {
   return (
-    <StyledButton disabled={disabled} type={variant}>
+    <StyledButton type={variant} disabled={disabled}>
       {text ?? children}
     </StyledButton>
   )
