@@ -8,3 +8,7 @@ export const isBrowser = !!(
   window.document &&
   window.document.createElement
 )
+
+export const isText = (value) => {
+  return typeof value === 'string' || value instanceof String
+}

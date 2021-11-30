@@ -6,7 +6,9 @@ import DisplayComponent from '../displayComponent'
 
 const StyledDiv = styled('div', {
   width: '250px',
-  background: '$background',
+  padding: '10px',
+  background: '#F7F7F8',
+  borderRadius: '4px',
 })
 
 const MenuPage = () => {
@@ -22,24 +24,21 @@ const MenuPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Menu</Title>
+        <Title weight="Bold">Menu</Title>
       </div>
 
       <DisplayComponent name="Menu">
         <StyledDiv>
           <Menu>
             <MenuItem
-              title="Item 1"
-              onClick={() => log.global.info('Item 1')}
-            />
-            <MenuItem
-              title="Item 2"
-              onClick={() => log.global.info('Item 2')}
-            />
-            <MenuItem
-              title="Item Accordion"
+              title="Item Header"
               onClick={() => log.global.info('Accordion')}
+              isHeader={true}
             >
+              <MenuItem
+                title="Item Inner"
+                onClick={() => log.global.info('Item Inner')}
+              />
               <MenuItem
                 title="Item Inner"
                 onClick={() => log.global.info('Item Inner')}
@@ -49,6 +48,27 @@ const MenuPage = () => {
               <MenuItem
                 title="Item Inner"
                 onClick={() => log.global.info('Item Inner')}
+              />
+            </MenuItem>
+          </Menu>
+        </StyledDiv>
+      </DisplayComponent>
+
+      <DisplayComponent name="Header, Not collapsible.">
+        <StyledDiv>
+          <Menu>
+            <MenuItem
+              title="Item Header"
+              onClick={() => log.global.info('Accordion')}
+              isHeader={true}
+            >
+              <MenuItem
+                title="Content 1"
+                onClick={() => log.global.info('Content 1')}
+              />
+              <MenuItem
+                title="Content 2"
+                onClick={() => log.global.info('Content 2')}
               />
             </MenuItem>
           </Menu>

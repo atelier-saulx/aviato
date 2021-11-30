@@ -1,12 +1,74 @@
 import React, { FunctionComponent, useState } from 'react'
-import { Conditional } from '~/components/Conditional'
+import { Conditional } from '~/components'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
+import { styled, classNames } from '~/theme'
+import { Arrow } from './assets'
+
+const StyledButton = styled('button', {
+  width: '100%',
+  padding: '4px 12px',
+  border: 'none',
+  outline: 'none',
+  cursor: 'pointer',
+  borderRadius: 4,
+  color: '$TextSecondary',
+  background: 'transparent',
+
+  '&:hover': {
+    background: '$ActionMainHover',
+  },
+  '&:active': {
+    background: '$ActionMainFocus',
+    color: '$TextPrimary',
+  },
+
+  '&.isActive': {
+    color: '$TextPrimary',
+    background: '$PrimaryLightSelected',
+  },
+
+  '&.isHeader': {
+    cursor: 'unset',
+
+    '&:hover': {
+      background: 'transparent',
+    },
+  },
+})
+
+const StyledChild = styled('div', {
+  paddingTop: '2px',
+})
+
+const Column = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+  alignItems: 'center',
+})
+
+const ArrowWrapper = styled('div', {
+  marginRight: '4px',
+
+  variants: {
+    state: {
+      close: {
+        transform: 'rotate(0deg)',
+      },
+      open: {
+        transform: 'rotate(90deg)',
+      },
+    },
+  },
+})
 
 export type MenuItemProps = {
   title: string
   onClick?: (value) => void
   isCollapsable?: boolean
+  isActive?: boolean
+  isHeader?: boolean
 }
 
 type CoercedClick = () => void
@@ -15,10 +77,13 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
   onClick,
   children,
-  isCollapsable = true,
+  isActive = false,
+  isHeader = false,
+  ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
-  const [isOpen, setIsOpen] = useState(hasChildren)
+  const isCollapsable = !isHeader && hasChildren
+  const [isOpen, setIsOpen] = useState(true)
   const click = (onClick as CoercedClick) ?? noop
 
   const toggle = () => {
@@ -33,53 +98,31 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
     }
   }
 
-  return (
-    <div
-      style={{
-        width: '100%',
-        lineHeight: '15px',
-      }}
-    >
-      <button
-        style={{
-          width: '100%',
-          position: 'relative',
-          textAlign: 'left',
-          padding: '4px',
-          border: 'none',
-          background: 'transparent',
-          outline: 'none',
-          cursor: 'pointer',
-        }}
-        onClick={toggle}
-        type="button"
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'nowrap',
-            alignItems: 'center',
-          }}
-        >
-          <Text>{title}</Text>
+  const classes = classNames({
+    isActive,
+    isHeader,
+  })
 
-          <Conditional test={hasChildren && isCollapsable}>
-            <span
-              style={{
-                marginLeft: 'auto',
-                marginRight: '6px',
-              }}
-            >
-              {isOpen ? '-' : '+'}
+  return (
+    <>
+      <StyledButton onClick={toggle} className={classes} {...remainingProps}>
+        <Column>
+          <Conditional test={isCollapsable}>
+            <span>
+              <ArrowWrapper state={isOpen ? 'open' : 'close'}>
+                <Arrow />
+              </ArrowWrapper>
             </span>
           </Conditional>
-        </div>
-      </button>
+          <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
+        </Column>
+      </StyledButton>
 
       <Conditional test={isOpen}>
-        <div onClick={(event) => event.stopPropagation()}>{children}</div>
+        <StyledChild onClick={(event) => event.stopPropagation()}>
+          {children}
+        </StyledChild>
       </Conditional>
-    </div>
+    </>
   )
 }

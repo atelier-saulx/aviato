@@ -15,7 +15,7 @@ const ButtonsPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Buttons</Title>
+        <Title weight="Bold">Buttons</Title>
       </div>
 
       <DisplayComponent name="Buttons">

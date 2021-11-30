@@ -1,15 +1,16 @@
 import { styled } from '~/theme'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
+import { noop } from '@aviato/utils'
 
 const StyledButton = styled('button', {
   alignItems: 'flex-start',
   borderRadius: '4px',
   cursor: 'pointer',
-  fontSize: '15px',
   fontWeight: '500',
   lineHeight: '24px',
   margin: '6px',
   padding: '4px 8px',
+  fontSize: '15px',
 
   '&:disabled': {
     cursor: 'not-allowed',
@@ -77,6 +78,7 @@ export type ButtonProps = {
   text?: string
   variant?: ButtonVariant
   disabled?: boolean
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -84,10 +86,23 @@ export const Button: FunctionComponent<ButtonProps> = ({
   children,
   variant = 'filled',
   disabled = false,
+  onClick = noop,
+  ...remainingProps
 }) => {
+  const handleClick = useCallback(() => {
+    onClick()
+  }, [])
+
+  const renderChildren = text ?? children
+
   return (
-    <StyledButton type={variant} disabled={disabled}>
-      {text ?? children}
+    <StyledButton
+      type={variant}
+      disabled={disabled}
+      onClick={handleClick}
+      {...remainingProps}
+    >
+      {renderChildren}
     </StyledButton>
   )
 }
