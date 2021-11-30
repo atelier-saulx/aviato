@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="./docs/assets/logo.svg" style="width: 200px; padding-bottom: 10px;" />
+  <a href="javascript:void(0);" style="pointer-events: none;">
+    <img src="./docs/assets/logo.svg" style="width: 200px; padding-bottom: 10px;" />
+  </a>
 
   <p align="center">
     A UI component library for building high-quality CMS & DMS interfaces web apps.
