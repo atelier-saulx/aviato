@@ -16,7 +16,9 @@
 
 ## 🔍 Description
 
-Aviato is UI component library with a focus on accessibility, customization and developer experience.You can use these components either as the base layer of your application, or adopt them incrementally.
+Aviato is UI component library with a focus on customization and developer experience (DX).
+
+You can use these components either as the base layer of your application, or adopt them incrementally.
 
 ---
 
