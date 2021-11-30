@@ -2,7 +2,7 @@ import { styled } from '~/theme'
 import React, { FunctionComponent } from 'react'
 
 const StyledButton = styled('button', {
-  backgroundColor: '$primary',
+  backgroundColor: '$PrimaryMain',
   alignItems: 'flex-start',
   borderRadius: '4px',
   color: 'white', // Foreground Color??
@@ -14,30 +14,30 @@ const StyledButton = styled('button', {
   padding: '4px 8px',
 
   '&:hover': {
-    backgroundColor: '$hover',
+    backgroundColor: '$PrimaryMainHover',
   },
 
   variants: {
     type: {
       filled: {
-        background: '$primary',
+        background: '$PrimaryMain',
 
         '&:hover': {
-          backgroundColor: '$hoverAlt',
+          backgroundColor: '$PrimaryMainHover',
         },
       },
       outlined: {
-        background: '$primary',
+        background: '$PrimaryMain',
 
         '&:hover': {
-          backgroundColor: '$hoverAlt',
+          backgroundColor: '$PrimaryMainHover',
         },
       },
       transparent: {
-        background: '$primary',
+        background: '$PrimaryMain',
 
         '&:hover': {
-          backgroundColor: '$hoverAlt',
+          backgroundColor: '$PrimaryMainHover',
         },
       },
     },
