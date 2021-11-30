@@ -82,6 +82,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
           justifyContent: 'flex-start',
           alignItems: 'flex-start',
           padding: '16px',
+          paddingBottom: 85 - 16,
           cursor: 'pointer',
         }}
       >
