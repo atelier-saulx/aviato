@@ -146,6 +146,20 @@ function flattenObject(object) {
   return toReturn
 }
 
+function convertHexToRGBA(input) {
+  const colorHex = input.replace('#', '')
+
+  const r = parseInt(colorHex.slice(0, 2), 16)
+  const g = parseInt(colorHex.slice(2, 4), 16)
+  const b = parseInt(colorHex.slice(4, 6), 16)
+
+  return `rgb(${r},${g},${b})`
+}
+
+function stripRGB(input) {
+  return input.replace('rgb(', '').replace(')', '')
+}
+
 function lookupVariablesAndReplace(object) {
   const braceRegex = /\[[^\]]+\]|\{[^}]+\}|<[^>]+>/
 
@@ -173,7 +187,10 @@ function lookupVariablesAndReplace(object) {
         .replace('{', '')
         .replace('}', '')
 
-      const matchingToken = findToken(sanitisedToken, object)
+      let matchingToken = findToken(sanitisedToken, object)
+      matchingToken = convertHexToRGBA(matchingToken)
+      matchingToken = stripRGB(matchingToken)
+
       object[key] = value.replace(braceRegex, matchingToken)
     }
 
@@ -187,8 +204,13 @@ function lookupVariablesAndReplace(object) {
           if (partial.includes(',')) {
             const splitPartial = partial.split(',')
             const token = splitPartial[0]
-            const matchingToken = findToken(token, object)
+            let matchingToken = findToken(token, object)
             if (matchingToken) {
+              if (matchingToken.includes('#')) {
+                matchingToken = convertHexToRGBA(matchingToken)
+                matchingToken = stripRGB(matchingToken)
+              }
+
               return [matchingToken, splitPartial[1]].join(',')
             }
           }
