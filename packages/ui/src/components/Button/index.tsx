@@ -10,6 +10,7 @@ const StyledButton = styled('button', {
   lineHeight: '24px',
   margin: '6px',
   padding: '4px 8px',
+  fontSize: '15px',
 
   '&:disabled': {
     cursor: 'not-allowed',
@@ -88,6 +89,8 @@ export const Button: FunctionComponent<ButtonProps> = ({
   onClick = noop,
   ...rest
 }) => {
+  const renderChildren = text ?? children
+
   return (
     <StyledButton
       type={variant}
@@ -95,7 +98,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
       onClick={(event) => onClick(event)}
       {...rest}
     >
-      {text ?? children}
+      {renderChildren}
     </StyledButton>
   )
 }

@@ -9,28 +9,37 @@ export const BaseText = styled('p', {
 
   variants: {
     weight: {
-      regular: {
+      Regular: {
         fontWeight: 'normal',
       },
-      medium: {
+      Medium: {
         fontWeight: 500,
       },
-      semibold: {
+      Semibold: {
         fontWeight: 600,
       },
-      bold: {
+      Bold: {
         fontWeight: 700,
       },
     },
 
     color: {
-      primary: {
+      Primary: {
         color: '$TextPrimary',
       },
-      secondary: {
+      PrimaryContrastHigh: {
+        color: '$PrimaryContrastHigh',
+      },
+      PrimaryMain: {
+        color: '$PrimaryMain',
+      },
+      ActionDisabledContent: {
+        color: '$PrimaryContrastHigh',
+      },
+      Secondary: {
         color: '$TextSecondary',
       },
-      disabled: {
+      Disabled: {
         color: '$TextDisabled',
       },
     },

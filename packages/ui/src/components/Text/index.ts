@@ -1,3 +1,1 @@
-export * from './Text'
-export * from './Title'
-export * from './types'
+export * from './variants'

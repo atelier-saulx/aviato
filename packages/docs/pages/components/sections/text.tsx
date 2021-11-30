@@ -21,7 +21,7 @@ const TextPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title weight="bold">Text</Title>
+        <Title weight="Bold">Text</Title>
       </div>
 
       <DisplayComponent name="Title">

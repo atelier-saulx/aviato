@@ -22,7 +22,7 @@ const Playground = () => {
           paddingLeft: 20,
         }}
       >
-        <Title weight="bold">Examples</Title>
+        <Title weight="Bold">Examples</Title>
       </div>
 
       <div>

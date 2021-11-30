@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react'
-import { Conditional } from '~/components/Conditional'
+import { Conditional } from '~/components'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { styled, classNames } from '~/theme'
@@ -71,7 +71,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   return (
     <>
       <StyledButton onClick={toggle} className={classes}>
-        <Text weight={isHeader ? 'bold' : 'regular'}>{title}</Text>
+        <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
       </StyledButton>
 
       <Conditional test={isOpen}>

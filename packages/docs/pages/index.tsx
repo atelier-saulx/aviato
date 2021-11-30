@@ -28,7 +28,7 @@ const Home: NextPage = () => {
             paddingBottom: 20,
           }}
         >
-          <Title weight="bold">Introduction to Aviato-UI</Title>
+          <Title weight="Bold">Introduction to Aviato-UI</Title>
         </div>
 
         <Text>

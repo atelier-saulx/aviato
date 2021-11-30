@@ -1,5 +1,12 @@
-export type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
-export type FontColor = 'primary' | 'secondary' | 'disabled'
+export type FontWeight = 'Regular' | 'Medium' | 'Semibold' | 'Bold'
+
+export type FontColor =
+  | 'Primary'
+  | 'PrimaryContrastHigh'
+  | 'PrimaryMain'
+  | 'ActionDisabledContent'
+  | 'Secondary'
+  | 'Disabled'
 
 export type BaseTextProps = {
   value?: string

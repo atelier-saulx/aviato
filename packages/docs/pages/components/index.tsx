@@ -13,7 +13,7 @@ const Components = () => {
           paddingLeft: 20,
         }}
       >
-        <Title weight="bold">Components</Title>
+        <Title weight="Bold">Components</Title>
       </div>
     </div>
   )
