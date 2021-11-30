@@ -1,7 +1,9 @@
+import { FunctionComponent } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu as AviatoSideMenu, Menu, MenuItem, Title } from '@aviato/ui'
-import { FunctionComponent } from 'react'
+import { SideMenu as AviatoSideMenu, Menu, MenuItem } from '@aviato/ui'
+
+import { AviatoLogo } from './logo'
 
 interface MainSideMenuProps {
   router: NextRouter
@@ -76,12 +78,14 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       <div
         onClick={() => router.push({ pathname: '/' })}
         style={{
-          padding: '30px 0px',
-          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          padding: '16px',
           cursor: 'pointer',
         }}
       >
-        <Title fontWeight="bold">Aviato-UI</Title>
+        <AviatoLogo />
       </div>
     )
   }
