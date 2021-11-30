@@ -101,7 +101,7 @@ const HooksPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Hooks</Title>
+        <Title weight="bold">Hooks</Title>
       </div>
 
       <DisplayComponent name="Button">

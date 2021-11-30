@@ -1,5 +1,5 @@
 import { styled } from '@aviato/ui'
-import { Title, Text, Paragraph } from '@aviato/ui'
+import { Title, Text } from '@aviato/ui'
 
 import DisplayComponent from '../displayComponent'
 
@@ -21,7 +21,7 @@ const TextPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Text</Title>
+        <Title weight="bold">Text</Title>
       </div>
 
       <DisplayComponent name="Title">
@@ -30,16 +30,6 @@ const TextPage = () => {
 
       <DisplayComponent name="Text">
         <Text>Text</Text>
-      </DisplayComponent>
-
-      <DisplayComponent name="Paragraph">
-        <Column>
-          <Paragraph>Paragraph</Paragraph>
-          <Paragraph weight="semibold">Paragraph</Paragraph>
-          <Paragraph weight="bold">Paragraph</Paragraph>
-          <Paragraph size="medium">Paragraph</Paragraph>
-          <Paragraph size="large">Paragraph</Paragraph>
-        </Column>
       </DisplayComponent>
     </div>
   )

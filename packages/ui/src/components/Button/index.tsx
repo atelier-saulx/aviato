@@ -5,7 +5,6 @@ const StyledButton = styled('button', {
   alignItems: 'flex-start',
   borderRadius: '4px',
   cursor: 'pointer',
-  fontSize: '15px',
   fontWeight: '500',
   lineHeight: '24px',
   margin: '6px',

@@ -1,25 +1,18 @@
 import React, { FunctionComponent } from 'react'
+import { styled } from '~/theme'
 
-export type MenuProps = {}
+const StyledDiv = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  width: '100%',
+  overflowX: 'hidden',
+})
 
-export const Menu: FunctionComponent<MenuProps> = ({ children }) => {
+export const Menu: FunctionComponent = ({ children }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        width: '100%',
-        overflowX: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          padding: '10px',
-        }}
-      >
-        {children}
-      </div>
-    </div>
+    <StyledDiv>
+      <div>{children}</div>
+    </StyledDiv>
   )
 }

@@ -2,11 +2,40 @@ import React, { FunctionComponent, useState } from 'react'
 import { Conditional } from '~/components/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
+import { styled, classNames } from '~/theme'
+
+const StyledButton = styled('button', {
+  width: '100%',
+  padding: '4px 12px',
+  border: 'none',
+  outline: 'none',
+  cursor: 'pointer',
+  color: '$TextSecondary',
+  borderRadius: 4,
+
+  '&:hover': {
+    background: '$ActionMainHover',
+  },
+  '&:active': {
+    background: '$ActionMainFocus',
+    color: '$TextPrimary',
+  },
+
+  '&.active': {
+    color: '$TextPrimary',
+    background: '$PrimaryLightSelected',
+  },
+  '&.header': {
+    fontWeight: 700,
+  },
+})
 
 export type MenuItemProps = {
   title: string
   onClick?: (value) => void
   isCollapsable?: boolean
+  isActive?: boolean
+  isHeader?: boolean
 }
 
 type CoercedClick = () => void
@@ -15,7 +44,9 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
   onClick,
   children,
-  isCollapsable = true,
+  isCollapsable = false,
+  isActive = false,
+  isHeader = false,
 }) => {
   const hasChildren = Boolean(children)
   const [isOpen, setIsOpen] = useState(hasChildren)
@@ -33,53 +64,19 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
     }
   }
 
-  return (
-    <div
-      style={{
-        width: '100%',
-        lineHeight: '15px',
-      }}
-    >
-      <button
-        style={{
-          width: '100%',
-          position: 'relative',
-          textAlign: 'left',
-          padding: '4px',
-          border: 'none',
-          background: 'transparent',
-          outline: 'none',
-          cursor: 'pointer',
-        }}
-        onClick={toggle}
-        type="button"
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'nowrap',
-            alignItems: 'center',
-          }}
-        >
-          <Text>{title}</Text>
+  const classes = classNames({
+    active: isActive,
+  })
 
-          <Conditional test={hasChildren && isCollapsable}>
-            <span
-              style={{
-                marginLeft: 'auto',
-                marginRight: '6px',
-              }}
-            >
-              {isOpen ? '-' : '+'}
-            </span>
-          </Conditional>
-        </div>
-      </button>
+  return (
+    <>
+      <StyledButton onClick={toggle} className={classes}>
+        <Text weight={isHeader ? 'bold' : 'regular'}>{title}</Text>
+      </StyledButton>
 
       <Conditional test={isOpen}>
         <div onClick={(event) => event.stopPropagation()}>{children}</div>
       </Conditional>
-    </div>
+    </>
   )
 }

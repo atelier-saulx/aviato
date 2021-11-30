@@ -22,7 +22,7 @@ const MenuPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Menu</Title>
+        <Title weight="bold">Menu</Title>
       </div>
 
       <DisplayComponent name="Menu">
@@ -45,7 +45,7 @@ const MenuPage = () => {
                 onClick={() => log.global.info('Item Inner')}
               />
             </MenuItem>
-            <MenuItem title="Item Accordion">
+            <MenuItem title="Item Accordion" isCollapsable={true}>
               <MenuItem
                 title="Item Inner"
                 onClick={() => log.global.info('Item Inner')}

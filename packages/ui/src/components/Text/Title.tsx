@@ -1,41 +1,19 @@
 import React, { FunctionComponent } from 'react'
 
-type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
+import { BaseText } from './styles'
+import { BaseTextProps } from './types'
 
-export type TitleProps = {
-  value?: string
-  fontWeight?: FontWeight
-}
+export type TitleProps = BaseTextProps & {}
 
 export const Title: FunctionComponent<TitleProps> = ({
   children,
   value = '',
-  fontWeight = 'normal',
+  weight = 'regular',
+  color = 'primary',
 }) => {
-  type FontWeightMap = {
-    [key in FontWeight]: number | string
-  }
-
-  const fontWeightMap: FontWeightMap = {
-    bold: 700,
-    semibold: 600,
-    medium: 500,
-    regular: 'normal',
-  }
-
-  const targetWeight = fontWeightMap[fontWeight] ?? 'normal'
-
   return (
-    <div
-      style={{
-        fontSize: '22px',
-        lineHeight: '24px',
-        letterSpacing: '-0.015em',
-        userSelect: 'text',
-        fontWeight: targetWeight,
-      }}
-    >
+    <BaseText as="h1" weight={weight} color={color} alignment="start">
       {children ?? value}
-    </div>
+    </BaseText>
   )
 }

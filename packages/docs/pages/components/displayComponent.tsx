@@ -28,7 +28,6 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
       <div
         style={{
           marginBottom: '10px',
-          fontSize: '12px',
         }}
       >
         <Text>{componentName}</Text>
