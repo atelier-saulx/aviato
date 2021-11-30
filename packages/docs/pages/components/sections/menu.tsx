@@ -22,7 +22,7 @@ const MenuPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title weight="bold">Menu</Title>
+        <Title weight="Bold">Menu</Title>
       </div>
 
       <DisplayComponent name="Menu">
