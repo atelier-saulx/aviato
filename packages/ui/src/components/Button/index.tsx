@@ -2,10 +2,8 @@ import { styled } from '~/theme'
 import React, { FunctionComponent } from 'react'
 
 const StyledButton = styled('button', {
-  backgroundColor: '$PrimaryMain',
   alignItems: 'flex-start',
   borderRadius: '4px',
-  color: 'white', // Foreground Color??
   cursor: 'pointer',
   fontSize: '15px',
   fontWeight: '500',
@@ -13,32 +11,37 @@ const StyledButton = styled('button', {
   margin: '6px',
   padding: '4px 8px',
 
-  '&:hover': {
-    backgroundColor: '$PrimaryMainHover',
-  },
-
   variants: {
     type: {
       filled: {
         background: '$PrimaryMain',
+        border: '1px solid $PrimaryMain',
+        color: '$PrimaryContrastHigh',
 
         '&:hover': {
-          backgroundColor: '$PrimaryMainHover',
+          background: '$PrimaryMainHover',
+        },
+        '&:active': {
+          background: '$PrimaryMainSelected',
         },
       },
+
       outlined: {
-        background: '$PrimaryMain',
+        backgroundColor: '$PrimaryLightHover',
+        border: '1px solid $PrimaryOutlineBorder',
+        color: '$PrimaryMain',
 
         '&:hover': {
-          backgroundColor: '$PrimaryMainHover',
+          backgroundColor: '$PrimaryLightHover',
+        },
+        '&:active': {
+          background: '$PrimaryLightSelected',
         },
       },
-      transparent: {
-        background: '$PrimaryMain',
 
-        '&:hover': {
-          backgroundColor: '$PrimaryMainHover',
-        },
+      transparent: {
+        background: 'none',
+        color: '$PrimaryMain',
       },
     },
   },
@@ -49,12 +52,18 @@ type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 export type ButtonProps = {
   text?: string
   variant?: ButtonVariant
+  disabled?: boolean
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
   text,
   children,
   variant = 'filled',
+  disabled = false,
 }) => {
-  return <StyledButton type={variant}>{text ?? children}</StyledButton>
+  return (
+    <StyledButton disabled={disabled} type={variant}>
+      {text ?? children}
+    </StyledButton>
+  )
 }

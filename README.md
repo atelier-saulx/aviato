@@ -1,13 +1,13 @@
 <div align="center">
-  <h1 align="center">
-    Aviato UI
-  </h1>
+  <a href="javascript:void(0);" style="pointer-events: none;">
+    <img src="./docs/assets/logo.svg" style="width: 200px; padding-bottom: 10px;" />
+  </a>
 
   <p align="center">
     A UI component library for building high-quality CMS & DMS interfaces web apps.
   </p>
 
-[![Repo status](https://www.repostatus.org/badges/latest/wip.svg)](./README)
+[![Repo status](https://www.repostatus.org/badges/latest/concept.svg)](./README)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atelier-saulx/aviato-ui/graphs/commit-activity)
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/atelier-saulx/aviato-ui)
 [![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
@@ -18,7 +18,9 @@
 
 ## 🔍 Description
 
-Aviato is UI component library with a focus on accessibility, customization and developer experience.You can use these components either as the base layer of your application, or adopt them incrementally.
+Aviato is UI component library with a focus on customization and developer experience (DX).
+
+You can use these components either as the base layer of your application, or adopt them incrementally.
 
 ---
 

@@ -18,11 +18,25 @@ const ButtonsPage = () => {
         <Title fontWeight="bold">Buttons</Title>
       </div>
 
-      <DisplayComponent name="Button">
+      <DisplayComponent name="Buttons">
         <Button variant="filled">Button</Button>
         <Button variant="outlined">Button</Button>
         <Button variant="transparent">Button</Button>
       </DisplayComponent>
+
+      {/*
+      <DisplayComponent name="Disabled Buttons">
+        <Button disabled variant="filled">
+          Button
+        </Button>
+        <Button disabled variant="outlined">
+          Button
+        </Button>
+        <Button disabled variant="transparent">
+          Button
+        </Button>
+      </DisplayComponent>
+      */}
     </div>
   )
 }
