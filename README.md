@@ -1,7 +1,5 @@
 <div align="center">
-  <h1 align="center">
-    Aviato UI
-  </h1>
+  <img src="./docs/assets/logo.svg" style="width: 200px; padding-bottom: 10px;" />
 
   <p align="center">
     A UI component library for building high-quality CMS & DMS interfaces web apps.
