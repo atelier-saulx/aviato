@@ -24,7 +24,6 @@ const ButtonsPage = () => {
         <Button variant="transparent">Button</Button>
       </DisplayComponent>
 
-      {/*
       <DisplayComponent name="Disabled Buttons">
         <Button disabled variant="filled">
           Button
@@ -36,7 +35,6 @@ const ButtonsPage = () => {
           Button
         </Button>
       </DisplayComponent>
-      */}
     </div>
   )
 }

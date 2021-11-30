@@ -11,11 +11,15 @@ const StyledButton = styled('button', {
   margin: '6px',
   padding: '4px 8px',
 
+  '&:disabled': {
+    cursor: 'not-allowed',
+  },
+
   variants: {
     type: {
       filled: {
-        background: '$PrimaryMain',
         color: '$PrimaryContrastHigh',
+        background: '$PrimaryMain',
         border: '1px solid $PrimaryMain',
 
         '&:hover': {
@@ -23,6 +27,11 @@ const StyledButton = styled('button', {
         },
         '&:active': {
           background: '$PrimaryMainSelected',
+        },
+        '&:disabled': {
+          color: '$ActionDisabledContent',
+          background: '$ActionDisabledBackground',
+          border: '1px transparent $ActionDisabledBackground',
         },
       },
 
@@ -36,6 +45,11 @@ const StyledButton = styled('button', {
         '&:active': {
           background: '$PrimaryLightSelected',
         },
+        '&:disabled': {
+          color: '$ActionDisabledContent',
+          border: '1px solid $ActionDisabledBackground',
+          background: 'none',
+        },
       },
 
       transparent: {
@@ -47,6 +61,10 @@ const StyledButton = styled('button', {
         },
         '&:active': {
           background: '$PrimaryLightSelected',
+        },
+        '&:disabled': {
+          color: '$ActionDisabledContent',
+          background: 'none',
         },
       },
     },
