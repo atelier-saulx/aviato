@@ -3,6 +3,7 @@ import { Conditional } from '~/components'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { styled, classNames } from '~/theme'
+import { Arrow } from './assets'
 
 const StyledButton = styled('button', {
   width: '100%',
@@ -40,6 +41,28 @@ const StyledChild = styled('div', {
   paddingTop: '2px',
 })
 
+const Column = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+  alignItems: 'center',
+})
+
+const ArrowWrapper = styled('div', {
+  marginRight: '4px',
+
+  variants: {
+    state: {
+      close: {
+        transform: 'rotate(0deg)',
+      },
+      open: {
+        transform: 'rotate(90deg)',
+      },
+    },
+  },
+})
+
 export type MenuItemProps = {
   title: string
   onClick?: (value) => void
@@ -54,13 +77,13 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
   onClick,
   children,
-  isCollapsable = false,
   isActive = false,
   isHeader = false,
   ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
-  const [isOpen, setIsOpen] = useState(hasChildren)
+  const isCollapsable = !isHeader && hasChildren
+  const [isOpen, setIsOpen] = useState(true)
   const click = (onClick as CoercedClick) ?? noop
 
   const toggle = () => {
@@ -83,7 +106,16 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   return (
     <>
       <StyledButton onClick={toggle} className={classes} {...remainingProps}>
-        <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
+        <Column>
+          <Conditional test={isCollapsable}>
+            <span>
+              <ArrowWrapper state={isOpen ? 'open' : 'close'}>
+                <Arrow />
+              </ArrowWrapper>
+            </span>
+          </Conditional>
+          <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
+        </Column>
       </StyledButton>
 
       <Conditional test={isOpen}>
