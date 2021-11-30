@@ -10,8 +10,9 @@ const StyledButton = styled('button', {
   border: 'none',
   outline: 'none',
   cursor: 'pointer',
-  color: '$TextSecondary',
   borderRadius: 4,
+  color: '$TextSecondary',
+  background: 'transparent',
 
   '&:hover': {
     background: '$ActionMainHover',
@@ -21,13 +22,22 @@ const StyledButton = styled('button', {
     color: '$TextPrimary',
   },
 
-  '&.active': {
+  '&.isActive': {
     color: '$TextPrimary',
     background: '$PrimaryLightSelected',
   },
-  '&.header': {
-    fontWeight: 700,
+
+  '&.isHeader': {
+    cursor: 'unset',
+
+    '&:hover': {
+      background: 'transparent',
+    },
   },
+})
+
+const StyledChild = styled('div', {
+  paddingTop: '2px',
 })
 
 export type MenuItemProps = {
@@ -65,7 +75,8 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   }
 
   const classes = classNames({
-    active: isActive,
+    isActive,
+    isHeader,
   })
 
   return (
@@ -75,7 +86,9 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
       </StyledButton>
 
       <Conditional test={isOpen}>
-        <div onClick={(event) => event.stopPropagation()}>{children}</div>
+        <StyledChild onClick={(event) => event.stopPropagation()}>
+          {children}
+        </StyledChild>
       </Conditional>
     </>
   )

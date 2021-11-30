@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { styled } from '~/theme'
 
-const StyledDiv = styled('div', {
+const StyledWrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
@@ -9,10 +9,14 @@ const StyledDiv = styled('div', {
   overflowX: 'hidden',
 })
 
+const StyledChild = styled('div', {
+  paddingBottom: '2px',
+})
+
 export const Menu: FunctionComponent = ({ children }) => {
-  return (
-    <StyledDiv>
-      <div>{children}</div>
-    </StyledDiv>
-  )
+  const WrappedChildren = React.Children.map(children, (child, index) => {
+    return <StyledChild key={`StyledChild-${index}`}>{child}</StyledChild>
+  })
+
+  return <StyledWrapper>{WrappedChildren}</StyledWrapper>
 }

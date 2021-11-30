@@ -83,7 +83,7 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
         isHeader={hasSubmenu}
         isActive={isActivePath(route)}
       >
-        {hasSubmenu ? mappedSubmenu : null}
+        {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
       </MenuItem>
     )
   })
