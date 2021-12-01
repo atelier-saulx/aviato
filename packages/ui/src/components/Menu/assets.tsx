@@ -28,7 +28,6 @@ const ArrowWrapper = styled('svg', {
   },
 })
 
-// type ArrowMode = 'idle' | 'hover' | 'selected'
 type ArrowState = 'open' | 'closed'
 
 type ArrowProps = {
