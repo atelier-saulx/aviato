@@ -1,6 +1,12 @@
 import DisplayComponent from '../displayComponent'
 
-import { Title, Button, styled } from '@aviato/ui'
+import { Button, styled } from '@aviato/ui'
+import { NextTitle, NextText } from '../../../components'
+
+const RootDiv = styled('div', {
+  paddingTop: 20,
+  paddingBottom: 20,
+})
 
 const Wrapper = styled('div', {
   display: 'flex',
@@ -16,15 +22,6 @@ const Row = styled('div', {
   flexWrap: 'no-wrap',
 })
 
-const RootDiv = styled('div', {
-  paddingTop: 20,
-  paddingBottom: 20,
-})
-
-const TitleDiv = styled('div', {
-  paddingLeft: 20,
-})
-
 const BigSpacer = styled('div', {
   width: '100%',
   height: 20,
@@ -38,13 +35,9 @@ const Spacer = styled('div', {
 const ButtonsPage = () => {
   return (
     <RootDiv>
-      <TitleDiv>
-        <Title weight="Bold">Buttons</Title>
-      </TitleDiv>
-
       <DisplayComponent name="Buttons">
         <Wrapper>
-          <Title weight="Bold">Regular</Title>
+          <NextText weight="Bold">Regular</NextText>
           <Row>
             <Button variant="filled">Button</Button>
             <Spacer />
@@ -55,7 +48,7 @@ const ButtonsPage = () => {
 
           <BigSpacer />
 
-          <Title weight="Bold">Disabled</Title>
+          <NextText weight="Bold">Disabled</NextText>
           <Row>
             <Button disabled variant="filled">
               Button

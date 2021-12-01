@@ -1,8 +1,15 @@
 import { log } from '@aviato/utils'
 import { styled } from '@aviato/ui'
-import { Title, Menu, MenuItem } from '@aviato/ui'
+import { Menu, MenuItem } from '@aviato/ui'
 
-import DisplayComponent from '../displayComponent'
+import { NextTitle } from '../../../components'
+
+import { ShowcaseComponent } from '../../../components'
+
+const RootDiv = styled('div', {
+  paddingTop: 20,
+  paddingBottom: 20,
+})
 
 const StyledDiv = styled('div', {
   width: '250px',
@@ -13,21 +20,8 @@ const StyledDiv = styled('div', {
 
 const MenuPage = () => {
   return (
-    <div
-      style={{
-        paddingTop: 20,
-        paddingBottom: 20,
-      }}
-    >
-      <div
-        style={{
-          paddingLeft: 20,
-        }}
-      >
-        <Title weight="Bold">Menu</Title>
-      </div>
-
-      <DisplayComponent name="Menu">
+    <RootDiv>
+      <ShowcaseComponent title="Menu">
         <StyledDiv>
           <Menu>
             <MenuItem
@@ -52,9 +46,9 @@ const MenuPage = () => {
             </MenuItem>
           </Menu>
         </StyledDiv>
-      </DisplayComponent>
+      </ShowcaseComponent>
 
-      <DisplayComponent name="Header, Not collapsible.">
+      <ShowcaseComponent title="Header, Not collapsible.">
         <StyledDiv>
           <Menu>
             <MenuItem
@@ -73,8 +67,8 @@ const MenuPage = () => {
             </MenuItem>
           </Menu>
         </StyledDiv>
-      </DisplayComponent>
-    </div>
+      </ShowcaseComponent>
+    </RootDiv>
   )
 }
 

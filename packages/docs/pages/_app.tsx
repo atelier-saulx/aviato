@@ -5,8 +5,8 @@ import React, { FunctionComponent } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { SideMenu } from '../components/side-menu'
 import { initialiseApplication } from '../utils'
+import { SideMenu } from '../components/side-menu'
 
 initialiseApplication()
 

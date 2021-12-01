@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react'
 
 import { styled } from '@aviato/ui'
-import { NextText } from '../../components'
 
 const WrapperDiv = styled('div', {
-  margin: '20px',
+  marginLeft: '20px',
+  marginBottom: '20px',
 })
 
 const ComponentWrapperDiv = styled('div', {
@@ -20,31 +20,16 @@ const FlexDiv = styled('div', {
   display: 'flex',
 })
 
-export type DisplayComponentProps = {
-  name?: string
-}
+export type DisplayComponentProps = {}
 
-const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
-  name,
+export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   children,
 }) => {
-  let actualComponentName = ''
-
-  React.Children.forEach(children, (child) => {
-    actualComponentName = (child as any)?.type.name
-  })
-
-  const componentName = name ?? actualComponentName
-
   return (
     <WrapperDiv>
-      <NextText>{componentName}</NextText>
-
       <ComponentWrapperDiv>
         <FlexDiv>{children}</FlexDiv>
       </ComponentWrapperDiv>
     </WrapperDiv>
   )
 }
-
-export default DisplayComponent
