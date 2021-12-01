@@ -34,7 +34,6 @@ const StyledCheckbox = styled('div', {
     state: {
       checked: {
         backgroundColor: '$PrimaryMain',
-
         '&:hover': {
           backgroundColor: '$PrimaryMainHover',
         },
@@ -43,33 +42,32 @@ const StyledCheckbox = styled('div', {
     },
     disabled: {
       disabled: {
-        backgroundColor: 'yellow',
+        backgroundColor: '$ActionDisabledBackground !important',
+        cursor: 'not-allowed',
+        '&:hover': {
+          backgroundColor: '$ActionDisabledContent',
+        },
       },
+      enabled: {},
     },
   },
 })
 
 type CheckboxSize = 'small' | 'medium'
 type CheckboxState = 'checked' | 'unchecked'
-type CheckBoxDisabled = 'disabled'
+type CheckboxEnabled = 'disabled' | 'enabled'
 
 export type CheckboxProps = {
   size?: CheckboxSize
   state?: CheckboxState
-  disabled?: CheckBoxDisabled
+  disabled?: CheckboxEnabled
 }
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
   size = 'medium',
+  disabled = 'enabled',
 }) => {
   const [isChecked, setIsChecked] = useState(false)
-
-  let disabledBox = false
-  let clickable = false
-
-  if (isChecked && !disabledBox) {
-    clickable = true
-  }
 
   return (
     <CheckboxContainer>
@@ -77,8 +75,9 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
         onClick={() => setIsChecked(!isChecked)}
         size={size}
         state={isChecked ? 'checked' : 'unchecked'}
+        disabled={disabled}
       >
-        {clickable && <CheckedIcon />}
+        {isChecked && <CheckedIcon />}
       </StyledCheckbox>
     </CheckboxContainer>
   )

@@ -21,7 +21,8 @@ const CheckboxPage = () => {
       <DisplayComponent name="Checkbox">
         <Checkbox size="medium" />
         <Checkbox size="small" />
-        <Checkbox disabled />
+        <Checkbox disabled="disabled" />
+        <Checkbox size="small" disabled="disabled" />
       </DisplayComponent>
     </div>
   )
