@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 import { log } from '@aviato/utils'
-import { styled } from '@aviato/ui'
+import { styled, useIdle } from '@aviato/ui'
 import { Button, Text } from '@aviato/ui'
 import { Page } from '../../../components'
 
@@ -26,6 +26,16 @@ const StyledDiv = styled('div', {
 })
 
 const HooksPage = () => {
+  const IdleDiv = () => {
+    const isIdle = useIdle(500)
+
+    return (
+      <StyledDiv>
+        <Text>User is idle: {isIdle ? 'Yes 😴' : 'Nope ⚡️'}</Text>
+      </StyledDiv>
+    )
+  }
+
   const LongPressButton = () => {
     const onLongPress = () => {
       log.global.info('Long-press after pressing for 300ms.')
@@ -49,7 +59,7 @@ const HooksPage = () => {
 
     return (
       <StyledDiv>
-        <p>Page scroll: {clampedOffset}</p>
+        <Text>Page scroll: {clampedOffset}</Text>
       </StyledDiv>
     )
   }
@@ -86,6 +96,10 @@ const HooksPage = () => {
 
   return (
     <Page>
+      <ShowcaseComponent title="Idle Hook">
+        <IdleDiv />
+      </ShowcaseComponent>
+
       <ShowcaseComponent title="Long-press Hook">
         <LongPressButton />
       </ShowcaseComponent>
