@@ -1,7 +1,7 @@
 import DisplayComponent from '../displayComponent'
 
 import { Button, styled } from '@aviato/ui'
-import { NextTitle, NextText } from '../../../components'
+import { NextText } from '../../../components'
 
 const RootDiv = styled('div', {
   paddingTop: 20,
