@@ -14,8 +14,6 @@ const setupLogging = () => {
     logLevel,
     adapters,
   })
-
-  log.debug('Application has been started.')
 }
 
 export { setupLogging }
