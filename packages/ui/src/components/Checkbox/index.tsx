@@ -97,7 +97,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
         state={isChecked}
         disabled={isDisabled}
       >
-        <Conditional test={isIndeterminate}>
+        <Conditional test={isChecked && isIndeterminate}>
           <IndeterminateIcon size={size} />
         </Conditional>
 

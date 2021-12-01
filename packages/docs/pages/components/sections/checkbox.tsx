@@ -30,7 +30,7 @@ const Spacer = styled('div', {
 const CheckboxPage = () => {
   return (
     <Page>
-      <ShowcaseComponent title="Checkbox">
+      <ShowcaseComponent title="Checkboxes">
         <Wrapper>
           <NextText weight="Bold">Medium</NextText>
           <Row>
