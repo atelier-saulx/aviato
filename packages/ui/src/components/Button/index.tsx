@@ -75,25 +75,21 @@ const StyledButton = styled('button', {
 type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
 export type ButtonProps = {
-  text?: string
   variant?: ButtonVariant
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
-  text,
-  children,
   variant = 'filled',
   disabled = false,
   onClick = noop,
+  children,
   ...remainingProps
 }) => {
   const handleClick = useCallback(() => {
     onClick()
   }, [])
-
-  const renderChildren = text ?? children
 
   return (
     <StyledButton
@@ -102,7 +98,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
       onClick={handleClick}
       {...remainingProps}
     >
-      {renderChildren}
+      {children}
     </StyledButton>
   )
 }
