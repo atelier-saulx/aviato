@@ -69,12 +69,12 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
-  const isCollapsable = !isHeader && hasChildren
+  const isCollapsible = !isHeader && hasChildren
   const [isOpen, setIsOpen] = useState(startOpen)
   const click = (onClick as CoercedClick) ?? noop
 
   const toggle = () => {
-    if (!isCollapsable) {
+    if (!isCollapsible) {
       return click()
     }
 
@@ -94,7 +94,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
     <>
       <StyledButton onClick={toggle} className={classes} {...remainingProps}>
         <Column>
-          <Conditional test={isCollapsable}>
+          <Conditional test={isCollapsible}>
             <span>
               <Arrow state={isOpen ? 'open' : 'closed'} />
             </span>

@@ -27,13 +27,13 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
 }) => {
   return (
     <ComponentWrapperDiv>
-      <Conditional test={Boolean(title)}>
+      <Conditional test={title}>
         <NextTitle weight="Bold" size="ExtraLarge">
           {title}
         </NextTitle>
       </Conditional>
 
-      <Conditional test={Boolean(description)}>
+      <Conditional test={description}>
         <NextParagraph color="Secondary">{description}</NextParagraph>
       </Conditional>
 

@@ -39,6 +39,8 @@ const CheckboxPage = () => {
             <Checkbox indeterminate={true} />
             <Checkbox indeterminate={true} checked={true} />
             <Checkbox disabled={true} indeterminate={true} />
+            <Checkbox disabled={true} checked={true} />
+            <Checkbox disabled={true} indeterminate={true} checked={true} />
           </Row>
 
           <BigSpacer />
@@ -50,6 +52,13 @@ const CheckboxPage = () => {
             <Checkbox size="small" indeterminate={true} />
             <Checkbox size="small" indeterminate={true} checked={true} />
             <Checkbox size="small" disabled={true} indeterminate={true} />
+            <Checkbox size="small" disabled={true} checked={true} />
+            <Checkbox
+              size="small"
+              disabled={true}
+              indeterminate={true}
+              checked={true}
+            />
           </Row>
         </Wrapper>
       </ShowcaseComponent>

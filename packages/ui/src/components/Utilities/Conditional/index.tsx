@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react'
 
+type TruthyOrFalsy = boolean | string | null | undefined
+
 type ConditionalProps = {
-  test: boolean
+  test: TruthyOrFalsy
 }
 
 /**
