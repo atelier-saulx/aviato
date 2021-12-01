@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react'
 import { styled } from '@aviato/ui'
 
 const WrapperDiv = styled('div', {
-  marginLeft: '20px',
+  marginLeft: '0px',
   marginBottom: '20px',
 })
 
@@ -11,6 +11,7 @@ const ComponentWrapperDiv = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   padding: '20px',
+  paddingLeft: '0px',
   borderRadius: '4px',
   background: '$PrimaryLight',
 })

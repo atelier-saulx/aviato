@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { log } from '@aviato/utils'
 import { styled } from '@aviato/ui'
 import { Button, Text } from '@aviato/ui'
-import { NextTitle } from '../../../components'
+import { Page } from '../../../components'
 
 import {
   useElementRect,
@@ -22,11 +22,6 @@ const StyledDiv = styled('div', {
   alignItems: 'flex-start',
   background: '#eeeeee',
   padding: '12px',
-})
-
-const RootDiv = styled('div', {
-  paddingTop: 20,
-  paddingBottom: 20,
 })
 
 const HooksPage = () => {
@@ -89,7 +84,7 @@ const HooksPage = () => {
   }
 
   return (
-    <RootDiv>
+    <Page>
       <ShowcaseComponent title="Long-press Hook">
         <LongPressButton />
       </ShowcaseComponent>
@@ -105,7 +100,7 @@ const HooksPage = () => {
       <ShowcaseComponent title="Page Scroll Hook">
         <ScrollDiv />
       </ShowcaseComponent>
-    </RootDiv>
+    </Page>
   )
 }
 

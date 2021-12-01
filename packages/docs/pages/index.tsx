@@ -32,7 +32,9 @@ const Home: NextPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold">Introduction to Aviato-UI</NextTitle>
+      <NextTitle weight="Bold" size="ExtraLarge">
+        Introduction
+      </NextTitle>
 
       <NextText>
         Aviato is UI component library with a focus on customization and

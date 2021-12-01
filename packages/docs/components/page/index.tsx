@@ -1,15 +1,33 @@
 import { FunctionComponent } from 'react'
 import { styled } from '@aviato/ui'
 
-const PageWrapperDiv = styled('div', {
+const PageWrapperFullscreen = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   padding: '20px',
   width: '100%',
 })
 
-export type PageProps = {}
+const PageWrapper = styled('div', {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  padding: '20px',
+  width: '100%',
+  maxWidth: '860px',
+  margin: '0 auto',
+})
 
-export const Page: FunctionComponent<PageProps> = ({ children }) => {
-  return <PageWrapperDiv>{children}</PageWrapperDiv>
+export type PageProps = {
+  fullscreen?: boolean
+}
+
+export const Page: FunctionComponent<PageProps> = ({
+  fullscreen = false,
+  children,
+}) => {
+  if (!fullscreen) {
+    return <PageWrapper>{children}</PageWrapper>
+  }
+
+  return <PageWrapperFullscreen>{children}</PageWrapperFullscreen>
 }
