@@ -4,7 +4,7 @@ import { Menu, MenuItem } from '@aviato/ui'
 
 import { NextTitle } from '../../../components'
 
-import DisplayComponent from '../displayComponent'
+import { ShowcaseComponent } from '../../../components'
 
 const RootDiv = styled('div', {
   paddingTop: 20,
@@ -21,11 +21,7 @@ const StyledDiv = styled('div', {
 const MenuPage = () => {
   return (
     <RootDiv>
-      <NextTitle weight="Bold" paddingLeft={20}>
-        Menu
-      </NextTitle>
-
-      <DisplayComponent name="Menu">
+      <ShowcaseComponent title="Menu">
         <StyledDiv>
           <Menu>
             <MenuItem
@@ -50,9 +46,9 @@ const MenuPage = () => {
             </MenuItem>
           </Menu>
         </StyledDiv>
-      </DisplayComponent>
+      </ShowcaseComponent>
 
-      <DisplayComponent name="Header, Not collapsible.">
+      <ShowcaseComponent title="Header, Not collapsible.">
         <StyledDiv>
           <Menu>
             <MenuItem
@@ -71,7 +67,7 @@ const MenuPage = () => {
             </MenuItem>
           </Menu>
         </StyledDiv>
-      </DisplayComponent>
+      </ShowcaseComponent>
     </RootDiv>
   )
 }

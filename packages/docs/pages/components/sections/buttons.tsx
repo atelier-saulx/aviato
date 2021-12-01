@@ -35,10 +35,6 @@ const Spacer = styled('div', {
 const ButtonsPage = () => {
   return (
     <RootDiv>
-      <NextTitle weight="Bold" paddingLeft={20}>
-        Buttons
-      </NextTitle>
-
       <DisplayComponent name="Buttons">
         <Wrapper>
           <NextText weight="Bold">Regular</NextText>

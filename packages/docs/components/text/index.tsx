@@ -38,7 +38,7 @@ const NextTextDiv = styled('div', {
 
 export type TextProps = AviatoTextProps & {}
 
-export const NextText: FunctionComponent<NextTitleProps> = ({
+export const NextText: FunctionComponent<TextProps> = ({
   children,
   ...remainingProps
 }) => {
@@ -46,5 +46,22 @@ export const NextText: FunctionComponent<NextTitleProps> = ({
     <NextTextDiv>
       <AviatoText {...remainingProps}>{children}</AviatoText>
     </NextTextDiv>
+  )
+}
+
+const NextParagraphDiv = styled('div', {
+  paddingBottom: 10,
+})
+
+export type NextParagraphProps = AviatoTextProps & {}
+
+export const NextParagraph: FunctionComponent<NextParagraphProps> = ({
+  children,
+  ...remainingProps
+}) => {
+  return (
+    <NextParagraphDiv>
+      <AviatoText {...remainingProps}>{children}</AviatoText>
+    </NextParagraphDiv>
   )
 }
