@@ -48,27 +48,13 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-const ArrowWrapper = styled('div', {
-  marginRight: '4px',
-
-  variants: {
-    state: {
-      close: {
-        transform: 'rotate(0deg)',
-      },
-      open: {
-        transform: 'rotate(90deg)',
-      },
-    },
-  },
-})
-
 export type MenuItemProps = {
   title: string
   onClick?: (value) => void
   isCollapsable?: boolean
   isActive?: boolean
   isHeader?: boolean
+  startOpen?: boolean
 }
 
 type CoercedClick = () => void
@@ -79,11 +65,12 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   children,
   isActive = false,
   isHeader = false,
+  startOpen = true,
   ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
   const isCollapsable = !isHeader && hasChildren
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(startOpen)
   const click = (onClick as CoercedClick) ?? noop
 
   const toggle = () => {
@@ -109,9 +96,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
         <Column>
           <Conditional test={isCollapsable}>
             <span>
-              <ArrowWrapper state={isOpen ? 'open' : 'close'}>
-                <Arrow />
-              </ArrowWrapper>
+              <Arrow state={isOpen ? 'open' : 'closed'} />
             </span>
           </Conditional>
           <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>

@@ -1,7 +1,24 @@
-import React from 'react'
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
-import { Text } from '@aviato/ui'
+import { styled } from '@aviato/ui'
+import { NextText } from '../../components'
+
+const WrapperDiv = styled('div', {
+  margin: '20px',
+})
+
+const ComponentWrapperDiv = styled('div', {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  border: '1px dashed rgba(5, 24, 41, 0.2)',
+  padding: '20px',
+  borderRadius: '7px',
+  backgroundColor: 'transparent',
+})
+
+const FlexDiv = styled('div', {
+  display: 'flex',
+})
 
 export type DisplayComponentProps = {
   name?: string
@@ -20,32 +37,13 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   const componentName = name ?? actualComponentName
 
   return (
-    <div
-      style={{
-        margin: '20px',
-      }}
-    >
-      <div
-        style={{
-          marginBottom: '10px',
-        }}
-      >
-        <Text>{componentName}</Text>
-      </div>
+    <WrapperDiv>
+      <NextText>{componentName}</NextText>
 
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'column nowrap',
-          border: '1px dashed rgba(5, 24, 41, 0.2)',
-          padding: '20px',
-          borderRadius: '7px',
-          backgroundColor: 'transparent',
-        }}
-      >
-        <div style={{ display: 'flex' }}>{children}</div>
-      </div>
-    </div>
+      <ComponentWrapperDiv>
+        <FlexDiv>{children}</FlexDiv>
+      </ComponentWrapperDiv>
+    </WrapperDiv>
   )
 }
 

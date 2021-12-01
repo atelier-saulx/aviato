@@ -1,8 +1,14 @@
+import { FunctionComponent } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { FunctionComponent } from 'react'
 
-const Section = () => {
+import { styled } from '@aviato/ui'
+
+const WrapperDiv = styled('div', {
+  padding: '20px',
+})
+
+const Section: FunctionComponent = () => {
   const router = useRouter()
   const { section = '' } = router.query
 
@@ -18,22 +24,10 @@ const Section = () => {
 
   const TargetSection = matchingComponent
   if (!TargetSection) {
-    return (
-      <div
-        style={{
-          padding: 20,
-        }}
-      >
-        This section does not exist.
-      </div>
-    )
+    return <WrapperDiv>This section does not exist.</WrapperDiv>
   }
 
-  return (
-    <>
-      <TargetSection />
-    </>
-  )
+  return <TargetSection />
 }
 
 export default Section

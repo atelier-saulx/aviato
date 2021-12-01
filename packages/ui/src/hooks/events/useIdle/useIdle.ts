@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { throttle } from 'throttle-debounce'
-import { off, on } from '@aviato/utils'
+import { off, on, Milliseconds } from '@aviato/utils'
 
 const defaultEvents = [
   'mousemove',
@@ -11,7 +11,7 @@ const defaultEvents = [
   'wheel',
 ]
 
-const oneMinute = 60e3
+const oneMinute: Milliseconds = (60 * 1000) as Milliseconds
 
 function useIdle(
   milliseconds: number = oneMinute,

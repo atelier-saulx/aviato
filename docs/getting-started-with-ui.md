@@ -15,5 +15,14 @@ npm install --save @aviato/ui
 Below you can find a simple example of using the UI library.
 
 ```typescript
-// Put example code here...
+import { Button, Text } from "@aviato/ui";
+
+const ButtonAndText = () => {
+  return (
+    <>
+      <Text>Example</Text>
+      <Button>Button</Button>
+    </>
+  );
+};
 ```

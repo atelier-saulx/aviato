@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 
 import { log } from '@aviato/utils'
-import { styled } from '@aviato/ui'
-import { Button, Title, Text } from '@aviato/ui'
+import { styled, useIdle } from '@aviato/ui'
+import { Button, Text } from '@aviato/ui'
+import { Page } from '../../../components'
 
 import {
   useElementRect,
@@ -12,25 +13,29 @@ import {
   useWindowSize,
 } from '@aviato/ui'
 
-import DisplayComponent from '../displayComponent'
+import { ShowcaseComponent } from '../../../components'
 
 const StyledDiv = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  background: '#eeeeee',
+  background: '#FFF',
   padding: '12px',
-})
-
-const StyledButton = styled('button', {
-  cursor: 'pointer',
-  background: '#eeeeee',
-  padding: '10px 20px',
-  borderRadius: '6px',
+  borderRadius: '4px',
 })
 
 const HooksPage = () => {
+  const IdleDiv = () => {
+    const isIdle = useIdle(500)
+
+    return (
+      <StyledDiv>
+        <Text>User is idle: {isIdle ? 'Yes 😴' : 'Nope ⚡️'}</Text>
+      </StyledDiv>
+    )
+  }
+
   const LongPressButton = () => {
     const onLongPress = () => {
       log.global.info('Long-press after pressing for 300ms.')
@@ -54,7 +59,7 @@ const HooksPage = () => {
 
     return (
       <StyledDiv>
-        <p>Element scroll: {clampedOffset}</p>
+        <Text>Page scroll: {clampedOffset}</Text>
       </StyledDiv>
     )
   }
@@ -90,36 +95,27 @@ const HooksPage = () => {
   }
 
   return (
-    <div
-      style={{
-        paddingTop: 20,
-        paddingBottom: 20,
-      }}
-    >
-      <div
-        style={{
-          paddingLeft: 20,
-        }}
-      >
-        <Title weight="Bold">Hooks</Title>
-      </div>
+    <Page>
+      <ShowcaseComponent title="Idle Hook">
+        <IdleDiv />
+      </ShowcaseComponent>
 
-      <DisplayComponent name="Button">
+      <ShowcaseComponent title="Long-press Hook">
         <LongPressButton />
-      </DisplayComponent>
+      </ShowcaseComponent>
 
-      <DisplayComponent name="Scroll">
-        <ScrollDiv />
-      </DisplayComponent>
-
-      <DisplayComponent name="Window Size">
-        <DimensionDiv />
-      </DisplayComponent>
-
-      <DisplayComponent name="Hover">
+      <ShowcaseComponent title="Hover Hook">
         <HoverDiv />
-      </DisplayComponent>
-    </div>
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Window Size Hook">
+        <DimensionDiv />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Page Scroll Hook">
+        <ScrollDiv />
+      </ShowcaseComponent>
+    </Page>
   )
 }
 

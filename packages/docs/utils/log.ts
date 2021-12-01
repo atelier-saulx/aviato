@@ -1,21 +1,19 @@
 import { inDevEnvironment } from './misc'
 import {
   LogLevel,
-  setupLogging as setupApplicationLogging,
+  setupLogging,
   log,
   createConsoleAdapter,
 } from '@aviato/utils'
 
-const setupLogging = () => {
+const setupApplicationLogging = () => {
   const logLevel = inDevEnvironment ? LogLevel.DEBUG : LogLevel.ERROR
   const adapters = [createConsoleAdapter()]
 
-  setupApplicationLogging({
+  setupLogging({
     logLevel,
     adapters,
   })
-
-  log.debug('Application has been started.')
 }
 
-export { setupLogging }
+export { setupApplicationLogging }

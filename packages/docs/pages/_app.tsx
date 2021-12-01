@@ -1,14 +1,30 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { SideMenu } from '../components/side-menu'
 import { initialiseApplication } from '../utils'
+import { SideMenu } from '../components/side-menu'
+import { styled, MenuWidthConstant } from '@aviato/ui'
 
 initialiseApplication()
+
+const MainWrapper = styled('div', {
+  display: 'flex',
+  width: '100vw',
+  height: '100vh',
+  overflowX: 'hidden',
+})
+
+const ContentWrapper = styled('div', {
+  position: 'relative',
+  width: `calc(100vw - ${MenuWidthConstant}px)`,
+  height: '100vh',
+  padding: '10px',
+  overflowX: 'hidden',
+})
 
 const MainApplication = ({ Component, pageProps }: AppProps) => {
   const HeadContent = () => {
@@ -21,37 +37,6 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
         />
         <meta property="og:title" content="Aviato-UI" key="title" />
       </Head>
-    )
-  }
-
-  const MainWrapper: FunctionComponent = ({ children }) => {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100vw',
-          height: '100vh',
-          overflowX: 'hidden',
-        }}
-      >
-        {children}
-      </div>
-    )
-  }
-
-  const ContentWrapper = ({ children }: any) => {
-    return (
-      <div
-        style={{
-          position: 'relative',
-          width: '100vw',
-          height: '100vh',
-          padding: '10px',
-          overflowX: 'hidden',
-        }}
-      >
-        {children}
-      </div>
     )
   }
 

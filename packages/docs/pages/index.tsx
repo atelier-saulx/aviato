@@ -1,49 +1,65 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
+import { styled, Text } from '@aviato/ui'
 
-import { Title, Text } from '@aviato/ui'
+import { Page, NextTitle, NextText } from '../components'
+
+const Wrapper = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+})
+
+const Row = styled('div', {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'no-wrap',
+})
+
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
 
 const Home: NextPage = () => {
-  const ExamplesLink = (
-    <Link href="/examples">
-      <a style={{ color: 'orange' }}>Examples</a>
-    </Link>
-  )
-
-  const PlaygroundLink = (
-    <Link href="/playground">
-      <a style={{ color: 'orange' }}>Playground</a>
-    </Link>
-  )
+  const Line = ({ children }: any) => {
+    return (
+      <Row>
+        <Text>{children}</Text>
+      </Row>
+    )
+  }
 
   return (
-    <div>
-      <div
-        style={{
-          padding: '20px',
-        }}
-      >
-        <div
-          style={{
-            paddingBottom: 20,
-          }}
-        >
-          <Title weight="Bold">Introduction to Aviato-UI</Title>
-        </div>
+    <Page>
+      <NextTitle weight="Bold" size="ExtraLarge">
+        Introduction
+      </NextTitle>
 
-        <Text>
-          Aviato-UI is a component-suite to enrich your web applications, or to
-          create CMS/DMS interfaces.
-        </Text>
+      <NextText>
+        Aviato is UI component library with a focus on customization and
+        developer experience (DX).
+        <br />
+        You can use these components either as the base layer of your
+        application, or adopt them incrementally.
+      </NextText>
 
-        <div style={{ marginTop: '20px' }}>
-          <Text>To see our component suite, go to {ExamplesLink}.</Text>
-          <Text>
-            To play around with the components, go to {PlaygroundLink}.
-          </Text>
-        </div>
-      </div>
-    </div>
+      <NextText>
+        The goal with Aviato is to facilitate building high-quality CMS or DMS
+        interfaces and web apps.
+      </NextText>
+
+      <BigSpacer />
+      <Wrapper>
+        <Row>
+          <NextText weight="Bold">✨ Features ✨</NextText>
+        </Row>
+        <Line>📦 - A set of high-quality React components out of the box.</Line>
+        <Line>🛡 - Written in TypeScript with predictable static types.</Line>
+        <Line>🎨 - Powerful theme customization.</Line>
+        <Line>🪝 - Contains a comprehensive collection of basic Hooks.</Line>
+      </Wrapper>
+    </Page>
   )
 }
 

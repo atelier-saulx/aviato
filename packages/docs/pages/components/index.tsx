@@ -1,21 +1,17 @@
-import { Title } from '@aviato/ui'
+import { styled } from '@aviato/ui'
+
+import { NextTitle } from '../../components'
+
+const RootDiv = styled('div', {
+  paddingTop: 20,
+  paddingBottom: 20,
+})
 
 const Components = () => {
   return (
-    <div
-      style={{
-        paddingTop: '20px',
-        paddingBottom: '20px',
-      }}
-    >
-      <div
-        style={{
-          paddingLeft: 20,
-        }}
-      >
-        <Title weight="Bold">Components</Title>
-      </div>
-    </div>
+    <RootDiv>
+      <NextTitle weight="Bold">Components</NextTitle>
+    </RootDiv>
   )
 }
 

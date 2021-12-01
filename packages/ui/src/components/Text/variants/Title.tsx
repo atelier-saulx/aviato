@@ -8,11 +8,18 @@ export type TitleProps = BaseTextProps & {}
 export const Title: FunctionComponent<TitleProps> = ({
   children,
   value = '',
-  weight = 'Regular',
+  weight = 'Semibold',
   color = 'Primary',
+  size = 'Medium',
 }) => {
   return (
-    <BaseText as="h1" weight={weight} color={color} alignment="start">
+    <BaseText
+      as="h1"
+      weight={weight}
+      color={color}
+      size={size}
+      alignment="start"
+    >
       {children ?? value}
     </BaseText>
   )

@@ -8,8 +8,11 @@ export type FontColor =
   | 'Secondary'
   | 'Disabled'
 
+export type FontSize = 'Small' | 'Medium' | 'Large' | 'ExtraLarge'
+
 export type BaseTextProps = {
   value?: string
   weight?: FontWeight
   color?: FontColor
+  size?: FontSize
 }

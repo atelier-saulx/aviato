@@ -8,6 +8,21 @@ export const BaseText = styled('p', {
   fontSize: '15px',
 
   variants: {
+    size: {
+      Small: {
+        fontSize: '15px',
+      },
+      Medium: {
+        fontSize: '18px',
+      },
+      Large: {
+        fontSize: '21px',
+      },
+      ExtraLarge: {
+        fontSize: '32px',
+      },
+    },
+
     weight: {
       Regular: {
         fontWeight: 'normal',
