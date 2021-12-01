@@ -1,3 +1,4 @@
+import { noop } from '@aviato/utils'
 import React, {
   FunctionComponent,
   useCallback,
@@ -6,7 +7,7 @@ import React, {
 } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { styled } from '~/theme'
-import { CheckedIcon } from './temp'
+import { CheckedIcon, IndeterminateIcon } from './temp'
 
 const CheckboxContainer = styled('div', {
   verticalAlign: 'middle',
@@ -64,21 +65,28 @@ export type CheckboxProps = {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
+  indeterminate?: boolean
 }
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
   size = 'medium',
   checked = false,
   disabled = false,
+  indeterminate = false,
 }) => {
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(checked)
+  const [isDisabled, setIsDisbled] = useState(disabled)
+  const [isIndeterminate, setIsIndeterminate] = useState(indeterminate)
 
   useEffect(() => {
     setIsChecked(checked)
-  }, [checked])
+    setIsDisbled(disabled)
+    setIsIndeterminate(indeterminate)
+  }, [checked, disabled, indeterminate])
 
   const handleClick = useCallback(() => {
-    if (!disabled) return setIsChecked(!isChecked)
+    if (disabled) return noop()
+    setIsChecked(!isChecked)
   }, [isChecked])
 
   return (
@@ -87,9 +95,13 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
         onClick={handleClick}
         size={size}
         state={isChecked}
-        disabled={disabled}
+        disabled={isDisabled}
       >
-        <Conditional test={isChecked}>
+        <Conditional test={isIndeterminate}>
+          <IndeterminateIcon size={size} />
+        </Conditional>
+
+        <Conditional test={isChecked && !isIndeterminate}>
           <CheckedIcon size={size} />
         </Conditional>
       </StyledCheckbox>

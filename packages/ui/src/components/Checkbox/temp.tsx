@@ -44,11 +44,31 @@ export const CheckedIcon: FunctionComponent<CheckedIconProps> = ({
   )
 }
 
-export const IndeterminateIcon: FunctionComponent = () => {
+type IndeterminateIconProps = {
+  size?: 'small' | 'medium'
+}
+
+export const IndeterminateIcon: FunctionComponent<IndeterminateIconProps> = ({
+  size = 'small',
+}) => {
+  if (size === 'small') {
+    return (
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x="1.5" y="5.25" width="9" height="1.5" rx="0.75" fill="white" />
+      </svg>
+    )
+  }
+
   return (
     <svg
-      width="12"
-      height="12"
+      width="16"
+      height="16"
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
