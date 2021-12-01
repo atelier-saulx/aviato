@@ -1,6 +1,12 @@
+import { styled, Title } from '@aviato/ui'
+
+import { NextTitle } from '../../components'
 import ShowcaseComponent, { ShowcaseComponentProps } from './showcaseComponent'
 
-import { Title } from '@aviato/ui'
+const RootDiv = styled('div', {
+  paddingTop: 20,
+  paddingBottom: 20,
+})
 
 const Playground = () => {
   const components: ShowcaseComponentProps[] = [
@@ -11,19 +17,8 @@ const Playground = () => {
   ]
 
   return (
-    <div
-      style={{
-        paddingTop: 20,
-        paddingBottom: 20,
-      }}
-    >
-      <div
-        style={{
-          paddingLeft: 20,
-        }}
-      >
-        <Title weight="Bold">Examples</Title>
-      </div>
+    <RootDiv>
+      <NextTitle weight="Bold">Examples</NextTitle>
 
       <div>
         {components.map((component, index) => (
@@ -33,7 +28,7 @@ const Playground = () => {
           />
         ))}
       </div>
-    </div>
+    </RootDiv>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
-import { styled } from '@aviato/ui'
 
+import { styled } from '@aviato/ui'
 import { NextText } from '../../components'
 
 const WrapperDiv = styled('div', {
