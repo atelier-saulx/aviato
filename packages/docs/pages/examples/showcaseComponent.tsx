@@ -1,8 +1,24 @@
-import React from 'react'
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
+import { styled } from '@aviato/ui'
 
-import { Text } from '@aviato/ui'
-import { Code } from '../../components'
+import { NextText, Code } from '../../components'
+
+const WrapperDiv = styled('div', {
+  margin: '20px',
+})
+
+const ComponentWrapperDiv = styled('div', {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  border: '1px dashed rgba(5, 24, 41, 0.2)',
+  padding: '20px',
+  borderRadius: '7px',
+  backgroundColor: 'transparent',
+})
+
+const FlexDiv = styled('div', {
+  display: 'flex',
+})
 
 export type ShowcaseComponentProps = {
   component: JSX.Element
@@ -20,36 +36,15 @@ const ShowcaseComponent: FunctionComponent<ShowcaseComponentProps> = ({
   })
 
   return (
-    <div
-      style={{
-        margin: '20px',
-      }}
-    >
-      <div
-        style={{
-          marginBottom: '10px',
-        }}
-      >
-        <Text>{componentName}</Text>
-      </div>
+    <WrapperDiv>
+      <NextText>{componentName}</NextText>
 
-      <div
-        style={{
-          display: 'flex',
-          flexFlow: 'column nowrap',
-          border: '1px dashed rgba(5, 24, 41, 0.2)',
-          padding: '20px',
-          borderRadius: '7px',
-          backgroundColor: 'transparent',
-        }}
-      >
-        <div style={{ display: 'flex' }}>{component}</div>
-      </div>
+      <ComponentWrapperDiv>
+        <FlexDiv>{component}</FlexDiv>
+      </ComponentWrapperDiv>
 
-      <div>
-        <Code code={code} language={'jsx'} />
-      </div>
-    </div>
+      <Code code={code} language={'jsx'} />
+    </WrapperDiv>
   )
 }
 

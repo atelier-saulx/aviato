@@ -1,28 +1,21 @@
 import { styled } from '@aviato/ui'
 import { Title, Text } from '@aviato/ui'
 
+import { NextTitle } from '../../../components'
+
 import DisplayComponent from '../displayComponent'
 
-const Column = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
+const RootDiv = styled('div', {
+  paddingTop: 20,
+  paddingBottom: 20,
 })
 
 const TextPage = () => {
   return (
-    <div
-      style={{
-        paddingTop: 20,
-        paddingBottom: 20,
-      }}
-    >
-      <div
-        style={{
-          paddingLeft: 20,
-        }}
-      >
-        <Title weight="Bold">Text</Title>
-      </div>
+    <RootDiv>
+      <NextTitle weight="Bold" paddingLeft={20}>
+        Text
+      </NextTitle>
 
       <DisplayComponent name="Title">
         <Title>Title</Title>
@@ -31,7 +24,7 @@ const TextPage = () => {
       <DisplayComponent name="Text">
         <Text>Text</Text>
       </DisplayComponent>
-    </div>
+    </RootDiv>
   )
 }
 

@@ -10,9 +10,16 @@ export const Text: FunctionComponent<TextProps> = ({
   value = '',
   weight = 'Regular',
   color = 'Primary',
+  size = 'Small',
 }) => {
   return (
-    <BaseText as="p" weight={weight} color={color} alignment="start">
+    <BaseText
+      as="p"
+      weight={weight}
+      color={color}
+      size={size}
+      alignment="start"
+    >
       {children ?? value}
     </BaseText>
   )

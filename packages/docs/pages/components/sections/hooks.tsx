@@ -2,7 +2,8 @@ import { useRef } from 'react'
 
 import { log } from '@aviato/utils'
 import { styled } from '@aviato/ui'
-import { Button, Title, Text } from '@aviato/ui'
+import { Button, Text } from '@aviato/ui'
+import { NextTitle } from '../../../components'
 
 import {
   useElementRect,
@@ -23,11 +24,9 @@ const StyledDiv = styled('div', {
   padding: '12px',
 })
 
-const StyledButton = styled('button', {
-  cursor: 'pointer',
-  background: '#eeeeee',
-  padding: '10px 20px',
-  borderRadius: '6px',
+const RootDiv = styled('div', {
+  paddingTop: 20,
+  paddingBottom: 20,
 })
 
 const HooksPage = () => {
@@ -90,19 +89,10 @@ const HooksPage = () => {
   }
 
   return (
-    <div
-      style={{
-        paddingTop: 20,
-        paddingBottom: 20,
-      }}
-    >
-      <div
-        style={{
-          paddingLeft: 20,
-        }}
-      >
-        <Title weight="Bold">Hooks</Title>
-      </div>
+    <RootDiv>
+      <NextTitle weight="Bold" paddingLeft={20}>
+        Hooks
+      </NextTitle>
 
       <DisplayComponent name="Button">
         <LongPressButton />
@@ -119,7 +109,7 @@ const HooksPage = () => {
       <DisplayComponent name="Hover">
         <HoverDiv />
       </DisplayComponent>
-    </div>
+    </RootDiv>
   )
 }
 
