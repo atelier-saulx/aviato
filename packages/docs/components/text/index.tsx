@@ -18,7 +18,7 @@ export type NextTitleProps = AviatoTitleProps & {
 
 export const NextTitle: FunctionComponent<NextTitleProps> = ({
   children,
-  paddingLeft = 0,
+  paddingLeft = undefined,
   ...remainingProps
 }) => {
   return (
@@ -36,14 +36,21 @@ const NextTextDiv = styled('div', {
   paddingBottom: 10,
 })
 
-export type TextProps = AviatoTextProps & {}
+export type TextProps = AviatoTextProps & {
+  paddingLeft?: number
+}
 
 export const NextText: FunctionComponent<TextProps> = ({
   children,
+  paddingLeft = undefined,
   ...remainingProps
 }) => {
   return (
-    <NextTextDiv>
+    <NextTextDiv
+      css={{
+        paddingLeft,
+      }}
+    >
       <AviatoText {...remainingProps}>{children}</AviatoText>
     </NextTextDiv>
   )
@@ -53,14 +60,21 @@ const NextParagraphDiv = styled('div', {
   paddingBottom: 10,
 })
 
-export type NextParagraphProps = AviatoTextProps & {}
+export type NextParagraphProps = AviatoTextProps & {
+  paddingLeft?: number
+}
 
 export const NextParagraph: FunctionComponent<NextParagraphProps> = ({
   children,
+  paddingLeft = undefined,
   ...remainingProps
 }) => {
   return (
-    <NextParagraphDiv>
+    <NextParagraphDiv
+      css={{
+        paddingLeft,
+      }}
+    >
       <AviatoText {...remainingProps}>{children}</AviatoText>
     </NextParagraphDiv>
   )

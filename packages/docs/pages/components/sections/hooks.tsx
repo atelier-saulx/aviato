@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { log } from '@aviato/utils'
 import { styled } from '@aviato/ui'
 import { Button, Text } from '@aviato/ui'
-import { NextTitle } from '../../../components'
+import { Page } from '../../../components'
 
 import {
   useElementRect,
@@ -13,20 +13,16 @@ import {
   useWindowSize,
 } from '@aviato/ui'
 
-import DisplayComponent from '../displayComponent'
+import { ShowcaseComponent } from '../../../components'
 
 const StyledDiv = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  background: '#eeeeee',
+  background: '#FFF',
   padding: '12px',
-})
-
-const RootDiv = styled('div', {
-  paddingTop: 20,
-  paddingBottom: 20,
+  borderRadius: '4px',
 })
 
 const HooksPage = () => {
@@ -53,7 +49,7 @@ const HooksPage = () => {
 
     return (
       <StyledDiv>
-        <p>Element scroll: {clampedOffset}</p>
+        <p>Page scroll: {clampedOffset}</p>
       </StyledDiv>
     )
   }
@@ -89,27 +85,23 @@ const HooksPage = () => {
   }
 
   return (
-    <RootDiv>
-      <NextTitle weight="Bold" paddingLeft={20}>
-        Hooks
-      </NextTitle>
-
-      <DisplayComponent name="Button">
+    <Page>
+      <ShowcaseComponent title="Long-press Hook">
         <LongPressButton />
-      </DisplayComponent>
+      </ShowcaseComponent>
 
-      <DisplayComponent name="Scroll">
-        <ScrollDiv />
-      </DisplayComponent>
-
-      <DisplayComponent name="Window Size">
-        <DimensionDiv />
-      </DisplayComponent>
-
-      <DisplayComponent name="Hover">
+      <ShowcaseComponent title="Hover Hook">
         <HoverDiv />
-      </DisplayComponent>
-    </RootDiv>
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Window Size Hook">
+        <DimensionDiv />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Page Scroll Hook">
+        <ScrollDiv />
+      </ShowcaseComponent>
+    </Page>
   )
 }
 

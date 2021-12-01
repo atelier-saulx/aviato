@@ -1,18 +1,13 @@
-import DisplayComponent from '../displayComponent'
+import { styled } from '@aviato/ui'
+import { Button } from '@aviato/ui'
+import { NextText } from '../../../components'
 
-import { Button, styled } from '@aviato/ui'
-import { NextTitle, NextText } from '../../../components'
-
-const RootDiv = styled('div', {
-  paddingTop: 20,
-  paddingBottom: 20,
-})
+import { Page, ShowcaseComponent } from '../../../components'
 
 const Wrapper = styled('div', {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  width: '100%',
 })
 
 const Row = styled('div', {
@@ -34,8 +29,8 @@ const Spacer = styled('div', {
 
 const ButtonsPage = () => {
   return (
-    <RootDiv>
-      <DisplayComponent name="Buttons">
+    <Page>
+      <ShowcaseComponent title="Buttons">
         <Wrapper>
           <NextText weight="Bold">Regular</NextText>
           <Row>
@@ -63,8 +58,8 @@ const ButtonsPage = () => {
             </Button>
           </Row>
         </Wrapper>
-      </DisplayComponent>
-    </RootDiv>
+      </ShowcaseComponent>
+    </Page>
   )
 }
 

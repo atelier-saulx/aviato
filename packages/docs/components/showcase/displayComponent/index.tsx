@@ -3,21 +3,26 @@ import React, { FunctionComponent } from 'react'
 import { styled } from '@aviato/ui'
 
 const WrapperDiv = styled('div', {
-  marginLeft: '20px',
+  marginLeft: '0px',
   marginBottom: '20px',
 })
 
 const ComponentWrapperDiv = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
-  border: '1px dashed rgba(5, 24, 41, 0.2)',
   padding: '20px',
-  borderRadius: '7px',
-  backgroundColor: 'transparent',
+  paddingLeft: '0px',
+  borderRadius: '4px',
+  background: '$PrimaryLight',
 })
 
-const FlexDiv = styled('div', {
+const InnerDiv = styled('div', {
   display: 'flex',
+  width: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  filter: 'drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.12))',
+  margin: '60px 0px',
 })
 
 export type DisplayComponentProps = {}
@@ -28,7 +33,7 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   return (
     <WrapperDiv>
       <ComponentWrapperDiv>
-        <FlexDiv>{children}</FlexDiv>
+        <InnerDiv>{children}</InnerDiv>
       </ComponentWrapperDiv>
     </WrapperDiv>
   )

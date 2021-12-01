@@ -1,28 +1,23 @@
-import { FunctionComponent } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu as AviatoSideMenu, Menu, MenuItem, styled } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
 
-import { AviatoLogo } from './logo'
+import { AviatoLogo } from '../logo'
 
 const HeaderDiv = styled('div', {
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'flex-start',
-  padding: '16px',
-  paddingBottom: '77px',
+  padding: '8px',
+  paddingBottom: '69px',
   cursor: 'pointer',
-})
-
-const MenuContainerDiv = styled('div', {
-  padding: 8,
 })
 
 interface MainSideMenuProps {
   router: NextRouter
 }
 
-const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
+const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   type Items = {
     title: string
     route?: string
@@ -38,16 +33,12 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
       title: 'Components',
       subMenu: [
         {
+          title: 'Side-menu',
+          route: '/components/side-menu',
+        },
+        {
           title: 'Buttons',
           route: '/components/buttons',
-        },
-        {
-          title: 'Menu',
-          route: '/components/menu',
-        },
-        {
-          title: 'Text',
-          route: '/components/text',
         },
         {
           title: 'Hooks',
@@ -89,16 +80,14 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
   })
 
   return (
-    <AviatoSideMenu>
+    <SideMenu>
       <HeaderDiv onClick={() => router.push({ pathname: '/' })}>
         <AviatoLogo />
       </HeaderDiv>
 
-      <MenuContainerDiv>
-        <Menu>{mainMenuItems}</Menu>
-      </MenuContainerDiv>
-    </AviatoSideMenu>
+      <Menu>{mainMenuItems}</Menu>
+    </SideMenu>
   )
 })
 
-export { SideMenu }
+export { MainSideMenu as SideMenu }
