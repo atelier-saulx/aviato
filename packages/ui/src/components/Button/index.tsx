@@ -8,7 +8,6 @@ const StyledButton = styled('button', {
   cursor: 'pointer',
   fontWeight: '500',
   lineHeight: '24px',
-  margin: '6px',
   padding: '4px 8px',
   fontSize: '15px',
 
