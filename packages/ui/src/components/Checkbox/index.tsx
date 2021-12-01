@@ -37,11 +37,6 @@ const StyledCheckbox = styled('div', {
       secondary: {
         backgroundColor: 'rgba(15,16,19,0.12)',
         border: '1px solid rgba(15,16,19,0.26)',
-        '&:disabled': {
-          backgroundColor: '#f9f9f9',
-          border: '1px solid rgba(15,16,19,0.06)',
-          cursor: 'not-allowed',
-        },
       },
     },
     size: {
@@ -81,6 +76,12 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
 }) => {
   const [check, setCheck] = useState(false)
 
+  let clickable = false
+
+  if (check && !disabled) {
+    clickable = true
+  }
+
   return (
     <CheckboxContainer>
       <StyledCheckbox
@@ -89,7 +90,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
         size={size}
         disabled={disabled}
       >
-        {check && (
+        {clickable && (
           <Icon viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
           </Icon>
