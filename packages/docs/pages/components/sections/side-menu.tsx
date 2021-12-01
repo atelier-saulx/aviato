@@ -30,6 +30,10 @@ const SideMenuPage = () => {
           </HeaderDiv>
 
           <Menu>
+            <MenuItem title="Content model" />
+            <MenuItem title="Publications" />
+            <MenuItem title="Media" />
+
             <MenuItem title="Settings">
               <MenuItem title="Profile" />
               <MenuItem title="User management" />
