@@ -39,13 +39,12 @@ const StyledCheckbox = styled('div', {
       },
     },
     state: {
-      checked: {
+      true: {
         backgroundColor: '$PrimaryMain',
         '&:hover': {
           backgroundColor: '$PrimaryMainHover',
         },
       },
-      unchecked: {},
     },
     disabled: {
       true: {
@@ -55,7 +54,6 @@ const StyledCheckbox = styled('div', {
           backgroundColor: '$ActionDisabledContent',
         },
       },
-      false: {},
     },
   },
 })
@@ -88,7 +86,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
       <StyledCheckbox
         onClick={handleClick}
         size={size}
-        state={isChecked ? 'checked' : 'unchecked'}
+        state={isChecked}
         disabled={disabled}
       >
         <Conditional test={isChecked}>
