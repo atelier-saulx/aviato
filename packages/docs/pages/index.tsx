@@ -39,9 +39,7 @@ const Home: NextPage = () => {
       <NextText>
         Aviato is UI component library with a focus on customization and
         developer experience (DX).
-      </NextText>
-
-      <NextText>
+        <br />
         You can use these components either as the base layer of your
         application, or adopt them incrementally.
       </NextText>
