@@ -36,22 +36,14 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
           title: 'Side-menu',
           route: '/components/side-menu',
         },
-        // {
-        //   title: 'Buttons',
-        //   route: '/components/buttons',
-        // },
-        // {
-        //   title: 'Menu',
-        //   route: '/components/menu',
-        // },
-        // {
-        //   title: 'Text',
-        //   route: '/components/text',
-        // },
-        // {
-        //   title: 'Hooks',
-        //   route: '/components/hooks',
-        // },
+        {
+          title: 'Buttons',
+          route: '/components/buttons',
+        },
+        {
+          title: 'Hooks',
+          route: '/components/hooks',
+        },
       ],
     },
   ]
