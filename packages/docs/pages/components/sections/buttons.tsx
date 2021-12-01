@@ -1,6 +1,18 @@
 import DisplayComponent from '../displayComponent'
 
-import { Title, Button } from '@aviato/ui'
+import { Title, Button, styled } from '@aviato/ui'
+
+const Wrapper = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  width: '100%',
+})
+
+const Row = styled('div', {
+  width: '100%',
+  paddingBottom: '20px',
+})
 
 const ButtonsPage = () => {
   return (
@@ -19,21 +31,27 @@ const ButtonsPage = () => {
       </div>
 
       <DisplayComponent name="Buttons">
-        <Button variant="filled">Button</Button>
-        <Button variant="outlined">Button</Button>
-        <Button variant="transparent">Button</Button>
-      </DisplayComponent>
+        <Wrapper>
+          <Title weight="Bold">Buttons</Title>
+          <Row>
+            <Button variant="filled">Button</Button>
+            <Button variant="outlined">Button</Button>
+            <Button variant="transparent">Button</Button>
+          </Row>
 
-      <DisplayComponent name="Disabled Buttons">
-        <Button disabled variant="filled">
-          Button
-        </Button>
-        <Button disabled variant="outlined">
-          Button
-        </Button>
-        <Button disabled variant="transparent">
-          Button
-        </Button>
+          <Title weight="Bold">Disabled Buttons</Title>
+          <Row>
+            <Button disabled variant="filled">
+              Button
+            </Button>
+            <Button disabled variant="outlined">
+              Button
+            </Button>
+            <Button disabled variant="transparent">
+              Button
+            </Button>
+          </Row>
+        </Wrapper>
       </DisplayComponent>
     </div>
   )
