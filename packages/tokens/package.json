@@ -1,0 +1,44 @@
+{
+  "name": "@aviato/tokens",
+  "version": "1.0.0",
+  "description": "Design Tokens for Aviato",
+  "license": "MIT",
+  "dependencies": {
+    "@stitches/react": "^1.2.5"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "chalk": "^5.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "esm": "^3.2.25",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "ora": "^6.0.1",
+    "promisify-child-process": "^4.1.1",
+    "rollup": "^2.33.1",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-execute": "^1.1.1",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "ts-node": "^10.4.0",
+    "typescript": "4.4.3"
+  },
+  "prettier": "@saulx/prettier-config",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "run-p watch:*",
+    "watch:project": "rollup -c --watch",
+    "lint": "run-p lint:*",
+    "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
+    "lint:eslint": "eslint --ignore-path .gitignore './**/*.{ts,tsx}'",
+    "lint:prettier": "prettier --write './**/*.ts{,x}'",
+    "parse-script": "nodemon --exec yarn parse",
+    "parse": "run-s parse:*",
+    "parse:tokens": "node ./scripts/parseToken.js"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.es.js"
+}

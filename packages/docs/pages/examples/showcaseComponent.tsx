@@ -28,7 +28,6 @@ const ShowcaseComponent: FunctionComponent<ShowcaseComponentProps> = ({
       <div
         style={{
           marginBottom: '10px',
-          fontSize: '12px',
         }}
       >
         <Text>{componentName}</Text>
