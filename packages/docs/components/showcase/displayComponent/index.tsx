@@ -13,7 +13,7 @@ const ComponentWrapperDiv = styled('div', {
   border: '1px dashed rgba(5, 24, 41, 0.2)',
   padding: '20px',
   borderRadius: '7px',
-  backgroundColor: 'transparent',
+  background: '$PrimaryLight',
 })
 
 const FlexDiv = styled('div', {

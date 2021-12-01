@@ -23,7 +23,10 @@ const Footer = styled('div', {
 const SideMenuPage = () => {
   return (
     <Page>
-      <ShowcaseComponent title="Menu">
+      <ShowcaseComponent
+        title="Sidebar Menu"
+        description="A navigational list of primary sections combined into a single interactive area."
+      >
         <SideMenu>
           <HeaderDiv>
             <AviatoLogo />
