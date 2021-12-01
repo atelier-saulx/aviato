@@ -9,6 +9,12 @@ const ComponentWrapperDiv = styled('div', {
   flexFlow: 'column nowrap',
   padding: '20px',
   width: '100%',
+  maxWidth: '860px',
+  margin: '0 auto',
+})
+
+const PaddingTop = styled('div', {
+  paddingTop: '20px',
 })
 
 export type DisplayComponentProps = {
@@ -24,16 +30,20 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
   return (
     <ComponentWrapperDiv>
       <Conditional test={Boolean(title)}>
-        <NextTitle weight="Bold" paddingLeft={20}>
+        <NextTitle weight="Bold" size="ExtraLarge" paddingLeft={20}>
           {title}
         </NextTitle>
       </Conditional>
 
       <Conditional test={Boolean(description)}>
-        <NextParagraph paddingLeft={20}>{description}</NextParagraph>
+        <NextParagraph paddingLeft={20} color="Secondary">
+          {description}
+        </NextParagraph>
       </Conditional>
 
-      <DisplayComponent>{children}</DisplayComponent>
+      <PaddingTop>
+        <DisplayComponent>{children}</DisplayComponent>
+      </PaddingTop>
     </ComponentWrapperDiv>
   )
 }

@@ -18,6 +18,9 @@ export const BaseText = styled('p', {
       Large: {
         fontSize: '21px',
       },
+      ExtraLarge: {
+        fontSize: '32px',
+      },
     },
 
     weight: {
