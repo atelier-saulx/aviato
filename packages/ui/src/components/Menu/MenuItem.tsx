@@ -48,21 +48,6 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-const ArrowWrapper = styled('div', {
-  marginRight: '4px',
-
-  variants: {
-    state: {
-      close: {
-        transform: 'rotate(0deg)',
-      },
-      open: {
-        transform: 'rotate(90deg)',
-      },
-    },
-  },
-})
-
 export type MenuItemProps = {
   title: string
   onClick?: (value) => void
@@ -111,9 +96,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
         <Column>
           <Conditional test={isCollapsable}>
             <span>
-              <ArrowWrapper state={isOpen ? 'open' : 'close'}>
-                <Arrow />
-              </ArrowWrapper>
+              <Arrow state={isOpen ? 'open' : 'closed'} />
             </span>
           </Conditional>
           <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
