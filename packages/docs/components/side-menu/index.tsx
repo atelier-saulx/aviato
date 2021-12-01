@@ -46,6 +46,10 @@ const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
           route: '/components/menu',
         },
         {
+          title: 'Checkbox',
+          route: '/components/checkbox',
+        },
+        {
           title: 'Text',
           route: '/components/text',
         },

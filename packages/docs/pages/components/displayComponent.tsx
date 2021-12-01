@@ -14,7 +14,7 @@ const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   let actualComponentName = ''
 
   React.Children.forEach(children, (child) => {
-    actualComponentName = (child as any)?.type.name
+    actualComponentName = (child as any)?.type?.name ?? ''
   })
 
   const componentName = name ?? actualComponentName

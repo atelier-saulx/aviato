@@ -1,17 +1,11 @@
 import React, { FunctionComponent, useState } from 'react'
 import { styled } from '~/theme'
+import { CheckedIcon } from './temp'
 
 const CheckboxContainer = styled('div', {
   display: 'inline-block',
   verticalAlign: 'middle',
   margin: '6px',
-})
-
-/* Temporary Icon */
-const Icon = styled('svg', {
-  fill: 'none',
-  stroke: 'white',
-  strokeWidth: '3px',
 })
 
 const StyledCheckbox = styled('div', {
@@ -61,12 +55,11 @@ const StyledCheckbox = styled('div', {
 
 type CheckboxVariant = 'medium' | 'primary' | 'secondary'
 type CheckboxSize = 'small' | 'medium'
-type CheckboxDisabled = true | false
 
 export type CheckboxProps = {
   variant?: CheckboxVariant
   size?: CheckboxSize
-  disabled?: CheckboxDisabled
+  disabled?: boolean
 }
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
@@ -90,11 +83,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
         size={size}
         disabled={disabled}
       >
-        {clickable && (
-          <Icon viewBox="0 0 24 24">
-            <polyline points="20 6 9 17 4 12" />
-          </Icon>
-        )}
+        {clickable && <CheckedIcon />}
       </StyledCheckbox>
     </CheckboxContainer>
   )
