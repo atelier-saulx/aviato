@@ -20,9 +20,9 @@ const CheckboxPage = () => {
 
       <DisplayComponent name="Checkbox">
         <Checkbox size="medium" />
+        <Checkbox disabled={true} />
         <Checkbox size="small" />
-        <Checkbox disabled="disabled" />
-        <Checkbox size="small" disabled="disabled" />
+        <Checkbox size="small" disabled={true} />
       </DisplayComponent>
     </div>
   )

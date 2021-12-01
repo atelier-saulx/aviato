@@ -1,6 +1,31 @@
 import React, { FunctionComponent } from 'react'
 
-export const CheckedIcon: FunctionComponent = () => {
+type CheckedIconProps = {
+  size?: 'small' | 'medium'
+}
+
+export const CheckedIcon: FunctionComponent<CheckedIconProps> = ({
+  size = 'small',
+}) => {
+  if (size === 'small') {
+    return (
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M4.43254 7.87189L2.78033 6.21968C2.48743 5.92679 2.01256 5.92679 1.71967 6.21968C1.42678 6.51257 1.42678 6.98745 1.71967 7.28034L3.96966 9.53032C4.2876 9.84826 4.81193 9.81692 5.08972 9.46336L10.3397 3.46339C10.5956 3.13769 10.539 2.6662 10.2133 2.41029C9.88763 2.15438 9.41614 2.21096 9.16023 2.53666L4.43254 7.87189Z"
+          fill="white"
+        />
+      </svg>
+    )
+  }
+
   return (
     <svg
       width="16"

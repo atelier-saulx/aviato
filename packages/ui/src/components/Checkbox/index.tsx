@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { styled } from '~/theme'
 import { CheckedIcon } from './temp'
 
@@ -16,6 +22,7 @@ const StyledCheckbox = styled('div', {
   padding: '1px',
   boxSizing: 'border-box',
   border: '1px solid $OtherOutline',
+
   '&:hover': {
     backgroundColor: '$ActionMainHover',
   },
@@ -41,43 +48,52 @@ const StyledCheckbox = styled('div', {
       unchecked: {},
     },
     disabled: {
-      disabled: {
+      true: {
         backgroundColor: '$ActionDisabledBackground !important',
         cursor: 'not-allowed',
         '&:hover': {
           backgroundColor: '$ActionDisabledContent',
         },
       },
-      enabled: {},
+      false: {},
     },
   },
 })
 
 type CheckboxSize = 'small' | 'medium'
-type CheckboxState = 'checked' | 'unchecked'
-type CheckboxEnabled = 'disabled' | 'enabled'
 
 export type CheckboxProps = {
   size?: CheckboxSize
-  state?: CheckboxState
-  disabled?: CheckboxEnabled
+  checked?: boolean
+  disabled?: boolean
 }
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
   size = 'medium',
-  disabled = 'enabled',
+  checked = false,
+  disabled = false,
 }) => {
   const [isChecked, setIsChecked] = useState(false)
+
+  useEffect(() => {
+    setIsChecked(checked)
+  }, [checked])
+
+  const handleClick = useCallback(() => {
+    if (!disabled) return setIsChecked(!isChecked)
+  }, [isChecked])
 
   return (
     <CheckboxContainer>
       <StyledCheckbox
-        onClick={() => setIsChecked(!isChecked)}
+        onClick={handleClick}
         size={size}
         state={isChecked ? 'checked' : 'unchecked'}
         disabled={disabled}
       >
-        {isChecked && <CheckedIcon />}
+        <Conditional test={isChecked}>
+          <CheckedIcon size={size} />
+        </Conditional>
       </StyledCheckbox>
     </CheckboxContainer>
   )
