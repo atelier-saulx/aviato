@@ -20,8 +20,9 @@ const StyledDiv = styled('div', {
   justifyContent: 'center',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  background: '#eeeeee',
+  background: '#FFF',
   padding: '12px',
+  borderRadius: '4px',
 })
 
 const HooksPage = () => {
