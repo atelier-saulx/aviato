@@ -15,16 +15,13 @@ const CheckboxPage = () => {
           paddingLeft: 20,
         }}
       >
-        <Title fontWeight="bold">Checkbox</Title>
+        <Title>Checkbox</Title>
       </div>
 
       <DisplayComponent name="Checkbox">
-        <Checkbox disabled variant="medium" />
-        <Checkbox variant="medium" />
-        <Checkbox variant="primary" />
-        <Checkbox variant="secondary" />
-        <Checkbox variant="primary" size="small" />
-        <Checkbox variant="secondary" size="small" />
+        <Checkbox size="medium" />
+        <Checkbox size="small" />
+        <Checkbox disabled />
       </DisplayComponent>
     </div>
   )

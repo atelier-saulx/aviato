@@ -3,36 +3,24 @@ import { styled } from '~/theme'
 import { CheckedIcon } from './temp'
 
 const CheckboxContainer = styled('div', {
-  display: 'inline-block',
   verticalAlign: 'middle',
   margin: '6px',
 })
 
 const StyledCheckbox = styled('div', {
-  backgroundColor: '$primary',
+  backgroundColor: 'white',
   borderRadius: '4px',
   cursor: 'pointer',
   width: '20px',
   height: '20px',
-  padding: '2px',
+  padding: '1px',
   boxSizing: 'border-box',
-  border: '1px solid $primary',
+  border: '1px solid $OtherOutline',
+  '&:hover': {
+    backgroundColor: '$ActionMainHover',
+  },
 
   variants: {
-    type: {
-      medium: {
-        backgroundColor: 'rgba(15,16,19,0.06)',
-        border: '1px solid rgba(15,16,19,0.12)',
-      },
-      primary: {
-        backgroundColor: '$primary',
-        border: '1px solid $primary',
-      },
-      secondary: {
-        backgroundColor: 'rgba(15,16,19,0.12)',
-        border: '1px solid rgba(15,16,19,0.26)',
-      },
-    },
     size: {
       small: {
         width: '16px',
@@ -43,45 +31,52 @@ const StyledCheckbox = styled('div', {
         height: '20px',
       },
     },
+    state: {
+      checked: {
+        backgroundColor: '$PrimaryMain',
+
+        '&:hover': {
+          backgroundColor: '$PrimaryMainHover',
+        },
+      },
+      unchecked: {},
+    },
     disabled: {
-      true: {
-        backgroundColor: '#f9f9f9',
-        border: '1px solid rgba(15,16,19,0.06)',
-        cursor: 'not-allowed',
+      disabled: {
+        backgroundColor: 'yellow',
       },
     },
   },
 })
 
-type CheckboxVariant = 'medium' | 'primary' | 'secondary'
 type CheckboxSize = 'small' | 'medium'
+type CheckboxState = 'checked' | 'unchecked'
+type CheckBoxDisabled = 'disabled'
 
 export type CheckboxProps = {
-  variant?: CheckboxVariant
   size?: CheckboxSize
-  disabled?: boolean
+  state?: CheckboxState
+  disabled?: CheckBoxDisabled
 }
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
-  variant = 'medium',
   size = 'medium',
-  disabled = false,
 }) => {
-  const [check, setCheck] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
 
+  let disabledBox = false
   let clickable = false
 
-  if (check && !disabled) {
+  if (isChecked && !disabledBox) {
     clickable = true
   }
 
   return (
     <CheckboxContainer>
       <StyledCheckbox
-        onClick={() => setCheck(!check)}
-        type={variant}
+        onClick={() => setIsChecked(!isChecked)}
         size={size}
-        disabled={disabled}
+        state={isChecked ? 'checked' : 'unchecked'}
       >
         {clickable && <CheckedIcon />}
       </StyledCheckbox>
