@@ -69,6 +69,7 @@ export type MenuItemProps = {
   isCollapsable?: boolean
   isActive?: boolean
   isHeader?: boolean
+  startOpen?: boolean
 }
 
 type CoercedClick = () => void
@@ -79,11 +80,12 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   children,
   isActive = false,
   isHeader = false,
+  startOpen = true,
   ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
   const isCollapsable = !isHeader && hasChildren
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(startOpen)
   const click = (onClick as CoercedClick) ?? noop
 
   const toggle = () => {

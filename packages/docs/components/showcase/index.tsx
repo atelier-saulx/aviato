@@ -4,6 +4,14 @@ import { NextTitle, NextParagraph } from '../text'
 
 import { styled, Conditional } from '@aviato/ui'
 
+const ComponentWrapperDiv = styled('div', {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  padding: '20px',
+  width: '100%',
+  background: '$PrimaryLight',
+})
+
 export type DisplayComponentProps = {
   title?: string
   description?: string
@@ -15,7 +23,7 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
   children,
 }) => {
   return (
-    <div>
+    <ComponentWrapperDiv>
       <Conditional test={Boolean(title)}>
         <NextTitle weight="Bold" paddingLeft={20}>
           {title}
@@ -27,6 +35,6 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
       </Conditional>
 
       <DisplayComponent>{children}</DisplayComponent>
-    </div>
+    </ComponentWrapperDiv>
   )
 }

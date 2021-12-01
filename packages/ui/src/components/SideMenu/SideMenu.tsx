@@ -9,6 +9,7 @@ const StyledDiv = styled('div', {
   minWidth: 224,
   overflowX: 'hidden',
   backgroundColor: '#F7F7F8',
+  padding: 8,
 })
 
 export const SideMenu: FunctionComponent = ({ children }) => {
