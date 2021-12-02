@@ -42,6 +42,7 @@ const StyledCheckbox = styled('div', {
     state: {
       true: {
         backgroundColor: '$PrimaryMain',
+
         '&:hover': {
           backgroundColor: '$PrimaryMainHover',
         },
@@ -51,6 +52,7 @@ const StyledCheckbox = styled('div', {
       true: {
         backgroundColor: '$ActionDisabledBackground !important',
         cursor: 'not-allowed',
+
         '&:hover': {
           backgroundColor: '$ActionDisabledContent',
         },
