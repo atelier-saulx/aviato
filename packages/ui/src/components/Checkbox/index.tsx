@@ -50,9 +50,9 @@ const StyledCheckbox = styled('div', {
   },
 })
 
-export type CheckboxSize = 'small' | 'medium'
+type CheckboxSize = 'small' | 'medium'
 
-export type CheckboxProps = DefaultProps & {
+type CheckboxProps = DefaultProps & {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean

@@ -6,7 +6,7 @@ const StyledColumn = styled('div', {
   flexDirection: 'column',
 })
 
-export type ColumnProps = DefaultProps & {}
+type ColumnProps = DefaultProps & {}
 
 export const Column = React.forwardRef<
   ElementRef<typeof StyledColumn>,

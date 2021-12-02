@@ -6,7 +6,7 @@ const StyledRow = styled('div', {
   flexDirection: 'row',
 })
 
-export type RowProps = DefaultProps & {}
+type RowProps = DefaultProps & {}
 
 export const Row = React.forwardRef<ElementRef<typeof StyledRow>, RowProps>(
   ({ children, ...properties }, forwardedRef) => {

@@ -12,7 +12,7 @@ const StyledDivider = styled('div', {
 
 type DividerType = 'horizontal' | 'vertical'
 
-export type DividerProps = DefaultProps & {
+type DividerProps = DefaultProps & {
   type?: DividerType
 }
 

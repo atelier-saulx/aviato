@@ -48,13 +48,13 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-export type MenuItemProps = {
+type MenuItemProps = {
   title: string
-  onClick?: (value) => void
   isCollapsable?: boolean
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
+  onClick?: (value) => void
 }
 
 export const MenuItem = React.forwardRef<

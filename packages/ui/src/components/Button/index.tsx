@@ -69,7 +69,7 @@ const StyledButton = styled('button', {
 
 type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
-export type ButtonProps = DefaultProps & {
+type ButtonProps = DefaultProps & {
   variant?: ButtonVariant
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
