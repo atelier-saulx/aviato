@@ -27,4 +27,6 @@ export const {
 
 export const darkTheme = createTheme(LightTheme)
 
+export { globalReset } from './reset'
+
 export { classNames } from './utils'

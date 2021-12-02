@@ -1,4 +1,3 @@
-import '../styles/reset.css'
 import '../styles/font.css'
 
 import React from 'react'
@@ -7,9 +6,11 @@ import Head from 'next/head'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, MenuWidthConstant } from '@aviato/ui'
+import { styled, MenuWidthConstant, globalCss, globalReset } from '@aviato/ui'
 
 initialiseApplication()
+
+globalCss(globalReset)()
 
 const MainWrapper = styled('div', {
   display: 'flex',
