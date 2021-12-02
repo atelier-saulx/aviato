@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
-import { styled, classNames } from '~/theme'
+import { styled, classNames, css } from '~/theme'
 import { Arrow } from './assets'
 import { PlaceholderIcon } from './temp'
 
-const StyledButton = styled('button', {
+const MenuItemStyles = css({
   width: '100%',
   padding: '4px 12px',
   border: 'none',
@@ -38,6 +38,8 @@ const StyledButton = styled('button', {
   },
 })
 
+const StyledMenuItem = styled('button', MenuItemStyles)
+
 const StyledChild = styled('div', {
   paddingTop: '2px',
 })
@@ -57,7 +59,6 @@ const IconWrapper = styled('div', {
 export type MenuItemProps = {
   title: string
   icon?: 'box' | 'paper' | 'circle'
-  isCollapsable?: boolean
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
@@ -66,7 +67,7 @@ export type MenuItemProps = {
 
 export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
-  onClick,
+  onClick = noop,
   children,
   isActive = false,
   isHeader = false,
@@ -77,19 +78,18 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
   const [isOpen, setIsOpen] = useState(startOpen)
-  const click = onClick ?? noop
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     if (!isCollapsible) {
-      return click()
+      return onClick()
     }
 
     if (hasChildren) {
       setIsOpen(!isOpen)
     } else {
-      click()
+      onClick()
     }
-  }
+  }, [isCollapsible, isOpen, hasChildren])
 
   const classes = classNames({
     isActive,
@@ -98,7 +98,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
 
   return (
     <>
-      <StyledButton onClick={toggle} className={classes} {...remainingProps}>
+      <StyledMenuItem onClick={toggle} className={classes} {...remainingProps}>
         <Column>
           <Conditional test={icon}>
             <IconWrapper>
@@ -116,7 +116,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
             {title}
           </Text>
         </Column>
-      </StyledButton>
+      </StyledMenuItem>
 
       <Conditional test={isOpen}>
         <StyledChild onClick={(event) => event.stopPropagation()}>

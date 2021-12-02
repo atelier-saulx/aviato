@@ -1,26 +1,29 @@
 import React, { FunctionComponent } from 'react'
 
-import { BaseText } from '../styles'
-import { BaseTextProps } from '../types'
+import { StyledText } from './styles'
+import { FontWeight, FontColor, FontSize } from './types'
 
-export type TextProps = BaseTextProps & {}
+export type TextProps = {
+  weight?: FontWeight
+  color?: FontColor
+  size?: FontSize
+}
 
 export const Text: FunctionComponent<TextProps> = ({
   children,
-  value = '',
   weight = 'Regular',
   color = 'Primary',
   size = 'Small',
 }) => {
   return (
-    <BaseText
+    <StyledText
       as="p"
       weight={weight}
       color={color}
       size={size}
       alignment="start"
     >
-      {children ?? value}
-    </BaseText>
+      {children}
+    </StyledText>
   )
 }
