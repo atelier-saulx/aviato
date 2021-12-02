@@ -1,8 +1,7 @@
 import { styled } from '~/theme'
 import React, { FunctionComponent, useCallback, MouseEventHandler } from 'react'
 import { noop } from '@aviato/utils'
-
-import TempAvatar from './temp'
+import { Avatar } from '../Avatar'
 
 const StyledProfileMenuItem = styled('button', {
   alignItems: 'center',
@@ -40,7 +39,7 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
 
   return (
     <StyledProfileMenuItem onClick={handleClick}>
-      <TempAvatar />
+      <Avatar username={userName} />
       {children}
       {userName}
     </StyledProfileMenuItem>
