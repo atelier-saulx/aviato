@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 
-import { StyledText } from '../styles'
-import { FontWeight, FontColor, FontSize } from '../types'
+import { StyledText } from './styles'
+import { FontWeight, FontColor, FontSize } from './types'
 
 export type TextProps = {
   weight?: FontWeight

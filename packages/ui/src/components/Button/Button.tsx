@@ -1,8 +1,8 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import { css, DefaultProps, styled } from '~/theme'
 import { noop } from '@aviato/utils'
 
-const StyledButton = styled('button', {
+const ButtonStyles = css({
   alignItems: 'flex-start',
   borderRadius: '4px',
   cursor: 'pointer',
@@ -66,6 +66,8 @@ const StyledButton = styled('button', {
     },
   },
 })
+
+const StyledButton = styled('button', ButtonStyles)
 
 type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
