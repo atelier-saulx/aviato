@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
@@ -52,18 +52,16 @@ const Column = styled('div', {
 
 export type MenuItemProps = {
   title: string
-  onClick?: (value) => void
   isCollapsable?: boolean
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
+  onClick?: (value) => void
 }
-
-type CoercedClick = () => void
 
 export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
-  onClick,
+  onClick = noop,
   children,
   isActive = false,
   isHeader = false,
@@ -73,19 +71,18 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
   const [isOpen, setIsOpen] = useState(startOpen)
-  const click = (onClick as CoercedClick) ?? noop
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     if (!isCollapsible) {
-      return click()
+      return onClick()
     }
 
     if (hasChildren) {
       setIsOpen(!isOpen)
     } else {
-      click()
+      onClick()
     }
-  }
+  }, [isCollapsible, isOpen, hasChildren])
 
   const classes = classNames({
     isActive,
