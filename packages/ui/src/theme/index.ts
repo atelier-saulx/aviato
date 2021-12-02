@@ -3,6 +3,7 @@ import { CSSProperties } from 'react'
 import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './theme.light'
+import { theme as DarkTheme } from './theme.dark'
 
 const createdConfig = createStitches({
   theme: LightTheme,
@@ -25,7 +26,7 @@ export const {
   theme,
 } = createdConfig
 
-export const darkTheme = createTheme(LightTheme)
+export const darkTheme = createTheme(DarkTheme)
 
 export { globalReset } from './reset'
 
