@@ -93,8 +93,12 @@ const HooksPage = () => {
     ])
 
     return (
-      <StyledDiv>
-        <Text>🚀 Press one of the below key-bindings ...</Text>
+      <StyledDiv
+        css={{
+          alignItems: 'center',
+        }}
+      >
+        <Text>Press one of the below key-bindings:</Text>
 
         <BigSpacer />
 
