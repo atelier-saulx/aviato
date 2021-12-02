@@ -8,7 +8,7 @@ const RowDiv = styled('div', {
 
 export type RowProps = DefaultProps & {}
 
-export const Column = React.forwardRef<ElementRef<typeof RowDiv>, RowProps>(
+export const Row = React.forwardRef<ElementRef<typeof RowDiv>, RowProps>(
   ({ children, ...props }, forwardedRef) => {
     return (
       <RowDiv {...props} ref={forwardedRef}>

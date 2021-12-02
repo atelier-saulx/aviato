@@ -1,5 +1,5 @@
-import { styled } from '~/theme'
-import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
+import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
+import { DefaultProps, styled } from '~/theme'
 import { noop } from '@aviato/utils'
 
 const StyledButton = styled('button', {
@@ -73,25 +73,31 @@ const StyledButton = styled('button', {
 
 type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
-export type ButtonProps = {
+export type ButtonProps = DefaultProps & {
   variant?: ButtonVariant
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({
-  variant = 'filled',
-  disabled = false,
-  onClick = noop,
-  children,
-  ...remainingProps
-}) => {
+export const Button = React.forwardRef<
+  ElementRef<typeof StyledButton>,
+  ButtonProps
+>((properties, forwardedRef) => {
+  const {
+    variant = 'filled',
+    disabled = false,
+    onClick = noop,
+    children,
+    ...remainingProps
+  } = properties
+
   const handleClick = useCallback(() => {
     onClick()
   }, [])
 
   return (
     <StyledButton
+      ref={forwardedRef}
       type={variant}
       disabled={disabled}
       onClick={handleClick}
@@ -100,4 +106,4 @@ export const Button: FunctionComponent<ButtonProps> = ({
       {children}
     </StyledButton>
   )
-}
+})
