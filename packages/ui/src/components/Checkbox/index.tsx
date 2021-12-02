@@ -9,11 +9,6 @@ import { Conditional } from '~/components/Utilities/Conditional'
 import { styled } from '~/theme'
 import { CheckedIcon, IndeterminateIcon } from './temp'
 
-const CheckboxContainer = styled('div', {
-  verticalAlign: 'middle',
-  margin: '6px',
-})
-
 const StyledCheckbox = styled('div', {
   backgroundColor: 'white',
   borderRadius: '4px',
@@ -91,21 +86,19 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   }, [isChecked])
 
   return (
-    <CheckboxContainer>
-      <StyledCheckbox
-        onClick={handleClick}
-        size={size}
-        state={isChecked}
-        disabled={isDisabled}
-      >
-        <Conditional test={isChecked && isIndeterminate}>
-          <IndeterminateIcon size={size} />
-        </Conditional>
+    <StyledCheckbox
+      onClick={handleClick}
+      size={size}
+      state={isChecked}
+      disabled={isDisabled}
+    >
+      <Conditional test={isChecked && isIndeterminate}>
+        <IndeterminateIcon size={size} />
+      </Conditional>
 
-        <Conditional test={isChecked && !isIndeterminate}>
-          <CheckedIcon size={size} />
-        </Conditional>
-      </StyledCheckbox>
-    </CheckboxContainer>
+      <Conditional test={isChecked && !isIndeterminate}>
+        <CheckedIcon size={size} />
+      </Conditional>
+    </StyledCheckbox>
   )
 }
