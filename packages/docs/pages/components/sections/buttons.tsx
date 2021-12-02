@@ -4,9 +4,9 @@ import { NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
 
-const Wrapper = styled('div', {
+const Column = styled('div', {
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   flexWrap: 'wrap',
 })
 
@@ -31,8 +31,8 @@ const ButtonsPage = () => {
   return (
     <Page>
       <ShowcaseComponent title="Buttons">
-        <Wrapper>
-          <NextText weight="Bold">Regular</NextText>
+        <Column>
+          <NextText weight="Bold">Normal</NextText>
           <Row>
             <Button variant="filled">Button</Button>
             <Spacer />
@@ -57,7 +57,7 @@ const ButtonsPage = () => {
               Button
             </Button>
           </Row>
-        </Wrapper>
+        </Column>
       </ShowcaseComponent>
     </Page>
   )

@@ -4,9 +4,9 @@ import { NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
 
-const Wrapper = styled('div', {
+const Column = styled('div', {
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   flexWrap: 'wrap',
 })
 
@@ -22,15 +22,26 @@ const BigSpacer = styled('div', {
   height: 20,
 })
 
+const Spacer = styled('div', {
+  width: 6,
+  height: 6,
+})
+
 const ShowCaseCheckboxes = ({ size }: { size: CheckboxSize }) => {
   return (
     <>
       <Checkbox size={size} />
+      <Spacer />
       <Checkbox size={size} indeterminate={true} />
+      <Spacer />
       <Checkbox size={size} checked={true} />
+      <Spacer />
       <Checkbox size={size} indeterminate={true} checked={true} />
+      <Spacer />
       <Checkbox size={size} disabled={true} indeterminate={true} />
+      <Spacer />
       <Checkbox size={size} disabled={true} checked={true} />
+      <Spacer />
       <Checkbox
         size={size}
         disabled={true}
@@ -45,7 +56,7 @@ const CheckboxPage = () => {
   return (
     <Page>
       <ShowcaseComponent title="Checkboxes">
-        <Wrapper>
+        <Column>
           <NextText weight="Bold">Medium</NextText>
           <Row>
             <ShowCaseCheckboxes size="medium" />
@@ -57,7 +68,7 @@ const CheckboxPage = () => {
           <Row>
             <ShowCaseCheckboxes size="small" />
           </Row>
-        </Wrapper>
+        </Column>
       </ShowcaseComponent>
     </Page>
   )
