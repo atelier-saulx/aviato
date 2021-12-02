@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 
-import { BaseText } from '../styles'
+import { StyledText } from '../styles'
 import { FontWeight, FontColor, FontSize } from '../types'
 
 export type TitleProps = {
@@ -16,7 +16,7 @@ export const Title: FunctionComponent<TitleProps> = ({
   size = 'Medium',
 }) => {
   return (
-    <BaseText
+    <StyledText
       as="h1"
       weight={weight}
       color={color}
@@ -24,6 +24,6 @@ export const Title: FunctionComponent<TitleProps> = ({
       alignment="start"
     >
       {children}
-    </BaseText>
+    </StyledText>
   )
 }

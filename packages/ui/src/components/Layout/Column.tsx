@@ -1,7 +1,7 @@
 import React, { ElementRef } from 'react'
 import { styled, DefaultProps } from '~/theme'
 
-const ColumnDiv = styled('div', {
+const StyledColumn = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 })
@@ -9,12 +9,12 @@ const ColumnDiv = styled('div', {
 export type ColumnProps = DefaultProps & {}
 
 export const Column = React.forwardRef<
-  ElementRef<typeof ColumnDiv>,
+  ElementRef<typeof StyledColumn>,
   ColumnProps
 >(({ children, ...properties }, forwardedRef) => {
   return (
-    <ColumnDiv {...properties} ref={forwardedRef}>
+    <StyledColumn {...properties} ref={forwardedRef}>
       {children}
-    </ColumnDiv>
+    </StyledColumn>
   )
 })

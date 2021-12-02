@@ -5,7 +5,7 @@ import { noop } from '@aviato/utils'
 import { styled, classNames } from '~/theme'
 import { Arrow } from './assets'
 
-const StyledButton = styled('button', {
+const StyledMenuItem = styled('button', {
   width: '100%',
   padding: '4px 12px',
   border: 'none',
@@ -92,7 +92,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
 
   return (
     <>
-      <StyledButton onClick={toggle} className={classes} {...remainingProps}>
+      <StyledMenuItem onClick={toggle} className={classes} {...remainingProps}>
         <Column>
           <Conditional test={isCollapsible}>
             <span>
@@ -101,7 +101,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
           </Conditional>
           <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
         </Column>
-      </StyledButton>
+      </StyledMenuItem>
 
       <Conditional test={isOpen}>
         <StyledChild onClick={(event) => event.stopPropagation()}>

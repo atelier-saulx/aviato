@@ -1,7 +1,7 @@
 import React, { ElementRef } from 'react'
 import { styled, DefaultProps } from '~/theme'
 
-const DividerDiv = styled('div', {
+const StyledDivider = styled('div', {
   variants: {
     type: {
       horizontal: {},
@@ -17,8 +17,8 @@ export type DividerProps = DefaultProps & {
 }
 
 export const Divider = React.forwardRef<
-  ElementRef<typeof DividerDiv>,
+  ElementRef<typeof StyledDivider>,
   DividerProps
 >((properties, forwardedRef) => {
-  return <DividerDiv {...properties} ref={forwardedRef} />
+  return <StyledDivider {...properties} ref={forwardedRef} />
 })
