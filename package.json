@@ -24,9 +24,9 @@
   "scripts": {
     "start": "yarn watch",
     "build-start": "yarn build && yarn watch",
-    "watch": "yarn workspace @aviato/build action watch 'tokens,utils,ui,docs'",
-    "lint": "yarn workspace @aviato/build action lint 'tokens,utils,ui,docs'",
-    "build": "yarn workspace @aviato/build action build 'tokens,utils,ui,docs'",
+    "watch": "yarn workspace @aviato/build action watch 'utils,ui,docs'",
+    "lint": "yarn workspace @aviato/build action lint 'utils,ui,docs'",
+    "build": "yarn workspace @aviato/build action build 'utils,ui,docs'",
     "postbuild": "yarn lint",
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
   },
