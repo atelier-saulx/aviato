@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { styled, CSSParameters } from '~/theme'
+import { styled, StitchedCSS } from '~/theme'
 
 const RowDiv = styled('div', {
   display: 'flex',
@@ -7,7 +7,7 @@ const RowDiv = styled('div', {
 })
 
 export type RowProps = {
-  css?: CSSParameters
+  css?: StitchedCSS
 }
 
 export const Row: FunctionComponent<RowProps> = ({ children, css = {} }) => {

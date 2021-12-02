@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { styled, CSSParameters } from '~/theme'
+import { styled, StitchedCSS } from '~/theme'
 
 const ColumnDiv = styled('div', {
   display: 'flex',
@@ -7,7 +7,7 @@ const ColumnDiv = styled('div', {
 })
 
 export type ColumnProps = {
-  css?: CSSParameters
+  css?: StitchedCSS
 }
 
 export const Column: FunctionComponent<ColumnProps> = ({

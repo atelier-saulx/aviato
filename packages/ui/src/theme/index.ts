@@ -1,4 +1,5 @@
 import { createStitches } from '@stitches/react'
+import { CSSProperties } from 'react'
 
 import { theme as LightTheme } from './theme.light'
 
@@ -6,7 +7,12 @@ const createdConfig = createStitches({
   theme: LightTheme,
 })
 
-export type CSSParameters = typeof css
+export type StitchedCSS = typeof css
+
+export interface DefaultProps {
+  css?: StitchedCSS
+  style?: CSSProperties
+}
 
 export const {
   config,

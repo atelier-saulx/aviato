@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { CSSParameters, styled } from '~/theme'
+import { StitchedCSS, styled } from '~/theme'
 
 const DividerDiv = styled('div', {
   variants: {
@@ -14,7 +14,7 @@ type DividerType = 'horizontal' | 'vertical'
 
 export type DividerProps = {
   type?: DividerType
-  css?: CSSParameters
+  css?: StitchedCSS
 }
 
 export const Divider: FunctionComponent<DividerProps> = ({
