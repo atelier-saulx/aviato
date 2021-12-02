@@ -45,8 +45,8 @@ const Home: NextPage = () => {
       </NextText>
 
       <NextText>
-        The goal with Aviato is to facilitate building high-quality CMS or DMS
-        interfaces and web apps.
+        Aviato is meant to be used to facilitate building high-quality CMS or
+        DMS interfaces and web applications.
       </NextText>
 
       <BigSpacer />

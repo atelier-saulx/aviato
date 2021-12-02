@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react'
-import { styled } from '~/theme'
+import React, { ElementRef } from 'react'
+import { DefaultProps, styled } from '~/theme'
 
 export const MenuWidthConstant = 224
 
-const StyledDiv = styled('div', {
+const StyledSideMenu = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
@@ -11,9 +11,26 @@ const StyledDiv = styled('div', {
   minWidth: MenuWidthConstant,
   overflowX: 'hidden',
   backgroundColor: '#F7F7F8',
-  padding: 8,
 })
 
-export const SideMenu: FunctionComponent = ({ children }) => {
-  return <StyledDiv>{children}</StyledDiv>
-}
+type SideMenuProps = DefaultProps & {}
+
+export const SideMenu = React.forwardRef<
+  ElementRef<typeof StyledSideMenu>,
+  SideMenuProps
+>((properties, forwardedRef) => {
+  const { children, css, ...remainingProps } = properties
+
+  return (
+    <StyledSideMenu
+      ref={forwardedRef}
+      css={{
+        padding: 8,
+        ...css,
+      }}
+      {...remainingProps}
+    >
+      {children}
+    </StyledSideMenu>
+  )
+})

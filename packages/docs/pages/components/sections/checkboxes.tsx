@@ -1,21 +1,8 @@
 import { styled } from '@aviato/ui'
-import { Checkbox, CheckboxSize } from '@aviato/ui'
+import { Checkbox, CheckboxSize, Row, Column } from '@aviato/ui'
 import { NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
-
-const Column = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  flexWrap: 'wrap',
-})
-
-const Row = styled('div', {
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'no-wrap',
-})
 
 const BigSpacer = styled('div', {
   width: '100%',

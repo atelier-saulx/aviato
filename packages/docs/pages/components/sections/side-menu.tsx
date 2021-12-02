@@ -20,9 +20,14 @@ const Footer = styled('div', {
   padding: '8px',
 })
 
+const SmallSpacer = styled('div', {
+  width: '100%',
+  height: 10,
+})
+
 const Spacer = styled('div', {
-  width: 6,
-  height: 6,
+  width: '100%',
+  height: 20,
 })
 
 const SideMenuPage = () => {
@@ -38,19 +43,25 @@ const SideMenuPage = () => {
           </HeaderDiv>
 
           <Menu>
-            <MenuItem title="Content model" />
-            <MenuItem title="Publications" />
-            <MenuItem title="Media" />
+            <MenuItem title="Content model" icon="box" />
+            <MenuItem title="Publications" icon="paper" />
+            <MenuItem title="Media" icon="circle" />
+
+            <Spacer />
 
             <MenuItem title="Settings">
               <MenuItem title="Profile" />
               <MenuItem title="User management" />
             </MenuItem>
 
+            <SmallSpacer />
+
             <MenuItem title="Statistics" startOpen={false}>
               <MenuItem title="Overview" />
               <MenuItem title="Details" />
             </MenuItem>
+
+            <SmallSpacer />
 
             <MenuItem title="Test-suite" startOpen={false}>
               <MenuItem title="Perform test" />
@@ -59,9 +70,7 @@ const SideMenuPage = () => {
           </Menu>
 
           <Footer>
-            <ProfileMenuItem userName="Maarten de Winter">
-              <Spacer />
-            </ProfileMenuItem>
+            <ProfileMenuItem userName="Maarten de Winter" />
           </Footer>
         </SideMenu>
       </ShowcaseComponent>

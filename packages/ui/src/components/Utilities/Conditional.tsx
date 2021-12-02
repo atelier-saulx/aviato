@@ -10,10 +10,10 @@ type ConditionalProps = {
  * Render children conditionally, if test returns true.
  */
 export const Conditional: FunctionComponent<ConditionalProps> = ({
-  test,
+  test: isTruthy,
   children,
 }) => {
-  if (test) {
+  if (isTruthy) {
     return <>{children}</>
   }
 

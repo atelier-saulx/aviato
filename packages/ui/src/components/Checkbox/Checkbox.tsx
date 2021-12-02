@@ -1,12 +1,7 @@
+import React, { ElementRef, useCallback, useEffect, useState } from 'react'
 import { noop } from '@aviato/utils'
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { styled } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 import { CheckedIcon, IndeterminateIcon } from './temp'
 
 const StyledCheckbox = styled('div', {
@@ -57,19 +52,25 @@ const StyledCheckbox = styled('div', {
 
 export type CheckboxSize = 'small' | 'medium'
 
-export type CheckboxProps = {
+export type CheckboxProps = DefaultProps & {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
   indeterminate?: boolean
 }
 
-export const Checkbox: FunctionComponent<CheckboxProps> = ({
-  size = 'medium',
-  checked = false,
-  disabled = false,
-  indeterminate = false,
-}) => {
+export const Checkbox = React.forwardRef<
+  ElementRef<typeof StyledCheckbox>,
+  CheckboxProps
+>((properties, forwardedRef) => {
+  const {
+    size = 'medium',
+    checked = false,
+    disabled = false,
+    indeterminate = false,
+    ...remainingProps
+  } = properties
+
   const [isChecked, setIsChecked] = useState(checked)
   const [isDisabled, setIsDisbled] = useState(disabled)
   const [isIndeterminate, setIsIndeterminate] = useState(indeterminate)
@@ -82,15 +83,18 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
 
   const handleClick = useCallback(() => {
     if (disabled) return noop()
+
     setIsChecked(!isChecked)
-  }, [isChecked])
+  }, [isChecked, isDisabled, isIndeterminate])
 
   return (
     <StyledCheckbox
+      ref={forwardedRef}
       onClick={handleClick}
       size={size}
       state={isChecked}
       disabled={isDisabled}
+      {...remainingProps}
     >
       <Conditional test={isChecked && isIndeterminate}>
         <IndeterminateIcon size={size} />
@@ -101,4 +105,4 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
       </Conditional>
     </StyledCheckbox>
   )
-}
+})

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { styled } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 
 const StyledAvatar = styled('div', {
   alignItems: 'center',
@@ -47,7 +47,7 @@ export function initialsFromUsername(fullUserName) {
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = {
+export type AvatarProps = DefaultProps & {
   size?: AvatarSize
   username?: string
 }
@@ -55,8 +55,11 @@ export type AvatarProps = {
 export const Avatar: FunctionComponent<AvatarProps> = ({
   username = '',
   size = 'medium',
+  ...remainingProps
 }) => {
   return (
-    <StyledAvatar size={size}>{initialsFromUsername(username)}</StyledAvatar>
+    <StyledAvatar size={size} {...remainingProps}>
+      {initialsFromUsername(username)}
+    </StyledAvatar>
   )
 }

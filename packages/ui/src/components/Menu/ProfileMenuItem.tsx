@@ -30,7 +30,6 @@ export type ProfileMenuItemProps = {
 
 export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   onClick = noop,
-  children,
   userName = '',
 }) => {
   const handleClick = useCallback(() => {
@@ -39,8 +38,12 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
 
   return (
     <StyledProfileMenuItem onClick={handleClick}>
-      <Avatar username={userName} />
-      {children}
+      <Avatar
+        username={userName}
+        css={{
+          marginRight: 6,
+        }}
+      />
       {userName}
     </StyledProfileMenuItem>
   )

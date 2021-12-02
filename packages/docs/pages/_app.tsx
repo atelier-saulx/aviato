@@ -16,6 +16,7 @@ const MainWrapper = styled('div', {
   width: '100vw',
   height: '100vh',
   overflowX: 'hidden',
+  overflowY: 'hidden',
 })
 
 const ContentWrapper = styled('div', {
@@ -24,6 +25,7 @@ const ContentWrapper = styled('div', {
   height: '100vh',
   padding: '10px',
   overflowX: 'hidden',
+  overflowY: 'scroll',
 })
 
 const MainApplication = ({ Component, pageProps }: AppProps) => {
