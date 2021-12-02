@@ -119,19 +119,48 @@ const HooksPage = () => {
   }
 
   const LongPressButton = () => {
+    const [wasPressed, setWasPressed] = useState({
+      onLongPress: false,
+    })
+
+    useEffect(() => {
+      let timer = setTimeout(
+        () =>
+          setWasPressed({
+            onLongPress: false,
+          }),
+        1200
+      )
+
+      return () => clearTimeout(timer)
+    }, [wasPressed])
+
     const onLongPress = () => {
       log.global.info('Long-press after pressing for 300ms.')
+
+      setWasPressed({
+        onLongPress: true,
+      })
     }
 
     const longPressEvent = useLongPress(onLongPress)
 
     return (
-      <Button
-        onClick={() => log.global.info('Regular press on release.')}
-        {...longPressEvent}
-      >
-        Button
-      </Button>
+      <>
+        <StyledDiv
+          css={{
+            width: 230,
+            alignItems: 'center',
+          }}
+        >
+          <Button {...longPressEvent}>Long-press Button</Button>
+
+          <Conditional test={wasPressed.onLongPress}>
+            <BigSpacer />
+            <Text>🪄 User pressed long time!</Text>
+          </Conditional>
+        </StyledDiv>
+      </>
     )
   }
 
