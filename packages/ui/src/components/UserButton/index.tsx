@@ -4,18 +4,23 @@ import { noop } from '@aviato/utils'
 
 import TempAvatar from './temp'
 
-const StyledUserButton = styled('div', {
+const StyledUserButton = styled('button', {
   alignItems: 'center',
-  backgroundColor: 'yellow',
+  backgroundColor: 'transparent',
   borderRadius: '4px',
   cursor: 'pointer',
   display: 'flex',
-  fontWeight: '500',
+  width: '100%',
+  fontWeight: '600',
+  fontSize: '15px',
   height: '40px',
   padding: '8px',
 
   '&:hover': {
     backgroundColor: '$ActionMainHover',
+  },
+  '&:active': {
+    backgroundColor: '$ActionMainSelected',
   },
 })
 

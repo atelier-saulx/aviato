@@ -1,4 +1,4 @@
-import { styled } from '@aviato/ui'
+import { styled, UserButton } from '@aviato/ui'
 import { SideMenu, Menu, MenuItem, Text } from '@aviato/ui'
 
 import { Page, ShowcaseComponent, AviatoLogo } from '../../../components'
@@ -54,7 +54,9 @@ const SideMenuPage = () => {
           </Menu>
 
           <Footer>
-            <Text>User button goes here</Text>
+            <Text>
+              <UserButton userName="Maarten de Winter" />
+            </Text>
           </Footer>
         </SideMenu>
       </ShowcaseComponent>
