@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react'
-import { StitchedCSS, styled } from '~/theme'
+import React, { ElementRef } from 'react'
+import { styled, DefaultProps } from '~/theme'
 
 const DividerDiv = styled('div', {
   variants: {
@@ -12,21 +12,13 @@ const DividerDiv = styled('div', {
 
 type DividerType = 'horizontal' | 'vertical'
 
-export type DividerProps = {
+export type DividerProps = DefaultProps & {
   type?: DividerType
-  css?: StitchedCSS
 }
 
-export const Divider: FunctionComponent<DividerProps> = ({
-  type = 'horizontal',
-  css = {},
-}) => {
-  return (
-    <DividerDiv
-      type={type}
-      css={{
-        ...css,
-      }}
-    />
-  )
-}
+export const Divider = React.forwardRef<
+  ElementRef<typeof DividerDiv>,
+  DividerProps
+>(({ ...props }, forwardedRef) => {
+  return <DividerDiv {...props} ref={forwardedRef} />
+})

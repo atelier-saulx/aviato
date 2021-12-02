@@ -1,26 +1,20 @@
-import React, { FunctionComponent } from 'react'
-import { styled, StitchedCSS } from '~/theme'
+import React, { ElementRef } from 'react'
+import { styled, DefaultProps } from '~/theme'
 
 const ColumnDiv = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 })
 
-export type ColumnProps = {
-  css?: StitchedCSS
-}
+export type ColumnProps = DefaultProps & {}
 
-export const Column: FunctionComponent<ColumnProps> = ({
-  children,
-  css = {},
-}) => {
+export const Column = React.forwardRef<
+  ElementRef<typeof ColumnDiv>,
+  ColumnProps
+>(({ children, ...props }, forwardedRef) => {
   return (
-    <ColumnDiv
-      css={{
-        ...css,
-      }}
-    >
+    <ColumnDiv {...props} ref={forwardedRef}>
       {children}
     </ColumnDiv>
   )
-}
+})
