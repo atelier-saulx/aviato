@@ -1,10 +1,23 @@
 import React, { FunctionComponent } from 'react'
 import { styled } from '~/theme'
 
-const DividerDiv = styled('div', {})
+const DividerDiv = styled('div', {
+  variants: {
+    type: {
+      horizontal: {},
+      vertical: {},
+    },
+  },
+})
 
-export type DividerProps = {}
+type DividerType = 'horizontal' | 'vertical'
 
-export const Divider: FunctionComponent<DividerProps> = () => {
-  return <DividerDiv />
+export type DividerProps = {
+  type?: DividerType
+}
+
+export const Divider: FunctionComponent<DividerProps> = ({
+  type = 'horizontal',
+}) => {
+  return <DividerDiv type={type} />
 }

@@ -3,7 +3,7 @@ import { styled } from '~/theme'
 
 export const MenuWidthConstant = 224
 
-const StyledDiv = styled('div', {
+const MenuDiv = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
@@ -11,9 +11,15 @@ const StyledDiv = styled('div', {
   minWidth: MenuWidthConstant,
   overflowX: 'hidden',
   backgroundColor: '#F7F7F8',
-  padding: 8,
 })
 
-export const SideMenu: FunctionComponent = ({ children }) => {
-  return <StyledDiv>{children}</StyledDiv>
+export type SideMenuProps = {
+  padding?: number
+}
+
+export const SideMenu: FunctionComponent<SideMenuProps> = ({
+  children,
+  padding = 8,
+}) => {
+  return <MenuDiv css={{ padding }}>{children}</MenuDiv>
 }
