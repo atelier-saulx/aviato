@@ -54,9 +54,7 @@ const SideMenuPage = () => {
           </Menu>
 
           <Footer>
-            <Text>
-              <UserButton userName="Maarten de Winter" />
-            </Text>
+            <UserButton userName="Maarten de Winter" />
           </Footer>
         </SideMenu>
       </ShowcaseComponent>
