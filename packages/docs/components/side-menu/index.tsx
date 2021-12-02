@@ -48,10 +48,6 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
           title: 'Hooks',
           route: '/components/hooks',
         },
-        {
-          title: 'UserButton',
-          route: '/components/userbutton',
-        },
       ],
     },
   ]

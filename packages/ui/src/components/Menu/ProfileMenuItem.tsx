@@ -4,7 +4,7 @@ import { noop } from '@aviato/utils'
 
 import TempAvatar from './temp'
 
-const StyledUserButton = styled('button', {
+const StyledProfileMenuItem = styled('button', {
   alignItems: 'center',
   backgroundColor: 'transparent',
   borderRadius: '4px',
@@ -24,12 +24,12 @@ const StyledUserButton = styled('button', {
   },
 })
 
-export type UserButtonProps = {
+export type ProfileMenuItemProps = {
   userName?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export const UserButton: FunctionComponent<UserButtonProps> = ({
+export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   onClick = noop,
   children,
   userName = '',
@@ -39,10 +39,10 @@ export const UserButton: FunctionComponent<UserButtonProps> = ({
   }, [])
 
   return (
-    <StyledUserButton onClick={handleClick}>
+    <StyledProfileMenuItem onClick={handleClick}>
       <TempAvatar />
       {children}
       {userName}
-    </StyledUserButton>
+    </StyledProfileMenuItem>
   )
 }
