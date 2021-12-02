@@ -35,7 +35,7 @@ const BigSpacer = styled('div', {
 
 const HooksPage = () => {
   const IdleDiv = () => {
-    const isIdle = useIdle(500)
+    const isIdle = useIdle(1500)
 
     return (
       <StyledDiv>
@@ -45,29 +45,29 @@ const HooksPage = () => {
   }
 
   const HotKeyDiv = () => {
-    const [wasHotkeyPressed, setWasHotkeyPressed] = useState({
+    const [wasPressed, setWasPressed] = useState({
       onEnter: false,
       onCtrlK: false,
       onComplex: false,
     })
 
     const onEnter = () => {
-      setWasHotkeyPressed({
-        ...wasHotkeyPressed,
+      setWasPressed({
+        ...wasPressed,
         onEnter: true,
       })
     }
 
     const onCtrlK = () => {
-      setWasHotkeyPressed({
-        ...wasHotkeyPressed,
+      setWasPressed({
+        ...wasPressed,
         onCtrlK: true,
       })
     }
 
     const onComplex = () => {
-      setWasHotkeyPressed({
-        ...wasHotkeyPressed,
+      setWasPressed({
+        ...wasPressed,
         onComplex: true,
       })
     }
@@ -75,21 +75,21 @@ const HooksPage = () => {
     useEffect(() => {
       let timer = setTimeout(
         () =>
-          setWasHotkeyPressed({
+          setWasPressed({
             onCtrlK: false,
             onEnter: false,
             onComplex: false,
           }),
-        1500
+        1200
       )
 
       return () => clearTimeout(timer)
-    }, [wasHotkeyPressed])
+    }, [wasPressed])
 
     useHotkeys([
       ['enter', () => onEnter()],
       ['ctrl+K', () => onCtrlK()],
-      ['ctrl+shift+b', () => onComplex()],
+      ['ctrl+shift+K', () => onComplex()],
     ])
 
     return (
@@ -98,21 +98,21 @@ const HooksPage = () => {
 
         <BigSpacer />
 
-        <Text weight="Medium">`Enter` or `Ctrl+K` or `Ctrl+Shift+B`!</Text>
+        <Text weight="Medium">`Enter` or `Ctrl+K` or `Ctrl+Shift+K`!</Text>
 
-        <Conditional test={wasHotkeyPressed.onEnter}>
+        <Conditional test={wasPressed.onEnter}>
           <BigSpacer />
           <Text>🪄 Enter was pressed!</Text>
         </Conditional>
 
-        <Conditional test={wasHotkeyPressed.onCtrlK}>
+        <Conditional test={wasPressed.onCtrlK}>
           <BigSpacer />
           <Text>🪄 Ctrl+K was pressed!</Text>
         </Conditional>
 
-        <Conditional test={wasHotkeyPressed.onComplex}>
+        <Conditional test={wasPressed.onComplex}>
           <BigSpacer />
-          <Text>🪄 Ctrl+Shift+B was pressed!</Text>
+          <Text>🪄 Ctrl+Shift+K was pressed!</Text>
         </Conditional>
       </StyledDiv>
     )
