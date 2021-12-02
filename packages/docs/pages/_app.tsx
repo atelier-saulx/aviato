@@ -16,6 +16,7 @@ const MainWrapper = styled('div', {
   width: '100vw',
   height: '100vh',
   overflowX: 'hidden',
+  overflowY: 'hidden',
 })
 
 const ContentWrapper = styled('div', {
