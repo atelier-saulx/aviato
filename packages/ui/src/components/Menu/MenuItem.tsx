@@ -4,6 +4,7 @@ import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { styled, classNames } from '~/theme'
 import { Arrow } from './assets'
+import { PlaceholderIcon } from './temp'
 
 const StyledButton = styled('button', {
   width: '100%',
@@ -48,16 +49,20 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
+const IconWrapper = styled('div', {
+  padding: '4px',
+  paddingRight: '8px',
+})
+
 export type MenuItemProps = {
   title: string
-  onClick?: (value) => void
+  icon?: 'box' | 'paper' | 'circle'
   isCollapsable?: boolean
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
+  onClick?: (value) => void
 }
-
-type CoercedClick = () => void
 
 export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
@@ -66,12 +71,13 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   isActive = false,
   isHeader = false,
   startOpen = true,
+  icon,
   ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
   const [isOpen, setIsOpen] = useState(startOpen)
-  const click = (onClick as CoercedClick) ?? noop
+  const click = onClick ?? noop
 
   const toggle = () => {
     if (!isCollapsible) {
@@ -94,12 +100,21 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
     <>
       <StyledButton onClick={toggle} className={classes} {...remainingProps}>
         <Column>
+          <Conditional test={icon}>
+            <IconWrapper>
+              <PlaceholderIcon type={icon} />
+            </IconWrapper>
+          </Conditional>
+
           <Conditional test={isCollapsible}>
             <span>
               <Arrow state={isOpen ? 'open' : 'closed'} />
             </span>
           </Conditional>
-          <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
+
+          <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
+            {title}
+          </Text>
         </Column>
       </StyledButton>
 
