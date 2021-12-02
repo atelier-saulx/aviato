@@ -1,8 +1,7 @@
 import { styled } from '~/theme'
 import React, { FunctionComponent, useCallback, MouseEventHandler } from 'react'
 import { noop } from '@aviato/utils'
-
-import TempAvatar from './temp'
+import { Avatar } from '../Avatar'
 
 const StyledProfileMenuItem = styled('button', {
   alignItems: 'center',
@@ -13,15 +12,6 @@ const StyledProfileMenuItem = styled('button', {
   width: '100%',
   fontWeight: '600',
   fontSize: '15px',
-  height: '40px',
-  padding: '8px',
-
-  '&:hover': {
-    backgroundColor: '$ActionMainHover',
-  },
-  '&:active': {
-    backgroundColor: '$ActionMainSelected',
-  },
 })
 
 export type ProfileMenuItemProps = {
@@ -31,7 +21,6 @@ export type ProfileMenuItemProps = {
 
 export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   onClick = noop,
-  children,
   userName = '',
 }) => {
   const handleClick = useCallback(() => {
@@ -40,8 +29,12 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
 
   return (
     <StyledProfileMenuItem onClick={handleClick}>
-      <TempAvatar />
-      {children}
+      <Avatar
+        username={userName}
+        css={{
+          marginRight: 6,
+        }}
+      />
       {userName}
     </StyledProfileMenuItem>
   )

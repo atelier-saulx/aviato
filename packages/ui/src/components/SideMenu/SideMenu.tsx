@@ -19,10 +19,17 @@ export const SideMenu = React.forwardRef<
   ElementRef<typeof StyledSideMenu>,
   SideMenuProps
 >((properties, forwardedRef) => {
-  const { children, ...remainingProps } = properties
+  const { children, css, ...remainingProps } = properties
 
   return (
-    <StyledSideMenu ref={forwardedRef} {...remainingProps}>
+    <StyledSideMenu
+      ref={forwardedRef}
+      css={{
+        padding: 8,
+        ...css,
+      }}
+      {...remainingProps}
+    >
       {children}
     </StyledSideMenu>
   )

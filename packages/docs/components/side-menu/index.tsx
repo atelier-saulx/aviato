@@ -37,6 +37,10 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
           route: '/components/side-menu',
         },
         {
+          title: 'Avatars',
+          route: '/components/avatar',
+        },
+        {
           title: 'Buttons',
           route: '/components/buttons',
         },
