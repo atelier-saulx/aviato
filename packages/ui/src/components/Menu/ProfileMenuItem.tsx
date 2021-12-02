@@ -12,15 +12,6 @@ const StyledProfileMenuItem = styled('button', {
   width: '100%',
   fontWeight: '600',
   fontSize: '15px',
-  height: '40px',
-  padding: '8px',
-
-  '&:hover': {
-    backgroundColor: '$ActionMainHover',
-  },
-  '&:active': {
-    backgroundColor: '$ActionMainSelected',
-  },
 })
 
 export type ProfileMenuItemProps = {
