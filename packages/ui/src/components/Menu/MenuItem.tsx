@@ -2,10 +2,10 @@ import React, { FunctionComponent, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
-import { styled, classNames } from '~/theme'
+import { styled, classNames, css } from '~/theme'
 import { Arrow } from './assets'
 
-const StyledMenuItem = styled('button', {
+const MenuItemStyles = css({
   width: '100%',
   padding: '4px 12px',
   border: 'none',
@@ -36,6 +36,8 @@ const StyledMenuItem = styled('button', {
     },
   },
 })
+
+const StyledMenuItem = styled('button', MenuItemStyles)
 
 const StyledChild = styled('div', {
   paddingTop: '2px',
