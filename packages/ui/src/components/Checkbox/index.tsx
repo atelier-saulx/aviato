@@ -21,7 +21,6 @@ const StyledCheckbox = styled('div', {
   width: '20px',
   height: '20px',
   padding: '1px',
-  boxSizing: 'border-box',
   border: '1px solid $OtherOutline',
 
   '&:hover': {
