@@ -1,6 +1,6 @@
+import type * as Stitches from '@stitches/react'
 import { createStitches } from '@stitches/react'
 import { CSSProperties } from 'react'
-import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './theme.light'
 
@@ -25,13 +25,4 @@ export const {
   theme,
 } = createdConfig
 
-type ClassName = {
-  [key: string]: boolean
-}
-
-export function classNames(classes: ClassName) {
-  return Object.entries(classes)
-    .filter(([, value]) => value)
-    .map(([key]) => key)
-    .join(' ')
-}
+export { classNames } from './utils'
