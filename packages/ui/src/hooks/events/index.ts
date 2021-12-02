@@ -1,3 +1,4 @@
+export * from './useHotKeys'
 export * from './useHover'
 export * from './useIdle'
 export * from './useLongPress'

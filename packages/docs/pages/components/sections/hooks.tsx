@@ -1,8 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 
 import { log } from '@aviato/utils'
-import { styled, useIdle } from '@aviato/ui'
-import { Button, Text } from '@aviato/ui'
+
 import { Page } from '../../../components'
 
 import {
@@ -11,7 +10,11 @@ import {
   useLongPress,
   useMouseWheel,
   useWindowSize,
+  useHotkeys,
+  useIdle,
 } from '@aviato/ui'
+
+import { styled, Button, Text, Conditional } from '@aviato/ui'
 
 import { ShowcaseComponent } from '../../../components'
 
@@ -32,6 +35,59 @@ const HooksPage = () => {
     return (
       <StyledDiv>
         <Text>User is idle: {isIdle ? 'Yes 😴' : 'Nope ⚡️'}</Text>
+      </StyledDiv>
+    )
+  }
+
+  const HotKeyDiv = () => {
+    const [wasHotkeyPressed, setWasHotkeyPressed] = useState({
+      onCtrlK: false,
+      onEnter: false,
+    })
+
+    const onCtrlK = () => {
+      setWasHotkeyPressed({
+        ...wasHotkeyPressed,
+        onCtrlK: true,
+      })
+    }
+
+    const onEnter = () => {
+      setWasHotkeyPressed({
+        ...wasHotkeyPressed,
+        onEnter: true,
+      })
+    }
+
+    useEffect(() => {
+      let timer = setTimeout(
+        () =>
+          setWasHotkeyPressed({
+            onCtrlK: false,
+            onEnter: false,
+          }),
+        1000
+      )
+
+      return () => clearTimeout(timer)
+    }, [wasHotkeyPressed])
+
+    useHotkeys([
+      ['ctrl+K', () => onCtrlK()],
+      ['enter', () => onEnter()],
+    ])
+
+    return (
+      <StyledDiv>
+        <Text>🪝 Press Enter or CTRL+K!</Text>
+
+        <Conditional test={wasHotkeyPressed.onCtrlK}>
+          <Text>🪄 Ctrl+K was pressed!</Text>
+        </Conditional>
+
+        <Conditional test={wasHotkeyPressed.onEnter}>
+          <Text>🪄 Enter was pressed!</Text>
+        </Conditional>
       </StyledDiv>
     )
   }
@@ -98,6 +154,10 @@ const HooksPage = () => {
     <Page>
       <ShowcaseComponent title="Idle Hook">
         <IdleDiv />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Hotkeys">
+        <HotKeyDiv />
       </ShowcaseComponent>
 
       <ShowcaseComponent title="Long-press Hook">
