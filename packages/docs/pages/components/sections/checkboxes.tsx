@@ -1,5 +1,5 @@
 import { styled } from '@aviato/ui'
-import { Checkbox } from '@aviato/ui'
+import { Checkbox, CheckboxSize } from '@aviato/ui'
 import { NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -22,10 +22,24 @@ const BigSpacer = styled('div', {
   height: 20,
 })
 
-const Spacer = styled('div', {
-  width: 6,
-  height: 6,
-})
+const ShowCaseCheckboxes = ({ size }: { size: CheckboxSize }) => {
+  return (
+    <>
+      <Checkbox size={size} />
+      <Checkbox size={size} indeterminate={true} />
+      <Checkbox size={size} checked={true} />
+      <Checkbox size={size} indeterminate={true} checked={true} />
+      <Checkbox size={size} disabled={true} indeterminate={true} />
+      <Checkbox size={size} disabled={true} checked={true} />
+      <Checkbox
+        size={size}
+        disabled={true}
+        indeterminate={true}
+        checked={true}
+      />
+    </>
+  )
+}
 
 const CheckboxPage = () => {
   return (
@@ -34,31 +48,14 @@ const CheckboxPage = () => {
         <Wrapper>
           <NextText weight="Bold">Medium</NextText>
           <Row>
-            <Checkbox />
-            <Checkbox checked={true} />
-            <Checkbox indeterminate={true} />
-            <Checkbox indeterminate={true} checked={true} />
-            <Checkbox disabled={true} indeterminate={true} />
-            <Checkbox disabled={true} checked={true} />
-            <Checkbox disabled={true} indeterminate={true} checked={true} />
+            <ShowCaseCheckboxes size="medium" />
           </Row>
 
           <BigSpacer />
 
           <NextText weight="Bold">Small</NextText>
           <Row>
-            <Checkbox size="small" />
-            <Checkbox size="small" checked={true} />
-            <Checkbox size="small" indeterminate={true} />
-            <Checkbox size="small" indeterminate={true} checked={true} />
-            <Checkbox size="small" disabled={true} indeterminate={true} />
-            <Checkbox size="small" disabled={true} checked={true} />
-            <Checkbox
-              size="small"
-              disabled={true}
-              indeterminate={true}
-              checked={true}
-            />
+            <ShowCaseCheckboxes size="small" />
           </Row>
         </Wrapper>
       </ShowcaseComponent>

@@ -59,7 +59,7 @@ const StyledCheckbox = styled('div', {
   },
 })
 
-type CheckboxSize = 'small' | 'medium'
+export type CheckboxSize = 'small' | 'medium'
 
 export type CheckboxProps = {
   size?: CheckboxSize
