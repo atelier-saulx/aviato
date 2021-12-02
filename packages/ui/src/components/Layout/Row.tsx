@@ -1,13 +1,23 @@
 import React, { FunctionComponent } from 'react'
-import { styled } from '~/theme'
+import { styled, CSSParameters } from '~/theme'
 
 const RowDiv = styled('div', {
   display: 'flex',
   flexDirection: 'row',
 })
 
-export type RowProps = {}
+export type RowProps = {
+  css?: CSSParameters
+}
 
-export const Row: FunctionComponent<RowProps> = () => {
-  return <RowDiv />
+export const Row: FunctionComponent<RowProps> = ({ children, css = {} }) => {
+  return (
+    <RowDiv
+      css={{
+        ...css,
+      }}
+    >
+      {children}
+    </RowDiv>
+  )
 }

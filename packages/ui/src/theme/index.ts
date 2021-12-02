@@ -6,6 +6,8 @@ const createdConfig = createStitches({
   theme: LightTheme,
 })
 
+export type CSSParameters = typeof css
+
 export const {
   config,
   createTheme,
