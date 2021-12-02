@@ -26,3 +26,7 @@ const ButtonAndText = () => {
   );
 };
 ```
+
+---
+
+To read more behind the scenes, go to [Methodologies](./methodologies.md).
