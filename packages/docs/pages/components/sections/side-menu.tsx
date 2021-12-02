@@ -20,6 +20,11 @@ const Footer = styled('div', {
   padding: '8px',
 })
 
+const Spacer = styled('div', {
+  width: 6,
+  height: 6,
+})
+
 const SideMenuPage = () => {
   return (
     <Page>
@@ -54,7 +59,9 @@ const SideMenuPage = () => {
           </Menu>
 
           <Footer>
-            <ProfileMenuItem userName="Maarten de Winter" />
+            <ProfileMenuItem userName="Maarten de Winter">
+              <Spacer />
+            </ProfileMenuItem>
           </Footer>
         </SideMenu>
       </ShowcaseComponent>

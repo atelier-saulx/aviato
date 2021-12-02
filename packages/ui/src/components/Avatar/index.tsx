@@ -10,7 +10,6 @@ const StyledAvatar = styled('div', {
   fontSize: '9px',
   fontWeight: '600',
   lineHeight: '24px',
-  marginRight: '8px',
   height: '24px',
   width: '24px',
   justifyContent: 'center',

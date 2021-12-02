@@ -15,6 +15,7 @@ const Row = styled('div', {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'no-wrap',
+  alignItems: 'center',
 })
 
 const BigSpacer = styled('div', {
@@ -34,10 +35,11 @@ const AvatarPage = () => {
         <Column>
           <NextText weight="Bold">Avatar</NextText>
           <Row>
-            <Avatar size="small" username="Morton Olsen-Broesby" />
-            <Avatar size="medium" username="Maarten de Winter" />
-            <Avatar size="large" username="Yves Beer" />
+            <Avatar size="small" username="Morten Olsen-Broesby" />
             <Spacer />
+            <Avatar size="medium" username="Maarten de Winter" />
+            <Spacer />
+            <Avatar size="large" username="Yves Beer" />
           </Row>
         </Column>
       </ShowcaseComponent>
