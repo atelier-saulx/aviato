@@ -4,6 +4,7 @@ import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { styled, classNames, css } from '~/theme'
 import { Arrow } from './assets'
+import { PlaceholderIcon } from './temp'
 
 const MenuItemStyles = css({
   width: '100%',
@@ -50,9 +51,14 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
+const IconWrapper = styled('div', {
+  padding: '4px',
+  paddingRight: '8px',
+})
+
 export type MenuItemProps = {
   title: string
-  isCollapsable?: boolean
+  icon?: 'box' | 'paper' | 'circle'
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
@@ -66,6 +72,7 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
   isActive = false,
   isHeader = false,
   startOpen = true,
+  icon,
   ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
@@ -93,12 +100,21 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
     <>
       <StyledMenuItem onClick={toggle} className={classes} {...remainingProps}>
         <Column>
+          <Conditional test={icon}>
+            <IconWrapper>
+              <PlaceholderIcon type={icon} />
+            </IconWrapper>
+          </Conditional>
+
           <Conditional test={isCollapsible}>
             <span>
               <Arrow state={isOpen ? 'open' : 'closed'} />
             </span>
           </Conditional>
-          <Text weight={isHeader ? 'Bold' : 'Regular'}>{title}</Text>
+
+          <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
+            {title}
+          </Text>
         </Column>
       </StyledMenuItem>
 
