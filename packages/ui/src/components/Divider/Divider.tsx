@@ -2,10 +2,18 @@ import React, { ElementRef } from 'react'
 import { styled, DefaultProps } from '~/theme'
 
 const StyledDivider = styled('div', {
+  background: '$OtherDivider',
+
   variants: {
     type: {
-      horizontal: {},
-      vertical: {},
+      horizontal: {
+        width: '100%',
+        height: '1px',
+      },
+      vertical: {
+        height: '100%',
+        width: '1px',
+      },
     },
   },
 })

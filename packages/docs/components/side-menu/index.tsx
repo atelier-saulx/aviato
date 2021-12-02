@@ -88,7 +88,11 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   })
 
   return (
-    <SideMenu>
+    <SideMenu
+      css={{
+        borderRight: '1px solid $OtherDivider',
+      }}
+    >
       <HeaderDiv onClick={() => router.push({ pathname: '/' })}>
         <AviatoLogo />
       </HeaderDiv>
