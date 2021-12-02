@@ -24,6 +24,7 @@ const ContentWrapper = styled('div', {
   height: '100vh',
   padding: '10px',
   overflowX: 'hidden',
+  overflowY: 'scroll',
 })
 
 const MainApplication = ({ Component, pageProps }: AppProps) => {
