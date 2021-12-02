@@ -25,4 +25,6 @@ export const {
   theme,
 } = createdConfig
 
+export const darkTheme = createTheme(LightTheme)
+
 export { classNames } from './utils'
