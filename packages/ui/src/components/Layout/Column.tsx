@@ -11,9 +11,9 @@ export type ColumnProps = DefaultProps & {}
 export const Column = React.forwardRef<
   ElementRef<typeof ColumnDiv>,
   ColumnProps
->(({ children, ...props }, forwardedRef) => {
+>(({ children, ...properties }, forwardedRef) => {
   return (
-    <ColumnDiv {...props} ref={forwardedRef}>
+    <ColumnDiv {...properties} ref={forwardedRef}>
       {children}
     </ColumnDiv>
   )

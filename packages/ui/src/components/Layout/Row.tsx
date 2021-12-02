@@ -9,9 +9,9 @@ const RowDiv = styled('div', {
 export type RowProps = DefaultProps & {}
 
 export const Row = React.forwardRef<ElementRef<typeof RowDiv>, RowProps>(
-  ({ children, ...props }, forwardedRef) => {
+  ({ children, ...properties }, forwardedRef) => {
     return (
-      <RowDiv {...props} ref={forwardedRef}>
+      <RowDiv {...properties} ref={forwardedRef}>
         {children}
       </RowDiv>
     )

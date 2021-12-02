@@ -19,6 +19,6 @@ export type DividerProps = DefaultProps & {
 export const Divider = React.forwardRef<
   ElementRef<typeof DividerDiv>,
   DividerProps
->(({ ...props }, forwardedRef) => {
-  return <DividerDiv {...props} ref={forwardedRef} />
+>((properties, forwardedRef) => {
+  return <DividerDiv {...properties} ref={forwardedRef} />
 })
