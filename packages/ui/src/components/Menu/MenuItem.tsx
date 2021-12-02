@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { ElementRef, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
@@ -57,21 +57,24 @@ export type MenuItemProps = {
   startOpen?: boolean
 }
 
-type CoercedClick = () => void
+export const MenuItem = React.forwardRef<
+  ElementRef<typeof StyledMenuItem>,
+  MenuItemProps
+>((properties, forwardedRef) => {
+  const {
+    title,
+    onClick,
+    children,
+    isActive = false,
+    isHeader = false,
+    startOpen = true,
+    ...remainingProps
+  } = properties
 
-export const MenuItem: FunctionComponent<MenuItemProps> = ({
-  title,
-  onClick,
-  children,
-  isActive = false,
-  isHeader = false,
-  startOpen = true,
-  ...remainingProps
-}) => {
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
   const [isOpen, setIsOpen] = useState(startOpen)
-  const click = (onClick as CoercedClick) ?? noop
+  const click = onClick ?? noop
 
   const toggle = () => {
     if (!isCollapsible) {
@@ -92,7 +95,12 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
 
   return (
     <>
-      <StyledMenuItem onClick={toggle} className={classes} {...remainingProps}>
+      <StyledMenuItem
+        ref={forwardedRef}
+        onClick={toggle}
+        className={classes}
+        {...remainingProps}
+      >
         <Column>
           <Conditional test={isCollapsible}>
             <span>
@@ -110,4 +118,4 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
       </Conditional>
     </>
   )
-}
+})
