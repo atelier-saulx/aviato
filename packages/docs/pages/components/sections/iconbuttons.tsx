@@ -1,5 +1,5 @@
-import { styled } from '@aviato/ui'
-import { Button } from '@aviato/ui'
+import { IconButton, styled } from '@aviato/ui'
+
 import { NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -27,18 +27,18 @@ const Spacer = styled('div', {
   height: 6,
 })
 
-const ButtonsPage = () => {
+const IconButtonsPage = () => {
   return (
     <Page>
-      <ShowcaseComponent title="Buttons">
+      <ShowcaseComponent title="Icon Buttons">
         <Column>
-          <NextText weight="Bold">Normal</NextText>
+          <NextText weight="Bold">Icon Buttons</NextText>
           <Row>
-            <Button variant="filled">Button</Button>
+            <IconButton />
             <Spacer />
-            <Button variant="outlined">Button</Button>
+            <IconButton variant="outlined" />
             <Spacer />
-            <Button variant="transparent">Button</Button>
+            <IconButton variant="transparent" />
             <Spacer />
           </Row>
 
@@ -46,17 +46,12 @@ const ButtonsPage = () => {
 
           <NextText weight="Bold">Disabled</NextText>
           <Row>
-            <Button disabled variant="filled">
-              Button
-            </Button>
+            <IconButton disabled />
             <Spacer />
-            <Button disabled variant="outlined">
-              Button
-            </Button>
+            <IconButton variant="outlined" disabled />
             <Spacer />
-            <Button disabled variant="transparent">
-              Button
-            </Button>
+            <IconButton variant="transparent" disabled />
+            <Spacer />
           </Row>
         </Column>
       </ShowcaseComponent>
@@ -64,4 +59,4 @@ const ButtonsPage = () => {
   )
 }
 
-export default ButtonsPage
+export default IconButtonsPage
