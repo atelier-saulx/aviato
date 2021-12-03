@@ -40,6 +40,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
           content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
         />
         <meta property="og:title" content="Aviato-UI" key="title" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
     )
   }
@@ -58,6 +59,17 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export default process.env.PASSWORD_PROTECT
-  ? withPasswordProtect(MainApplication)
+const hasPasswordProtection = process.env.PASSWORD_PROTECT || false
+
+const ExportedApplication = hasPasswordProtection
+  ? withPasswordProtect(MainApplication, {
+      loginComponentProps: {
+        logo: 'https://i.ibb.co/b1B1ZyT/android-chrome-512x512.png',
+        backUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        buttonBackgroundColor: '#3D53E7',
+        buttonColor: 'white',
+      },
+    })
   : MainApplication
+
+export default ExportedApplication
