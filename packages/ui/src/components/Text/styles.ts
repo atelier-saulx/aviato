@@ -1,6 +1,6 @@
-import { styled } from '~/theme'
+import { css } from '~/theme'
 
-export const StyledText = styled('p', {
+export const TextStyles = css({
   display: 'block',
   lineHeight: '1.5',
   margin: 0,

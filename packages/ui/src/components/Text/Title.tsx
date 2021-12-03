@@ -1,7 +1,10 @@
 import React, { ElementRef } from 'react'
+import { styled } from '~/theme'
+import { TextStyles } from './styles'
 
-import { StyledText } from './styles'
 import { FontWeight, FontColor, FontSize } from './types'
+
+const StyledTitle = styled('h1', TextStyles)
 
 export type TitleProps = {
   weight?: FontWeight
@@ -10,7 +13,7 @@ export type TitleProps = {
 }
 
 export const Title = React.forwardRef<
-  ElementRef<typeof StyledText>,
+  ElementRef<typeof StyledTitle>,
   TitleProps
 >((properties, forwardedRef) => {
   const {
@@ -22,8 +25,7 @@ export const Title = React.forwardRef<
   } = properties
 
   return (
-    <StyledText
-      as="h1"
+    <StyledTitle
       ref={forwardedRef}
       weight={weight}
       color={color}
@@ -32,6 +34,6 @@ export const Title = React.forwardRef<
       {...remainingProps}
     >
       {children}
-    </StyledText>
+    </StyledTitle>
   )
 })

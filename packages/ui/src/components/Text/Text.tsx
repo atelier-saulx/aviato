@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from 'react'
+import { styled } from '~/theme'
+import { TextStyles } from './styles'
 
-import { StyledText } from './styles'
 import { FontWeight, FontColor, FontSize } from './types'
+
+const StyledText = styled('p', TextStyles)
 
 export type TextProps = {
   weight?: FontWeight
@@ -16,13 +19,7 @@ export const Text: FunctionComponent<TextProps> = ({
   size = 'Small',
 }) => {
   return (
-    <StyledText
-      as="p"
-      weight={weight}
-      color={color}
-      size={size}
-      alignment="start"
-    >
+    <StyledText weight={weight} color={color} size={size} alignment="start">
       {children}
     </StyledText>
   )
