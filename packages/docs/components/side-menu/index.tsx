@@ -3,6 +3,7 @@ import { withRouter, NextRouter } from 'next/router'
 import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
 
 import { AviatoLogo } from '../logo'
+import { useCallback, useState } from 'react'
 
 const HeaderDiv = styled('div', {
   display: 'flex',
@@ -17,14 +18,16 @@ interface MainSideMenuProps {
   router: NextRouter
 }
 
-const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
-  type Items = {
-    title: string
-    route?: string
-    subMenu?: Items[]
-  }
+type MenuDataItems = {
+  title: string
+  route?: string
+  subMenu?: MenuDataItems[]
+}
 
-  const mainMenu: Items[] = [
+const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
+  const [activeRoute, setActiveRoute] = useState('/')
+
+  const mainMenu: MenuDataItems[] = [
     {
       title: 'Introduction',
       route: '/',
@@ -56,8 +59,21 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     },
   ]
 
-  const isActivePath = (path: string = '') => {
-    return router.asPath === path
+  const { asPath } = router
+
+  useCallback(() => {
+    setActiveRoute(asPath)
+  }, [asPath])
+
+  const isActiveRoute = (path = '') => activeRoute === path
+
+  const setRoute = (route: string | undefined) => {
+    if (!route) return
+
+    setActiveRoute(route)
+    router.push({
+      pathname: route,
+    })
   }
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
@@ -65,9 +81,9 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
       return (
         <MenuItem
           title={title}
-          onClick={() => route && router.push({ pathname: route })}
+          onClick={() => setRoute(route)}
           key={`SubMenuItem-${submenuIndex}`}
-          isActive={isActivePath(route)}
+          isActive={isActiveRoute(route)}
         />
       )
     })
@@ -77,10 +93,10 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     return (
       <MenuItem
         title={title}
-        onClick={() => route && router.push({ pathname: route })}
+        onClick={() => setRoute(route)}
         key={`MenuItem-${menuIndex}`}
         isHeader={hasSubmenu}
-        isActive={isActivePath(route)}
+        isActive={isActiveRoute(route)}
       >
         {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
       </MenuItem>

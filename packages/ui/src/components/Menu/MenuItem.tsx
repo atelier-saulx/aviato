@@ -19,11 +19,11 @@ const MenuItemStyles = css({
   '&:hover': {
     background: '$ActionMainHover',
   },
-  '&:active': {
-    background: '$ActionMainFocus',
-    color: '$TextPrimary',
-  },
 
+  '&:active': {
+    color: '$TextPrimary',
+    background: '$PrimaryLightSelected',
+  },
   '&.isActive': {
     color: '$TextPrimary',
     background: '$PrimaryLightSelected',
