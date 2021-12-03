@@ -97,13 +97,11 @@ export type IconButtonProps = {
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
   icon?: string
-  color?: string
 }
 
 export const IconButton: FunctionComponent<IconButtonProps> = ({
   variant = 'filled',
   disabled = false,
-  color = '',
   onClick = noop,
 }) => {
   const handleClick = useCallback(() => {
@@ -111,13 +109,8 @@ export const IconButton: FunctionComponent<IconButtonProps> = ({
   }, [])
 
   return (
-    <StyledIconButton
-      type={variant}
-      disabled={disabled}
-      onClick={handleClick}
-      color={color}
-    >
-      <PlusIcon color={color} />
+    <StyledIconButton type={variant} disabled={disabled} onClick={handleClick}>
+      <PlusIcon />
     </StyledIconButton>
   )
 }

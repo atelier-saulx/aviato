@@ -15,13 +15,13 @@ const StyledProfileMenuItem = styled('button', {
 })
 
 export type ProfileMenuItemProps = {
-  userName?: string
+  username?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   onClick = noop,
-  userName = '',
+  username = '',
 }) => {
   const handleClick = useCallback(() => {
     onClick()
@@ -30,12 +30,12 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   return (
     <StyledProfileMenuItem onClick={handleClick}>
       <Avatar
-        userName={userName}
+        username={username}
         css={{
           marginRight: 6,
         }}
       />
-      {userName}
+      {username}
     </StyledProfileMenuItem>
   )
 }
