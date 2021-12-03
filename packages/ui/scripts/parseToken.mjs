@@ -1,6 +1,5 @@
-/* eslint-disable no-prototype-builtins */
 /* eslint-disable no-console */
-/* eslint-disable no-unreachable */
+/* eslint-disable no-prototype-builtins */
 
 import ora from 'ora'
 import chalk from 'chalk'
@@ -15,16 +14,24 @@ const yellow = chalk.yellow
 const white = chalk.white
 const red = chalk.red
 
+let warningCount = 0
+
 const logInfo = (message) => console.log(white(message))
 const logSuccess = (message) => console.log(green(message))
 const logProgress = (message) => console.log(blue(message))
-const logWarning = (message) => console.log(yellow(message))
 const logError = (message) => console.log(red(message))
+
+const logWarning = (message) => {
+  warningCount++
+  console.log(yellow(message))
+}
 
 /***
  * Setup spinner
  **/
-const spinner = ora('Parsing Theme').start()
+const spinner = ora('📡 Parsing Theme').start()
+
+console.log('')
 
 async function start() {
   try {
@@ -33,13 +40,16 @@ async function start() {
   } catch (error) {
     logError(`\nError parsing tokens. ${error}\n`)
     throw new Error(error)
+  } finally {
+    spinner.stop()
+    logInfo('\n Done parsing')
+
+    if (warningCount === 0) {
+      logSuccess('\n ⚡️ Parsing finished without warnings. ⚡️')
+    } else {
+      logWarning(`\n 🚨 Parsing ended with ${warningCount} warnings! 🚨`)
+    }
   }
-
-  spinner.stop()
-
-  logInfo('\n Done parsing')
-
-  logSuccess('\n Success! \n')
 
   process.exit()
 }
@@ -70,21 +80,37 @@ async function parseTokens() {
       const fileData = fs.readFileSync(path.join(inputDir, fileName))
       const stringData = fileData.toString()
 
+      logProgress('\n Parsing: ' + fileName)
+
       const isValidJSON = IsJsonString(stringData)
       if (!isValidJSON) {
-        logWarning('Malformed data')
+        logWarning('\n Malformed data')
         return [fileName, undefined]
       }
 
       const parsedJSON = JSON.parse(stringData)
       const parsedObject = formatJSON(parsedJSON)
-      return [fileName, parsedObject]
+
+      const validThemeNames = ['light', 'dark']
+
+      const themeName = validThemeNames
+        .map((themeName) => {
+          if (fileName.toLowerCase().includes(themeName)) {
+            return `theme.${themeName}`
+          } else {
+            return undefined
+          }
+        })
+        .filter((themeName) => themeName !== undefined)[0]
+
+      if (!themeName) {
+        logWarning('\n Malformed theme name')
+        return [fileName, undefined]
+      }
+
+      return [themeName, parsedObject]
     })
     .filter(([, data]) => data !== undefined)
-    .filter(([fileName]) => {
-      return true
-      return fileName.includes('dark')
-    })
 
   if (mappedJsons.length === 0) {
     return logWarning('\n\n Warning: No JSON to read.')
@@ -96,12 +122,10 @@ async function parseTokens() {
     await fs.mkdir(outputDir, { recursive: true })
   }
 
-  console.log('')
-
   const writeFilesPromises = []
 
-  mappedJsons.forEach((jsonTuple) => {
-    writeFilesPromises.push(writeTypescriptFiles({ outputDir, jsonTuple }))
+  mappedJsons.forEach((jsonOutput) => {
+    writeFilesPromises.push(writeTypescriptFiles({ outputDir, jsonOutput }))
   })
 
   await Promise.all(writeFilesPromises)
@@ -174,7 +198,7 @@ function lookupVariablesAndReplace(object) {
 
       return tokenTuple[1]
     } catch (error) {
-      logError(`\n\nError: Could not find token: ${token}`)
+      logWarning(`\n\nError: Could not find token: ${token}`)
 
       throw new Error(error)
     }
@@ -277,15 +301,13 @@ function formatJSON(object) {
   }
 }
 
-async function writeTypescriptFiles({ outputDir, jsonTuple }) {
-  const [fileName, parsedObject] = jsonTuple
+async function writeTypescriptFiles({ outputDir, jsonOutput }) {
+  const [fileName, parsedObject] = jsonOutput
 
   const trimmedFileName = fileName.replace('.json', '')
   const outputJSON = JSON.stringify(parsedObject, null, 2)
   const outputFilename = `${trimmedFileName}.ts`
   const outputFullPath = path.join(outputDir, outputFilename)
-
-  logProgress('\n Parsing: ' + fileName)
 
   const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
 
