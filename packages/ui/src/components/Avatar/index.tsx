@@ -49,17 +49,17 @@ type AvatarSize = 'small' | 'medium' | 'large'
 
 export type AvatarProps = DefaultProps & {
   size?: AvatarSize
-  username?: string
+  userName?: string
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
-  username = '',
+  userName = '',
   size = 'medium',
   ...remainingProps
 }) => {
   return (
     <StyledAvatar size={size} {...remainingProps}>
-      {initialsFromUsername(username)}
+      {initialsFromUsername(userName)}
     </StyledAvatar>
   )
 }

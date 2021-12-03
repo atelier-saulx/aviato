@@ -70,9 +70,7 @@ const SideMenuPage = () => {
           </Menu>
 
           <Footer>
-            <ProfileMenuItem username="Maarten de Winter">
-              <Spacer />
-            </ProfileMenuItem>
+            <ProfileMenuItem userName="Maarten de Winter" />
           </Footer>
         </SideMenu>
       </ShowcaseComponent>

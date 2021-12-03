@@ -15,7 +15,7 @@ const StyledProfileMenuItem = styled('button', {
 })
 
 export type ProfileMenuItemProps = {
-  username?: string
+  userName?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -30,7 +30,7 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   return (
     <StyledProfileMenuItem onClick={handleClick}>
       <Avatar
-        username={userName}
+        userName={userName}
         css={{
           marginRight: 6,
         }}
