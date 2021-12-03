@@ -18,11 +18,6 @@ const Row = styled('div', {
   alignItems: 'center',
 })
 
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
-
 const Spacer = styled('div', {
   width: 6,
   height: 6,
