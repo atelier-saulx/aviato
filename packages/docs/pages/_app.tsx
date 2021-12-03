@@ -1,9 +1,11 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
-import React from 'react'
 import type { AppProps } from 'next/app'
+import React from 'react'
 import Head from 'next/head'
+
+import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
@@ -56,8 +58,6 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-const App = (props: AppProps) => {
-  return MainApplication(props)
-}
-
-export default App
+export default process.env.PASSWORD_PROTECT
+  ? withPasswordProtect(MainApplication)
+  : MainApplication
