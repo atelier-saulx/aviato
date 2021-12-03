@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react'
-import { styled } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 
 const StyledAvatar = styled('div', {
   alignItems: 'center',
   backgroundColor: '$PrimaryMain',
-  backgroundSize: 'cover',
-  backPosition: 'center',
   borderRadius: '300px',
   color: 'white',
   display: 'flex',
@@ -49,19 +47,18 @@ export function initialsFromUsername(fullUserName) {
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = {
+export type AvatarProps = DefaultProps & {
   size?: AvatarSize
   username?: string
-  image?: string
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
   username = '',
   size = 'medium',
-  image = '',
+  ...remainingProps
 }) => {
   return (
-    <StyledAvatar size={size} style={{ backgroundImage: `url(${image})` }}>
+    <StyledAvatar size={size} {...remainingProps}>
       {initialsFromUsername(username)}
     </StyledAvatar>
   )

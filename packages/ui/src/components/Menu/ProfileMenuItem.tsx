@@ -12,15 +12,6 @@ const StyledProfileMenuItem = styled('button', {
   width: '100%',
   fontWeight: '600',
   fontSize: '15px',
-  height: '40px',
-  padding: '8px',
-
-  '&:hover': {
-    backgroundColor: '$ActionMainHover',
-  },
-  '&:active': {
-    backgroundColor: '$ActionMainSelected',
-  },
 })
 
 export type ProfileMenuItemProps = {
@@ -30,8 +21,7 @@ export type ProfileMenuItemProps = {
 
 export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
   onClick = noop,
-  children,
-  username = '',
+  userName = '',
 }) => {
   const handleClick = useCallback(() => {
     onClick()
@@ -39,9 +29,13 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
 
   return (
     <StyledProfileMenuItem onClick={handleClick}>
-      <Avatar username={username} />
-      {children}
-      {username}
+      <Avatar
+        username={userName}
+        css={{
+          marginRight: 6,
+        }}
+      />
+      {userName}
     </StyledProfileMenuItem>
   )
 }

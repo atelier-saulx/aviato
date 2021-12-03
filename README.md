@@ -59,7 +59,7 @@ npm install --save @aviato/ui
 
 ### Example
 
-See how to use the library under [Getting Started](./docs/getting-started-with-ui.md).
+See how to use the library under [Getting Started](./docs/getting-started.md).
 
 ---
 
