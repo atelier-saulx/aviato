@@ -4,6 +4,8 @@ import { styled } from '~/theme'
 const StyledAvatar = styled('div', {
   alignItems: 'center',
   backgroundColor: '$PrimaryMain',
+  backgroundSize: 'cover',
+  backPosition: 'center',
   borderRadius: '300px',
   color: 'white',
   display: 'flex',
@@ -50,13 +52,17 @@ type AvatarSize = 'small' | 'medium' | 'large'
 export type AvatarProps = {
   size?: AvatarSize
   username?: string
+  image?: string
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
   username = '',
   size = 'medium',
+  image = '',
 }) => {
   return (
-    <StyledAvatar size={size}>{initialsFromUsername(username)}</StyledAvatar>
+    <StyledAvatar size={size} style={{ backgroundImage: `url(${image})` }}>
+      {initialsFromUsername(username)}
+    </StyledAvatar>
   )
 }

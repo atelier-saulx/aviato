@@ -41,6 +41,24 @@ const AvatarPage = () => {
             <Spacer />
             <Avatar size="large" username="Yves Beer" />
           </Row>
+          <BigSpacer />
+          <NextText weight="Bold">Image Avatars</NextText>
+          <Row>
+            <Avatar
+              size="small"
+              image="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvZmZlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+            />
+            <Spacer />
+            <Avatar
+              size="medium"
+              image="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvZmZlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+            />
+            <Spacer />
+            <Avatar
+              size="large"
+              image="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvZmZlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+            />
+          </Row>
         </Column>
       </ShowcaseComponent>
     </Page>
