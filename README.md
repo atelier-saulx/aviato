@@ -4,7 +4,7 @@
   </a>
 
   <p align="center">
-    A UI component library for building high-quality CMS & DMS interfaces web apps.
+    A UI component library for building high-quality CMS & DMS interfaces and web apps.
   </p>
 
 [![Repo status](https://www.repostatus.org/badges/latest/concept.svg)](./README)
@@ -59,7 +59,7 @@ npm install --save @aviato/ui
 
 ### Example
 
-See how to use the library under [Getting Started](./docs/getting-started-with-ui.md).
+See how to use the library under [Getting Started](./docs/getting-started.md).
 
 ---
 

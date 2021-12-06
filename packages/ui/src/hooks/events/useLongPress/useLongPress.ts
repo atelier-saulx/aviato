@@ -16,7 +16,7 @@ function preventDefault(event: Event) {
 
 function useLongPress(
   callback: (event: TouchEvent | MouseEvent) => void,
-  { isPreventDefault = true, delay = 300 }: LongpressOptions = {}
+  { delay = 300, isPreventDefault = true }: LongpressOptions = {}
 ) {
   const timeout = useRef<ReturnType<typeof setTimeout>>()
   const target = useRef<EventTarget>()

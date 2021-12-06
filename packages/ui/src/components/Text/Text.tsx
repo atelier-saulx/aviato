@@ -1,41 +1,29 @@
 import React, { FunctionComponent } from 'react'
 
-type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
+import { StyledText } from './styles'
+import { FontWeight, FontColor, FontSize } from './types'
 
 export type TextProps = {
-  value?: string
-  fontWeight?: FontWeight
+  weight?: FontWeight
+  color?: FontColor
+  size?: FontSize
 }
 
 export const Text: FunctionComponent<TextProps> = ({
   children,
-  value = '',
-  fontWeight = 'normal',
+  weight = 'Regular',
+  color = 'Primary',
+  size = 'Small',
 }) => {
-  type FontWeightMap = {
-    [key in FontWeight]: number | string
-  }
-
-  const fontWeightMap: FontWeightMap = {
-    bold: 700,
-    semibold: 600,
-    medium: 500,
-    regular: 'normal',
-  }
-
-  const targetWeight = fontWeightMap[fontWeight] ?? 'normal'
-
   return (
-    <div
-      style={{
-        fontSize: '15px',
-        lineHeight: '24px',
-        letterSpacing: '-0.015em',
-        userSelect: 'text',
-        fontWeight: targetWeight,
-      }}
+    <StyledText
+      as="p"
+      weight={weight}
+      color={color}
+      size={size}
+      alignment="start"
     >
-      {children ?? value}
-    </div>
+      {children}
+    </StyledText>
   )
 }

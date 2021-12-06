@@ -1,85 +1,128 @@
-import React, { FunctionComponent, useState } from 'react'
-import { Conditional } from '~/components/Conditional'
+import React, { FunctionComponent, useCallback, useState } from 'react'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
+import { styled, classNames, css } from '~/theme'
+import { Arrow } from './assets'
+import { PlaceholderIcon } from './temp'
+
+const MenuItemStyles = css({
+  width: '100%',
+  padding: '4px 12px',
+  border: 'none',
+  outline: 'none',
+  cursor: 'pointer',
+  borderRadius: 4,
+  color: '$TextSecondary',
+  background: 'transparent',
+
+  '&:hover': {
+    background: '$ActionMainHover',
+  },
+
+  '&:active': {
+    color: '$TextPrimary',
+    background: '$PrimaryLightSelected',
+  },
+  '&.isActive': {
+    color: '$TextPrimary',
+    background: '$PrimaryLightSelected',
+  },
+
+  '&.isHeader': {
+    cursor: 'unset',
+
+    '&:hover': {
+      background: 'transparent',
+    },
+  },
+})
+
+const StyledMenuItem = styled('button', MenuItemStyles)
+
+const StyledChild = styled('div', {
+  paddingTop: '2px',
+})
+
+const Column = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+  alignItems: 'center',
+})
+
+const IconWrapper = styled('div', {
+  padding: '4px',
+  paddingRight: '8px',
+})
 
 export type MenuItemProps = {
   title: string
+  icon?: 'box' | 'paper' | 'circle'
+  isActive?: boolean
+  isHeader?: boolean
+  startOpen?: boolean
   onClick?: (value) => void
-  isCollapsable?: boolean
 }
-
-type CoercedClick = () => void
 
 export const MenuItem: FunctionComponent<MenuItemProps> = ({
   title,
-  onClick,
+  onClick = noop,
   children,
-  isCollapsable = true,
+  isActive = false,
+  isHeader = false,
+  startOpen = true,
+  icon,
+  ...remainingProps
 }) => {
   const hasChildren = Boolean(children)
-  const [isOpen, setIsOpen] = useState(hasChildren)
-  const click = (onClick as CoercedClick) ?? noop
+  const isCollapsible = !isHeader && hasChildren
+  const [isOpen, setIsOpen] = useState(startOpen)
 
-  const toggle = () => {
-    if (!isCollapsable) {
-      return click()
+  const toggle = useCallback(() => {
+    if (!isCollapsible) {
+      return onClick()
     }
 
     if (hasChildren) {
       setIsOpen(!isOpen)
     } else {
-      click()
+      onClick()
     }
-  }
+  }, [isCollapsible, isOpen, hasChildren])
+
+  const classes = classNames({
+    isActive,
+    isHeader,
+  })
 
   return (
-    <div
-      style={{
-        width: '100%',
-        lineHeight: '15px',
-      }}
-    >
-      <button
-        style={{
-          width: '100%',
-          position: 'relative',
-          textAlign: 'left',
-          padding: '4px',
-          border: 'none',
-          background: 'transparent',
-          outline: 'none',
-          cursor: 'pointer',
-        }}
-        onClick={toggle}
-        type="button"
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'nowrap',
-            alignItems: 'center',
-          }}
-        >
-          <Text>{title}</Text>
+    <>
+      <StyledMenuItem onClick={toggle} className={classes} {...remainingProps}>
+        <Column>
+          <Conditional test={icon}>
+            <IconWrapper>
+              <PlaceholderIcon type={icon} />
+            </IconWrapper>
+          </Conditional>
 
-          <Conditional test={hasChildren && isCollapsable}>
-            <span
-              style={{
-                marginLeft: 'auto',
-                marginRight: '6px',
-              }}
-            >
-              {isOpen ? '-' : '+'}
+          <Conditional test={isCollapsible}>
+            <span>
+              <Arrow state={isOpen ? 'open' : 'closed'} />
             </span>
           </Conditional>
-        </div>
-      </button>
+
+          <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
+            {title}
+          </Text>
+        </Column>
+      </StyledMenuItem>
 
       <Conditional test={isOpen}>
-        <div onClick={(event) => event.stopPropagation()}>{children}</div>
+        <StyledChild onClick={(event) => event.stopPropagation()}>
+          {children}
+        </StyledChild>
       </Conditional>
-    </div>
+    </>
   )
 }

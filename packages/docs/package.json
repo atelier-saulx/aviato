@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "watch": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "run-p lint:*",
@@ -13,7 +14,9 @@
     "lint:next": "next lint"
   },
   "dependencies": {
+    "@storyofams/next-password-protect": "^1.5.14",
     "next": "12.0.4",
+    "next-themes": "^0.0.15",
     "prismjs": "^1.25.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
@@ -25,11 +28,11 @@
     "@saulx/prettier-config": "^1.0.0",
     "@types/node": "16.11.7",
     "@types/prismjs": "^1.16.6",
-    "@types/react-dom": "^17.0.11",
     "@types/react": "17.0.35",
+    "@types/react-dom": "^17.0.11",
     "babel-plugin-prismjs": "^2.1.0",
-    "eslint-config-next": "12.0.4",
     "eslint": "7",
+    "eslint-config-next": "12.0.4",
     "npm-run-all": "^4.1.5",
     "typescript": "4.4.3"
   },

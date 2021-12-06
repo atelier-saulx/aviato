@@ -1,102 +1,166 @@
-import { FunctionComponent } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
+import { useTheme } from 'next-themes'
 
-import { SideMenu as AviatoSideMenu, Menu, MenuItem } from '@aviato/ui'
+import { log } from '@aviato/utils'
+import {
+  SideMenu,
+  Menu,
+  MenuItem,
+  Button,
+  styled,
+  getCurrentTheme,
+} from '@aviato/ui'
+import { AviatoLogo } from '../logo'
 
-import { AviatoLogo } from './logo'
+const HeaderDiv = styled('div', {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  padding: '8px',
+  paddingBottom: '69px',
+  cursor: 'pointer',
+})
+
+const Footer = styled('div', {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  marginTop: 'auto',
+  padding: '8px',
+})
 
 interface MainSideMenuProps {
   router: NextRouter
 }
 
-const SideMenu = withRouter(({ router }: MainSideMenuProps) => {
-  type Items = {
-    title: string
-    route: string
-    subMenu?: Items[]
-  }
+type MenuDataItems = {
+  title: string
+  route?: string
+  subMenu?: MenuDataItems[]
+}
 
-  const componentsMenu: Items[] = [
-    {
-      title: 'Buttons',
-      route: '/components/buttons',
-    },
-    {
-      title: 'Menu',
-      route: '/components/menu',
-    },
-    {
-      title: 'Text',
-      route: '/components/text',
-    },
-    {
-      title: 'Hooks',
-      route: '/components/hooks',
-    },
-  ]
+const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
+  const [activeRoute, setActiveRoute] = useState('/')
+  const [mounted, setMounted] = useState(false)
+  const { setTheme, theme } = useTheme()
+  const [currentTheme, setCurrentTheme] = useState(theme)
 
-  const mainMenu: Items[] = [
+  useEffect(() => setMounted(true), [])
+
+  const mainMenu: MenuDataItems[] = [
     {
-      title: 'Home',
+      title: 'Introduction',
       route: '/',
     },
     {
       title: 'Components',
-      route: '/components',
-      subMenu: componentsMenu,
+      subMenu: [
+        {
+          title: 'Side-menu',
+          route: '/components/side-menu',
+        },
+        {
+          title: 'Avatars',
+          route: '/components/avatar',
+        },
+        {
+          title: 'Buttons',
+          route: '/components/buttons',
+        },
+        {
+          title: 'Icon-buttons',
+          route: '/components/icon-buttons',
+        },
+        {
+          title: 'Checkboxes',
+          route: '/components/checkboxes',
+        },
+        {
+          title: 'Hooks',
+          route: '/components/hooks',
+        },
+      ],
     },
   ]
+
+  const { asPath } = router
+
+  useCallback(() => {
+    setActiveRoute(asPath)
+  }, [asPath])
+
+  const isActiveRoute = (route = '') => activeRoute === route
+
+  const setRoute = (targetRoute: string | undefined) => {
+    if (!targetRoute) return
+
+    setActiveRoute(targetRoute)
+    router.push({
+      pathname: targetRoute,
+    })
+  }
+
+  const toggleTheme = useCallback(() => {
+    log.global.debug('Toggling theme...')
+
+    const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
+
+    setTheme(targetTheme)
+    setCurrentTheme(targetTheme)
+  }, [setTheme])
+
+  // Prevent SSR de-sync error by waiting for CSR
+  if (!mounted) {
+    return null
+  }
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
     const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
       return (
         <MenuItem
           title={title}
-          onClick={() => router.push({ pathname: route })}
+          onClick={() => setRoute(route)}
           key={`SubMenuItem-${submenuIndex}`}
-          isCollapsable={false}
+          isActive={isActiveRoute(route)}
         />
       )
     })
 
+    const hasSubmenu = Boolean(subMenu)
+
     return (
       <MenuItem
         title={title}
-        onClick={() => router.push({ pathname: route })}
+        onClick={() => setRoute(route)}
         key={`MenuItem-${menuIndex}`}
-        isCollapsable={false}
+        isHeader={hasSubmenu}
+        isActive={isActiveRoute(route)}
       >
-        {subMenu ? (
-          <div style={{ padding: '6px 10px' }}>{mappedSubmenu}</div>
-        ) : null}
+        {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
       </MenuItem>
     )
   })
 
-  const Header: FunctionComponent = () => {
-    return (
-      <div
-        onClick={() => router.push({ pathname: '/' })}
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          padding: '16px',
-          paddingBottom: 85 - 16,
-          cursor: 'pointer',
-        }}
-      >
-        <AviatoLogo />
-      </div>
-    )
-  }
-
   return (
-    <AviatoSideMenu>
-      <Header />
+    <SideMenu
+      css={{
+        borderRight: '1px solid $OtherDivider',
+      }}
+    >
+      <HeaderDiv onClick={() => setRoute('/')}>
+        <AviatoLogo />
+      </HeaderDiv>
+
       <Menu>{mainMenuItems}</Menu>
-    </AviatoSideMenu>
+
+      <Footer>
+        <Button onClick={() => toggleTheme()}>
+          {currentTheme === 'light' ? '🌙' : '☀️'}
+        </Button>
+      </Footer>
+    </SideMenu>
   )
 })
 
-export { SideMenu }
+export { MainSideMenu as SideMenu }

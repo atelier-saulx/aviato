@@ -1,41 +1,37 @@
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
 
-type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
+import { StyledText } from './styles'
+import { FontWeight, FontColor, FontSize } from './types'
 
 export type TitleProps = {
-  value?: string
-  fontWeight?: FontWeight
+  weight?: FontWeight
+  color?: FontColor
+  size?: FontSize
 }
 
-export const Title: FunctionComponent<TitleProps> = ({
-  children,
-  value = '',
-  fontWeight = 'normal',
-}) => {
-  type FontWeightMap = {
-    [key in FontWeight]: number | string
-  }
-
-  const fontWeightMap: FontWeightMap = {
-    bold: 700,
-    semibold: 600,
-    medium: 500,
-    regular: 'normal',
-  }
-
-  const targetWeight = fontWeightMap[fontWeight] ?? 'normal'
+export const Title = React.forwardRef<
+  ElementRef<typeof StyledText>,
+  TitleProps
+>((properties, forwardedRef) => {
+  const {
+    children,
+    weight = 'Semibold',
+    color = 'Primary',
+    size = 'Medium',
+    ...remainingProps
+  } = properties
 
   return (
-    <div
-      style={{
-        fontSize: '22px',
-        lineHeight: '24px',
-        letterSpacing: '-0.015em',
-        userSelect: 'text',
-        fontWeight: targetWeight,
-      }}
+    <StyledText
+      as="h1"
+      ref={forwardedRef}
+      weight={weight}
+      color={color}
+      size={size}
+      alignment="start"
+      {...remainingProps}
     >
-      {children ?? value}
-    </div>
+      {children}
+    </StyledText>
   )
-}
+})

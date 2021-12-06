@@ -24,30 +24,15 @@
   "scripts": {
     "start": "yarn watch",
     "build-start": "yarn build && yarn watch",
-    "watch": "run-p watch:*",
-    "watch:tokens": "yarn workspace @aviato/tokens watch",
-    "watch:utils": "yarn workspace @aviato/utils watch",
-    "watch:ui": "yarn workspace @aviato/ui watch",
-    "watch:docs": "yarn workspace @aviato/docs dev",
-    "lint": "run-p lint:*",
-    "lint:tokens": "yarn workspace @aviato/tokens lint",
-    "lint:utils": "yarn workspace @aviato/utils lint",
-    "lint:ui": "yarn workspace @aviato/ui lint",
-    "lint:docs": "yarn workspace @aviato/docs lint",
-    "build": "run-s build:*",
-    "build:tokens": "yarn workspace @aviato/tokens build",
-    "build:utils": "yarn workspace @aviato/utils build",
-    "build:ui": "yarn workspace @aviato/ui build",
-    "build:docs": "yarn workspace @aviato/docs build",
-    "postbuild": "yarn lint",
+    "watch": "yarn workspace @aviato/build action watch 'utils,ui,docs'",
+    "lint": "yarn workspace @aviato/build action lint 'utils,ui,docs'",
+    "prebuild": "yarn lint",
+    "build": "yarn workspace @aviato/build action build 'utils,ui,docs'",
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2",
-    "npm-run-all": "^4.1.5"
+    "lint-staged": "^12.1.2"
   },
   "lint-staged": {
     "*": [
