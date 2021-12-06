@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { styled, Text } from '@aviato/ui'
+import { styled } from '@aviato/ui'
 
 import { Page, NextTitle, NextText } from '../components'
 
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   const Line = ({ children }: any) => {
     return (
       <Row>
-        <Text>{children}</Text>
+        <NextText>{children}</NextText>
       </Row>
     )
   }
