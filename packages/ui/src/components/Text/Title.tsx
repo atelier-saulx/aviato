@@ -20,9 +20,9 @@ export const Title = React.forwardRef<
   TitleProps
 >((properties, forwardedRef) => {
   const {
-    weight = 'Regular',
+    weight = 'Semibold',
     color = 'Primary',
-    size = 'Small',
+    size = 'Medium',
     ...remainingProps
   } = properties
 

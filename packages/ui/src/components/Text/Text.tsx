@@ -6,7 +6,7 @@ import { FontWeight, FontColor, FontSize } from './types'
 
 const TEXT_TAG = 'p'
 
-const StyledTitle = styled(TEXT_TAG, TextStyles)
+const StyledText = styled(TEXT_TAG, TextStyles)
 
 export type TextProps = React.ComponentProps<typeof TEXT_TAG> & {
   weight?: FontWeight
@@ -22,12 +22,12 @@ export const Text = React.forwardRef<
   const {
     weight = 'Regular',
     color = 'Primary',
-    size = 'Medium',
+    size = 'Small',
     ...remainingProps
   } = properties
 
   return (
-    <StyledTitle
+    <StyledText
       as={TEXT_TAG}
       weight={weight}
       color={color}
