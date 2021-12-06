@@ -11,7 +11,7 @@ import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, MenuWidthConstant, darkTheme } from '@aviato/ui'
+import { styled, MenuWidthConstant, darkTheme, themes } from '@aviato/ui'
 
 initialiseApplication()
 
@@ -55,10 +55,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
         disableTransitionOnChange
         attribute="class"
         defaultTheme="system"
-        value={{
-          light: 'light-theme',
-          dark: darkTheme.className,
-        }}
+        value={themes}
       >
         <MainWrapper>
           <SideMenu />

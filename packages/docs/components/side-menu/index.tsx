@@ -3,7 +3,15 @@ import { withRouter, NextRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 
 import { log } from '@aviato/utils'
-import { SideMenu, Menu, MenuItem, Button, styled, themes } from '@aviato/ui'
+import {
+  SideMenu,
+  Menu,
+  MenuItem,
+  Button,
+  styled,
+  themes,
+  getCurrentTheme,
+} from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 
 const HeaderDiv = styled('div', {
@@ -97,8 +105,7 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const toggleTheme = useCallback(() => {
     log.global.debug('Toggling theme...')
 
-    const root = document.documentElement
-    const targetTheme = root.classList.contains(themes.dark) ? 'light' : 'dark'
+    const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
 
     setTheme(targetTheme)
   }, [setTheme])
