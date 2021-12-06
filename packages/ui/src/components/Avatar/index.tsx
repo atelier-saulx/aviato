@@ -1,7 +1,9 @@
-import React, { ElementRef } from 'react'
+import React, { ComponentProps, ElementRef, forwardRef } from 'react'
 import { DefaultProps, styled } from '~/theme'
 
-const StyledAvatar = styled('div', {
+const DIV_TAG = 'div'
+
+const StyledAvatar = styled(DIV_TAG, {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '$PrimaryMain',
@@ -54,15 +56,16 @@ export type AvatarProps = DefaultProps & {
   size?: AvatarSize
 }
 
-export const Avatar = React.forwardRef<
-  ElementRef<typeof StyledAvatar>,
-  AvatarProps
->((properties, forwardedRef) => {
-  const { username = '', size = 'medium', ...remainingProps } = properties
+type ForwardProps = ComponentProps<typeof DIV_TAG> & AvatarProps
 
-  return (
-    <StyledAvatar ref={forwardedRef} size={size} {...remainingProps}>
-      {initialsFromUsername(username)}
-    </StyledAvatar>
-  )
-})
+export const Avatar = forwardRef<ElementRef<typeof DIV_TAG>, ForwardProps>(
+  (properties, forwardedRef) => {
+    const { username = '', size = 'medium', ...remainingProps } = properties
+
+    return (
+      <StyledAvatar size={size} {...remainingProps} ref={forwardedRef}>
+        {initialsFromUsername(username)}
+      </StyledAvatar>
+    )
+  }
+)

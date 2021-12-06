@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentProps, ElementRef, forwardRef } from 'react'
 import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
@@ -15,27 +15,26 @@ export type TextProps = {
   css?: CSS
 }
 
-type ForwardProps = React.ComponentProps<typeof TEXT_TAG> & TextProps
+type ForwardProps = ComponentProps<typeof TEXT_TAG> & TextProps
 
-export const Text = React.forwardRef<
-  React.ElementRef<typeof TEXT_TAG>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    weight = 'Regular',
-    color = 'Primary',
-    size = 'Small',
-    ...remainingProps
-  } = properties
+export const Text = forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
+  (properties, forwardedRef) => {
+    const {
+      weight = 'Regular',
+      color = 'Primary',
+      size = 'Small',
+      ...remainingProps
+    } = properties
 
-  return (
-    <StyledText
-      as={TEXT_TAG}
-      weight={weight}
-      color={color}
-      size={size}
-      {...remainingProps}
-      ref={forwardedRef}
-    />
-  )
-})
+    return (
+      <StyledText
+        as={TEXT_TAG}
+        weight={weight}
+        color={color}
+        size={size}
+        {...remainingProps}
+        ref={forwardedRef}
+      />
+    )
+  }
+)
