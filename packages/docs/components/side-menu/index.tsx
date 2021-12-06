@@ -3,7 +3,7 @@ import { withRouter, NextRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 
 import { log } from '@aviato/utils'
-import { SideMenu, Menu, MenuItem, Button, styled } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, Button, styled, themes } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 
 const HeaderDiv = styled('div', {
@@ -33,12 +33,10 @@ type MenuDataItems = {
   subMenu?: MenuDataItems[]
 }
 
-type ThemeState = 'dark' | 'light'
-
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
   const [mounted, setMounted] = useState(false)
-  const { setTheme, resolvedTheme } = useTheme()
+  const { setTheme } = useTheme()
 
   useEffect(() => setMounted(true), [])
 
@@ -99,10 +97,11 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const toggleTheme = useCallback(() => {
     log.global.debug('Toggling theme...')
 
-    const targetTheme = resolvedTheme === 'light' ? 'dark' : 'light'
+    const root = document.documentElement
+    const targetTheme = root.classList.contains(themes.dark) ? 'light' : 'dark'
 
     setTheme(targetTheme)
-  }, [resolvedTheme, setTheme])
+  }, [setTheme])
 
   if (!mounted) return null
 

@@ -1,7 +1,7 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
