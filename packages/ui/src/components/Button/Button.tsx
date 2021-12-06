@@ -6,9 +6,9 @@ const ButtonStyles = css({
   alignItems: 'flex-start',
   borderRadius: '4px',
   cursor: 'pointer',
-  fontWeight: '600',
-  lineHeight: '24px',
+  fontWeight: '500',
   padding: '4px 8px',
+  lineHeight: '24px',
   fontSize: '15px',
 
   '&:disabled': {
