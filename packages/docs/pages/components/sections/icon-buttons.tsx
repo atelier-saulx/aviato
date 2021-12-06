@@ -38,7 +38,6 @@ const IconButtonsPage = () => {
             <IconButton variant="outlined" disabled />
             <Spacer />
             <IconButton variant="transparent" disabled />
-            <Spacer />
           </Row>
         </Column>
       </ShowcaseComponent>
