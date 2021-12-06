@@ -8,16 +8,18 @@ const TITLE_TAG = 'p'
 
 const StyledText = styled(TITLE_TAG, TextStyles)
 
-export type TitleProps = React.ComponentProps<typeof TITLE_TAG> & {
+export type TitleProps = {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize
   css?: CSS
 }
 
+type ForwardProps = React.ComponentProps<typeof TITLE_TAG> & TitleProps
+
 export const Title = React.forwardRef<
   React.ElementRef<typeof TITLE_TAG>,
-  TitleProps
+  ForwardProps
 >((properties, forwardedRef) => {
   const {
     weight = 'Semibold',

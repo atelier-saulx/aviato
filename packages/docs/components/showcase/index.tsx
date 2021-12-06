@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { DisplayComponent } from './displayComponent'
-import { NextTitle, NextParagraph } from '../text'
+import { NextTitle, NextText } from '../text'
 
 import { styled, Conditional } from '@aviato/ui'
 
@@ -34,7 +34,7 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
       </Conditional>
 
       <Conditional test={description}>
-        <NextParagraph color="Secondary">{description}</NextParagraph>
+        <NextText color="Secondary">{description}</NextText>
       </Conditional>
 
       <PaddingTop>

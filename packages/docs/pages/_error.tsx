@@ -1,6 +1,6 @@
 import { NextPageContext } from 'next'
 import { styled } from '@aviato/ui'
-import { Page, NextTitle, NextText } from '../components'
+import { Page, NextText } from '../components'
 
 const StyledDiv = styled('div', {
   display: 'flex',
@@ -45,7 +45,7 @@ const Error = ({ statusCode }: { statusCode: number }) => {
   return (
     <Page>
       <StyledDiv>
-        <NextTitle size="Large">🔍 {statusCode} 🔍</NextTitle>
+        <NextText size="Large">🔍 {statusCode} 🔍</NextText>
 
         <NextText>{getContent({ statusCode })}</NextText>
       </StyledDiv>

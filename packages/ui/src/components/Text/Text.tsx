@@ -8,16 +8,18 @@ const TEXT_TAG = 'p'
 
 const StyledText = styled(TEXT_TAG, TextStyles)
 
-export type TextProps = React.ComponentProps<typeof TEXT_TAG> & {
+export type TextProps = {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize
   css?: CSS
 }
 
+type ForwardProps = React.ComponentProps<typeof TEXT_TAG> & TextProps
+
 export const Text = React.forwardRef<
   React.ElementRef<typeof TEXT_TAG>,
-  TextProps
+  ForwardProps
 >((properties, forwardedRef) => {
   const {
     weight = 'Regular',
