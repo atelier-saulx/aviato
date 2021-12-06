@@ -1,5 +1,10 @@
-import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
-import { classNames, css, DefaultProps, styled, CSS } from '~/theme'
+import React, {
+  CSSProperties,
+  ElementRef,
+  MouseEventHandler,
+  useCallback,
+} from 'react'
+import { classNames, css, styled, CSS } from '~/theme'
 import { noop } from '@aviato/utils'
 
 const primaryButtonCSS: CSS = {
@@ -194,11 +199,13 @@ const StyledButton = styled('button', ButtonStyles)
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonMode = 'filled' | 'outlined' | 'transparent'
 
-export type ButtonProps = DefaultProps & {
+export type ButtonProps = {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
+  css?: CSS
+  style?: CSSProperties
 }
 
 export const Button = React.forwardRef<

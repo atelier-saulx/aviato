@@ -1,5 +1,5 @@
-import React, { ElementRef } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import React, { CSSProperties, ElementRef } from 'react'
+import { styled, CSS } from '~/theme'
 
 export const MenuWidthConstant = 224
 
@@ -13,7 +13,10 @@ const StyledSideMenu = styled('div', {
   backgroundColor: '$Background2dp',
 })
 
-type SideMenuProps = DefaultProps & {}
+type SideMenuProps = {
+  css?: CSS
+  style?: CSSProperties
+}
 
 export const SideMenu = React.forwardRef<
   ElementRef<typeof StyledSideMenu>,

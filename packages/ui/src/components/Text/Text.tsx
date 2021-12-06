@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled, CSS } from '~/theme'
+import { styled } from '~/theme'
 import { TextStyles } from './styles'
 
 import { FontWeight, FontColor, FontSize } from './types'
@@ -8,11 +8,10 @@ const TEXT_TAG = 'p'
 
 const StyledText = styled(TEXT_TAG, TextStyles)
 
-export type TextProps = {
+export interface TextProps {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize
-  css?: CSS
 }
 
 type ForwardProps = React.ComponentProps<typeof TEXT_TAG> & TextProps

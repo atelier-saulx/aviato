@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
@@ -13,6 +13,7 @@ export type TitleProps = {
   color?: FontColor
   size?: FontSize
   css?: CSS
+  style?: CSSProperties
 }
 
 type ForwardProps = React.ComponentProps<typeof TITLE_TAG> & TitleProps

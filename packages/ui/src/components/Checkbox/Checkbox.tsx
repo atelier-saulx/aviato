@@ -1,7 +1,13 @@
-import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import React, {
+  CSSProperties,
+  ElementRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { DefaultProps, styled } from '~/theme'
+import { styled, CSS } from '~/theme'
 import { CheckedIcon, IndeterminateIcon } from './temp'
 
 const StyledCheckbox = styled('div', {
@@ -52,11 +58,13 @@ const StyledCheckbox = styled('div', {
 
 export type CheckboxSize = 'small' | 'medium'
 
-export type CheckboxProps = DefaultProps & {
+export type CheckboxProps = {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
   indeterminate?: boolean
+  css?: CSS
+  style?: CSSProperties
 }
 
 export const Checkbox = React.forwardRef<

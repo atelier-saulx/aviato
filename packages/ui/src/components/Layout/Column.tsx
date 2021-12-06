@@ -1,12 +1,15 @@
-import React, { ElementRef } from 'react'
-import { styled, DefaultProps } from '~/theme'
+import React, { CSSProperties, ElementRef } from 'react'
+import { styled, CSS } from '~/theme'
 
 const StyledColumn = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 })
 
-export type ColumnProps = DefaultProps & {}
+export type ColumnProps = {
+  css?: CSS
+  style?: CSSProperties
+}
 
 export const Column = React.forwardRef<
   ElementRef<typeof StyledColumn>,
