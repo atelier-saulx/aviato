@@ -44,7 +44,8 @@ type MenuDataItems = {
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
   const [mounted, setMounted] = useState(false)
-  const { setTheme } = useTheme()
+  const { setTheme, theme } = useTheme()
+  const [currentTheme, setCurrentTheme] = useState(theme)
 
   useEffect(() => setMounted(true), [])
 
@@ -108,6 +109,7 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
 
     setTheme(targetTheme)
+    setCurrentTheme(targetTheme)
   }, [setTheme])
 
   if (!mounted) return null
@@ -152,7 +154,9 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
       <Menu>{mainMenuItems}</Menu>
 
       <Footer>
-        <Button onClick={() => toggleTheme()}>Toggle Theme</Button>
+        <Button onClick={() => toggleTheme()}>
+          {currentTheme === 'light' ? '🌙' : '☀️'}
+        </Button>
       </Footer>
     </SideMenu>
   )
