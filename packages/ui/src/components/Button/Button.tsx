@@ -11,6 +11,10 @@ const ButtonStyles = css({
   padding: '4px 8px',
   fontSize: '15px',
 
+  '&:disabled': {
+    cursor: 'not-allowed',
+  },
+
   variants: {
     type: {
       filled: {
