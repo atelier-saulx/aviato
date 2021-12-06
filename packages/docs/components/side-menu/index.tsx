@@ -56,6 +56,10 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
           route: '/components/checkboxes',
         },
         {
+          title: 'Tabs',
+          route: '/components/tabs',
+        },
+        {
           title: 'Hooks',
           route: '/components/hooks',
         },
