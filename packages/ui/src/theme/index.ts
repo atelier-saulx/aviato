@@ -1,5 +1,5 @@
 import { createStitches } from '@stitches/react'
-import { CSSProperties } from 'react'
+import { CSSProperties, createContext } from 'react'
 import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './theme.light'
@@ -26,6 +26,6 @@ export const {
   theme,
 } = createdConfig
 
-export const darkTheme = createTheme(DarkTheme)
-
 export { classNames } from './utils'
+
+export const darkTheme = createTheme(DarkTheme)
