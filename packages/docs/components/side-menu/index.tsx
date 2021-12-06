@@ -1,10 +1,10 @@
+import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
+import { useTheme } from 'next-themes'
 
-import { SideMenu, Menu, MenuItem, Button, styled } from '@aviato/ui'
-
-import { AviatoLogo } from '../logo'
-import { useCallback, useState } from 'react'
 import { log } from '@aviato/utils'
+import { SideMenu, Menu, MenuItem, Button, styled } from '@aviato/ui'
+import { AviatoLogo } from '../logo'
 
 const HeaderDiv = styled('div', {
   display: 'flex',
@@ -33,8 +33,14 @@ type MenuDataItems = {
   subMenu?: MenuDataItems[]
 }
 
+type ThemeState = 'dark' | 'light'
+
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
+  const [mounted, setMounted] = useState(false)
+  const { setTheme, resolvedTheme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
 
   const mainMenu: MenuDataItems[] = [
     {
@@ -89,9 +95,16 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     })
   }
 
+  // TODO: Fix issue with theme only changing once
   const toggleTheme = useCallback(() => {
     log.global.debug('Toggling theme...')
-  }, [])
+
+    const targetTheme = resolvedTheme === 'light' ? 'dark' : 'light'
+
+    setTheme(targetTheme)
+  }, [resolvedTheme, setTheme])
+
+  if (!mounted) return null
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
     const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
