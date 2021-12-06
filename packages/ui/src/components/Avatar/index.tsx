@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
 import { DefaultProps, styled } from '~/theme'
 
 const StyledAvatar = styled('div', {
@@ -36,7 +36,7 @@ const StyledAvatar = styled('div', {
   },
 })
 
-export function initialsFromUsername(fullUserName) {
+export function initialsFromUsername(fullUserName: string) {
   const fullName = fullUserName.split(' ')
   if (fullName.length > 1) {
     const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0)
@@ -50,18 +50,19 @@ export function initialsFromUsername(fullUserName) {
 type AvatarSize = 'small' | 'medium' | 'large'
 
 export type AvatarProps = DefaultProps & {
-  size?: AvatarSize
   username?: string
+  size?: AvatarSize
 }
 
-export const Avatar: FunctionComponent<AvatarProps> = ({
-  username = '',
-  size = 'medium',
-  ...remainingProps
-}) => {
+export const Avatar = React.forwardRef<
+  ElementRef<typeof StyledAvatar>,
+  AvatarProps
+>((properties, forwardedRef) => {
+  const { username = '', size = 'medium', ...remainingProps } = properties
+
   return (
-    <StyledAvatar size={size} {...remainingProps}>
+    <StyledAvatar ref={forwardedRef} size={size} {...remainingProps}>
       {initialsFromUsername(username)}
     </StyledAvatar>
   )
-}
+})
