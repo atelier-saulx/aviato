@@ -3,6 +3,7 @@ html {
 
   /* Nicer looking fonts for OS X and iOS */
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   /* Correct the line height in all browsers. */
   line-height: 1.15;
