@@ -1,6 +1,7 @@
+import { useTheme } from 'next-themes'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, Button, styled } from '@aviato/ui'
 
 import { AviatoLogo } from '../logo'
 
@@ -13,11 +14,21 @@ const HeaderDiv = styled('div', {
   cursor: 'pointer',
 })
 
+const Footer = styled('div', {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  marginTop: 'auto',
+  padding: '8px',
+})
+
 interface MainSideMenuProps {
   router: NextRouter
 }
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
+  const { theme, setTheme } = useTheme()
+
   type Items = {
     title: string
     route?: string
@@ -98,6 +109,10 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
       </HeaderDiv>
 
       <Menu>{mainMenuItems}</Menu>
+
+      <Footer>
+        <Button>Change to Light Theme</Button>
+      </Footer>
     </SideMenu>
   )
 })

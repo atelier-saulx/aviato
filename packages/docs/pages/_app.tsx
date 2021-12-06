@@ -1,13 +1,13 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
-import React from 'react'
-import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, MenuWidthConstant } from '@aviato/ui'
+import { styled, MenuWidthConstant, darkTheme } from '@aviato/ui'
 
 initialiseApplication()
 
@@ -17,6 +17,7 @@ const MainWrapper = styled('div', {
   height: '100vh',
   overflowX: 'hidden',
   overflowY: 'hidden',
+  background: '$Background',
 })
 
 const ContentWrapper = styled('div', {
@@ -45,13 +46,21 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <HeadContent />
-
-      <MainWrapper>
-        <SideMenu />
-        <ContentWrapper>
-          <Component {...pageProps} />
-        </ContentWrapper>
-      </MainWrapper>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        value={{
+          light: 'light',
+          dark: darkTheme.className,
+        }}
+      >
+        <MainWrapper>
+          <SideMenu />
+          <ContentWrapper>
+            <Component {...pageProps} />
+          </ContentWrapper>
+        </MainWrapper>
+      </ThemeProvider>
     </>
   )
 }

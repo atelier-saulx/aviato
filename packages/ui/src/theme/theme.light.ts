@@ -34,5 +34,6 @@ export const theme = {
     ErrorLightHover: 'rgba(244,67,54, 0.12)',
     ErrorLightSelected: 'rgba(244,67,54, 0.16)',
     ErrorOutlineBorder: 'rgba(244,67,54, 1)',
+    Background: 'white',
   },
 }
