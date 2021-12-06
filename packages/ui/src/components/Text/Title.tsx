@@ -1,39 +1,39 @@
-import React, { ElementRef } from 'react'
-import { styled } from '~/theme'
+import React from 'react'
+import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
 import { FontWeight, FontColor, FontSize } from './types'
 
-const StyledTitle = styled('h1', TextStyles)
+const TITLE_TAG = 'p'
 
-export type TitleProps = {
+const StyledText = styled(TITLE_TAG, TextStyles)
+
+export type TitleProps = React.ComponentProps<typeof TITLE_TAG> & {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize
+  css?: CSS
 }
 
 export const Title = React.forwardRef<
-  ElementRef<typeof StyledTitle>,
+  React.ElementRef<typeof TITLE_TAG>,
   TitleProps
 >((properties, forwardedRef) => {
   const {
-    children,
-    weight = 'Semibold',
+    weight = 'Regular',
     color = 'Primary',
-    size = 'Medium',
+    size = 'Small',
     ...remainingProps
   } = properties
 
   return (
-    <StyledTitle
-      ref={forwardedRef}
+    <StyledText
+      as={TITLE_TAG}
       weight={weight}
       color={color}
       size={size}
-      alignment="start"
       {...remainingProps}
-    >
-      {children}
-    </StyledTitle>
+      ref={forwardedRef}
+    />
   )
 })
