@@ -102,7 +102,6 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     })
   }
 
-  // TODO: Fix issue with theme only changing once
   const toggleTheme = useCallback(() => {
     log.global.debug('Toggling theme...')
 
