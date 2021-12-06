@@ -1,5 +1,5 @@
 import React, { ComponentProps, ElementRef, forwardRef } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import { CSS, styled } from '~/theme'
 
 const DIV_TAG = 'div'
 
@@ -51,9 +51,10 @@ export function initialsFromUsername(fullUserName: string) {
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = DefaultProps & {
+export type AvatarProps = {
   username?: string
   size?: AvatarSize
+  css?: CSS
 }
 
 type ForwardProps = ComponentProps<typeof DIV_TAG> & AvatarProps
