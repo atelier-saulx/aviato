@@ -1,5 +1,5 @@
 import { styled } from '@aviato/ui'
-import { Button, Row, Column } from '@aviato/ui'
+import { Button, Column, Row } from '@aviato/ui'
 import { NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -14,54 +14,73 @@ const Spacer = styled('div', {
   height: 6,
 })
 
+const capitalize = (input: string) => {
+  return input.charAt(0).toUpperCase() + input.slice(1)
+}
+
 const ButtonsPage = () => {
-  return (
-    <Page>
-      <ShowcaseComponent title="Buttons">
+  const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
+    const uppercasedType = capitalize(type)
+
+    return (
+      <>
         <Column>
-          <NextText weight="Bold">Normal</NextText>
+          <NextText weight="Bold">{uppercasedType} Enabled</NextText>
           <Row>
-            <Button variant="filled">Button</Button>
-            <Spacer />
-            <Button variant="outlined">Button</Button>
-            <Spacer />
-            <Button variant="transparent">Button</Button>
-          </Row>
-
-          <BigSpacer />
-
-          <NextText weight="Bold">Disabled</NextText>
-          <Row>
-            <Button disabled variant="filled">
-              Button
+            <Button type={type} mode="filled">
+              {uppercasedType}
             </Button>
+
             <Spacer />
-            <Button disabled variant="outlined">
-              Button
+
+            <Button type={type} mode="outlined">
+              {uppercasedType}
             </Button>
+
             <Spacer />
-            <Button disabled variant="transparent">
-              Button
+
+            <Button type={type} mode="transparent">
+              {uppercasedType}
             </Button>
           </Row>
 
           <BigSpacer />
 
-          <NextText weight="Bold">Error</NextText>
+          <NextText weight="Bold">{uppercasedType} Disabled</NextText>
           <Row>
-            <Button error variant="filled">
-              Button
+            <Button type={type} mode="filled" disabled>
+              {uppercasedType}
             </Button>
+
             <Spacer />
-            <Button error variant="outlined">
-              Button
+
+            <Button type={type} mode="outlined" disabled>
+              {uppercasedType}
             </Button>
+
             <Spacer />
-            <Button error variant="transparent">
-              Button
+
+            <Button type={type} mode="transparent" disabled>
+              {uppercasedType}
             </Button>
           </Row>
         </Column>
+      </>
+    )
+  }
+
+  return (
+    <Page>
+      <ShowcaseComponent title="Primary Buttons">
+        <ShowButtons type="primary" />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Ghost Buttons">
+        <ShowButtons type="ghost" />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent title="Error Buttons">
+        <ShowButtons type="error" />
       </ShowcaseComponent>
     </Page>
   )
