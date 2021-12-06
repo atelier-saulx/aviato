@@ -1,5 +1,6 @@
-import React, { ComponentProps, ElementRef, forwardRef } from 'react'
-import { CSS, styled } from '~/theme'
+import { ComponentProps } from '@stitches/react'
+import React, { ElementRef, forwardRef } from 'react'
+import { styled } from '~/theme'
 
 const DIV_TAG = 'div'
 
@@ -54,10 +55,9 @@ type AvatarSize = 'small' | 'medium' | 'large'
 export type AvatarProps = {
   username?: string
   size?: AvatarSize
-  css?: CSS
 }
 
-type ForwardProps = ComponentProps<typeof DIV_TAG> & AvatarProps
+type ForwardProps = ComponentProps<typeof StyledAvatar> & AvatarProps
 
 export const Avatar = forwardRef<ElementRef<typeof DIV_TAG>, ForwardProps>(
   (properties, forwardedRef) => {
