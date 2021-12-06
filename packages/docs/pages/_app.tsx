@@ -1,15 +1,17 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
-import type { AppProps } from 'next/app'
-import React from 'react'
+import React, { useEffect } from 'react'
+
 import Head from 'next/head'
+import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app'
 
 import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, MenuWidthConstant } from '@aviato/ui'
+import { styled, MenuWidthConstant, darkTheme, themes } from '@aviato/ui'
 
 initialiseApplication()
 
@@ -48,13 +50,19 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <HeadContent />
-
-      <MainWrapper>
-        <SideMenu />
-        <ContentWrapper>
-          <Component {...pageProps} />
-        </ContentWrapper>
-      </MainWrapper>
+      <ThemeProvider
+        disableTransitionOnChange
+        attribute="class"
+        defaultTheme="system"
+        value={themes}
+      >
+        <MainWrapper>
+          <SideMenu />
+          <ContentWrapper>
+            <Component {...pageProps} />
+          </ContentWrapper>
+        </MainWrapper>
+      </ThemeProvider>
     </>
   )
 }
