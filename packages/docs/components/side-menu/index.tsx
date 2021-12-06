@@ -1,9 +1,17 @@
+import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
+import { useTheme } from 'next-themes'
 
-import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
-
+import { log } from '@aviato/utils'
+import {
+  SideMenu,
+  Menu,
+  MenuItem,
+  Button,
+  styled,
+  getCurrentTheme,
+} from '@aviato/ui'
 import { AviatoLogo } from '../logo'
-import { useCallback, useState } from 'react'
 
 const HeaderDiv = styled('div', {
   display: 'flex',
@@ -12,6 +20,14 @@ const HeaderDiv = styled('div', {
   padding: '8px',
   paddingBottom: '69px',
   cursor: 'pointer',
+})
+
+const Footer = styled('div', {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  marginTop: 'auto',
+  padding: '8px',
 })
 
 interface MainSideMenuProps {
@@ -26,6 +42,11 @@ type MenuDataItems = {
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
+  const [mounted, setMounted] = useState(false)
+  const { setTheme, theme } = useTheme()
+  const [currentTheme, setCurrentTheme] = useState(theme)
+
+  useEffect(() => setMounted(true), [])
 
   const mainMenu: MenuDataItems[] = [
     {
@@ -69,15 +90,29 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     setActiveRoute(asPath)
   }, [asPath])
 
-  const isActiveRoute = (path = '') => activeRoute === path
+  const isActiveRoute = (route = '') => activeRoute === route
 
-  const setRoute = (route: string | undefined) => {
-    if (!route) return
+  const setRoute = (targetRoute: string | undefined) => {
+    if (!targetRoute) return
 
-    setActiveRoute(route)
+    setActiveRoute(targetRoute)
     router.push({
-      pathname: route,
+      pathname: targetRoute,
     })
+  }
+
+  const toggleTheme = useCallback(() => {
+    log.global.debug('Toggling theme...')
+
+    const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
+
+    setTheme(targetTheme)
+    setCurrentTheme(targetTheme)
+  }, [setTheme])
+
+  // Prevent SSR de-sync error by waiting for CSR
+  if (!mounted) {
+    return null
   }
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
@@ -113,11 +148,17 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
         borderRight: '1px solid $OtherDivider',
       }}
     >
-      <HeaderDiv onClick={() => router.push({ pathname: '/' })}>
+      <HeaderDiv onClick={() => setRoute('/')}>
         <AviatoLogo />
       </HeaderDiv>
 
       <Menu>{mainMenuItems}</Menu>
+
+      <Footer>
+        <Button onClick={() => toggleTheme()}>
+          {currentTheme === 'light' ? '🌙' : '☀️'}
+        </Button>
+      </Footer>
     </SideMenu>
   )
 })

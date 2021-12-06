@@ -211,11 +211,15 @@ function lookupVariablesAndReplace(object) {
         .replace('{', '')
         .replace('}', '')
 
-      let matchingToken = findToken(sanitisedToken, object)
-      matchingToken = convertHexToRGBA(matchingToken)
-      matchingToken = stripRGB(matchingToken)
+      const matchingToken = findToken(sanitisedToken, object)
+      let convertedToColor = matchingToken
 
-      object[key] = value.replace(braceRegex, matchingToken)
+      if (value.startsWith('rgba')) {
+        convertedToColor = convertHexToRGBA(matchingToken)
+        convertedToColor = stripRGB(matchingToken)
+      }
+
+      object[key] = value.replace(braceRegex, convertedToColor)
     }
 
     if (isDollarToken(value)) {

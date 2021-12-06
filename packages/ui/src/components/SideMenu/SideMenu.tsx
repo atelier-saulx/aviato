@@ -10,7 +10,7 @@ const StyledSideMenu = styled('div', {
   width: MenuWidthConstant,
   minWidth: MenuWidthConstant,
   overflowX: 'hidden',
-  backgroundColor: '#F7F7F8',
+  backgroundColor: '$Background2dp',
 })
 
 type SideMenuProps = DefaultProps & {}
