@@ -52,10 +52,11 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
     <>
       <HeadContent />
       <ThemeProvider
+        disableTransitionOnChange
         attribute="class"
         defaultTheme="system"
         value={{
-          light: 'light',
+          light: 'light-theme',
           dark: darkTheme.className,
         }}
       >

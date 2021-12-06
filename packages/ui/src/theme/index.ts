@@ -1,5 +1,5 @@
 import { createStitches } from '@stitches/react'
-import { CSSProperties, createContext } from 'react'
+import { CSSProperties } from 'react'
 import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './theme.light'

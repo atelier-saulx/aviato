@@ -1,10 +1,10 @@
-import { useTheme } from 'next-themes'
 import { withRouter, NextRouter } from 'next/router'
 
 import { SideMenu, Menu, MenuItem, Button, styled } from '@aviato/ui'
 
 import { AviatoLogo } from '../logo'
 import { useCallback, useState } from 'react'
+import { log } from '@aviato/utils'
 
 const HeaderDiv = styled('div', {
   display: 'flex',
@@ -34,8 +34,6 @@ type MenuDataItems = {
 }
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
-  const { theme, setTheme } = useTheme()
-
   const [activeRoute, setActiveRoute] = useState('/')
 
   const mainMenu: MenuDataItems[] = [
@@ -80,16 +78,20 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     setActiveRoute(asPath)
   }, [asPath])
 
-  const isActiveRoute = (path = '') => activeRoute === path
+  const isActiveRoute = (route = '') => activeRoute === route
 
-  const setRoute = (route: string | undefined) => {
-    if (!route) return
+  const setRoute = (targetRoute: string | undefined) => {
+    if (!targetRoute) return
 
-    setActiveRoute(route)
+    setActiveRoute(targetRoute)
     router.push({
-      pathname: route,
+      pathname: targetRoute,
     })
   }
+
+  const toggleTheme = useCallback(() => {
+    log.global.debug('Toggling theme...')
+  }, [])
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
     const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
@@ -124,14 +126,14 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
         borderRight: '1px solid $OtherDivider',
       }}
     >
-      <HeaderDiv onClick={() => router.push({ pathname: '/' })}>
+      <HeaderDiv onClick={() => setRoute('/')}>
         <AviatoLogo />
       </HeaderDiv>
 
       <Menu>{mainMenuItems}</Menu>
 
       <Footer>
-        <Button>Change to Light Theme</Button>
+        <Button onClick={() => toggleTheme()}>Toggle Theme</Button>
       </Footer>
     </SideMenu>
   )
