@@ -9,7 +9,6 @@ import {
   MenuItem,
   Button,
   styled,
-  themes,
   getCurrentTheme,
 } from '@aviato/ui'
 import { AviatoLogo } from '../logo'

@@ -4,6 +4,7 @@ import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './theme.light'
 import { theme as DarkTheme } from './theme.dark'
+import { isBrowser } from '@aviato/utils'
 
 const createdConfig = createStitches({
   theme: LightTheme,
@@ -36,6 +37,10 @@ export const themes = {
 }
 
 export const getCurrentTheme: () => 'light' | 'dark' = () => {
-  const root = document.documentElement
-  return root.classList.contains(themes.dark) ? 'dark' : 'light'
+  if (isBrowser) {
+    const root = document.documentElement
+    return root.classList.contains(themes.dark) ? 'dark' : 'light'
+  }
+
+  return 'light'
 }
