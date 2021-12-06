@@ -44,6 +44,23 @@ const ButtonsPage = () => {
               Button
             </Button>
           </Row>
+
+          <BigSpacer />
+
+          <NextText weight="Bold">Error</NextText>
+          <Row>
+            <Button error variant="filled">
+              Button
+            </Button>
+            <Spacer />
+            <Button error variant="outlined">
+              Button
+            </Button>
+            <Spacer />
+            <Button error variant="transparent">
+              Button
+            </Button>
+          </Row>
         </Column>
       </ShowcaseComponent>
     </Page>

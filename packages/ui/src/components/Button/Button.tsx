@@ -28,6 +28,19 @@ const ButtonStyles = css({
           color: '$ActionDisabledContent',
           background: '$ActionDisabledBackground',
           border: '1px transparent $ActionDisabledBackground',
+          cursor: 'default',
+        },
+        '&.error': {
+          background: '$ErrorMain',
+          border: '1px solid $ErrorMain',
+          '&:hover': {
+            backgroundColor: '$ErrorMainHover',
+            border: '1px solid $ErrorMainHover',
+            '&:active': {
+              background: '$ErrorMainSelected',
+              border: '1px solid $ErrorMainSelected',
+            },
+          },
         },
       },
 
@@ -45,13 +58,23 @@ const ButtonStyles = css({
           color: '$ActionDisabledContent',
           border: '1px solid $ActionDisabledBackground',
           background: 'none',
+          cursor: 'default',
+        },
+        '&.error': {
+          border: '1px solid $ErrorMain',
+          color: '$ErrorMain',
+          '&:hover': {
+            backgroundColor: '$ErrorLightHover',
+            '&:active': {
+              background: '$ErrorLightSelected',
+            },
+          },
         },
       },
 
       transparent: {
         border: '1px solid transparent',
         color: '$PrimaryMain',
-
         '&:hover': {
           backgroundColor: '$PrimaryLightHover',
         },
@@ -61,6 +84,16 @@ const ButtonStyles = css({
         '&:disabled': {
           color: '$ActionDisabledContent',
           background: 'none',
+          cursor: 'default',
+        },
+        '&.error': {
+          color: '$ErrorMain',
+          '&:hover': {
+            backgroundColor: '$ErrorLightHover',
+            '&:active': {
+              background: '$ErrorLightSelected',
+            },
+          },
         },
       },
     },
@@ -74,6 +107,7 @@ type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 export type ButtonProps = DefaultProps & {
   variant?: ButtonVariant
   disabled?: boolean
+  error?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -84,6 +118,7 @@ export const Button = React.forwardRef<
   const {
     variant = 'filled',
     disabled = false,
+    error = false,
     onClick = noop,
     children,
     ...remainingProps
@@ -100,6 +135,7 @@ export const Button = React.forwardRef<
       disabled={disabled}
       onClick={handleClick}
       {...remainingProps}
+      className={error && !disabled && 'error'}
     >
       {children}
     </StyledButton>
