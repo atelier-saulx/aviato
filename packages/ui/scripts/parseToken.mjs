@@ -89,8 +89,6 @@ async function parseTokens() {
       }
 
       const parsedJSON = JSON.parse(stringData)
-      const parsedObject = formatJSON(parsedJSON)
-
       const validThemeNames = ['light', 'dark']
 
       const themeName = validThemeNames
@@ -98,7 +96,7 @@ async function parseTokens() {
           if (fileName.toLowerCase().includes(themeName)) {
             return `theme.${themeName}`
           } else {
-            return undefined
+            return `theme`
           }
         })
         .filter((themeName) => themeName !== undefined)[0]
@@ -108,7 +106,7 @@ async function parseTokens() {
         return [fileName, undefined]
       }
 
-      return [themeName, parsedObject]
+      return [themeName, parsedJSON]
     })
     .filter(([, data]) => data !== undefined)
 
@@ -301,19 +299,43 @@ function formatJSON(object) {
   }
 }
 
+const includesList = ['dark', 'light']
+
+function getThemeObjects(object, trimmedFileName) {
+  const output = []
+
+  includesList.forEach((themeName) => {
+    if (_.has(object, themeName)) {
+      output.push([`${trimmedFileName}.${themeName}`, object[themeName]])
+    }
+  })
+
+  if (output.length > 0) {
+    return output
+  }
+
+  return [trimmedFileName, object]
+}
+
 async function writeTypescriptFiles({ outputDir, jsonOutput }) {
-  const [fileName, parsedObject] = jsonOutput
-
+  const [fileName, parsedJSON] = jsonOutput
   const trimmedFileName = fileName.replace('.json', '')
-  const outputJSON = JSON.stringify(parsedObject, null, 2)
-  const outputFilename = `${trimmedFileName}.ts`
-  const outputFullPath = path.join(outputDir, outputFilename)
 
-  const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
+  const themeObjects = getThemeObjects(parsedJSON, trimmedFileName)
 
-  const outputContent = typescriptTemplate
+  themeObjects.forEach(([themeName, themeObject]) => {
+    const parsedObject = formatJSON(themeObject)
 
-  return fs.writeFile(outputFullPath, outputContent)
+    const outputJSON = JSON.stringify(parsedObject, null, 2)
+    const outputFilename = `${themeName}.ts`
+    const outputFullPath = path.join(outputDir, outputFilename)
+
+    const typescriptTemplate = `export const theme = ${outputJSON}`.trim()
+
+    const outputContent = typescriptTemplate
+
+    return fs.writeFile(outputFullPath, outputContent)
+  })
 }
 
 /***
