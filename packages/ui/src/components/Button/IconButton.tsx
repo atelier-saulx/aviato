@@ -82,6 +82,7 @@ const StyledIconButton = styled('button', {
             fill: '$ActionDisabledContent',
           },
         },
+        // TODO: normalise icon color props
         '& svg': {
           fill: '$PrimaryMain',
         },
