@@ -1,4 +1,4 @@
-import React, { ComponentProps, ElementRef, forwardRef } from 'react'
+import React, { ComponentProps, ElementRef } from 'react'
 import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
@@ -17,7 +17,7 @@ export type TextProps = {
 
 type ForwardProps = ComponentProps<typeof TEXT_TAG> & TextProps
 
-export const Text = forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
+export const Text = React.forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
   (properties, forwardedRef) => {
     const {
       weight = 'Regular',

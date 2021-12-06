@@ -1,4 +1,4 @@
-import React, { ComponentProps, ElementRef, forwardRef } from 'react'
+import React, { ComponentProps, ElementRef } from 'react'
 import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
@@ -17,24 +17,25 @@ export type TitleProps = {
 
 type ForwardProps = ComponentProps<typeof TITLE_TAG> & TitleProps
 
-export const Title = forwardRef<ElementRef<typeof TITLE_TAG>, ForwardProps>(
-  (properties, forwardedRef) => {
-    const {
-      weight = 'Semibold',
-      color = 'Primary',
-      size = 'Medium',
-      ...remainingProps
-    } = properties
+export const Title = React.forwardRef<
+  ElementRef<typeof TITLE_TAG>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const {
+    weight = 'Semibold',
+    color = 'Primary',
+    size = 'Medium',
+    ...remainingProps
+  } = properties
 
-    return (
-      <StyledText
-        as={TITLE_TAG}
-        weight={weight}
-        color={color}
-        size={size}
-        {...remainingProps}
-        ref={forwardedRef}
-      />
-    )
-  }
-)
+  return (
+    <StyledText
+      as={TITLE_TAG}
+      weight={weight}
+      color={color}
+      size={size}
+      {...remainingProps}
+      ref={forwardedRef}
+    />
+  )
+})

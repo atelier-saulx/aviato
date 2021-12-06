@@ -1,10 +1,13 @@
 import React, { ElementRef, useCallback, useEffect, useState } from 'react'
 import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 import { CheckedIcon, IndeterminateIcon } from './temp'
+import { ComponentProps } from '@stitches/react'
 
-const StyledCheckbox = styled('div', {
+const DIV_TAG = 'div'
+
+const StyledCheckbox = styled(DIV_TAG, {
   backgroundColor: 'white',
   borderRadius: '4px',
   cursor: 'pointer',
@@ -52,16 +55,18 @@ const StyledCheckbox = styled('div', {
 
 export type CheckboxSize = 'small' | 'medium'
 
-export type CheckboxProps = DefaultProps & {
+export type CheckboxProps = {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
   indeterminate?: boolean
 }
 
+type ForwardProps = ComponentProps<typeof StyledCheckbox> & CheckboxProps
+
 export const Checkbox = React.forwardRef<
-  ElementRef<typeof StyledCheckbox>,
-  CheckboxProps
+  ElementRef<typeof DIV_TAG>,
+  ForwardProps
 >((properties, forwardedRef) => {
   const {
     size = 'medium',

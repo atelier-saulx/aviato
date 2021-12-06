@@ -1,5 +1,5 @@
 import { ComponentProps } from '@stitches/react'
-import React, { ElementRef, forwardRef } from 'react'
+import React, { ElementRef } from 'react'
 import { styled } from '~/theme'
 
 const DIV_TAG = 'div'
@@ -59,14 +59,15 @@ export type AvatarProps = {
 
 type ForwardProps = ComponentProps<typeof StyledAvatar> & AvatarProps
 
-export const Avatar = forwardRef<ElementRef<typeof DIV_TAG>, ForwardProps>(
-  (properties, forwardedRef) => {
-    const { username = '', size = 'medium', ...remainingProps } = properties
+export const Avatar = React.forwardRef<
+  ElementRef<typeof DIV_TAG>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const { username = '', size = 'medium', ...remainingProps } = properties
 
-    return (
-      <StyledAvatar size={size} {...remainingProps} ref={forwardedRef}>
-        {initialsFromUsername(username)}
-      </StyledAvatar>
-    )
-  }
-)
+  return (
+    <StyledAvatar size={size} {...remainingProps} ref={forwardedRef}>
+      {initialsFromUsername(username)}
+    </StyledAvatar>
+  )
+})
