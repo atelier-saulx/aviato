@@ -1,5 +1,45 @@
-import { darkTheme } from './index'
-import React, { createContext, useEffect, useMemo, useState } from 'react'
+import React, {
+  CSSProperties,
+  createContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+import { createStitches } from '@stitches/react'
+import type * as Stitches from '@stitches/react'
+
+import { theme as LightTheme } from './theme.light'
+import { theme as DarkTheme } from './theme.dark'
+
+const createdConfig = createStitches({
+  theme: LightTheme,
+})
+
+export type CSS = Stitches.CSS<typeof config>
+
+export interface DefaultProps {
+  css?: CSS
+  style?: CSSProperties
+}
+
+export const {
+  config,
+  createTheme,
+  css,
+  getCssText,
+  globalCss,
+  styled,
+  theme,
+} = createdConfig
+
+export { classNames } from './utils'
+
+export const darkTheme = createTheme(DarkTheme)
+
+export const themes = {
+  light: 'light',
+  dark: darkTheme.className,
+}
 
 export const COLOR_MODE_KEY = 'color-mode'
 
@@ -8,11 +48,6 @@ type ColorMode = 'light' | 'dark'
 type ThemeContextValue = {
   colorMode: ColorMode
   setColorMode: (newValue: ColorMode) => void
-}
-
-const themes = {
-  light: 'light',
-  dark: darkTheme.className,
 }
 
 export const ThemeContext = createContext<ThemeContextValue>({
