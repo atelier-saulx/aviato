@@ -21,7 +21,6 @@ const MainWrapper = styled('div', {
   height: '100vh',
   overflowX: 'hidden',
   overflowY: 'hidden',
-  background: '$Background',
 })
 
 const ContentWrapper = styled('div', {
