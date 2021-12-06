@@ -1,9 +1,13 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
+import React from 'react'
+
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
+
+import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
@@ -39,6 +43,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
           content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
         />
         <meta property="og:title" content="Aviato-UI" key="title" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
     )
   }
@@ -65,8 +70,17 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-const App = (props: AppProps) => {
-  return MainApplication(props)
-}
+const hasPasswordProtection = process.env.PASSWORD_PROTECT || false
 
-export default App
+const ExportedApplication = hasPasswordProtection
+  ? withPasswordProtect(MainApplication, {
+      loginComponentProps: {
+        logo: 'https://i.ibb.co/b1B1ZyT/android-chrome-512x512.png',
+        backUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        buttonBackgroundColor: '#3D53E7',
+        buttonColor: 'white',
+      },
+    })
+  : MainApplication
+
+export default ExportedApplication
