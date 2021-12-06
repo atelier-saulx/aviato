@@ -23,7 +23,7 @@ const StyledDiv = styled('div', {
   justifyContent: 'center',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  background: '#FFF',
+  background: '$Background2dp',
   padding: '12px',
   borderRadius: '4px',
 })
