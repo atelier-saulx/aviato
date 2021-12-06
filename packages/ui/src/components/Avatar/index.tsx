@@ -1,5 +1,5 @@
-import React, { CSSProperties, ElementRef } from 'react'
-import { styled, CSS } from '~/theme'
+import React, { ElementRef } from 'react'
+import { DefaultProps, styled } from '~/theme'
 
 const StyledAvatar = styled('div', {
   alignItems: 'center',
@@ -49,11 +49,9 @@ export function initialsFromUsername(fullUserName: string) {
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = {
+export type AvatarProps = DefaultProps & {
   username?: string
   size?: AvatarSize
-  css?: CSS
-  style?: CSSProperties
 }
 
 export const Avatar = React.forwardRef<

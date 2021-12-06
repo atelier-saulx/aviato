@@ -1,15 +1,10 @@
-import React, {
-  CSSProperties,
-  FunctionComponent,
-  useCallback,
-  useState,
-} from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
-import { styled, classNames, css, CSS } from '~/theme'
-import { PlaceholderIcon } from './temp'
+import { styled, classNames, css } from '~/theme'
 import { Arrow } from './assets'
+import { PlaceholderIcon } from './temp'
 
 const MenuItemStyles = css({
   width: '100%',
@@ -68,8 +63,6 @@ export type MenuItemProps = {
   isHeader?: boolean
   startOpen?: boolean
   onClick?: (value) => void
-  css?: CSS
-  style?: CSSProperties
 }
 
 export const MenuItem: FunctionComponent<MenuItemProps> = ({

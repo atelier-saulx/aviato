@@ -1,5 +1,5 @@
-import React, { CSSProperties, ElementRef } from 'react'
-import { styled, CSS } from '~/theme'
+import React, { ElementRef } from 'react'
+import { DefaultProps, styled } from '~/theme'
 
 const StyledMenu = styled('div', {
   display: 'flex',
@@ -13,10 +13,7 @@ const StyledChild = styled('div', {
   paddingBottom: '2px',
 })
 
-type MenuProps = {
-  css?: CSS
-  style?: CSSProperties
-}
+type MenuProps = DefaultProps & {}
 
 export const Menu = React.forwardRef<ElementRef<typeof StyledMenu>, MenuProps>(
   (properties, forwardedRef) => {
