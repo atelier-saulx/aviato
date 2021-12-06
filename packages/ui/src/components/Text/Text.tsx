@@ -1,4 +1,5 @@
-import React, { ComponentProps, ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
+import React, { ElementRef } from 'react'
 import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
@@ -15,7 +16,7 @@ export type TextProps = {
   css?: CSS
 }
 
-type ForwardProps = ComponentProps<typeof TEXT_TAG> & TextProps
+type ForwardProps = ComponentProps<typeof StyledText> & TextProps
 
 export const Text = React.forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
   (properties, forwardedRef) => {

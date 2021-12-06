@@ -1,4 +1,5 @@
-import React, { ComponentProps, ElementRef } from 'react'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { styled, CSS } from '~/theme'
 import { TextStyles } from './styles'
 
@@ -15,7 +16,7 @@ export type TitleProps = {
   css?: CSS
 }
 
-type ForwardProps = ComponentProps<typeof TITLE_TAG> & TitleProps
+type ForwardProps = ComponentProps<typeof StyledText> & TitleProps
 
 export const Title = React.forwardRef<
   ElementRef<typeof TITLE_TAG>,
