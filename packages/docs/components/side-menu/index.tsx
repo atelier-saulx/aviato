@@ -110,7 +110,10 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     setCurrentTheme(targetTheme)
   }, [setTheme])
 
-  if (!mounted) return null
+  // Prevent SSR de-sync error by waiting for CSR
+  if (!mounted) {
+    return null
+  }
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
     const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
