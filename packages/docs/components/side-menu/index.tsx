@@ -48,7 +48,7 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
           route: '/components/buttons',
         },
         {
-          title: 'Icon-Buttons',
+          title: 'Icon-buttons',
           route: '/components/icon-buttons',
         },
         {
