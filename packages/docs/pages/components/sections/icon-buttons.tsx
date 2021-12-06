@@ -26,7 +26,6 @@ const IconButtonsPage = () => {
             <IconButton variant="outlined" />
             <Spacer />
             <IconButton variant="transparent" />
-            <Spacer />
           </Row>
 
           <BigSpacer />
