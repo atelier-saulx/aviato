@@ -1,6 +1,7 @@
-import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { DefaultProps, styled } from '~/theme'
+import { getInitialsFromUsername } from './utils'
 
 const DIV_TAG = 'div'
 
@@ -39,17 +40,6 @@ const StyledAvatar = styled(DIV_TAG, {
   },
 })
 
-export function initialsFromUsername(fullUserName: string) {
-  const fullName = fullUserName.split(' ')
-  if (fullName.length > 1) {
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0)
-    return initials.toUpperCase()
-  } else {
-    const initials = fullName.shift().charAt(0)
-    return initials.toUpperCase()
-  }
-}
-
 type AvatarSize = 'small' | 'medium' | 'large'
 
 export interface AvatarProps extends DefaultProps {
@@ -67,7 +57,7 @@ export const Avatar = React.forwardRef<
 
   return (
     <StyledAvatar size={size} {...remainingProps} ref={forwardedRef}>
-      {initialsFromUsername(username)}
+      {getInitialsFromUsername(username)}
     </StyledAvatar>
   )
 })
