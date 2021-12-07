@@ -1,12 +1,12 @@
 import React, { ElementRef } from 'react'
-import { styled, DefaultProps } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 
 const StyledRow = styled('div', {
   display: 'flex',
   flexDirection: 'row',
 })
 
-export type RowProps = DefaultProps & {}
+export interface RowProps extends DefaultProps {}
 
 export const Row = React.forwardRef<ElementRef<typeof StyledRow>, RowProps>(
   ({ children, ...properties }, forwardedRef) => {

@@ -1,6 +1,6 @@
 import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
-import { styled, CSS } from '~/theme'
+import { styled, CSS, DefaultProps } from '~/theme'
 import { TextStyles } from './styles'
 
 import { FontWeight, FontColor, FontSize } from './types'
@@ -9,7 +9,7 @@ const TEXT_TAG = 'p'
 
 const StyledText = styled(TEXT_TAG, TextStyles)
 
-export type TextProps = {
+export interface TextProps extends DefaultProps {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize

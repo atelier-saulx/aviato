@@ -1,9 +1,12 @@
+import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
 import { DefaultProps, styled } from '~/theme'
 
 export const MenuWidthConstant = 224
 
-const StyledSideMenu = styled('div', {
+const DIV_TAG = 'div'
+
+const StyledSideMenu = styled(DIV_TAG, {
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
@@ -13,11 +16,13 @@ const StyledSideMenu = styled('div', {
   backgroundColor: '$Background2dp',
 })
 
-type SideMenuProps = DefaultProps & {}
+export interface SideMenuProps extends DefaultProps {}
+
+type ForwardProps = ComponentProps<typeof StyledSideMenu> & SideMenuProps
 
 export const SideMenu = React.forwardRef<
   ElementRef<typeof StyledSideMenu>,
-  SideMenuProps
+  ForwardProps
 >((properties, forwardedRef) => {
   const { children, css, ...remainingProps } = properties
 

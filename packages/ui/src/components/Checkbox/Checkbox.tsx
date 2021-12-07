@@ -1,7 +1,7 @@
 import React, { ElementRef, useCallback, useEffect, useState } from 'react'
 import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { styled } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 import { CheckedIcon, IndeterminateIcon } from './temp'
 import { ComponentProps } from '@stitches/react'
 
@@ -55,7 +55,7 @@ const StyledCheckbox = styled(DIV_TAG, {
 
 export type CheckboxSize = 'small' | 'medium'
 
-export type CheckboxProps = {
+export interface CheckboxProps extends DefaultProps {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean

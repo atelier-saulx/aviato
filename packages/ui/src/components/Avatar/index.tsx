@@ -1,6 +1,6 @@
 import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
-import { styled } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 
 const DIV_TAG = 'div'
 
@@ -52,7 +52,7 @@ export function initialsFromUsername(fullUserName: string) {
 
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = {
+export interface AvatarProps extends DefaultProps {
   username?: string
   size?: AvatarSize
 }

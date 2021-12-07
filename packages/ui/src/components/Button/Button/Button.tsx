@@ -1,6 +1,6 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { classNames, css, styled, CSS } from '~/theme'
+import { classNames, css, styled, CSS, DefaultProps } from '~/theme'
 import { noop } from '@aviato/utils'
 
 const primaryButtonCSS: CSS = {
@@ -197,7 +197,7 @@ export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonMode = 'filled' | 'outlined' | 'transparent'
 
-export interface ButtonProps {
+export interface ButtonProps extends DefaultProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean

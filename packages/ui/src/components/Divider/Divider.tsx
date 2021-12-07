@@ -1,5 +1,5 @@
 import React, { ElementRef } from 'react'
-import { styled, DefaultProps } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 
 const StyledDivider = styled('div', {
   background: '$OtherDivider',
@@ -20,7 +20,7 @@ const StyledDivider = styled('div', {
 
 type DividerType = 'horizontal' | 'vertical'
 
-export type DividerProps = DefaultProps & {
+interface DividerProps extends DefaultProps {
   type?: DividerType
 }
 

@@ -22,21 +22,6 @@ const IconButtonsPage = () => {
           <NextText weight="Bold">Icon Buttons</NextText>
           <Row>
             <IconButton />
-            <Spacer />
-            <IconButton variant="outlined" />
-            <Spacer />
-            <IconButton variant="transparent" />
-          </Row>
-
-          <BigSpacer />
-
-          <NextText weight="Bold">Disabled</NextText>
-          <Row>
-            <IconButton disabled />
-            <Spacer />
-            <IconButton variant="outlined" disabled />
-            <Spacer />
-            <IconButton variant="transparent" disabled />
           </Row>
         </Column>
       </ShowcaseComponent>

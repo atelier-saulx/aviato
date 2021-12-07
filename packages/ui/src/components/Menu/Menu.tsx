@@ -13,7 +13,7 @@ const StyledChild = styled('div', {
   paddingBottom: '2px',
 })
 
-type MenuProps = DefaultProps & {}
+export interface MenuProps extends DefaultProps {}
 
 export const Menu = React.forwardRef<ElementRef<typeof StyledMenu>, MenuProps>(
   (properties, forwardedRef) => {
