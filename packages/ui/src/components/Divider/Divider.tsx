@@ -1,3 +1,4 @@
+import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
 import { DefaultProps, styled } from '~/theme'
 
@@ -24,9 +25,11 @@ interface DividerProps extends DefaultProps {
   type?: DividerType
 }
 
+type ForwardProps = ComponentProps<typeof StyledDivider> & DividerProps
+
 export const Divider = React.forwardRef<
   ElementRef<typeof StyledDivider>,
-  DividerProps
+  ForwardProps
 >((properties, forwardedRef) => {
   return <StyledDivider {...properties} ref={forwardedRef} />
 })

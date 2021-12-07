@@ -1,10 +1,12 @@
-import React, { FunctionComponent, useCallback, useState } from 'react'
+import React, { ElementRef, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
-import { styled, classNames, css } from '~/theme'
-import { Arrow } from './assets'
+import { styled, classNames, css, DefaultProps } from '~/theme'
 import { PlaceholderIcon } from './temp'
+import { ComponentProps } from '@stitches/react'
+
+const BUTTON_TAG = 'button'
 
 const MenuItemStyles = css({
   width: '100%',
@@ -38,7 +40,7 @@ const MenuItemStyles = css({
   },
 })
 
-const StyledMenuItem = styled('button', MenuItemStyles)
+const StyledMenuItem = styled(BUTTON_TAG, MenuItemStyles)
 
 const StyledChild = styled('div', {
   paddingTop: '2px',
@@ -56,7 +58,7 @@ const IconWrapper = styled('div', {
   paddingRight: '8px',
 })
 
-export type MenuItemProps = {
+export interface MenuItemProps extends DefaultProps {
   title: string
   icon?: 'box' | 'paper' | 'circle'
   isActive?: boolean
@@ -65,16 +67,23 @@ export type MenuItemProps = {
   onClick?: (value) => void
 }
 
-export const MenuItem: FunctionComponent<MenuItemProps> = ({
-  title,
-  onClick = noop,
-  children,
-  isActive = false,
-  isHeader = false,
-  startOpen = true,
-  icon,
-  ...remainingProps
-}) => {
+type ForwardProps = ComponentProps<typeof StyledMenuItem> & MenuItemProps
+
+export const MenuItem = React.forwardRef<
+  ElementRef<typeof BUTTON_TAG>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const {
+    title,
+    onClick = noop,
+    children,
+    isActive = false,
+    isHeader = false,
+    startOpen = true,
+    icon,
+    ...remainingProps
+  } = properties
+
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
   const [isOpen, setIsOpen] = useState(startOpen)
@@ -98,18 +107,17 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
 
   return (
     <>
-      <StyledMenuItem onClick={toggle} className={classes} {...remainingProps}>
+      <StyledMenuItem
+        onClick={toggle}
+        className={classes}
+        {...remainingProps}
+        ref={forwardedRef}
+      >
         <Column>
           <Conditional test={icon}>
             <IconWrapper>
               <PlaceholderIcon type={icon} />
             </IconWrapper>
-          </Conditional>
-
-          <Conditional test={isCollapsible}>
-            <span>
-              <Arrow state={isOpen ? 'open' : 'closed'} />
-            </span>
           </Conditional>
 
           <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
@@ -125,4 +133,4 @@ export const MenuItem: FunctionComponent<MenuItemProps> = ({
       </Conditional>
     </>
   )
-}
+})
