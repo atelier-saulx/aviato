@@ -1,7 +1,7 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
-import { classNames, css, DefaultProps, styled, CSS } from '~/theme'
-import { noop } from '@aviato/utils'
 import { ComponentProps } from '@stitches/react'
+import { classNames, css, styled, CSS } from '~/theme'
+import { noop } from '@aviato/utils'
 
 const primaryButtonCSS: CSS = {
   '&.isFilled': {
@@ -168,7 +168,7 @@ const errorButtonCSS: CSS = {
   },
 }
 
-const ButtonStyles = css({
+export const ButtonStyles = css({
   alignItems: 'flex-start',
   borderRadius: '4px',
   cursor: 'pointer',
@@ -192,12 +192,12 @@ const ButtonStyles = css({
 
 const BUTTON_TAG = 'button'
 
-const StyledButton = styled(BUTTON_TAG, ButtonStyles)
+export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
 
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonMode = 'filled' | 'outlined' | 'transparent'
 
-export type ButtonProps = DefaultProps & {
+export interface ButtonProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
