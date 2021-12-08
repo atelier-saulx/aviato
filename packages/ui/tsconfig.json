@@ -34,7 +34,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "src/icons/raw/**/*",
-    "src/icons/svg/**/*"
+    "src/icons/svg/**/*",
+    "src/icons/parsed/**/*",
   ],
 }

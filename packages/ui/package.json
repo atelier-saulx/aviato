@@ -42,8 +42,7 @@
   "scripts": {
     "nodemon:parse": "nodemon --exec yarn parse",
     "parse": "run-s parse:*",
-    "parse:svg": "node --experimental-modules ./scripts/formatSVG.mjs",
-    "parse:icons": "node --experimental-modules ./scripts/parseIcons.mjs",
+    "parse:icons": "node --experimental-modules ./scripts/reactFromSVG.mjs",
     "parse:tokens": "node --experimental-modules ./scripts/parseToken.mjs",
     "start": "yarn watch",
     "prebuild": "yarn parse",

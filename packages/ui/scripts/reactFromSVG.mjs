@@ -1,15 +1,16 @@
 import { exec } from 'promisify-child-process'
 import { logInfo, logError } from './utils.mjs'
+import { startIconFormatting } from './formatSVG.mjs'
 import fs from 'fs-extra'
 import path from 'path'
 
-async function parseIcons() {
-  const inputDir = path.join('./src', 'icons')
-  const outputDir = path.join(inputDir, 'raw')
+async function generateReactFromSVG() {
+  const outputDir = path.join('./src', 'icons', 'parsed')
 
   await fs.emptyDir(outputDir)
-
   await fs.writeFile(path.join(outputDir, '.gitkeep'), '')
+
+  await startIconFormatting()
 
   const parseCommand = [
     'svgr',
@@ -17,18 +18,26 @@ async function parseIcons() {
     '--no-svgo',
     `--replace-attr-values '#0F1013={properties.fill}'`,
     '--template ./scripts/svgrTemplate.js',
-    '--out-dir ./src/icons/raw',
-    './src/icons/svg',
+    '--out-dir ./src/icons/parsed',
+    './src/icons/parsed/svg',
   ]
 
-  const parseIconsCommand = parseCommand.join(' ')
+  // const parseIconsCommand = parseCommand.join(' ')
 
-  await exec(parseIconsCommand)
+  // await exec(parseIconsCommand)
+
+  const deleteVectorFolder = true
+  if (deleteVectorFolder) {
+    const vectorDir = path.join(outputDir, 'svg')
+
+    await fs.emptyDir(vectorDir)
+    await fs.rmdir(vectorDir)
+  }
 }
 
 async function start() {
   try {
-    await parseIcons()
+    await generateReactFromSVG()
   } catch (error) {
     logError('parseIcons error: ', error)
     throw new Error(error)

@@ -1,4 +1,4 @@
 src/icons/svg/**/*
-src/icons/raw/**/*
+src/icons/parsed/**/*
 
 dist/**/*

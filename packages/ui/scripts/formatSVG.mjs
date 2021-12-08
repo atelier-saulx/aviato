@@ -5,6 +5,7 @@ async function formatIcons() {
   const parseCommand = [
     'svgo',
     '--config ./scripts/svgoConfig.js',
+    '--output ./src/icons/parsed/svg',
     '-f',
     './src/icons/svg',
   ]
@@ -26,7 +27,7 @@ async function formatIcons() {
   }
 }
 
-async function start() {
+export async function startIconFormatting() {
   try {
     await formatIcons()
   } catch (error) {
@@ -35,13 +36,6 @@ async function start() {
 
   logInfo('Done formatting SVGs.')
 }
-
-/***
- * Execute script.
- **/
-;(async () => {
-  start()
-})()
 
 /*
 
