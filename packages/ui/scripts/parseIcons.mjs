@@ -31,7 +31,11 @@ async function start() {
   start()
 })()
 
-/***
+/*
+
+Usage: svgr [options] <file|directory>
+
+Options:
   -V, --version                    output the version number
   --config-file <file>             specify the path of the svgr config
   --no-runtime-config              disable runtime config (".svgrrc", ".svgo.yml", ".prettierrc")
@@ -61,4 +65,5 @@ async function start() {
   --stdin                          force reading input from stdin
   --stdin-filepath                 path to the file to pretend that stdin comes from
   -h, --help                       display help for command
+
  */
