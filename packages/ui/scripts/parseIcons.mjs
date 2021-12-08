@@ -4,11 +4,12 @@ async function parseIcons() {
   const parseCommand = [
     'svgr',
     '--typescript',
+    '--no-svgo',
     '--out-dir ./src/icons/raw',
     './src/icons/svg',
   ]
 
-  exec(parseCommand.join(' '))
+  await exec(parseCommand.join(' '))
 }
 
 async function start() {

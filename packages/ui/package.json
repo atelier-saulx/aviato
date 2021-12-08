@@ -40,7 +40,7 @@
   "sideEffects": false,
   "prettier": "@saulx/prettier-config",
   "scripts": {
-    "parse:svg": "svgo --config=.svgo.yml -f ./src/icons/svg",
+    "parse:svg": "svgo --config ./scripts/svgoConfig.js -f ./src/icons/svg",
     "parse:icons": "node --experimental-modules ./scripts/parseIcons.mjs",
     "parse": "node --experimental-modules ./scripts/parseToken.mjs",
     "parse:node": "nodemon --exec yarn parse",
