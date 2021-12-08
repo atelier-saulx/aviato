@@ -1,9 +1,12 @@
-import { styled } from '~/theme'
-import React, { FunctionComponent, useCallback, MouseEventHandler } from 'react'
+import React, { useCallback, MouseEventHandler, ElementRef } from 'react'
+import { DefaultProps, styled } from '~/theme'
 import { noop } from '@aviato/utils'
 import { Avatar } from '../Avatar'
+import { ComponentProps } from '@stitches/react'
 
-const StyledProfileMenuItem = styled('button', {
+const BUTTON_TAG = 'button'
+
+const StyledProfileMenuItem = styled(BUTTON_TAG, {
   alignItems: 'center',
   backgroundColor: 'transparent',
   borderRadius: '4px',
@@ -14,21 +17,30 @@ const StyledProfileMenuItem = styled('button', {
   fontSize: '15px',
 })
 
-export type ProfileMenuItemProps = {
+export interface ProfileMenuItemProps extends DefaultProps {
   username?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
-  onClick = noop,
-  username = '',
-}) => {
+type ForwardProps = ComponentProps<typeof StyledProfileMenuItem> &
+  ProfileMenuItemProps
+
+export const ProfileMenuItem = React.forwardRef<
+  ElementRef<typeof BUTTON_TAG>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const { onClick = noop, username = '', ...remainingProps } = properties
+
   const handleClick = useCallback(() => {
     onClick()
   }, [])
 
   return (
-    <StyledProfileMenuItem onClick={handleClick}>
+    <StyledProfileMenuItem
+      onClick={handleClick}
+      {...remainingProps}
+      ref={forwardedRef}
+    >
       <Avatar
         username={username}
         css={{
@@ -38,4 +50,4 @@ export const ProfileMenuItem: FunctionComponent<ProfileMenuItemProps> = ({
       {username}
     </StyledProfileMenuItem>
   )
-}
+})

@@ -1,7 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { DefaultProps, styled } from '~/theme'
+import { getInitialsFromUsername } from './utils'
 
-const StyledAvatar = styled('div', {
+const DIV_TAG = 'div'
+
+const StyledAvatar = styled(DIV_TAG, {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '$PrimaryMain',
@@ -36,32 +40,24 @@ const StyledAvatar = styled('div', {
   },
 })
 
-export function initialsFromUsername(fullUserName) {
-  const fullName = fullUserName.split(' ')
-  if (fullName.length > 1) {
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0)
-    return initials.toUpperCase()
-  } else {
-    const initials = fullName.shift().charAt(0)
-    return initials.toUpperCase()
-  }
-}
-
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = DefaultProps & {
-  size?: AvatarSize
+export interface AvatarProps extends DefaultProps {
   username?: string
+  size?: AvatarSize
 }
 
-export const Avatar: FunctionComponent<AvatarProps> = ({
-  username = '',
-  size = 'medium',
-  ...remainingProps
-}) => {
+type ForwardProps = ComponentProps<typeof StyledAvatar> & AvatarProps
+
+export const Avatar = React.forwardRef<
+  ElementRef<typeof DIV_TAG>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const { username = '', size = 'medium', ...remainingProps } = properties
+
   return (
-    <StyledAvatar size={size} {...remainingProps}>
-      {initialsFromUsername(username)}
+    <StyledAvatar size={size} {...remainingProps} ref={forwardedRef}>
+      {getInitialsFromUsername(username)}
     </StyledAvatar>
   )
-}
+})

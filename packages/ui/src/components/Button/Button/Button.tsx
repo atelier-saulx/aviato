@@ -1,5 +1,6 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
-import { classNames, css, DefaultProps, styled, CSS } from '~/theme'
+import { ComponentProps } from '@stitches/react'
+import { classNames, css, styled, CSS, DefaultProps } from '~/theme'
 import { noop } from '@aviato/utils'
 
 const primaryButtonCSS: CSS = {
@@ -167,7 +168,7 @@ const errorButtonCSS: CSS = {
   },
 }
 
-const ButtonStyles = css({
+export const ButtonStyles = css({
   alignItems: 'flex-start',
   borderRadius: '4px',
   cursor: 'pointer',
@@ -189,21 +190,25 @@ const ButtonStyles = css({
   },
 })
 
-const StyledButton = styled('button', ButtonStyles)
+const BUTTON_TAG = 'button'
+
+export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
 
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonMode = 'filled' | 'outlined' | 'transparent'
 
-export type ButtonProps = DefaultProps & {
+export interface ButtonProps extends DefaultProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
+type ForwardProps = ComponentProps<typeof StyledButton> & ButtonProps
+
 export const Button = React.forwardRef<
-  ElementRef<typeof StyledButton>,
-  ButtonProps
+  ElementRef<typeof BUTTON_TAG>,
+  ForwardProps
 >((properties, forwardedRef) => {
   const {
     type = 'primary',
