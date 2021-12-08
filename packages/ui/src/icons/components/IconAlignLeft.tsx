@@ -1,7 +1,7 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-function SvgIconAlignLeft(properties: SVGProperties) {
+const SvgIconAlignLeft = (properties: SVGProperties) => {
   return (
     <svg fill="none" viewBox="0 0 16 16">
       <path

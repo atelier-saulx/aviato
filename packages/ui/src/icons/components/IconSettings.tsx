@@ -1,7 +1,7 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-function SvgIconSettings(properties: SVGProperties) {
+const SvgIconSettings = (properties: SVGProperties) => {
   return (
     <svg fill="none" viewBox="0 0 16 16">
       <g clipPath="url(#clip0_115_1876)">

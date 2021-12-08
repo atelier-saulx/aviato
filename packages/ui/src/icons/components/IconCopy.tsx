@@ -1,7 +1,7 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-function SvgIconCopy(properties: SVGProperties) {
+const SvgIconCopy = (properties: SVGProperties) => {
   return (
     <svg fill="none" viewBox="0 0 16 16">
       <path
