@@ -41,6 +41,7 @@ async function generateReactFromSVG() {
 
     await fs.emptyDir(componentDir)
     await fs.copy(reactDir, componentDir)
+    await fs.rm(path.join(componentDir, '.gitkeep'))
   }
 }
 
