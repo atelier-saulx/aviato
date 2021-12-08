@@ -2,17 +2,15 @@ import React, { ElementRef, useCallback, useEffect, useState } from 'react'
 import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { DefaultProps, styled } from '~/theme'
-import { CheckedIcon, IndeterminateIcon } from './temp'
 import { ComponentProps } from '@stitches/react'
+import { IconCheck, IconMinus } from '~/icons'
 
-const DIV_TAG = 'div'
+const BUTTON_TAG = 'button'
 
-const StyledCheckbox = styled(DIV_TAG, {
+const StyledCheckbox = styled(BUTTON_TAG, {
   backgroundColor: 'white',
   borderRadius: '4px',
   cursor: 'pointer',
-  width: '20px',
-  height: '20px',
   padding: '1px',
   border: '1px solid $OtherOutline',
 
@@ -42,11 +40,11 @@ const StyledCheckbox = styled(DIV_TAG, {
     },
     disabled: {
       true: {
-        backgroundColor: '$ActionDisabledBackground !important',
         cursor: 'not-allowed',
+        backgroundColor: '$ActionDisabledBackground',
 
         '&:hover': {
-          backgroundColor: '$ActionDisabledContent',
+          backgroundColor: '$ActionDisabledBackground',
         },
       },
     },
@@ -65,7 +63,7 @@ export interface CheckboxProps extends DefaultProps {
 type ForwardProps = ComponentProps<typeof StyledCheckbox> & CheckboxProps
 
 export const Checkbox = React.forwardRef<
-  ElementRef<typeof DIV_TAG>,
+  ElementRef<typeof BUTTON_TAG>,
   ForwardProps
 >((properties, forwardedRef) => {
   const {
@@ -102,11 +100,11 @@ export const Checkbox = React.forwardRef<
       {...remainingProps}
     >
       <Conditional test={isChecked && isIndeterminate}>
-        <IndeterminateIcon size={size} />
+        <IconMinus fill="#FFF" />
       </Conditional>
 
       <Conditional test={isChecked && !isIndeterminate}>
-        <CheckedIcon size={size} />
+        <IconCheck fill="#FFF" />
       </Conditional>
     </StyledCheckbox>
   )
