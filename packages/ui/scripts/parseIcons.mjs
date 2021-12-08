@@ -15,7 +15,7 @@ async function parseIcons() {
     'svgr',
     '--typescript',
     '--no-svgo',
-    `--replace-attr-values '#0F1013=currentColor'`,
+    `--replace-attr-values '#0F1013={properties.fill}'`,
     '--template ./scripts/svgrTemplate.js',
     '--out-dir ./src/icons/raw',
     './src/icons/svg',

@@ -12,7 +12,7 @@ module.exports = {
     {
       name: 'removeAttrs',
       params: {
-        attrs: '(xmlns)',
+        attrs: '(xmlns|fill-opacity|stroke-opacity)',
       },
     },
 
