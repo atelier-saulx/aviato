@@ -1,3 +1,7 @@
+export { default as IconAlignCenter } from './IconAlignCenter'
+export { default as IconAlignJustify } from './IconAlignJustify'
+export { default as IconAlignLeft } from './IconAlignLeft'
+export { default as IconAlignRight } from './IconAlignRight'
 export { default as IconAperture } from './IconAperture'
 export { default as IconCheck } from './IconCheck'
 export { default as IconChevronBack } from './IconChevronBack'

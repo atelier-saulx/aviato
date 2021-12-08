@@ -1,17 +1,18 @@
-import * as React from 'react'
-import { SVGProps } from 'react'
+import React from 'react'
+import { SVGProperties } from '../types'
 
-const SvgIconChevronDown = (props: SVGProps<SVGSVGElement>) => (
-  <svg fill="none" viewBox="0 0 16 16" {...props}>
-    <path
-      stroke="#0F1013"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeOpacity={0.87}
-      strokeWidth={1.33333}
-      d="M2 5L8 11L14 5"
-    />
-  </svg>
-)
+function SvgIconChevronDown(properties: SVGProperties) {
+  return (
+    <svg fill="none" viewBox="0 0 16 16">
+      <path
+        stroke={properties.fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.33333}
+        d="M2 5L8 11L14 5"
+      />
+    </svg>
+  )
+}
 
 export default SvgIconChevronDown
