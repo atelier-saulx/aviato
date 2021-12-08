@@ -13,6 +13,7 @@ async function parseIcons() {
     'svgr',
     '--typescript',
     '--no-svgo',
+    `--replace-attr-values '#0F1013=currentColor'`,
     '--template ./scripts/svgrTemplate.js',
     '--out-dir ./src/icons/raw/react',
     './src/icons/svg',
