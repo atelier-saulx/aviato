@@ -1,20 +1,28 @@
 import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
+import { styled, CSS, DefaultProps } from '~/theme'
+import { TextStyles } from './styles'
 
-import { StyledText } from './styles'
 import { FontWeight, FontColor, FontSize } from './types'
 
-export type TitleProps = {
+const TITLE_TAG = 'h1'
+
+const StyledText = styled(TITLE_TAG, TextStyles)
+
+export interface TitleProps extends DefaultProps {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize
+  css?: CSS
 }
 
+type ForwardProps = ComponentProps<typeof StyledText> & TitleProps
+
 export const Title = React.forwardRef<
-  ElementRef<typeof StyledText>,
-  TitleProps
+  ElementRef<typeof TITLE_TAG>,
+  ForwardProps
 >((properties, forwardedRef) => {
   const {
-    children,
     weight = 'Semibold',
     color = 'Primary',
     size = 'Medium',
@@ -23,15 +31,12 @@ export const Title = React.forwardRef<
 
   return (
     <StyledText
-      as="h1"
-      ref={forwardedRef}
+      as={TITLE_TAG}
       weight={weight}
       color={color}
       size={size}
-      alignment="start"
       {...remainingProps}
-    >
-      {children}
-    </StyledText>
+      ref={forwardedRef}
+    />
   )
 })
