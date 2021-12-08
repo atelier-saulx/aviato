@@ -5,7 +5,7 @@ function template({ template }, opts, { componentName, jsx }) {
 
   return typeScriptTpl.ast`
     import React from 'react';
-    import { SVGProperties } from './types';
+    import { SVGProperties } from '../types';
 
     function ${componentName}(properties: SVGProperties) {
       return ${jsx};
