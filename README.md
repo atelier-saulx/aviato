@@ -43,7 +43,7 @@ You can use these components either as the base layer of your application, or ad
 
 ## 📕 Documentation
 
-For full documentation, visit [<--Link not yet published-->]().
+Visit [aviato.design](https://aviato.design/) for full documentation and showcase of Aviato.
 
 ---
 
