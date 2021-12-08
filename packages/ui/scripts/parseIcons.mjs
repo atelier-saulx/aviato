@@ -10,7 +10,9 @@ async function parseIcons() {
     './src/icons/svg',
   ]
 
-  await exec(parseCommand.join(' '))
+  const parseIconsCommand = parseCommand.join(' ')
+
+  await exec(parseIconsCommand)
 }
 
 async function start() {
