@@ -1,4 +1,5 @@
 import { exec } from 'promisify-child-process'
+import { logError } from './utils.mjs'
 
 async function parseIcons() {
   const parseCommand = [
@@ -16,6 +17,7 @@ async function start() {
   try {
     await parseIcons()
   } catch (error) {
+    logError('parseIcons error: ', error)
     throw new Error(error)
   }
 }
@@ -28,7 +30,6 @@ async function start() {
 })()
 
 /***
-
   -V, --version                    output the version number
   --config-file <file>             specify the path of the svgr config
   --no-runtime-config              disable runtime config (".svgrrc", ".svgo.yml", ".prettierrc")
@@ -58,5 +59,4 @@ async function start() {
   --stdin                          force reading input from stdin
   --stdin-filepath                 path to the file to pretend that stdin comes from
   -h, --help                       display help for command
-
  */
