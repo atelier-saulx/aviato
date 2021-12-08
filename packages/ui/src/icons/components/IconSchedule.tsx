@@ -1,25 +1,25 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-const SvgIconSchedule = (properties: SVGProperties) => {
+const SvgIconSchedule = (props: SVGProperties) => {
   return (
-    <svg fill="none" viewBox="0 0 16 16">
+    <svg fill="none" viewBox="0 0 16 16" {...props}>
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M6 2H2V4.66667H6V2Z"
       />
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M7.33333 11.3333H2V14H7.33333V11.3333Z"
       />
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}

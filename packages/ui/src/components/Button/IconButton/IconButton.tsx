@@ -1,34 +1,38 @@
-import React, { ElementRef, useCallback } from 'react'
+import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
 import { classNames, styled } from '~/theme'
 import { noop } from '@aviato/utils'
-import { PlusIcon } from './temp'
-import { ButtonProps, ButtonStyles } from '~/components/Button/Button'
-import { ComponentProps } from '@stitches/react'
+import {
+  ButtonMode,
+  ButtonStyles,
+  ButtonType,
+} from '~/components/Button/Button'
+import { IconName, iconFromString } from '~/icons'
 
 const BUTTON_TAG = 'button'
 
 const StyledButton = styled(BUTTON_TAG, ButtonStyles)
+
 const StyledIconButton = styled(StyledButton, {
   padding: '8px 8px',
 })
 
-export type IconTypes = 'plus'
-
-export interface IconButtonProps extends ButtonProps {
-  icon?: IconTypes
+export interface IconButtonProps {
+  type?: ButtonType
+  mode?: ButtonMode
+  disabled?: boolean
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  icon?: IconName
 }
 
-type ForwardProps = ComponentProps<typeof StyledIconButton> & IconButtonProps
-
-export const IconButton = React.forwardRef<
-  ElementRef<typeof BUTTON_TAG>,
-  ForwardProps
->((properties, forwardedRef) => {
+export const IconButton: FunctionComponent<IconButtonProps> = (
+  properties: IconButtonProps
+) => {
   const {
     type = 'primary',
     mode = 'filled',
     disabled = false,
     onClick = noop,
+    icon,
     ...remainingProps
   } = properties
 
@@ -46,16 +50,17 @@ export const IconButton = React.forwardRef<
     isTransparent,
   })
 
+  const TargetIcon = iconFromString(icon)
+
   return (
     <StyledIconButton
-      ref={forwardedRef}
       type={type}
       onClick={handleClick}
       disabled={disabled}
       className={classes}
       {...remainingProps}
     >
-      <PlusIcon />
+      <TargetIcon fill="#FFF" width={12} height={12} />
     </StyledIconButton>
   )
-})
+}

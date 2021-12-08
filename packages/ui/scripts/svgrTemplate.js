@@ -7,7 +7,7 @@ function template({ template }, opts, { componentName, jsx }) {
     import React from 'react';
     import { SVGProperties } from '../types';
 
-    const ${componentName} = (properties: SVGProperties) => {
+    const ${componentName} = (props: SVGProperties) => {
       return ${jsx};
     }
 

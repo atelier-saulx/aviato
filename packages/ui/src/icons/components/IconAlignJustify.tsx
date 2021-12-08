@@ -1,32 +1,32 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-const SvgIconAlignJustify = (properties: SVGProperties) => {
+const SvgIconAlignJustify = (props: SVGProperties) => {
   return (
-    <svg fill="none" viewBox="0 0 16 16">
+    <svg fill="none" viewBox="0 0 16 16" {...props}>
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M14 6.66666H2"
       />
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M14 4H2"
       />
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M14 9.33334H2"
       />
       <path
-        stroke={properties.fill}
+        stroke={props.fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}

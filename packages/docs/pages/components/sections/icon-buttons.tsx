@@ -1,5 +1,5 @@
 import { styled } from '@aviato/ui'
-import { Button, Column, Row } from '@aviato/ui'
+import { IconButton, Column, Row } from '@aviato/ui'
 import { NextTitle, NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -18,8 +18,12 @@ const capitalize = (input: string) => {
   return input.charAt(0).toUpperCase() + input.slice(1)
 }
 
-const ButtonsPage = () => {
-  const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
+const IconButtonsPage = () => {
+  const ShowIconButtons = ({
+    type,
+  }: {
+    type: 'primary' | 'ghost' | 'error'
+  }) => {
     const uppercasedType = capitalize(type)
 
     return (
@@ -27,42 +31,27 @@ const ButtonsPage = () => {
         <Column>
           <NextText weight="Bold">{uppercasedType} Enabled</NextText>
           <Row>
-            <Button type={type} mode="filled">
-              {uppercasedType}
-            </Button>
-
+            <IconButton icon="IconPlus" type={type} />
             <Spacer />
-
-            <Button type={type} mode="outlined">
-              {uppercasedType}
-            </Button>
-
+            <IconButton icon="IconPlus" type={type} mode="outlined" />
             <Spacer />
-
-            <Button type={type} mode="transparent">
-              {uppercasedType}
-            </Button>
+            <IconButton icon="IconPlus" type={type} mode="transparent" />
           </Row>
 
           <BigSpacer />
 
           <NextText weight="Bold">{uppercasedType} Disabled</NextText>
           <Row>
-            <Button type={type} mode="filled" disabled>
-              {uppercasedType}
-            </Button>
-
+            <IconButton icon="IconPlus" type={type} disabled />
             <Spacer />
-
-            <Button type={type} mode="outlined" disabled>
-              {uppercasedType}
-            </Button>
-
+            <IconButton icon="IconPlus" type={type} mode="outlined" disabled />
             <Spacer />
-
-            <Button type={type} mode="transparent" disabled>
-              {uppercasedType}
-            </Button>
+            <IconButton
+              icon="IconPlus"
+              type={type}
+              mode="transparent"
+              disabled
+            />
           </Row>
         </Column>
       </>
@@ -72,22 +61,22 @@ const ButtonsPage = () => {
   return (
     <Page>
       <NextTitle weight="Bold" size="ExtraLarge">
-        Buttons
+        Icon-buttons
       </NextTitle>
 
       <ShowcaseComponent>
-        <ShowButtons type="primary" />
+        <ShowIconButtons type="primary" />
       </ShowcaseComponent>
 
       <ShowcaseComponent>
-        <ShowButtons type="ghost" />
+        <ShowIconButtons type="ghost" />
       </ShowcaseComponent>
 
       <ShowcaseComponent>
-        <ShowButtons type="error" />
+        <ShowIconButtons type="error" />
       </ShowcaseComponent>
     </Page>
   )
 }
 
-export default ButtonsPage
+export default IconButtonsPage
