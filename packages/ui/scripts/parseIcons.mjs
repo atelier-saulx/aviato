@@ -1,7 +1,14 @@
 import { exec } from 'promisify-child-process'
 
 async function parseIcons() {
-  exec('svgr --typescript --out-dir ./src/icons/components ./src/icons/svg')
+  const parseCommand = [
+    'svgr',
+    '--typescript',
+    '--out-dir ./src/icons/raw',
+    './src/icons/svg',
+  ]
+
+  exec(parseCommand.join(' '))
 }
 
 async function start() {
