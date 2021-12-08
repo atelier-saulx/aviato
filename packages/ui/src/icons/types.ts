@@ -1,1 +1,1 @@
-export interface SVGProps {}
+export interface SVGProperties {}

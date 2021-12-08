@@ -5,9 +5,11 @@ import path from 'path'
 
 async function parseIcons() {
   const inputDir = path.join('./src', 'icons')
-  const outputDir = path.join(inputDir, 'raw', 'react')
+  const outputDir = path.join(inputDir, 'raw')
 
   await fs.emptyDir(outputDir)
+
+  await fs.writeFile(path.join(outputDir, '.gitkeep'), '')
 
   const parseCommand = [
     'svgr',
@@ -15,7 +17,7 @@ async function parseIcons() {
     '--no-svgo',
     `--replace-attr-values '#0F1013=currentColor'`,
     '--template ./scripts/svgrTemplate.js',
-    '--out-dir ./src/icons/raw/react',
+    '--out-dir ./src/icons/raw',
     './src/icons/svg',
   ]
 
