@@ -3,7 +3,7 @@ import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { DefaultProps, styled } from '~/theme'
 import { ComponentProps } from '@stitches/react'
-import { IconChecked, IconIndeterminate } from '~/icons'
+import { IconCheck, IconMinus } from '~/icons'
 
 const BUTTON_TAG = 'button'
 
@@ -100,11 +100,11 @@ export const Checkbox = React.forwardRef<
       {...remainingProps}
     >
       <Conditional test={isChecked && isIndeterminate}>
-        <IconIndeterminate />
+        <IconMinus fill="#FFF" />
       </Conditional>
 
       <Conditional test={isChecked && !isIndeterminate}>
-        <IconChecked />
+        <IconCheck fill="#FFF" />
       </Conditional>
     </StyledCheckbox>
   )

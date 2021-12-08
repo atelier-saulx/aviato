@@ -5,7 +5,18 @@ module.exports = {
     pretty: true, // boolean, false by default
   },
   plugins: [
+    // Remove width and height
     'removeDimensions',
+
+    // Remove specific attributes
+    {
+      name: 'removeAttrs',
+      params: {
+        attrs: '(xmlns)',
+      },
+    },
+
+    // Sort remaining attributes
     {
       name: 'sortAttrs',
       params: {

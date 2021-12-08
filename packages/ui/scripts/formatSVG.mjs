@@ -4,8 +4,8 @@ import { exec } from 'promisify-child-process'
 async function formatIcons() {
   const parseCommand = [
     'svgo',
-    '-f',
     '--config ./scripts/svgoConfig.js',
+    '-f',
     './src/icons/svg',
   ]
 
@@ -32,6 +32,8 @@ async function start() {
   } catch (error) {
     throw new Error(error)
   }
+
+  logInfo('Done formatting SVGs.')
 }
 
 /***

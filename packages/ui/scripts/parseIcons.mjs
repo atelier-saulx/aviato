@@ -1,5 +1,5 @@
 import { exec } from 'promisify-child-process'
-import { logError } from './utils.mjs'
+import { logInfo, logError } from './utils.mjs'
 
 async function parseIcons() {
   const parseCommand = [
@@ -22,6 +22,8 @@ async function start() {
     logError('parseIcons error: ', error)
     throw new Error(error)
   }
+
+  logInfo('Done converting SVGs to React.')
 }
 
 /***

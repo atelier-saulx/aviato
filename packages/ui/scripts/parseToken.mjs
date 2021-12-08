@@ -38,7 +38,7 @@ async function start() {
     throw new Error(error)
   } finally {
     spinner.stop()
-    logInfo('\n Done parsing')
+    logInfo('\n Done parsing Figma tokens.')
 
     if (warningCount === 0) {
       logSuccess('\n ⚡️ Parsing finished without warnings. ⚡️')
