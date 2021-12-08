@@ -22,9 +22,9 @@ async function generateReactFromSVG() {
     './src/icons/parsed/svg',
   ]
 
-  // const parseIconsCommand = parseCommand.join(' ')
+  const parseIconsCommand = parseCommand.join(' ')
 
-  // await exec(parseIconsCommand)
+  await exec(parseIconsCommand)
 
   const deleteVectorFolder = true
   if (deleteVectorFolder) {
@@ -32,6 +32,15 @@ async function generateReactFromSVG() {
 
     await fs.emptyDir(vectorDir)
     await fs.rmdir(vectorDir)
+  }
+
+  const overrideComponents = true
+  if (overrideComponents) {
+    const reactDir = path.join('./src', 'icons', 'parsed')
+    const componentDir = path.join('./src', 'icons', 'components')
+
+    await fs.emptyDir(componentDir)
+    await fs.copy(reactDir, componentDir)
   }
 }
 
