@@ -1,12 +1,20 @@
 import { exec } from 'promisify-child-process'
 import { logInfo, logError } from './utils.mjs'
+import fs from 'fs-extra'
+import path from 'path'
 
 async function parseIcons() {
+  const inputDir = path.join('./src', 'icons')
+  const outputDir = path.join(inputDir, 'raw', 'react')
+
+  await fs.emptyDir(outputDir)
+
   const parseCommand = [
     'svgr',
     '--typescript',
     '--no-svgo',
-    '--out-dir ./src/icons/raw',
+    '--template ./scripts/svgrTemplate.js',
+    '--out-dir ./src/icons/raw/react',
     './src/icons/svg',
   ]
 
