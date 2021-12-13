@@ -19,7 +19,7 @@ const capitalize = (input: string) => {
   return input.charAt(0).toUpperCase() + input.slice(1)
 }
 
-const ButtonsPage = () => {
+const ButtonPage = () => {
   const RandomIcon = () => {
     const Icon = getRandomIcon()
     return <Icon />
@@ -228,4 +228,4 @@ const ButtonsPage = () => {
   )
 }
 
-export default ButtonsPage
+export default ButtonPage

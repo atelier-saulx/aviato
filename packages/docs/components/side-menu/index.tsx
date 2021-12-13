@@ -29,6 +29,10 @@ const mainMenu: MenuDataItems[] = [
         title: 'Icon-button',
         route: '/components/icon-button',
       },
+      {
+        title: 'Checkbox',
+        route: '/components/checkbox',
+      },
     ],
   },
 ]
