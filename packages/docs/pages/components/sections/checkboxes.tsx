@@ -19,22 +19,11 @@ const ShowCaseCheckboxes = ({ size }: { size: CheckboxSize }) => {
     <>
       <Checkbox size={size} />
       <Spacer />
-      <Checkbox size={size} indeterminate={true} />
-      <Spacer />
       <Checkbox size={size} checked={true} />
       <Spacer />
-      <Checkbox size={size} indeterminate={true} checked={true} />
-      <Spacer />
-      <Checkbox size={size} disabled={true} indeterminate={true} />
+      <Checkbox size={size} disabled={true} checked={false} />
       <Spacer />
       <Checkbox size={size} disabled={true} checked={true} />
-      <Spacer />
-      <Checkbox
-        size={size}
-        disabled={true}
-        indeterminate={true}
-        checked={true}
-      />
     </>
   )
 }

@@ -1,17 +1,33 @@
-import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import React, {
+  FunctionComponent,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { DefaultProps, styled } from '~/theme'
-import { ComponentProps } from '@stitches/react'
 import { IconCheck, IconMinus } from '~/icons'
-import { OnValueChange } from '~/types'
 
 const HiddenCheckbox = styled('input', {
   position: 'absolute',
   opacity: 0,
   cursor: 'pointer',
-  height: 0,
-  width: 0,
+
+  variants: {
+    size: {
+      small: {
+        width: '16px',
+        height: '16px',
+      },
+
+      medium: {
+        width: '20px',
+        height: '20px',
+      },
+    },
+  },
 })
 
 const DIV_TAG = 'div'
@@ -33,12 +49,19 @@ const StyledCheckbox = styled(DIV_TAG, {
       small: {
         width: '16px',
         height: '16px',
+
+        '& svg': {
+          width: '12px',
+          height: '12px',
+        },
       },
+
       medium: {
         width: '20px',
         height: '20px',
       },
     },
+
     state: {
       true: {
         backgroundColor: '$PrimaryMain',
@@ -48,6 +71,7 @@ const StyledCheckbox = styled(DIV_TAG, {
         },
       },
     },
+
     disabled: {
       true: {
         cursor: 'not-allowed',
@@ -63,59 +87,69 @@ const StyledCheckbox = styled(DIV_TAG, {
 
 export type CheckboxSize = 'small' | 'medium'
 
+export enum CHECKBOX_STATES {
+  Unchecked = 'Unchecked',
+  Checked = 'Checked',
+  Indeterminate = 'Indeterminate',
+}
+
+export interface OnChangePayload {
+  isChecked: boolean
+  event: SyntheticEvent
+}
+
 export interface CheckboxProps extends DefaultProps {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
-  indeterminate?: boolean
-  onChange?: OnValueChange<boolean>
+  hasCheckedChildren?: boolean
+  onCheckChange?: (payload: OnChangePayload) => void
 }
 
-type ForwardProps = ComponentProps<typeof StyledCheckbox> & CheckboxProps
-
-export const Checkbox = React.forwardRef<
-  ElementRef<typeof DIV_TAG>,
-  ForwardProps
->((properties, forwardedRef) => {
+/***
+ * TODO: Implement proper indeterminate logic
+ */
+export const Checkbox: FunctionComponent<CheckboxProps> = (
+  properties: CheckboxProps
+) => {
   const {
     size = 'medium',
     checked = false,
     disabled = false,
-    indeterminate = false,
-    onChange = noop,
+    onCheckChange = noop,
     ...remainingProps
   } = properties
 
-  const [isChecked, setIsChecked] = useState(checked)
+  const [checkboxState] = useState(CHECKBOX_STATES.Unchecked)
+
+  const [isChecked, setIsChecked] = useState(false)
+  const [hasIndeterminateState] = useState(false)
   const [isDisabled, setIsDisbled] = useState(disabled)
-  const [isIndeterminate, setIsIndeterminate] = useState(indeterminate)
 
   useEffect(() => {
-    setIsChecked(checked)
     setIsDisbled(disabled)
-    setIsIndeterminate(indeterminate)
-  }, [checked, disabled, indeterminate])
+    setIsChecked(checked)
+  }, [checked, disabled])
 
-  const handleClick = useCallback(() => {
-    if (disabled) return noop()
+  const handleChange = useCallback(
+    (event) => {
+      if (isDisabled) return noop()
+      const newState = !isChecked
 
-    const newState = !isChecked
-    setIsChecked(newState)
-    onChange(newState)
-  }, [isChecked, isDisabled, isIndeterminate])
+      setIsChecked(newState)
 
-  const handleChange = useCallback(() => {
-    if (disabled) return noop()
-
-    const newState = !isChecked
-    setIsChecked(newState)
-    onChange(newState)
-  }, [isChecked, isDisabled, isIndeterminate])
+      onCheckChange({
+        isChecked: newState,
+        isDisabled,
+        checkboxState,
+        event,
+      })
+    },
+    [isChecked]
+  )
 
   return (
     <StyledCheckbox
-      ref={forwardedRef}
-      onClick={handleClick}
       size={size}
       state={isChecked}
       disabled={isDisabled}
@@ -123,18 +157,19 @@ export const Checkbox = React.forwardRef<
     >
       <HiddenCheckbox
         type="checkbox"
-        checked={indeterminate || checked}
+        checked={isChecked}
         onChange={handleChange}
         disabled={disabled}
+        size={size}
       />
 
-      <Conditional test={isChecked && !isIndeterminate}>
+      <Conditional test={isChecked && !hasIndeterminateState}>
         <IconCheck />
       </Conditional>
 
-      <Conditional test={isChecked && isIndeterminate}>
+      <Conditional test={isChecked && hasIndeterminateState}>
         <IconMinus />
       </Conditional>
     </StyledCheckbox>
   )
-})
+}
