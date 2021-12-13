@@ -1,6 +1,5 @@
 import React, {
   FunctionComponent,
-  SyntheticEvent,
   useCallback,
   useEffect,
   useState,
@@ -9,6 +8,7 @@ import { noop } from '@aviato/utils'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { DefaultProps, styled } from '~/theme'
 import { IconCheck, IconMinus } from '~/icons'
+import { DefaultChangePayload } from '~/types/events'
 
 const HiddenCheckbox = styled('input', {
   position: 'absolute',
@@ -93,9 +93,8 @@ export enum CHECKBOX_STATES {
   Indeterminate = 'Indeterminate',
 }
 
-export interface OnChangePayload {
+export interface OnCheckboxChangePayload extends DefaultChangePayload {
   isChecked: boolean
-  event: SyntheticEvent
 }
 
 export interface CheckboxProps extends DefaultProps {
@@ -103,7 +102,7 @@ export interface CheckboxProps extends DefaultProps {
   checked?: boolean
   disabled?: boolean
   hasCheckedChildren?: boolean
-  onCheckChange?: (payload: OnChangePayload) => void
+  onCheckChange?: (payload: OnCheckboxChangePayload) => void
 }
 
 /***
@@ -120,11 +119,11 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (
     ...remainingProps
   } = properties
 
-  const [checkboxState] = useState(CHECKBOX_STATES.Unchecked)
-
+  const [isDisabled, setIsDisbled] = useState(disabled)
   const [isChecked, setIsChecked] = useState(false)
   const [hasIndeterminateState] = useState(false)
-  const [isDisabled, setIsDisbled] = useState(disabled)
+
+  const [checkboxState, setCheckboxState] = useState(CHECKBOX_STATES.Unchecked)
 
   useEffect(() => {
     setIsDisbled(disabled)
@@ -134,12 +133,18 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (
   const handleChange = useCallback(
     (event) => {
       if (isDisabled) return noop()
-      const newState = !isChecked
 
-      setIsChecked(newState)
+      const isCheckboxChecked = !isChecked
+      setIsChecked(isCheckboxChecked)
+
+      const newCheckboxState = isCheckboxChecked
+        ? CHECKBOX_STATES.Checked
+        : CHECKBOX_STATES.Unchecked
+
+      setCheckboxState(newCheckboxState)
 
       onCheckChange({
-        isChecked: newState,
+        isChecked: isCheckboxChecked,
         isDisabled,
         checkboxState,
         event,

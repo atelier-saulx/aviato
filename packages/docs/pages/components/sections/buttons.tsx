@@ -1,4 +1,4 @@
-import { Checkbox, OnChangePayload, styled } from '@aviato/ui'
+import { Checkbox, OnCheckboxChangePayload, styled } from '@aviato/ui'
 import { Button, Column, Row, getRandomIcon, icons } from '@aviato/ui'
 import { useCallback, useState } from 'react'
 import { NextTitle } from '../../../components'
@@ -32,7 +32,7 @@ const ButtonsPage = () => {
 
     const [isChecked, setIsChecked] = useState(false)
 
-    const onCheckedChange = useCallback((event: OnChangePayload) => {
+    const onCheckedChange = useCallback((event: OnCheckboxChangePayload) => {
       const { isChecked } = event
 
       setIsChecked(isChecked)

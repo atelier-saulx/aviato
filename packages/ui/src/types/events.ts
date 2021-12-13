@@ -1,12 +1,4 @@
-import { EventHandler, SyntheticEvent } from 'react'
-
-export type GenericEventHandler = EventHandler<SyntheticEvent>
-
-interface DefaultChangeEvent {
-  event?: SyntheticEvent
+export interface DefaultChangePayload {
+  index?: number
+  event?: Event
 }
-
-export type OnValueChange<T extends DefaultChangeEvent> = (
-  value: T,
-  e?: Event | SyntheticEvent
-) => void
