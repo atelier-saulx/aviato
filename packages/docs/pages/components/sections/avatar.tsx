@@ -38,17 +38,6 @@ const AvatarPage = () => {
           </Row>
         </Column>
       </ShowcaseComponent>
-
-      <ShowcaseComponent title="Avatar with CSS">
-        <Avatar
-          username="Test"
-          css={{
-            width: '200px;',
-            height: '200px',
-            borderRadius: '200px',
-          }}
-        />
-      </ShowcaseComponent>
     </Page>
   )
 }
