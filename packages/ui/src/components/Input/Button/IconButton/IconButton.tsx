@@ -15,6 +15,8 @@ const StyledButton = styled(BUTTON_TAG, ButtonStyles)
 
 const StyledIconButton = styled(StyledButton, {
   padding: '8px 8px',
+  height: 'max-content',
+  width: 'max-content',
 })
 
 export interface IconButtonProps {
