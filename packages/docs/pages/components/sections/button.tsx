@@ -24,7 +24,7 @@ const capitalize = (input: string) => {
 const ButtonsPage = () => {
   const RandomIcon = () => {
     const Icon = getRandomIcon()
-    return <IconPlus />
+    return <Icon />
   }
 
   const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
@@ -59,13 +59,13 @@ const ButtonsPage = () => {
                   leftIcon={<RandomIcon />}
                   disabled={isChecked}
                 >
-                  {uppercasedType}
+                  Filled
                 </Button>
 
                 <Spacer />
 
                 <Button type={type} mode="filled" disabled={isChecked}>
-                  {uppercasedType}
+                  Filled
                 </Button>
 
                 <Spacer />
@@ -76,7 +76,7 @@ const ButtonsPage = () => {
                   rightIcon={<RandomIcon />}
                   disabled={isChecked}
                 >
-                  {uppercasedType}
+                  Filled
                 </Button>
               </Row>
 
@@ -89,13 +89,13 @@ const ButtonsPage = () => {
                   leftIcon={<RandomIcon />}
                   disabled={isChecked}
                 >
-                  {uppercasedType}
+                  Outlined
                 </Button>
 
                 <Spacer />
 
                 <Button type={type} mode="outlined" disabled={isChecked}>
-                  {uppercasedType}
+                  Outlined
                 </Button>
 
                 <Spacer />
@@ -106,7 +106,7 @@ const ButtonsPage = () => {
                   rightIcon={<RandomIcon />}
                   disabled={isChecked}
                 >
-                  {uppercasedType}
+                  Outlined
                 </Button>
               </Row>
 
@@ -119,11 +119,11 @@ const ButtonsPage = () => {
                   leftIcon={<RandomIcon />}
                   disabled={isChecked}
                 >
-                  {uppercasedType}
+                  Text
                 </Button>
                 <Spacer />
                 <Button type={type} mode="transparent" disabled={isChecked}>
-                  {uppercasedType}
+                  Text
                 </Button>
                 <Spacer />
                 <Button
@@ -132,7 +132,7 @@ const ButtonsPage = () => {
                   rightIcon={<RandomIcon />}
                   disabled={isChecked}
                 >
-                  {uppercasedType}
+                  Text
                 </Button>
               </Row>
             </Column>
@@ -188,22 +188,28 @@ const ButtonsPage = () => {
   return (
     <Page>
       <NextTitle weight="Bold" size="ExtraLarge">
-        Buttons
+        Button
       </NextTitle>
 
-      <ShowcaseComponent>
+      <NextText size="Medium" color="Secondary">
+        The Button component is used to trigger an action or event, such as
+        submitting a form, opening a dialog, canceling an action, or performing
+        a delete operation.
+      </NextText>
+
+      <ShowcaseComponent background="transparent">
         <ShowButtons type="primary" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent>
+      <ShowcaseComponent background="transparent">
         <ShowButtons type="ghost" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent>
+      <ShowcaseComponent background="transparent">
         <ShowButtons type="error" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent>
+      <ShowcaseComponent background="transparent">
         <ShowDisabledButtons />
       </ShowcaseComponent>
     </Page>

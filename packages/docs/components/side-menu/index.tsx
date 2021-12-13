@@ -2,6 +2,42 @@ import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 
+const mainMenu: MenuDataItems[] = [
+  {
+    title: 'Introduction',
+    route: '/',
+  },
+  {
+    title: 'Components',
+    subMenu: [
+      {
+        title: 'Button',
+        route: '/components/button',
+      },
+      {
+        title: 'Icon-buttons',
+        route: '/components/icon-buttons',
+      },
+      {
+        title: 'Icons',
+        route: '/components/icons',
+      },
+      {
+        title: 'Checkboxes',
+        route: '/components/checkboxes',
+      },
+      {
+        title: 'Side-menu',
+        route: '/components/side-menu',
+      },
+      {
+        title: 'Hooks',
+        route: '/components/hooks',
+      },
+    ],
+  },
+]
+
 import { log } from '@aviato/utils'
 import {
   SideMenu,
@@ -47,42 +83,6 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [currentTheme, setCurrentTheme] = useState(theme)
 
   useEffect(() => setMounted(true), [])
-
-  const mainMenu: MenuDataItems[] = [
-    {
-      title: 'Introduction',
-      route: '/',
-    },
-    {
-      title: 'Components',
-      subMenu: [
-        {
-          title: 'Side-menu',
-          route: '/components/side-menu',
-        },
-        {
-          title: 'Buttons',
-          route: '/components/buttons',
-        },
-        {
-          title: 'Icon-buttons',
-          route: '/components/icon-buttons',
-        },
-        {
-          title: 'Icons',
-          route: '/components/icons',
-        },
-        {
-          title: 'Checkboxes',
-          route: '/components/checkboxes',
-        },
-        {
-          title: 'Hooks',
-          route: '/components/hooks',
-        },
-      ],
-    },
-  ]
 
   const { asPath } = router
 

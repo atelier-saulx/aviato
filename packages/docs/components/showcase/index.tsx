@@ -18,11 +18,15 @@ const PaddingTop = styled('div', {
 export type DisplayComponentProps = {
   title?: string
   description?: string
+  background?: 'filled' | 'transparent'
+  padding?: 'regular' | 'large'
 }
 
 export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
   title,
   description,
+  background = 'filled',
+  padding = 'regular',
   children,
 }) => {
   return (
@@ -38,7 +42,9 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
       </Conditional>
 
       <PaddingTop>
-        <DisplayComponent>{children}</DisplayComponent>
+        <DisplayComponent background={background} padding={padding}>
+          {children}
+        </DisplayComponent>
       </PaddingTop>
     </ComponentWrapperDiv>
   )
