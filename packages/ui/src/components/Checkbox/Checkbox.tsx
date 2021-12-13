@@ -102,7 +102,7 @@ export interface CheckboxProps extends DefaultProps {
   checked?: boolean
   disabled?: boolean
   hasCheckedChildren?: boolean
-  onCheckChange?: (payload: OnCheckboxChangePayload) => void
+  onChange?: (payload: OnCheckboxChangePayload) => void
 }
 
 /***
@@ -115,7 +115,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (
     size = 'medium',
     checked = false,
     disabled = false,
-    onCheckChange = noop,
+    onChange = noop,
     ...remainingProps
   } = properties
 
@@ -143,7 +143,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (
 
       setCheckboxState(newCheckboxState)
 
-      onCheckChange({
+      onChange({
         isChecked: isCheckboxChecked,
         isDisabled,
         checkboxState,

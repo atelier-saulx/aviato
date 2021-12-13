@@ -42,7 +42,7 @@ const ButtonsPage = () => {
       <>
         <Column>
           <NextTitle weight="Bold">{uppercasedType}</NextTitle>
-          <Checkbox onCheckChange={(event) => onCheckedChange(event)} />
+          <Checkbox onChange={onCheckedChange} />
           <BigSpacer />
 
           <Row>
