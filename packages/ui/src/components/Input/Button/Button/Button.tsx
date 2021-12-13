@@ -1,9 +1,10 @@
-import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
+import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { noop } from '@aviato/utils'
 
-import { classNames, css, styled, CSS, DefaultProps } from '~/theme'
+import { classNames, css, styled, CSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Icon } from '~/icons/collection'
+import { ComponentProps } from '@stitches/react'
 
 const primaryButtonCSS: CSS = {
   '&.isFilled': {
@@ -218,7 +219,7 @@ export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonMode = 'filled' | 'outlined' | 'transparent'
 
-export interface ButtonProps extends DefaultProps {
+export interface ButtonProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
@@ -227,7 +228,12 @@ export interface ButtonProps extends DefaultProps {
   rightIcon?: Icon
 }
 
-export const Button: FunctionComponent<ButtonProps> = (properties) => {
+type ForwardProps = ComponentProps<typeof StyledButton> & ButtonProps
+
+export const Button = React.forwardRef<
+  ElementRef<typeof StyledButton>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     type = 'primary',
     mode = 'filled',
@@ -263,6 +269,7 @@ export const Button: FunctionComponent<ButtonProps> = (properties) => {
       onClick={handleClick}
       disabled={disabled}
       className={classes}
+      ref={forwardedRef}
       {...remainingProps}
     >
       <Conditional test={leftIcon}>
@@ -276,4 +283,4 @@ export const Button: FunctionComponent<ButtonProps> = (properties) => {
       </Conditional>
     </StyledButton>
   )
-}
+})

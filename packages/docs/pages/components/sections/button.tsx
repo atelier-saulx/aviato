@@ -210,6 +210,20 @@ const ButtonsPage = () => {
       <ShowcaseComponent background="transparent">
         <ShowDisabledButtons />
       </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <Button
+          type="primary"
+          mode="filled"
+          css={{
+            width: 200,
+            height: 200,
+            justifyContent: 'center',
+          }}
+        >
+          With CSS
+        </Button>
+      </ShowcaseComponent>
     </Page>
   )
 }

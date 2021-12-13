@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
+import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { classNames, styled } from '~/theme'
 import { noop } from '@aviato/utils'
 import {
@@ -7,6 +7,7 @@ import {
   ButtonType,
 } from '~/components/Input/Button/Button'
 import { IconName, getIconFromString } from '~/icons'
+import { ComponentProps } from '@stitches/react'
 
 const BUTTON_TAG = 'button'
 
@@ -24,7 +25,12 @@ export interface IconButtonProps {
   icon?: IconName
 }
 
-export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
+type ForwardProps = ComponentProps<typeof StyledIconButton> & IconButtonProps
+
+export const IconButton = React.forwardRef<
+  ElementRef<typeof StyledIconButton>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     type = 'primary',
     mode = 'filled',
@@ -60,9 +66,10 @@ export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
       onClick={handleClick}
       disabled={disabled}
       className={classes}
+      ref={forwardedRef}
       {...remainingProps}
     >
       <TargetIcon width={16} height={16} />
     </StyledIconButton>
   )
-}
+})

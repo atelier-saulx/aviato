@@ -136,6 +136,19 @@ const ButtonsPage = () => {
       <ShowcaseComponent background="transparent">
         <ShowDisabledButtons />
       </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <IconButton
+          type="primary"
+          mode="filled"
+          icon={RandomIconName()}
+          css={{
+            width: 200,
+            height: 200,
+            justifyContent: 'center',
+          }}
+        ></IconButton>
+      </ShowcaseComponent>
     </Page>
   )
 }
