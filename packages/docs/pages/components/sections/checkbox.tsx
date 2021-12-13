@@ -1,6 +1,5 @@
-import { Checkbox, OnCheckboxChangePayload, styled } from '@aviato/ui'
-import { IconButton, Column, Row, getRandomIconName } from '@aviato/ui'
-import { useCallback, useState } from 'react'
+import { styled } from '@aviato/ui'
+import { Checkbox, Text, Column, Row } from '@aviato/ui'
 import { NextTitle, NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -11,8 +10,8 @@ const BigSpacer = styled('div', {
 })
 
 const Spacer = styled('div', {
-  width: 6,
-  height: 6,
+  width: 12,
+  height: 12,
 })
 
 const capitalize = (input: string) => {
@@ -21,7 +20,17 @@ const capitalize = (input: string) => {
 
 const CheckboxPage = () => {
   const ShowCheckboxes = () => {
-    return <>Test</>
+    return (
+      <>
+        <Column>
+          <Row>
+            <Checkbox />
+            <Spacer />
+            <Text>Accept the terms and conditions</Text>
+          </Row>
+        </Column>
+      </>
+    )
   }
 
   return (
