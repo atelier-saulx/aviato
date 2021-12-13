@@ -3,23 +3,23 @@ import { SVGProperties } from '../types'
 
 const SvgIconSchedule = (props: SVGProperties) => {
   return (
-    <svg fill="none" viewBox="0 0 16 16" {...props}>
+    <svg width={16} height={16} fill="none" viewBox="0 0 16 16" {...props}>
       <path
-        stroke={props.fill}
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M6 2H2V4.66667H6V2Z"
       />
       <path
-        stroke={props.fill}
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M7.33333 11.3333H2V14H7.33333V11.3333Z"
       />
       <path
-        stroke={props.fill}
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}

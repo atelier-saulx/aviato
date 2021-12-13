@@ -16,7 +16,7 @@ async function generateReactFromSVG() {
     'svgr',
     '--typescript',
     '--no-svgo',
-    `--replace-attr-values '#0F1013={props.fill}'`,
+    // `--replace-attr-values '#0F1013={props.fill}'`,
     '--template ./scripts/svgrTemplate.js',
     '--out-dir ./src/icons/parsed',
     './src/icons/parsed/svg',

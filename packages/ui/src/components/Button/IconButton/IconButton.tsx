@@ -60,7 +60,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = (
       className={classes}
       {...remainingProps}
     >
-      <TargetIcon fill="#FFF" width={12} height={12} />
+      <TargetIcon width={12} height={12} />
     </StyledIconButton>
   )
 }

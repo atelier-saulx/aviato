@@ -3,16 +3,16 @@ import { SVGProperties } from '../types'
 
 const SvgIconCopy = (props: SVGProperties) => {
   return (
-    <svg fill="none" viewBox="0 0 16 16" {...props}>
+    <svg width={16} height={16} fill="none" viewBox="0 0 16 16" {...props}>
       <path
-        stroke={props.fill}
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
         d="M13.3333 6H7.33333C6.59695 6 6 6.59695 6 7.33333V13.3333C6 14.0697 6.59695 14.6667 7.33333 14.6667H13.3333C14.0697 14.6667 14.6667 14.0697 14.6667 13.3333V7.33333C14.6667 6.59695 14.0697 6 13.3333 6Z"
       />
       <path
-        stroke={props.fill}
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.33333}
