@@ -5,7 +5,7 @@ import {
   ButtonMode,
   ButtonStyles,
   ButtonType,
-} from '~/components/Button/Button'
+} from '~/components/Input/Button/Button'
 import { IconName, getIconFromString } from '~/icons'
 
 const BUTTON_TAG = 'button'
