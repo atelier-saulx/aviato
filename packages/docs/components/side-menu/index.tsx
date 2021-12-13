@@ -73,6 +73,10 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
           route: '/components/icon-buttons',
         },
         {
+          title: 'Icons',
+          route: '/components/icons',
+        },
+        {
           title: 'Checkboxes',
           route: '/components/checkboxes',
         },
