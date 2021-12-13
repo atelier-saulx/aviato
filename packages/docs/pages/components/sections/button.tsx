@@ -219,15 +219,7 @@ const ButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <Button
-          type="primary"
-          mode="filled"
-          css={{
-            width: 200,
-            height: 200,
-            justifyContent: 'center',
-          }}
-        >
+        <Button type="primary" mode="filled">
           With CSS
         </Button>
       </ShowcaseComponent>
