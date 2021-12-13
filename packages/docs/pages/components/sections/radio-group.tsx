@@ -10,15 +10,11 @@ const Spacer = styled('div', {
 })
 
 const CheckboxPage = () => {
-  const ShowCheckboxes = () => {
+  const ShowRadiogroup = () => {
     return (
       <>
         <Column>
-          <Row>
-            <Checkbox />
-            <Spacer />
-            <Text>Accept the terms and conditions</Text>
-          </Row>
+          <Row>Radio Group Placeholder</Row>
         </Column>
       </>
     )
@@ -27,16 +23,16 @@ const CheckboxPage = () => {
   return (
     <Page>
       <NextTitle weight="Bold" size="ExtraLarge">
-        Checkbox
+        Radio Group
       </NextTitle>
 
       <NextText size="Medium" color="Secondary">
-        A control that allows the user to toggle between checked and not
-        checked.
+        A control that allows the user to toggle selection within a small set of
+        options.
       </NextText>
 
       <ShowcaseComponent background="transparent">
-        <ShowCheckboxes />
+        <ShowRadiogroup />
       </ShowcaseComponent>
     </Page>
   )
