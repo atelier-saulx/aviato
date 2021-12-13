@@ -2,6 +2,17 @@ import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 
+import { log } from '@aviato/utils'
+import {
+  SideMenu,
+  Menu,
+  MenuItem,
+  Button,
+  styled,
+  getCurrentTheme,
+} from '@aviato/ui'
+import { AviatoLogo } from '../logo'
+
 const mainMenu: MenuDataItems[] = [
   {
     title: 'Introduction',
@@ -15,39 +26,12 @@ const mainMenu: MenuDataItems[] = [
         route: '/components/button',
       },
       {
-        title: 'Icon-buttons',
-        route: '/components/icon-buttons',
-      },
-      {
-        title: 'Icons',
-        route: '/components/icons',
-      },
-      {
-        title: 'Checkboxes',
-        route: '/components/checkboxes',
-      },
-      {
-        title: 'Side-menu',
-        route: '/components/side-menu',
-      },
-      {
-        title: 'Hooks',
-        route: '/components/hooks',
+        title: 'Icon-button',
+        route: '/components/icon-button',
       },
     ],
   },
 ]
-
-import { log } from '@aviato/utils'
-import {
-  SideMenu,
-  Menu,
-  MenuItem,
-  Button,
-  styled,
-  getCurrentTheme,
-} from '@aviato/ui'
-import { AviatoLogo } from '../logo'
 
 const HeaderDiv = styled('div', {
   display: 'flex',

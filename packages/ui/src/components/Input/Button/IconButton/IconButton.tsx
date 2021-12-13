@@ -24,15 +24,13 @@ export interface IconButtonProps {
   icon?: IconName
 }
 
-export const IconButton: FunctionComponent<IconButtonProps> = (
-  properties: IconButtonProps
-) => {
+export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
   const {
     type = 'primary',
     mode = 'filled',
     disabled = false,
     onClick = noop,
-    icon,
+    icon = 'IconPlus',
     ...remainingProps
   } = properties
 
@@ -64,7 +62,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = (
       className={classes}
       {...remainingProps}
     >
-      <TargetIcon width={12} height={12} />
+      <TargetIcon width={16} height={16} />
     </StyledIconButton>
   )
 }

@@ -1,5 +1,4 @@
-import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
-import { ComponentProps } from '@stitches/react'
+import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
 import { noop } from '@aviato/utils'
 
 import { classNames, css, styled, CSS, DefaultProps } from '~/theme'
@@ -228,12 +227,7 @@ export interface ButtonProps extends DefaultProps {
   rightIcon?: Icon
 }
 
-type ForwardProps = ComponentProps<typeof StyledButton> & ButtonProps
-
-export const Button = React.forwardRef<
-  ElementRef<typeof BUTTON_TAG>,
-  ForwardProps
->((properties, forwardedRef) => {
+export const Button: FunctionComponent<ButtonProps> = (properties) => {
   const {
     type = 'primary',
     mode = 'filled',
@@ -265,7 +259,6 @@ export const Button = React.forwardRef<
 
   return (
     <StyledButton
-      ref={forwardedRef}
       type={type}
       onClick={handleClick}
       disabled={disabled}
@@ -283,4 +276,4 @@ export const Button = React.forwardRef<
       </Conditional>
     </StyledButton>
   )
-})
+}
