@@ -1,10 +1,18 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-const SvgIconMinus = (properties: SVGProperties) => {
+const SvgIconMinus = (props: SVGProperties) => {
   return (
-    <svg fill="none" viewBox="0 0 16 16">
-      <rect width={12} height={2} x={2} y={7} fill={properties.fill} rx={1} />
+    <svg width={16} height={16} fill="none" viewBox="0 0 16 16" {...props}>
+      <rect
+        width={12}
+        height={2}
+        x={2}
+        y={7}
+        fill="currentColor"
+        fillOpacity={0.87}
+        rx={1}
+      />
     </svg>
   )
 }

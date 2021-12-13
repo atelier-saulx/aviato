@@ -10,6 +10,7 @@ const WrapperDiv = styled('div', {
 
 const Section: FunctionComponent = () => {
   const router = useRouter()
+
   const { section = '' } = router.query
 
   if (!section) {

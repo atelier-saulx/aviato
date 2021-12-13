@@ -43,9 +43,9 @@ const SideMenuPage = () => {
           </HeaderDiv>
 
           <Menu>
-            <MenuItem title="Content model" icon="box" />
-            <MenuItem title="Publications" icon="paper" />
-            <MenuItem title="Media" icon="circle" />
+            <MenuItem title="Content model" />
+            <MenuItem title="Publications" />
+            <MenuItem title="Media" />
 
             <Spacer />
 

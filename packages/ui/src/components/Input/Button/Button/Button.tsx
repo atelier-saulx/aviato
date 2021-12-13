@@ -1,13 +1,16 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { classNames, css, styled, CSS, DefaultProps } from '~/theme'
 import { noop } from '@aviato/utils'
+
+import { classNames, css, styled, CSS, DefaultProps } from '~/theme'
+import { Conditional } from '~/components/Utilities/Conditional'
+import { Icon } from '~/icons/collection'
 
 const primaryButtonCSS: CSS = {
   '&.isFilled': {
     color: '$PrimaryContrastHigh',
     background: '$PrimaryMain',
-    border: '0px solid transparent',
+    border: '1px solid $PrimaryMain',
 
     '&:hover': {
       background: '$PrimaryMainHover',
@@ -18,7 +21,7 @@ const primaryButtonCSS: CSS = {
     '&:disabled': {
       color: '$ActionDisabledContent',
       background: '$ActionDisabledBackground',
-      border: '0px solid transparent',
+      border: '1px solid $ActionDisabledBackground',
     },
   },
 
@@ -41,6 +44,7 @@ const primaryButtonCSS: CSS = {
 
   '&.isTransparent': {
     color: '$PrimaryMain',
+    border: '1px solid transparent',
 
     '&:hover': {
       backgroundColor: '$PrimaryLightHover',
@@ -51,7 +55,7 @@ const primaryButtonCSS: CSS = {
     '&:disabled': {
       color: '$ActionDisabledContent',
       background: 'transparent',
-      border: '0px solid transparent',
+      border: '1px solid transparent',
     },
   },
 }
@@ -60,7 +64,7 @@ const ghostButtonCSS: CSS = {
   '&.isFilled': {
     color: '$TextPrimary',
     background: '$ActionMain',
-    border: '0px solid transparent',
+    border: '1px solid $ActionMain',
 
     '&:hover': {
       background: '$ActionMainHover',
@@ -72,7 +76,7 @@ const ghostButtonCSS: CSS = {
     '&:disabled': {
       color: '$ActionDisabledContent',
       background: '$ActionDisabledBackground',
-      border: '0px solid transparent',
+      border: '1px solid $ActionMain',
     },
   },
 
@@ -169,11 +173,12 @@ const errorButtonCSS: CSS = {
 }
 
 export const ButtonStyles = css({
-  alignItems: 'flex-start',
+  display: 'flex',
+  alignItems: 'center',
   borderRadius: '4px',
   cursor: 'pointer',
   fontWeight: '500',
-  padding: '4px 8px',
+  padding: '4px 10px',
   lineHeight: '24px',
   fontSize: '15px',
 
@@ -190,6 +195,23 @@ export const ButtonStyles = css({
   },
 })
 
+export const ButtonIcon = styled('span', {
+  display: 'inline-flex',
+  alignSelf: 'center',
+  flexShrink: 0,
+
+  variants: {
+    type: {
+      start: {
+        marginRight: 10,
+      },
+      end: {
+        marginLeft: 10,
+      },
+    },
+  },
+})
+
 const BUTTON_TAG = 'button'
 
 export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
@@ -202,6 +224,8 @@ export interface ButtonProps extends DefaultProps {
   mode?: ButtonMode
   disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
+  leftIcon?: Icon
+  rightIcon?: Icon
 }
 
 type ForwardProps = ComponentProps<typeof StyledButton> & ButtonProps
@@ -215,11 +239,17 @@ export const Button = React.forwardRef<
     mode = 'filled',
     disabled = false,
     onClick = noop,
+    leftIcon = null,
+    rightIcon = null,
     children,
     ...remainingProps
   } = properties
 
   const handleClick = useCallback(() => {
+    if (disabled) {
+      return noop()
+    }
+
     onClick()
   }, [])
 
@@ -242,7 +272,15 @@ export const Button = React.forwardRef<
       className={classes}
       {...remainingProps}
     >
+      <Conditional test={leftIcon}>
+        <ButtonIcon type="start">{leftIcon}</ButtonIcon>
+      </Conditional>
+
       {children}
+
+      <Conditional test={rightIcon}>
+        <ButtonIcon type="end">{rightIcon}</ButtonIcon>
+      </Conditional>
     </StyledButton>
   )
 })

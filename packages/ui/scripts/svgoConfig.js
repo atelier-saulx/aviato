@@ -1,18 +1,25 @@
 module.exports = {
   multipass: true, // boolean. false by default
+
   js2svg: {
     indent: 2, // string with spaces or number of spaces. 4 by default
     pretty: true, // boolean, false by default
   },
+
   plugins: [
-    // Remove width and height
-    'removeDimensions',
+    // Convert colors to currentColor
+    {
+      name: 'convertColors',
+      params: {
+        currentColor: true,
+      },
+    },
 
     // Remove specific attributes
     {
       name: 'removeAttrs',
       params: {
-        attrs: '(xmlns|fill-opacity|stroke-opacity)',
+        attrs: '(xmlns)',
       },
     },
 
