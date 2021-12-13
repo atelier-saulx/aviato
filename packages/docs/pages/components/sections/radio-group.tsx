@@ -1,5 +1,5 @@
 import { styled } from '@aviato/ui'
-import { Checkbox, Text, Column, Row } from '@aviato/ui'
+import { RadioGroup, Radio, Column, Row } from '@aviato/ui'
 import { NextTitle, NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -14,7 +14,14 @@ const CheckboxPage = () => {
     return (
       <>
         <Column>
-          <Row>Radio Group Placeholder</Row>
+          <Row>
+            <RadioGroup>
+              <Radio />
+              <Radio />
+              <Radio />
+              <Radio />
+            </RadioGroup>
+          </Row>
         </Column>
       </>
     )
