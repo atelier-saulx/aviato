@@ -132,7 +132,9 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (
 
   const handleChange = useCallback(
     (event) => {
-      if (isDisabled) return noop()
+      if (isDisabled) {
+        return noop()
+      }
 
       const isCheckboxChecked = !isChecked
       setIsChecked(isCheckboxChecked)
