@@ -246,6 +246,10 @@ export const Button = React.forwardRef<
   } = properties
 
   const handleClick = useCallback(() => {
+    if (disabled) {
+      return noop()
+    }
+
     onClick()
   }, [])
 

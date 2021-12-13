@@ -37,6 +37,10 @@ export const IconButton: FunctionComponent<IconButtonProps> = (
   } = properties
 
   const handleClick = useCallback(() => {
+    if (disabled) {
+      return noop()
+    }
+
     onClick()
   }, [])
 
