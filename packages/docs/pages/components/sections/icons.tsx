@@ -25,7 +25,7 @@ const IconButtonsPage = () => {
 
   const getMappedIcons = (color: string) => {
     const mappedIcons = Object.values(icons).map((Icon, index) => (
-      <Icon key={`Icons-${index}`} fill={color} width="20px" />
+      <Icon key={`Icons-${index}`} fill={color} width="20px" height="20px" />
     ))
 
     return mappedIcons
