@@ -3,7 +3,6 @@ import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { styled, classNames, css, DefaultProps } from '~/theme'
-import { PlaceholderIcon } from './temp'
 import { ComponentProps } from '@stitches/react'
 
 const BUTTON_TAG = 'button'
@@ -53,14 +52,8 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-const IconWrapper = styled('div', {
-  padding: '4px',
-  paddingRight: '8px',
-})
-
 export interface MenuItemProps extends DefaultProps {
   title: string
-  icon?: 'box' | 'paper' | 'circle'
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
@@ -80,7 +73,6 @@ export const MenuItem = React.forwardRef<
     isActive = false,
     isHeader = false,
     startOpen = true,
-    icon,
     ...remainingProps
   } = properties
 
@@ -114,12 +106,6 @@ export const MenuItem = React.forwardRef<
         ref={forwardedRef}
       >
         <Column>
-          <Conditional test={icon}>
-            <IconWrapper>
-              <PlaceholderIcon type={icon} />
-            </IconWrapper>
-          </Conditional>
-
           <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
             {title}
           </Text>
