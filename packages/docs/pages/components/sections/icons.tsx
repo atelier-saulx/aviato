@@ -1,31 +1,12 @@
-import { styled } from '@aviato/ui'
 import { icons, Column, Row } from '@aviato/ui'
-import { NextTitle, NextText } from '../../../components'
+import { NextTitle } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
 
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
-
-const Spacer = styled('div', {
-  width: 6,
-  height: 6,
-})
-
-const capitalize = (input: string) => {
-  return input.charAt(0).toUpperCase() + input.slice(1)
-}
-
 const IconButtonsPage = () => {
-  const mappedIcons = Object.values(icons).map((Icon, index) => (
-    <Icon key={`Icons-${index}`} />
-  ))
-
   const getMappedIcons = (color: string) => {
     const mappedIcons = Object.values(icons).map((Icon, index) => (
-      <Icon key={`Icons-${index}`} fill={color} width="20px" height="20px" />
+      <Icon key={`Icons-${index}`} fill={color} width="24px" height="24px" />
     ))
 
     return mappedIcons
@@ -52,7 +33,7 @@ const IconButtonsPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent>
-        <ShowIcons color="black" />
+        <ShowIcons color="red" />
       </ShowcaseComponent>
     </Page>
   )
