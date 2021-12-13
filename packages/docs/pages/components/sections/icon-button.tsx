@@ -1,5 +1,5 @@
 import { Checkbox, OnCheckboxChangePayload, styled } from '@aviato/ui'
-import { IconButton, Button, Column, Row, getRandomIconName } from '@aviato/ui'
+import { IconButton, Column, Row, getRandomIconName } from '@aviato/ui'
 import { useCallback, useState } from 'react'
 import { NextTitle, NextText } from '../../../components'
 

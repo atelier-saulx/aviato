@@ -1,23 +1,20 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
-import { classNames, styled } from '~/theme'
-import { noop } from '@aviato/utils'
 import {
+  Button,
   ButtonMode,
-  ButtonStyles,
   ButtonType,
+  StyledButton,
 } from '~/components/Input/Button/Button'
 import { IconName, getIconFromString } from '~/icons'
 import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
+import { StitchedCSS } from '~/theme'
 
-const BUTTON_TAG = 'button'
-
-const StyledButton = styled(BUTTON_TAG, ButtonStyles)
-
-const StyledIconButton = styled(StyledButton, {
+const IconButtonStyles: StitchedCSS = {
   padding: '8px 8px',
   height: 'max-content',
   width: 'max-content',
-})
+}
 
 export interface IconButtonProps {
   type?: ButtonType
@@ -27,10 +24,10 @@ export interface IconButtonProps {
   icon?: IconName
 }
 
-type ForwardProps = ComponentProps<typeof StyledIconButton> & IconButtonProps
+type ForwardProps = ComponentProps<typeof StyledButton> & IconButtonProps
 
 export const IconButton = React.forwardRef<
-  ElementRef<typeof StyledIconButton>,
+  ElementRef<typeof StyledButton>,
   ForwardProps
 >((properties, forwardedRef) => {
   const {
@@ -50,28 +47,19 @@ export const IconButton = React.forwardRef<
     onClick()
   }, [])
 
-  const isFilled = mode === 'filled'
-  const isOutlined = mode === 'outlined'
-  const isTransparent = mode === 'transparent'
-
-  const classes = classNames({
-    isFilled,
-    isOutlined,
-    isTransparent,
-  })
-
   const TargetIcon = getIconFromString(icon)
 
   return (
-    <StyledIconButton
+    <Button
       type={type}
+      mode={mode}
       onClick={handleClick}
       disabled={disabled}
-      className={classes}
       ref={forwardedRef}
+      css={IconButtonStyles}
       {...remainingProps}
     >
       <TargetIcon width={16} height={16} />
-    </StyledIconButton>
+    </Button>
   )
 })

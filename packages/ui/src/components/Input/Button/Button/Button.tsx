@@ -1,12 +1,12 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { noop } from '@aviato/utils'
 
-import { classNames, css, styled, CSS } from '~/theme'
+import { classNames, css, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Icon } from '~/icons/collection'
 import { ComponentProps } from '@stitches/react'
 
-const primaryButtonCSS: CSS = {
+const primaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$PrimaryContrastHigh',
     background: '$PrimaryMain',
@@ -60,7 +60,7 @@ const primaryButtonCSS: CSS = {
   },
 }
 
-const ghostButtonCSS: CSS = {
+const ghostButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$TextPrimary',
     background: '$ActionMain',
@@ -116,7 +116,7 @@ const ghostButtonCSS: CSS = {
   },
 }
 
-const errorButtonCSS: CSS = {
+const errorButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$PrimaryContrastHigh',
     background: '$ErrorMain',
