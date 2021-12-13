@@ -1,5 +1,5 @@
 import { styled } from '@aviato/ui'
-import { Button, Column, Row } from '@aviato/ui'
+import { Button, Column, Row, getRandomIcon } from '@aviato/ui'
 import { NextTitle, NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
@@ -22,12 +22,29 @@ const ButtonsPage = () => {
   const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
     const uppercasedType = capitalize(type)
 
+    const RandomIcon = () => {
+      const Icon = getRandomIcon()
+      return <Icon />
+    }
+
     return (
       <>
         <Column>
           <NextText weight="Bold">{uppercasedType} Enabled</NextText>
           <Row>
+            <Button type={type} mode="filled" leftIcon={<RandomIcon />}>
+              {uppercasedType}
+            </Button>
+
+            <Spacer />
+
             <Button type={type} mode="filled">
+              {uppercasedType}
+            </Button>
+
+            <Spacer />
+
+            <Button type={type} mode="filled" rightIcon={<RandomIcon />}>
               {uppercasedType}
             </Button>
 

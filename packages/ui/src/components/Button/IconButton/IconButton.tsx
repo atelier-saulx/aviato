@@ -6,7 +6,7 @@ import {
   ButtonStyles,
   ButtonType,
 } from '~/components/Button/Button'
-import { IconName, iconFromString } from '~/icons'
+import { IconName, getIconFromString } from '~/icons'
 
 const BUTTON_TAG = 'button'
 
@@ -50,7 +50,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = (
     isTransparent,
   })
 
-  const TargetIcon = iconFromString(icon)
+  const TargetIcon = getIconFromString(icon)
 
   return (
     <StyledIconButton

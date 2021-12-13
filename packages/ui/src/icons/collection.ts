@@ -66,13 +66,18 @@ export const icons = {
 
 export type IconName = keyof typeof icons
 
-export const iconFromString = (
-  input: IconName
-): FunctionComponent<SVGProperties> | null => {
+export type Icon = FunctionComponent<SVGProperties>
+
+export const getIconFromString = (input: IconName): Icon | null => {
   if (input && typeof input === 'string') {
     const targetIcon = input[0].toUpperCase() + input.slice(1)
     return icons[targetIcon]
   }
 
   return null
+}
+
+export const getRandomIcon = (): Icon => {
+  const values = Object.values(icons)
+  return values[Math.floor(Math.random() * values.length)]
 }

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
+import { Icon } from '~/icons/collection'
 
-type TruthyOrFalsy = boolean | string | null | undefined
+type TruthyOrFalsy = Icon | boolean | string | null | undefined
 
 type ConditionalProps = {
   test: TruthyOrFalsy
