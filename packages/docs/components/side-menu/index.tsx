@@ -26,7 +26,7 @@ const mainMenu: MenuDataItems[] = [
         route: '/components/button',
       },
       {
-        title: 'Icon-button',
+        title: 'Icon Button',
         route: '/components/icon-button',
       },
       {
