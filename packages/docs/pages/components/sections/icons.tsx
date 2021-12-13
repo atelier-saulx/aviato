@@ -1,12 +1,21 @@
+import { styled } from '@aviato/ui'
 import { icons, Column, Row } from '@aviato/ui'
-import { NextTitle } from '../../../components'
+import { NextTitle, NextText } from '../../../components'
 
 import { Page, ShowcaseComponent } from '../../../components'
+
+const Wrapper = styled('div', {
+  width: 20,
+  height: 20,
+  margin: 6,
+})
 
 const IconButtonsPage = () => {
   const getMappedIcons = (color: string) => {
     const mappedIcons = Object.values(icons).map((Icon, index) => (
-      <Icon key={`Icons-${index}`} fill={color} width="24px" height="24px" />
+      <Wrapper css={{ color }} key={`IconWrapper-${index}`}>
+        <Icon key={`Icon-${index}`} width="inherit" height="inherit" />
+      </Wrapper>
     ))
 
     return mappedIcons
@@ -16,7 +25,9 @@ const IconButtonsPage = () => {
     return (
       <>
         <Column>
-          <Row>{getMappedIcons(color)}</Row>
+          <Row css={{ flexWrap: 'wrap', maxWidth: '200px' }}>
+            {getMappedIcons(color)}
+          </Row>
         </Column>
       </>
     )
@@ -29,7 +40,7 @@ const IconButtonsPage = () => {
       </NextTitle>
 
       <ShowcaseComponent>
-        <ShowIcons color="white" />
+        <ShowIcons color="black" />
       </ShowcaseComponent>
 
       <ShowcaseComponent>
