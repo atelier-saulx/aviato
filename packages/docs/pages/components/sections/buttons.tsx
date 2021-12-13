@@ -19,67 +19,117 @@ const capitalize = (input: string) => {
 }
 
 const ButtonsPage = () => {
+  const RandomIcon = () => {
+    const Icon = getRandomIcon()
+    return <Icon />
+  }
+
   const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
     const uppercasedType = capitalize(type)
-
-    const RandomIcon = () => {
-      const Icon = getRandomIcon()
-      return <Icon />
-    }
 
     return (
       <>
         <Column>
-          <NextText weight="Bold">{uppercasedType} Enabled</NextText>
+          <NextTitle weight="Bold">{uppercasedType}</NextTitle>
           <Row>
-            <Button type={type} mode="filled" leftIcon={<RandomIcon />}>
-              {uppercasedType}
-            </Button>
+            <Column>
+              <Row>
+                <Button type={type} mode="filled" leftIcon={<RandomIcon />}>
+                  {uppercasedType}
+                </Button>
+                <Spacer />
+                <Button type={type} mode="filled">
+                  {uppercasedType}
+                </Button>
+                <Spacer />
+                <Button type={type} mode="filled" rightIcon={<RandomIcon />}>
+                  {uppercasedType}
+                </Button>
+              </Row>
 
-            <Spacer />
+              <BigSpacer />
 
-            <Button type={type} mode="filled">
-              {uppercasedType}
-            </Button>
+              <Row>
+                <Button type={type} mode="outlined" leftIcon={<RandomIcon />}>
+                  {uppercasedType}
+                </Button>
+                <Spacer />
+                <Button type={type} mode="outlined">
+                  {uppercasedType}
+                </Button>
+                <Spacer />
+                <Button type={type} mode="outlined" rightIcon={<RandomIcon />}>
+                  {uppercasedType}
+                </Button>
+              </Row>
 
-            <Spacer />
+              <BigSpacer />
 
-            <Button type={type} mode="filled" rightIcon={<RandomIcon />}>
-              {uppercasedType}
-            </Button>
-
-            <Spacer />
-
-            <Button type={type} mode="outlined">
-              {uppercasedType}
-            </Button>
-
-            <Spacer />
-
-            <Button type={type} mode="transparent">
-              {uppercasedType}
-            </Button>
+              <Row>
+                <Button
+                  type={type}
+                  mode="transparent"
+                  leftIcon={<RandomIcon />}
+                >
+                  {uppercasedType}
+                </Button>
+                <Spacer />
+                <Button type={type} mode="transparent">
+                  {uppercasedType}
+                </Button>
+                <Spacer />
+                <Button
+                  type={type}
+                  mode="transparent"
+                  rightIcon={<RandomIcon />}
+                >
+                  {uppercasedType}
+                </Button>
+              </Row>
+            </Column>
           </Row>
+        </Column>
+      </>
+    )
+  }
 
-          <BigSpacer />
-
-          <NextText weight="Bold">{uppercasedType} Disabled</NextText>
+  const ShowDisabledButtons = () => {
+    return (
+      <>
+        <Column>
+          <NextTitle weight="Bold">Disabled</NextTitle>
           <Row>
-            <Button type={type} mode="filled" disabled>
-              {uppercasedType}
-            </Button>
+            <Column>
+              <Row>
+                <Button mode="filled" disabled>
+                  Disabled
+                </Button>
+                <Spacer />
+                <Button mode="outlined" disabled>
+                  Disabled
+                </Button>
+                <Spacer />
+                <Button mode="transparent" disabled>
+                  Disabled
+                </Button>
+              </Row>
 
-            <Spacer />
+              <BigSpacer />
 
-            <Button type={type} mode="outlined" disabled>
-              {uppercasedType}
-            </Button>
-
-            <Spacer />
-
-            <Button type={type} mode="transparent" disabled>
-              {uppercasedType}
-            </Button>
+              <Row>
+                <Button mode="filled" disabled leftIcon={<RandomIcon />}>
+                  Disabled
+                </Button>
+                <Spacer />
+                <Button mode="outlined" disabled>
+                  Disabled
+                </Button>
+                <Spacer />
+                <Button mode="transparent" disabled rightIcon={<RandomIcon />}>
+                  Disabled
+                </Button>
+              </Row>
+            </Column>
           </Row>
         </Column>
       </>
@@ -102,6 +152,10 @@ const ButtonsPage = () => {
 
       <ShowcaseComponent>
         <ShowButtons type="error" />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent>
+        <ShowDisabledButtons />
       </ShowcaseComponent>
     </Page>
   )
