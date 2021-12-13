@@ -36,7 +36,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   const HeadContent = () => {
     return (
       <Head>
-        <title>Aviato-UI</title>
+        <title>Aviato-UI test</title>
         <meta
           name="viewport"
           content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
