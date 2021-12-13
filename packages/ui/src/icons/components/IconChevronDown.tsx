@@ -8,6 +8,7 @@ const SvgIconChevronDown = (props: SVGProperties) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.87}
         strokeWidth={1.33333}
         d="M2 5L8 11L14 5"
       />

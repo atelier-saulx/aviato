@@ -8,6 +8,7 @@ const SvgIconAlignCenter = (props: SVGProperties) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.87}
         strokeWidth={1.33333}
         d="M12 6.66666H4"
       />
@@ -15,6 +16,7 @@ const SvgIconAlignCenter = (props: SVGProperties) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.87}
         strokeWidth={1.33333}
         d="M14 4H2"
       />
@@ -22,6 +24,7 @@ const SvgIconAlignCenter = (props: SVGProperties) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.87}
         strokeWidth={1.33333}
         d="M14 9.33334H2"
       />
@@ -29,6 +32,7 @@ const SvgIconAlignCenter = (props: SVGProperties) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.87}
         strokeWidth={1.33333}
         d="M12 12H4"
       />

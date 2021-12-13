@@ -8,6 +8,7 @@ const SvgIconChevronBack = (props: SVGProperties) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.87}
         strokeWidth={1.33333}
         d="M11 2L5 8L11 14"
       />
