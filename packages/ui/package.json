@@ -43,7 +43,6 @@
     "parse:icons": "node --experimental-modules ./scripts/reactFromSVG.mjs",
     "parse:tokens": "node --experimental-modules ./scripts/parseToken.mjs",
     "start": "yarn watch",
-    "prebuild": "yarn parse",
     "build": "rollup -c",
     "watch": "rollup -c --watch",
     "lint": "run-p lint:*",
