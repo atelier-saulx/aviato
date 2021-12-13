@@ -10,7 +10,7 @@ const primaryButtonCSS: CSS = {
   '&.isFilled': {
     color: '$PrimaryContrastHigh',
     background: '$PrimaryMain',
-    border: '0px solid transparent',
+    border: '1px solid $PrimaryMain',
 
     '&:hover': {
       background: '$PrimaryMainHover',
@@ -21,7 +21,7 @@ const primaryButtonCSS: CSS = {
     '&:disabled': {
       color: '$ActionDisabledContent',
       background: '$ActionDisabledBackground',
-      border: '0px solid transparent',
+      border: '1px solid $ActionDisabledBackground',
     },
   },
 
@@ -54,7 +54,7 @@ const primaryButtonCSS: CSS = {
     '&:disabled': {
       color: '$ActionDisabledContent',
       background: 'transparent',
-      border: '0px solid transparent',
+      border: '1px solid transparent',
     },
   },
 }
@@ -63,7 +63,7 @@ const ghostButtonCSS: CSS = {
   '&.isFilled': {
     color: '$TextPrimary',
     background: '$ActionMain',
-    border: '0px solid transparent',
+    border: '1px solid $ActionMain',
 
     '&:hover': {
       background: '$ActionMainHover',
@@ -75,7 +75,7 @@ const ghostButtonCSS: CSS = {
     '&:disabled': {
       color: '$ActionDisabledContent',
       background: '$ActionDisabledBackground',
-      border: '0px solid transparent',
+      border: '1px solid $ActionMain',
     },
   },
 

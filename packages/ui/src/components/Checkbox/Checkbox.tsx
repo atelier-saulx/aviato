@@ -4,15 +4,25 @@ import { Conditional } from '~/components/Utilities/Conditional'
 import { DefaultProps, styled } from '~/theme'
 import { ComponentProps } from '@stitches/react'
 import { IconCheck, IconMinus } from '~/icons'
+import { OnValueChange } from '~/types'
 
-const BUTTON_TAG = 'button'
+const HiddenCheckbox = styled('input', {
+  position: 'absolute',
+  opacity: 0,
+  cursor: 'pointer',
+  height: 0,
+  width: 0,
+})
 
-const StyledCheckbox = styled(BUTTON_TAG, {
+const DIV_TAG = 'div'
+
+const StyledCheckbox = styled(DIV_TAG, {
   backgroundColor: 'white',
   borderRadius: '4px',
   cursor: 'pointer',
   padding: '1px',
   border: '1px solid $OtherOutline',
+  color: '$PrimaryContrastHigh',
 
   '&:hover': {
     backgroundColor: '$ActionMainHover',
@@ -58,12 +68,13 @@ export interface CheckboxProps extends DefaultProps {
   checked?: boolean
   disabled?: boolean
   indeterminate?: boolean
+  onChange?: OnValueChange<boolean>
 }
 
 type ForwardProps = ComponentProps<typeof StyledCheckbox> & CheckboxProps
 
 export const Checkbox = React.forwardRef<
-  ElementRef<typeof BUTTON_TAG>,
+  ElementRef<typeof DIV_TAG>,
   ForwardProps
 >((properties, forwardedRef) => {
   const {
@@ -71,6 +82,7 @@ export const Checkbox = React.forwardRef<
     checked = false,
     disabled = false,
     indeterminate = false,
+    onChange = noop,
     ...remainingProps
   } = properties
 
@@ -87,7 +99,17 @@ export const Checkbox = React.forwardRef<
   const handleClick = useCallback(() => {
     if (disabled) return noop()
 
-    setIsChecked(!isChecked)
+    const newState = !isChecked
+    setIsChecked(newState)
+    onChange(newState)
+  }, [isChecked, isDisabled, isIndeterminate])
+
+  const handleChange = useCallback(() => {
+    if (disabled) return noop()
+
+    const newState = !isChecked
+    setIsChecked(newState)
+    onChange(newState)
   }, [isChecked, isDisabled, isIndeterminate])
 
   return (
@@ -99,12 +121,19 @@ export const Checkbox = React.forwardRef<
       disabled={isDisabled}
       {...remainingProps}
     >
-      <Conditional test={isChecked && isIndeterminate}>
-        <IconMinus fill="#FFF" />
-      </Conditional>
+      <HiddenCheckbox
+        type="checkbox"
+        checked={indeterminate || checked}
+        onChange={handleChange}
+        disabled={disabled}
+      />
 
       <Conditional test={isChecked && !isIndeterminate}>
-        <IconCheck fill="#FFF" />
+        <IconCheck />
+      </Conditional>
+
+      <Conditional test={isChecked && isIndeterminate}>
+        <IconMinus />
       </Conditional>
     </StyledCheckbox>
   )

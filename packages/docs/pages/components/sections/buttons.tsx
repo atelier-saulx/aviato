@@ -1,6 +1,9 @@
-import { styled } from '@aviato/ui'
-import { Button, Column, Row, getRandomIcon } from '@aviato/ui'
-import { NextTitle, NextText } from '../../../components'
+import { Checkbox, styled } from '@aviato/ui'
+import { Button, Column, Row, getRandomIcon, icons } from '@aviato/ui'
+import { useCallback, useState } from 'react'
+import { NextTitle } from '../../../components'
+
+const { IconPlus } = icons
 
 import { Page, ShowcaseComponent } from '../../../components'
 
@@ -21,28 +24,50 @@ const capitalize = (input: string) => {
 const ButtonsPage = () => {
   const RandomIcon = () => {
     const Icon = getRandomIcon()
-    return <Icon />
+    return <IconPlus />
   }
 
   const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
     const uppercasedType = capitalize(type)
 
+    const [isChecked, setIsChecked] = useState(false)
+
+    const onCheckedChange = useCallback((event) => {
+      setIsChecked(event)
+    }, [])
+
     return (
       <>
         <Column>
           <NextTitle weight="Bold">{uppercasedType}</NextTitle>
+          <Checkbox
+            checked={isChecked}
+            onChange={(event) => onCheckedChange(event)}
+          />
+          <BigSpacer />
+
           <Row>
             <Column>
               <Row>
-                <Button type={type} mode="filled" leftIcon={<RandomIcon />}>
+                <Button
+                  type={type}
+                  mode="filled"
+                  leftIcon={<RandomIcon />}
+                  disabled={isChecked}
+                >
                   {uppercasedType}
                 </Button>
                 <Spacer />
-                <Button type={type} mode="filled">
+                <Button type={type} mode="filled" disabled={isChecked}>
                   {uppercasedType}
                 </Button>
                 <Spacer />
-                <Button type={type} mode="filled" rightIcon={<RandomIcon />}>
+                <Button
+                  type={type}
+                  mode="filled"
+                  rightIcon={<RandomIcon />}
+                  disabled={isChecked}
+                >
                   {uppercasedType}
                 </Button>
               </Row>
@@ -50,15 +75,25 @@ const ButtonsPage = () => {
               <BigSpacer />
 
               <Row>
-                <Button type={type} mode="outlined" leftIcon={<RandomIcon />}>
+                <Button
+                  type={type}
+                  mode="outlined"
+                  leftIcon={<RandomIcon />}
+                  disabled={isChecked}
+                >
                   {uppercasedType}
                 </Button>
                 <Spacer />
-                <Button type={type} mode="outlined">
+                <Button type={type} mode="outlined" disabled={isChecked}>
                   {uppercasedType}
                 </Button>
                 <Spacer />
-                <Button type={type} mode="outlined" rightIcon={<RandomIcon />}>
+                <Button
+                  type={type}
+                  mode="outlined"
+                  rightIcon={<RandomIcon />}
+                  disabled={isChecked}
+                >
                   {uppercasedType}
                 </Button>
               </Row>
@@ -70,11 +105,12 @@ const ButtonsPage = () => {
                   type={type}
                   mode="transparent"
                   leftIcon={<RandomIcon />}
+                  disabled={isChecked}
                 >
                   {uppercasedType}
                 </Button>
                 <Spacer />
-                <Button type={type} mode="transparent">
+                <Button type={type} mode="transparent" disabled={isChecked}>
                   {uppercasedType}
                 </Button>
                 <Spacer />
@@ -82,6 +118,7 @@ const ButtonsPage = () => {
                   type={type}
                   mode="transparent"
                   rightIcon={<RandomIcon />}
+                  disabled={isChecked}
                 >
                   {uppercasedType}
                 </Button>
