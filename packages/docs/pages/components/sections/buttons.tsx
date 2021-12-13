@@ -1,7 +1,7 @@
 import { Checkbox, OnCheckboxChangePayload, styled } from '@aviato/ui'
 import { Button, Column, Row, getRandomIcon, icons } from '@aviato/ui'
 import { useCallback, useState } from 'react'
-import { NextTitle } from '../../../components'
+import { NextTitle, NextText } from '../../../components'
 
 const { IconPlus } = icons
 
@@ -42,7 +42,12 @@ const ButtonsPage = () => {
       <>
         <Column>
           <NextTitle weight="Bold">{uppercasedType}</NextTitle>
-          <Checkbox onChange={onCheckedChange} />
+
+          <Row>
+            <NextText>Disable buttons?</NextText> <Spacer />
+            <Checkbox onChange={onCheckedChange} />
+          </Row>
+
           <BigSpacer />
 
           <Row>
@@ -56,11 +61,15 @@ const ButtonsPage = () => {
                 >
                   {uppercasedType}
                 </Button>
+
                 <Spacer />
+
                 <Button type={type} mode="filled" disabled={isChecked}>
                   {uppercasedType}
                 </Button>
+
                 <Spacer />
+
                 <Button
                   type={type}
                   mode="filled"
@@ -82,11 +91,15 @@ const ButtonsPage = () => {
                 >
                   {uppercasedType}
                 </Button>
+
                 <Spacer />
+
                 <Button type={type} mode="outlined" disabled={isChecked}>
                   {uppercasedType}
                 </Button>
+
                 <Spacer />
+
                 <Button
                   type={type}
                   mode="outlined"

@@ -44,6 +44,7 @@ const primaryButtonCSS: CSS = {
 
   '&.isTransparent': {
     color: '$PrimaryMain',
+    border: '1px solid transparent',
 
     '&:hover': {
       backgroundColor: '$PrimaryLightHover',
