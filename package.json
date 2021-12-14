@@ -62,6 +62,9 @@
         "outputs": []
       },
       "watch": {
+        "dependsOn": [
+          "build"
+        ],
         "cache": false
       }
     }
