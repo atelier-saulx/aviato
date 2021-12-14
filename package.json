@@ -19,7 +19,7 @@
     "saulx"
   ],
   "scripts": {
-    "start": "yarn watch",
+    "start": "pnpm run watch",
     "watch": "turbo run watch --parallel",
     "lint": "turbo run lint --continue",
     "build": "turbo run build --continue",
@@ -45,6 +45,7 @@
   },
   "turbo": {
     "baseBranch": "origin/main",
+    "npmClient": "pnpm",
     "pipeline": {
       "build": {
         "dependsOn": [
