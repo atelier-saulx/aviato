@@ -7,6 +7,11 @@ import alias from 'rollup-plugin-alias'
 const plugins = []
 
 const isProduction = !process.env.ROLLUP_WATCH
+
+/**
+ * Remove dist folder building for deployment.
+ * This negates the risk of publishing stale files.
+ */
 if (isProduction) {
   plugins.push(remove({ targets: './dist/*' }))
 }
