@@ -1,38 +1,34 @@
 import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
-import { classNames, styled } from '~/theme'
-import { noop } from '@aviato/utils'
 import {
+  Button,
   ButtonMode,
-  ButtonStyles,
   ButtonType,
 } from '~/components/Input/Button/Button'
 import { IconName, getIconFromString } from '~/icons'
+import { noop } from '@aviato/utils'
+import { DefaultProps, StitchedCSS } from '~/theme'
 
-const BUTTON_TAG = 'button'
-
-const StyledButton = styled(BUTTON_TAG, ButtonStyles)
-
-const StyledIconButton = styled(StyledButton, {
+const IconButtonStyles: StitchedCSS = {
   padding: '8px 8px',
-})
+  height: 'max-content',
+  width: 'max-content',
+}
 
-export interface IconButtonProps {
+export interface IconButtonProps extends DefaultProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
-  onClick?: MouseEventHandler<HTMLButtonElement>
   icon?: IconName
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export const IconButton: FunctionComponent<IconButtonProps> = (
-  properties: IconButtonProps
-) => {
+export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
   const {
     type = 'primary',
     mode = 'filled',
     disabled = false,
     onClick = noop,
-    icon,
+    icon = 'IconPlus',
     ...remainingProps
   } = properties
 
@@ -44,27 +40,18 @@ export const IconButton: FunctionComponent<IconButtonProps> = (
     onClick()
   }, [])
 
-  const isFilled = mode === 'filled'
-  const isOutlined = mode === 'outlined'
-  const isTransparent = mode === 'transparent'
-
-  const classes = classNames({
-    isFilled,
-    isOutlined,
-    isTransparent,
-  })
-
   const TargetIcon = getIconFromString(icon)
 
   return (
-    <StyledIconButton
+    <Button
       type={type}
+      mode={mode}
       onClick={handleClick}
       disabled={disabled}
-      className={classes}
+      css={IconButtonStyles}
       {...remainingProps}
     >
-      <TargetIcon width={12} height={12} />
-    </StyledIconButton>
+      <TargetIcon width={16} height={16} />
+    </Button>
   )
 }

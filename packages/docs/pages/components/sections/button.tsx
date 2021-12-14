@@ -1,9 +1,14 @@
-import { Checkbox, OnCheckboxChangePayload, styled } from '@aviato/ui'
-import { Button, Column, Row, getRandomIcon, icons } from '@aviato/ui'
+import {
+  Checkbox,
+  OnCheckboxChangePayload,
+  Button,
+  Column,
+  Row,
+  getRandomIcon,
+  styled,
+} from '@aviato/ui'
 import { useCallback, useState } from 'react'
 import { NextTitle, NextText } from '../../../components'
-
-const { IconPlus } = icons
 
 import { Page, ShowcaseComponent } from '../../../components'
 
@@ -21,7 +26,7 @@ const capitalize = (input: string) => {
   return input.charAt(0).toUpperCase() + input.slice(1)
 }
 
-const ButtonsPage = () => {
+const ButtonPage = () => {
   const RandomIcon = () => {
     const Icon = getRandomIcon()
     return <Icon />
@@ -212,8 +217,14 @@ const ButtonsPage = () => {
       <ShowcaseComponent background="transparent">
         <ShowDisabledButtons />
       </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <Button type="primary" mode="filled">
+          With CSS
+        </Button>
+      </ShowcaseComponent>
     </Page>
   )
 }
 
-export default ButtonsPage
+export default ButtonPage

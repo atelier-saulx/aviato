@@ -39,9 +39,9 @@
   "prettier": "@saulx/prettier-config",
   "scripts": {
     "nodemon:parse": "nodemon --exec yarn parse",
-    "parse": "run-s parse:*",
-    "parse:icons": "node --experimental-modules ./scripts/reactFromSVG.mjs",
-    "parse:tokens": "node --experimental-modules ./scripts/parseToken.mjs",
+    "scripts": "run-s scripts:*",
+    "scripts:icons": "node --experimental-modules ./scripts/reactFromSVG.mjs",
+    "scripts:tokens": "node --experimental-modules ./scripts/parseToken.mjs",
     "start": "yarn watch",
     "build": "rollup -c",
     "watch": "rollup -c --watch",

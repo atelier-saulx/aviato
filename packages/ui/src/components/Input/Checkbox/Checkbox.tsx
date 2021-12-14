@@ -108,9 +108,7 @@ export interface CheckboxProps extends DefaultProps {
 /***
  * TODO: Implement proper indeterminate logic
  */
-export const Checkbox: FunctionComponent<CheckboxProps> = (
-  properties: CheckboxProps
-) => {
+export const Checkbox: FunctionComponent<CheckboxProps> = (properties) => {
   const {
     size = 'medium',
     checked = false,

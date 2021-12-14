@@ -10,10 +10,10 @@ const createdConfig = createStitches({
   theme: LightTheme,
 })
 
-export type CSS = Stitches.CSS<typeof config>
+export type StitchedCSS = Stitches.CSS<typeof config>
 
 export interface DefaultProps {
-  css?: CSS
+  css?: StitchedCSS
   style?: CSSProperties
 }
 
