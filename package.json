@@ -23,9 +23,9 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "watch": "turbo run watch --parallel",
-    "lint": "turbo run lint",
+    "lint": "turbo run lint --continue",
+    "build": "turbo run build --continue",
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
   },
   "dependencies": {
