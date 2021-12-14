@@ -39,12 +39,12 @@
   },
   "lint-staged": {
     "*": [
-      "yarn lint"
+      "yarn lint --continue"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn lint"
+      "pre-push": "yarn lint --continue"
     }
   },
   "turbo": {
