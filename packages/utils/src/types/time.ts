@@ -1,5 +1,9 @@
 import type { Nominal } from './nominal'
 
+/**
+ * Nominal primitives. See ./nominal.ts
+ */
+
 export type Milliseconds = Nominal<number, 'Milliseconds'>
 export type Seconds = Nominal<number, 'Seconds'>
 export type Minutes = Nominal<number, 'Minutes'>

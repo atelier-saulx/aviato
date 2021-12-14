@@ -27,6 +27,7 @@
     "watch": "turbo run watch --parallel",
     "lint": "turbo run lint --continue",
     "build": "turbo run build --continue",
+    "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
   },
   "dependencies": {

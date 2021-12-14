@@ -49,6 +49,9 @@ export interface AvatarProps extends DefaultProps {
 
 type ForwardProps = ComponentProps<typeof StyledAvatar> & AvatarProps
 
+/**
+ * Avatar component.
+ */
 export const Avatar = React.forwardRef<
   ElementRef<typeof DIV_TAG>,
   ForwardProps
