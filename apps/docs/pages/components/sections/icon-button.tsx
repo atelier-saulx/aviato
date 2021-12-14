@@ -8,9 +8,12 @@ import {
   styled,
 } from '@aviato/ui'
 import { useCallback, useState } from 'react'
-import { NextTitle, NextText } from '../../../components'
-
-import { Page, ShowcaseComponent } from '../../../components'
+import {
+  NextTitle,
+  NextText,
+  Page,
+  ShowcaseComponent,
+} from '../../../components'
 
 const BigSpacer = styled('div', {
   width: '100%',
@@ -145,11 +148,7 @@ const IconButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <IconButton
-          type="primary"
-          mode="filled"
-          icon={RandomIconName()}
-        ></IconButton>
+        <IconButton type="primary" mode="filled" icon={RandomIconName()} />
       </ShowcaseComponent>
     </Page>
   )
