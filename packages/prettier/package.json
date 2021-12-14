@@ -6,7 +6,7 @@
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
   "main": "prettier.config.js",
-  "peerDependencies": {
+  "dependencies": {
     "prettier": "2.5.1"
   }
 }
