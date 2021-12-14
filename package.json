@@ -23,6 +23,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "yarn watch",
     "watch": "turbo run watch --parallel",
     "lint": "turbo run lint --continue",
     "build": "turbo run build --continue",
