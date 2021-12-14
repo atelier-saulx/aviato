@@ -1,6 +1,6 @@
 <div align="center">
   <a href="javascript:void(0);" style="pointer-events: none;">
-    <img src="./docs/assets/logo.svg" style="width: 200px; padding-bottom: 10px;" />
+    <img src="./.docs/assets/logo.svg" style="width: 200px; padding-bottom: 10px;" />
   </a>
 
   <p align="center">
@@ -59,7 +59,9 @@ npm install --save @aviato/ui
 
 ### Example
 
-See how to use the library under [Getting Started](./docs/getting-started.md).
+See how to use the library under [Getting Started](./.docs/getting-started.md).
+
+To read more behind the scenes, go to [Methodologies](./.docs/methodologies.md).
 
 ---
 

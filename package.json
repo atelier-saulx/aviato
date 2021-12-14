@@ -18,10 +18,6 @@
     "aviato",
     "saulx"
   ],
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "start": "yarn watch",
     "watch": "turbo run watch --parallel",
