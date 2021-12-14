@@ -1,2 +1,6 @@
 temp
 dist
+.turbo
+
+src/icons
+src/icons/parsed

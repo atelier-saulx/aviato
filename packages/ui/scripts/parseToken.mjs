@@ -1,29 +1,25 @@
 /* eslint-disable no-console */
 /* eslint-disable no-prototype-builtins */
 
+import {
+  logInfo,
+  logSuccess,
+  logProgress,
+  logWarning as utilsLogWarning,
+  logError,
+} from './utils.mjs'
+
 import ora from 'ora'
-import chalk from 'chalk'
 import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
 import { exec } from 'promisify-child-process'
 
-const green = chalk.green
-const blue = chalk.blue
-const yellow = chalk.yellow
-const white = chalk.white
-const red = chalk.red
-
 let warningCount = 0
-
-const logInfo = (message) => console.log(white(message))
-const logSuccess = (message) => console.log(green(message))
-const logProgress = (message) => console.log(blue(message))
-const logError = (message) => console.log(red(message))
 
 const logWarning = (message) => {
   warningCount++
-  console.log(yellow(message))
+  utilsLogWarning(message)
 }
 
 /***
@@ -42,7 +38,7 @@ async function start() {
     throw new Error(error)
   } finally {
     spinner.stop()
-    logInfo('\n Done parsing')
+    logInfo('\n Done parsing Figma tokens.')
 
     if (warningCount === 0) {
       logSuccess('\n ⚡️ Parsing finished without warnings. ⚡️')
@@ -209,11 +205,15 @@ function lookupVariablesAndReplace(object) {
         .replace('{', '')
         .replace('}', '')
 
-      let matchingToken = findToken(sanitisedToken, object)
-      matchingToken = convertHexToRGBA(matchingToken)
-      matchingToken = stripRGB(matchingToken)
+      const matchingToken = findToken(sanitisedToken, object)
+      let convertedToColor = matchingToken
 
-      object[key] = value.replace(braceRegex, matchingToken)
+      if (value.startsWith('rgba')) {
+        convertedToColor = convertHexToRGBA(matchingToken)
+        convertedToColor = stripRGB(matchingToken)
+      }
+
+      object[key] = value.replace(braceRegex, convertedToColor)
     }
 
     if (isDollarToken(value)) {

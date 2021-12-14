@@ -1,18 +1,19 @@
-import { createStitches } from '@stitches/react'
 import { CSSProperties } from 'react'
+import { createStitches } from '@stitches/react'
 import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './theme.light'
 import { theme as DarkTheme } from './theme.dark'
+import { isBrowser } from '@aviato/utils'
 
 const createdConfig = createStitches({
   theme: LightTheme,
 })
 
-export type CSS = Stitches.CSS<typeof config>
+export type StitchedCSS = Stitches.CSS<typeof config>
 
 export interface DefaultProps {
-  css?: CSS
+  css?: StitchedCSS
   style?: CSSProperties
 }
 
@@ -26,6 +27,20 @@ export const {
   theme,
 } = createdConfig
 
+export { classNames } from './utils'
+
 export const darkTheme = createTheme(DarkTheme)
 
-export { classNames } from './utils'
+export const themes = {
+  light: 'light',
+  dark: darkTheme.className,
+}
+
+export const getCurrentTheme: () => 'light' | 'dark' = () => {
+  if (isBrowser) {
+    const root = document.documentElement
+    return root.classList.contains(themes.dark) ? 'dark' : 'light'
+  }
+
+  return 'light'
+}

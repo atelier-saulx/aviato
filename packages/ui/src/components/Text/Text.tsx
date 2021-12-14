@@ -1,29 +1,41 @@
-import React, { FunctionComponent } from 'react'
+import { ComponentProps } from '@stitches/react'
+import React, { ElementRef } from 'react'
+import { styled, StitchedCSS, DefaultProps } from '~/theme'
+import { TextStyles } from './styles'
 
-import { StyledText } from './styles'
 import { FontWeight, FontColor, FontSize } from './types'
 
-export type TextProps = {
+const TEXT_TAG = 'p'
+
+const StyledText = styled(TEXT_TAG, TextStyles)
+
+export interface TextProps extends DefaultProps {
   weight?: FontWeight
   color?: FontColor
   size?: FontSize
+  css?: StitchedCSS
 }
 
-export const Text: FunctionComponent<TextProps> = ({
-  children,
-  weight = 'Regular',
-  color = 'Primary',
-  size = 'Small',
-}) => {
-  return (
-    <StyledText
-      as="p"
-      weight={weight}
-      color={color}
-      size={size}
-      alignment="start"
-    >
-      {children}
-    </StyledText>
-  )
-}
+type ForwardProps = ComponentProps<typeof StyledText> & TextProps
+
+export const Text = React.forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
+  (properties, forwardedRef) => {
+    const {
+      weight = 'Regular',
+      color = 'Primary',
+      size = 'Small',
+      ...remainingProps
+    } = properties
+
+    return (
+      <StyledText
+        as={TEXT_TAG}
+        weight={weight}
+        color={color}
+        size={size}
+        {...remainingProps}
+        ref={forwardedRef}
+      />
+    )
+  }
+)

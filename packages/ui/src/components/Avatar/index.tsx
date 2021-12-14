@@ -1,18 +1,21 @@
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { DefaultProps, styled } from '~/theme'
+import { getInitialsFromUsername } from './utils'
 
-const StyledAvatar = styled('div', {
+const DIV_TAG = 'div'
+
+const StyledAvatar = styled(DIV_TAG, {
   alignItems: 'center',
+  justifyContent: 'center',
   backgroundColor: '$PrimaryMain',
-  borderRadius: '300px',
-  color: 'white',
+  color: '$PrimaryContrastHigh',
   display: 'flex',
   fontSize: '9px',
   fontWeight: '600',
   lineHeight: '24px',
   height: '24px',
   width: '24px',
-  justifyContent: 'center',
 
   variants: {
     size: {
@@ -20,46 +23,41 @@ const StyledAvatar = styled('div', {
         fontSize: '7px',
         width: '20px;',
         height: '20px',
+        borderRadius: '20px',
       },
       medium: {
         width: '24px',
         height: '24px',
+        borderRadius: '24px',
       },
       large: {
         fontSize: '12px',
         width: '36px',
         height: '36px',
+        borderRadius: '24px',
       },
     },
   },
 })
 
-export function initialsFromUsername(fullUserName) {
-  const fullName = fullUserName.split(' ')
-  if (fullName.length > 1) {
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0)
-    return initials.toUpperCase()
-  } else {
-    const initials = fullName.shift().charAt(0)
-    return initials.toUpperCase()
-  }
-}
-
 type AvatarSize = 'small' | 'medium' | 'large'
 
-export type AvatarProps = DefaultProps & {
-  size?: AvatarSize
+export interface AvatarProps extends DefaultProps {
   username?: string
+  size?: AvatarSize
 }
 
-export const Avatar: FunctionComponent<AvatarProps> = ({
-  username = '',
-  size = 'medium',
-  ...remainingProps
-}) => {
+type ForwardProps = ComponentProps<typeof StyledAvatar> & AvatarProps
+
+export const Avatar = React.forwardRef<
+  ElementRef<typeof DIV_TAG>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const { username = '', size = 'medium', ...remainingProps } = properties
+
   return (
-    <StyledAvatar size={size} {...remainingProps}>
-      {initialsFromUsername(username)}
+    <StyledAvatar size={size} {...remainingProps} ref={forwardedRef}>
+      {getInitialsFromUsername(username)}
     </StyledAvatar>
   )
-}
+})
