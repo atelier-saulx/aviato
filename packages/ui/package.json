@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "dependencies": {
-    "@aviato/utils": "*",
+    "@aviato/utils": "workspace:*",
     "@stitches/react": "^1.2.6",
     "react": "^17.0.2",
     "throttle-debounce": "^3.0.1"

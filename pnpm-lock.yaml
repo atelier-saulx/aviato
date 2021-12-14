@@ -17,8 +17,8 @@ importers:
 
   apps/docs:
     specifiers:
-      '@aviato/ui': '*'
-      '@aviato/utils': '*'
+      '@aviato/ui': workspace:*
+      '@aviato/utils': workspace:*
       '@saulx/eslint-config': ^1.1.0
       '@saulx/prettier-config': ^1.0.0
       '@storyofams/next-password-protect': ^1.5.14
@@ -60,7 +60,7 @@ importers:
 
   packages/ui:
     specifiers:
-      '@aviato/utils': '*'
+      '@aviato/utils': workspace:*
       '@saulx/eslint-config': ^1.1.1
       '@saulx/prettier-config': ^1.0.0
       '@stitches/react': ^1.2.6

@@ -22,8 +22,8 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@aviato/ui": "*",
-    "@aviato/utils": "*",
+    "@aviato/ui": "workspace:*",
+    "@aviato/utils": "workspace:*",
     "@saulx/eslint-config": "^1.1.0",
     "@saulx/prettier-config": "^1.0.0",
     "@types/node": "16.11.7",
