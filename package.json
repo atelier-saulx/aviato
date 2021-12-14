@@ -19,16 +19,17 @@
     "saulx"
   ],
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "start": "yarn watch",
-    "build-start": "yarn build && yarn watch",
-    "watch": "yarn workspace @aviato/build action watch 'utils,ui,docs'",
-    "lint": "yarn workspace @aviato/build action lint 'utils,ui,docs'",
-    "build": "yarn workspace @aviato/build action build 'utils,ui,docs'",
-    "postbuild": "yarn lint",
+    "build": "turbo run build",
+    "watch": "turbo run watch --parallel",
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
+  },
+  "dependencies": {
+    "shx": "^0.3.3",
+    "turbo": "latest"
   },
   "devDependencies": {
     "husky": "^7.0.4",
@@ -44,7 +45,24 @@
       "pre-push": "yarn lint"
     }
   },
-  "dependencies": {
-    "shx": "^0.3.3"
+  "turbo": {
+    "baseBranch": "origin/main",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**",
+          ".next/**"
+        ]
+      },
+      "lint": {
+        "outputs": []
+      },
+      "watch": {
+        "cache": false
+      }
+    }
   }
 }
