@@ -19,8 +19,8 @@
     "saulx"
   ],
   "scripts": {
-    "start": "pnpm run watch",
     "watch": "turbo run watch --parallel",
+    "start": "pnpm run watch",
     "lint": "turbo run lint --continue",
     "build": "turbo run build --continue",
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
