@@ -1,5 +1,9 @@
-import { FunctionComponent } from 'react'
-import { styled } from '@aviato/ui'
+import React, { FunctionComponent } from 'react'
+import { styled } from '~/theme'
+
+const PageRoot = styled('div', {
+  backgroundColor: '$Background2dp',
+})
 
 const PageWrapperFullscreen = styled('div', {
   display: 'flex',
@@ -25,9 +29,11 @@ export const Page: FunctionComponent<PageProps> = ({
   fullscreen = false,
   children,
 }) => {
-  if (!fullscreen) {
-    return <PageWrapper>{children}</PageWrapper>
-  }
+  const Wrapper = fullscreen ? PageWrapperFullscreen : PageWrapper
 
-  return <PageWrapperFullscreen>{children}</PageWrapperFullscreen>
+  return (
+    <PageRoot>
+      <Wrapper>{children}</Wrapper>
+    </PageRoot>
+  )
 }

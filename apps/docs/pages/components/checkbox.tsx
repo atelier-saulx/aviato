@@ -1,5 +1,5 @@
-import { styled, Checkbox, Text, Column, Row } from '@aviato/ui'
-import { NextTitle, NextText, Page, ShowcaseComponent } from '../../components'
+import { styled, Page, Checkbox, Text, Column, Row } from '@aviato/ui'
+import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
   width: '100%',

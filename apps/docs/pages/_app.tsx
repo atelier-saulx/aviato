@@ -11,7 +11,7 @@ import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, MenuWidthConstant, themes } from '@aviato/ui'
+import { styled, themes } from '@aviato/ui'
 
 initialiseApplication()
 
@@ -25,9 +25,8 @@ const MainWrapper = styled('div', {
 
 const ContentWrapper = styled('div', {
   position: 'relative',
-  width: `calc(100vw - ${MenuWidthConstant}px)`,
+  width: '100vw',
   height: '100vh',
-  padding: '10px',
   overflowX: 'hidden',
   overflowY: 'scroll',
 })

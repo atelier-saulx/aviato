@@ -1,5 +1,5 @@
-import { RadioGroup, Radio, Column, Row } from '@aviato/ui'
-import { NextTitle, NextText, Page, ShowcaseComponent } from '../../components'
+import { Page, RadioGroup, Radio, Column, Row } from '@aviato/ui'
+import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const CheckboxPage = () => {
   const ShowRadiogroup = () => {
