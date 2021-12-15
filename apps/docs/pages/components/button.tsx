@@ -8,6 +8,7 @@ import {
   getRandomIcon,
   styled,
 } from '@aviato/ui'
+import { useHasLoaded } from '@aviato/hooks'
 import { useCallback, useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -25,7 +26,16 @@ const capitalize = (input: string) => {
   return input.charAt(0).toUpperCase() + input.slice(1)
 }
 
+/**
+ * TODO: Fix SSR issue with Vector Icons!
+ */
+
 const ButtonPage = () => {
+  const hasLoaded = useHasLoaded()
+  if (!hasLoaded) {
+    return null
+  }
+
   const RandomIcon = () => {
     const Icon = getRandomIcon()
     return <Icon />

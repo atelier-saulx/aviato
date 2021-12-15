@@ -9,6 +9,7 @@ import {
   styled,
   IconName,
 } from '@aviato/ui'
+import { useHasLoaded } from '@aviato/hooks'
 import { useCallback, useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -26,8 +27,16 @@ const capitalize = (input: string) => {
   return input.charAt(0).toUpperCase() + input.slice(1)
 }
 
+/**
+ * TODO: Fix SSR issue with Vector Icons!
+ */
 const IconButtonPage = () => {
-  const randomIcon = getRandomIconName() as IconName
+  const hasLoaded = useHasLoaded()
+  if (!hasLoaded) {
+    return null
+  }
+
+  const randomIcon = () => getRandomIconName() as IconName
 
   const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
     const uppercasedType = capitalize(type)
@@ -59,7 +68,7 @@ const IconButtonPage = () => {
                   type={type}
                   mode="filled"
                   disabled={isChecked}
-                  icon={randomIcon}
+                  icon={randomIcon()}
                 />
 
                 <Spacer />
@@ -68,7 +77,7 @@ const IconButtonPage = () => {
                   type={type}
                   mode="outlined"
                   disabled={isChecked}
-                  icon={randomIcon}
+                  icon={randomIcon()}
                 />
 
                 <Spacer />
@@ -77,7 +86,7 @@ const IconButtonPage = () => {
                   type={type}
                   mode="transparent"
                   disabled={isChecked}
-                  icon={randomIcon}
+                  icon={randomIcon()}
                 />
               </Row>
             </Column>
@@ -95,15 +104,15 @@ const IconButtonPage = () => {
           <Row>
             <Column>
               <Row>
-                <IconButton mode="filled" disabled icon={randomIcon} />
+                <IconButton mode="filled" disabled icon={randomIcon()} />
 
                 <Spacer />
 
-                <IconButton mode="outlined" disabled icon={randomIcon} />
+                <IconButton mode="outlined" disabled icon={randomIcon()} />
 
                 <Spacer />
 
-                <IconButton mode="transparent" disabled icon={randomIcon} />
+                <IconButton mode="transparent" disabled icon={randomIcon()} />
               </Row>
             </Column>
           </Row>
@@ -139,7 +148,7 @@ const IconButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <IconButton type="primary" mode="filled" icon={randomIcon} />
+        <IconButton type="primary" mode="filled" icon={randomIcon()} />
       </ShowcaseComponent>
     </Page>
   )

@@ -64,7 +64,7 @@ You can use these components either as the base layer of your application, or ad
 
 ## 📕 Documentation
 
-Visit [aviato.design](https://aviato.design/) for full documentation and a showcase of Aviato's UI, hooks and utilities.
+Visit [aviato.design](https://aviato.design/) for full documentation and a showcase of Aviatos UI component suite, hooks and utilities.
 
 ---
 
