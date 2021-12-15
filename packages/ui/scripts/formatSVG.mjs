@@ -1,7 +1,27 @@
 import { logInfo, logError } from './utils.mjs'
 import { exec } from 'promisify-child-process'
+import fs from 'fs-extra'
+import path from 'path'
+
+function checkForSVGs() {
+  const inputDir = path.join('./src', 'icons', 'svg')
+
+  const vectorFilesInDir = fs
+    .readdirSync(inputDir)
+    .filter((fileName) => path.extname(fileName) === '.svg')
+
+  if (vectorFilesInDir.length === 0) {
+    throw new Error('Vector files missing')
+  }
+}
 
 async function formatIcons() {
+  try {
+    checkForSVGs()
+  } catch (error) {
+    return logInfo('Note: SVG folder is empty.')
+  }
+
   const parseCommand = [
     'svgo',
     '--config ./scripts/svgoConfig.js',
@@ -25,6 +45,8 @@ async function formatIcons() {
       logError('formatIcons error: ', error)
     }
   }
+
+  logInfo('Done formatting SVGs.')
 }
 
 export async function startIconFormatting() {
@@ -33,8 +55,6 @@ export async function startIconFormatting() {
   } catch (error) {
     throw new Error(error)
   }
-
-  logInfo('Done formatting SVGs.')
 }
 
 /*
