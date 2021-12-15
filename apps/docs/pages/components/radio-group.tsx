@@ -1,7 +1,7 @@
 import { Page, RadioGroup, Radio, Column, Row } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
-const CheckboxPage = () => {
+const RadioGroupPage = () => {
   const ShowRadiogroup = () => {
     return (
       <>
@@ -37,4 +37,4 @@ const CheckboxPage = () => {
   )
 }
 
-export default CheckboxPage
+export default RadioGroupPage

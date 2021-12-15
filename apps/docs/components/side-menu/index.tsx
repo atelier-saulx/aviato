@@ -34,9 +34,13 @@ const mainMenu: MenuDataItems[] = [
         route: '/components/checkbox',
       },
       {
-        title: 'Radio Group',
-        route: '/components/radio-group',
+        title: 'Switch',
+        route: '/components/switch',
       },
+      // {
+      //   title: 'Radio Group',
+      //   route: '/components/radio-group',
+      // },
     ],
   },
 ]
