@@ -6,11 +6,7 @@ import { useUuid } from '~/hooks/utility'
 const StyledRadioLabel = styled('label', {})
 
 const StyledRadio = styled('input', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexWrap: 'nowrap',
-
+  position: 'relative',
   width: 20,
   height: 20,
   borderRadius: 20 / 2,
@@ -22,13 +18,16 @@ const StyledRadio = styled('input', {
     borderColor: '#228be6',
 
     '&::before': {
-      content: `''`,
-      display: 'block',
-      backgroundColor: '#FFF',
-
+      position: 'absolute',
+      top: `calc(50% - ${10 / 2}px)`,
+      left: `calc(50% - ${10 / 2}px)`,
       width: 10,
       height: 10,
       borderRadius: 10 / 2,
+
+      content: `''`,
+      display: 'block',
+      backgroundColor: '#FFF',
     },
   },
 })
