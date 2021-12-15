@@ -1,19 +1,31 @@
-import { Page, RadioGroup, Radio, Column, Row } from '@aviato/ui'
+import { useState } from 'react'
+import { Page, RadioGroup, Radio, Column, Row, styled } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
 
 const RadioGroupPage = () => {
   const ShowRadiogroup = () => {
+    const [value, setValue] = useState('Test 1')
+
     return (
       <>
         <Column>
           <Row>
-            <RadioGroup>
-              <Radio value="Test 1" />
-              <Radio value="Test 2" />
-              <Radio value="Test 3" />
-              <Radio value="Test 4" />
+            <RadioGroup value={value} onChange={setValue}>
+              <Radio value="Test 1">Test 1</Radio>
+              <Radio value="Test 2">Test 2</Radio>
+              <Radio value="Test 3">Test 3</Radio>
+              <Radio value="Test 4">Test 4</Radio>
             </RadioGroup>
           </Row>
+
+          <BigSpacer />
+
+          <Row>Currently active: {value}</Row>
         </Column>
       </>
     )

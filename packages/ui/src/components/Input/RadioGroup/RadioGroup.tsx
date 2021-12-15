@@ -3,6 +3,7 @@ import { noop } from '@aviato/utils'
 import { useUncontrolled } from '~/hooks/state/useUncontrolled'
 import { DefaultProps, styled } from '~/theme'
 import { Radio } from './Radio'
+import { useUuid } from '~/hooks/utility'
 
 const StyledRadioGroupWrapper = styled('div', {
   position: 'relative',
@@ -23,6 +24,8 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     ...remainingProps
   } = properties
 
+  const uuid = useUuid()
+
   const [_value, setValue] = useUncontrolled({
     value,
     defaultValue,
@@ -35,9 +38,9 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     .filter((item) => item.type === Radio)
     .map((radio, index) =>
       cloneElement(radio, {
+        name: uuid,
         key: index,
         checked: _value === radio.props.value,
-        __staticSelector: 'RadioGroup',
         onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
           setValue(event.currentTarget.value),
       })

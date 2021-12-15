@@ -14,7 +14,7 @@ export interface RadioProps extends DefaultProps {
 }
 
 export const Radio: FunctionComponent<RadioProps> = (properties) => {
-  const { value, disabled = false, ...remainingProps } = properties
+  const { value, disabled = false, children, ...remainingProps } = properties
 
   return (
     <StyledRadioLabel>
@@ -24,6 +24,7 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
         disabled={disabled}
         {...remainingProps}
       />
+      <span>{children}</span>
     </StyledRadioLabel>
   )
 }
