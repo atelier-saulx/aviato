@@ -10,21 +10,21 @@ const StyledRadioGroupWrapper = styled('div', {
 })
 
 export interface RadioGroupProps extends DefaultProps {
-  onChange?(value: string): void
   value?: string
   defaultValue?: string
+  onChange?(value: string): void
 }
 
 export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
   const {
-    onChange = noop,
     value,
     defaultValue,
+    onChange = noop,
     children,
     ...remainingProps
   } = properties
 
-  const uuid = useUuid()
+  const uuid = useUuid({ prefix: 'radio' })
 
   const [_value, setValue] = useUncontrolled({
     value,
@@ -34,21 +34,23 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     rule: (value) => typeof value === 'string',
   })
 
-  const radios: any = (Children.toArray(children) as React.ReactElement[])
-    .filter((item) => item.type === Radio)
-    .map((radio, index) =>
-      cloneElement(radio, {
-        name: uuid,
-        key: index,
-        checked: _value === radio.props.value,
-        onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-          setValue(event.currentTarget.value),
-      })
-    )
+  const childrenArray = Children.toArray(children) as React.ReactElement[]
+  const radioChildren = childrenArray.filter((item) => item.type === Radio)
+
+  const mappedRadioChildren = radioChildren.map((radio, index) => {
+    return cloneElement(radio, {
+      name: uuid,
+      key: `RadioGroupItem-${index}`,
+      checked: _value === radio.props.value,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        return setValue(event.currentTarget.value)
+      },
+    })
+  })
 
   return (
     <StyledRadioGroupWrapper {...remainingProps}>
-      {radios}
+      {mappedRadioChildren}
     </StyledRadioGroupWrapper>
   )
 }
