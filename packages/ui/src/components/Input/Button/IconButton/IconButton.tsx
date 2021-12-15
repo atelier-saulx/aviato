@@ -4,7 +4,7 @@ import {
   ButtonMode,
   ButtonType,
 } from '~/components/Input/Button/Button'
-import { IconName, getIconFromString } from '~/icons'
+import { IconName, getIconFromType, Icon } from '~/icons'
 import { noop } from '@aviato/utils'
 import { DefaultProps, StitchedCSS } from '~/theme'
 
@@ -18,7 +18,7 @@ export interface IconButtonProps extends DefaultProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
-  icon?: IconName
+  icon?: IconName | string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -40,7 +40,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
     onClick()
   }, [])
 
-  const TargetIcon = getIconFromString(icon)
+  const TargetIcon = getIconFromType(icon as IconName) as Icon
 
   return (
     <Button

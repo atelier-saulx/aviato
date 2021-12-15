@@ -1,0 +1,13 @@
+{
+  "name": "@aviato/prettier-config",
+  "description": "Aviato Shareable Prettier Config",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": "https://github.com/atelier-saulx/aviato-ui",
+  "sideEffects": false,
+  "private": true,
+  "main": "prettier.config.js",
+  "dependencies": {
+    "prettier": "2.5.1"
+  }
+}

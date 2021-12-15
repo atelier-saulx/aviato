@@ -1,6 +1,6 @@
 import { NextPageContext } from 'next'
-import { styled } from '@aviato/ui'
-import { Page, NextTitle, NextText } from '../components'
+import { styled, Page } from '@aviato/ui'
+import { NextTitle, NextText } from '../components'
 
 const StyledDiv = styled('div', {
   display: 'flex',

@@ -34,6 +34,10 @@ const mainMenu: MenuDataItems[] = [
         route: '/components/checkbox',
       },
       {
+        title: 'Switch',
+        route: '/components/switch',
+      },
+      {
         title: 'Radio Group',
         route: '/components/radio-group',
       },
@@ -135,11 +139,7 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   })
 
   return (
-    <SideMenu
-      css={{
-        borderRight: '1px solid $OtherDivider',
-      }}
-    >
+    <SideMenu>
       <HeaderDiv onClick={() => setRoute('/')}>
         <AviatoLogo />
       </HeaderDiv>

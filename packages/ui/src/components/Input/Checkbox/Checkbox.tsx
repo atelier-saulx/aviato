@@ -10,38 +10,33 @@ import { DefaultProps, styled } from '~/theme'
 import { IconCheck, IconMinus } from '~/icons'
 import { DefaultChangePayload } from '~/types/events'
 
-const HiddenCheckbox = styled('input', {
-  position: 'absolute',
-  opacity: 0,
-  cursor: 'pointer',
-
-  variants: {
-    size: {
-      small: {
-        width: '16px',
-        height: '16px',
-      },
-
-      medium: {
-        width: '20px',
-        height: '20px',
-      },
-    },
-  },
+const StyledCheckboxWrapper = styled('div', {
+  position: 'relative',
 })
 
-const DIV_TAG = 'div'
-
-const StyledCheckbox = styled(DIV_TAG, {
-  backgroundColor: 'white',
-  borderRadius: '4px',
+const StyledCheckbox = styled('input', {
   cursor: 'pointer',
-  padding: '1px',
-  border: '1px solid $OtherOutline',
-  color: '$PrimaryContrastHigh',
+  appearance: 'none',
+  padding: 0,
+  outline: 0,
+  display: 'block',
+  overflow: 'visible',
+  border: '1px solid $OtherInputBorderDefault',
+  background: 'transparent',
+  borderRadius: '4px',
 
-  '&:hover': {
-    backgroundColor: '$ActionMainHover',
+  '&:disabled': {
+    cursor: 'not-allowed',
+  },
+
+  '&:checked': {
+    border: '1px solid $PrimaryMain',
+    backgroundColor: '$PrimaryMain',
+
+    '&:disabled': {
+      border: '1px solid $OtherDisabledOutline',
+      backgroundColor: '$OtherDisabledBackground',
+    },
   },
 
   variants: {
@@ -61,25 +56,36 @@ const StyledCheckbox = styled(DIV_TAG, {
         height: '20px',
       },
     },
+  },
+})
 
-    state: {
-      true: {
-        backgroundColor: '$PrimaryMain',
+const StyledIconWrapper = styled('div', {
+  position: 'absolute',
+  zIndex: '1',
+  top: '0',
+  left: '0',
+  pointerEvents: 'none',
+  color: '$PrimaryMainContrast',
 
-        '&:hover': {
-          backgroundColor: '$PrimaryMainHover',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  variants: {
+    size: {
+      small: {
+        width: '16px',
+        height: '16px',
+
+        '& svg': {
+          width: '12px',
+          height: '12px',
         },
       },
-    },
 
-    disabled: {
-      true: {
-        cursor: 'not-allowed',
-        backgroundColor: '$ActionDisabledBackground',
-
-        '&:hover': {
-          backgroundColor: '$ActionDisabledBackground',
-        },
+      medium: {
+        width: '20px',
+        height: '20px',
       },
     },
   },
@@ -154,27 +160,26 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (properties) => {
   )
 
   return (
-    <StyledCheckbox
-      size={size}
-      state={isChecked}
-      disabled={isDisabled}
-      {...remainingProps}
-    >
-      <HiddenCheckbox
-        type="checkbox"
-        checked={isChecked}
-        onChange={handleChange}
-        disabled={disabled}
-        size={size}
-      />
+    <>
+      <StyledCheckboxWrapper {...remainingProps}>
+        <StyledCheckbox
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleChange}
+          disabled={disabled}
+          size={size}
+        />
 
-      <Conditional test={isChecked && !hasIndeterminateState}>
-        <IconCheck />
-      </Conditional>
+        <StyledIconWrapper size={size}>
+          <Conditional test={isChecked && !hasIndeterminateState}>
+            <IconCheck />
+          </Conditional>
 
-      <Conditional test={isChecked && hasIndeterminateState}>
-        <IconMinus />
-      </Conditional>
-    </StyledCheckbox>
+          <Conditional test={isChecked && hasIndeterminateState}>
+            <IconMinus />
+          </Conditional>
+        </StyledIconWrapper>
+      </StyledCheckboxWrapper>
+    </>
   )
 }

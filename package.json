@@ -23,12 +23,13 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "yarn watch",
-    "watch": "turbo run watch --parallel",
-    "lint": "turbo run lint --continue",
-    "build": "turbo run build --continue",
+    "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true",
+    "watch": "turbo run watch --no-cache --parallel --continue",
+    "lint": "turbo run lint",
+    "build": "turbo run build",
+    "test": "turbo run test",
     "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
-    "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true"
+    "clean": "turbo run clean && rm -rf node_modules"
   },
   "dependencies": {
     "shx": "^0.3.3",
@@ -52,21 +53,20 @@
     "baseBranch": "origin/main",
     "pipeline": {
       "build": {
+        "outputs": [
+          "dist/**"
+        ],
         "dependsOn": [
           "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
         ]
       },
       "lint": {
         "outputs": []
       },
       "watch": {
-        "dependsOn": [
-          "build"
-        ],
+        "cache": false
+      },
+      "clean": {
         "cache": false
       }
     }
