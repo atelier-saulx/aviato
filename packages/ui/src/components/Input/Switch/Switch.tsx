@@ -8,20 +8,65 @@ import { noop } from '@aviato/utils'
 import { DefaultProps, styled } from '~/theme'
 import { DefaultChangePayload } from '~/types/events'
 
+export type SwitchSize = 'normal' | 'large'
+
+interface SwitchStyles {
+  switch: {
+    width: number
+    height: number
+  }
+  knob: {
+    size: number
+  }
+  offset: {
+    value: number
+  }
+}
+
+const SwitchSizeMap: {
+  [key in SwitchSize]: SwitchStyles
+} = {
+  normal: {
+    switch: {
+      width: 32,
+      height: 20,
+    },
+    knob: {
+      size: 16,
+    },
+    offset: {
+      value: 2,
+    },
+  },
+
+  large: {
+    switch: {
+      width: 48,
+      height: 30,
+    },
+    knob: {
+      size: 24,
+    },
+    offset: {
+      value: 3,
+    },
+  },
+}
+
+const normalSize = SwitchSizeMap.normal
+const largeSize = SwitchSizeMap.large
+
 const StyledSwitch = styled('input', {
+  display: 'flex',
+  alignItems: 'center',
   cursor: 'pointer',
   padding: '1px',
   border: '1px solid $OtherOutline',
-  color: '$PrimaryContrastHigh',
-  backgroundColor: '$ActionDisabledBackground',
-
-  width: 32,
-  height: 20,
-  borderRadius: 20 / 2,
+  backgroundColor: '$OtherInputBorderDefault',
 
   '&:hover': {
     '&:not([disabled])': {
-      backgroundColor: '$ActionMainHover',
+      backgroundColor: '$PrimaryLightHover',
     },
   },
 
@@ -32,11 +77,7 @@ const StyledSwitch = styled('input', {
   '&::before': {
     content: `''`,
     display: 'block',
-    width: 16,
-    height: 16,
-    borderRadius: 16 / 2,
     backgroundColor: '#FFF',
-    transform: 'translateX(0px)',
   },
 
   '&:checked': {
@@ -47,9 +88,51 @@ const StyledSwitch = styled('input', {
         backgroundColor: '$PrimaryMainHover',
       },
     },
+  },
 
-    '&::before': {
-      transform: 'translateX(calc(100% - 4px))',
+  variants: {
+    size: {
+      normal: {
+        width: normalSize.switch.width,
+        height: normalSize.switch.height,
+        borderRadius: normalSize.switch.height / 2,
+
+        '&::before': {
+          width: normalSize.knob.size,
+          height: normalSize.knob.size,
+          borderRadius: normalSize.knob.size / 2,
+          transform: `translateX(${normalSize.offset.value}px)`,
+        },
+
+        '&:checked': {
+          '&::before': {
+            transform: `translateX(${
+              normalSize.knob.size - normalSize.offset.value
+            }px)`,
+          },
+        },
+      },
+
+      large: {
+        width: largeSize.switch.width,
+        height: largeSize.switch.height,
+        borderRadius: largeSize.switch.height / 2,
+
+        '&::before': {
+          width: largeSize.knob.size,
+          height: largeSize.knob.size,
+          borderRadius: largeSize.knob.size / 2,
+          transform: `translateX(${largeSize.offset.value}px)`,
+        },
+
+        '&:checked': {
+          '&::before': {
+            transform: `translateX(${
+              largeSize.knob.size - largeSize.offset.value
+            }px)`,
+          },
+        },
+      },
     },
   },
 })
@@ -59,6 +142,7 @@ export interface OnSwitchChangePayload extends DefaultChangePayload {
 }
 
 export interface SwitchProps extends DefaultProps {
+  size?: SwitchSize
   checked?: boolean
   disabled?: boolean
   onChange?: (payload: OnSwitchChangePayload) => void
@@ -66,6 +150,7 @@ export interface SwitchProps extends DefaultProps {
 
 export const Switch: FunctionComponent<SwitchProps> = (properties) => {
   const {
+    size = 'normal',
     checked = false,
     disabled = false,
     onChange = noop,
@@ -101,6 +186,7 @@ export const Switch: FunctionComponent<SwitchProps> = (properties) => {
   return (
     <StyledSwitch
       type="checkbox"
+      size={size}
       checked={isChecked}
       onChange={handleChange}
       disabled={isDisabled}
