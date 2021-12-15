@@ -8,10 +8,10 @@ const RadioGroupPage = () => {
         <Column>
           <Row>
             <RadioGroup>
-              <Radio />
-              <Radio />
-              <Radio />
-              <Radio />
+              <Radio value="Test 1" />
+              <Radio value="Test 2" />
+              <Radio value="Test 3" />
+              <Radio value="Test 4" />
             </RadioGroup>
           </Row>
         </Column>

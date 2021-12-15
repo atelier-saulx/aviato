@@ -1,8 +1,29 @@
 import React, { FunctionComponent } from 'react'
-import { DefaultProps } from '~/theme'
+import { DefaultProps, styled } from '~/theme'
 
-export interface RadioProps extends DefaultProps {}
+const StyledRadioLabel = styled('label', {})
 
-export const Radio: FunctionComponent<RadioProps> = () => {
-  return <>Radio</>
+const StyledRadio = styled('input', {
+  width: 20,
+  height: 20,
+})
+
+export interface RadioProps extends DefaultProps {
+  value: string
+  disabled?: boolean
+}
+
+export const Radio: FunctionComponent<RadioProps> = (properties) => {
+  const { value, disabled = false, ...remainingProps } = properties
+
+  return (
+    <StyledRadioLabel>
+      <StyledRadio
+        type="radio"
+        value={value}
+        disabled={disabled}
+        {...remainingProps}
+      />
+    </StyledRadioLabel>
+  )
 }

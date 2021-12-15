@@ -37,10 +37,10 @@ const mainMenu: MenuDataItems[] = [
         title: 'Switch',
         route: '/components/switch',
       },
-      // {
-      //   title: 'Radio Group',
-      //   route: '/components/radio-group',
-      // },
+      {
+        title: 'Radio Group',
+        route: '/components/radio-group',
+      },
     ],
   },
 ]
