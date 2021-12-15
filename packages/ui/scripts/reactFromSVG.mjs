@@ -4,7 +4,25 @@ import { startIconFormatting } from './formatSVG.mjs'
 import fs from 'fs-extra'
 import path from 'path'
 
+function checkForSVGs() {
+  const inputDir = path.join('./src', 'icons', 'svg')
+
+  const vectorFilesInDir = fs
+    .readdirSync(inputDir)
+    .filter((fileName) => path.extname(fileName) === '.svg')
+
+  if (vectorFilesInDir.length === 0) {
+    throw new Error('Vector files missing')
+  }
+}
+
 async function generateReactFromSVG() {
+  try {
+    checkForSVGs()
+  } catch (error) {
+    return logInfo('Note: SVG folder is empty.')
+  }
+
   const outputDir = path.join('./src', 'icons', 'parsed')
 
   await fs.emptyDir(outputDir)
@@ -43,6 +61,8 @@ async function generateReactFromSVG() {
     await fs.copy(reactDir, componentDir)
     await fs.rm(path.join(componentDir, '.gitkeep'))
   }
+
+  logInfo('Done converting SVGs to React Components.')
 }
 
 async function start() {
@@ -52,8 +72,6 @@ async function start() {
     logError('parseIcons error: ', error)
     throw new Error(error)
   }
-
-  logInfo('Done converting SVGs to React.')
 }
 
 /***

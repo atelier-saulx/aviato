@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
-import { styled } from '@aviato/ui'
+import { styled, Page } from '@aviato/ui'
 
-import { Page, NextTitle, NextText } from '../components'
+import { NextTitle, NextText } from '../components'
 
 const Wrapper = styled('div', {
   display: 'flex',

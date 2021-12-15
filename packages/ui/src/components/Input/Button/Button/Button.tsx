@@ -8,26 +8,29 @@ import { ComponentProps } from '@stitches/react'
 
 const primaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
-    color: '$PrimaryContrastHigh',
+    color: '$PrimaryMainContrast',
     background: '$PrimaryMain',
     border: '1px solid $PrimaryMain',
 
     '&:hover': {
       background: '$PrimaryMainHover',
+      border: '1px solid $PrimaryMainHover',
     },
     '&:active': {
       background: '$PrimaryMainSelected',
+      border: '1px solid $PrimaryMainSelected',
     },
+
     '&:disabled': {
-      color: '$ActionDisabledContent',
-      background: '$ActionDisabledBackground',
-      border: '1px solid $ActionDisabledBackground',
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      border: '1px solid $OtherDisabledBackground',
     },
   },
 
   '&.isOutlined': {
     color: '$PrimaryMain',
-    border: '1px solid $PrimaryOutlineBorder',
+    border: '1px solid $PrimaryOutline',
 
     '&:hover': {
       backgroundColor: '$PrimaryLightHover',
@@ -35,10 +38,11 @@ const primaryButtonCSS: StitchedCSS = {
     '&:active': {
       background: '$PrimaryLightSelected',
     },
+
     '&:disabled': {
-      color: '$ActionDisabledContent',
+      color: '$OtherDisabledContent',
+      border: '1px solid $OtherDisabledOutline',
       background: 'transparent',
-      border: '1px solid $ActionDisabledBackground',
     },
   },
 
@@ -52,17 +56,17 @@ const primaryButtonCSS: StitchedCSS = {
     '&:active': {
       background: '$PrimaryLightSelected',
     },
+
     '&:disabled': {
-      color: '$ActionDisabledContent',
+      color: '$OtherDisabledContent',
       background: 'transparent',
-      border: '1px solid transparent',
     },
   },
 }
 
 const ghostButtonCSS: StitchedCSS = {
   '&.isFilled': {
-    color: '$TextPrimary',
+    color: '$ActionMainContrast',
     background: '$ActionMain',
     border: '1px solid $ActionMain',
 
@@ -74,32 +78,33 @@ const ghostButtonCSS: StitchedCSS = {
     },
 
     '&:disabled': {
-      color: '$ActionDisabledContent',
-      background: '$ActionDisabledBackground',
-      border: '1px solid $ActionMain',
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      border: '1px solid $OtherDisabledBackground',
     },
   },
 
   '&.isOutlined': {
-    color: '$TextPrimary',
-    border: '1px solid $OtherOutline',
+    color: '$ActionMainContrast',
+    border: '1px solid $ActionOutline',
 
     '&:hover': {
-      backgroundColor: '$ActionMainHover',
+      backgroundColor: '$ActionLightHover',
     },
     '&:active': {
       background: '$ActionMainSelected',
     },
 
     '&:disabled': {
-      color: '$ActionDisabledContent',
+      color: '$OtherDisabledContent',
+      border: '1px solid $OtherDisabledOutline',
       background: 'transparent',
-      border: '1px solid $ActionDisabledBackground',
     },
   },
 
   '&.isTransparent': {
-    color: '$TextPrimary',
+    color: '$ActionMainContrast',
+    border: '1px solid transparent',
 
     '&:hover': {
       backgroundColor: '$ActionMainHover',
@@ -109,36 +114,37 @@ const ghostButtonCSS: StitchedCSS = {
     },
 
     '&:disabled': {
-      color: '$ActionDisabledContent',
+      color: '$OtherDisabledContent',
       background: 'transparent',
-      border: '0px solid transparent',
     },
   },
 }
 
 const errorButtonCSS: StitchedCSS = {
   '&.isFilled': {
-    color: '$PrimaryContrastHigh',
+    color: '$ErrorMainContrast',
     background: '$ErrorMain',
-    border: '0px solid transparent',
+    border: '1px solid $ErrorMain',
 
     '&:hover': {
       background: '$ErrorMainHover',
+      border: '1px solid $ErrorMainHover',
     },
     '&:active': {
       background: '$ErrorMainSelected',
+      border: '1px solid $ErrorMainSelected',
     },
 
     '&:disabled': {
-      color: '$ActionDisabledContent',
-      background: '$ActionDisabledBackground',
-      border: '0px solid transparent',
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      border: '1px solid $OtherDisabledBackground',
     },
   },
 
   '&.isOutlined': {
-    color: '$ErrorMain',
-    border: '1px solid $ErrorOutlineBorder',
+    color: '$ErrorLightContrast',
+    border: '1px solid $ErrorOutline',
 
     '&:hover': {
       backgroundColor: '$ErrorLightHover',
@@ -148,14 +154,15 @@ const errorButtonCSS: StitchedCSS = {
     },
 
     '&:disabled': {
-      color: '$ActionDisabledContent',
+      color: '$OtherDisabledContent',
+      border: '1px solid $OtherDisabledOutline',
       background: 'transparent',
-      border: '1px solid $ActionDisabledBackground',
     },
   },
 
   '&.isTransparent': {
     color: '$ErrorMain',
+    border: '1px solid transparent',
 
     '&:hover': {
       backgroundColor: '$ErrorLightHover',
@@ -165,9 +172,8 @@ const errorButtonCSS: StitchedCSS = {
     },
 
     '&:disabled': {
-      color: '$ActionDisabledContent',
+      color: '$OtherDisabledContent',
       background: 'transparent',
-      border: '0px solid transparent',
     },
   },
 }
