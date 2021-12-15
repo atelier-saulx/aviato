@@ -12,3 +12,7 @@ export const isBrowser = !!(
 export const isText = (value) => {
   return typeof value === 'string' || value instanceof String
 }
+
+export function getRandomId(prefix = '') {
+  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`
+}
