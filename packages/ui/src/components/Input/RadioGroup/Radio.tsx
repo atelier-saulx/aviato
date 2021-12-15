@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { DefaultProps, styled } from '~/theme'
 import { noop } from '@aviato/utils'
-import { useUuid } from '~/hooks/utility'
+import { useUuid } from '@aviato/hooks'
 
 const StyledRadioLabel = styled('label', {})
 

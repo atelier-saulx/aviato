@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@aviato/eslint-config": "*",
+    "@aviato/hooks": "*",
     "@aviato/prettier-config": "*",
     "@aviato/tsconfig": "*",
     "@aviato/ui": "*",
