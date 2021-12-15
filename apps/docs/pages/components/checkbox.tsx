@@ -1,6 +1,11 @@
 import { styled, Checkbox, Text, Column, Row } from '@aviato/ui'
 import { NextTitle, NextText, Page, ShowcaseComponent } from '../../components'
 
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
+
 const Spacer = styled('div', {
   width: 12,
   height: 12,
@@ -15,6 +20,40 @@ const CheckboxPage = () => {
             <Checkbox />
             <Spacer />
             <Text>Accept the terms and conditions</Text>
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Column>
+              <Text>Big size</Text>
+              <Row>
+                <Checkbox />
+                <Spacer />
+                <Checkbox checked />
+                <Spacer />
+                <Checkbox disabled />
+                <Spacer />
+                <Checkbox disabled checked />
+              </Row>
+            </Column>
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Column>
+              <Text>Small size</Text>
+              <Row>
+                <Checkbox size="small" />
+                <Spacer />
+                <Checkbox size="small" checked />
+                <Spacer />
+                <Checkbox size="small" disabled />
+                <Spacer />
+                <Checkbox size="small" disabled checked />
+              </Row>
+            </Column>
           </Row>
         </Column>
       </>

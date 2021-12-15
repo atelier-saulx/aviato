@@ -1,6 +1,4 @@
-export * from './Avatar'
 export * from './Input'
-export * from './Divider'
 export * from './Layout'
 export * from './Menu'
 export * from './SideMenu'

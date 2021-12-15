@@ -14,9 +14,12 @@ const StyledSideMenu = styled(DIV_TAG, {
   minWidth: MenuWidthConstant,
   overflowX: 'hidden',
   backgroundColor: '$Background2dp',
+  borderRight: '1px solid $OtherDivider',
 })
 
-export interface SideMenuProps extends DefaultProps {}
+export interface SideMenuProps extends DefaultProps {
+  useBorder?: boolean
+}
 
 type ForwardProps = ComponentProps<typeof StyledSideMenu> & SideMenuProps
 
@@ -24,14 +27,13 @@ export const SideMenu = React.forwardRef<
   ElementRef<typeof StyledSideMenu>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { children, css, ...remainingProps } = properties
+  const { children, ...remainingProps } = properties
 
   return (
     <StyledSideMenu
       ref={forwardedRef}
       css={{
         padding: 8,
-        ...css,
       }}
       {...remainingProps}
     >
