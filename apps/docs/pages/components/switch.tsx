@@ -1,5 +1,5 @@
-import { Column, Row, Switch, styled } from '@aviato/ui'
-import { NextTitle, NextText, Page, ShowcaseComponent } from '../../components'
+import { Column, Row, Switch, Page, styled } from '@aviato/ui'
+import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const Spacer = styled('div', {
   width: 6,
