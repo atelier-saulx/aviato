@@ -75,7 +75,7 @@ export type Icon = FunctionComponent<SVGProperties>
  * input === 'IconPlus'
  * output === <IconPlus />
  */
-export const getIconFromString = (input: IconName): Icon | null => {
+export const getIconFromType = (input: IconName): Icon | null => {
   if (input && typeof input === 'string') {
     const targetIcon = input[0].toUpperCase() + input.slice(1)
     return icons[targetIcon]

@@ -9,7 +9,7 @@ function useThrottledCallback(
   refs: any[] = [],
   frames: number = 1
 ): Function {
-  const ref = useRef(null)
+  const ref = useRef(null) as any
 
   const isMultiFrame = frames > 1
 

@@ -31,7 +31,7 @@ export function useUncontrolled<T>({
   const initialValue = rule(defaultValue) ? defaultValue : finalValue
   const [uncontrolledValue, setUncontrolledValue] = useState(initialValue)
 
-  // Compute effective value
+  // compute effective value
   let effectiveValue = shouldBeControlled ? value : uncontrolledValue
 
   // We are transitioning from controlled to uncontrolled
@@ -66,8 +66,10 @@ export function useUncontrolled<T>({
       setUncontrolledValue(effectiveValue)
     }
 
-    typeof onValueUpdate === 'function' && onValueUpdate(effectiveValue)
+    if (typeof onValueUpdate === 'function') {
+      onValueUpdate(effectiveValue as T | null)
+    }
   }, [mode, effectiveValue])
 
-  return [effectiveValue, handleChange, modeRef.current] as const
+  return [effectiveValue as T | null, handleChange, modeRef.current] as const
 }
