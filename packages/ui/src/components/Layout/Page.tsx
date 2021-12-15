@@ -3,6 +3,11 @@ import { styled } from '~/theme'
 
 const PageRoot = styled('div', {
   backgroundColor: '$Background2dp',
+  position: 'relative',
+  width: '100vw',
+  height: '100vh',
+  overflowX: 'hidden',
+  overflowY: 'scroll',
 })
 
 const PageWrapperFullscreen = styled('div', {
@@ -10,15 +15,17 @@ const PageWrapperFullscreen = styled('div', {
   flexFlow: 'column nowrap',
   padding: '20px',
   width: '100%',
+  height: '100vh',
 })
 
 const PageWrapper = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   padding: '20px',
+  margin: '0 auto',
   width: '100%',
   maxWidth: '860px',
-  margin: '0 auto',
+  height: '100vh',
 })
 
 export type PageProps = {

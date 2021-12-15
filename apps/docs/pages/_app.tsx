@@ -11,25 +11,9 @@ import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, themes } from '@aviato/ui'
+import { themes, ApplicationRoot } from '@aviato/ui'
 
 initialiseApplication()
-
-const MainWrapper = styled('div', {
-  display: 'flex',
-  width: '100vw',
-  height: '100vh',
-  overflowX: 'hidden',
-  overflowY: 'hidden',
-})
-
-const ContentWrapper = styled('div', {
-  position: 'relative',
-  width: '100vw',
-  height: '100vh',
-  overflowX: 'hidden',
-  overflowY: 'scroll',
-})
 
 const MainApplication = ({ Component, pageProps }: AppProps) => {
   const HeadContent = () => {
@@ -55,12 +39,10 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
         defaultTheme="system"
         value={themes}
       >
-        <MainWrapper>
+        <ApplicationRoot>
           <SideMenu />
-          <ContentWrapper>
-            <Component {...pageProps} />
-          </ContentWrapper>
-        </MainWrapper>
+          <Component {...pageProps} />
+        </ApplicationRoot>
       </ThemeProvider>
     </>
   )
