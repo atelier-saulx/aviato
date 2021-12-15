@@ -378,6 +378,12 @@ template {
   display: none;
 }
 
+/**
+ * IMPORTANT: This removes the focus outline for most browsers.
+
+ * Be aware this is a backwards accessibility step! Mozilla adds a dotted outline around A tags
+ * and buttons when they receive tab focus which I haven't found an unhacky way of removing.
+ */
 a:focus,
 button:focus {
   outline: 0;
