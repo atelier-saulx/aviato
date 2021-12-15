@@ -13,7 +13,7 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "sourceMap": true,
     "removeComments": false,
     "noImplicitAny": false,

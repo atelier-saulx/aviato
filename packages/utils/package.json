@@ -30,8 +30,8 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
-    "watch": "tsup --watch --env.NODE_ENV development",
-    "build": "tsup --env.NODE_ENV production",
+    "watch": "tsup --watch",
+    "build": "tsup",
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",

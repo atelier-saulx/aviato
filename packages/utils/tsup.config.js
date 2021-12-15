@@ -13,5 +13,8 @@ export default defineConfig((options) => {
     minify: !isWatching,
     dts: shouldCreateTypeDefinitions,
     external: ['react'],
+    env: {
+      NODE_ENV: isWatching ? 'development' : 'production',
+    },
   }
 })
