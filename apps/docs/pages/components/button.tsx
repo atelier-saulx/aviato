@@ -29,7 +29,6 @@ const capitalize = (input: string) => {
 /**
  * TODO: Fix SSR issue with Vector Icons!
  */
-
 const ButtonPage = () => {
   const hasLoaded = useHasLoaded()
   if (!hasLoaded) {
