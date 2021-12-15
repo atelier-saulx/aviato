@@ -1,9 +1,8 @@
 import React, { FunctionComponent, Children, cloneElement } from 'react'
 import { noop } from '@aviato/utils'
-import { useUncontrolled } from '~/hooks/state/useUncontrolled'
+import { useUncontrolled, useUuid } from '@aviato/hooks'
 import { DefaultProps, styled } from '~/theme'
 import { Radio } from './Radio'
-import { useUuid } from '~/hooks/utility'
 
 const StyledRadioGroupWrapper = styled('div', {
   position: 'relative',

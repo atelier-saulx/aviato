@@ -41,9 +41,30 @@ You can use these components either as the base layer of your application, or ad
 
 ---
 
+## 📦 Public Packages
+
+| Name            | Description                                                      | Status     |
+| --------------- | ---------------------------------------------------------------- | ---------- |
+| `@aviato/ui`    | Component library. A suite of ready-to-use components & theming. | Soon 🚀    |
+| `@aviato/hooks` | A curated collection of hooks for State and UI management.       | Soon 🚀    |
+| `@aviato/utils` | Utility functions to facilitate DX and easier development.       | Soon 🚀    |
+| `@aviato/next`  | Setup server side rendering utilities for Next.js.               | On hold 🌙 |
+
+---
+
+## 🧩 Internal Packages
+
+| Name               | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| `@aviato/eslint`   | Eslint configuration used in all Aviato projects.      |
+| `@aviato/prettier` | Prettier configuration used in all Aviato projects.    |
+| `@aviato/tsconfig` | Typescript configurations used in all Aviato projects. |
+
+---
+
 ## 📕 Documentation
 
-Visit [aviato.design](https://aviato.design/) for full documentation and showcase of Aviato.
+Visit [aviato.design](https://aviato.design/) for full documentation and a showcase of Aviatos UI component suite, hooks and utilities.
 
 ---
 
