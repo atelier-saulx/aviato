@@ -10,37 +10,36 @@ const PageRoot = styled('div', {
   backgroundColor: '$Background2dp',
 })
 
-const PageWrapperFullscreen = styled('div', {
-  display: 'flex',
-  flexFlow: 'column nowrap',
-  padding: '20px',
-  width: '100%',
-  height: '100vh',
-})
-
 const PageWrapper = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
-  padding: '20px',
-  margin: '0 auto',
   width: '100%',
-  maxWidth: '860px',
   height: '100vh',
+  padding: '20px',
+
+  variants: {
+    mode: {
+      center: {
+        margin: '0 auto',
+        maxWidth: '860px',
+      },
+
+      fullscreen: {},
+    },
+  },
 })
 
 export type PageProps = {
-  fullscreen?: boolean
+  mode?: 'center' | 'fullscreen'
 }
 
 export const Page: FunctionComponent<PageProps> = ({
-  fullscreen = false,
+  mode = 'center',
   children,
 }) => {
-  const Wrapper = fullscreen ? PageWrapperFullscreen : PageWrapper
-
   return (
     <PageRoot>
-      <Wrapper>{children}</Wrapper>
+      <PageWrapper mode={mode}>{children}</PageWrapper>
     </PageRoot>
   )
 }
