@@ -1,7 +1,7 @@
 import {
   Page,
-  Checkbox,
-  OnCheckboxChangePayload,
+  Switch,
+  OnSwitchChangePayload,
   IconButton,
   Column,
   Row,
@@ -35,7 +35,7 @@ const IconButtonPage = () => {
 
     const [isChecked, setIsChecked] = useState(false)
 
-    const onCheckedChange = useCallback((event: OnCheckboxChangePayload) => {
+    const onCheckedChange = useCallback((event: OnSwitchChangePayload) => {
       const { isChecked } = event
 
       setIsChecked(isChecked)
@@ -48,7 +48,7 @@ const IconButtonPage = () => {
 
           <Row>
             <NextText>Disable buttons?</NextText> <Spacer />
-            <Checkbox onChange={onCheckedChange} />
+            <Switch onChange={onCheckedChange} />
           </Row>
 
           <BigSpacer />
