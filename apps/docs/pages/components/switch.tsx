@@ -1,5 +1,10 @@
-import { Column, Row, Switch } from '@aviato/ui'
+import { Column, Row, Switch, styled } from '@aviato/ui'
 import { NextTitle, NextText, Page, ShowcaseComponent } from '../../components'
+
+const Spacer = styled('div', {
+  width: 6,
+  height: 6,
+})
 
 const CheckboxPage = () => {
   const ShowSwitch = () => {
@@ -8,6 +13,18 @@ const CheckboxPage = () => {
         <Column>
           <Row>
             <Switch />
+
+            <Spacer />
+
+            <Switch checked />
+
+            <Spacer />
+
+            <Switch disabled />
+
+            <Spacer />
+
+            <Switch disabled checked />
           </Row>
         </Column>
       </>
