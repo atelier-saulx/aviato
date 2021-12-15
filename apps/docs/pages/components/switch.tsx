@@ -38,10 +38,6 @@ const SwitchPage = () => {
       <ShowcaseComponent background="transparent">
         <ShowSwitch size="normal" />
       </ShowcaseComponent>
-
-      <ShowcaseComponent background="transparent">
-        <ShowSwitch size="large" />
-      </ShowcaseComponent>
     </Page>
   )
 }

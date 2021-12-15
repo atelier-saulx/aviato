@@ -41,14 +41,14 @@ const SwitchSizeMap: {
 
   large: {
     switch: {
-      width: 48,
-      height: 30,
+      width: 32 * 1.3,
+      height: 20 * 1.3,
     },
     knob: {
-      size: 24,
+      size: 16 * 1.3,
     },
     offset: {
-      value: 3,
+      value: 2 * 1.3,
     },
   },
 }
