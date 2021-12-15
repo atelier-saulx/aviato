@@ -1,13 +1,10 @@
-import { styled } from '@aviato/ui'
 import { RadioGroup, Radio, Column, Row } from '@aviato/ui'
-import { NextTitle, NextText } from '../../../components'
-
-import { Page, ShowcaseComponent } from '../../../components'
-
-const Spacer = styled('div', {
-  width: 12,
-  height: 12,
-})
+import {
+  NextTitle,
+  NextText,
+  Page,
+  ShowcaseComponent,
+} from '../../../components'
 
 const CheckboxPage = () => {
   const ShowRadiogroup = () => {

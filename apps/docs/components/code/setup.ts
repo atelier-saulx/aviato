@@ -10,18 +10,18 @@ export function setupPrism() {
   const registerButton = Prism?.plugins?.toolbar?.registerButton ?? noop
 
   registerButton('select-code', (env: any) => {
-    var button = document.createElement('button')
+    const button = document.createElement('button')
     button.innerHTML = 'Select Code'
     button.style.marginLeft = '10px'
 
     button.addEventListener('click', function () {
       if ((document as any).body.createTextRange) {
-        var range = (document as any).body.createTextRange()
+        const range = (document as any).body.createTextRange()
         range.moveToElementText(env.element)
         range.select()
       } else if (window.getSelection) {
-        var selection = window.getSelection()
-        var range = (document as any).createRange()
+        const selection = window.getSelection()
+        const range = (document as any).createRange()
         range.selectNodeContents(env.element)
         selection?.removeAllRanges()
         selection?.addRange(range)
@@ -32,18 +32,18 @@ export function setupPrism() {
   })
 
   registerButton('copy-code', (env: any) => {
-    var button = document.createElement('button')
+    const button = document.createElement('button')
     button.innerHTML = 'Copy Code'
     button.style.marginLeft = '10px'
 
     button.addEventListener('click', function () {
       if ((document as any).body.createTextRange) {
-        var range = (document as any).body.createTextRange()
+        const range = (document as any).body.createTextRange()
         range.moveToElementText(env.element)
         range.select()
       } else if (window.getSelection) {
-        var selection = window.getSelection()
-        var range = (document as any).createRange()
+        const selection = window.getSelection()
+        const range = (document as any).createRange()
         range.selectNodeContents(env.element)
         selection?.removeAllRanges()
         selection?.addRange(range)

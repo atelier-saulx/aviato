@@ -1,7 +1,7 @@
 import '../styles/reset.css'
 import '../styles/font.css'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
@@ -11,7 +11,7 @@ import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { styled, MenuWidthConstant, darkTheme, themes } from '@aviato/ui'
+import { styled, MenuWidthConstant, themes } from '@aviato/ui'
 
 initialiseApplication()
 

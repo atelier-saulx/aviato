@@ -8,9 +8,12 @@ import {
   styled,
 } from '@aviato/ui'
 import { useCallback, useState } from 'react'
-import { NextTitle, NextText } from '../../../components'
-
-import { Page, ShowcaseComponent } from '../../../components'
+import {
+  NextTitle,
+  NextText,
+  Page,
+  ShowcaseComponent,
+} from '../../../components'
 
 const BigSpacer = styled('div', {
   width: '100%',
