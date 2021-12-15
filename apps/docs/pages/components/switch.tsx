@@ -6,7 +6,7 @@ const Spacer = styled('div', {
   height: 6,
 })
 
-const CheckboxPage = () => {
+const SwitchPage = () => {
   const ShowSwitch = () => {
     return (
       <>
@@ -48,4 +48,4 @@ const CheckboxPage = () => {
   )
 }
 
-export default CheckboxPage
+export default SwitchPage
