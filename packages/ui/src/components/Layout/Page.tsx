@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react'
 import { styled } from '~/theme'
 
 const PageRoot = styled('div', {
-  backgroundColor: '$Background2dp',
   position: 'relative',
   width: '100vw',
   height: '100vh',
   overflowX: 'hidden',
   overflowY: 'scroll',
+  backgroundColor: '$Background2dp',
 })
 
 const PageWrapperFullscreen = styled('div', {
