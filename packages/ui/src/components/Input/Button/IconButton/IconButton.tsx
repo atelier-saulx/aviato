@@ -18,7 +18,7 @@ export interface IconButtonProps extends DefaultProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
-  icon?: IconName
+  icon?: IconName | string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
@@ -40,7 +40,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
     onClick()
   }, [])
 
-  const TargetIcon = getIconFromString(icon)
+  const TargetIcon = getIconFromString(icon as IconName)
 
   return (
     <Button

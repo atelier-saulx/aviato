@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import React, { ReactNode, FunctionComponent } from 'react'
 import { Icon } from '~/icons/collection'
 
-type TruthyOrFalsy = Icon | boolean | string | null | undefined
+type TruthyOrFalsy = ReactNode | Icon | boolean | string | null | undefined
 
 type ConditionalProps = {
   test: TruthyOrFalsy

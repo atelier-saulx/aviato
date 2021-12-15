@@ -7,6 +7,7 @@ import {
   Row,
   getRandomIconName,
   styled,
+  IconName,
 } from '@aviato/ui'
 import { useCallback, useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
@@ -26,9 +27,7 @@ const capitalize = (input: string) => {
 }
 
 const IconButtonPage = () => {
-  const RandomIconName = () => {
-    return getRandomIconName()
-  }
+  const randomIcon = getRandomIconName() as IconName
 
   const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
     const uppercasedType = capitalize(type)
@@ -60,7 +59,7 @@ const IconButtonPage = () => {
                   type={type}
                   mode="filled"
                   disabled={isChecked}
-                  icon={RandomIconName()}
+                  icon={randomIcon}
                 />
 
                 <Spacer />
@@ -69,7 +68,7 @@ const IconButtonPage = () => {
                   type={type}
                   mode="outlined"
                   disabled={isChecked}
-                  icon={RandomIconName()}
+                  icon={randomIcon}
                 />
 
                 <Spacer />
@@ -78,7 +77,7 @@ const IconButtonPage = () => {
                   type={type}
                   mode="transparent"
                   disabled={isChecked}
-                  icon={RandomIconName()}
+                  icon={randomIcon}
                 />
               </Row>
             </Column>
@@ -96,19 +95,15 @@ const IconButtonPage = () => {
           <Row>
             <Column>
               <Row>
-                <IconButton mode="filled" disabled icon={RandomIconName()} />
+                <IconButton mode="filled" disabled icon={randomIcon} />
 
                 <Spacer />
 
-                <IconButton mode="outlined" disabled icon={RandomIconName()} />
+                <IconButton mode="outlined" disabled icon={randomIcon} />
 
                 <Spacer />
 
-                <IconButton
-                  mode="transparent"
-                  disabled
-                  icon={RandomIconName()}
-                />
+                <IconButton mode="transparent" disabled icon={randomIcon} />
               </Row>
             </Column>
           </Row>
@@ -144,7 +139,7 @@ const IconButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <IconButton type="primary" mode="filled" icon={RandomIconName()} />
+        <IconButton type="primary" mode="filled" icon={randomIcon} />
       </ShowcaseComponent>
     </Page>
   )

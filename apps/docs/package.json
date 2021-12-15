@@ -1,17 +1,19 @@
 {
   "name": "@aviato/docs",
-  "version": "0.0.1",
+  "description": "Aviato Documentation & Design Suite",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "watch": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "run-p lint:*",
+    "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint --ignore-path .gitignore './**/*.{ts,tsx}'",
     "lint:prettier": "prettier --write './**/*.ts{,x}'",
-    "lint:next": "next lint"
+    "lint:next": "next lint",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
     "@storyofams/next-password-protect": "^1.5.14",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@aviato/eslint-config": "*",
     "@aviato/prettier-config": "*",
+    "@aviato/tsconfig": "*",
     "@aviato/ui": "*",
     "@aviato/utils": "*",
     "@babel/core": "^7.0.0-0",

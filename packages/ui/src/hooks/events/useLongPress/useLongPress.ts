@@ -6,10 +6,10 @@ type LongpressOptions = {
   delay?: number
 }
 
-function preventDefault(event: Event) {
+function preventDefault(event: Event | TouchEvent) {
   if (!isTouchEvent(event)) return
 
-  if (event.touches.length < 2 && event.preventDefault) {
+  if ((event as TouchEvent)?.touches?.length < 2 && event.preventDefault) {
     event.preventDefault()
   }
 }

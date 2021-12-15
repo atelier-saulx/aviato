@@ -1,14 +1,20 @@
 {
   "name": "@aviato/utils",
-  "version": "0.1.0",
   "description": "A library of utility functions for Aviato",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "iife": "dist/index.global.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "react": "^17.0.2"
   },
   "devDependencies": {
+    "@aviato/tsconfig": "*",
     "@aviato/eslint-config": "*",
     "@aviato/prettier-config": "*",
     "@types/node": "^16.11.12",
@@ -16,25 +22,20 @@
     "eslint": "7.28.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
-    "rollup-plugin-alias": "^2.2.0",
-    "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-typescript2": "^0.31.1",
-    "rollup": "^2.60.2",
-    "typescript": "4.5.2"
+    "typescript": "4.5.2",
+    "tsup": "^5.10.1"
   },
   "prettier": "@aviato/prettier-config",
   "eslintConfig": {
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
-    "start": "yarn watch",
-    "build": "rollup -c",
-    "watch": "rollup -c --watch",
-    "lint": "run-p lint:*",
+    "watch": "tsup --watch --env.NODE_ENV development",
+    "build": "tsup --env.NODE_ENV production",
+    "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",
-    "lint:prettier": "prettier --write './src/**/*.ts{,x}'"
-  },
-  "main": "dist/index.js",
-  "module": "dist/index.es.js"
+    "lint:prettier": "prettier --write './src/**/*.ts{,x}'",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  }
 }

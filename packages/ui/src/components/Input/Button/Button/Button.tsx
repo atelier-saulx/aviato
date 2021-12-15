@@ -3,7 +3,6 @@ import { noop } from '@aviato/utils'
 
 import { classNames, css, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { Icon } from '~/icons/collection'
 import { ComponentProps } from '@stitches/react'
 
 const primaryButtonCSS: StitchedCSS = {
@@ -229,8 +228,8 @@ export interface ButtonProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
-  leftIcon?: Icon
-  rightIcon?: Icon
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
