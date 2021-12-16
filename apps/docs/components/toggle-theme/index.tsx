@@ -1,7 +1,7 @@
 import { log } from '@aviato/utils'
 import { useCallback, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Button, getCurrentTheme } from '@aviato/ui'
+import { IconButton, getCurrentTheme } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 
 export const ToggleThemeButton = () => {
@@ -23,8 +23,10 @@ export const ToggleThemeButton = () => {
   }
 
   return (
-    <Button onClick={toggleTheme}>
-      {currentTheme === 'light' ? '🌙' : '☀️'}
-    </Button>
+    <IconButton
+      type="ghost"
+      onClick={toggleTheme}
+      icon={currentTheme === 'light' ? 'IconDark' : 'IconLight'}
+    />
   )
 }

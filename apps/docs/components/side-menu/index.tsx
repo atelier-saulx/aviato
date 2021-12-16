@@ -3,7 +3,6 @@ import { withRouter, NextRouter } from 'next/router'
 
 import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
-import { ToggleThemeButton } from '../toggle-theme'
 
 const mainMenu: MenuDataItems[] = [
   {
@@ -44,14 +43,6 @@ const HeaderDiv = styled('div', {
   padding: '8px',
   paddingBottom: '69px',
   cursor: 'pointer',
-})
-
-const Footer = styled('div', {
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  marginTop: 'auto',
-  padding: '8px',
 })
 
 interface MainSideMenuProps {
@@ -117,10 +108,6 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
       </HeaderDiv>
 
       <Menu>{mainMenuItems}</Menu>
-
-      <Footer>
-        <ToggleThemeButton />
-      </Footer>
     </SideMenu>
   )
 })

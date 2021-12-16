@@ -5,8 +5,6 @@ import type * as Stitches from '@stitches/react'
 import { theme as LightTheme } from './theme.light'
 import { theme as DarkTheme } from './theme.dark'
 import { isBrowser } from '@aviato/utils'
-import { globalResetText } from './reset'
-import { globalFontsText } from './fonts'
 
 const createdConfig = createStitches({
   theme: LightTheme,
@@ -45,8 +43,4 @@ export const getCurrentTheme: () => 'light' | 'dark' = () => {
   }
 
   return 'light'
-}
-
-export const globalStylesText = () => {
-  return [globalResetText(), globalFontsText()].join('\n')
 }

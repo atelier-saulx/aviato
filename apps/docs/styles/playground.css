@@ -8,16 +8,16 @@
 }
 
 /**
-  * Create a root stacking context
-  */
+ * Create a root stacking context
+ */
 #root,
 #__next {
   isolation: isolate;
 }
 
 /**
-  *Switching on box-sizing: border-box by default; toggle this off if you want more granular control
-  */
+ *Switching on box-sizing: border-box by default; toggle this off if you want more granular control
+ */
 body {
   box-sizing: border-box;
 }
@@ -68,8 +68,8 @@ p {
 }
 
 /**
-  * Avoid text overflows
-  */
+ * Avoid text overflows
+ */
 p,
 h1,
 h2,
@@ -107,11 +107,11 @@ a {
 }
 
 /**
-  * IMPORTANT: This removes the focus outline for most browsers.
-  * Be aware this is a backwards accessibilty step! Mozilla (i.e. Firefox)
-  * also adds a dotted outline around a tags and buttons when they receive
-  * tab focus which I haven't found an unhacky way of removing.
-  */
+ * IMPORTANT: This removes the focus outline for most browsers.
+ * Be aware this is a backwards accessibilty step! Mozilla (i.e. Firefox)
+ * also adds a dotted outline around a tags and buttons when they receive
+ * tab focus which I haven't found an unhacky way of removing.
+ */
 a:focus,
 button:focus {
   outline: 0;
@@ -150,18 +150,18 @@ fieldset {
 }
 
 /**
-  * For IE, we want to remove the default cross ('X') that appears in
-  * input fields when a user starts typing - Make sure you add your own!
-  */
+ * For IE, we want to remove the default cross ('X') that appears in
+ * input fields when a user starts typing - Make sure you add your own!
+ */
 input::-ms-clear {
   display: none;
 }
 
 /**
-  * This switches the default outline off when an input receives focus
-  * (really important for users tabbing through with a keyboard) so ensure
-  * you put something decent in for your input focus instead!!
-  */
+ * This switches the default outline off when an input receives focus
+ * (really important for users tabbing through with a keyboard) so ensure
+ * you put something decent in for your input focus instead!!
+ */
 textarea:focus,
 input:focus select:focus {
   outline: none;
@@ -177,8 +177,8 @@ input[type='number'] {
 }
 
 /**
-  * Removes the little spinner controls for number type inputs (WebKit browsers/forks only).
-  */
+ * Removes the little spinner controls for number type inputs (WebKit browsers/forks only).
+ */
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   appearance: none;
@@ -189,8 +189,8 @@ iframe {
 }
 
 /**
-  * Make elements behave responsively. Here they will scale up to 100% of their natural size.
-  */
+ * Make elements behave responsively. Here they will scale up to 100% of their natural size.
+ */
 img,
 picture,
 video,
@@ -201,17 +201,17 @@ svg {
 }
 
 /**
-  * Removes the default focusring that Mozilla places on select items. From: http://stackoverflow.com/a/18853002/1147859
-  * Ensure you set `#000` to the colour you want your text to appear.
-  */
+ * Removes the default focusring that Mozilla places on select items. From: http://stackoverflow.com/a/18853002/1147859
+ * Ensure you set `#000` to the colour you want your text to appear.
+ */
 select:-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 #000;
 }
 
 /**
-  * Remove all animations and transitions for people that prefer not to see them
-  */
+ * Remove all animations and transitions for people that prefer not to see them
+ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
