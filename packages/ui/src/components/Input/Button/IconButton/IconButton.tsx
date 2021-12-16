@@ -5,10 +5,11 @@ import {
   ButtonType,
   StyledButton,
 } from '~/components/Input/Button/Button'
-import { IconName, getIconFromType, Icon } from '~/icons'
-import { noop } from '@aviato/utils'
-import { StitchedCSS } from '~/theme'
 import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
+
+import { IconName, getIconFromType, Icon } from '~/icons'
+import { StitchedCSS } from '~/theme'
 
 const IconButtonStyles: StitchedCSS = {
   padding: '8px 8px',
