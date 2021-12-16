@@ -1,4 +1,25 @@
-export const fontNames = [
+export const preloadFonts = [
+  'Font-Regular.woff2',
+  'Font-Bold.woff2',
+  'Font-Medium.woff2',
+  'Font-SemiBold.woff2',
+  'Font-Black.woff2',
+  'Font-ExtraBold.woff2',
+  'Font-ExtraLight.woff2',
+  'Font-Italic.woff2',
+  'Font-Light.woff2',
+  'Font-Thin.woff2',
+  'Font-ExtraBoldItalic.woff2',
+  'Font-BlackItalic.woff2',
+  'Font-BoldItalic.woff2',
+  'Font-ExtraLightItalic.woff2',
+  'Font-LightItalic.woff2',
+  'Font-MediumItalic.woff2',
+  'Font-SemiBoldItalic.woff2',
+  'Font-ThinItalic.woff2',
+]
+
+export const allFontNames = [
   'Font-ExtraBoldItalic.woff',
   'Font-Black.woff',
   'Font-Black.woff2',

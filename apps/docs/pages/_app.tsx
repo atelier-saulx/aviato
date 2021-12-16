@@ -1,5 +1,5 @@
 import '../styles/reset.css'
-import '../styles/font.css'
+import '../styles/fonts.css'
 
 import React from 'react'
 
@@ -12,6 +12,14 @@ import { withPasswordProtect } from '@storyofams/next-password-protect'
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
 import { themes, ApplicationRoot } from '@aviato/ui'
+
+import Router from 'next/router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 initialiseApplication()
 

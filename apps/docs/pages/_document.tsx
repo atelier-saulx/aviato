@@ -1,12 +1,12 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 
 import { getCssText } from '@aviato/ui'
-import { fontNames } from '../utils/font-names'
+import { preloadFonts } from '../utils/font-names'
 
 export default class Document extends NextDocument {
   render() {
     const PreloadFonts: any = () => {
-      return fontNames.map((fontName, key) => {
+      return preloadFonts.map((fontName, key) => {
         const splitFont = fontName.split('.')
         const fontType = splitFont[splitFont.length - 1]
 
