@@ -1,12 +1,14 @@
-import React, { FunctionComponent, MouseEventHandler, useCallback } from 'react'
+import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import {
   Button,
   ButtonMode,
   ButtonType,
+  StyledButton,
 } from '~/components/Input/Button/Button'
 import { IconName, getIconFromType, Icon } from '~/icons'
 import { noop } from '@aviato/utils'
-import { DefaultProps, StitchedCSS } from '~/theme'
+import { StitchedCSS } from '~/theme'
+import { ComponentProps } from '@stitches/react'
 
 const IconButtonStyles: StitchedCSS = {
   padding: '8px 8px',
@@ -14,7 +16,7 @@ const IconButtonStyles: StitchedCSS = {
   width: 'max-content',
 }
 
-export interface IconButtonProps extends DefaultProps {
+export interface IconButtonProps {
   type?: ButtonType
   mode?: ButtonMode
   disabled?: boolean
@@ -22,7 +24,12 @@ export interface IconButtonProps extends DefaultProps {
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
+type ForwardProps = ComponentProps<typeof StyledButton> & IconButtonProps
+
+export const IconButton = React.forwardRef<
+  ElementRef<typeof StyledButton>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     type = 'primary',
     mode = 'filled',
@@ -49,9 +56,10 @@ export const IconButton: FunctionComponent<IconButtonProps> = (properties) => {
       onClick={handleClick}
       disabled={disabled}
       css={IconButtonStyles}
+      ref={forwardedRef}
       {...remainingProps}
     >
       <TargetIcon width={16} height={16} />
     </Button>
   )
-}
+})

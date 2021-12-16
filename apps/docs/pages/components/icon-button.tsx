@@ -149,7 +149,18 @@ const IconButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <IconButton type="primary" mode="filled" icon={randomIcon()} />
+        <IconButton
+          type="primary"
+          mode="filled"
+          icon={randomIcon()}
+          css={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+            width: 200,
+            height: 200,
+          }}
+        />
       </ShowcaseComponent>
     </Page>
   )

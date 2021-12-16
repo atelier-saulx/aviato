@@ -228,7 +228,17 @@ const ButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <Button type="primary" mode="filled">
+        <Button
+          type="primary"
+          mode="filled"
+          css={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+            width: 200,
+            height: 200,
+          }}
+        >
           With CSS
         </Button>
       </ShowcaseComponent>
