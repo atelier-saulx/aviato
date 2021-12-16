@@ -7,6 +7,7 @@ import {
   Row,
   getRandomIcon,
   styled,
+  ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { useCallback, useState } from 'react'
@@ -40,12 +41,12 @@ const ButtonPage = () => {
     return <Icon />
   }
 
-  const ShowButtons = ({ type }: { type: 'primary' | 'ghost' | 'error' }) => {
+  const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
     const [isChecked, setIsChecked] = useState(false)
 
-    const onCheckedChange = useCallback((event: OnSwitchChangePayload) => {
+    const onSwitchChange = useCallback((event: OnSwitchChangePayload) => {
       const { isChecked } = event
 
       setIsChecked(isChecked)
@@ -58,7 +59,7 @@ const ButtonPage = () => {
 
           <Row>
             <NextText>Disable buttons?</NextText> <Spacer />
-            <Switch onChange={onCheckedChange} />
+            <Switch onChange={onSwitchChange} />
           </Row>
 
           <BigSpacer />
@@ -227,7 +228,17 @@ const ButtonPage = () => {
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
-        <Button type="primary" mode="filled">
+        <Button
+          type="primary"
+          mode="filled"
+          css={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+            width: 200,
+            height: 200,
+          }}
+        >
           With CSS
         </Button>
       </ShowcaseComponent>

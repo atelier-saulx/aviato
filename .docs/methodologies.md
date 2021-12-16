@@ -12,6 +12,25 @@ In Aviato-UI, we use a few methodologies and libraries.
 
 Stitches is a CSS-in-JS framework with near-zero runtime, SSR, multi-variant support, and a best-in-class developer experience. It also supports theme tokens — aka. style variables or design tokens — out of the box. See [Tokens](https://stitches.dev/docs/tokens).
 
+One benefit is being able to style a component the way you like.
+
+Example:
+
+```tsx
+<IconButton
+  type="primary"
+  mode="filled"
+  icon={randomIcon()}
+  css={{
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    width: 200,
+    height: 200,
+  }}
+/>
+```
+
 ---
 
 ## 🔗 React.forwardRef
