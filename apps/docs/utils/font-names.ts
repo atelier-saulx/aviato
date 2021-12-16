@@ -1,3 +1,6 @@
+/**
+ * Curated list of fonts for preloading.
+ */
 export const preloadFonts = [
   'Font-Regular.woff2',
   'Font-Bold.woff2',
@@ -19,6 +22,9 @@ export const preloadFonts = [
   'Font-ThinItalic.woff2',
 ]
 
+/**
+ * Complete list of fonts.
+ */
 export const allFontNames = [
   'Font-ExtraBoldItalic.woff',
   'Font-Black.woff',
