@@ -1,16 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
-import { useTheme } from 'next-themes'
 
-import { log } from '@aviato/utils'
-import {
-  SideMenu,
-  Menu,
-  MenuItem,
-  Button,
-  styled,
-  getCurrentTheme,
-} from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 
 const mainMenu: MenuDataItems[] = [
@@ -52,14 +43,7 @@ const HeaderDiv = styled('div', {
   padding: '8px',
   paddingBottom: '69px',
   cursor: 'pointer',
-})
-
-const Footer = styled('div', {
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  marginTop: 'auto',
-  padding: '8px',
+  color: '$Primary',
 })
 
 interface MainSideMenuProps {
@@ -74,12 +58,6 @@ type MenuDataItems = {
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
-  const [mounted, setMounted] = useState(false)
-  const { setTheme, theme } = useTheme()
-  const [currentTheme, setCurrentTheme] = useState(theme)
-
-  useEffect(() => setMounted(true), [])
-
   const { asPath } = router
 
   useCallback(() => {
@@ -95,20 +73,6 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     router.push({
       pathname: targetRoute,
     })
-  }
-
-  const toggleTheme = useCallback(() => {
-    log.global.debug('Toggling theme...')
-
-    const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
-
-    setTheme(targetTheme)
-    setCurrentTheme(targetTheme)
-  }, [setTheme])
-
-  // Prevent SSR de-sync error by waiting for CSR
-  if (!mounted) {
-    return null
   }
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
@@ -145,12 +109,6 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
       </HeaderDiv>
 
       <Menu>{mainMenuItems}</Menu>
-
-      <Footer>
-        <Button onClick={() => toggleTheme()}>
-          {currentTheme === 'light' ? '🌙' : '☀️'}
-        </Button>
-      </Footer>
     </SideMenu>
   )
 })

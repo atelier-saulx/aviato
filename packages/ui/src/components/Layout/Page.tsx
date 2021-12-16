@@ -3,8 +3,8 @@ import { styled } from '~/theme'
 
 const PageRoot = styled('div', {
   position: 'relative',
-  width: '100vw',
-  height: '100vh',
+  width: '100%',
+  height: '100%',
   overflowX: 'hidden',
   overflowY: 'scroll',
   backgroundColor: '$Background2dp',
@@ -14,7 +14,7 @@ const PageWrapper = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   width: '100%',
-  height: '100vh',
+  height: '100%',
   padding: '20px',
 
   variants: {

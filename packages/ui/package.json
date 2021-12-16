@@ -26,6 +26,7 @@
     "@types/react": "^17.0.37",
     "@types/throttle-debounce": "^2.1.0",
     "chalk": "^5.0.0",
+    "esbuild-plugin-copy": "^0.3.0",
     "eslint": "7.28.0",
     "esm": "^3.2.25",
     "fs-extra": "^10.0.0",
