@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
@@ -11,8 +11,7 @@ import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { themes, ApplicationRoot, Conditional } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+import { themes, ApplicationRoot } from '@aviato/ui'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -20,26 +19,7 @@ Router.events.on('routeChangeError', () => NProgress.done())
 
 initialiseApplication()
 
-let loadingScreenTimeout
-
 const MainApplication = ({ Component, pageProps }: AppProps) => {
-  const hasLoaded = useHasLoaded()
-  const [isFirstLoad, setIsFirstLoad] = useState(true)
-
-  /**
-   * On first load, hide content and show progress bar.
-   */
-  useEffect(() => {
-    if (!isFirstLoad || loadingScreenTimeout) return
-
-    NProgress.start()
-
-    loadingScreenTimeout = setTimeout(() => {
-      setIsFirstLoad(false)
-      NProgress.done()
-    }, 200)
-  }, [hasLoaded, isFirstLoad])
-
   const HeadContent = () => {
     return (
       <Head>
@@ -64,12 +44,10 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
         defaultTheme="system"
         value={themes}
       >
-        <Conditional test={!isFirstLoad}>
-          <ApplicationRoot>
-            <SideMenu />
-            <Component {...pageProps} />
-          </ApplicationRoot>
-        </Conditional>
+        <ApplicationRoot>
+          <SideMenu />
+          <Component {...pageProps} />
+        </ApplicationRoot>
       </ThemeProvider>
     </>
   )
