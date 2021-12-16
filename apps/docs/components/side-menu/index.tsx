@@ -43,6 +43,7 @@ const HeaderDiv = styled('div', {
   padding: '8px',
   paddingBottom: '69px',
   cursor: 'pointer',
+  color: '$Primary',
 })
 
 interface MainSideMenuProps {
