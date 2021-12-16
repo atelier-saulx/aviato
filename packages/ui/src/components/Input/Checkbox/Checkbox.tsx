@@ -1,12 +1,9 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
+
+import { styled } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { DefaultProps, styled } from '~/theme'
 import { IconCheck, IconMinus } from '~/icons'
 import { DefaultChangePayload } from '~/types/events'
 
@@ -103,7 +100,7 @@ export interface OnCheckboxChangePayload extends DefaultChangePayload {
   isChecked: boolean
 }
 
-export interface CheckboxProps extends DefaultProps {
+export interface CheckboxProps {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
@@ -111,10 +108,16 @@ export interface CheckboxProps extends DefaultProps {
   onChange?: (payload: OnCheckboxChangePayload) => void
 }
 
+type ForwardProps = ComponentProps<typeof StyledCheckboxWrapper> & CheckboxProps
+
 /***
  * TODO: Implement proper indeterminate logic
  */
-export const Checkbox: FunctionComponent<CheckboxProps> = (properties) => {
+
+export const Checkbox = React.forwardRef<
+  ElementRef<typeof StyledCheckboxWrapper>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     size = 'medium',
     checked = false,
@@ -161,7 +164,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (properties) => {
 
   return (
     <>
-      <StyledCheckboxWrapper {...remainingProps}>
+      <StyledCheckboxWrapper ref={forwardedRef} {...remainingProps}>
         <StyledCheckbox
           type="checkbox"
           checked={isChecked}
@@ -182,4 +185,4 @@ export const Checkbox: FunctionComponent<CheckboxProps> = (properties) => {
       </StyledCheckboxWrapper>
     </>
   )
-}
+})

@@ -1,9 +1,9 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { noop } from '@aviato/utils'
+import { ComponentProps } from '@stitches/react'
 
 import { classNames, css, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
-import { ComponentProps } from '@stitches/react'
 
 const primaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
