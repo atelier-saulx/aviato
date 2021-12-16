@@ -1,5 +1,5 @@
-import '../styles/reset.css'
-import '../styles/fonts.css'
+import '@aviato/ui/dist/css/reset.css'
+import '@aviato/ui/dist/css/fonts.css'
 
 import React from 'react'
 

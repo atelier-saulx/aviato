@@ -31,13 +31,6 @@ export default class Document extends NextDocument {
             dangerouslySetInnerHTML={{ __html: getCssText() }}
           />
           <PreloadFonts />
-          <link
-            rel="preload"
-            href="/fonts/Font-Black.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
         </Head>
         <body>
           <Main />
