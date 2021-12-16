@@ -1,6 +1,6 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 
-import { getCssText } from '@aviato/ui'
+import { globalStylesText, getCssText } from '@aviato/ui'
 import { PreloadFonts } from '../utils/fonts'
 
 export default class Document extends NextDocument {
@@ -10,8 +10,16 @@ export default class Document extends NextDocument {
         <Head>
           <PreloadFonts />
           <style
+            id="global-styles"
+            dangerouslySetInnerHTML={{
+              __html: globalStylesText(),
+            }}
+          />
+          <style
             id="stitches"
-            dangerouslySetInnerHTML={{ __html: getCssText() }}
+            dangerouslySetInnerHTML={{
+              __html: getCssText(),
+            }}
           />
         </Head>
         <body>

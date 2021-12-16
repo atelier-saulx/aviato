@@ -1,21 +1,18 @@
-import '@aviato/ui/dist/css/reset.css'
-import '@aviato/ui/dist/css/fonts.css'
-
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
+import Router from 'next/router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { themes, ApplicationRoot } from '@aviato/ui'
-
-import Router from 'next/router'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+import { themes, ApplicationRoot, Conditional } from '@aviato/ui'
+import { useHasLoaded } from '@aviato/hooks'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -23,7 +20,26 @@ Router.events.on('routeChangeError', () => NProgress.done())
 
 initialiseApplication()
 
+let loadingScreenTimeout
+
 const MainApplication = ({ Component, pageProps }: AppProps) => {
+  const hasLoaded = useHasLoaded()
+  const [isFirstLoad, setIsFirstLoad] = useState(true)
+
+  /**
+   * On first load, hide content and show progress bar.
+   */
+  useEffect(() => {
+    if (!isFirstLoad || loadingScreenTimeout) return
+
+    NProgress.start()
+
+    loadingScreenTimeout = setTimeout(() => {
+      setIsFirstLoad(false)
+      NProgress.done()
+    }, 200)
+  }, [hasLoaded, isFirstLoad])
+
   const HeadContent = () => {
     return (
       <Head>
@@ -41,16 +57,19 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <HeadContent />
+
       <ThemeProvider
         disableTransitionOnChange
         attribute="class"
         defaultTheme="system"
         value={themes}
       >
-        <ApplicationRoot>
-          <SideMenu />
-          <Component {...pageProps} />
-        </ApplicationRoot>
+        <Conditional test={!isFirstLoad}>
+          <ApplicationRoot>
+            <SideMenu />
+            <Component {...pageProps} />
+          </ApplicationRoot>
+        </Conditional>
       </ThemeProvider>
     </>
   )
