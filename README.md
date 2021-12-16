@@ -66,9 +66,13 @@ You can use these components either as the base layer of your application, or ad
 
 Visit [aviato.design](https://aviato.design/) for full documentation and a showcase of Aviatos UI component suite, hooks and utilities.
 
+See how to use the library under [Getting Started](./.docs/getting-started.md).
+
+To read more behind the scenes, go to [Methodologies](./.docs/methodologies.md).
+
 ---
 
-## 📦 Installation
+## 📡 Installation
 
 ```bash
 yarn add @aviato/ui
@@ -78,11 +82,13 @@ yarn add @aviato/ui
 npm install --save @aviato/ui
 ```
 
-### Example
+---
 
-See how to use the library under [Getting Started](./.docs/getting-started.md).
+## 🤝 Contributing
 
-To read more behind the scenes, go to [Methodologies](./.docs/methodologies.md).
+_We do not currently accept community-driven code contributions_, as Aviato is still in concept phase, but feel free to fork Aviato for your own use. This is subject to change in the future.
+
+If you are an onboarded maintainer (or curious), then please check out the [Contributing guide](CONTRIBUTING.md) for guidelines about how to proceed.
 
 ---
 

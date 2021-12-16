@@ -1,10 +1,20 @@
 ### SUMMARY
 
+What type of PR is this? (check all applicable)
+
+- [ ] - ♻️ Refactor
+- [ ] - ✨ Feature
+- [ ] - 🐛 Bug Fix
+- [ ] - 👷 Optimization
+- [ ] - 📝 Documentation
+- [ ] - 🔖 Release
+- [ ] - 🚩 Other
+
+### DETAILS
+
 <!--
   Write a sentence or two explaining the overall problem that you are solving.
 -->
-
-### DETAILS
 
 <!--
   OPTIONAL!
