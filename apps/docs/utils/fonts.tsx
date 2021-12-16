@@ -1,7 +1,28 @@
 /**
+ * Array of links for font-preloading.
+ */
+export const PreloadFonts: any = () => {
+  return fontsToPreload.map((fontName, key) => {
+    const splitFont = fontName.split('.')
+    const fontType = splitFont[splitFont.length - 1]
+
+    return (
+      <link
+        key={`FontName-${key}`}
+        rel="preload"
+        href={`/fonts/${fontName}`}
+        as="font"
+        type={`font/${fontType}`}
+        crossOrigin="anonymous"
+      />
+    )
+  })
+}
+
+/**
  * Curated list of fonts for preloading.
  */
-export const preloadFonts = [
+export const fontsToPreload = [
   'Font-Regular.woff2',
   'Font-Bold.woff2',
   'Font-Medium.woff2',
