@@ -28,6 +28,7 @@
     "lint": "turbo run lint",
     "build": "turbo run build",
     "test": "turbo run test",
+    "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "dependencies": {
