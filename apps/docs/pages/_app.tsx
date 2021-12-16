@@ -1,17 +1,21 @@
-import '../styles/reset.css'
-import '../styles/font.css'
-
 import React from 'react'
 
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
+import Router from 'next/router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 import { withPasswordProtect } from '@storyofams/next-password-protect'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
 import { themes, ApplicationRoot } from '@aviato/ui'
+
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 initialiseApplication()
 
@@ -33,6 +37,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <HeadContent />
+
       <ThemeProvider
         disableTransitionOnChange
         attribute="class"
