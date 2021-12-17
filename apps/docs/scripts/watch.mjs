@@ -11,14 +11,24 @@ stream.write = (data) => {
 }
 
 let hasOpenedBrowserTab = false
+let portAddress = 3000
 
 const checkTab = (data) => {
-  const targetMessage = 'compiled client and server successfully'
-  const serverReady = data.includes(targetMessage)
+  if (hasOpenedBrowserTab) return
 
-  if (serverReady && !hasOpenedBrowserTab) {
+  const hasPortMessage = data.includes('0.0.0.0:')
+  if (hasPortMessage) {
+    const splitMessage = data.replace('\n', '').split(':')
+    const targetAddress = splitMessage[splitMessage.length - 1]
+
+    portAddress = Number(targetAddress)
+  }
+
+  const hasCompiledMessage = 'compiled client and server successfully'
+  const hasCompiled = data.includes(hasCompiledMessage)
+  if (hasCompiled) {
     hasOpenedBrowserTab = true
-    open('http://localhost:3000/')
+    open(`http://localhost:${portAddress}/`)
   }
 }
 
