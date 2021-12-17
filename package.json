@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true",
-    "watch": "turbo run watch --no-cache --parallel --continue",
+    "watch": "turbo run watch",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "test": "turbo run test",
@@ -67,6 +67,9 @@
         "cache": false
       },
       "clean": {
+        "dependsOn": [
+          "^build"
+        ],
         "cache": false
       }
     }

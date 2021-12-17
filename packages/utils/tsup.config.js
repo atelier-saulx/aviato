@@ -5,9 +5,8 @@ export default defineConfig((options) => {
   const shouldCreateTypeDefinitions = true
 
   return {
-    entry: ['src/index.ts'],
     format: ['esm', 'cjs', 'iife'],
-    clean: true,
+    clean: !isWatching,
     splitting: true,
     sourcemap: isWatching,
     minify: !isWatching,

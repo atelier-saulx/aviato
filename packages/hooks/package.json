@@ -32,9 +32,8 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
-    "watch": "nodemon --watch src -e ts,tsx,svg,json,js --exec \"yarn build\"",
-    "watch-failing": "tsup --watch",
-    "build": "tsup",
+    "watch": "tsup ./src/index.ts --watch",
+    "build": "tsup ./src/index.ts",
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",
