@@ -1,5 +1,5 @@
-import '@aviato/ui/dist/css/reset.css'
-import '@aviato/ui/dist/css/fonts.css'
+import '@aviato/ui/css/reset.css'
+import '@aviato/ui/css/fonts.css'
 import '../styles/nprogress.css'
 import '../styles/playground.css'
 

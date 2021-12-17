@@ -60,7 +60,6 @@ const StyledSwitch = styled('input', {
   display: 'flex',
   alignItems: 'center',
   cursor: 'pointer',
-  padding: '1px',
   border: '1px solid $OtherOutline',
   backgroundColor: '$OtherInputBorderDefault',
 

@@ -15,23 +15,25 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@aviato/tsconfig": "*",
     "@aviato/eslint-config": "*",
     "@aviato/prettier-config": "*",
+    "@aviato/tsconfig": "*",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "eslint": "7.28.0",
+    "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
-    "typescript": "4.5.2",
-    "tsup": "^5.10.1"
+    "tsup": "^5.10.1",
+    "typescript": "4.5.2"
   },
   "prettier": "@aviato/prettier-config",
   "eslintConfig": {
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
-    "watch": "tsup --watch",
+    "watch": "nodemon --watch src -e ts,tsx,svg,json,js --exec \"yarn build\"",
+    "watch-failing": "tsup --watch",
     "build": "tsup",
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",

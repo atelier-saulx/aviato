@@ -1,5 +1,4 @@
 import { defineConfig } from 'tsup'
-import copy from 'esbuild-plugin-copy'
 
 export default defineConfig((options) => {
   const isWatching = !!options.watch
@@ -17,14 +16,5 @@ export default defineConfig((options) => {
     env: {
       NODE_ENV: isWatching ? 'development' : 'production',
     },
-    esbuildPlugins: [
-      copy({
-        assets: {
-          from: ['./assets/css/*'],
-          to: ['./css'],
-        },
-        verbose: false,
-      }),
-    ],
   }
 })
