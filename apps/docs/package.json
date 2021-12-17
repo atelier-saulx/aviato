@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "yarn watch",
-    "watch": "node --experimental-modules ./scripts/startServer.mjs",
+    "watch": "node --experimental-modules ./scripts/watch.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "TIMING=1 run-p lint:*",
