@@ -2,12 +2,16 @@ import open from 'open'
 import concurrently from 'concurrently'
 import process from 'process'
 
+const log = (data) => {
+  process.stdout.write(data)
+}
+
 const stream = {}
 
 stream.writable = true
 stream.write = (data) => {
   checkTab(data)
-  process.stdout.write(data)
+  log(data)
 }
 
 let hasOpenedBrowserTab = false
@@ -32,16 +36,6 @@ const checkTab = (data) => {
   }
 }
 
-const onSuccess = () => {
-  process.stdout.write('Success!')
-  process.exit()
-}
-
-const onFailure = () => {
-  process.stdout.write('onFailure!')
-  process.exit()
-}
-
 const commands = []
 commands.push({
   name: 'watch',
@@ -54,4 +48,14 @@ concurrently(commands, {
   maxProcesses: 8,
   prefix: 'none',
   outputStream: stream,
-}).then(onSuccess, onFailure)
+}).then(
+  // This code is necessary to make sure the parent
+  // terminates when the child process is closed.
+
+  function onSuccess() {
+    process.exit()
+  },
+  function onFailure() {
+    process.exit()
+  }
+)
