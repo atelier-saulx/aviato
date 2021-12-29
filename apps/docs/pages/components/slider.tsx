@@ -3,7 +3,7 @@ import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
   width: '100%',
-  height: 20,
+  height: 100,
 })
 
 const SliderPage = () => {
@@ -25,6 +25,22 @@ const SliderPage = () => {
                 { value: 50, label: '50%' },
                 { value: 75, label: '75%' },
                 { value: 100, label: '100%' },
+              ]}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '90%' }}>
+            <Slider
+              defaultValue={50}
+              step={25}
+              marks={[
+                { value: 0, label: 'xs' },
+                { value: 25, label: 'sm' },
+                { value: 50, label: 'md' },
+                { value: 75, label: 'lg' },
+                { value: 100, label: 'xl' },
               ]}
             />
           </Row>

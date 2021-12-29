@@ -77,7 +77,7 @@ export const Slider = React.forwardRef<
     defaultValue,
     min = 0,
     max = 100,
-    step = 0.1,
+    step = 1,
     marks = [],
     onChange = noop,
     ...remainingProps
