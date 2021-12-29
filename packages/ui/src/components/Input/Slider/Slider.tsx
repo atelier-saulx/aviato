@@ -53,12 +53,22 @@ const Thumb = styled('div', {
   left: '0%',
 })
 
+const Marks = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  position: 'relative',
+  cursor: 'pointer',
+  width: '100%',
+  height: 16,
+})
+
 export interface SliderProps extends DefaultProps {
   value?: number
   defaultValue?: number
   min?: number
   max?: number
   step?: number
+  marks?: { value: number; label?: React.ReactNode }[]
   onChange?(value: string): void
 }
 
@@ -74,6 +84,7 @@ export const Slider = React.forwardRef<
     min = 0,
     max = 100,
     step = 1,
+    marks = [],
     onChange = noop,
     ...remainingProps
   } = properties
@@ -89,8 +100,8 @@ export const Slider = React.forwardRef<
     onChange,
   })
 
-  const handleChange = (val: number) => {
-    const nextValue = getChangeValue({ value: val, min, max, step })
+  const handleChange = (newValue: number) => {
+    const nextValue = getChangeValue({ value: newValue, min, max, step })
     setValue(nextValue)
   }
 
@@ -119,6 +130,8 @@ export const Slider = React.forwardRef<
           onMouseDown={handleThumbMouseDown}
         />
       </Track>
+
+      <Marks />
 
       <input type="hidden" value={_value} />
     </StyledSlider>
