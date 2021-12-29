@@ -10,19 +10,21 @@ const SliderPage = () => {
   const ShowSlider = () => {
     return (
       <>
-        <Column>
-          <Row>
+        <Column css={{ width: '100%' }}>
+          <Row css={{ width: '100%' }}>
             <Slider />
           </Row>
 
           <BigSpacer />
 
-          <Row>
+          <Row css={{ width: '100%' }}>
             <Slider
               marks={[
-                { value: 20, label: '20%' },
+                { value: 0, label: '0%' },
+                { value: 25, label: '25%' },
                 { value: 50, label: '50%' },
                 { value: 75, label: '75%' },
+                { value: 100, label: '100%' },
               ]}
             />
           </Row>

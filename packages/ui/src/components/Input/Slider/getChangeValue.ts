@@ -1,4 +1,4 @@
-interface GetChangeValue {
+type GetChangeValue = {
   value: number
   containerWidth?: number
   min: number
@@ -16,6 +16,8 @@ export function getChangeValue({
   const left = !containerWidth
     ? value
     : Math.min(Math.max(value, 0), containerWidth) / containerWidth
-  const dx = left * (max - min)
-  return (dx !== 0 ? Math.round(dx / step) * step : 0) + min
+
+  const deltaX = left * (max - min)
+
+  return (deltaX !== 0 ? Math.round(deltaX / step) * step : 0) + min
 }

@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, { ElementRef, FunctionComponent, useRef, useState } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import React, { ElementRef, useRef, useState } from 'react'
+import { styled } from '~/theme'
 import { noop } from '@aviato/utils'
 import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
 import { getChangeValue } from './getChangeValue'
 import { ComponentProps } from '@stitches/react'
+import { Marks } from './Marks'
+import { Conditional } from '~/components'
 
 const StyledSlider = styled('div', {
   display: 'flex',
@@ -38,31 +40,23 @@ const Bar = styled('div', {
 
 const Thumb = styled('div', {
   position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   cursor: 'pointer',
   height: '16px',
   width: '16px',
   backgroundColor: '$PrimaryMainContrast',
   border: '4px solid $OtherInputBorderActive',
   color: '$OtherInputBorderActive',
+  borderRadius: '50%',
   transform: 'translate(-50%, -50%)',
   top: '50%',
-  borderRadius: '50%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   left: '0%',
+  zIndex: 2,
 })
 
-const Marks = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  position: 'relative',
-  cursor: 'pointer',
-  width: '100%',
-  height: 16,
-})
-
-export interface SliderProps extends DefaultProps {
+export interface SliderProps {
   value?: number
   defaultValue?: number
   min?: number
@@ -83,7 +77,7 @@ export const Slider = React.forwardRef<
     defaultValue,
     min = 0,
     max = 100,
-    step = 1,
+    step = 0.1,
     marks = [],
     onChange = noop,
     ...remainingProps
@@ -131,7 +125,9 @@ export const Slider = React.forwardRef<
         />
       </Track>
 
-      <Marks />
+      <Conditional test={marks.length > 0}>
+        <Marks marks={marks} min={min} max={max} value={_value} />
+      </Conditional>
 
       <input type="hidden" value={_value} />
     </StyledSlider>

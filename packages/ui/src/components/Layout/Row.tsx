@@ -4,7 +4,6 @@ import { DefaultProps, styled } from '~/theme'
 const StyledRow = styled('div', {
   display: 'flex',
   flexDirection: 'row',
-  width: '100%',
   height: '100%',
 })
 
