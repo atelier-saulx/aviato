@@ -20,7 +20,13 @@ export function valueToPercent(value: number, min: number, max: number) {
   return ((value - min) * 100) / (max - min)
 }
 
-export function clamp(value: number, [min, max]: [number, number]): number {
+interface Clamp {
+  value: number
+  min: number
+  max: number
+}
+
+export function clamp({ value, min, max }: Clamp): number {
   const isUndefined = value === null || value === undefined
   const hasInvalidBounds = max < min
 

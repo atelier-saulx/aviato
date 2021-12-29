@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef, FunctionComponent, useRef, useState } from 'react'
 import { DefaultProps, styled } from '~/theme'
 import { noop } from '@aviato/utils'
-import { useUncontrolled } from '@aviato/hooks'
+import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
+import { getChangeValue } from './getChangeValue'
+import { ComponentProps } from '@stitches/react'
 
 const StyledSlider = styled('div', {
   display: 'flex',
@@ -31,7 +33,7 @@ const Bar = styled('div', {
   backgroundColor: '$OtherInputBorderActive',
   borderRadius: '4px',
   left: '0%',
-  width: '40%',
+  width: '0%',
 })
 
 const Thumb = styled('div', {
@@ -48,34 +50,77 @@ const Thumb = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  left: '40%',
+  left: '0%',
 })
 
 export interface SliderProps extends DefaultProps {
   value?: number
   defaultValue?: number
+  min?: number
+  max?: number
+  step?: number
   onChange?(value: string): void
 }
 
-export const Slider: FunctionComponent<SliderProps> = (properties) => {
-  const { value, defaultValue, onChange = noop, ...remainingProps } = properties
+type ForwardProps = ComponentProps<typeof StyledSlider> & SliderProps
+
+export const Slider = React.forwardRef<
+  ElementRef<typeof StyledSlider>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const {
+    value,
+    defaultValue,
+    min = 0,
+    max = 100,
+    step = 1,
+    onChange = noop,
+    ...remainingProps
+  } = properties
+
+  const [hovered, setHovered] = useState(false)
+  const thumb = useRef<HTMLDivElement>()
 
   const [_value, setValue] = useUncontrolled({
     value,
     defaultValue,
     finalValue: 0,
-    rule: (val) => typeof val === 'number',
+    rule: (value) => typeof value === 'number',
     onChange,
   })
 
+  const handleChange = (val: number) => {
+    const nextValue = getChangeValue({ value: val, min, max, step })
+    setValue(nextValue)
+  }
+
+  const { ref: container, active } = useMove(({ x }) => handleChange(x))
+
+  const handleThumbMouseDown = (
+    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+  ) => {
+    if (event.cancelable) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
+
   return (
-    <StyledSlider {...remainingProps}>
+    <StyledSlider
+      ref={useMergedRef(container, forwardedRef)}
+      {...remainingProps}
+    >
       <Track>
-        <Bar />
-        <Thumb />
+        <Bar style={{ width: `${_value}%` }} />
+
+        <Thumb
+          ref={thumb}
+          style={{ left: `${_value}%` }}
+          onMouseDown={handleThumbMouseDown}
+        />
       </Track>
 
       <input type="hidden" value={_value} />
     </StyledSlider>
   )
-}
+})
