@@ -11,13 +11,13 @@ const SliderPage = () => {
     return (
       <>
         <Column>
-          <Row css={{}}>
+          <Row>
             <Slider />
           </Row>
 
           <BigSpacer />
 
-          <Row css={{}}>
+          <Row>
             <Slider
               marks={[
                 { value: 20, label: '20%' },
