@@ -1,15 +1,11 @@
-import { Column, Row, Slider, Page } from '@aviato/ui'
+import { Slider, Page } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const SliderPage = () => {
   const ShowSlider = () => {
     return (
       <>
-        <Column>
-          <Row>
-            <Slider />
-          </Row>
-        </Column>
+        <Slider />
       </>
     )
   }
