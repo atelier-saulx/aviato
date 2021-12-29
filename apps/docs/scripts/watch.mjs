@@ -2,20 +2,12 @@ import open from 'open'
 import concurrently from 'concurrently'
 import process from 'process'
 
+let hasOpenedBrowserTab = false
+let portAddress = 3000
+
 const log = (data) => {
   process.stdout.write(data)
 }
-
-const stream = {}
-
-stream.writable = true
-stream.write = (data) => {
-  checkTab(data)
-  log(data)
-}
-
-let hasOpenedBrowserTab = false
-let portAddress = 3000
 
 const checkTab = (data) => {
   if (hasOpenedBrowserTab) return
@@ -28,25 +20,33 @@ const checkTab = (data) => {
     portAddress = Number(targetAddress)
   }
 
-  const hasCompiledMessage = 'compiled client and server successfully'
-  const hasCompiled = data.includes(hasCompiledMessage)
+  const compileMessage = 'compiled client and server successfully'
+  const hasCompiled = data.includes(compileMessage)
   if (hasCompiled) {
     hasOpenedBrowserTab = true
     open(`http://localhost:${portAddress}/`)
   }
 }
 
-const commands = []
-commands.push({
-  name: 'watch',
-  command: 'next dev',
-})
+const stream = {}
+stream.writable = true
+stream.write = (data) => {
+  checkTab(data)
+  log(data)
+}
 
-concurrently(commands, {
+const watchCommands = [
+  {
+    name: 'watch',
+    command: 'next dev',
+  },
+]
+
+concurrently(watchCommands, {
+  prefix: 'none',
   killOthers: ['failure', 'success'],
   restartTries: 0,
   maxProcesses: 8,
-  prefix: 'none',
   outputStream: stream,
 }).then(
   // This code is necessary to make sure the parent
@@ -55,6 +55,7 @@ concurrently(commands, {
   function onSuccess() {
     process.exit()
   },
+
   function onFailure() {
     process.exit()
   }
