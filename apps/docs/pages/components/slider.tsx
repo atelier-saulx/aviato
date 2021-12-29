@@ -19,6 +19,7 @@ const SliderPage = () => {
 
           <Row css={{ width: '90%' }}>
             <Slider
+              showLabelOnHover={false}
               marks={[
                 { value: 0, label: '0%' },
                 { value: 25, label: '25%' },
@@ -35,6 +36,7 @@ const SliderPage = () => {
             <Slider
               defaultValue={50}
               step={25}
+              labelAlwaysVisible
               marks={[
                 { value: 0, label: 'xs' },
                 { value: 25, label: 'sm' },

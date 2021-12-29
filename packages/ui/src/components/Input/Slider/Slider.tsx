@@ -56,6 +56,25 @@ const Thumb = styled('div', {
   zIndex: 2,
 })
 
+const Label = styled('div', {
+  position: 'absolute',
+  top: '-40px',
+  backgroundColor: '$OtherForegroundInverted',
+  fontSize: '13px',
+  color: '$TextInverted',
+  padding: '5px',
+  borderRadius: '4px',
+  whiteSpace: 'nowrap',
+  pointerEvents: 'none',
+
+  transitionProperty: 'transform, opacity',
+  transitionDuration: '150ms',
+  transitionTimingFunction: 'cubic-bezier(0.51, 0.3, 0, 1.21)',
+  transformOrigin: 'center bottom',
+  opacity: '1',
+  transform: 'translateY(0px) skew(0deg, 0deg)',
+})
+
 export interface SliderProps {
   value?: number
   defaultValue?: number
@@ -63,6 +82,9 @@ export interface SliderProps {
   max?: number
   step?: number
   marks?: { value: number; label?: React.ReactNode }[]
+  label?: React.ReactNode | ((value: number) => React.ReactNode)
+  showLabelOnHover?: boolean
+  labelAlwaysVisible?: boolean
   onChange?(value: string): void
 }
 
@@ -79,12 +101,12 @@ export const Slider = React.forwardRef<
     max = 100,
     step = 1,
     marks = [],
+    label = (f) => f,
+    showLabelOnHover = true,
+    labelAlwaysVisible = false,
     onChange = noop,
     ...remainingProps
   } = properties
-
-  const [hovered, setHovered] = useState(false)
-  const thumb = useRef<HTMLDivElement>()
 
   const [_value, setValue] = useUncontrolled({
     value,
@@ -93,6 +115,10 @@ export const Slider = React.forwardRef<
     rule: (value) => typeof value === 'number',
     onChange,
   })
+
+  const [hovered, setHovered] = useState(false)
+  const thumb = useRef<HTMLDivElement>()
+  const _label = typeof label === 'function' ? label(_value) : label
 
   const handleChange = (newValue: number) => {
     const nextValue = getChangeValue({ value: newValue, min, max, step })
@@ -110,9 +136,14 @@ export const Slider = React.forwardRef<
     }
   }
 
+  const isLabelVisible =
+    labelAlwaysVisible || active || (showLabelOnHover && hovered)
+
   return (
     <StyledSlider
       ref={useMergedRef(container, forwardedRef)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       {...remainingProps}
     >
       <Track>
@@ -122,7 +153,11 @@ export const Slider = React.forwardRef<
           ref={thumb}
           style={{ left: `${_value}%` }}
           onMouseDown={handleThumbMouseDown}
-        />
+        >
+          <Label style={{ opacity: isLabelVisible ? '1' : '0' }}>
+            {_label}
+          </Label>
+        </Thumb>
 
         <Conditional test={marks.length > 0}>
           <Marks marks={marks} min={min} max={max} value={_value} />
