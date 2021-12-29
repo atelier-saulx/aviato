@@ -12,12 +12,13 @@ const MarkWrapper = styled('div', {
 })
 
 const Mark = styled('div', {
+  boxSizing: 'border-box',
   border: '2px solid $OtherInputBorderDefault',
   height: '8px',
   width: '8px',
   borderRadius: '50%',
   backgroundColor: '$PrimaryMainContrast',
-  transform: 'translate(-4px, 4px)',
+  transform: 'translate(-4px, -1px)',
   zIndex: 1,
 
   variants: {
@@ -34,8 +35,9 @@ const Mark = styled('div', {
 
 const Label = styled('div', {
   transform: 'translate(-50%, 0)',
-  color: '#868e96',
-  marginTop: '5px',
+  color: '$TextDisabled',
+  marginTop: '7px',
+  fontSize: 13,
 })
 
 export interface MarksProps {

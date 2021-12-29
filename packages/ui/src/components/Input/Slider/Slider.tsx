@@ -123,11 +123,11 @@ export const Slider = React.forwardRef<
           style={{ left: `${_value}%` }}
           onMouseDown={handleThumbMouseDown}
         />
-      </Track>
 
-      <Conditional test={marks.length > 0}>
-        <Marks marks={marks} min={min} max={max} value={_value} />
-      </Conditional>
+        <Conditional test={marks.length > 0}>
+          <Marks marks={marks} min={min} max={max} value={_value} />
+        </Conditional>
+      </Track>
 
       <input type="hidden" value={_value} />
     </StyledSlider>

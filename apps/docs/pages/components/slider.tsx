@@ -10,14 +10,14 @@ const SliderPage = () => {
   const ShowSlider = () => {
     return (
       <>
-        <Column css={{ width: '100%' }}>
-          <Row css={{ width: '100%' }}>
+        <Column css={{ width: '90%' }}>
+          <Row css={{ width: '90%' }}>
             <Slider />
           </Row>
 
           <BigSpacer />
 
-          <Row css={{ width: '100%' }}>
+          <Row css={{ width: '90%' }}>
             <Slider
               marks={[
                 { value: 0, label: '0%' },
