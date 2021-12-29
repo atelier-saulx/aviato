@@ -202,23 +202,28 @@ function lookupVariablesAndReplace(object) {
 
   _.each(object, (value, key) => {
     if (isTemplateToken(value)) {
+      let outputValue = ''
+
       const sanitisedToken = braceRegex
         .exec(value)[0]
         .replace('{', '')
         .replace('}', '')
 
-      const matchingToken = findToken(sanitisedToken, object)
-      let convertedToColor = matchingToken
-
       if (value.startsWith('rgba')) {
-        convertedToColor = convertHexToRGBA(matchingToken)
-        convertedToColor = stripRGB(matchingToken)
+        const tokenPartial = braceRegex.exec(value)[0]
+        const converted = findToken(sanitisedToken, object)
+        const toRgba = convertHexToRGBA(converted)
+        const strippedColor = stripRGB(toRgba)
+
+        outputValue = value.replace(tokenPartial, strippedColor)
+      } else {
+        const matchingToken = findToken(sanitisedToken, object)
+
+        outputValue = value.replace(braceRegex, matchingToken)
       }
 
-      object[key] = value.replace(braceRegex, convertedToColor)
-    }
-
-    if (isDollarToken(value)) {
+      object[key] = outputValue
+    } else if (isDollarToken(value)) {
       let mappedOutput = []
 
       const splitString = value.split('$')

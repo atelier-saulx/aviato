@@ -4,6 +4,7 @@ import { DefaultProps, styled } from '~/theme'
 const StyledColumn = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  height: '100%',
 })
 
 export interface ColumnProps extends DefaultProps {}

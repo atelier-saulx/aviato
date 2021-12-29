@@ -32,6 +32,10 @@ const mainMenu: MenuDataItems[] = [
         title: 'Radio Group',
         route: '/components/radio-group',
       },
+      {
+        title: 'Slider',
+        route: '/components/slider',
+      },
     ],
   },
 ]

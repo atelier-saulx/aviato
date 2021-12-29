@@ -5,5 +5,6 @@ module.exports = {
 
   env: {
     PASSWORD_PROTECT: process.env.ENVIRONMENT !== 'development',
+    FLAGS: process.env.FLAGS ?? 'none',
   },
 }
