@@ -13,7 +13,7 @@ export function defaultFlagConfig(): FeatureFlagConfig {
 
     TextField: {
       description: 'Text-field component',
-      isEnabled: false,
+      isEnabled: true,
     },
   }
 }
