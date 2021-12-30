@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { classNames, styled } from '~/theme'
@@ -98,12 +101,12 @@ const InputWrapper = styled('div', {
   },
 })
 
-const StyledInput = styled('input', {
+export const StyledInput = styled('input', {
   position: 'relative',
   display: 'block',
   height: '36px',
   minHeight: '36px',
-  lineHeight: '34px',
+  lineHeight: '1.55',
   fontSize: '15px',
   width: '100%',
   minWidth: '0px',
@@ -186,6 +189,9 @@ export interface InputProps {
   variant?: InputVariant
   disabled?: boolean
   invalid?: boolean
+  multiline?: boolean
+  maxRows?: number
+  minRows?: number
 }
 
 type ForwardProps = ComponentProps<typeof StyledInput> & InputProps
@@ -198,9 +204,10 @@ export const Input = React.forwardRef<
     component = 'input',
     leftIcon = null,
     rightIcon = null,
-    variant = 'filled',
+    variant = 'outlined',
     disabled: isDisabled = false,
     invalid: isInvalid = false,
+    multiline: isMultiline = false,
     ...remainingProps
   } = properties
 

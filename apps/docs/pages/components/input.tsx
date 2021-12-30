@@ -9,6 +9,7 @@ import {
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { capitalize } from '../../utils'
 
 const BigSpacer = styled('div', {
   width: '100%',
@@ -30,9 +31,15 @@ const InputPage = () => {
   }
 
   const ShowInput = ({ variant }: { variant: InputVariant }) => {
+    const uppercaseVariant = capitalize(variant)
+
     return (
       <>
         <Column css={{ width: '100%' }}>
+          <NextTitle weight="Bold" size="Medium">
+            {uppercaseVariant}
+          </NextTitle>
+
           <Row css={{ width: '100%' }}>
             <Input variant={variant} placeholder="Type something here" />
           </Row>

@@ -1,18 +1,61 @@
 import React, { ElementRef } from 'react'
-import { ComponentProps } from '@stitches/react'
-import { styled } from '~/theme'
+import TextareaAutosize from 'react-textarea-autosize'
+import { useUuid } from '@aviato/hooks'
+import { StitchedCSS } from '~/theme'
 
-const StyledTextField = styled('textarea', {})
+import { Input, InputProps, StyledInput } from '../Input'
 
-export interface TextFieldProps {}
+export const TextFieldStyles: StitchedCSS = {
+  padding: '10px 12px',
+  height: 'auto',
+  resize: 'none',
+}
 
-type ForwardProps = ComponentProps<typeof StyledTextField> & TextFieldProps
+export interface TextFieldProps {
+  autosize?: boolean
+  maxRows?: number
+  minRows?: number
+}
+
+type ForwardProps = InputProps & TextFieldProps
 
 export const TextField = React.forwardRef<
-  ElementRef<typeof StyledTextField>,
+  ElementRef<typeof StyledInput>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { ...remainingProps } = properties
+  const {
+    autosize = false,
+    multiline = false,
+    minRows,
+    maxRows,
+    ...remainingProps
+  } = properties
 
-  return <StyledTextField ref={forwardedRef} {...remainingProps} />
+  const uuid = useUuid({ prefix: 'text-field' })
+
+  if (autosize) {
+    return (
+      <Input
+        ref={forwardedRef}
+        component={TextareaAutosize}
+        css={TextFieldStyles}
+        id={uuid}
+        multiline={multiline}
+        maxRows={maxRows}
+        minRows={minRows}
+        {...remainingProps}
+      />
+    )
+  }
+
+  return (
+    <Input
+      ref={forwardedRef}
+      component="textarea"
+      css={TextFieldStyles}
+      id={uuid}
+      multiline={multiline}
+      {...remainingProps}
+    />
+  )
 })
