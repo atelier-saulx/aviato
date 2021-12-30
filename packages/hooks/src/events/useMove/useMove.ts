@@ -1,4 +1,4 @@
-import { clamp } from '@aviato/utils'
+import { clamp, off, on } from '@aviato/utils'
 import { useEffect, useState, useRef } from 'react'
 
 export interface UseMovePosition {
@@ -50,17 +50,17 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
     }
 
     const bindEvents = () => {
-      document.addEventListener('mousemove', onMouseMove)
-      document.addEventListener('mouseup', stopScrubbing)
-      document.addEventListener('touchmove', onTouchMove)
-      document.addEventListener('touchend', stopScrubbing)
+      on(document, 'mousemove', onMouseMove)
+      on(document, 'mouseup', stopScrubbing)
+      on(document, 'touchmove', onTouchMove)
+      on(document, 'touchend', stopScrubbing)
     }
 
     const unbindEvents = () => {
-      document.removeEventListener('mousemove', onMouseMove)
-      document.removeEventListener('mouseup', stopScrubbing)
-      document.removeEventListener('touchmove', onTouchMove)
-      document.removeEventListener('touchend', stopScrubbing)
+      off(document, 'mousemove', onMouseMove)
+      off(document, 'mouseup', stopScrubbing)
+      off(document, 'touchmove', onTouchMove)
+      off(document, 'touchend', stopScrubbing)
     }
 
     const startScrubbing = () => {
@@ -86,30 +86,38 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
       onMouseMove(event)
     }
 
-    const onMouseMove = (event: MouseEvent) =>
-      onScrub({ x: event.clientX, y: event.clientY })
+    const onMouseMove = (event: MouseEvent) => {
+      return onScrub({ x: event.clientX, y: event.clientY })
+    }
 
     const onTouchStart = (event: TouchEvent) => {
       startScrubbing()
-      event?.preventDefault()
+
+      if (event?.cancelable) {
+        event?.preventDefault()
+      }
+
       onTouchMove(event)
     }
 
     const onTouchMove = (event: TouchEvent) => {
-      event?.preventDefault()
+      if (event?.cancelable) {
+        event?.preventDefault()
+      }
+
       onScrub({
         x: event.changedTouches[0].clientX,
         y: event.changedTouches[0].clientY,
       })
     }
 
-    ref.current.addEventListener('mousedown', onMouseDown)
-    ref.current.addEventListener('touchstart', onTouchStart)
+    on(ref.current, 'mousedown', onMouseDown, { passive: false })
+    on(ref.current, 'touchstart', onTouchStart, { passive: false })
 
     return () => {
       if (ref.current) {
-        ref.current.removeEventListener('mousedown', onMouseDown)
-        ref.current.removeEventListener('touchstart', onTouchStart)
+        off(ref.current, 'mousedown', onMouseDown)
+        off(ref.current, 'touchstart', onTouchStart)
       }
     }
   }, [ref.current])

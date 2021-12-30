@@ -18,6 +18,7 @@ const StyledSlider = styled('div', {
   cursor: 'pointer',
   width: '100%',
   height: 16,
+  touchAction: 'none',
 })
 
 export interface SliderProps {
