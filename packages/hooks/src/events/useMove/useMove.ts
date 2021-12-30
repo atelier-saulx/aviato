@@ -1,4 +1,4 @@
-import { clamp, off, on } from '@aviato/utils'
+import { clamp, noop, off, on } from '@aviato/utils'
 import { useEffect, useState, useRef } from 'react'
 
 export interface UseMovePosition {
@@ -25,6 +25,7 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
   const isSliding = useRef(false)
   const frame = useRef(0)
   const [isActive, setIsActive] = useState(false)
+  const { onScrubStart = noop, onScrubEnd = noop } = handlers ?? {}
 
   useEffect(() => {
     mounted.current = true
@@ -66,7 +67,7 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
     const startScrubbing = () => {
       if (!isSliding.current && mounted.current) {
         isSliding.current = true
-        typeof handlers?.onScrubStart === 'function' && handlers.onScrubStart()
+        onScrubStart()
         setIsActive(true)
         bindEvents()
       }
@@ -75,7 +76,7 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
     const stopScrubbing = () => {
       if (isSliding.current && mounted.current) {
         isSliding.current = false
-        typeof handlers?.onScrubEnd === 'function' && handlers.onScrubEnd()
+        onScrubEnd()
         setIsActive(false)
         unbindEvents()
       }
