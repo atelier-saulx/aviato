@@ -44,12 +44,12 @@ const ButtonPage = () => {
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
-    const [isChecked, setIsChecked] = useState(false)
+    const [isDisabled, setIsDisabled] = useState(false)
 
     const onSwitchChange = useCallback((event: OnSwitchChangePayload) => {
       const { isChecked } = event
 
-      setIsChecked(isChecked)
+      setIsDisabled(isChecked)
     }, [])
 
     return (
@@ -71,14 +71,14 @@ const ButtonPage = () => {
                   type={type}
                   mode="filled"
                   leftIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
 
                 <Spacer />
 
-                <Button type={type} mode="filled" disabled={isChecked}>
+                <Button type={type} mode="filled" disabled={isDisabled}>
                   Lorem
                 </Button>
 
@@ -88,7 +88,7 @@ const ButtonPage = () => {
                   type={type}
                   mode="filled"
                   rightIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
@@ -100,7 +100,7 @@ const ButtonPage = () => {
                   mode="filled"
                   leftIcon={<RandomIcon />}
                   rightIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
@@ -113,14 +113,14 @@ const ButtonPage = () => {
                   type={type}
                   mode="outlined"
                   leftIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
 
                 <Spacer />
 
-                <Button type={type} mode="outlined" disabled={isChecked}>
+                <Button type={type} mode="outlined" disabled={isDisabled}>
                   Lorem
                 </Button>
 
@@ -130,7 +130,7 @@ const ButtonPage = () => {
                   type={type}
                   mode="outlined"
                   rightIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
@@ -142,7 +142,7 @@ const ButtonPage = () => {
                   mode="outlined"
                   leftIcon={<RandomIcon />}
                   rightIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
@@ -155,14 +155,14 @@ const ButtonPage = () => {
                   type={type}
                   mode="transparent"
                   leftIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
 
                 <Spacer />
 
-                <Button type={type} mode="transparent" disabled={isChecked}>
+                <Button type={type} mode="transparent" disabled={isDisabled}>
                   Lorem
                 </Button>
 
@@ -172,7 +172,7 @@ const ButtonPage = () => {
                   type={type}
                   mode="transparent"
                   rightIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
@@ -184,7 +184,7 @@ const ButtonPage = () => {
                   mode="transparent"
                   leftIcon={<RandomIcon />}
                   rightIcon={<RandomIcon />}
-                  disabled={isChecked}
+                  disabled={isDisabled}
                 >
                   Lorem
                 </Button>
