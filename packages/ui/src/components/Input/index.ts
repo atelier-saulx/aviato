@@ -1,5 +1,6 @@
 export * from './Button'
 export * from './Checkbox'
+export * from './Input'
 export * from './RadioGroup'
 export * from './Slider'
 export * from './Switch'

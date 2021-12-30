@@ -2,7 +2,7 @@ import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 
-const StyledTextField = styled('div', {})
+const StyledTextField = styled('textarea', {})
 
 export interface TextFieldProps {}
 
@@ -14,9 +14,5 @@ export const TextField = React.forwardRef<
 >((properties, forwardedRef) => {
   const { ...remainingProps } = properties
 
-  return (
-    <StyledTextField ref={forwardedRef} {...remainingProps}>
-      TextField
-    </StyledTextField>
-  )
+  return <StyledTextField ref={forwardedRef} {...remainingProps} />
 })

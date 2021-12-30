@@ -37,8 +37,12 @@ const mainMenu: MenuDataItems[] = [
         route: '/components/slider',
       },
       {
-        title: 'Inputs',
-        route: '/components/inputs',
+        title: 'Input',
+        route: '/components/input',
+      },
+      {
+        title: 'Text Field',
+        route: '/components/text-field',
       },
     ],
   },
