@@ -24,7 +24,7 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
   const mounted = useRef<boolean>(false)
   const isSliding = useRef(false)
   const frame = useRef(0)
-  const [active, setActive] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     mounted.current = true
@@ -67,7 +67,7 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
       if (!isSliding.current && mounted.current) {
         isSliding.current = true
         typeof handlers?.onScrubStart === 'function' && handlers.onScrubStart()
-        setActive(true)
+        setIsActive(true)
         bindEvents()
       }
     }
@@ -76,7 +76,7 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
       if (isSliding.current && mounted.current) {
         isSliding.current = false
         typeof handlers?.onScrubEnd === 'function' && handlers.onScrubEnd()
-        setActive(false)
+        setIsActive(false)
         unbindEvents()
       }
     }
@@ -114,5 +114,5 @@ export function useMove<T extends HTMLElement = HTMLDivElement>(
     }
   }, [ref.current])
 
-  return { ref, active }
+  return { ref, isActive }
 }

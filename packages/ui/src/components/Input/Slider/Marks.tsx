@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Conditional } from '~/components'
 import { styled } from '~/theme'
-import { getPosition } from './getPosition'
-import { isMarkFilled } from './isMarkFilled'
+import { isMarkFilled, getPosition } from './utils'
 
 const StyledMarks = styled('div', {})
 
@@ -49,17 +48,25 @@ export interface MarksProps {
 }
 
 export const Marks: FunctionComponent<MarksProps> = (properties) => {
-  const { marks, min, max, value: sliderValue, offset = 0 } = properties
+  const {
+    marks,
+    min,
+    max,
+    value: sliderValue,
+    offset = 0,
+    ...remainingProps
+  } = properties
 
   const markItems = marks.map((mark, index) => {
-    const markType = isMarkFilled({ mark, value: sliderValue, offset })
-      ? 'filled'
-      : 'empty'
+    const isFilled = isMarkFilled({ mark, value: sliderValue, offset })
+    const markType = isFilled ? 'filled' : 'empty'
+    const leftOffset = getPosition({ value: mark.value, min, max })
 
     return (
       <MarkWrapper
-        style={{ left: `${getPosition({ value: mark.value, min, max })}%` }}
+        style={{ left: `${leftOffset}%` }}
         key={`mark-${index}`}
+        {...remainingProps}
       >
         <Mark type={markType} />
 
