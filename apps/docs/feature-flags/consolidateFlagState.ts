@@ -3,10 +3,11 @@ import { defaultFlagConfig, FeatureFlag } from '.'
 import { FeatureFlagConfig } from './types'
 
 function setupFlagsFromEnv(currentState: FeatureFlagConfig): FeatureFlagConfig {
-  const flagsFromEnv = process.env.FLAGS
+  const environmentFlags = process.env.FLAGS ?? 'none'
 
-  if (flagsFromEnv) {
-    const flags = flagsFromEnv.split(',') as FeatureFlag[]
+  const hasEnvironmentFlags = environmentFlags !== 'none'
+  if (hasEnvironmentFlags) {
+    const flags = environmentFlags.split(',') as FeatureFlag[]
 
     for (const flag of flags) {
       const targetFlagConfiguration = currentState[flag]
@@ -27,7 +28,8 @@ function setupFlagsFromUrl(currentState: FeatureFlagConfig): FeatureFlagConfig {
   const urlParams = new URLSearchParams(window.location.search)
   const flagsFromQuery = urlParams.get('flags')
 
-  if (flagsFromQuery) {
+  const hasQueryFlags = Boolean(flagsFromQuery)
+  if (hasQueryFlags) {
     const flags = flagsFromQuery.split(',') as FeatureFlag[]
 
     for (const flag of flags) {
