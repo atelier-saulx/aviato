@@ -1,7 +1,7 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import {
   Button,
-  ButtonMode,
+  ButtonVariant,
   ButtonType,
   StyledButton,
 } from '~/components/Input/Button/Button'
@@ -19,7 +19,7 @@ const IconButtonStyles: StitchedCSS = {
 
 export interface IconButtonProps {
   type?: ButtonType
-  mode?: ButtonMode
+  variant?: ButtonVariant
   disabled?: boolean
   icon?: IconName | string
   onClick?: MouseEventHandler<HTMLButtonElement>
@@ -33,7 +33,7 @@ export const IconButton = React.forwardRef<
 >((properties, forwardedRef) => {
   const {
     type = 'primary',
-    mode = 'filled',
+    variant = 'filled',
     disabled = false,
     onClick = noop,
     icon = 'IconPlus',
@@ -53,7 +53,7 @@ export const IconButton = React.forwardRef<
   return (
     <Button
       type={type}
-      mode={mode}
+      variant={variant}
       onClick={handleClick}
       disabled={disabled}
       css={IconButtonStyles}
