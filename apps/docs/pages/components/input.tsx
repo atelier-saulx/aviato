@@ -1,4 +1,12 @@
-import { Column, Row, Input, Page, styled, getRandomIcon } from '@aviato/ui'
+import {
+  Column,
+  Row,
+  Input,
+  Page,
+  styled,
+  getRandomIcon,
+  InputVariant,
+} from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -21,18 +29,19 @@ const InputPage = () => {
     return <Icon />
   }
 
-  const ShowInput = () => {
+  const ShowInput = ({ variant }: { variant: InputVariant }) => {
     return (
       <>
-        <Column>
-          <Row>
-            <Input placeholder="Type something here" />
+        <Column css={{ width: '100%' }}>
+          <Row css={{ width: '100%' }}>
+            <Input variant={variant} placeholder="Type something here" />
           </Row>
 
           <BigSpacer />
 
-          <Row>
+          <Row css={{ width: '100%' }}>
             <Input
+              variant={variant}
               leftIcon={<RandomIcon />}
               placeholder="Type something here"
             />
@@ -40,8 +49,9 @@ const InputPage = () => {
 
           <BigSpacer />
 
-          <Row>
+          <Row css={{ width: '100%' }}>
             <Input
+              variant={variant}
               rightIcon={<RandomIcon />}
               placeholder="Type something here"
             />
@@ -49,11 +59,24 @@ const InputPage = () => {
 
           <BigSpacer />
 
-          <Row>
+          <Row css={{ width: '100%' }}>
             <Input
+              variant={variant}
               leftIcon={<RandomIcon />}
               rightIcon={<RandomIcon />}
               placeholder="Type something here"
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <Input
+              variant={variant}
+              leftIcon={<RandomIcon />}
+              rightIcon={<RandomIcon />}
+              placeholder="Type something here"
+              disabled
             />
           </Row>
         </Column>
@@ -64,7 +87,7 @@ const InputPage = () => {
   return (
     <Page>
       <NextTitle weight="Bold" size="ExtraLarge">
-        Text Field
+        Input
       </NextTitle>
 
       <NextText size="Medium" color="Secondary">
@@ -72,7 +95,11 @@ const InputPage = () => {
       </NextText>
 
       <ShowcaseComponent background="transparent">
-        <ShowInput />
+        <ShowInput variant="outlined" />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowInput variant="filled" />
       </ShowcaseComponent>
     </Page>
   )
