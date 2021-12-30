@@ -6,6 +6,7 @@ import { Conditional } from '~/components/Utilities'
 const InputWrapper = styled('div', {
   position: 'relative',
   width: '100%',
+  borderRadius: '4px',
 
   '&::after': {
     content: `''`,
@@ -18,19 +19,11 @@ const InputWrapper = styled('div', {
     pointerEvents: 'none',
     borderRadius: '4px',
     border: '1px solid $OtherInputBorderDefault',
-    transition: 'border-color 100ms ease',
   },
 
-  '&:hover': {
-    '&::after': {
-      border: '1px solid $OtherInputBorderHover',
-    },
-
-    '&.isActive': {
-      '&::after': {
-        border: '2px solid $OtherInputBorderActive',
-      },
-    },
+  '&.isDisabled': {
+    background: '$OtherDisabledBackground',
+    border: '1px solid $OtherDisabledOutline',
   },
 
   '&.isActive': {
@@ -39,10 +32,37 @@ const InputWrapper = styled('div', {
     },
   },
 
+  '&:hover': {
+    '&.isActive': {
+      '&::after': {
+        border: '2px solid $OtherInputBorderActive',
+      },
+    },
+  },
+
   variants: {
     variant: {
-      outlined: {},
-      filled: {},
+      outlined: {
+        '&:hover': {
+          '&::after': {
+            border: '1px solid $OtherInputBorderHover',
+          },
+        },
+      },
+
+      filled: {
+        '&::after': {
+          border: '1px solid transparent',
+        },
+
+        '&:not(.isActive):not(.isDisabled)': {
+          background: '$ActionMain',
+
+          '&:hover': {
+            background: '$ActionMainHover',
+          },
+        },
+      },
     },
   },
 })
@@ -59,6 +79,16 @@ const StyledInput = styled('input', {
   textAlign: 'left',
   paddingLeft: '12px',
   color: '$TextPrimary',
+  background: 'transparent',
+
+  '&:disabled': {
+    background: 'transparent',
+    color: '$OtherDisabledContent',
+
+    '&::placeholder': {
+      color: '$OtherDisabledContent',
+    },
+  },
 
   '&::placeholder': {
     color: '$TextSecondary',
@@ -82,23 +112,32 @@ const StyledInput = styled('input', {
 
 const IconWrapper = styled('span', {
   position: 'absolute',
-  top: '0',
-  bottom: '0',
+  top: 0,
+  bottom: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   pointerEvents: 'none',
   width: '36px',
   height: '36px',
-  zIndex: '1',
+  zIndex: 1,
+  color: '$TextSecondary',
+
+  '&.isActive': {
+    color: '$TextPrimary',
+  },
+
+  '&.isDisabled': {
+    color: '$OtherDisabledContent',
+  },
 
   variants: {
     type: {
       start: {
-        left: '0',
+        left: 0,
       },
       end: {
-        right: '0',
+        right: 0,
       },
     },
   },
@@ -153,7 +192,9 @@ export const Input = React.forwardRef<
   return (
     <InputWrapper variant={variant} className={classes}>
       <Conditional test={leftIcon}>
-        <IconWrapper type="start">{leftIcon}</IconWrapper>
+        <IconWrapper type="start" className={classes}>
+          {leftIcon}
+        </IconWrapper>
       </Conditional>
 
       <StyledInput
@@ -168,7 +209,9 @@ export const Input = React.forwardRef<
       />
 
       <Conditional test={rightIcon}>
-        <IconWrapper type="end">{rightIcon}</IconWrapper>
+        <IconWrapper type="end" className={classes}>
+          {rightIcon}
+        </IconWrapper>
       </Conditional>
     </InputWrapper>
   )
