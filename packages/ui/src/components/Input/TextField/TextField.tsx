@@ -8,6 +8,7 @@ import { Input, InputProps, StyledInput } from '../Input'
 export const TextFieldStyles: StitchedCSS = {
   padding: '10px 12px',
   height: 'auto',
+  maxHeight: 'auto',
   resize: 'none',
 }
 
