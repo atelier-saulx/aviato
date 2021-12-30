@@ -22,7 +22,16 @@ const InputWrapper = styled('div', {
 
   '&.isDisabled': {
     background: '$OtherDisabledBackground',
-    border: '1px solid $OtherDisabledOutline',
+
+    '&::after': {
+      border: '1px solid $OtherDisabledOutline',
+    },
+  },
+
+  '&.isInvalid': {
+    '&::after': {
+      border: '1px solid $ErrorOutline',
+    },
   },
 
   variants: {
@@ -176,6 +185,7 @@ export interface InputProps {
   rightIcon?: React.ReactNode
   variant?: InputVariant
   disabled?: boolean
+  invalid?: boolean
 }
 
 type ForwardProps = ComponentProps<typeof StyledInput> & InputProps
@@ -190,6 +200,7 @@ export const Input = React.forwardRef<
     rightIcon = null,
     variant = 'filled',
     disabled: isDisabled = false,
+    invalid: isInvalid = false,
     ...remainingProps
   } = properties
 
@@ -202,6 +213,7 @@ export const Input = React.forwardRef<
     hasRightIcon,
     isActive,
     isDisabled,
+    isInvalid,
   })
 
   return (

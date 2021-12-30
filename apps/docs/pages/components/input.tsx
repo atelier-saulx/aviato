@@ -73,6 +73,16 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
+              placeholder="Type something here"
+              invalid
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <Input
+              variant={variant}
               leftIcon={<RandomIcon />}
               rightIcon={<RandomIcon />}
               placeholder="Type something here"
