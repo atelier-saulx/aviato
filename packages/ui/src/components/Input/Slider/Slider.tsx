@@ -73,6 +73,17 @@ const Label = styled('div', {
   transformOrigin: 'center bottom',
   opacity: '1',
   transform: 'translateY(0px) skew(0deg, 0deg)',
+
+  variants: {
+    mode: {
+      visible: {
+        opacity: 1,
+      },
+      hidden: {
+        opacity: 0,
+      },
+    },
+  },
 })
 
 export interface SliderProps {
@@ -116,9 +127,9 @@ export const Slider = React.forwardRef<
     onChange,
   })
 
-  const [hovered, setHovered] = useState(false)
   const thumb = useRef<HTMLDivElement>()
   const _label = typeof label === 'function' ? label(_value) : label
+  const [isHovering, setIsHovering] = useState(false)
 
   const handleChange = (newValue: number) => {
     const nextValue = getChangeValue({ value: newValue, min, max, step })
@@ -137,13 +148,15 @@ export const Slider = React.forwardRef<
   }
 
   const isLabelVisible =
-    labelAlwaysVisible || active || (showLabelOnHover && hovered)
+    labelAlwaysVisible || active || (showLabelOnHover && isHovering)
+
+  const labelMode = isLabelVisible ? 'visible' : 'hidden'
 
   return (
     <StyledSlider
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       ref={useMergedRef(container, forwardedRef)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       {...remainingProps}
     >
       <Track>
@@ -151,12 +164,10 @@ export const Slider = React.forwardRef<
 
         <Thumb
           ref={thumb}
-          style={{ left: `${_value}%` }}
           onMouseDown={handleThumbMouseDown}
+          style={{ left: `${_value}%` }}
         >
-          <Label style={{ opacity: isLabelVisible ? '1' : '0' }}>
-            {_label}
-          </Label>
+          <Label mode={labelMode}>{_label}</Label>
         </Thumb>
 
         <Conditional test={marks.length > 0}>
