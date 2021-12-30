@@ -18,7 +18,6 @@ const InputWrapper = styled('div', {
     left: '0',
     pointerEvents: 'none',
     borderRadius: '4px',
-    border: '1px solid $OtherInputBorderDefault',
   },
 
   '&.isDisabled': {
@@ -26,26 +25,28 @@ const InputWrapper = styled('div', {
     border: '1px solid $OtherDisabledOutline',
   },
 
-  '&.isActive': {
-    '&::after': {
-      border: '2px solid $OtherInputBorderActive',
-    },
-  },
-
-  '&:hover': {
-    '&.isActive': {
-      '&::after': {
-        border: '2px solid $OtherInputBorderActive',
-      },
-    },
-  },
-
   variants: {
     variant: {
       outlined: {
+        '&::after': {
+          border: '1px solid $OtherInputBorderDefault',
+        },
+
         '&:hover': {
           '&::after': {
             border: '1px solid $OtherInputBorderHover',
+          },
+
+          '&.isActive': {
+            '&::after': {
+              border: '2px solid $OtherInputBorderActive',
+            },
+          },
+        },
+
+        '&.isActive': {
+          '&::after': {
+            border: '2px solid $OtherInputBorderActive',
           },
         },
       },
@@ -61,6 +62,27 @@ const InputWrapper = styled('div', {
           '&:hover': {
             background: '$ActionMainHover',
           },
+        },
+
+        '&.isActive': {
+          '&::after': {
+            border: '2px solid $OtherInputBorderActive',
+          },
+        },
+
+        '&:hover': {
+          '&.isActive': {
+            '&::after': {
+              border: '2px solid $OtherInputBorderActive',
+            },
+          },
+        },
+      },
+
+      unstyled: {
+        '&.isDisabled': {
+          background: 'none',
+          border: '1px solid transparent',
         },
       },
     },
@@ -101,13 +123,6 @@ const StyledInput = styled('input', {
   '&.hasRightIcon': {
     paddingRight: '32px',
   },
-
-  variants: {
-    variant: {
-      outlined: {},
-      filled: {},
-    },
-  },
 })
 
 const IconWrapper = styled('span', {
@@ -143,7 +158,7 @@ const IconWrapper = styled('span', {
   },
 })
 
-export type InputVariant = 'outlined' | 'filled'
+export type InputVariant = 'outlined' | 'filled' | 'unstyled'
 export type InputType =
   | 'text'
   | 'password'
@@ -201,7 +216,6 @@ export const Input = React.forwardRef<
         as={component}
         ref={forwardedRef}
         className={classes}
-        variant={variant}
         onFocus={() => setIsActive(true)}
         onBlur={() => setIsActive(false)}
         disabled={isDisabled}
