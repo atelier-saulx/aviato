@@ -200,7 +200,7 @@ export const ButtonStyles = css({
   },
 })
 
-export const ButtonIcon = styled('span', {
+const IconWrapper = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
   flexShrink: 0,
@@ -222,11 +222,11 @@ const BUTTON_TAG = 'button'
 export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
 
 export type ButtonType = 'primary' | 'ghost' | 'error'
-export type ButtonMode = 'filled' | 'outlined' | 'transparent'
+export type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
 export interface ButtonProps {
   type?: ButtonType
-  mode?: ButtonMode
+  variant?: ButtonVariant
   disabled?: boolean
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
@@ -241,7 +241,7 @@ export const Button = React.forwardRef<
 >((properties, forwardedRef) => {
   const {
     type = 'primary',
-    mode = 'filled',
+    variant = 'filled',
     disabled = false,
     onClick = noop,
     leftIcon = null,
@@ -258,9 +258,9 @@ export const Button = React.forwardRef<
     onClick()
   }, [])
 
-  const isFilled = mode === 'filled'
-  const isOutlined = mode === 'outlined'
-  const isTransparent = mode === 'transparent'
+  const isFilled = variant === 'filled'
+  const isOutlined = variant === 'outlined'
+  const isTransparent = variant === 'transparent'
 
   const classes = classNames({
     isFilled,
@@ -278,13 +278,13 @@ export const Button = React.forwardRef<
       {...remainingProps}
     >
       <Conditional test={leftIcon}>
-        <ButtonIcon type="start">{leftIcon}</ButtonIcon>
+        <IconWrapper type="start">{leftIcon}</IconWrapper>
       </Conditional>
 
       {children}
 
       <Conditional test={rightIcon}>
-        <ButtonIcon type="end">{rightIcon}</ButtonIcon>
+        <IconWrapper type="end">{rightIcon}</IconWrapper>
       </Conditional>
     </StyledButton>
   )

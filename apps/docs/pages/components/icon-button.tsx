@@ -67,7 +67,7 @@ const IconButtonPage = () => {
               <Row>
                 <IconButton
                   type={type}
-                  mode="filled"
+                  variant="filled"
                   disabled={isChecked}
                   icon={randomIcon()}
                 />
@@ -76,7 +76,7 @@ const IconButtonPage = () => {
 
                 <IconButton
                   type={type}
-                  mode="outlined"
+                  variant="outlined"
                   disabled={isChecked}
                   icon={randomIcon()}
                 />
@@ -85,7 +85,7 @@ const IconButtonPage = () => {
 
                 <IconButton
                   type={type}
-                  mode="transparent"
+                  variant="transparent"
                   disabled={isChecked}
                   icon={randomIcon()}
                 />
@@ -105,15 +105,19 @@ const IconButtonPage = () => {
           <Row>
             <Column>
               <Row>
-                <IconButton mode="filled" disabled icon={randomIcon()} />
+                <IconButton variant="filled" disabled icon={randomIcon()} />
 
                 <Spacer />
 
-                <IconButton mode="outlined" disabled icon={randomIcon()} />
+                <IconButton variant="outlined" disabled icon={randomIcon()} />
 
                 <Spacer />
 
-                <IconButton mode="transparent" disabled icon={randomIcon()} />
+                <IconButton
+                  variant="transparent"
+                  disabled
+                  icon={randomIcon()}
+                />
               </Row>
             </Column>
           </Row>
@@ -151,7 +155,7 @@ const IconButtonPage = () => {
       <ShowcaseComponent background="transparent">
         <IconButton
           type="primary"
-          mode="filled"
+          variant="filled"
           icon={randomIcon()}
           css={{
             display: 'flex',

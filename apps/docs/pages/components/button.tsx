@@ -69,7 +69,7 @@ const ButtonPage = () => {
               <Row>
                 <Button
                   type={type}
-                  mode="filled"
+                  variant="filled"
                   leftIcon={<RandomIcon />}
                   disabled={isDisabled}
                 >
@@ -78,7 +78,7 @@ const ButtonPage = () => {
 
                 <Spacer />
 
-                <Button type={type} mode="filled" disabled={isDisabled}>
+                <Button type={type} variant="filled" disabled={isDisabled}>
                   Lorem
                 </Button>
 
@@ -86,7 +86,7 @@ const ButtonPage = () => {
 
                 <Button
                   type={type}
-                  mode="filled"
+                  variant="filled"
                   rightIcon={<RandomIcon />}
                   disabled={isDisabled}
                 >
@@ -97,49 +97,7 @@ const ButtonPage = () => {
 
                 <Button
                   type={type}
-                  mode="filled"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-              </Row>
-
-              <BigSpacer />
-
-              <Row>
-                <Button
-                  type={type}
-                  mode="outlined"
-                  leftIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button type={type} mode="outlined" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  mode="outlined"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  mode="outlined"
+                  variant="filled"
                   leftIcon={<RandomIcon />}
                   rightIcon={<RandomIcon />}
                   disabled={isDisabled}
@@ -153,7 +111,7 @@ const ButtonPage = () => {
               <Row>
                 <Button
                   type={type}
-                  mode="transparent"
+                  variant="outlined"
                   leftIcon={<RandomIcon />}
                   disabled={isDisabled}
                 >
@@ -162,7 +120,7 @@ const ButtonPage = () => {
 
                 <Spacer />
 
-                <Button type={type} mode="transparent" disabled={isDisabled}>
+                <Button type={type} variant="outlined" disabled={isDisabled}>
                   Lorem
                 </Button>
 
@@ -170,7 +128,7 @@ const ButtonPage = () => {
 
                 <Button
                   type={type}
-                  mode="transparent"
+                  variant="outlined"
                   rightIcon={<RandomIcon />}
                   disabled={isDisabled}
                 >
@@ -181,7 +139,49 @@ const ButtonPage = () => {
 
                 <Button
                   type={type}
-                  mode="transparent"
+                  variant="outlined"
+                  leftIcon={<RandomIcon />}
+                  rightIcon={<RandomIcon />}
+                  disabled={isDisabled}
+                >
+                  Lorem
+                </Button>
+              </Row>
+
+              <BigSpacer />
+
+              <Row>
+                <Button
+                  type={type}
+                  variant="transparent"
+                  leftIcon={<RandomIcon />}
+                  disabled={isDisabled}
+                >
+                  Lorem
+                </Button>
+
+                <Spacer />
+
+                <Button type={type} variant="transparent" disabled={isDisabled}>
+                  Lorem
+                </Button>
+
+                <Spacer />
+
+                <Button
+                  type={type}
+                  variant="transparent"
+                  rightIcon={<RandomIcon />}
+                  disabled={isDisabled}
+                >
+                  Lorem
+                </Button>
+
+                <Spacer />
+
+                <Button
+                  type={type}
+                  variant="transparent"
                   leftIcon={<RandomIcon />}
                   rightIcon={<RandomIcon />}
                   disabled={isDisabled}
@@ -204,15 +204,15 @@ const ButtonPage = () => {
           <Row>
             <Column>
               <Row>
-                <Button mode="filled" disabled>
+                <Button variant="filled" disabled>
                   Disabled
                 </Button>
                 <Spacer />
-                <Button mode="outlined" disabled>
+                <Button variant="outlined" disabled>
                   Disabled
                 </Button>
                 <Spacer />
-                <Button mode="transparent" disabled>
+                <Button variant="transparent" disabled>
                   Disabled
                 </Button>
               </Row>
@@ -220,15 +220,19 @@ const ButtonPage = () => {
               <BigSpacer />
 
               <Row>
-                <Button mode="filled" disabled leftIcon={<RandomIcon />}>
+                <Button variant="filled" disabled leftIcon={<RandomIcon />}>
                   Disabled
                 </Button>
                 <Spacer />
-                <Button mode="outlined" disabled>
+                <Button variant="outlined" disabled>
                   Disabled
                 </Button>
                 <Spacer />
-                <Button mode="transparent" disabled rightIcon={<RandomIcon />}>
+                <Button
+                  variant="transparent"
+                  disabled
+                  rightIcon={<RandomIcon />}
+                >
                   Disabled
                 </Button>
               </Row>
@@ -270,7 +274,7 @@ const ButtonPage = () => {
       <ShowcaseComponent background="transparent">
         <Button
           type="primary"
-          mode="filled"
+          variant="filled"
           css={{
             display: 'flex',
             justifyContent: 'center',

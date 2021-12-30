@@ -3,6 +3,38 @@ import { withRouter, NextRouter } from 'next/router'
 
 import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
+import { featureFlags } from '../../feature-flags'
+
+const componentsSubMenu: MenuDataItems[] = [
+  {
+    title: 'Button',
+    route: '/components/button',
+  },
+  {
+    title: 'Icon Button',
+    route: '/components/icon-button',
+  },
+  {
+    title: 'Checkbox',
+    route: '/components/checkbox',
+  },
+  {
+    title: 'Switch',
+    route: '/components/switch',
+  },
+  {
+    title: 'Radio Group',
+    route: '/components/radio-group',
+  },
+  {
+    title: 'Slider',
+    route: '/components/slider',
+  },
+  {
+    title: 'Input',
+    route: '/components/input',
+  },
+]
 
 const mainMenu: MenuDataItems[] = [
   {
@@ -11,34 +43,16 @@ const mainMenu: MenuDataItems[] = [
   },
   {
     title: 'Components',
-    subMenu: [
-      {
-        title: 'Button',
-        route: '/components/button',
-      },
-      {
-        title: 'Icon Button',
-        route: '/components/icon-button',
-      },
-      {
-        title: 'Checkbox',
-        route: '/components/checkbox',
-      },
-      {
-        title: 'Switch',
-        route: '/components/switch',
-      },
-      {
-        title: 'Radio Group',
-        route: '/components/radio-group',
-      },
-      {
-        title: 'Slider',
-        route: '/components/slider',
-      },
-    ],
+    subMenu: componentsSubMenu,
   },
 ]
+
+if (featureFlags.isEnabled('TextField')) {
+  componentsSubMenu.push({
+    title: 'Text Field',
+    route: '/components/text-field',
+  })
+}
 
 const HeaderDiv = styled('div', {
   display: 'flex',
