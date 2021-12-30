@@ -200,7 +200,7 @@ export const ButtonStyles = css({
   },
 })
 
-export const ButtonIcon = styled('span', {
+export const IconWrapper = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
   flexShrink: 0,
@@ -278,13 +278,13 @@ export const Button = React.forwardRef<
       {...remainingProps}
     >
       <Conditional test={leftIcon}>
-        <ButtonIcon type="start">{leftIcon}</ButtonIcon>
+        <IconWrapper type="start">{leftIcon}</IconWrapper>
       </Conditional>
 
       {children}
 
       <Conditional test={rightIcon}>
-        <ButtonIcon type="end">{rightIcon}</ButtonIcon>
+        <IconWrapper type="end">{rightIcon}</IconWrapper>
       </Conditional>
     </StyledButton>
   )
