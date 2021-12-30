@@ -11,7 +11,7 @@ export const clampUseMovePosition = (position: UseMovePosition) => ({
   y: clamp({ min: 0, max: 1, value: position.y }),
 })
 
-interface useMoveHandlers {
+type useMoveHandlers = {
   onScrubStart?(): void
   onScrubEnd?(): void
 }
