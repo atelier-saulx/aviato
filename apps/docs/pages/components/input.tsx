@@ -110,6 +110,12 @@ const InputPage = () => {
           </NextTitle>
 
           <Row css={{ width: '100%' }}>
+            <Input placeholder="Type something here" label="This is a label" />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
             <Input
               placeholder="Type something here"
               label="This is a label"

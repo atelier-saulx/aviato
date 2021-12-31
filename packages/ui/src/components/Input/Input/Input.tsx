@@ -48,7 +48,7 @@ export const Input = React.forwardRef<
   ElementRef<typeof StyledInput>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { label, error, ...remainingProps } = properties
+  const { label, error, invalid, ...remainingProps } = properties
 
   const uuid = useUuid({ prefix: 'input' })
 
@@ -58,7 +58,12 @@ export const Input = React.forwardRef<
         <Label>{label}</Label>
       </Conditional>
 
-      <BaseInput ref={forwardedRef} id={uuid} {...remainingProps} />
+      <BaseInput
+        ref={forwardedRef}
+        id={uuid}
+        {...remainingProps}
+        invalid={Boolean(error || invalid)}
+      />
 
       <Conditional test={error}>
         <ErrorWrapper>
