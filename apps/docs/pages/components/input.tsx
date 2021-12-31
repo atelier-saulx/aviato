@@ -101,6 +101,26 @@ const InputPage = () => {
     )
   }
 
+  const ShowComplexInput = () => {
+    return (
+      <>
+        <Column css={{ width: '100%' }}>
+          <NextTitle weight="Bold" size="Medium">
+            CMS Field
+          </NextTitle>
+
+          <Row css={{ width: '100%' }}>
+            <Input
+              placeholder="Type something here"
+              label="This is a label"
+              error="This is an error"
+            />
+          </Row>
+        </Column>
+      </>
+    )
+  }
+
   return (
     <Page>
       <NextTitle weight="Bold" size="ExtraLarge">
@@ -117,6 +137,10 @@ const InputPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowInput variant="filled" />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowComplexInput />
       </ShowcaseComponent>
     </Page>
   )
