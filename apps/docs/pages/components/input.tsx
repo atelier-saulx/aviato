@@ -106,7 +106,7 @@ const InputPage = () => {
       <>
         <Column css={{ width: '100%' }}>
           <NextTitle weight="Bold" size="Medium">
-            CMS Field
+            Form
           </NextTitle>
 
           <Row css={{ width: '100%' }}>

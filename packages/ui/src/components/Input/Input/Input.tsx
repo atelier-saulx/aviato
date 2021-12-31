@@ -5,6 +5,7 @@ import { styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
+import { IconError } from '~/icons'
 
 const InputWrapper = styled('div', {
   width: '100%',
@@ -12,16 +13,27 @@ const InputWrapper = styled('div', {
 
 const Label = styled('label', {
   fontSize: 15,
-  lineHeight: '24px',
-  marginBottom: 4,
+  lineHeight: '32px',
 })
 
-const ErrorWrapper = styled('div', {})
+const ErrorWrapper = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  marginTop: 8,
+})
+
+const IconWrapper = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '24px',
+  color: '$ErrorMain',
+  marginRight: 8,
+})
 
 const Error = styled('div', {
   fontSize: 15,
   lineHeight: '24px',
-  marginTop: 4,
   color: '$ErrorMain',
 })
 
@@ -50,6 +62,10 @@ export const Input = React.forwardRef<
 
       <Conditional test={error}>
         <ErrorWrapper>
+          <IconWrapper>
+            <IconError />
+          </IconWrapper>
+
           <Error>{error}</Error>
         </ErrorWrapper>
       </Conditional>
