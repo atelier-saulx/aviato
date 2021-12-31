@@ -38,7 +38,8 @@ const TextFieldPage = () => {
             <TextField
               variant={variant}
               autosize
-              maxRows={2}
+              minRows={2}
+              maxRows={4}
               placeholder="Autosize with 4 rows max"
             />
           </Row>
