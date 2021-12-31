@@ -2,11 +2,10 @@ import React, { ElementRef } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useUuid } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
-import { StitchedCSS, styled } from '~/theme'
+import { StitchedCSS } from '~/theme'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
-import { Conditional } from '~/components/Utilities'
-import { IconError } from '~/icons'
+import { InputWrapper } from './InputWrapper'
 
 const TextFieldStyles: StitchedCSS = {
   padding: '10px 12px',
@@ -14,36 +13,6 @@ const TextFieldStyles: StitchedCSS = {
   maxHeight: 'auto',
   resize: 'none',
 }
-
-const InputWrapper = styled('div', {
-  width: '100%',
-})
-
-const Label = styled('label', {
-  fontSize: 15,
-  lineHeight: '32px',
-})
-
-const ErrorWrapper = styled('div', {
-  display: 'flex',
-  flexDirection: 'row',
-  marginTop: 8,
-})
-
-const IconWrapper = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '24px',
-  color: '$ErrorMain',
-  marginRight: 8,
-})
-
-const Error = styled('div', {
-  fontSize: 15,
-  lineHeight: '24px',
-  color: '$ErrorMain',
-})
 
 export interface TextFieldProps extends BaseInputProps {
   autosize?: boolean
@@ -103,22 +72,8 @@ export const TextField = React.forwardRef<
   }
 
   return (
-    <InputWrapper>
-      <Conditional test={label}>
-        <Label>{label}</Label>
-      </Conditional>
-
+    <InputWrapper label={label} error={error}>
       <InputComponent />
-
-      <Conditional test={error}>
-        <ErrorWrapper>
-          <IconWrapper>
-            <IconError />
-          </IconWrapper>
-
-          <Error>{error}</Error>
-        </ErrorWrapper>
-      </Conditional>
     </InputWrapper>
   )
 })
