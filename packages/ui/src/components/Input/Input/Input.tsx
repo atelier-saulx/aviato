@@ -40,6 +40,7 @@ const Error = styled('div', {
 export interface InputProps extends BaseInputProps {
   label?: string
   error?: string
+  invalid?: boolean
 }
 
 type ForwardProps = ComponentProps<typeof StyledInput> & InputProps
@@ -52,6 +53,8 @@ export const Input = React.forwardRef<
 
   const uuid = useUuid({ prefix: 'input' })
 
+  const isInvalid = Boolean(error || invalid)
+
   return (
     <InputWrapper>
       <Conditional test={label}>
@@ -61,8 +64,8 @@ export const Input = React.forwardRef<
       <BaseInput
         ref={forwardedRef}
         id={uuid}
+        invalid={isInvalid}
         {...remainingProps}
-        invalid={Boolean(error || invalid)}
       />
 
       <Conditional test={error}>

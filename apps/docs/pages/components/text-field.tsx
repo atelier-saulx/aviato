@@ -28,7 +28,9 @@ const TextFieldPage = () => {
             <TextField
               variant={variant}
               autosize
-              placeholder="Autosize without a row limit"
+              minRows={3}
+              maxRows={3}
+              placeholder="Autosize with 3 rows"
             />
           </Row>
 
@@ -39,8 +41,18 @@ const TextFieldPage = () => {
               variant={variant}
               autosize
               minRows={2}
-              maxRows={4}
-              placeholder="Autosize with 4 rows max"
+              maxRows={6}
+              placeholder="Autosize with 6 rows max, 2 min"
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <TextField
+              variant={variant}
+              autosize
+              placeholder="Autosize without a row limit"
             />
           </Row>
 
@@ -50,7 +62,36 @@ const TextFieldPage = () => {
             <TextField
               variant={variant}
               invalid
+              placeholder="This is an error state"
+            />
+          </Row>
+        </Column>
+      </>
+    )
+  }
+
+  const ShowComplexTextField = () => {
+    return (
+      <>
+        <Column css={{ width: '100%' }}>
+          <NextTitle weight="Bold" size="Medium">
+            Form
+          </NextTitle>
+
+          <Row css={{ width: '100%' }}>
+            <TextField
               placeholder="Type something here"
+              label="This is a label"
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <TextField
+              placeholder="Type something here"
+              label="This is a label"
+              error="This is an error"
             />
           </Row>
         </Column>
@@ -74,6 +115,10 @@ const TextFieldPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowTextField variant="filled" />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowComplexTextField />
       </ShowcaseComponent>
     </Page>
   )
