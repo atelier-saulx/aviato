@@ -34,6 +34,10 @@ const componentsSubMenu: MenuDataItems[] = [
     title: 'Input',
     route: '/components/input',
   },
+  {
+    title: 'Text Field',
+    route: '/components/text-field',
+  },
 ]
 
 const mainMenu: MenuDataItems[] = [
@@ -47,10 +51,13 @@ const mainMenu: MenuDataItems[] = [
   },
 ]
 
-if (featureFlags.isEnabled('TextField')) {
+/**
+ * Add pages under a feature flag using the below approach.
+ */
+if (featureFlags.isEnabled('DemoFlag')) {
   componentsSubMenu.push({
-    title: 'Text Field',
-    route: '/components/text-field',
+    title: 'Demo Page',
+    route: '/components/demo-page',
   })
 }
 

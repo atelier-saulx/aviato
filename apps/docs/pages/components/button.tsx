@@ -12,6 +12,7 @@ import {
 import { useHasLoaded } from '@aviato/hooks'
 import { useCallback, useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { capitalize } from '../../utils'
 
 const BigSpacer = styled('div', {
   width: '100%',
@@ -22,10 +23,6 @@ const Spacer = styled('div', {
   width: 6,
   height: 6,
 })
-
-const capitalize = (input: string) => {
-  return input.charAt(0).toUpperCase() + input.slice(1)
-}
 
 /**
  * TODO: Fix SSR issue with Vector Icons!
