@@ -10,7 +10,7 @@ const SvgIconAlignLeft = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M11.3333 6.66666H2"
+        d="M11.3333 6.66675H2"
       />
       <path
         stroke="currentColor"
@@ -26,7 +26,7 @@ const SvgIconAlignLeft = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M14 9.33334H2"
+        d="M14 9.33325H2"
       />
       <path
         stroke="currentColor"

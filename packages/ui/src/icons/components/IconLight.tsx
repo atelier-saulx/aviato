@@ -10,7 +10,7 @@ const SvgIconLight = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M7.99996 11.3333C9.84091 11.3333 11.3333 9.84094 11.3333 7.99999C11.3333 6.15904 9.84091 4.66666 7.99996 4.66666C6.15901 4.66666 4.66663 6.15904 4.66663 7.99999C4.66663 9.84094 6.15901 11.3333 7.99996 11.3333Z"
+        d="M8.00008 11.3334C9.84103 11.3334 11.3334 9.84103 11.3334 8.00008C11.3334 6.15913 9.84103 4.66675 8.00008 4.66675C6.15913 4.66675 4.66675 6.15913 4.66675 8.00008C4.66675 9.84103 6.15913 11.3334 8.00008 11.3334Z"
       />
       <path
         stroke="currentColor"
@@ -18,7 +18,7 @@ const SvgIconLight = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M8 0.666656V1.99999"
+        d="M8 0.666748V2.00008"
       />
       <path
         stroke="currentColor"
@@ -34,7 +34,7 @@ const SvgIconLight = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M2.81335 2.81332L3.76002 3.75999"
+        d="M2.81323 2.81323L3.7599 3.7599"
       />
       <path
         stroke="currentColor"
@@ -50,7 +50,7 @@ const SvgIconLight = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M0.666626 8H1.99996"
+        d="M0.666748 8H2.00008"
       />
       <path
         stroke="currentColor"
@@ -66,7 +66,7 @@ const SvgIconLight = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M2.81335 13.1867L3.76002 12.24"
+        d="M2.81323 13.1867L3.7599 12.24"
       />
       <path
         stroke="currentColor"
@@ -74,7 +74,7 @@ const SvgIconLight = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M12.24 3.75999L13.1867 2.81332"
+        d="M12.24 3.7599L13.1867 2.81323"
       />
     </svg>
   )

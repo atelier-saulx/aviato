@@ -18,7 +18,7 @@ const SvgIconSchedule = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M7.33333 11.3333H2V14H7.33333V11.3333Z"
+        d="M7.33333 11.3333H2V13.9999H7.33333V11.3333Z"
       />
       <path
         stroke="currentColor"
@@ -26,7 +26,7 @@ const SvgIconSchedule = (props: SVGProperties) => {
         strokeLinejoin="round"
         strokeOpacity={0.87}
         strokeWidth={1.33333}
-        d="M14 6.66666H4.66663V9.33332H14V6.66666Z"
+        d="M14.0001 6.66675H4.66675V9.33341H14.0001V6.66675Z"
       />
     </svg>
   )
