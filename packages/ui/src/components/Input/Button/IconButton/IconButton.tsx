@@ -5,7 +5,6 @@ import {
   ButtonType,
   StyledButton,
 } from '~/components/Input/Button/Button'
-import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { IconName, getIconFromType, Icon } from '~/icons'
@@ -23,9 +22,10 @@ export interface IconButtonProps {
   disabled?: boolean
   icon?: IconName | string
   onClick?: MouseEventHandler<HTMLButtonElement>
+  css?: StitchedCSS
 }
 
-type ForwardProps = ComponentProps<typeof StyledButton> & IconButtonProps
+type ForwardProps = IconButtonProps
 
 export const IconButton = React.forwardRef<
   ElementRef<typeof StyledButton>,

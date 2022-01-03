@@ -1,7 +1,6 @@
 import {
   Page,
   Switch,
-  OnSwitchChangePayload,
   IconButton,
   Column,
   Row,
@@ -11,7 +10,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
@@ -42,13 +41,7 @@ const IconButtonPage = () => {
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
-    const [isChecked, setIsChecked] = useState(false)
-
-    const onSwitchChange = useCallback((event: OnSwitchChangePayload) => {
-      const { isChecked } = event
-
-      setIsChecked(isChecked)
-    }, [])
+    const [isDisabled, setIsDisabled] = useState(false)
 
     return (
       <>
@@ -57,7 +50,11 @@ const IconButtonPage = () => {
 
           <Row>
             <NextText>Disable buttons?</NextText> <Spacer />
-            <Switch onChange={onSwitchChange} />
+            <Switch
+              onChange={({ isChecked }) => {
+                setIsDisabled(isChecked)
+              }}
+            />
           </Row>
 
           <BigSpacer />
@@ -68,7 +65,7 @@ const IconButtonPage = () => {
                 <IconButton
                   type={type}
                   variant="filled"
-                  disabled={isChecked}
+                  disabled={isDisabled}
                   icon={randomIcon()}
                 />
 
@@ -77,7 +74,7 @@ const IconButtonPage = () => {
                 <IconButton
                   type={type}
                   variant="outlined"
-                  disabled={isChecked}
+                  disabled={isDisabled}
                   icon={randomIcon()}
                 />
 
@@ -86,7 +83,7 @@ const IconButtonPage = () => {
                 <IconButton
                   type={type}
                   variant="transparent"
-                  disabled={isChecked}
+                  disabled={isDisabled}
                   icon={randomIcon()}
                 />
               </Row>

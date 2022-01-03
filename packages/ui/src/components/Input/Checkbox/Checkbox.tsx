@@ -179,8 +179,6 @@ export const Checkbox = React.forwardRef<
   const [isChecked, setIsChecked] = useState(checked)
   const [hasIndeterminateState] = useState(indeterminate)
 
-  const [checkboxState, setCheckboxState] = useState(CHECKBOX_STATES.Unchecked)
-
   const hasLabel = Boolean(label)
   const hasDescription = Boolean(description)
   const hasLabelOrDescription = hasLabel || hasDescription
@@ -199,16 +197,14 @@ export const Checkbox = React.forwardRef<
       const isCheckboxChecked = !isChecked
       setIsChecked(isCheckboxChecked)
 
-      const newCheckboxState = isCheckboxChecked
+      const checkboxState = isCheckboxChecked
         ? CHECKBOX_STATES.Checked
         : CHECKBOX_STATES.Unchecked
 
-      setCheckboxState(newCheckboxState)
-
       onChange({
         isChecked: isCheckboxChecked,
+        checkboxState: checkboxState,
         isDisabled,
-        checkboxState,
         index,
         event,
       })
