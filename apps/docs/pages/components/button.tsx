@@ -1,7 +1,6 @@
 import {
   Page,
   Switch,
-  OnSwitchChangePayload,
   Button,
   Column,
   Row,
@@ -10,7 +9,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -43,12 +42,6 @@ const ButtonPage = () => {
 
     const [isDisabled, setIsDisabled] = useState(false)
 
-    const onSwitchChange = useCallback((event: OnSwitchChangePayload) => {
-      const { isChecked } = event
-
-      setIsDisabled(isChecked)
-    }, [])
-
     return (
       <>
         <Column>
@@ -56,7 +49,11 @@ const ButtonPage = () => {
 
           <Row>
             <NextText>Disable buttons?</NextText> <Spacer />
-            <Switch onChange={onSwitchChange} />
+            <Switch
+              onChange={({ isChecked }) => {
+                setIsDisabled(isChecked)
+              }}
+            />
           </Row>
 
           <BigSpacer />

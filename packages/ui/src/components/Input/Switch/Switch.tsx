@@ -1,4 +1,5 @@
 import React, {
+  BaseSyntheticEvent,
   FunctionComponent,
   useCallback,
   useEffect,
@@ -136,7 +137,7 @@ const StyledSwitch = styled('input', {
   },
 })
 
-export interface OnSwitchChangePayload extends DefaultChangePayload {
+export interface OnSwitchChangePayload extends DefaultChangePayload<Event> {
   isChecked: boolean
 }
 
@@ -165,7 +166,7 @@ export const Switch: FunctionComponent<SwitchProps> = (properties) => {
   }, [checked, disabled])
 
   const handleChange = useCallback(
-    (event) => {
+    (event: BaseSyntheticEvent) => {
       if (isDisabled) {
         return noop()
       }

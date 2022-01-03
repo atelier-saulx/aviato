@@ -1,4 +1,5 @@
 import React, {
+  BaseSyntheticEvent,
   ElementRef,
   FunctionComponent,
   useCallback,
@@ -137,7 +138,8 @@ export enum CHECKBOX_STATES {
   Indeterminate = 'Indeterminate',
 }
 
-export interface OnCheckboxChangePayload extends DefaultChangePayload {
+export interface OnCheckboxChangePayload
+  extends DefaultChangePayload<BaseSyntheticEvent> {
   isChecked: boolean
 }
 
@@ -148,6 +150,7 @@ export interface CheckboxProps {
   indeterminate?: boolean
   label?: string
   description?: string
+  index?: number
   onChange?: (payload: OnCheckboxChangePayload) => void
 }
 
@@ -168,6 +171,7 @@ export const Checkbox = React.forwardRef<
     label,
     description,
     onChange = noop,
+    index = 0,
     ...remainingProps
   } = properties
 
@@ -187,7 +191,7 @@ export const Checkbox = React.forwardRef<
   }, [checked, disabled])
 
   const handleChange = useCallback(
-    (event) => {
+    (event: BaseSyntheticEvent) => {
       if (isDisabled) {
         return noop()
       }
@@ -205,6 +209,7 @@ export const Checkbox = React.forwardRef<
         isChecked: isCheckboxChecked,
         isDisabled,
         checkboxState,
+        index,
         event,
       })
     },

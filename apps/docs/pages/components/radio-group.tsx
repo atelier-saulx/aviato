@@ -18,8 +18,6 @@ const BigSpacer = styled('div', {
 
 const RadioGroupPage = () => {
   const ShowRadiogroup = () => {
-    const [value, setValue] = useState('Test 1')
-
     const onRadioGroupChange = useCallback(
       (event: OnRadioGroupChangePayload) => {
         log.global.debug('RadioGroup change: ', event)
@@ -27,15 +25,14 @@ const RadioGroupPage = () => {
       []
     )
 
+    const [value, setValue] = useState('Thing 1')
+
     return (
       <>
         <Column>
           <Row>
             <RadioGroup
-              value={value}
-              onChange={({ value }) => {
-                setValue(value)
-              }}
+              onChange={onRadioGroupChange}
               label="Select your favorite developer"
               description="This is not anonymous, ofcourse."
             >
@@ -50,9 +47,10 @@ const RadioGroupPage = () => {
 
           <Row>
             <RadioGroup
-              label="Select a thing"
-              error="This is an error"
-              onChange={onRadioGroupChange}
+              label="Controlled example"
+              error={value === 'Thing 1' ? 'Do not select Thing 1' : null}
+              value={value}
+              onChange={({ value }) => setValue(value)}
             >
               <Radio value="Thing 1">Thing 1</Radio>
               <Radio value="Thing 2">Thing 2</Radio>

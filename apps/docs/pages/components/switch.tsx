@@ -1,3 +1,4 @@
+import { log } from '@aviato/utils'
 import { Column, Row, Switch, SwitchSize, Page, styled } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -12,7 +13,12 @@ const SwitchPage = () => {
       <>
         <Column>
           <Row>
-            <Switch size={size} />
+            <Switch
+              size={size}
+              onChange={(event) => {
+                log.global.debug('Switch change: ', event)
+              }}
+            />
             <Spacer />
             <Switch size={size} checked />
             <Spacer />

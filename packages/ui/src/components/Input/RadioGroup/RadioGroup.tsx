@@ -1,4 +1,10 @@
-import React, { FunctionComponent, Children, cloneElement } from 'react'
+import React, {
+  FunctionComponent,
+  Children,
+  cloneElement,
+  ChangeEvent,
+  BaseSyntheticEvent,
+} from 'react'
 import { noop } from '@aviato/utils'
 import { useUncontrolled, useUuid } from '@aviato/hooks'
 import { DefaultProps, styled } from '~/theme'
@@ -10,7 +16,8 @@ const StyledRadioGroupWrapper = styled('div', {
   position: 'relative',
 })
 
-export interface OnRadioGroupChangePayload extends DefaultChangePayload {
+export interface OnRadioGroupChangePayload
+  extends DefaultChangePayload<HTMLInputElement> {
   value: string
 }
 
@@ -37,9 +44,19 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
 
   const uuid = useUuid({ prefix: 'radio' })
 
-  const handleChange = (value: string) => {
+  const handleChange = ({
+    value,
+    index,
+    event,
+  }: {
+    value: string
+    index: number
+    event: BaseSyntheticEvent
+  }) => {
     onChange({
       value,
+      index,
+      event,
     })
   }
 
@@ -47,7 +64,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     value,
     defaultValue,
     finalValue: '',
-    onChange: handleChange,
+    onChange: () => {},
     rule: (value) => typeof value === 'string',
   })
 
@@ -59,8 +76,11 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
       name: uuid,
       key: `RadioGroupItem-${index}`,
       checked: _value === radio.props.value,
-      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-        return setValue(event.currentTarget.value)
+      onChange: (event: ChangeEvent<HTMLInputElement>) => {
+        const updatedValue = event.currentTarget.value
+
+        handleChange({ value: updatedValue, index, event })
+        return setValue(updatedValue)
       },
     })
   })
