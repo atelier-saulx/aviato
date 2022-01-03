@@ -12,6 +12,19 @@ const BigSpacer = styled('div', {
 })
 
 const SliderPage = () => {
+  const simpleMarks = [
+    { value: 10 },
+    { value: 20 },
+    { value: 30 },
+    { value: 40 },
+    { value: 50 },
+    { value: 60 },
+    { value: 70 },
+    { value: 80 },
+    { value: 90 },
+    { value: 100 },
+  ]
+
   const marks = [
     { value: 0, label: 'xs' },
     { value: 25, label: 'sm' },
@@ -24,7 +37,7 @@ const SliderPage = () => {
     return (
       <>
         <Column css={{ width: '90%' }}>
-          <NextText>Basic slider</NextText>
+          <NextText>Basic slider.</NextText>
           <Row css={{ width: '90%' }}>
             <Slider />
           </Row>
@@ -32,15 +45,15 @@ const SliderPage = () => {
           <BigSpacer />
 
           <NextText>
-            Clamp steps to increment of 5, hide label when hovering
+            Clamp steps to increment of 10, do not show label when hovering.
           </NextText>
           <Row css={{ width: '90%' }}>
-            <Slider step={5} showLabelOnHover={false} />
+            <Slider step={10} showLabelOnHover={false} marks={simpleMarks} />
           </Row>
 
           <BigSpacer />
 
-          <NextText>Negative values are fine</NextText>
+          <NextText>Negative values are fine (min -10, max 10).</NextText>
           <Row css={{ width: '90%' }}>
             <Slider
               defaultValue={5}
@@ -53,7 +66,7 @@ const SliderPage = () => {
 
           <BigSpacer />
 
-          <NextText>Example with percentage marks, always show label</NextText>
+          <NextText>Example with percentage marks, always show label.</NextText>
           <SmallSpacer />
           <Row css={{ width: '90%' }}>
             <Slider
@@ -73,7 +86,7 @@ const SliderPage = () => {
           <BigSpacer />
 
           <NextText>
-            Example with text marks, default to 50, steps of 25 []
+            Example with large steps; default to 50, steps of 25.
           </NextText>
           <Row css={{ width: '90%' }}>
             <Slider
@@ -91,7 +104,7 @@ const SliderPage = () => {
 
           <BigSpacer />
 
-          <NextText>Above example without smooth-dragging</NextText>
+          <NextText>Above example without smooth-dragging.</NextText>
           <Row css={{ width: '90%' }}>
             <Slider
               defaultValue={50}
@@ -109,7 +122,7 @@ const SliderPage = () => {
 
           <BigSpacer />
 
-          <NextText>Custom label format</NextText>
+          <NextText>Custom label format.</NextText>
           <SmallSpacer />
           <Row css={{ width: '90%' }}>
             <Slider
@@ -121,7 +134,7 @@ const SliderPage = () => {
 
           <BigSpacer />
 
-          <NextText>Custom label format</NextText>
+          <NextText>Custom mark label setup.</NextText>
           <SmallSpacer />
           <Row css={{ width: '90%' }}>
             <Slider
