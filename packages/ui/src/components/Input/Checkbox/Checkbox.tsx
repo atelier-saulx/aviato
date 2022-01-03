@@ -1,4 +1,10 @@
-import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import React, {
+  ElementRef,
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
@@ -37,7 +43,7 @@ const CheckboxWrapper = styled('div', {
   paddingTop: 4,
 })
 
-const LeftPadding = styled('div', {
+const TextWrapper = styled('div', {
   paddingLeft: 12,
 })
 
@@ -205,7 +211,7 @@ export const Checkbox = React.forwardRef<
     [isChecked]
   )
 
-  const CheckboxComponent = () => {
+  const CheckboxComponent: FunctionComponent = (properties) => {
     return (
       <CheckboxWrapper>
         <Column>
@@ -216,6 +222,7 @@ export const Checkbox = React.forwardRef<
               onChange={handleChange}
               disabled={disabled}
               size={size}
+              {...properties}
             />
 
             <IconWrapper size={size}>
@@ -235,12 +242,12 @@ export const Checkbox = React.forwardRef<
 
   if (hasLabelOrDescription) {
     return (
-      <StyledCheckboxWrapper ref={forwardedRef} {...remainingProps}>
+      <StyledCheckboxWrapper>
         <AlignmentWrapper>
-          <CheckboxComponent />
+          <CheckboxComponent ref={forwardedRef} {...remainingProps} />
 
           <Conditional test={hasLabelOrDescription}>
-            <LeftPadding>
+            <TextWrapper onClick={handleChange}>
               <Text weight={hasDescription ? 'Semibold' : 'Medium'}>
                 {label}
               </Text>
@@ -250,12 +257,12 @@ export const Checkbox = React.forwardRef<
               </Conditional>
 
               <Text>{description}</Text>
-            </LeftPadding>
+            </TextWrapper>
           </Conditional>
         </AlignmentWrapper>
       </StyledCheckboxWrapper>
     )
   }
 
-  return <CheckboxComponent />
+  return <CheckboxComponent ref={forwardedRef} {...remainingProps} />
 })

@@ -32,7 +32,7 @@ const CheckboxPage = () => {
           <BigSpacer />
 
           <Row>
-            <Checkbox label="Indeterminate" indeterminate checked />
+            <Checkbox label="Indeterminate checkbox" indeterminate checked />
           </Row>
 
           <BigSpacer />
