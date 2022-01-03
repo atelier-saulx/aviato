@@ -1,3 +1,4 @@
+import { log } from '@aviato/utils'
 import { Column, Row, Slider, Page, styled } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -12,7 +13,11 @@ const SliderPage = () => {
       <>
         <Column css={{ width: '90%' }}>
           <Row css={{ width: '90%' }}>
-            <Slider />
+            <Slider
+              onChange={(event) => {
+                log.global.debug('Slider change: ', event)
+              }}
+            />
           </Row>
 
           <BigSpacer />

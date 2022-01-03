@@ -1,4 +1,5 @@
 import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
+import { log } from '@aviato/utils'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -19,7 +20,13 @@ const TextFieldPage = () => {
           </NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <TextField variant={variant} placeholder="Type something here" />
+            <TextField
+              variant={variant}
+              placeholder="Type something here"
+              onChange={(event) => {
+                log.global.debug('TextField change: ', event)
+              }}
+            />
           </Row>
 
           <BigSpacer />

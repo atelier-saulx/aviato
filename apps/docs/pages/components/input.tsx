@@ -7,6 +7,7 @@ import {
   getRandomIcon,
   InputVariant,
 } from '@aviato/ui'
+import { log } from '@aviato/utils'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
@@ -41,7 +42,13 @@ const InputPage = () => {
           </NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <Input variant={variant} placeholder="Type something here" />
+            <Input
+              variant={variant}
+              placeholder="Type something here"
+              onChange={(event) => {
+                log.global.debug('Input change: ', event)
+              }}
+            />
           </Row>
 
           <BigSpacer />

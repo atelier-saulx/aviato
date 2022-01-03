@@ -1,8 +1,10 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, useCallback, BaseSyntheticEvent } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
 import { InputType, InputVariant } from './types'
+import { DefaultChangePayload } from '~/types'
+import { noop } from '@aviato/utils'
 
 /**
  * NOTICE
@@ -175,6 +177,10 @@ const IconWrapper = styled('span', {
   },
 })
 
+export interface OnInputChangePayload extends DefaultChangePayload {
+  value: string
+}
+
 export interface BaseInputProps {
   component?: React.ElementType
   type?: InputType
@@ -187,6 +193,7 @@ export interface BaseInputProps {
   multiline?: boolean
   maxRows?: number
   minRows?: number
+  onChange?: (payload: OnInputChangePayload) => void
 }
 
 type ForwardProps = ComponentProps<typeof StyledInput> & BaseInputProps
@@ -202,6 +209,7 @@ export const BaseInput = React.forwardRef<
     variant = 'outlined',
     disabled: isDisabled = false,
     invalid: isInvalid = false,
+    onChange = noop,
     ...remainingProps
   } = properties
 
@@ -216,6 +224,10 @@ export const BaseInput = React.forwardRef<
     isDisabled,
     isInvalid,
   })
+
+  const handleChange = useCallback((event: BaseSyntheticEvent) => {
+    onChange({ value: event.target.value, event })
+  }, [])
 
   return (
     <BaseInputWrapper variant={variant} className={classes}>
@@ -232,6 +244,7 @@ export const BaseInput = React.forwardRef<
         onFocus={() => setIsActive(true)}
         onBlur={() => setIsActive(false)}
         disabled={isDisabled}
+        onChange={handleChange}
         {...remainingProps}
       />
 
