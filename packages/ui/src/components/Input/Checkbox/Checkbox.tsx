@@ -4,11 +4,46 @@ import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
+import { Text } from '~/components/Text'
+import { Column } from '~/components/Layout'
 import { IconCheck, IconMinus } from '~/icons'
 import { DefaultChangePayload } from '~/types/events'
 
 const StyledCheckboxWrapper = styled('div', {
   position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'row',
+})
+
+const Centered = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'row',
+})
+
+const AlignmentWrapper = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'start',
+  justifyContent: 'center',
+})
+
+const CheckboxWrapper = styled('div', {
+  paddingTop: 4,
+})
+
+const LeftPadding = styled('div', {
+  paddingLeft: 12,
+})
+
+const Spacer = styled('div', {
+  width: '100%',
+  height: 4,
 })
 
 const StyledCheckbox = styled('input', {
@@ -56,7 +91,7 @@ const StyledCheckbox = styled('input', {
   },
 })
 
-const StyledIconWrapper = styled('div', {
+const IconWrapper = styled('div', {
   position: 'absolute',
   zIndex: '1',
   top: '0',
@@ -104,7 +139,9 @@ export interface CheckboxProps {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
-  hasCheckedChildren?: boolean
+  indeterminate?: boolean
+  label?: string
+  description?: string
   onChange?: (payload: OnCheckboxChangePayload) => void
 }
 
@@ -113,24 +150,30 @@ type ForwardProps = ComponentProps<typeof StyledCheckboxWrapper> & CheckboxProps
 /***
  * TODO: Implement proper indeterminate logic
  */
-
 export const Checkbox = React.forwardRef<
   ElementRef<typeof StyledCheckboxWrapper>,
   ForwardProps
 >((properties, forwardedRef) => {
   const {
-    size = 'medium',
+    size = 'small',
     checked = false,
     disabled = false,
+    indeterminate = false,
+    label,
+    description,
     onChange = noop,
     ...remainingProps
   } = properties
 
   const [isDisabled, setIsDisbled] = useState(disabled)
-  const [isChecked, setIsChecked] = useState(false)
-  const [hasIndeterminateState] = useState(false)
+  const [isChecked, setIsChecked] = useState(checked)
+  const [hasIndeterminateState] = useState(indeterminate)
 
   const [checkboxState, setCheckboxState] = useState(CHECKBOX_STATES.Unchecked)
+
+  const hasLabel = Boolean(label)
+  const hasDescription = Boolean(description)
+  const hasLabelOrDescription = hasLabel || hasDescription
 
   useEffect(() => {
     setIsDisbled(disabled)
@@ -162,27 +205,57 @@ export const Checkbox = React.forwardRef<
     [isChecked]
   )
 
-  return (
-    <>
+  const CheckboxComponent = () => {
+    return (
+      <CheckboxWrapper>
+        <Column>
+          <Centered>
+            <StyledCheckbox
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleChange}
+              disabled={disabled}
+              size={size}
+            />
+
+            <IconWrapper size={size}>
+              <Conditional test={isChecked && !hasIndeterminateState}>
+                <IconCheck />
+              </Conditional>
+
+              <Conditional test={isChecked && hasIndeterminateState}>
+                <IconMinus />
+              </Conditional>
+            </IconWrapper>
+          </Centered>
+        </Column>
+      </CheckboxWrapper>
+    )
+  }
+
+  if (hasLabelOrDescription) {
+    return (
       <StyledCheckboxWrapper ref={forwardedRef} {...remainingProps}>
-        <StyledCheckbox
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleChange}
-          disabled={disabled}
-          size={size}
-        />
+        <AlignmentWrapper>
+          <CheckboxComponent />
 
-        <StyledIconWrapper size={size}>
-          <Conditional test={isChecked && !hasIndeterminateState}>
-            <IconCheck />
-          </Conditional>
+          <Conditional test={hasLabelOrDescription}>
+            <LeftPadding>
+              <Text weight={hasDescription ? 'Semibold' : 'Medium'}>
+                {label}
+              </Text>
 
-          <Conditional test={isChecked && hasIndeterminateState}>
-            <IconMinus />
+              <Conditional test={hasLabel}>
+                <Spacer />
+              </Conditional>
+
+              <Text>{description}</Text>
+            </LeftPadding>
           </Conditional>
-        </StyledIconWrapper>
+        </AlignmentWrapper>
       </StyledCheckboxWrapper>
-    </>
-  )
+    )
+  }
+
+  return <CheckboxComponent />
 })

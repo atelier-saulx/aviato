@@ -17,24 +17,37 @@ const CheckboxPage = () => {
       <>
         <Column>
           <Row>
-            <Checkbox />
-            <Spacer />
-            <Text>Accept the terms and conditions</Text>
+            <Checkbox label="Accept terms and conditions" />
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Checkbox
+              label="Show content IDs"
+              description="See the unique ID for each content type to refer to or link them to a pull request."
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Checkbox label="Indeterminate" indeterminate checked />
           </Row>
 
           <BigSpacer />
 
           <Row>
             <Column>
-              <Text>Big size</Text>
+              <Text>Medium size</Text>
               <Row>
-                <Checkbox />
+                <Checkbox size="medium" />
                 <Spacer />
-                <Checkbox checked />
+                <Checkbox size="medium" checked />
                 <Spacer />
-                <Checkbox disabled />
+                <Checkbox size="medium" disabled />
                 <Spacer />
-                <Checkbox disabled checked />
+                <Checkbox size="medium" disabled checked />
               </Row>
             </Column>
           </Row>
