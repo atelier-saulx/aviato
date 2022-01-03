@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-prototype-builtins */
 
 import {
@@ -27,7 +26,7 @@ const logWarning = (message) => {
  **/
 const spinner = ora('📡 Parsing Theme').start()
 
-console.log('')
+logInfo('')
 
 async function start() {
   try {

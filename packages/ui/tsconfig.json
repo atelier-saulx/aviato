@@ -11,9 +11,9 @@
     "src/**/*"
   ],
   "exclude": [
+    "dist",
     "node_modules",
     "src/__test__/**/*",
-    "dist",
     "src/icons/svg/**/*",
     "src/icons/parsed/**/*",
   ],
