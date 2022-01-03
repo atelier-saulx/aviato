@@ -5,7 +5,7 @@ import { ComponentProps } from '@stitches/react'
 import { StitchedCSS } from '~/theme'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
-import { InputWrapper } from './InputWrapper'
+import { InputWrapper } from '../InputWrapper'
 
 const TextFieldStyles: StitchedCSS = {
   padding: '10px 12px',
@@ -19,6 +19,7 @@ export interface TextFieldProps extends BaseInputProps {
   maxRows?: number
   minRows?: number
   label?: string
+  description?: string
   error?: string
   invalid?: boolean
 }
@@ -34,6 +35,7 @@ export const TextField = React.forwardRef<
     minRows,
     maxRows,
     label,
+    description,
     error,
     invalid,
     ...remainingProps
@@ -72,7 +74,7 @@ export const TextField = React.forwardRef<
   }
 
   return (
-    <InputWrapper label={label} error={error}>
+    <InputWrapper label={label} description={description} error={error}>
       <InputComponent />
     </InputWrapper>
   )

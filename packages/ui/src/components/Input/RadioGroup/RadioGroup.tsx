@@ -3,6 +3,7 @@ import { noop } from '@aviato/utils'
 import { useUncontrolled, useUuid } from '@aviato/hooks'
 import { DefaultProps, styled } from '~/theme'
 import { Radio } from './Radio'
+import { InputWrapper } from '../InputWrapper'
 
 const StyledRadioGroupWrapper = styled('div', {
   position: 'relative',
@@ -11,6 +12,9 @@ const StyledRadioGroupWrapper = styled('div', {
 export interface RadioGroupProps extends DefaultProps {
   value?: string
   defaultValue?: string
+  label?: string
+  description?: string
+  error?: string
   onChange?(value: string): void
 }
 
@@ -19,6 +23,9 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     value,
     defaultValue,
     onChange = noop,
+    label,
+    description,
+    error,
     children,
     ...remainingProps
   } = properties
@@ -48,8 +55,10 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
   })
 
   return (
-    <StyledRadioGroupWrapper {...remainingProps}>
-      {mappedRadioChildren}
-    </StyledRadioGroupWrapper>
+    <InputWrapper label={label} description={description} error={error}>
+      <StyledRadioGroupWrapper {...remainingProps}>
+        {mappedRadioChildren}
+      </StyledRadioGroupWrapper>
+    </InputWrapper>
   )
 }

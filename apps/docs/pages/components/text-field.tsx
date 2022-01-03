@@ -82,6 +82,7 @@ const TextFieldPage = () => {
             <TextField
               placeholder="Type something here"
               label="This is a label"
+              description="This is a description"
             />
           </Row>
 
@@ -91,6 +92,7 @@ const TextFieldPage = () => {
             <TextField
               placeholder="Type something here"
               label="This is a label"
+              description="This is a description"
               error="This is an error"
             />
           </Row>

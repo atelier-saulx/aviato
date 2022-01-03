@@ -1,7 +1,8 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled } from '~/theme'
 
+import { styled } from '~/theme'
+import { Text } from '~/components/Text'
 import { Conditional } from '~/components/Utilities'
 import { IconError } from '~/icons'
 
@@ -9,9 +10,8 @@ const StyledInputWrapper = styled('div', {
   width: '100%',
 })
 
-const Label = styled('label', {
-  fontSize: 15,
-  lineHeight: '32px',
+const TextWrapper = styled('div', {
+  marginBottom: 4,
 })
 
 const ErrorWrapper = styled('div', {
@@ -37,6 +37,7 @@ const Error = styled('div', {
 
 export interface InputWrapperProps {
   label?: string
+  description?: string
   error?: string
 }
 
@@ -47,12 +48,19 @@ export const InputWrapper = React.forwardRef<
   ElementRef<typeof StyledInputWrapper>,
   ForwardProps
 >((properties, forwardRef) => {
-  const { label, error, children, ...remainingProps } = properties
+  const { label, description, error, children, ...remainingProps } = properties
+
+  const hasLabel = Boolean(label)
+  const hasDescription = Boolean(description)
+  const hasLabelOrDescription = hasLabel || hasDescription
 
   return (
     <StyledInputWrapper {...remainingProps} ref={forwardRef}>
-      <Conditional test={label}>
-        <Label>{label}</Label>
+      <Conditional test={hasLabelOrDescription}>
+        <TextWrapper>
+          <Text weight="Semibold">{label}</Text>
+          <Text>{description}</Text>
+        </TextWrapper>
       </Conditional>
 
       {children}
