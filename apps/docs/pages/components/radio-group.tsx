@@ -1,10 +1,31 @@
-import { useState } from 'react'
-import { Page, RadioGroup, Radio, Column, Row } from '@aviato/ui'
+import { useCallback, useState } from 'react'
+import {
+  Page,
+  RadioGroup,
+  Radio,
+  Column,
+  Row,
+  styled,
+  OnRadioGroupChangePayload,
+} from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { log } from '@aviato/utils'
+
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
 
 const RadioGroupPage = () => {
   const ShowRadiogroup = () => {
     const [value, setValue] = useState('Test 1')
+
+    const onRadioGroupChange = useCallback(
+      (event: OnRadioGroupChangePayload) => {
+        log.global.debug('RadioGroup change: ', event)
+      },
+      []
+    )
 
     return (
       <>
@@ -12,7 +33,9 @@ const RadioGroupPage = () => {
           <Row>
             <RadioGroup
               value={value}
-              onChange={setValue}
+              onChange={({ value }) => {
+                setValue(value)
+              }}
               label="Select your favorite developer"
               description="This is not anonymous, ofcourse."
             >
@@ -20,6 +43,21 @@ const RadioGroupPage = () => {
               <Radio value="Test 2">Test 2</Radio>
               <Radio value="Test 3">Test 3</Radio>
               <Radio value="Test 4">Test 4</Radio>
+            </RadioGroup>
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <RadioGroup
+              label="Select a thing"
+              error="This is an error"
+              onChange={onRadioGroupChange}
+            >
+              <Radio value="Thing 1">Thing 1</Radio>
+              <Radio value="Thing 2">Thing 2</Radio>
+              <Radio value="Thing 3">Thing 3</Radio>
+              <Radio value="Thing 4">Thing 4</Radio>
             </RadioGroup>
           </Row>
         </Column>

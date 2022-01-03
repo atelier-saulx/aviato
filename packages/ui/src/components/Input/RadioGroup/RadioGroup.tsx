@@ -4,10 +4,15 @@ import { useUncontrolled, useUuid } from '@aviato/hooks'
 import { DefaultProps, styled } from '~/theme'
 import { Radio } from './Radio'
 import { InputWrapper } from '../InputWrapper'
+import { DefaultChangePayload } from '~/types/events'
 
 const StyledRadioGroupWrapper = styled('div', {
   position: 'relative',
 })
+
+export interface OnRadioGroupChangePayload extends DefaultChangePayload {
+  value: string
+}
 
 export interface RadioGroupProps extends DefaultProps {
   value?: string
@@ -15,7 +20,7 @@ export interface RadioGroupProps extends DefaultProps {
   label?: string
   description?: string
   error?: string
-  onChange?(value: string): void
+  onChange?: (payload: OnRadioGroupChangePayload) => void
 }
 
 export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
@@ -32,11 +37,17 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
 
   const uuid = useUuid({ prefix: 'radio' })
 
+  const handleChange = (value: string) => {
+    onChange({
+      value,
+    })
+  }
+
   const [_value, setValue] = useUncontrolled({
     value,
     defaultValue,
     finalValue: '',
-    onChange,
+    onChange: handleChange,
     rule: (value) => typeof value === 'string',
   })
 

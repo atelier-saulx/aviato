@@ -50,6 +50,7 @@ const Home: NextPage = () => {
       </NextText>
 
       <BigSpacer />
+
       <Wrapper>
         <Row>
           <NextText weight="Bold">✨ Features ✨</NextText>
