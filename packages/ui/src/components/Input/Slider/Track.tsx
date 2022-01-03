@@ -51,13 +51,6 @@ const Label = styled('div', {
   whiteSpace: 'nowrap',
   pointerEvents: 'none',
 
-  transitionProperty: 'transform, opacity',
-  transitionDuration: '150ms',
-  transitionTimingFunction: 'cubic-bezier(0.51, 0.3, 0, 1.21)',
-  transformOrigin: 'center bottom',
-  opacity: '1',
-  transform: 'translateY(0px) skew(0deg, 0deg)',
-
   variants: {
     mode: {
       visible: {
@@ -77,6 +70,7 @@ export interface TrackProps {
   marks: Mark[]
   min: number
   max: number
+  position: number
 }
 
 export const Track: FunctionComponent<TrackProps> = (properties) => {
@@ -87,6 +81,7 @@ export const Track: FunctionComponent<TrackProps> = (properties) => {
     marks,
     min,
     max,
+    position,
     ...remainingProps
   } = properties
 
@@ -101,16 +96,17 @@ export const Track: FunctionComponent<TrackProps> = (properties) => {
     }
   }
 
-  const labelMode = isLabelVisible ? 'visible' : 'hidden'
+  const hasValidLabel = label !== ''
+  const labelMode = isLabelVisible && hasValidLabel ? 'visible' : 'hidden'
 
   return (
     <StyledTrack {...remainingProps}>
-      <Bar style={{ width: `${sliderValue}%` }} />
+      <Bar style={{ width: `${position}%` }} />
 
       <Thumb
         ref={thumb}
         onMouseDown={handleThumbMouseDown}
-        style={{ left: `${sliderValue}%` }}
+        style={{ left: `${position}%` }}
       >
         <Label mode={labelMode}>{label}</Label>
       </Thumb>

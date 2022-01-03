@@ -1,36 +1,65 @@
-import { log } from '@aviato/utils'
 import { Column, Row, Slider, Page, styled } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
+const SmallSpacer = styled('div', {
+  width: '100%',
+  height: 30,
+})
+
 const BigSpacer = styled('div', {
   width: '100%',
-  height: 100,
+  height: 50,
 })
 
 const SliderPage = () => {
+  const marks = [
+    { value: 0, label: 'xs' },
+    { value: 25, label: 'sm' },
+    { value: 50, label: 'md' },
+    { value: 75, label: 'lg' },
+    { value: 100, label: 'xl' },
+  ]
+
   const ShowSlider = () => {
     return (
       <>
         <Column css={{ width: '90%' }}>
+          <NextText>Basic slider</NextText>
+          <Row css={{ width: '90%' }}>
+            <Slider />
+          </Row>
+
+          <BigSpacer />
+
+          <NextText>
+            Clamp steps to increment of 5, hide label when hovering
+          </NextText>
+          <Row css={{ width: '90%' }}>
+            <Slider step={5} showLabelOnHover={false} />
+          </Row>
+
+          <BigSpacer />
+
+          <NextText>Negative values are fine</NextText>
           <Row css={{ width: '90%' }}>
             <Slider
-              onChange={(event) => {
-                log.global.debug('Slider change: ', event)
-              }}
+              defaultValue={5}
+              min={-10}
+              max={10}
+              label={(value) => value.toFixed(1)}
+              step={0.1}
             />
           </Row>
 
           <BigSpacer />
 
-          <Row css={{ width: '90%' }}>
-            <Slider step={1} />
-          </Row>
-
-          <BigSpacer />
-
+          <NextText>Example with percentage marks, always show label</NextText>
+          <SmallSpacer />
           <Row css={{ width: '90%' }}>
             <Slider
               showLabelOnHover={false}
+              labelAlwaysVisible
+              defaultValue={75}
               marks={[
                 { value: 0, label: '0%' },
                 { value: 25, label: '25%' },
@@ -43,11 +72,13 @@ const SliderPage = () => {
 
           <BigSpacer />
 
+          <NextText>
+            Example with text marks, default to 50, steps of 25 []
+          </NextText>
           <Row css={{ width: '90%' }}>
             <Slider
               defaultValue={50}
               step={25}
-              labelAlwaysVisible
               marks={[
                 { value: 0, label: 'xs' },
                 { value: 25, label: 'sm' },
@@ -55,6 +86,51 @@ const SliderPage = () => {
                 { value: 75, label: 'lg' },
                 { value: 100, label: 'xl' },
               ]}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <NextText>Above example without smooth-dragging</NextText>
+          <Row css={{ width: '90%' }}>
+            <Slider
+              defaultValue={50}
+              step={25}
+              smoothDrag={false}
+              marks={[
+                { value: 0, label: 'xs' },
+                { value: 25, label: 'sm' },
+                { value: 50, label: 'md' },
+                { value: 75, label: 'lg' },
+                { value: 100, label: 'xl' },
+              ]}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <NextText>Custom label format</NextText>
+          <SmallSpacer />
+          <Row css={{ width: '90%' }}>
+            <Slider
+              label={(value) => `${value} °C`}
+              labelAlwaysVisible
+              defaultValue={15}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <NextText>Custom label format</NextText>
+          <SmallSpacer />
+          <Row css={{ width: '90%' }}>
+            <Slider
+              defaultValue={50}
+              step={25}
+              marks={marks}
+              label={(value) =>
+                marks.find((mark) => mark.value === value)?.label ?? ''
+              }
             />
           </Row>
         </Column>
