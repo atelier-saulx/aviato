@@ -23,6 +23,12 @@ const SliderPage = () => {
           <BigSpacer />
 
           <Row css={{ width: '90%' }}>
+            <Slider step={1} />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '90%' }}>
             <Slider
               showLabelOnHover={false}
               marks={[
