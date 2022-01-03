@@ -46,12 +46,12 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
+    "types": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir ./dist",
     "nodemon": "nodemon --exec yarn parse",
     "parse": "run-s parse:*",
     "parse:tokens": "node --experimental-modules ./scripts/parseTokens.mjs",
     "parse:icons": "node --experimental-modules ./scripts/reactFromSVG.mjs",
     "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",
-    "types": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir ./dist",
     "build": "tsup ./src/index.ts",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
