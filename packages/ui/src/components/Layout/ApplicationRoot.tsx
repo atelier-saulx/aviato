@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 
-const ApplicationRootStyles = styled('div', {
+const StyledApplicationRoot = styled('div', {
   position: 'relative',
   display: 'flex',
   width: '100vw',
@@ -13,8 +14,18 @@ const ApplicationRootStyles = styled('div', {
 
 export type ApplicationRootProps = {}
 
-export const ApplicationRoot: FunctionComponent<ApplicationRootProps> = ({
-  children,
-}) => {
-  return <ApplicationRootStyles>{children}</ApplicationRootStyles>
-}
+type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
+  ApplicationRootProps
+
+export const ApplicationRoot = React.forwardRef<
+  ElementRef<typeof StyledApplicationRoot>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const { children, ...remainingProps } = properties
+
+  return (
+    <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
+      {children}
+    </StyledApplicationRoot>
+  )
+})

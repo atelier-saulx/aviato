@@ -5,9 +5,7 @@ import { BaseTextStyles, BaseFontVariants } from './styles'
 
 import { FontWeight, FontColor } from './types'
 
-const TITLE_TAG = 'h1'
-
-const StyledText = styled(TITLE_TAG, {
+const StyledTitle = styled('h1', {
   ...BaseTextStyles,
 
   variants: {
@@ -34,10 +32,10 @@ export interface TitleProps {
   color?: FontColor
 }
 
-type ForwardProps = ComponentProps<typeof StyledText> & TitleProps
+type ForwardProps = ComponentProps<typeof StyledTitle> & TitleProps
 
 export const Title = React.forwardRef<
-  ElementRef<typeof TITLE_TAG>,
+  ElementRef<typeof StyledTitle>,
   ForwardProps
 >((properties, forwardedRef) => {
   const {
@@ -48,8 +46,7 @@ export const Title = React.forwardRef<
   } = properties
 
   return (
-    <StyledText
-      as={TITLE_TAG}
+    <StyledTitle
       weight={weight}
       color={color}
       size={size}

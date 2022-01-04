@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, { CSSProperties, ComponentProps, ElementRef } from 'react'
+import React, { CSSProperties, ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
+
 import { DefaultProps, StitchedCSS, styled } from '~/theme'
 import { Size } from '~/types/sizes'
 
@@ -97,9 +99,9 @@ export const Group = React.forwardRef<
   return (
     <StyledGroup
       direction={direction}
-      ref={forwardedRef}
       css={styledCSS}
       space={spacing}
+      ref={forwardedRef}
       {...remainingProps}
     >
       {children}

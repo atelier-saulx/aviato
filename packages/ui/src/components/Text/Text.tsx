@@ -5,9 +5,7 @@ import { BaseFontVariants, BaseTextStyles } from './styles'
 
 import { FontWeight, FontColor } from './types'
 
-const TEXT_TAG = 'p'
-
-const StyledText = styled(TEXT_TAG, {
+const StyledText = styled('p', {
   ...BaseTextStyles,
 
   variants: {
@@ -48,24 +46,24 @@ export interface TextProps {
 
 type ForwardProps = ComponentProps<typeof StyledText> & TextProps
 
-export const Text = React.forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
-  (properties, forwardedRef) => {
-    const {
-      size = 'small',
-      weight = 'regular',
-      color = 'Inherit',
-      ...remainingProps
-    } = properties
+export const Text = React.forwardRef<
+  ElementRef<typeof StyledText>,
+  ForwardProps
+>((properties, forwardedRef) => {
+  const {
+    size = 'small',
+    weight = 'regular',
+    color = 'Inherit',
+    ...remainingProps
+  } = properties
 
-    return (
-      <StyledText
-        as={TEXT_TAG}
-        color={color}
-        size={size}
-        weight={weight}
-        ref={forwardedRef}
-        {...remainingProps}
-      />
-    )
-  }
-)
+  return (
+    <StyledText
+      color={color}
+      size={size}
+      weight={weight}
+      ref={forwardedRef}
+      {...remainingProps}
+    />
+  )
+})

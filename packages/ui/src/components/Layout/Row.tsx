@@ -1,4 +1,5 @@
-import React, { ComponentProps, ElementRef } from 'react'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { DefaultProps, styled } from '~/theme'
 
 const StyledRow = styled('div', {
