@@ -126,6 +126,7 @@ export const Track: FunctionComponent<TrackProps> = (properties) => {
         mode={isActive ? 'active' : 'inactive'}
       >
         <ThumbPoint />
+
         <Label mode={labelMode}>{label}</Label>
       </Thumb>
 

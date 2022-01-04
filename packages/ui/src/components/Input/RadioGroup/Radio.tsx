@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
@@ -48,7 +49,13 @@ export interface RadioProps {
   onChange?(value: string): void
 }
 
-export const Radio: FunctionComponent<RadioProps> = (properties) => {
+type StitchedProps = ComponentProps<typeof StyledRadio>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & RadioProps
+
+export const Radio = React.forwardRef<
+  ElementRef<typeof StyledRadio>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     value,
     checked = false,
@@ -71,6 +78,7 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
         onChange={onChange}
         id={uuid}
         name={name}
+        ref={forwardedRef}
         {...remainingProps}
       />
 
@@ -79,4 +87,4 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
       </Span>
     </Label>
   )
-}
+})
