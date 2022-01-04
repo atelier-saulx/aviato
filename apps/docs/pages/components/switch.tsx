@@ -13,8 +13,8 @@ const SwitchPage = () => {
               description="With a description"
               text="This text is beside the switch"
               size={size}
-              onChange={(event) => {
-                log.global.debug('Switch change: ', event)
+              onChange={(value, payload) => {
+                log.global.debug('Switch change: ', { value, payload })
               }}
             />
           </Row>

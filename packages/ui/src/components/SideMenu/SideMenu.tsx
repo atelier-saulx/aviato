@@ -1,6 +1,6 @@
 import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 
 const StyledSideMenu = styled('div', {
   display: 'flex',
@@ -13,7 +13,7 @@ const StyledSideMenu = styled('div', {
   overflowX: 'hidden',
 })
 
-export interface SideMenuProps extends DefaultProps {
+export interface SideMenuProps {
   useBorder?: boolean
 }
 

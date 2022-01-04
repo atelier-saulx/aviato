@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
 import { InputType, InputVariant } from './types'
-import { DefaultChangePayload } from '~/types'
+import { onChange } from '~/types/events'
 import { noop } from '@aviato/utils'
 
 /**
@@ -177,7 +177,7 @@ const IconWrapper = styled('span', {
   },
 })
 
-export interface OnInputChangePayload extends DefaultChangePayload {
+export interface OnInputChange extends onChange {
   value: string
 }
 
@@ -193,10 +193,11 @@ export interface BaseInputProps {
   multiline?: boolean
   maxRows?: number
   minRows?: number
-  onChange?: (payload: OnInputChangePayload) => void
+  onChange?: (value: string, payload: OnInputChange) => void
 }
 
-type ForwardProps = ComponentProps<typeof StyledInput> & BaseInputProps
+type StitchedProps = ComponentProps<typeof StyledInput>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & BaseInputProps
 
 export const BaseInput = React.forwardRef<
   ElementRef<typeof StyledInput>,
@@ -226,7 +227,9 @@ export const BaseInput = React.forwardRef<
   })
 
   const handleChange = useCallback((event: BaseSyntheticEvent) => {
-    onChange({ value: event.target.value, event })
+    const { value } = event?.target ?? {}
+
+    onChange(value, { value, event })
   }, [])
 
   return (

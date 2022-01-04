@@ -1,6 +1,6 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 
 const StyledRow = styled('div', {
   display: 'flex',
@@ -8,7 +8,7 @@ const StyledRow = styled('div', {
   height: '100%',
 })
 
-export interface RowProps extends DefaultProps {}
+export interface RowProps {}
 
 type ForwardProps = ComponentProps<typeof StyledRow> & RowProps
 

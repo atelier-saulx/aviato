@@ -4,7 +4,7 @@
 import React, { CSSProperties, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { DefaultProps, StitchedCSS, styled } from '~/theme'
+import { StitchedCSS, styled } from '~/theme'
 import { Size } from '~/types/sizes'
 
 const StyledGroup = styled('div', {
@@ -62,7 +62,7 @@ const mappedPositions = {
 
 export type GroupPosition = 'left' | 'center' | 'right' | 'apart'
 
-export interface GroupProps extends DefaultProps {
+export interface GroupProps {
   direction?: 'row' | 'column'
   align?: CSSProperties['alignItems']
   position?: GroupPosition

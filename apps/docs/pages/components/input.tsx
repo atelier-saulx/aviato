@@ -43,8 +43,8 @@ const InputPage = () => {
             <Input
               variant={variant}
               placeholder="Type something here"
-              onChange={(event) => {
-                log.global.debug('Input change: ', event)
+              onChange={(value, payload) => {
+                log.global.debug('Input change: ', { value, payload })
               }}
             />
           </Row>

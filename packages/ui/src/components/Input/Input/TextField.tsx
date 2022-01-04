@@ -24,7 +24,8 @@ export interface TextFieldProps extends BaseInputProps {
   invalid?: boolean
 }
 
-type ForwardProps = ComponentProps<typeof StyledInput> & TextFieldProps
+type StitchedProps = ComponentProps<typeof StyledInput>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & TextFieldProps
 
 export const TextField = React.forwardRef<
   ElementRef<typeof StyledInput>,

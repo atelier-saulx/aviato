@@ -1,6 +1,6 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 
 const StyledColumn = styled('div', {
   display: 'flex',
@@ -8,7 +8,7 @@ const StyledColumn = styled('div', {
   height: '100%',
 })
 
-export interface ColumnProps extends DefaultProps {}
+export interface ColumnProps {}
 
 type ForwardProps = ComponentProps<typeof StyledColumn> & ColumnProps
 

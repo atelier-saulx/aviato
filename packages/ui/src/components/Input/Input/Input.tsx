@@ -12,7 +12,8 @@ export interface InputProps extends BaseInputProps {
   invalid?: boolean
 }
 
-type ForwardProps = ComponentProps<typeof StyledInput> & InputProps
+type StitchedProps = ComponentProps<typeof StyledInput>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & InputProps
 
 export const Input = React.forwardRef<
   ElementRef<typeof StyledInput>,

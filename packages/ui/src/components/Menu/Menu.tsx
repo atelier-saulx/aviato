@@ -1,6 +1,6 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 
 const StyledMenu = styled('div', {
   display: 'flex',
@@ -14,7 +14,7 @@ const StyledChild = styled('div', {
   paddingBottom: '2px',
 })
 
-export interface MenuProps extends DefaultProps {}
+export interface MenuProps {}
 
 type ForwardProps = ComponentProps<typeof StyledMenu> & MenuProps
 

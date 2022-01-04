@@ -1,38 +1,40 @@
-import React, {
-  FunctionComponent,
-  Children,
-  cloneElement,
-  ChangeEvent,
-  BaseSyntheticEvent,
-} from 'react'
-import { noop } from '@aviato/utils'
+import React, { Children, cloneElement, ChangeEvent, ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { useUncontrolled, useUuid } from '@aviato/hooks'
-import { DefaultProps } from '~/theme'
+import { styled } from '~/theme'
 import { Radio } from './Radio'
 import { InputWrapper } from '../InputWrapper'
-import { DefaultChangePayload } from '~/types/events'
+import { onChange } from '~/types/events'
 import { Group } from '~/components/Layout'
 
-export interface OnRadioGroupChangePayload
-  extends DefaultChangePayload<HTMLInputElement> {
+const StyledRadioGroup = styled('div', {})
+
+export interface OnRadioGroupChange
+  extends onChange<ChangeEvent<HTMLInputElement>> {
   value: string
 }
 
-export interface RadioGroupProps extends DefaultProps {
+export interface RadioGroupProps {
   value?: string
   defaultValue?: string
   label?: string
   description?: string
   error?: string
   direction?: 'horizontal' | 'vertical'
-  onChange?: (payload: OnRadioGroupChangePayload) => void
+  onChange?: (value: string, payload: OnRadioGroupChange) => void
 }
 
-export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
+type StitchedProps = ComponentProps<typeof StyledRadioGroup>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & RadioGroupProps
+
+export const RadioGroup = React.forwardRef<
+  ElementRef<typeof Group>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     value,
     defaultValue,
-    onChange = noop,
+    onChange,
     label,
     description,
     error,
@@ -50,21 +52,21 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
   }: {
     value: string
     index: number
-    event: BaseSyntheticEvent
+    event: ChangeEvent<HTMLInputElement>
   }) => {
-    onChange({
+    onChange(value, {
       value,
       index,
       event,
     })
   }
 
-  const [_value, setValue] = useUncontrolled({
+  const [radioGroupValue, setValue] = useUncontrolled({
     value,
     defaultValue,
     finalValue: '',
-    onChange: () => {},
     rule: (value) => typeof value === 'string',
+    onChange: () => {},
   })
 
   const childrenArray = Children.toArray(children) as React.ReactElement[]
@@ -74,27 +76,28 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     return cloneElement(radio, {
       name: uuid,
       key: `RadioGroupItem-${index}`,
-      checked: _value === radio.props.value,
+      checked: radioGroupValue === radio.props.value,
       onChange: (event: ChangeEvent<HTMLInputElement>) => {
-        const updatedValue = event.currentTarget.value
+        const { value } = event?.currentTarget ?? {}
 
-        handleChange({ value: updatedValue, index, event })
+        handleChange({ value, index, event })
 
-        return setValue(updatedValue)
+        return setValue(value)
       },
     })
   })
 
   return (
     <InputWrapper label={label} description={description} error={error}>
-      <Group
-        role="radiogroup"
-        direction={direction === 'horizontal' ? 'row' : 'column'}
-        css={{ paddingTop: '$xxs', paddingBottom: '$xxs' }}
-        {...remainingProps}
-      >
-        {mappedRadioChildren}
-      </Group>
+      <StyledRadioGroup ref={forwardedRef} {...remainingProps}>
+        <Group
+          role="radiogroup"
+          direction={direction === 'horizontal' ? 'row' : 'column'}
+          css={{ paddingTop: '$xxs', paddingBottom: '$xxs' }}
+        >
+          {mappedRadioChildren}
+        </Group>
+      </StyledRadioGroup>
     </InputWrapper>
   )
-}
+})

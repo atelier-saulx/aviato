@@ -21,8 +21,8 @@ const TextFieldPage = () => {
             <TextField
               variant={variant}
               placeholder="Type something here"
-              onChange={(event) => {
-                log.global.debug('TextField change: ', event)
+              onChange={(value, payload) => {
+                log.global.debug('TextField change: ', { value, payload })
               }}
             />
           </Row>

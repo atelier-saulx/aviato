@@ -50,7 +50,7 @@ const ButtonPage = () => {
           <Row>
             <Switch
               text="Disable buttons?"
-              onChange={({ isChecked }) => {
+              onChange={(isChecked) => {
                 setIsDisabled(isChecked)
               }}
             />

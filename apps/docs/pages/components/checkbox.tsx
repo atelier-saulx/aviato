@@ -20,8 +20,8 @@ const CheckboxPage = () => {
           <Row>
             <Checkbox
               label="Accept terms and conditions"
-              onChange={(event) => {
-                log.global.debug('Checkbox change: ', event)
+              onChange={(value, payload) => {
+                log.global.debug('Checkbox change: ', { value, payload })
               }}
             />
           </Row>

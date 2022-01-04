@@ -14,7 +14,7 @@ import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { Column } from '~/components/Layout'
 import { IconCheck, IconMinus } from '~/icons'
-import { DefaultChangePayload } from '~/types/events'
+import { onChange } from '~/types/events'
 
 const StyledCheckboxWrapper = styled('div', {
   position: 'relative',
@@ -138,8 +138,7 @@ export enum CHECKBOX_STATES {
   Indeterminate = 'Indeterminate',
 }
 
-export interface OnCheckboxChangePayload
-  extends DefaultChangePayload<BaseSyntheticEvent> {
+export interface OnCheckboxChange extends onChange<BaseSyntheticEvent> {
   isChecked: boolean
 }
 
@@ -151,14 +150,12 @@ export interface CheckboxProps {
   label?: string
   description?: string
   index?: number
-  onChange?: (payload: OnCheckboxChangePayload) => void
+  onChange?: (value: boolean, payload: OnCheckboxChange) => void
 }
 
-type ForwardProps = ComponentProps<typeof StyledCheckboxWrapper> & CheckboxProps
+type StitchedProps = ComponentProps<typeof StyledCheckboxWrapper>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & CheckboxProps
 
-/***
- * TODO: Implement proper indeterminate logic
- */
 export const Checkbox = React.forwardRef<
   ElementRef<typeof StyledCheckboxWrapper>,
   ForwardProps
@@ -201,7 +198,7 @@ export const Checkbox = React.forwardRef<
         ? CHECKBOX_STATES.Checked
         : CHECKBOX_STATES.Unchecked
 
-      onChange({
+      onChange(isCheckboxChecked, {
         isChecked: isCheckboxChecked,
         checkboxState: checkboxState,
         isDisabled,

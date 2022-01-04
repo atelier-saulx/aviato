@@ -2,7 +2,7 @@ import React, { ElementRef, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
-import { styled, classNames, DefaultProps } from '~/theme'
+import { styled, classNames } from '~/theme'
 import { ComponentProps } from '@stitches/react'
 
 const StyledMenuItem = styled('button', {
@@ -48,7 +48,7 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-export interface MenuItemProps extends DefaultProps {
+export interface MenuItemProps {
   title: string
   isActive?: boolean
   isHeader?: boolean

@@ -2,7 +2,7 @@ import React, { ElementRef, useCallback, useEffect, useState } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 import { styled } from '~/theme'
-import { DefaultChangePayload } from '~/types/events'
+import { onChange } from '~/types/events'
 import { Group } from '~/components/Layout'
 import { Text } from '~/components/Text'
 import { InputWrapper } from '~/components/Input/InputWrapper'
@@ -135,7 +135,7 @@ const StyledSwitch = styled('input', {
   },
 })
 
-export interface OnSwitchChangePayload extends DefaultChangePayload<Event> {
+export interface OnSwitchChange extends onChange<Event> {
   isChecked: boolean
 }
 
@@ -147,7 +147,7 @@ export interface SwitchProps {
   label?: string
   description?: string
   error?: string
-  onChange?: (payload: OnSwitchChangePayload) => void
+  onChange?: (value: boolean, payload: OnSwitchChange) => void
 }
 
 type StitchedProps = ComponentProps<typeof StyledSwitch>
@@ -186,7 +186,7 @@ export const Switch = React.forwardRef<
       const isSwitchChecked = !isChecked
       setIsChecked(isSwitchChecked)
 
-      onChange({
+      onChange(isSwitchChecked, {
         isChecked: isSwitchChecked,
         isDisabled,
         event,

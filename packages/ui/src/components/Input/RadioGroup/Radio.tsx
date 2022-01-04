@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { useUuid } from '@aviato/hooks'
@@ -40,7 +40,7 @@ const Span = styled('span', {
   paddingLeft: 12,
 })
 
-export interface RadioProps extends DefaultProps {
+export interface RadioProps {
   value: string
   checked?: boolean
   disabled?: boolean
