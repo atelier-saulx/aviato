@@ -11,6 +11,7 @@ import { DefaultProps, styled } from '~/theme'
 import { Radio } from './Radio'
 import { InputWrapper } from '../InputWrapper'
 import { DefaultChangePayload } from '~/types/events'
+import { Group } from '~/components/Layout'
 
 const StyledRadioGroupWrapper = styled('div', {
   position: 'relative',
@@ -27,6 +28,7 @@ export interface RadioGroupProps extends DefaultProps {
   label?: string
   description?: string
   error?: string
+  direction?: 'horizontal' | 'vertical'
   onChange?: (payload: OnRadioGroupChangePayload) => void
 }
 
@@ -38,6 +40,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
     label,
     description,
     error,
+    direction = 'horizontal',
     children,
     ...remainingProps
   } = properties
@@ -80,6 +83,7 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
         const updatedValue = event.currentTarget.value
 
         handleChange({ value: updatedValue, index, event })
+
         return setValue(updatedValue)
       },
     })
@@ -88,7 +92,13 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
   return (
     <InputWrapper label={label} description={description} error={error}>
       <StyledRadioGroupWrapper {...remainingProps}>
-        {mappedRadioChildren}
+        <Group
+          role="radiogroup"
+          direction={direction === 'horizontal' ? 'row' : 'column'}
+          css={{ paddingTop: 5 }}
+        >
+          {mappedRadioChildren}
+        </Group>
       </StyledRadioGroupWrapper>
     </InputWrapper>
   )

@@ -14,9 +14,11 @@ type ForwardProps = ComponentProps<typeof StyledColumn> & ColumnProps
 export const Column = React.forwardRef<
   ElementRef<typeof StyledColumn>,
   ForwardProps
->(({ children, ...properties }, forwardedRef) => {
+>((properties, forwardedRef) => {
+  const { children, ...remainingProps } = properties
+
   return (
-    <StyledColumn {...properties} ref={forwardedRef}>
+    <StyledColumn ref={forwardedRef} {...remainingProps}>
       {children}
     </StyledColumn>
   )

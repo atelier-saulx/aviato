@@ -33,13 +33,14 @@ export type PageProps = {
   mode?: 'center' | 'fullscreen'
 }
 
-export const Page: FunctionComponent<PageProps> = ({
-  mode = 'center',
-  children,
-}) => {
+export const Page: FunctionComponent<PageProps> = (properties) => {
+  const { mode, children, ...remainingProps } = properties
+
   return (
     <PageRoot>
-      <PageWrapper mode={mode}>{children}</PageWrapper>
+      <PageWrapper mode={mode} {...remainingProps}>
+        {children}
+      </PageWrapper>
     </PageRoot>
   )
 }

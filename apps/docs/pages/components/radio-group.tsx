@@ -19,7 +19,7 @@ const RadioGroupPage = () => {
           <Row>
             <RadioGroup
               label="Select your favorite developer"
-              description="This is not anonymous, ofcourse."
+              description="This is not anonymous, of course"
               onChange={(event) => {
                 log.global.debug('RadioGroup change: ', event)
               }}
@@ -36,6 +36,7 @@ const RadioGroupPage = () => {
           <Row>
             <RadioGroup
               label="Controlled example"
+              description="Do not select Thing 1"
               error={value === 'Thing 1' ? 'Do not select Thing 1' : null}
               value={value}
               onChange={({ value }) => setValue(value)}
@@ -46,6 +47,23 @@ const RadioGroupPage = () => {
               <Radio value="Thing 4">Thing 4</Radio>
             </RadioGroup>
           </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <RadioGroup
+              label="Select a goober"
+              description="Goobers are strange"
+              direction="vertical"
+            >
+              <Radio value="Goober 1">Goober 1</Radio>
+              <Radio value="Goober 2">Goober 2</Radio>
+              <Radio value="Goober 3">Goober 3</Radio>
+              <Radio value="Goober 4">Goober 4</Radio>
+            </RadioGroup>
+          </Row>
+
+          <BigSpacer />
         </Column>
       </>
     )

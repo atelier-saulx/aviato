@@ -12,9 +12,11 @@ export interface RowProps extends DefaultProps {}
 type ForwardProps = ComponentProps<typeof StyledRow> & RowProps
 
 export const Row = React.forwardRef<ElementRef<typeof StyledRow>, ForwardProps>(
-  ({ children, ...properties }, forwardedRef) => {
+  (properties, forwardedRef) => {
+    const { children, ...remainingProps } = properties
+
     return (
-      <StyledRow {...properties} ref={forwardedRef}>
+      <StyledRow ref={forwardedRef} {...remainingProps}>
         {children}
       </StyledRow>
     )

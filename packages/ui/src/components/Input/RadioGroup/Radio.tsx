@@ -3,7 +3,10 @@ import { DefaultProps, styled } from '~/theme'
 import { noop } from '@aviato/utils'
 import { useUuid } from '@aviato/hooks'
 
-const StyledRadioLabel = styled('label', {})
+const Label = styled('label', {
+  display: 'flex',
+  alignItems: 'center',
+})
 
 const StyledRadio = styled('input', {
   position: 'relative',
@@ -32,6 +35,10 @@ const StyledRadio = styled('input', {
   },
 })
 
+const Span = styled('span', {
+  paddingLeft: 12,
+})
+
 export interface RadioProps extends DefaultProps {
   value: string
   checked?: boolean
@@ -54,7 +61,7 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
   const uuid = useUuid({ prefix: 'radio-item' })
 
   return (
-    <StyledRadioLabel>
+    <Label>
       <StyledRadio
         type="radio"
         value={value}
@@ -65,7 +72,8 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
         name={name}
         {...remainingProps}
       />
-      <span>{children}</span>
-    </StyledRadioLabel>
+
+      <Span>{children}</Span>
+    </Label>
   )
 }
