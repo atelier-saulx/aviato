@@ -81,11 +81,9 @@ const CheckboxPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Checkbox
-      </NextTitle>
+      <NextTitle>Checkbox</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         A control that allows the user to toggle between checked and not
         checked.
       </NextText>

@@ -32,9 +32,7 @@ const Home: NextPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Introduction
-      </NextTitle>
+      <NextTitle size="small">Introduction</NextTitle>
 
       <NextText>
         Aviato is UI component library with a focus on customization and
@@ -53,7 +51,9 @@ const Home: NextPage = () => {
 
       <Wrapper>
         <Row>
-          <NextText weight="Bold">✨ Features ✨</NextText>
+          <NextText weight="bold" size="large">
+            Features
+          </NextText>
         </Row>
         <Line>📦 - A set of high-quality React components out of the box.</Line>
         <Line>🛡 - Written in TypeScript with predictable static types.</Line>

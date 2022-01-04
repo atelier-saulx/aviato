@@ -4,6 +4,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { classNames, css, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
+import { Text } from '~/components/Text'
 
 const primaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
@@ -181,11 +182,8 @@ export const ButtonStyles = css({
   display: 'flex',
   alignItems: 'center',
   borderRadius: '4px',
-  cursor: 'pointer',
-  fontWeight: '500',
   padding: '4px 10px',
-  lineHeight: '24px',
-  fontSize: '15px',
+  cursor: 'pointer',
 
   '&:disabled': {
     cursor: 'not-allowed',
@@ -281,7 +279,7 @@ export const Button = React.forwardRef<
         <IconWrapper type="start">{leftIcon}</IconWrapper>
       </Conditional>
 
-      {children}
+      <Text color="Inherit">{children}</Text>
 
       <Conditional test={rightIcon}>
         <IconWrapper type="end">{rightIcon}</IconWrapper>

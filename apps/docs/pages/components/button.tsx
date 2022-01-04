@@ -45,7 +45,7 @@ const ButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">{uppercasedType}</NextTitle>
+          <NextTitle size="small">{uppercasedType}</NextTitle>
 
           <Row>
             <NextText>Disable buttons?</NextText> <Spacer />
@@ -194,7 +194,7 @@ const ButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">Disabled</NextTitle>
+          <NextTitle>Disabled</NextTitle>
           <Row>
             <Column>
               <Row>
@@ -239,11 +239,9 @@ const ButtonPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Button
-      </NextTitle>
+      <NextTitle>Button</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         The Button component is used to trigger an action or event, such as
         submitting a form, opening a dialog, canceling an action, or performing
         a delete operation.

@@ -37,9 +37,7 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            {uppercaseVariant}
-          </NextTitle>
+          <NextTitle size="small">{uppercaseVariant}</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <Input
@@ -112,9 +110,7 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            Form
-          </NextTitle>
+          <NextTitle>Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <Input
@@ -141,13 +137,9 @@ const InputPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Input
-      </NextTitle>
+      <NextTitle>Input</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
-        Capture string input from user
-      </NextText>
+      <NextText color="Secondary">Capture string input from user</NextText>
 
       <ShowcaseComponent background="transparent">
         <ShowInput variant="outlined" />

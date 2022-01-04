@@ -153,11 +153,9 @@ const SliderPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Slider
-      </NextTitle>
+      <NextTitle>Slider</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         Sliders allow users to make selections from a range of values.
       </NextText>
 

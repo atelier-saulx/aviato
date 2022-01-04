@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { DefaultProps, styled } from '~/theme'
+import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { useUuid } from '@aviato/hooks'
 
@@ -73,7 +74,9 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
         {...remainingProps}
       />
 
-      <Span>{children}</Span>
+      <Span>
+        <Text>{children}</Text>
+      </Span>
     </Label>
   )
 }

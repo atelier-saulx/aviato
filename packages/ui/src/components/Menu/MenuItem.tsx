@@ -106,7 +106,7 @@ export const MenuItem = React.forwardRef<
         ref={forwardedRef}
       >
         <Column>
-          <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
+          <Text weight={isHeader || hasChildren ? 'bold' : 'regular'}>
             {title}
           </Text>
         </Column>

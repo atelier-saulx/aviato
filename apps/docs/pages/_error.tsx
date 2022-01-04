@@ -45,7 +45,7 @@ const Error = ({ statusCode }: { statusCode: number }) => {
   return (
     <Page>
       <StyledDiv>
-        <NextTitle size="Large">🔍 {statusCode} 🔍</NextTitle>
+        <NextTitle>🔍 {statusCode} 🔍</NextTitle>
 
         <NextText>{getContent({ statusCode })}</NextText>
       </StyledDiv>

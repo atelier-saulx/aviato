@@ -113,14 +113,14 @@ export const StyledInput = styled('input', {
   display: 'block',
   height: '36px',
   minHeight: '36px',
-  lineHeight: '1.55',
-  fontSize: '15px',
   width: '100%',
   minWidth: '0px',
   textAlign: 'left',
   paddingLeft: '12px',
-  color: '$TextPrimary',
   background: 'transparent',
+  lineHeight: '$md',
+  fontSize: '$md',
+  color: '$TextPrimary',
 
   '&:disabled': {
     background: 'transparent',

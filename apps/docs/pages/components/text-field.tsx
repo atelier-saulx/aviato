@@ -15,9 +15,7 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            {uppercaseVariant}
-          </NextTitle>
+          <NextTitle size="small">{uppercaseVariant}</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <TextField
@@ -81,9 +79,7 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            Form
-          </NextTitle>
+          <NextTitle>Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <TextField
@@ -110,13 +106,9 @@ const TextFieldPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Text Field
-      </NextTitle>
+      <NextTitle>Text Field</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
-        Capture string input from user
-      </NextText>
+      <NextText color="Secondary">Capture string input from user</NextText>
 
       <ShowcaseComponent background="transparent">
         <ShowTextField variant="outlined" />

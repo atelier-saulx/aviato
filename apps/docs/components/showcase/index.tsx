@@ -32,9 +32,7 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
   return (
     <ComponentWrapperDiv>
       <Conditional test={title}>
-        <NextTitle weight="Bold" size="ExtraLarge">
-          {title}
-        </NextTitle>
+        <NextTitle>{title}</NextTitle>
       </Conditional>
 
       <Conditional test={description}>

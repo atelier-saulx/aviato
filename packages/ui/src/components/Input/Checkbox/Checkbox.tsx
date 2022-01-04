@@ -249,7 +249,7 @@ export const Checkbox = React.forwardRef<
 
           <Conditional test={hasLabelOrDescription}>
             <TextWrapper onClick={handleChange}>
-              <Text weight={hasDescription ? 'Semibold' : 'Medium'}>
+              <Text weight={hasDescription ? 'semibold' : 'medium'}>
                 {label}
               </Text>
 

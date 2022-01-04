@@ -46,7 +46,7 @@ const IconButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">{uppercasedType}</NextTitle>
+          <NextTitle size="small">{uppercasedType}</NextTitle>
 
           <Row>
             <NextText>Disable buttons?</NextText> <Spacer />
@@ -98,7 +98,7 @@ const IconButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">Disabled</NextTitle>
+          <NextTitle>Disabled</NextTitle>
           <Row>
             <Column>
               <Row>
@@ -125,11 +125,9 @@ const IconButtonPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Icon Button
-      </NextTitle>
+      <NextTitle>Icon Button</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         The Icon Button composes the Button component and renders only an icon.
       </NextText>
 

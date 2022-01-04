@@ -71,11 +71,9 @@ const RadioGroupPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Radio Group
-      </NextTitle>
+      <NextTitle>Radio Group</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         A control that allows the user to toggle selection within a small set of
         options.
       </NextText>

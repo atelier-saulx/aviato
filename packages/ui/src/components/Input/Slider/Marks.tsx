@@ -34,9 +34,9 @@ const Mark = styled('div', {
 
 const Label = styled('div', {
   transform: 'translate(-50%, 0)',
-  color: '$TextDisabled',
   marginTop: '7px',
-  fontSize: 13,
+  color: '$TextDisabled',
+  fontSize: '$xs',
 })
 
 export interface MarksProps {

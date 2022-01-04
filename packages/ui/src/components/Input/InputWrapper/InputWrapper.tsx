@@ -30,8 +30,9 @@ const IconWrapper = styled('div', {
 })
 
 const Error = styled('div', {
-  fontSize: 15,
-  lineHeight: '24px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   color: '$ErrorMain',
 })
 
@@ -58,7 +59,7 @@ export const InputWrapper = React.forwardRef<
     <StyledInputWrapper {...remainingProps} ref={forwardRef}>
       <Conditional test={hasLabelOrDescription}>
         <TextWrapper>
-          <Text weight="Semibold">{label}</Text>
+          <Text weight="semibold">{label}</Text>
           <Text>{description}</Text>
         </TextWrapper>
       </Conditional>
@@ -71,7 +72,9 @@ export const InputWrapper = React.forwardRef<
             <IconError />
           </IconWrapper>
 
-          <Error>{error}</Error>
+          <Error>
+            <Text>{error}</Text>
+          </Error>
         </ErrorWrapper>
       </Conditional>
     </StyledInputWrapper>

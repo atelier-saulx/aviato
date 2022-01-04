@@ -320,13 +320,13 @@ function formatJSON(object) {
 
   const parsedFontSizes = {
     xxxs: '11px',
-    xxs: '11px',
-    xs: '12px',
-    sm: '13px',
-    md: '14px',
-    lg: '15px',
-    xl: '18px',
-    xxl: '24px',
+    xxs: '12px',
+    xs: '13px',
+    sm: '14px',
+    md: '15px',
+    lg: '18px',
+    xl: '24px',
+    xxl: '32px',
     xxxl: '32px',
   }
 
@@ -336,9 +336,9 @@ function formatJSON(object) {
     xs: '16px',
     sm: '16px',
     md: '16px',
-    lg: '16px',
-    xl: '16px',
-    xxl: '24px',
+    lg: '24px',
+    xl: '24px',
+    xxl: '32px',
     xxxl: '32px',
   }
 

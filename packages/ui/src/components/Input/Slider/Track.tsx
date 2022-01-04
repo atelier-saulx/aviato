@@ -44,12 +44,12 @@ const Label = styled('div', {
   position: 'absolute',
   top: '-40px',
   backgroundColor: '$OtherForegroundInverted',
-  fontSize: '13px',
-  color: '$TextInverted',
   padding: '5px',
   borderRadius: '4px',
-  whiteSpace: 'nowrap',
   pointerEvents: 'none',
+  whiteSpace: 'nowrap',
+  fontSize: '$xs',
+  color: '$TextInverted',
 
   variants: {
     mode: {
