@@ -1,5 +1,5 @@
-import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { styled, StitchedCSS, DefaultProps } from '~/theme'
 import { TextStyles } from './styles'
 
