@@ -1,5 +1,6 @@
 import { Column, Row, Slider, Page, styled } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { log } from '@aviato/utils'
 
 const SmallSpacer = styled('div', {
   width: '100%',
@@ -39,7 +40,11 @@ const SliderPage = () => {
         <Column css={{ width: '90%' }}>
           <NextText>Basic slider.</NextText>
           <Row css={{ width: '90%' }}>
-            <Slider />
+            <Slider
+              onChange={(value) => {
+                log.global.debug('Slider change: ', { value })
+              }}
+            />
           </Row>
 
           <BigSpacer />
