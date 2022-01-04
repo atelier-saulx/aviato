@@ -13,7 +13,7 @@ import { InputWrapper } from '../InputWrapper'
 import { DefaultChangePayload } from '~/types/events'
 import { Group } from '~/components/Layout'
 
-const StyledRadioGroupWrapper = styled('div', {
+const RadioGroupWrapper = styled('div', {
   position: 'relative',
 })
 
@@ -91,15 +91,15 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
 
   return (
     <InputWrapper label={label} description={description} error={error}>
-      <StyledRadioGroupWrapper {...remainingProps}>
+      <RadioGroupWrapper {...remainingProps}>
         <Group
           role="radiogroup"
           direction={direction === 'horizontal' ? 'row' : 'column'}
-          css={{ paddingTop: 5 }}
+          css={{ paddingTop: '$sm' }}
         >
           {mappedRadioChildren}
         </Group>
-      </StyledRadioGroupWrapper>
+      </RadioGroupWrapper>
     </InputWrapper>
   )
 }

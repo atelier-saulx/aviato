@@ -41,7 +41,7 @@ const AlignmentWrapper = styled('div', {
 })
 
 const CheckboxWrapper = styled('div', {
-  paddingTop: 4,
+  paddingTop: 3,
 })
 
 const TextWrapper = styled('div', {

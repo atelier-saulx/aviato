@@ -294,14 +294,71 @@ function parseObject({ object, type }) {
   return sanitiseProperties
 }
 
+/**
+ * Possible theming groups:
+ * - colors: {},
+ * - space: {},
+ * - fontSizes: {},
+ * - fonts: {},
+ * - fontWeights: {},
+ * - lineHeights: {},
+ * - letterSpacings: {},
+ * - sizes: {},
+ * - borderWidths: {},
+ * - borderStyles: {},
+ * - radii: {},
+ * - shadows: {},
+ * - zIndices: {},
+ * - transitions: {},
+ */
+
 function formatJSON(object) {
   const parsedColors = parseObject({
     object,
     type: 'color',
   })
 
+  const parsedFontSizes = {
+    xxxs: '11px',
+    xxs: '11px',
+    xs: '12px',
+    sm: '13px',
+    md: '14px',
+    lg: '15px',
+    xl: '18px',
+    xxl: '24px',
+    xxxl: '32px',
+  }
+
+  const parsedLineHeights = {
+    xxxs: '16px',
+    xxs: '16px',
+    xs: '16px',
+    sm: '16px',
+    md: '16px',
+    lg: '16px',
+    xl: '16px',
+    xxl: '24px',
+    xxxl: '32px',
+  }
+
+  const parsedSpacings = {
+    xxxs: '4px',
+    xxs: '8px',
+    xs: '12px',
+    sm: '16px',
+    md: '20px',
+    lg: '24px',
+    xl: '28px',
+    xxl: '32px',
+    xxxl: '36px',
+  }
+
   return {
     colors: parsedColors,
+    fontSizes: parsedFontSizes,
+    lineHeights: parsedLineHeights,
+    space: parsedSpacings,
   }
 }
 

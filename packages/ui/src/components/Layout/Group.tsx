@@ -19,6 +19,36 @@ const StyledGroup = styled('div', {
         flexDirection: 'column',
       },
     },
+
+    space: {
+      xxxs: {
+        gap: '$xxxs',
+      },
+      xxs: {
+        gap: '$xxs',
+      },
+      xs: {
+        gap: '$xs',
+      },
+      sm: {
+        gap: '$sm',
+      },
+      md: {
+        gap: '$md',
+      },
+      lg: {
+        gap: '$lg',
+      },
+      xl: {
+        gap: '$xl',
+      },
+      xxl: {
+        gap: '$xxl',
+      },
+      xxxl: {
+        gap: '$xxxl',
+      },
+    },
   },
 })
 
@@ -69,6 +99,7 @@ export const Group = React.forwardRef<
       direction={direction}
       ref={forwardedRef}
       css={styledCSS}
+      space={spacing}
       {...remainingProps}
     >
       {children}

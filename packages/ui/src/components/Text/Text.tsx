@@ -33,8 +33,8 @@ export const Text = React.forwardRef<ElementRef<typeof TEXT_TAG>, ForwardProps>(
         weight={weight}
         color={color}
         size={size}
-        {...remainingProps}
         ref={forwardedRef}
+        {...remainingProps}
       />
     )
   }

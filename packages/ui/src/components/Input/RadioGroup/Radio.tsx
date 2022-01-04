@@ -17,8 +17,8 @@ const StyledRadio = styled('input', {
   border: '1px solid $OtherInputBorderDefault',
 
   '&:checked': {
-    background: '#228be6',
-    borderColor: '#228be6',
+    background: '$PrimaryMain',
+    borderColor: '$PrimaryMain',
 
     '&::before': {
       position: 'absolute',
