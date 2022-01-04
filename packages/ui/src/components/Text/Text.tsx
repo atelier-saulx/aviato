@@ -53,7 +53,7 @@ export const Text = React.forwardRef<
   const {
     size = 'medium',
     weight = 'regular',
-    color = 'Inherit',
+    color = 'Primary',
     ...remainingProps
   } = properties
 

@@ -1,14 +1,21 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
+import { menuWidth } from '~/components/SideMenu'
 
 const PageWrapper = styled('div', {
   position: 'relative',
   width: '100%',
   height: '100%',
-  overflowX: 'hidden',
-  overflowY: 'scroll',
   backgroundColor: '$Background2dp',
+
+  variants: {
+    sideMenu: {
+      true: {
+        paddingLeft: menuWidth,
+      },
+    },
+  },
 })
 
 const StyledPage = styled('div', {
@@ -32,6 +39,7 @@ const StyledPage = styled('div', {
 
 export type PageProps = {
   mode?: 'center' | 'fullscreen'
+  hasSideMenu?: boolean
 }
 
 type ForwardProps = ComponentProps<typeof StyledPage> & PageProps
@@ -40,10 +48,10 @@ export const Page = React.forwardRef<
   ElementRef<typeof StyledPage>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { mode, children, ...remainingProps } = properties
+  const { mode, hasSideMenu = true, children, ...remainingProps } = properties
 
   return (
-    <PageWrapper>
+    <PageWrapper sideMenu={hasSideMenu}>
       <StyledPage mode={mode} ref={forwardedRef} {...remainingProps}>
         {children}
       </StyledPage>
