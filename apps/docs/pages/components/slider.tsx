@@ -65,7 +65,6 @@ const SliderPage = () => {
               min={-10}
               max={10}
               label={(value) => value.toFixed(1)}
-              step={0.1}
             />
           </Row>
 

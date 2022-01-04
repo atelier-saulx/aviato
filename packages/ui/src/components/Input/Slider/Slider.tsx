@@ -94,9 +94,7 @@ export const Slider = React.forwardRef<
       step: setWithDecimals ? 0.01 : step,
     })
 
-    const roundedValue = setWithDecimals
-      ? Math.round((targetValue + Number.EPSILON) * 100) / 100
-      : Math.round(targetValue)
+    const roundedValue = Math.round((targetValue + Number.EPSILON) * 100) / 100
 
     setValue(roundedValue)
   }, [smoothDrag, isActive, inputValue, step])
