@@ -28,16 +28,30 @@ const Thumb = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
-  height: '16px',
-  width: '16px',
-  backgroundColor: '$PrimaryMainContrast',
-  border: '4px solid $OtherInputBorderActive',
-  color: '$OtherInputBorderActive',
-  borderRadius: '50%',
+  height: '20px',
+  width: '20px',
+  borderRadius: '20px',
   transform: 'translate(-50%, -50%)',
   top: '50%',
   left: '0%',
   zIndex: 2,
+
+  variants: {
+    mode: {
+      inactive: {},
+      active: {
+        background: '$PrimaryLightSelected',
+      },
+    },
+  },
+})
+
+const ThumbPoint = styled('div', {
+  height: '16px',
+  width: '16px',
+  borderRadius: '16px',
+  backgroundColor: '$PrimaryMainContrast',
+  border: '4px solid $OtherInputBorderActive',
 })
 
 const Label = styled('div', {
@@ -66,22 +80,24 @@ const Label = styled('div', {
 export interface TrackProps {
   value: number
   label: string
-  isLabelVisible: boolean
   marks: Mark[]
   min: number
   max: number
   position: number
+  isActive: boolean
+  isLabelVisible: boolean
 }
 
 export const Track: FunctionComponent<TrackProps> = (properties) => {
   const {
     value: sliderValue,
     label,
-    isLabelVisible,
     marks,
     min,
     max,
     position,
+    isLabelVisible,
+    isActive,
     ...remainingProps
   } = properties
 
@@ -107,7 +123,9 @@ export const Track: FunctionComponent<TrackProps> = (properties) => {
         ref={thumb}
         onMouseDown={handleThumbMouseDown}
         style={{ left: `${position}%` }}
+        mode={isActive ? 'active' : 'inactive'}
       >
+        <ThumbPoint />
         <Label mode={labelMode}>{label}</Label>
       </Thumb>
 

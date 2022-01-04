@@ -117,8 +117,9 @@ export const Slider = React.forwardRef<
         marks={marks}
         min={min}
         max={max}
-        isLabelVisible={isLabelVisible}
         position={position}
+        isActive={isActive}
+        isLabelVisible={isLabelVisible}
       />
 
       <input type="hidden" value={sliderValue} />
