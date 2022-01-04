@@ -66,16 +66,13 @@ export const Slider = React.forwardRef<
 
   const position = getPosition({ value: sliderValue, min, max })
 
-  const { ref: container, isActive } = useMove(({ x }) => handleChange(x))
+  const { ref: container, isActive } = useMove(({ x }) => setInputValue(x))
+
   const sliderLabel =
     typeof label === 'function' ? label(Math.round(sliderValue)) : label
 
   const [isHovering, setIsHovering] = useState(false)
   const [inputValue, setInputValue] = useState<number>(null)
-
-  const handleChange = (value: number) => {
-    setInputValue(value)
-  }
 
   /**
    * Dragging clamp logic:

@@ -20,6 +20,7 @@ const Bar = styled('div', {
   borderRadius: '4px',
   left: '0%',
   width: '0%',
+  willChange: 'transform',
 })
 
 const Thumb = styled('div', {
@@ -35,6 +36,7 @@ const Thumb = styled('div', {
   top: '50%',
   left: '0%',
   zIndex: 2,
+  willChange: 'transform',
 
   variants: {
     mode: {
@@ -64,6 +66,7 @@ const Label = styled('div', {
   whiteSpace: 'nowrap',
   fontSize: '$xs',
   color: '$TextInverted',
+  willChange: 'transform',
 
   variants: {
     mode: {
