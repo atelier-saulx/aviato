@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-prototype-builtins */
 
 import {
@@ -27,7 +26,7 @@ const logWarning = (message) => {
  **/
 const spinner = ora('📡 Parsing Theme').start()
 
-console.log('')
+logInfo('')
 
 async function start() {
   try {
@@ -295,14 +294,71 @@ function parseObject({ object, type }) {
   return sanitiseProperties
 }
 
+/**
+ * Possible theming groups:
+ * - colors: {},
+ * - space: {},
+ * - fontSizes: {},
+ * - fonts: {},
+ * - fontWeights: {},
+ * - lineHeights: {},
+ * - letterSpacings: {},
+ * - sizes: {},
+ * - borderWidths: {},
+ * - borderStyles: {},
+ * - radii: {},
+ * - shadows: {},
+ * - zIndices: {},
+ * - transitions: {},
+ */
+
 function formatJSON(object) {
   const parsedColors = parseObject({
     object,
     type: 'color',
   })
 
+  const parsedFontSizes = {
+    xxxs: '11px',
+    xxs: '12px',
+    xs: '13px',
+    sm: '14px',
+    md: '15px',
+    lg: '18px',
+    xl: '24px',
+    xxl: '32px',
+    xxxl: '32px',
+  }
+
+  const parsedLineHeights = {
+    xxxs: '16px',
+    xxs: '16px',
+    xs: '16px',
+    sm: '16px',
+    md: '24px',
+    lg: '24px',
+    xl: '24px',
+    xxl: '32px',
+    xxxl: '32px',
+  }
+
+  const parsedSpacings = {
+    xxxs: '4px',
+    xxs: '8px',
+    xs: '12px',
+    sm: '16px',
+    md: '20px',
+    lg: '24px',
+    xl: '28px',
+    xxl: '32px',
+    xxxl: '36px',
+  }
+
   return {
     colors: parsedColors,
+    fontSizes: parsedFontSizes,
+    lineHeights: parsedLineHeights,
+    space: parsedSpacings,
   }
 }
 

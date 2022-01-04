@@ -1,23 +1,19 @@
 import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 
-export const MenuWidthConstant = 224
-
-const DIV_TAG = 'div'
-
-const StyledSideMenu = styled(DIV_TAG, {
+const StyledSideMenu = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
-  width: MenuWidthConstant,
-  minWidth: MenuWidthConstant,
-  overflowX: 'hidden',
+  width: 224,
+  minWidth: 224,
   backgroundColor: '$Background2dp',
   borderRight: '1px solid $OtherDivider',
+  overflowX: 'hidden',
 })
 
-export interface SideMenuProps extends DefaultProps {
+export interface SideMenuProps {
   useBorder?: boolean
 }
 

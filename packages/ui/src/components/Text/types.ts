@@ -1,17 +1,10 @@
-export type FontWeight = 'Regular' | 'Medium' | 'Semibold' | 'Bold'
-
 export type FontColor =
+  | 'Inherit'
   | 'Primary'
-  | 'PrimaryContrastHigh'
-  | 'PrimaryMain'
-  | 'ActionDisabledContent'
   | 'Secondary'
   | 'Disabled'
+  | 'Error'
 
-export type FontSize = 'Small' | 'Medium' | 'Large' | 'ExtraLarge'
+export type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
 
-export type BaseTextProps = {
-  weight?: FontWeight
-  color?: FontColor
-  size?: FontSize
-}
+export type FontAlignment = 'start' | 'center' | 'end'

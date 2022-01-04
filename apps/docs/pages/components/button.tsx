@@ -1,7 +1,6 @@
 import {
   Page,
   Switch,
-  OnSwitchChangePayload,
   Button,
   Column,
   Row,
@@ -10,7 +9,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -43,20 +42,18 @@ const ButtonPage = () => {
 
     const [isDisabled, setIsDisabled] = useState(false)
 
-    const onSwitchChange = useCallback((event: OnSwitchChangePayload) => {
-      const { isChecked } = event
-
-      setIsDisabled(isChecked)
-    }, [])
-
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">{uppercasedType}</NextTitle>
+          <NextTitle size="small">{uppercasedType}</NextTitle>
 
           <Row>
-            <NextText>Disable buttons?</NextText> <Spacer />
-            <Switch onChange={onSwitchChange} />
+            <Switch
+              text="Disable buttons?"
+              onChange={(isChecked) => {
+                setIsDisabled(isChecked)
+              }}
+            />
           </Row>
 
           <BigSpacer />
@@ -197,7 +194,7 @@ const ButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">Disabled</NextTitle>
+          <NextTitle>Disabled</NextTitle>
           <Row>
             <Column>
               <Row>
@@ -242,11 +239,9 @@ const ButtonPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Button
-      </NextTitle>
+      <NextTitle>Button</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         The Button component is used to trigger an action or event, such as
         submitting a form, opening a dialog, canceling an action, or performing
         a delete operation.

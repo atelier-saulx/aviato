@@ -1,7 +1,6 @@
 import {
   Page,
   Switch,
-  OnSwitchChangePayload,
   IconButton,
   Column,
   Row,
@@ -11,7 +10,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
@@ -42,22 +41,20 @@ const IconButtonPage = () => {
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
-    const [isChecked, setIsChecked] = useState(false)
-
-    const onSwitchChange = useCallback((event: OnSwitchChangePayload) => {
-      const { isChecked } = event
-
-      setIsChecked(isChecked)
-    }, [])
+    const [isDisabled, setIsDisabled] = useState(false)
 
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">{uppercasedType}</NextTitle>
+          <NextTitle size="small">{uppercasedType}</NextTitle>
 
           <Row>
-            <NextText>Disable buttons?</NextText> <Spacer />
-            <Switch onChange={onSwitchChange} />
+            <Switch
+              text="Disable buttons?"
+              onChange={(isChecked) => {
+                setIsDisabled(isChecked)
+              }}
+            />
           </Row>
 
           <BigSpacer />
@@ -68,7 +65,7 @@ const IconButtonPage = () => {
                 <IconButton
                   type={type}
                   variant="filled"
-                  disabled={isChecked}
+                  disabled={isDisabled}
                   icon={randomIcon()}
                 />
 
@@ -77,7 +74,7 @@ const IconButtonPage = () => {
                 <IconButton
                   type={type}
                   variant="outlined"
-                  disabled={isChecked}
+                  disabled={isDisabled}
                   icon={randomIcon()}
                 />
 
@@ -86,7 +83,7 @@ const IconButtonPage = () => {
                 <IconButton
                   type={type}
                   variant="transparent"
-                  disabled={isChecked}
+                  disabled={isDisabled}
                   icon={randomIcon()}
                 />
               </Row>
@@ -101,7 +98,7 @@ const IconButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle weight="Bold">Disabled</NextTitle>
+          <NextTitle>Disabled</NextTitle>
           <Row>
             <Column>
               <Row>
@@ -128,11 +125,9 @@ const IconButtonPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Icon Button
-      </NextTitle>
+      <NextTitle>Icon Button</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         The Icon Button composes the Button component and renders only an icon.
       </NextText>
 

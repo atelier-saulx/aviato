@@ -2,8 +2,9 @@ import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
 import { noop } from '@aviato/utils'
 import { ComponentProps } from '@stitches/react'
 
-import { classNames, css, styled, StitchedCSS } from '~/theme'
+import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
+import { Text } from '~/components/Text'
 
 const primaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
@@ -177,29 +178,6 @@ const errorButtonCSS: StitchedCSS = {
   },
 }
 
-export const ButtonStyles = css({
-  display: 'flex',
-  alignItems: 'center',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  fontWeight: '500',
-  padding: '4px 10px',
-  lineHeight: '24px',
-  fontSize: '15px',
-
-  '&:disabled': {
-    cursor: 'not-allowed',
-  },
-
-  variants: {
-    type: {
-      primary: primaryButtonCSS,
-      ghost: ghostButtonCSS,
-      error: errorButtonCSS,
-    },
-  },
-})
-
 const IconWrapper = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
@@ -217,9 +195,25 @@ const IconWrapper = styled('span', {
   },
 })
 
-const BUTTON_TAG = 'button'
+export const StyledButton = styled('button', {
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '4px',
+  padding: '4px 8px',
+  cursor: 'pointer',
 
-export const StyledButton = styled(BUTTON_TAG, ButtonStyles)
+  '&:disabled': {
+    cursor: 'not-allowed',
+  },
+
+  variants: {
+    type: {
+      primary: primaryButtonCSS,
+      ghost: ghostButtonCSS,
+      error: errorButtonCSS,
+    },
+  },
+})
 
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonVariant = 'filled' | 'outlined' | 'transparent'
@@ -281,7 +275,9 @@ export const Button = React.forwardRef<
         <IconWrapper type="start">{leftIcon}</IconWrapper>
       </Conditional>
 
-      {children}
+      <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+        {children}
+      </Text>
 
       <Conditional test={rightIcon}>
         <IconWrapper type="end">{rightIcon}</IconWrapper>

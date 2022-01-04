@@ -20,6 +20,7 @@ const Bar = styled('div', {
   borderRadius: '4px',
   left: '0%',
   width: '0%',
+  willChange: 'transform',
 })
 
 const Thumb = styled('div', {
@@ -28,35 +29,44 @@ const Thumb = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
-  height: '16px',
-  width: '16px',
-  backgroundColor: '$PrimaryMainContrast',
-  border: '4px solid $OtherInputBorderActive',
-  color: '$OtherInputBorderActive',
-  borderRadius: '50%',
+  height: '20px',
+  width: '20px',
+  borderRadius: '20px',
   transform: 'translate(-50%, -50%)',
   top: '50%',
   left: '0%',
   zIndex: 2,
+  willChange: 'transform',
+
+  variants: {
+    mode: {
+      inactive: {},
+      active: {
+        background: '$PrimaryLightSelected',
+      },
+    },
+  },
+})
+
+const ThumbPoint = styled('div', {
+  height: '16px',
+  width: '16px',
+  borderRadius: '16px',
+  backgroundColor: '$PrimaryMainContrast',
+  border: '4px solid $OtherInputBorderActive',
 })
 
 const Label = styled('div', {
   position: 'absolute',
   top: '-40px',
   backgroundColor: '$OtherForegroundInverted',
-  fontSize: '13px',
-  color: '$TextInverted',
   padding: '5px',
   borderRadius: '4px',
-  whiteSpace: 'nowrap',
   pointerEvents: 'none',
-
-  transitionProperty: 'transform, opacity',
-  transitionDuration: '150ms',
-  transitionTimingFunction: 'cubic-bezier(0.51, 0.3, 0, 1.21)',
-  transformOrigin: 'center bottom',
-  opacity: '1',
-  transform: 'translateY(0px) skew(0deg, 0deg)',
+  whiteSpace: 'nowrap',
+  fontSize: '$xs',
+  color: '$TextInverted',
+  willChange: 'transform',
 
   variants: {
     mode: {
@@ -73,20 +83,24 @@ const Label = styled('div', {
 export interface TrackProps {
   value: number
   label: string
-  isLabelVisible: boolean
   marks: Mark[]
   min: number
   max: number
+  position: number
+  isActive: boolean
+  isLabelVisible: boolean
 }
 
 export const Track: FunctionComponent<TrackProps> = (properties) => {
   const {
     value: sliderValue,
     label,
-    isLabelVisible,
     marks,
     min,
     max,
+    position,
+    isLabelVisible,
+    isActive,
     ...remainingProps
   } = properties
 
@@ -101,17 +115,21 @@ export const Track: FunctionComponent<TrackProps> = (properties) => {
     }
   }
 
-  const labelMode = isLabelVisible ? 'visible' : 'hidden'
+  const hasValidLabel = label !== ''
+  const labelMode = isLabelVisible && hasValidLabel ? 'visible' : 'hidden'
 
   return (
     <StyledTrack {...remainingProps}>
-      <Bar style={{ width: `${sliderValue}%` }} />
+      <Bar style={{ width: `${position}%` }} />
 
       <Thumb
         ref={thumb}
         onMouseDown={handleThumbMouseDown}
-        style={{ left: `${sliderValue}%` }}
+        style={{ left: `${position}%` }}
+        mode={isActive ? 'active' : 'inactive'}
       >
+        <ThumbPoint />
+
         <Label mode={labelMode}>{label}</Label>
       </Thumb>
 

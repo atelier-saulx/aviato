@@ -1,17 +1,15 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled } from '~/theme'
 
+import { styled } from '~/theme'
+import { Text } from '~/components/Text'
 import { Conditional } from '~/components/Utilities'
 import { IconError } from '~/icons'
 
-const StyledInputWrapper = styled('div', {
-  width: '100%',
-})
+const StyledInputWrapper = styled('div', {})
 
-const Label = styled('label', {
-  fontSize: 15,
-  lineHeight: '32px',
+const TextWrapper = styled('div', {
+  paddingBottom: 8,
 })
 
 const ErrorWrapper = styled('div', {
@@ -25,18 +23,20 @@ const IconWrapper = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   height: '24px',
-  color: '$ErrorMain',
   marginRight: 8,
+  color: '$ErrorMain',
 })
 
 const Error = styled('div', {
-  fontSize: 15,
-  lineHeight: '24px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   color: '$ErrorMain',
 })
 
 export interface InputWrapperProps {
   label?: string
+  description?: string
   error?: string
 }
 
@@ -47,12 +47,20 @@ export const InputWrapper = React.forwardRef<
   ElementRef<typeof StyledInputWrapper>,
   ForwardProps
 >((properties, forwardRef) => {
-  const { label, error, children, ...remainingProps } = properties
+  const { label, description, error, children, ...remainingProps } = properties
+
+  const hasLabel = Boolean(label)
+  const hasDescription = Boolean(description)
+  const hasLabelOrDescription = hasLabel || hasDescription
 
   return (
     <StyledInputWrapper {...remainingProps} ref={forwardRef}>
-      <Conditional test={label}>
-        <Label>{label}</Label>
+      <Conditional test={hasLabelOrDescription}>
+        <TextWrapper>
+          <Text weight="semibold">{label}</Text>
+
+          <Text>{description}</Text>
+        </TextWrapper>
       </Conditional>
 
       {children}
@@ -63,7 +71,9 @@ export const InputWrapper = React.forwardRef<
             <IconError />
           </IconWrapper>
 
-          <Error>{error}</Error>
+          <Error>
+            <Text>{error}</Text>
+          </Error>
         </ErrorWrapper>
       </Conditional>
     </StyledInputWrapper>

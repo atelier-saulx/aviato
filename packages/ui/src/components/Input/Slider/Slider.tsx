@@ -1,9 +1,9 @@
-import React, { ElementRef, useState } from 'react'
+import React, { ElementRef, useEffect, useState } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 import { styled } from '~/theme'
-import { getChangeValue } from './utils'
+import { getChangeValue, getPosition } from './utils'
 import { Track } from './Track'
 
 export type Mark = {
@@ -31,6 +31,7 @@ export interface SliderProps {
   label?: React.ReactNode | ((value: number) => React.ReactNode)
   showLabelOnHover?: boolean
   labelAlwaysVisible?: boolean
+  smoothDrag?: boolean
   onChange?(value: string): void
 }
 
@@ -45,11 +46,12 @@ export const Slider = React.forwardRef<
     defaultValue,
     min = 0,
     max = 100,
-    step = 1,
+    step = 0.1,
     marks = [],
-    label = (f) => f,
+    label = (inputValue) => String(inputValue),
     showLabelOnHover = true,
     labelAlwaysVisible = false,
+    smoothDrag = true,
     onChange = noop,
     ...remainingProps
   } = properties
@@ -62,15 +64,37 @@ export const Slider = React.forwardRef<
     onChange,
   })
 
-  const sliderLabel = typeof label === 'function' ? label(sliderValue) : label
+  const position = getPosition({ value: sliderValue, min, max })
+
+  const { ref: container, isActive } = useMove(({ x }) => setInputValue(x))
+
+  const sliderLabel =
+    typeof label === 'function' ? label(Math.round(sliderValue)) : label
+
   const [isHovering, setIsHovering] = useState(false)
+  const [inputValue, setInputValue] = useState<number>(null)
 
-  const handleChange = (newValue: number) => {
-    const nextValue = getChangeValue({ value: newValue, min, max, step })
-    setValue(nextValue)
-  }
+  /**
+   * Dragging clamp logic:
+   * - If dragging, clamp to decimal places for smooth UX.
+   * - If releasing, snap to closest step value.
+   */
+  useEffect(() => {
+    if (inputValue === null) return
 
-  const { ref: container, isActive } = useMove(({ x }) => handleChange(x))
+    const setWithDecimals = smoothDrag && isActive
+
+    const targetValue = getChangeValue({
+      value: inputValue,
+      min,
+      max,
+      step: setWithDecimals ? 0.01 : step,
+    })
+
+    const roundedValue = Math.round((targetValue + Number.EPSILON) * 100) / 100
+
+    setValue(roundedValue)
+  }, [smoothDrag, isActive, inputValue, step])
 
   const isLabelVisible =
     labelAlwaysVisible || isActive || (showLabelOnHover && isHovering)
@@ -88,6 +112,8 @@ export const Slider = React.forwardRef<
         marks={marks}
         min={min}
         max={max}
+        position={position}
+        isActive={isActive}
         isLabelVisible={isLabelVisible}
       />
 

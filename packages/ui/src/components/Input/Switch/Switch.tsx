@@ -1,12 +1,11 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
-import { DefaultProps, styled } from '~/theme'
-import { DefaultChangePayload } from '~/types/events'
+import { styled } from '~/theme'
+import { onChange } from '~/types/events'
+import { Group } from '~/components/Layout'
+import { Text } from '~/components/Text'
+import { InputWrapper } from '~/components/Input/InputWrapper'
 
 export type SwitchSize = 'normal' | 'large'
 
@@ -136,23 +135,37 @@ const StyledSwitch = styled('input', {
   },
 })
 
-export interface OnSwitchChangePayload extends DefaultChangePayload {
+export interface OnSwitchChange extends onChange<Event> {
   isChecked: boolean
 }
 
-export interface SwitchProps extends DefaultProps {
+export interface SwitchProps {
   size?: SwitchSize
   checked?: boolean
   disabled?: boolean
-  onChange?: (payload: OnSwitchChangePayload) => void
+  text?: string
+  label?: string
+  description?: string
+  error?: string
+  onChange?: (value: boolean, payload: OnSwitchChange) => void
 }
 
-export const Switch: FunctionComponent<SwitchProps> = (properties) => {
+type StitchedProps = ComponentProps<typeof StyledSwitch>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & SwitchProps
+
+export const Switch = React.forwardRef<
+  ElementRef<typeof StyledSwitch>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     size = 'normal',
     checked = false,
     disabled = false,
     onChange = noop,
+    text,
+    label,
+    description,
+    error,
     ...remainingProps
   } = properties
 
@@ -173,7 +186,7 @@ export const Switch: FunctionComponent<SwitchProps> = (properties) => {
       const isSwitchChecked = !isChecked
       setIsChecked(isSwitchChecked)
 
-      onChange({
+      onChange(isSwitchChecked, {
         isChecked: isSwitchChecked,
         isDisabled,
         event,
@@ -183,13 +196,20 @@ export const Switch: FunctionComponent<SwitchProps> = (properties) => {
   )
 
   return (
-    <StyledSwitch
-      type="checkbox"
-      size={size}
-      checked={isChecked}
-      onChange={handleChange}
-      disabled={isDisabled}
-      {...remainingProps}
-    />
+    <InputWrapper label={label} description={description} error={error}>
+      <Group>
+        <StyledSwitch
+          type="checkbox"
+          size={size}
+          checked={isChecked}
+          onChange={handleChange}
+          disabled={isDisabled}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
+
+        <Text onClick={handleChange}>{text}</Text>
+      </Group>
+    </InputWrapper>
   )
-}
+})

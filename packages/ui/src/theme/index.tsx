@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react'
 import { createStitches } from '@stitches/react'
 import type * as Stitches from '@stitches/react'
 
@@ -11,11 +10,6 @@ const createdConfig = createStitches({
 })
 
 export type StitchedCSS = Stitches.CSS<typeof config>
-
-export interface DefaultProps {
-  css?: StitchedCSS
-  style?: CSSProperties
-}
 
 export const {
   config,

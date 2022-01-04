@@ -1,4 +1,4 @@
-export interface DefaultChangePayload {
+export interface onChange<T = Event> {
   index?: number
-  event?: Event
+  event?: T
 }

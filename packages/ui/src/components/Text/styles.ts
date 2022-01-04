@@ -1,74 +1,71 @@
-import { css } from '~/theme'
-
-export const TextStyles = css({
+export const BaseTextStyles = {
   display: 'block',
-  lineHeight: '1.5',
-  margin: 0,
   fontVariantNumeric: 'tabular-nums',
-  fontSize: '15px',
+  margin: 0,
+}
 
-  variants: {
-    size: {
-      Small: {
-        fontSize: '15px',
-      },
-      Medium: {
-        fontSize: '18px',
-      },
-      Large: {
-        fontSize: '21px',
-      },
-      ExtraLarge: {
-        fontSize: '32px',
-      },
+export const BaseFontWeight = {
+  weight: {
+    regular: {
+      fontWeight: 'normal',
     },
-
-    weight: {
-      Regular: {
-        fontWeight: 'normal',
-      },
-      Medium: {
-        fontWeight: 500,
-      },
-      Semibold: {
-        fontWeight: 600,
-      },
-      Bold: {
-        fontWeight: 700,
-      },
+    medium: {
+      fontWeight: 500,
     },
-
-    color: {
-      Primary: {
-        color: '$TextPrimary',
-      },
-      PrimaryContrastHigh: {
-        color: '$PrimaryContrastHigh',
-      },
-      PrimaryMain: {
-        color: '$PrimaryMain',
-      },
-      ActionDisabledContent: {
-        color: '$PrimaryContrastHigh',
-      },
-      Secondary: {
-        color: '$TextSecondary',
-      },
-      Disabled: {
-        color: '$TextDisabled',
-      },
+    semibold: {
+      fontWeight: 600,
     },
-
-    alignment: {
-      start: {
-        textAlign: 'start',
-      },
-      middle: {
-        textAlign: 'center',
-      },
-      end: {
-        textAlign: 'end',
-      },
+    bold: {
+      fontWeight: 700,
     },
   },
-})
+}
+
+export const BaseFontColor = {
+  color: {
+    Inherit: {
+      color: 'inherit',
+    },
+    Primary: {
+      color: '$TextPrimary',
+    },
+    PrimaryContrastHigh: {
+      color: '$PrimaryContrastHigh',
+    },
+    PrimaryMain: {
+      color: '$PrimaryMain',
+    },
+    ActionDisabledContent: {
+      color: '$PrimaryContrastHigh',
+    },
+    Secondary: {
+      color: '$TextSecondary',
+    },
+    Disabled: {
+      color: '$TextDisabled',
+    },
+    Error: {
+      color: '$ErrorMain',
+    },
+  },
+}
+
+export const BaseFontAlignment = {
+  alignment: {
+    start: {
+      textAlign: 'start',
+    },
+    middle: {
+      textAlign: 'center',
+    },
+    end: {
+      textAlign: 'end',
+    },
+  },
+}
+
+export const BaseFontVariants = {
+  ...BaseFontWeight,
+  ...BaseFontColor,
+  ...BaseFontAlignment,
+}

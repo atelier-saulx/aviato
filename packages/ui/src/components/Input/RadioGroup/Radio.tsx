@@ -1,9 +1,14 @@
-import React, { FunctionComponent } from 'react'
-import { DefaultProps, styled } from '~/theme'
+import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
+import { styled } from '~/theme'
+import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
 import { useUuid } from '@aviato/hooks'
 
-const StyledRadioLabel = styled('label', {})
+const Label = styled('label', {
+  display: 'flex',
+  alignItems: 'center',
+})
 
 const StyledRadio = styled('input', {
   position: 'relative',
@@ -14,8 +19,8 @@ const StyledRadio = styled('input', {
   border: '1px solid $OtherInputBorderDefault',
 
   '&:checked': {
-    background: '#228be6',
-    borderColor: '#228be6',
+    background: '$PrimaryMain',
+    borderColor: '$PrimaryMain',
 
     '&::before': {
       position: 'absolute',
@@ -32,7 +37,11 @@ const StyledRadio = styled('input', {
   },
 })
 
-export interface RadioProps extends DefaultProps {
+const Span = styled('span', {
+  paddingLeft: 12,
+})
+
+export interface RadioProps {
   value: string
   checked?: boolean
   disabled?: boolean
@@ -40,7 +49,13 @@ export interface RadioProps extends DefaultProps {
   onChange?(value: string): void
 }
 
-export const Radio: FunctionComponent<RadioProps> = (properties) => {
+type StitchedProps = ComponentProps<typeof StyledRadio>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & RadioProps
+
+export const Radio = React.forwardRef<
+  ElementRef<typeof StyledRadio>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     value,
     checked = false,
@@ -54,7 +69,7 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
   const uuid = useUuid({ prefix: 'radio-item' })
 
   return (
-    <StyledRadioLabel>
+    <Label>
       <StyledRadio
         type="radio"
         value={value}
@@ -63,9 +78,13 @@ export const Radio: FunctionComponent<RadioProps> = (properties) => {
         onChange={onChange}
         id={uuid}
         name={name}
+        ref={forwardedRef}
         {...remainingProps}
       />
-      <span>{children}</span>
-    </StyledRadioLabel>
+
+      <Span>
+        <Text>{children}</Text>
+      </Span>
+    </Label>
   )
-}
+})

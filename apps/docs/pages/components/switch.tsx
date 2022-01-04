@@ -1,10 +1,6 @@
-import { Column, Row, Switch, SwitchSize, Page, styled } from '@aviato/ui'
+import { log } from '@aviato/utils'
+import { Column, Row, Switch, SwitchSize, Page } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const Spacer = styled('div', {
-  width: 6,
-  height: 6,
-})
 
 const SwitchPage = () => {
   const ShowSwitch = ({ size }: { size: SwitchSize }) => {
@@ -12,13 +8,15 @@ const SwitchPage = () => {
       <>
         <Column>
           <Row>
-            <Switch size={size} />
-            <Spacer />
-            <Switch size={size} checked />
-            <Spacer />
-            <Switch size={size} disabled />
-            <Spacer />
-            <Switch size={size} disabled checked />
+            <Switch
+              label="This is a switch"
+              description="With a description"
+              text="This text is beside the switch"
+              size={size}
+              onChange={(value, payload) => {
+                log.global.debug('Switch change: ', { value, payload })
+              }}
+            />
           </Row>
         </Column>
       </>
@@ -27,13 +25,9 @@ const SwitchPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Switch
-      </NextTitle>
+      <NextTitle>Switch</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
-        Capture boolean input from user.
-      </NextText>
+      <NextText color="Secondary">Capture boolean input from user.</NextText>
 
       <ShowcaseComponent background="transparent">
         <ShowSwitch size="normal" />

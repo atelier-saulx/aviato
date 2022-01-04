@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig((options) => {
   const isWatching = !!options.watch
-  const shouldCreateTypeDefinitions = true
+  const shouldCreateTypeDefinitions = !isWatching
 
   return {
     format: ['esm', 'cjs', 'iife'],

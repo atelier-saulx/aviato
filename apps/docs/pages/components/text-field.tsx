@@ -1,4 +1,5 @@
 import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
+import { log } from '@aviato/utils'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -14,12 +15,16 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            {uppercaseVariant}
-          </NextTitle>
+          <NextTitle size="small">{uppercaseVariant}</NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <TextField variant={variant} placeholder="Type something here" />
+            <TextField
+              variant={variant}
+              placeholder="Type something here"
+              onChange={(value, payload) => {
+                log.global.debug('TextField change: ', { value, payload })
+              }}
+            />
           </Row>
 
           <BigSpacer />
@@ -74,14 +79,13 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            Form
-          </NextTitle>
+          <NextTitle>Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <TextField
               placeholder="Type something here"
               label="This is a label"
+              description="This is a description"
             />
           </Row>
 
@@ -91,6 +95,7 @@ const TextFieldPage = () => {
             <TextField
               placeholder="Type something here"
               label="This is a label"
+              description="This is a description"
               error="This is an error"
             />
           </Row>
@@ -101,13 +106,9 @@ const TextFieldPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Text Field
-      </NextTitle>
+      <NextTitle>Text Field</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
-        Capture string input from user
-      </NextText>
+      <NextText color="Secondary">Capture string input from user</NextText>
 
       <ShowcaseComponent background="transparent">
         <ShowTextField variant="outlined" />

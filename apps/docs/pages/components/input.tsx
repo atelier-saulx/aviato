@@ -7,6 +7,7 @@ import {
   getRandomIcon,
   InputVariant,
 } from '@aviato/ui'
+import { log } from '@aviato/utils'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
@@ -36,12 +37,16 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            {uppercaseVariant}
-          </NextTitle>
+          <NextTitle size="small">{uppercaseVariant}</NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <Input variant={variant} placeholder="Type something here" />
+            <Input
+              variant={variant}
+              placeholder="Type something here"
+              onChange={(value, payload) => {
+                log.global.debug('Input change: ', { value, payload })
+              }}
+            />
           </Row>
 
           <BigSpacer />
@@ -105,12 +110,14 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle weight="Bold" size="Medium">
-            Form
-          </NextTitle>
+          <NextTitle>Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <Input placeholder="Type something here" label="This is a label" />
+            <Input
+              placeholder="Type something here"
+              label="This is a label"
+              description="This is a description"
+            />
           </Row>
 
           <BigSpacer />
@@ -119,6 +126,7 @@ const InputPage = () => {
             <Input
               placeholder="Type something here"
               label="This is a label"
+              description="This is a description"
               error="This is an error"
             />
           </Row>
@@ -129,13 +137,9 @@ const InputPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Input
-      </NextTitle>
+      <NextTitle>Input</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
-        Capture string input from user
-      </NextText>
+      <NextText color="Secondary">Capture string input from user</NextText>
 
       <ShowcaseComponent background="transparent">
         <ShowInput variant="outlined" />

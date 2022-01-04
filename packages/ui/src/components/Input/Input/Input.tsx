@@ -3,28 +3,35 @@ import { useUuid } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
-import { InputWrapper } from './InputWrapper'
+import { InputWrapper } from '../InputWrapper'
 
 export interface InputProps extends BaseInputProps {
   label?: string
+  description?: string
   error?: string
   invalid?: boolean
 }
 
-type ForwardProps = ComponentProps<typeof StyledInput> & InputProps
+type StitchedProps = ComponentProps<typeof StyledInput>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & InputProps
 
 export const Input = React.forwardRef<
   ElementRef<typeof StyledInput>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { label, error, invalid, ...remainingProps } = properties
+  const { label, description, error, invalid, ...remainingProps } = properties
 
   const uuid = useUuid({ prefix: 'input' })
 
   const isInvalid = Boolean(error || invalid)
 
   return (
-    <InputWrapper label={label} error={error}>
+    <InputWrapper
+      label={label}
+      description={description}
+      error={error}
+      css={{ width: '100%' }}
+    >
       <BaseInput
         ref={forwardedRef}
         id={uuid}

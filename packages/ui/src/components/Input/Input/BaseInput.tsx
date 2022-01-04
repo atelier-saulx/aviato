@@ -1,8 +1,10 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, useCallback, BaseSyntheticEvent } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
 import { InputType, InputVariant } from './types'
+import { onChange } from '~/types/events'
+import { noop } from '@aviato/utils'
 
 /**
  * NOTICE
@@ -111,14 +113,14 @@ export const StyledInput = styled('input', {
   display: 'block',
   height: '36px',
   minHeight: '36px',
-  lineHeight: '1.55',
-  fontSize: '15px',
   width: '100%',
   minWidth: '0px',
   textAlign: 'left',
   paddingLeft: '12px',
-  color: '$TextPrimary',
   background: 'transparent',
+  lineHeight: '$md',
+  fontSize: '$md',
+  color: '$TextPrimary',
 
   '&:disabled': {
     background: 'transparent',
@@ -175,6 +177,10 @@ const IconWrapper = styled('span', {
   },
 })
 
+export interface OnInputChange extends onChange {
+  value: string
+}
+
 export interface BaseInputProps {
   component?: React.ElementType
   type?: InputType
@@ -187,9 +193,11 @@ export interface BaseInputProps {
   multiline?: boolean
   maxRows?: number
   minRows?: number
+  onChange?: (value: string, payload: OnInputChange) => void
 }
 
-type ForwardProps = ComponentProps<typeof StyledInput> & BaseInputProps
+type StitchedProps = ComponentProps<typeof StyledInput>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & BaseInputProps
 
 export const BaseInput = React.forwardRef<
   ElementRef<typeof StyledInput>,
@@ -202,6 +210,7 @@ export const BaseInput = React.forwardRef<
     variant = 'outlined',
     disabled: isDisabled = false,
     invalid: isInvalid = false,
+    onChange = noop,
     ...remainingProps
   } = properties
 
@@ -216,6 +225,12 @@ export const BaseInput = React.forwardRef<
     isDisabled,
     isInvalid,
   })
+
+  const handleChange = useCallback((event: BaseSyntheticEvent) => {
+    const { value } = event?.target ?? {}
+
+    onChange(value, { value, event })
+  }, [])
 
   return (
     <BaseInputWrapper variant={variant} className={classes}>
@@ -232,6 +247,7 @@ export const BaseInput = React.forwardRef<
         onFocus={() => setIsActive(true)}
         onBlur={() => setIsActive(false)}
         disabled={isDisabled}
+        onChange={handleChange}
         {...remainingProps}
       />
 

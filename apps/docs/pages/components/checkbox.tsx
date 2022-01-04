@@ -1,4 +1,5 @@
 import { styled, Page, Checkbox, Text, Column, Row } from '@aviato/ui'
+import { log } from '@aviato/utils'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
@@ -17,24 +18,42 @@ const CheckboxPage = () => {
       <>
         <Column>
           <Row>
-            <Checkbox />
-            <Spacer />
-            <Text>Accept the terms and conditions</Text>
+            <Checkbox
+              label="Accept terms and conditions"
+              onChange={(value, payload) => {
+                log.global.debug('Checkbox change: ', { value, payload })
+              }}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Checkbox
+              label="Show content IDs"
+              description="See the unique ID for each content type to refer to or link them to a pull request."
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Checkbox label="Indeterminate checkbox" indeterminate checked />
           </Row>
 
           <BigSpacer />
 
           <Row>
             <Column>
-              <Text>Big size</Text>
+              <Text>Medium size</Text>
               <Row>
-                <Checkbox />
+                <Checkbox size="medium" />
                 <Spacer />
-                <Checkbox checked />
+                <Checkbox size="medium" checked />
                 <Spacer />
-                <Checkbox disabled />
+                <Checkbox size="medium" disabled />
                 <Spacer />
-                <Checkbox disabled checked />
+                <Checkbox size="medium" disabled checked />
               </Row>
             </Column>
           </Row>
@@ -62,11 +81,9 @@ const CheckboxPage = () => {
 
   return (
     <Page>
-      <NextTitle weight="Bold" size="ExtraLarge">
-        Checkbox
-      </NextTitle>
+      <NextTitle>Checkbox</NextTitle>
 
-      <NextText size="Medium" color="Secondary">
+      <NextText color="Secondary">
         A control that allows the user to toggle between checked and not
         checked.
       </NextText>

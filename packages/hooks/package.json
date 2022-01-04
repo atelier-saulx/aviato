@@ -32,7 +32,8 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
-    "watch": "tsup ./src/index.ts --watch",
+    "types": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir ./dist",
+    "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",
     "build": "tsup ./src/index.ts",
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",

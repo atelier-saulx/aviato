@@ -2,12 +2,10 @@ import React, { ElementRef, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
-import { styled, classNames, css, DefaultProps } from '~/theme'
+import { styled, classNames } from '~/theme'
 import { ComponentProps } from '@stitches/react'
 
-const BUTTON_TAG = 'button'
-
-const MenuItemStyles = css({
+const StyledMenuItem = styled('button', {
   width: '100%',
   padding: '4px 12px',
   border: 'none',
@@ -39,8 +37,6 @@ const MenuItemStyles = css({
   },
 })
 
-const StyledMenuItem = styled(BUTTON_TAG, MenuItemStyles)
-
 const StyledChild = styled('div', {
   paddingTop: '2px',
 })
@@ -52,7 +48,7 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-export interface MenuItemProps extends DefaultProps {
+export interface MenuItemProps {
   title: string
   isActive?: boolean
   isHeader?: boolean
@@ -63,7 +59,7 @@ export interface MenuItemProps extends DefaultProps {
 type ForwardProps = ComponentProps<typeof StyledMenuItem> & MenuItemProps
 
 export const MenuItem = React.forwardRef<
-  ElementRef<typeof BUTTON_TAG>,
+  ElementRef<typeof StyledMenuItem>,
   ForwardProps
 >((properties, forwardedRef) => {
   const {
@@ -102,11 +98,14 @@ export const MenuItem = React.forwardRef<
       <StyledMenuItem
         onClick={toggle}
         className={classes}
-        {...remainingProps}
         ref={forwardedRef}
+        {...remainingProps}
       >
         <Column>
-          <Text weight={isHeader || hasChildren ? 'Bold' : 'Regular'}>
+          <Text
+            weight={isHeader || hasChildren ? 'bold' : 'regular'}
+            color={isHeader || hasChildren ? 'Primary' : 'Inherit'}
+          >
             {title}
           </Text>
         </Column>
