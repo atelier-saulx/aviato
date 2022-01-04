@@ -48,8 +48,8 @@ const ButtonPage = () => {
           <NextTitle size="small">{uppercasedType}</NextTitle>
 
           <Row>
-            <NextText>Disable buttons?</NextText> <Spacer />
             <Switch
+              text="Disable buttons?"
               onChange={({ isChecked }) => {
                 setIsDisabled(isChecked)
               }}

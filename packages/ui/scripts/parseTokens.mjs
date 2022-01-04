@@ -335,7 +335,7 @@ function formatJSON(object) {
     xxs: '16px',
     xs: '16px',
     sm: '16px',
-    md: '16px',
+    md: '24px',
     lg: '24px',
     xl: '24px',
     xxl: '32px',

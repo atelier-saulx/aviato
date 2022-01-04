@@ -7,15 +7,11 @@ import React, {
 } from 'react'
 import { noop } from '@aviato/utils'
 import { useUncontrolled, useUuid } from '@aviato/hooks'
-import { DefaultProps, styled } from '~/theme'
+import { DefaultProps } from '~/theme'
 import { Radio } from './Radio'
 import { InputWrapper } from '../InputWrapper'
 import { DefaultChangePayload } from '~/types/events'
 import { Group } from '~/components/Layout'
-
-const RadioGroupWrapper = styled('div', {
-  position: 'relative',
-})
 
 export interface OnRadioGroupChangePayload
   extends DefaultChangePayload<HTMLInputElement> {
@@ -91,15 +87,14 @@ export const RadioGroup: FunctionComponent<RadioGroupProps> = (properties) => {
 
   return (
     <InputWrapper label={label} description={description} error={error}>
-      <RadioGroupWrapper {...remainingProps}>
-        <Group
-          role="radiogroup"
-          direction={direction === 'horizontal' ? 'row' : 'column'}
-          css={{ paddingTop: '$sm' }}
-        >
-          {mappedRadioChildren}
-        </Group>
-      </RadioGroupWrapper>
+      <Group
+        role="radiogroup"
+        direction={direction === 'horizontal' ? 'row' : 'column'}
+        css={{ paddingTop: '$xxs', paddingBottom: '$xxs' }}
+        {...remainingProps}
+      >
+        {mappedRadioChildren}
+      </Group>
     </InputWrapper>
   )
 }

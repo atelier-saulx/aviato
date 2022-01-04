@@ -6,12 +6,10 @@ import { Text } from '~/components/Text'
 import { Conditional } from '~/components/Utilities'
 import { IconError } from '~/icons'
 
-const StyledInputWrapper = styled('div', {
-  width: '100%',
-})
+const StyledInputWrapper = styled('div', {})
 
 const TextWrapper = styled('div', {
-  marginBottom: 4,
+  paddingBottom: 8,
 })
 
 const ErrorWrapper = styled('div', {
@@ -25,8 +23,8 @@ const IconWrapper = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   height: '24px',
-  color: '$ErrorMain',
   marginRight: 8,
+  color: '$ErrorMain',
 })
 
 const Error = styled('div', {
@@ -60,6 +58,7 @@ export const InputWrapper = React.forwardRef<
       <Conditional test={hasLabelOrDescription}>
         <TextWrapper>
           <Text weight="semibold">{label}</Text>
+
           <Text>{description}</Text>
         </TextWrapper>
       </Conditional>

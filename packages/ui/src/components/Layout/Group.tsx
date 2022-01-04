@@ -9,7 +9,6 @@ import { Size } from '~/types/sizes'
 
 const StyledGroup = styled('div', {
   display: 'flex',
-  height: '100%',
 
   variants: {
     direction: {
@@ -84,12 +83,24 @@ export const Group = React.forwardRef<
     wrap = true,
     grow = false,
     spacing = 'sm',
+    align,
     children,
     ...remainingProps
   } = properties
 
+  const alignItems =
+    align ||
+    (direction === 'row'
+      ? 'center'
+      : grow
+      ? 'stretch'
+      : position === 'apart'
+      ? 'flex-start'
+      : mappedPositions[position])
+
   const styledCSS: StitchedCSS = {
     flexWrap: wrap ? 'wrap' : 'nowrap',
+    alignItems,
   }
 
   if (direction === 'row') {

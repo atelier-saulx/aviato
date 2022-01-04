@@ -74,7 +74,12 @@ export const TextField = React.forwardRef<
   }
 
   return (
-    <InputWrapper label={label} description={description} error={error}>
+    <InputWrapper
+      label={label}
+      description={description}
+      error={error}
+      css={{ width: '100%' }}
+    >
       <InputComponent />
     </InputWrapper>
   )

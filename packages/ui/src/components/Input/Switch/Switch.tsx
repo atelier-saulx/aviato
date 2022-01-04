@@ -1,13 +1,11 @@
-import React, {
-  BaseSyntheticEvent,
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
-import { DefaultProps, styled } from '~/theme'
+import { styled } from '~/theme'
 import { DefaultChangePayload } from '~/types/events'
+import { Group } from '~/components/Layout'
+import { Text } from '~/components/Text'
+import { InputWrapper } from '~/components/Input/InputWrapper'
 
 export type SwitchSize = 'normal' | 'large'
 
@@ -141,19 +139,33 @@ export interface OnSwitchChangePayload extends DefaultChangePayload<Event> {
   isChecked: boolean
 }
 
-export interface SwitchProps extends DefaultProps {
+export interface SwitchProps {
   size?: SwitchSize
   checked?: boolean
   disabled?: boolean
+  text?: string
+  label?: string
+  description?: string
+  error?: string
   onChange?: (payload: OnSwitchChangePayload) => void
 }
 
-export const Switch: FunctionComponent<SwitchProps> = (properties) => {
+type StitchedProps = ComponentProps<typeof StyledSwitch>
+type ForwardProps = Omit<StitchedProps, 'onChange'> & SwitchProps
+
+export const Switch = React.forwardRef<
+  ElementRef<typeof StyledSwitch>,
+  ForwardProps
+>((properties, forwardedRef) => {
   const {
     size = 'normal',
     checked = false,
     disabled = false,
     onChange = noop,
+    text,
+    label,
+    description,
+    error,
     ...remainingProps
   } = properties
 
@@ -166,7 +178,7 @@ export const Switch: FunctionComponent<SwitchProps> = (properties) => {
   }, [checked, disabled])
 
   const handleChange = useCallback(
-    (event: BaseSyntheticEvent) => {
+    (event) => {
       if (isDisabled) {
         return noop()
       }
@@ -184,13 +196,20 @@ export const Switch: FunctionComponent<SwitchProps> = (properties) => {
   )
 
   return (
-    <StyledSwitch
-      type="checkbox"
-      size={size}
-      checked={isChecked}
-      onChange={handleChange}
-      disabled={isDisabled}
-      {...remainingProps}
-    />
+    <InputWrapper label={label} description={description} error={error}>
+      <Group>
+        <StyledSwitch
+          type="checkbox"
+          size={size}
+          checked={isChecked}
+          onChange={handleChange}
+          disabled={isDisabled}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
+
+        <Text onClick={handleChange}>{text}</Text>
+      </Group>
+    </InputWrapper>
   )
-}
+})

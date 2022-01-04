@@ -51,7 +51,7 @@ export const Text = React.forwardRef<
   ForwardProps
 >((properties, forwardedRef) => {
   const {
-    size = 'small',
+    size = 'medium',
     weight = 'regular',
     color = 'Inherit',
     ...remainingProps

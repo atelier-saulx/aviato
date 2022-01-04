@@ -25,7 +25,12 @@ export const Input = React.forwardRef<
   const isInvalid = Boolean(error || invalid)
 
   return (
-    <InputWrapper label={label} description={description} error={error}>
+    <InputWrapper
+      label={label}
+      description={description}
+      error={error}
+      css={{ width: '100%' }}
+    >
       <BaseInput
         ref={forwardedRef}
         id={uuid}
