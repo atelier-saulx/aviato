@@ -5,14 +5,16 @@ import '../styles/playground.css'
 import React from 'react'
 
 import Head from 'next/head'
-import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import { themes, ApplicationRoot, styled } from '@aviato/ui'
-
-import { ToggleThemeButton } from '../components/toggle-theme'
+import {
+  ThemeProvider,
+  ApplicationRoot,
+  styled,
+  ToggleThemeButton,
+} from '@aviato/ui'
 
 initialiseApplication()
 
@@ -37,12 +39,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <HeadContent />
-      <ThemeProvider
-        disableTransitionOnChange
-        attribute="class"
-        defaultTheme="system"
-        value={themes}
-      >
+      <ThemeProvider>
         <ApplicationRoot>
           <SideMenu />
           <Component {...pageProps} />

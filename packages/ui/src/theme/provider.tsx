@@ -1,8 +1,25 @@
-import { log } from '@aviato/utils'
-import { useCallback, useState } from 'react'
-import { useTheme } from 'next-themes'
-import { IconButton, getCurrentTheme } from '@aviato/ui'
+import React, { useCallback, useState } from 'react'
+import { ThemeProvider as NextThemeProvider, useTheme } from 'next-themes'
+import { getCurrentTheme, themes } from './theme'
 import { useHasLoaded } from '@aviato/hooks'
+import { IconButton } from '~/components/Input/Button'
+
+export interface ThemeProviderProps {
+  children: React.ReactNode
+}
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  return (
+    <NextThemeProvider
+      disableTransitionOnChange
+      attribute="class"
+      defaultTheme="system"
+      value={themes}
+    >
+      {children}
+    </NextThemeProvider>
+  )
+}
 
 export const ToggleThemeButton = () => {
   const hasLoaded = useHasLoaded()
@@ -10,8 +27,6 @@ export const ToggleThemeButton = () => {
   const [currentTheme, setCurrentTheme] = useState(theme)
 
   const toggleTheme = useCallback(() => {
-    log.global.debug('Toggling theme...')
-
     const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
 
     setTheme(targetTheme)
