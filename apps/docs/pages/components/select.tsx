@@ -1,6 +1,11 @@
-import { Column, Row, Select, Page } from '@aviato/ui'
+import { Column, Row, Select, NativeSelect, Page, styled } from '@aviato/ui'
 import { log } from '@aviato/utils'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
 
 const SelectPage = () => {
   const ShowSelect = () => {
@@ -10,18 +15,33 @@ const SelectPage = () => {
           <Row css={{ width: '100%' }}>
             <Select
               placeholder="Type something here"
+              label="This is a label"
+              description="This is a description"
               onChange={(value, payload) => {
                 log.global.debug('Select change: ', { value, payload })
               }}
-            >
-              <option value="">-- Please choose an option --</option>
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-              <option value="hamster">Hamster</option>
-              <option value="parrot">Parrot</option>
-              <option value="spider">Spider</option>
-              <option value="goldfish">Goldfish</option>
-            </Select>
+              data={[
+                { value: 'flurpy', label: 'Flurpy' },
+                { value: 'snark', label: 'Snark' },
+              ]}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <NativeSelect
+              placeholder="Type something here"
+              label="This is a label"
+              description="This is a description"
+              onChange={(value, payload) => {
+                log.global.debug('Select change: ', { value, payload })
+              }}
+              data={[
+                { value: 'flurpy', label: 'Flurpy' },
+                { value: 'snark', label: 'Snark' },
+              ]}
+            />
           </Row>
         </Column>
       </>
