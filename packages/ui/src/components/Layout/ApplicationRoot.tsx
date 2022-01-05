@@ -1,4 +1,10 @@
-import React, { ElementRef, useCallback, useState } from 'react'
+import React, {
+  createContext,
+  ElementRef,
+  useCallback,
+  useState,
+  useMemo,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled, ThemeProvider, ToggleThemeButton } from '~/theme'
 import { ToggleMenuButton, menuWidth } from '../SideMenu'
@@ -60,38 +66,51 @@ export type ApplicationRootProps = {
 type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
   ApplicationRootProps
 
+interface MenuStateContextType {
+  isMenuOpen: boolean
+  setIsMenuOpen: any
+}
+
+export const MenuStateContext = createContext<MenuStateContextType>({
+  isMenuOpen: false,
+  setIsMenuOpen: (() => {}) as any,
+})
+
 export const ApplicationRoot = React.forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ForwardProps
 >((properties, forwardedRef) => {
   const { children, navigation, ...remainingProps } = properties
 
-  const [isMenuOpen, setIsOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
 
   const hasSideMenu = Boolean(navigation)
   const NavigationComponent = navigation ? React.cloneElement(navigation) : null
 
   const handleMenuButtonClick = useCallback(() => {
     const newState = !isMenuOpen
-    setIsOpen(newState)
+    setIsMenuOpen(newState)
   }, [isMenuOpen])
 
   return (
     <ThemeProvider>
-      <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
-        <Header>
-          <Group>
-            <ToggleMenuButton onClick={() => handleMenuButtonClick()} />
-            <ToggleThemeButton />
-          </Group>
-        </Header>
+      <MenuStateContext.Provider value={value}>
+        <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
+          <Header>
+            <Group>
+              <ToggleMenuButton onClick={() => handleMenuButtonClick()} />
+              <ToggleThemeButton />
+            </Group>
+          </Header>
 
-        <NavigationWrapper isOpen={isMenuOpen}>
-          {NavigationComponent}
-        </NavigationWrapper>
+          <NavigationWrapper isOpen={isMenuOpen}>
+            {NavigationComponent}
+          </NavigationWrapper>
 
-        <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
-      </StyledApplicationRoot>
+          <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
+        </StyledApplicationRoot>
+      </MenuStateContext.Provider>
     </ThemeProvider>
   )
 })

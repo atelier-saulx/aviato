@@ -1,5 +1,6 @@
-import { ComponentProps } from '@stitches/react'
 import React, { ElementRef } from 'react'
+import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 import { headerHeight } from '../Layout/Header'
 

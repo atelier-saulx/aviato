@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, styled, MenuStateContext } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 import { featureFlags } from '../../feature-flags'
 
@@ -87,7 +87,21 @@ type MenuDataItems = {
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
-  const { asPath } = router
+  const { asPath, events } = router
+
+  const { setIsMenuOpen } = useContext(MenuStateContext)
+
+  const handleRouteChange = useCallback(() => {
+    setIsMenuOpen(false)
+  }, [setIsMenuOpen])
+
+  useEffect(() => {
+    events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [events, handleRouteChange])
 
   useCallback(() => {
     setActiveRoute(asPath)
@@ -95,14 +109,17 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
 
   const isActiveRoute = (route = '') => activeRoute === route
 
-  const setRoute = (targetRoute: string | undefined) => {
-    if (!targetRoute) return
+  const setRoute = useCallback(
+    (targetRoute: string | undefined) => {
+      if (!targetRoute) return
 
-    setActiveRoute(targetRoute)
-    router.push({
-      pathname: targetRoute,
-    })
-  }
+      setActiveRoute(targetRoute)
+      router.push({
+        pathname: targetRoute,
+      })
+    },
+    [router]
+  )
 
   const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
     const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
