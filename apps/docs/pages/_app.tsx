@@ -1,6 +1,5 @@
 import '@aviato/ui/css/reset.css'
 import '@aviato/ui/css/fonts.css'
-import '../styles/nprogress.css'
 import '../styles/playground.css'
 
 import React from 'react'
@@ -13,14 +12,7 @@ import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
 import { themes, ApplicationRoot, styled } from '@aviato/ui'
 
-import Router from 'next/router'
-import NProgress from 'nprogress'
-
 import { ToggleThemeButton } from '../components/toggle-theme'
-
-Router.events.on('routeChangeStart', () => NProgress.start())
-Router.events.on('routeChangeComplete', () => NProgress.done())
-Router.events.on('routeChangeError', () => NProgress.done())
 
 initialiseApplication()
 
