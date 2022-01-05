@@ -1,6 +1,30 @@
 import { ComponentProps } from '@stitches/react'
-import React, { ElementRef } from 'react'
+import React, { ElementRef, FunctionComponent } from 'react'
 import { styled } from '~/theme'
+import { IconButton } from '../Input/Button/IconButton'
+import { headerHeight } from '../Layout/Header'
+
+const CloseMenuWrapper = styled('div', {
+  visibility: 'visible',
+
+  '@breakpoint1': {
+    visibility: 'hidden',
+  },
+})
+
+type ToggleMenuProps = {
+  onClick?: () => void
+}
+
+export const ToggleMenuButton: FunctionComponent<ToggleMenuProps> = ({
+  onClick,
+}) => {
+  return (
+    <CloseMenuWrapper>
+      <IconButton type="ghost" onClick={onClick} icon="IconAlignJustify" />
+    </CloseMenuWrapper>
+  )
+}
 
 export const menuWidth = 224
 
@@ -13,17 +37,23 @@ const StyledSideMenu = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
-  width: menuWidth,
-  minWidth: menuWidth,
+  width: '100%',
+  minWidth: '100%',
   backgroundColor: '$Background2dp',
-  borderRight: '1px solid $OtherDivider',
   overflowX: 'hidden',
-  zIndex: 1,
+  padding: 8,
+  zIndex: 10,
+  marginTop: headerHeight,
+
+  '@breakpoint1': {
+    width: menuWidth,
+    minWidth: menuWidth,
+    borderRight: '1px solid $OtherDivider',
+    marginTop: 0,
+  },
 })
 
-export interface SideMenuProps {
-  useBorder?: boolean
-}
+export interface SideMenuProps {}
 
 type ForwardProps = ComponentProps<typeof StyledSideMenu> & SideMenuProps
 
@@ -34,13 +64,7 @@ export const SideMenu = React.forwardRef<
   const { children, ...remainingProps } = properties
 
   return (
-    <StyledSideMenu
-      ref={forwardedRef}
-      css={{
-        padding: 8,
-      }}
-      {...remainingProps}
-    >
+    <StyledSideMenu ref={forwardedRef} {...remainingProps}>
       {children}
     </StyledSideMenu>
   )

@@ -1,5 +1,6 @@
 export * from './ApplicationRoot'
 export * from './Column'
 export * from './Group'
+export * from './Header'
 export * from './Page'
 export * from './Row'
