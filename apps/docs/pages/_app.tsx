@@ -6,25 +6,12 @@ import React from 'react'
 
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
+import { ThemeProvider, ApplicationRoot } from '@aviato/ui'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
-import {
-  ThemeProvider,
-  ApplicationRoot,
-  styled,
-  ToggleThemeButton,
-} from '@aviato/ui'
 
 initialiseApplication()
-
-const TopRight = styled('div', {
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  paddingTop: 10,
-  paddingRight: 16,
-})
 
 const MainApplication = ({ Component, pageProps }: AppProps) => {
   const HeadContent = () => {
@@ -39,14 +26,10 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <HeadContent />
-      <ThemeProvider>
-        <ApplicationRoot>
-          <SideMenu />
-          <Component {...pageProps} />
 
-          <TopRight>
-            <ToggleThemeButton />
-          </TopRight>
+      <ThemeProvider>
+        <ApplicationRoot navigation={<SideMenu />}>
+          <Component {...pageProps} />
         </ApplicationRoot>
       </ThemeProvider>
     </>
