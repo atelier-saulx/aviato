@@ -1,30 +1,7 @@
 import { ComponentProps } from '@stitches/react'
-import React, { ElementRef, FunctionComponent } from 'react'
+import React, { ElementRef } from 'react'
 import { styled } from '~/theme'
-import { IconButton } from '../Input/Button/IconButton'
 import { headerHeight } from '../Layout/Header'
-
-const CloseMenuWrapper = styled('div', {
-  visibility: 'visible',
-
-  '@breakpoint1': {
-    visibility: 'hidden',
-  },
-})
-
-type ToggleMenuProps = {
-  onClick?: () => void
-}
-
-export const ToggleMenuButton: FunctionComponent<ToggleMenuProps> = ({
-  onClick,
-}) => {
-  return (
-    <CloseMenuWrapper>
-      <IconButton type="ghost" onClick={onClick} icon="IconAlignJustify" />
-    </CloseMenuWrapper>
-  )
-}
 
 export const menuWidth = 224
 
