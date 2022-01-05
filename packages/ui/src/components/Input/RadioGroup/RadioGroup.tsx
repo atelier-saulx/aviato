@@ -1,4 +1,10 @@
-import React, { Children, cloneElement, ChangeEvent, ElementRef } from 'react'
+import React, {
+  Children,
+  cloneElement,
+  ChangeEvent,
+  ElementRef,
+  useEffect,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { useUncontrolled, useUuid } from '@aviato/hooks'
 import { styled } from '~/theme'
@@ -6,6 +12,7 @@ import { Radio } from './Radio'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types/events'
 import { Group } from '~/components/Layout'
+import { noop } from '@aviato/utils'
 
 const StyledRadioGroup = styled('div', {})
 
@@ -34,7 +41,7 @@ export const RadioGroup = React.forwardRef<
   const {
     value,
     defaultValue,
-    onChange,
+    onChange = noop,
     label,
     description,
     error,
@@ -71,6 +78,15 @@ export const RadioGroup = React.forwardRef<
 
   const childrenArray = Children.toArray(children) as React.ReactElement[]
   const radioChildren = childrenArray.filter((item) => item.type === Radio)
+
+  /**
+   * Set default value if none is set.
+   */
+  useEffect(() => {
+    if (radioGroupValue === '' && radioChildren.length > 0) {
+      setValue(radioChildren?.[0].props?.value)
+    }
+  })
 
   const mappedRadioChildren = radioChildren.map((radio, index) => {
     return cloneElement(radio, {

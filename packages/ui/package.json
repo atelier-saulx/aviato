@@ -14,6 +14,7 @@
     "@aviato/hooks": "*",
     "@aviato/utils": "*",
     "@stitches/react": "^1.2.6",
+    "next-themes": "^0.0.15",
     "react": "^17.0.2",
     "throttle-debounce": "^3.0.1"
   },
