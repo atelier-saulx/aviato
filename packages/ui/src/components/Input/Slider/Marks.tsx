@@ -4,12 +4,14 @@ import { styled } from '~/theme'
 import { isMarkFilled, getPosition } from './utils'
 
 const StyledMarks = styled('div', {
-  '& > div:first-child': {
-    marginLeft: '2px',
+  '& > div:first-child > div': {
+    borderTopRightRadius: '0',
+    borderBottomRightRadius: '0',
   },
 
-  '& > div:last-child': {
-    marginLeft: '-2px',
+  '& > div:last-child > div': {
+    borderTopLeftRadius: '0',
+    borderBottomLeftRadius: '0',
   },
 })
 
