@@ -9,8 +9,6 @@ import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 
-import { withPasswordProtect } from '@storyofams/next-password-protect'
-
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
 import { themes, ApplicationRoot, styled } from '@aviato/ui'
@@ -56,6 +54,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
         <ApplicationRoot>
           <SideMenu />
           <Component {...pageProps} />
+
           <TopRight>
             <ToggleThemeButton />
           </TopRight>
@@ -65,17 +64,4 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-const hasPasswordProtection = process.env.PASSWORD_PROTECT || false
-
-const ExportedApplication = hasPasswordProtection
-  ? withPasswordProtect(MainApplication, {
-      loginComponentProps: {
-        logo: 'https://i.ibb.co/b1B1ZyT/android-chrome-512x512.png',
-        backUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        buttonBackgroundColor: '#3D53E7',
-        buttonColor: 'white',
-      },
-    })
-  : MainApplication
-
-export default ExportedApplication
+export default MainApplication
