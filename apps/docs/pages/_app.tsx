@@ -6,7 +6,7 @@ import React from 'react'
 
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { ThemeProvider, ApplicationRoot } from '@aviato/ui'
+import { ApplicationRoot } from '@aviato/ui'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
@@ -27,11 +27,9 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
     <>
       <HeadContent />
 
-      <ThemeProvider>
-        <ApplicationRoot navigation={<SideMenu />}>
-          <Component {...pageProps} />
-        </ApplicationRoot>
-      </ThemeProvider>
+      <ApplicationRoot navigation={<SideMenu />}>
+        <Component {...pageProps} />
+      </ApplicationRoot>
     </>
   )
 }

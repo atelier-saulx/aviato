@@ -1,6 +1,6 @@
 import React, { ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled, ToggleThemeButton } from '~/theme'
+import { styled, ThemeProvider, ToggleThemeButton } from '~/theme'
 import { menuWidth } from '../SideMenu'
 
 const StyledApplicationRoot = styled('div', {
@@ -49,19 +49,25 @@ export const ApplicationRoot = React.forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { children, navigation, ...remainingProps } = properties
+  const {
+    children,
+    navigation: NavigationComponent,
+    ...remainingProps
+  } = properties
 
-  const hasSideMenu = Boolean(navigation)
+  const hasSideMenu = Boolean(NavigationComponent)
 
   return (
-    <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
-      {navigation}
+    <ThemeProvider>
+      <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
+        <>{NavigationComponent}</>
 
-      <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
+        <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
 
-      <TopRight>
-        <ToggleThemeButton />
-      </TopRight>
-    </StyledApplicationRoot>
+        <TopRight>
+          <ToggleThemeButton />
+        </TopRight>
+      </StyledApplicationRoot>
+    </ThemeProvider>
   )
 })
