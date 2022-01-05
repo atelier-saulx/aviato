@@ -1,11 +1,14 @@
 import React, { ElementRef } from 'react'
 import { useUuid } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
+import { StitchedCSS } from '~/theme'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'
 
-export interface InputProps extends BaseInputProps {
+const SelectStyles: StitchedCSS = {}
+
+export interface SelectProps extends BaseInputProps {
   label?: string
   description?: string
   error?: string
@@ -13,15 +16,15 @@ export interface InputProps extends BaseInputProps {
 }
 
 type StitchedProps = ComponentProps<typeof StyledInput>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & InputProps
+type ForwardProps = Omit<StitchedProps, 'onChange'> & SelectProps
 
-export const Input = React.forwardRef<
+export const Select = React.forwardRef<
   ElementRef<typeof StyledInput>,
   ForwardProps
 >((properties, forwardedRef) => {
   const { label, description, error, invalid, ...remainingProps } = properties
 
-  const uuid = useUuid({ prefix: 'input' })
+  const uuid = useUuid({ prefix: 'select' })
 
   const isInvalid = Boolean(error || invalid)
 
@@ -33,6 +36,8 @@ export const Input = React.forwardRef<
       css={{ width: '100%' }}
     >
       <BaseInput
+        component="select"
+        css={SelectStyles}
         id={uuid}
         invalid={isInvalid}
         ref={forwardedRef}
