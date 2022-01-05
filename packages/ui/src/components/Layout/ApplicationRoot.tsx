@@ -9,9 +9,9 @@ const StyledApplicationRoot = styled('div', {
   width: '100%',
   height: '100%',
   minHeight: '100vh',
+  backgroundColor: '$Background2dp',
   overflowX: 'hidden',
   overflowY: 'hidden',
-  backgroundColor: '$Background2dp',
 })
 
 export type ApplicationRootProps = {}

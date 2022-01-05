@@ -3,7 +3,15 @@ import { Conditional } from '~/components'
 import { styled } from '~/theme'
 import { isMarkFilled, getPosition } from './utils'
 
-const StyledMarks = styled('div', {})
+const StyledMarks = styled('div', {
+  '& > div:first-child': {
+    marginLeft: '2px',
+  },
+
+  '& > div:last-child': {
+    marginLeft: '-2px',
+  },
+})
 
 const MarkWrapper = styled('div', {
   position: 'absolute',
