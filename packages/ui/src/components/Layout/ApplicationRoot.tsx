@@ -6,10 +6,13 @@ import React, {
   useMemo,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled, ThemeProvider, ToggleThemeButton } from '~/theme'
-import { ToggleMenuButton, menuWidth } from '../SideMenu'
+import { styled, ThemeProvider } from '~/theme'
+
+import { menuWidth } from '../SideMenu'
 import { Header, headerHeight } from './Header'
 import { Group } from './Group'
+import { ToggleThemeButton } from './ToggleThemeButton'
+import { ToggleMenuButton } from './ToggleMenuButton'
 
 const StyledApplicationRoot = styled('div', {
   position: 'relative',

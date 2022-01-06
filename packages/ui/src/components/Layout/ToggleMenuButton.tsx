@@ -4,7 +4,7 @@ import { ComponentProps } from '@stitches/react'
 import { IconButton } from '../Input/Button/IconButton'
 import { styled } from '~/theme'
 
-const CloseMenuWrapper = styled('div', {
+const StyledToggleMenuButton = styled('div', {
   visibility: 'visible',
 
   '@breakpoint1': {
@@ -12,17 +12,15 @@ const CloseMenuWrapper = styled('div', {
   },
 })
 
-type ToggleMenuProps = {}
-
-type ForwardProps = ComponentProps<typeof CloseMenuWrapper> & ToggleMenuProps
+type ForwardProps = ComponentProps<typeof StyledToggleMenuButton>
 
 export const ToggleMenuButton = React.forwardRef<
-  ElementRef<typeof CloseMenuWrapper>,
+  ElementRef<typeof StyledToggleMenuButton>,
   ForwardProps
 >((properties, forwardedRef) => {
   return (
-    <CloseMenuWrapper ref={forwardedRef} {...properties}>
+    <StyledToggleMenuButton ref={forwardedRef} {...properties}>
       <IconButton type="ghost" icon="IconAlignJustify" />
-    </CloseMenuWrapper>
+    </StyledToggleMenuButton>
   )
 })
