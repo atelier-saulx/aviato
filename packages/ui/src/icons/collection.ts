@@ -1,83 +1,10 @@
 import { FunctionComponent } from 'react'
 
-import {
-  IconModel,
-  IconAlignCenter,
-  IconAlignJustify,
-  IconAlignLeft,
-  IconAlignRight,
-  IconAperture,
-  IconAttachment,
-  IconBase,
-  IconCheck,
-  IconChevronBack,
-  IconChevronDown,
-  IconChevronRight,
-  IconChevronUp,
-  IconClipboard,
-  IconClose,
-  IconCopy,
-  IconDark,
-  IconDelete,
-  IconEdit,
-  IconEmail,
-  IconError,
-  IconExpand,
-  IconExpanded,
-  IconLight,
-  IconLoading,
-  IconMinus,
-  IconMore,
-  IconPlus,
-  IconSchedule,
-  IconSearch,
-  IconSettings,
-  IconSort,
-  IconTarget,
-  IconUploadCloud,
-  IconUpload,
-  IconUserGroups,
-} from './components'
-
 import { SVGProperties } from './types'
+import * as IconComponents from './components'
 
 export const icons = {
-  IconModel,
-  IconAlignCenter,
-  IconAlignJustify,
-  IconAlignLeft,
-  IconAlignRight,
-  IconAperture,
-  IconAttachment,
-  IconBase,
-  IconCheck,
-  IconChevronBack,
-  IconChevronDown,
-  IconChevronRight,
-  IconChevronUp,
-  IconClipboard,
-  IconClose,
-  IconCopy,
-  IconDark,
-  IconDelete,
-  IconEdit,
-  IconEmail,
-  IconError,
-  IconExpand,
-  IconExpanded,
-  IconLight,
-  IconLoading,
-  IconMinus,
-  IconMore,
-  IconPlus,
-  IconSchedule,
-  IconSearch,
-  IconSettings,
-  IconSort,
-  IconTarget,
-  IconUploadCloud,
-  IconUpload,
-  IconUserGroups,
+  ...IconComponents,
 }
 
 export type IconName = keyof typeof icons
@@ -105,6 +32,7 @@ export const getIconFromType = (input: IconName): Icon | null => {
  */
 export const getRandomIcon = (): Icon => {
   const values = Object.values(icons)
+
   return values[Math.floor(Math.random() * values.length)]
 }
 
