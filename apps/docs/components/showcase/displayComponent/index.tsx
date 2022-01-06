@@ -33,7 +33,6 @@ const InnerDiv = styled('div', {
   width: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-  filter: 'drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.12))',
   margin: '60px 0px',
 
   variants: {
