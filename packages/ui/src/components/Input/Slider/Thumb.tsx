@@ -75,7 +75,7 @@ export const Thumb = React.forwardRef<
   const { label, position, isLabelVisible, isActive, ...remainingProps } =
     properties
 
-  const handleThumbMouseDown = (
+  const handleThumbDown = (
     event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
   ) => {
     if (event.cancelable) {
@@ -92,8 +92,8 @@ export const Thumb = React.forwardRef<
       style={{ left: `${position}%` }}
       mode={isActive ? 'active' : 'inactive'}
       ref={forwardedRef}
-      onMouseDown={handleThumbMouseDown}
-      onTouchStart={handleThumbMouseDown}
+      onMouseDown={handleThumbDown}
+      onTouchStart={handleThumbDown}
       onClick={(event) => event.stopPropagation()}
       {...remainingProps}
     >
