@@ -1,7 +1,7 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu, Menu, MenuItem, styled, MenuStateContext } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 import { featureFlags } from '../../feature-flags'
 
@@ -92,7 +92,7 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const [activeRoute, setActiveRoute] = useState('/')
   const { asPath, events } = router
 
-  const { setIsMenuOpen } = useContext(MenuStateContext)
+  const { setIsMenuOpen } = useMenuContext()
 
   const handleRouteChange = useCallback(() => {
     setIsMenuOpen(false)

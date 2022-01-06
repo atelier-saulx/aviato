@@ -1,9 +1,8 @@
 import React, { useState, useCallback, ElementRef } from 'react'
 import { useHasLoaded } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
-import { useTheme } from 'next-themes'
 
-import { getCurrentTheme, styled } from '~/theme'
+import { getCurrentTheme, styled, useThemeContext } from '~/theme'
 import { IconButton } from '../Input/Button/IconButton'
 
 const StyledToggleThemeButton = styled('div', {})
@@ -15,15 +14,15 @@ export const ToggleThemeButton = React.forwardRef<
   ForwardProps
 >((properties, forwardedRef) => {
   const hasLoaded = useHasLoaded()
-  const { setTheme } = useTheme()
+  const { setColorMode } = useThemeContext()
   const [currentTheme, setCurrentTheme] = useState(getCurrentTheme())
 
   const toggleTheme = useCallback(() => {
     const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
 
-    setTheme(targetTheme)
+    setColorMode(targetTheme)
     setCurrentTheme(targetTheme)
-  }, [setTheme])
+  }, [setColorMode])
 
   if (!hasLoaded) {
     return null

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
 interface MenuStateContextType {
   isMenuOpen: boolean
@@ -9,3 +9,7 @@ export const MenuStateContext = createContext<MenuStateContextType>({
   isMenuOpen: false,
   setIsMenuOpen: () => {},
 })
+
+export const useMenuContext: () => MenuStateContextType = () => {
+  return useContext(MenuStateContext)
+}
