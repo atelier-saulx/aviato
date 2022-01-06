@@ -69,35 +69,6 @@ const ButtonPage = () => {
                 >
                   Lorem
                 </Button>
-
-                <Spacer />
-
-                <Button type={type} variant="filled" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="filled"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="filled"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
               </Row>
 
               <BigSpacer />
@@ -111,35 +82,6 @@ const ButtonPage = () => {
                 >
                   Lorem
                 </Button>
-
-                <Spacer />
-
-                <Button type={type} variant="outlined" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="outlined"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="outlined"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
               </Row>
 
               <BigSpacer />
@@ -149,35 +91,6 @@ const ButtonPage = () => {
                   type={type}
                   variant="transparent"
                   leftIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button type={type} variant="transparent" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="transparent"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="transparent"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
                   disabled={isDisabled}
                 >
                   Lorem

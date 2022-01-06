@@ -50,13 +50,13 @@ export const TextField = React.forwardRef<
     if (autosize) {
       return (
         <BaseInput
-          ref={forwardedRef}
           component={TextareaAutosize}
           css={TextFieldStyles}
           id={uuid}
           maxRows={maxRows}
           minRows={minRows}
           invalid={isInvalid}
+          ref={forwardedRef}
           {...remainingProps}
         />
       )
@@ -64,11 +64,11 @@ export const TextField = React.forwardRef<
 
     return (
       <BaseInput
-        ref={forwardedRef}
         component="textarea"
         css={TextFieldStyles}
         id={uuid}
         invalid={isInvalid}
+        ref={forwardedRef}
         {...remainingProps}
       />
     )

@@ -20,7 +20,7 @@ export interface IconButtonProps {
   type?: ButtonType
   variant?: ButtonVariant
   disabled?: boolean
-  icon?: IconName | string
+  icon?: IconName
   onClick?: MouseEventHandler<HTMLButtonElement>
   css?: StitchedCSS
 }

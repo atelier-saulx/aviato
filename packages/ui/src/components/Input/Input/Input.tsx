@@ -33,9 +33,9 @@ export const Input = React.forwardRef<
       css={{ width: '100%' }}
     >
       <BaseInput
-        ref={forwardedRef}
         id={uuid}
         invalid={isInvalid}
+        ref={forwardedRef}
         {...remainingProps}
       />
     </InputWrapper>

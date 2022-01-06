@@ -33,17 +33,26 @@ const InnerDiv = styled('div', {
   width: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-  filter: 'drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.12))',
   margin: '60px 0px',
 
   variants: {
     padding: {
+      small: {
+        '@breakpoint1': {
+          margin: '10px 0px',
+        },
+      },
+
       regular: {
-        margin: '50px 0px',
+        '@breakpoint1': {
+          margin: '50px 0px',
+        },
       },
 
       large: {
-        margin: '60px 0px',
+        '@breakpoint1': {
+          margin: '60px 0px',
+        },
       },
     },
   },
@@ -51,7 +60,7 @@ const InnerDiv = styled('div', {
 
 export type DisplayComponentProps = {
   background?: 'filled' | 'transparent'
-  padding?: 'regular' | 'large'
+  padding?: 'small' | 'regular' | 'large'
 }
 
 export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({

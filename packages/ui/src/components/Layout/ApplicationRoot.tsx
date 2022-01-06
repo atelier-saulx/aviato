@@ -1,7 +1,15 @@
-import React, { ElementRef } from 'react'
+import React, {
+  createContext,
+  ElementRef,
+  useCallback,
+  useState,
+  useMemo,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled, ThemeProvider, ToggleThemeButton } from '~/theme'
-import { menuWidth } from '../SideMenu'
+import { ToggleMenuButton, menuWidth } from '../SideMenu'
+import { Header, headerHeight } from './Header'
+import { Group } from './Group'
 
 const StyledApplicationRoot = styled('div', {
   position: 'relative',
@@ -15,24 +23,37 @@ const StyledApplicationRoot = styled('div', {
   overflowY: 'hidden',
 })
 
-const TopRight = styled('div', {
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  paddingTop: 10,
-  paddingRight: 16,
-})
-
 const PageWrapper = styled('div', {
   position: 'relative',
   width: '100%',
   height: '100%',
   backgroundColor: '$Background2dp',
+  marginTop: headerHeight,
 
   variants: {
     sideMenu: {
       true: {
-        paddingLeft: menuWidth,
+        '@breakpoint1': {
+          paddingLeft: menuWidth,
+        },
+      },
+    },
+  },
+})
+
+const NavigationWrapper = styled('div', {
+  variants: {
+    isOpen: {
+      true: {
+        display: 'block',
+      },
+
+      false: {
+        display: 'none',
+
+        '@breakpoint1': {
+          display: 'block',
+        },
       },
     },
   },
@@ -45,29 +66,51 @@ export type ApplicationRootProps = {
 type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
   ApplicationRootProps
 
+interface MenuStateContextType {
+  isMenuOpen: boolean
+  setIsMenuOpen: any
+}
+
+export const MenuStateContext = createContext<MenuStateContextType>({
+  isMenuOpen: false,
+  setIsMenuOpen: (() => {}) as any,
+})
+
 export const ApplicationRoot = React.forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const {
-    children,
-    navigation: NavigationComponent,
-    ...remainingProps
-  } = properties
+  const { children, navigation, ...remainingProps } = properties
 
-  const hasSideMenu = Boolean(NavigationComponent)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
+
+  const hasSideMenu = Boolean(navigation)
+  const NavigationComponent = navigation ? React.cloneElement(navigation) : null
+
+  const handleMenuButtonClick = useCallback(() => {
+    const newState = !isMenuOpen
+    setIsMenuOpen(newState)
+  }, [isMenuOpen])
 
   return (
     <ThemeProvider>
-      <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
-        <>{NavigationComponent}</>
+      <MenuStateContext.Provider value={value}>
+        <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
+          <Header>
+            <Group>
+              <ToggleMenuButton onClick={() => handleMenuButtonClick()} />
+              <ToggleThemeButton />
+            </Group>
+          </Header>
 
-        <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
+          <NavigationWrapper isOpen={isMenuOpen}>
+            {NavigationComponent}
+          </NavigationWrapper>
 
-        <TopRight>
-          <ToggleThemeButton />
-        </TopRight>
-      </StyledApplicationRoot>
+          <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
+        </StyledApplicationRoot>
+      </MenuStateContext.Provider>
     </ThemeProvider>
   )
 })
