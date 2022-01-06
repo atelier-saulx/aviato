@@ -1,10 +1,11 @@
-import React, { ElementRef, useEffect, useState } from 'react'
+import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 import { styled } from '~/theme'
 import { getChangeValue, getPosition } from './utils'
 import { Track } from './Track'
+import { Thumb } from './Thumb'
 
 export type Mark = {
   value: number
@@ -56,6 +57,8 @@ export const Slider = React.forwardRef<
     ...remainingProps
   } = properties
 
+  const thumb = useRef<HTMLDivElement>()
+
   const [sliderValue, setValue] = useUncontrolled({
     value,
     defaultValue,
@@ -101,6 +104,7 @@ export const Slider = React.forwardRef<
 
   return (
     <StyledSlider
+      onMouseDownCapture={() => container.current?.focus()}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       ref={useMergedRef(container, forwardedRef)}
@@ -108,14 +112,19 @@ export const Slider = React.forwardRef<
     >
       <Track
         value={sliderValue}
-        label={sliderLabel}
         marks={marks}
         min={min}
         max={max}
         position={position}
-        isActive={isActive}
-        isLabelVisible={isLabelVisible}
-      />
+      >
+        <Thumb
+          ref={thumb}
+          label={sliderLabel}
+          position={position}
+          isLabelVisible={isLabelVisible}
+          isActive={isActive}
+        />
+      </Track>
 
       <input type="hidden" value={sliderValue} />
     </StyledSlider>
