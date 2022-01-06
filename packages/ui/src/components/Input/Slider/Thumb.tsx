@@ -64,6 +64,9 @@ export interface ThumbProps {
   position: number
   isLabelVisible: boolean
   isActive: boolean
+  value: number
+  min: number
+  max: number
 }
 
 type ForwardProps = ComponentProps<typeof StyledThumb> & ThumbProps
@@ -72,8 +75,19 @@ export const Thumb = React.forwardRef<
   ElementRef<typeof StyledThumb>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { label, position, isLabelVisible, isActive, ...remainingProps } =
-    properties
+  const {
+    label,
+    position,
+    isLabelVisible,
+    isActive,
+    value: sliderValue,
+    min,
+    max,
+    ...remainingProps
+  } = properties
+
+  const hasValidLabel = label !== ''
+  const labelMode = isLabelVisible && hasValidLabel ? 'visible' : 'hidden'
 
   const handleThumbDown = (
     event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
@@ -84,17 +98,19 @@ export const Thumb = React.forwardRef<
     }
   }
 
-  const hasValidLabel = label !== ''
-  const labelMode = isLabelVisible && hasValidLabel ? 'visible' : 'hidden'
-
   return (
     <StyledThumb
+      tabIndex={0}
+      role="slider"
+      aria-valuemax={max}
+      aria-valuemin={min}
+      aria-valuenow={sliderValue}
       style={{ left: `${position}%` }}
       mode={isActive ? 'active' : 'inactive'}
-      ref={forwardedRef}
       onMouseDown={handleThumbDown}
       onTouchStart={handleThumbDown}
       onClick={(event) => event.stopPropagation()}
+      ref={forwardedRef}
       {...remainingProps}
     >
       <ThumbPoint />

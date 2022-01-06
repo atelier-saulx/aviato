@@ -25,19 +25,19 @@ const Bar = styled('div', {
 
 export interface TrackProps {
   value: number
-  marks: Mark[]
   min: number
   max: number
   position: number
+  marks: Mark[]
 }
 
 export const Track: FunctionComponent<TrackProps> = (properties) => {
   const {
     value: sliderValue,
-    marks,
     min,
     max,
     position,
+    marks,
     children,
     ...remainingProps
   } = properties

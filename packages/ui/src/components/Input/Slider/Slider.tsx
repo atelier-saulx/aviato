@@ -18,7 +18,7 @@ const StyledSlider = styled('div', {
   position: 'relative',
   cursor: 'pointer',
   width: '100%',
-  height: 16,
+  height: 24,
   touchAction: 'none',
 })
 
@@ -75,6 +75,10 @@ export const Slider = React.forwardRef<
     typeof label === 'function' ? label(Math.round(sliderValue)) : label
 
   const [isHovering, setIsHovering] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+
+  const isInteracting = isActive || isFocused
+
   const [inputValue, setInputValue] = useState<number>(null)
 
   /**
@@ -85,7 +89,7 @@ export const Slider = React.forwardRef<
   useEffect(() => {
     if (inputValue === null) return
 
-    const setWithDecimals = smoothDrag && isActive
+    const setWithDecimals = smoothDrag && isInteracting
 
     const targetValue = getChangeValue({
       value: inputValue,
@@ -97,32 +101,59 @@ export const Slider = React.forwardRef<
     const roundedValue = Math.round((targetValue + Number.EPSILON) * 100) / 100
 
     setValue(roundedValue)
-  }, [smoothDrag, isActive, inputValue, step])
+  }, [smoothDrag, isInteracting, inputValue, step])
 
   const isLabelVisible =
-    labelAlwaysVisible || isActive || (showLabelOnHover && isHovering)
+    labelAlwaysVisible || isInteracting || (showLabelOnHover && isHovering)
+
+  const handleKeydownCapture = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    switch (event.nativeEvent.code) {
+      case 'ArrowUp':
+      case 'ArrowRight': {
+        event.preventDefault()
+        thumb.current.focus()
+        setValue(Math.min(Math.max(sliderValue + 1, min), max))
+        break
+      }
+
+      case 'ArrowDown':
+      case 'ArrowLeft': {
+        event.preventDefault()
+        thumb.current.focus()
+        setValue(Math.min(Math.max(sliderValue - 1, min), max))
+        break
+      }
+    }
+  }
 
   return (
     <StyledSlider
-      onMouseDownCapture={() => container.current?.focus()}
+      tabIndex={-1}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      onKeyDownCapture={handleKeydownCapture}
+      onMouseDownCapture={() => container.current?.focus()}
       ref={useMergedRef(container, forwardedRef)}
       {...remainingProps}
     >
       <Track
         value={sliderValue}
-        marks={marks}
         min={min}
         max={max}
         position={position}
+        marks={marks}
       >
         <Thumb
           ref={thumb}
           label={sliderLabel}
           position={position}
           isLabelVisible={isLabelVisible}
-          isActive={isActive}
+          isActive={isInteracting}
+          value={sliderValue}
+          min={min}
+          max={max}
         />
       </Track>
 
