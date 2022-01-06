@@ -35,6 +35,7 @@ async function generateReactFromSVG() {
     '--typescript',
     '--no-svgo',
     '--template ./scripts/svgrTemplate.js',
+    '--index-template ./scripts/svgrIndexTemplate.js',
     '--out-dir ./src/icons/parsed',
     './src/icons/parsed/svg',
   ]
