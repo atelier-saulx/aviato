@@ -19,7 +19,7 @@ export type DisplayComponentProps = {
   title?: string
   description?: string
   background?: 'filled' | 'transparent'
-  padding?: 'regular' | 'large'
+  padding?: 'small' | 'regular' | 'large'
 }
 
 export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({

@@ -110,7 +110,7 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle>Form</NextTitle>
+          <NextTitle size="small">Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <Input
@@ -141,15 +141,15 @@ const InputPage = () => {
 
       <NextText color="Secondary">Capture string input from user</NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowInput variant="outlined" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowInput variant="filled" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowComplexInput />
       </ShowcaseComponent>
     </Page>

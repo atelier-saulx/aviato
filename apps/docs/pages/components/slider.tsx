@@ -37,7 +37,7 @@ const SliderPage = () => {
   const ShowSlider = () => {
     return (
       <>
-        <Column css={{ width: '100%', padding: '0 40px' }}>
+        <Column css={{ width: '100%' }}>
           <NextText>Basic slider.</NextText>
           <Row>
             <Slider />

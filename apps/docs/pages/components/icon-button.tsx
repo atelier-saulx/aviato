@@ -68,24 +68,6 @@ const IconButtonPage = () => {
                   disabled={isDisabled}
                   icon={randomIcon()}
                 />
-
-                <Spacer />
-
-                <IconButton
-                  type={type}
-                  variant="outlined"
-                  disabled={isDisabled}
-                  icon={randomIcon()}
-                />
-
-                <Spacer />
-
-                <IconButton
-                  type={type}
-                  variant="transparent"
-                  disabled={isDisabled}
-                  icon={randomIcon()}
-                />
               </Row>
             </Column>
           </Row>

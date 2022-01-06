@@ -79,7 +79,7 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle>Form</NextTitle>
+          <NextTitle size="small">Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <TextField
@@ -110,15 +110,15 @@ const TextFieldPage = () => {
 
       <NextText color="Secondary">Capture string input from user</NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowTextField variant="outlined" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowTextField variant="filled" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowComplexTextField />
       </ShowcaseComponent>
     </Page>
