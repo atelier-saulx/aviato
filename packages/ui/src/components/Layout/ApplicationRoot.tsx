@@ -1,14 +1,8 @@
-import React, {
-  createContext,
-  ElementRef,
-  useCallback,
-  useState,
-  useMemo,
-} from 'react'
+import React, { ElementRef, useCallback, useState, useMemo } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled, ThemeProvider } from '~/theme'
 
-import { menuWidth } from '../SideMenu'
+import { MenuStateContext, menuWidth } from '../SideMenu'
 import { Header, headerHeight } from './Header'
 import { Group } from './Group'
 import { ToggleThemeButton } from './ToggleThemeButton'
@@ -68,16 +62,6 @@ export type ApplicationRootProps = {
 
 type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
   ApplicationRootProps
-
-interface MenuStateContextType {
-  isMenuOpen: boolean
-  setIsMenuOpen: any
-}
-
-export const MenuStateContext = createContext<MenuStateContextType>({
-  isMenuOpen: false,
-  setIsMenuOpen: (() => {}) as any,
-})
 
 export const ApplicationRoot = React.forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
