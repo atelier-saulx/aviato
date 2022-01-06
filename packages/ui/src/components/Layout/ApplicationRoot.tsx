@@ -1,4 +1,4 @@
-import React, { ElementRef, useCallback, useState, useMemo } from 'react'
+import React, { ElementRef, useState, useMemo } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled, ThemeProvider } from '~/theme'
 
@@ -75,18 +75,13 @@ export const ApplicationRoot = React.forwardRef<
   const hasSideMenu = Boolean(navigation)
   const NavigationComponent = navigation ? React.cloneElement(navigation) : null
 
-  const handleMenuButtonClick = useCallback(() => {
-    const newState = !isMenuOpen
-    setIsMenuOpen(newState)
-  }, [isMenuOpen])
-
   return (
     <ThemeProvider>
       <MenuStateContext.Provider value={value}>
         <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
           <Header>
             <Group>
-              <ToggleMenuButton onClick={() => handleMenuButtonClick()} />
+              <ToggleMenuButton />
               <ToggleThemeButton />
             </Group>
           </Header>
