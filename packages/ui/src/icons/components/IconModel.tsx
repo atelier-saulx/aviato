@@ -1,7 +1,7 @@
 import React from 'react'
 import { SVGProperties } from '../types'
 
-const SvgIconmodel = (props: SVGProperties) => {
+const SvgIconModel = (props: SVGProperties) => {
   return (
     <svg width={16} height={16} fill="none" viewBox="0 0 16 16" {...props}>
       <path
@@ -15,4 +15,4 @@ const SvgIconmodel = (props: SVGProperties) => {
   )
 }
 
-export default SvgIconmodel
+export default SvgIconModel
