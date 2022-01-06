@@ -11,10 +11,11 @@ const StyledHeader = styled('div', {
   top: '0',
   height: headerHeight,
   zIndex: '6',
-  borderBottom: '1px solid $OtherDivider',
   display: 'flex',
   justifyContent: 'end',
-  padding: '$sm',
+  paddingRight: '$sm',
+  borderBottom: '1px solid $OtherDivider',
+  backgroundColor: '$Background2dp',
 })
 
 export interface HeaderProps {}
