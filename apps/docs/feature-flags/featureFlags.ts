@@ -2,12 +2,17 @@ import { log } from '@aviato/utils'
 import { getSettledFlagsState } from './consolidateFlagState'
 import { FeatureFlagConfig, MappedFlagConfig } from './types'
 
-export type FeatureFlag = 'DemoFlag' // 'DemoFlag' | 'Flag2' | 'Etc'.
+export type FeatureFlag = 'DemoFlag' | 'Select' // 'DemoFlag' | 'Flag2' | 'Etc'.
 
 export function defaultFlagConfig(): FeatureFlagConfig {
   return {
     DemoFlag: {
       description: 'Showcase feature-flag being enabled/disabled',
+      isEnabled: false,
+    },
+
+    Select: {
+      description: 'Showcase Select component',
       isEnabled: false,
     },
   }

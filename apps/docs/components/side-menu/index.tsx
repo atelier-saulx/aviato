@@ -38,10 +38,6 @@ const componentsSubMenu: MenuDataItems[] = [
     title: 'Text Field',
     route: '/components/text-field',
   },
-  {
-    title: 'Select',
-    route: '/components/select',
-  },
 ]
 
 const mainMenu: MenuDataItems[] = [
@@ -62,6 +58,13 @@ if (featureFlags.isEnabled('DemoFlag')) {
   componentsSubMenu.push({
     title: 'Demo Page',
     route: '/components/demo-page',
+  })
+}
+
+if (featureFlags.isEnabled('Select')) {
+  componentsSubMenu.push({
+    title: 'Select',
+    route: '/components/select',
   })
 }
 

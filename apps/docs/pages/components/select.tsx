@@ -13,7 +13,7 @@ const SelectPage = () => {
       <>
         <Column css={{ width: '100%' }}>
           <Row css={{ width: '100%' }}>
-            <Select
+            <NativeSelect
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
@@ -30,7 +30,7 @@ const SelectPage = () => {
           <BigSpacer />
 
           <Row css={{ width: '100%' }}>
-            <NativeSelect
+            <Select
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
