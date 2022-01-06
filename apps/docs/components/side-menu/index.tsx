@@ -68,6 +68,13 @@ if (featureFlags.isEnabled('Select')) {
   })
 }
 
+if (featureFlags.isEnabled('ContextMenu')) {
+  componentsSubMenu.push({
+    title: 'Context Menu',
+    route: '/components/context-menu',
+  })
+}
+
 const HeaderDiv = styled('div', {
   display: 'flex',
   justifyContent: 'flex-start',

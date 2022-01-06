@@ -2,7 +2,7 @@ import { log } from '@aviato/utils'
 import { getSettledFlagsState } from './consolidateFlagState'
 import { FeatureFlagConfig, MappedFlagConfig } from './types'
 
-export type FeatureFlag = 'DemoFlag' | 'Select' // 'DemoFlag' | 'Flag2' | 'Etc'.
+export type FeatureFlag = 'DemoFlag' | 'Select' | 'ContextMenu' // 'DemoFlag' | 'Flag2' | 'Etc'.
 
 export function defaultFlagConfig(): FeatureFlagConfig {
   return {
@@ -14,6 +14,11 @@ export function defaultFlagConfig(): FeatureFlagConfig {
     Select: {
       description: 'Showcase Select component',
       isEnabled: false,
+    },
+
+    ContextMenu: {
+      description: 'Showcase ContextMenu component',
+      isEnabled: true,
     },
   }
 }
