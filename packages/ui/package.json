@@ -15,7 +15,7 @@
     "@aviato/utils": "*",
     "@stitches/react": "^1.2.6",
     "next-themes": "^0.0.15",
-    "react": "^17.0.2",
+    "react": "17.0.2",
     "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "react-textarea-autosize": "^8.3.3",
     "svgo": "^2.8.0",
     "tsup": "^5.10.1",
-    "typescript": "4.5.2"
+    "typescript": "4.5.4"
   },
   "prettier": "@aviato/prettier-config",
   "eslintConfig": {
@@ -58,7 +58,6 @@
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",
-    "lint:prettier": "prettier --write './src/**/*.ts{,x}'",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "lint:prettier": "prettier --write './src/**/*.ts{,x}'"
   }
 }
