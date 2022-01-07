@@ -106,7 +106,7 @@ export const Slider = React.forwardRef<
     const roundedValue = Math.round((targetValue + Number.EPSILON) * 100) / 100
 
     setValue(roundedValue)
-  }, [smoothDrag, isInteracting, inputValue, step])
+  }, [smoothDrag, isActive, inputValue, step])
 
   const isLabelVisible =
     labelAlwaysVisible || isInteracting || (showLabelOnHover && isHovering)
