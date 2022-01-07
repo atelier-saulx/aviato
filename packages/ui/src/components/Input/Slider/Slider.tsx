@@ -1,4 +1,10 @@
-import React, { ElementRef, useEffect, useRef, useState } from 'react'
+import React, {
+  ElementRef,
+  useEffect,
+  useRef,
+  useState,
+  KeyboardEvent,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
@@ -6,6 +12,9 @@ import { styled } from '~/theme'
 import { getChangeValue, getPosition } from './utils'
 import { Track } from './Track'
 import { Thumb } from './Thumb'
+
+type CaptureEvent = KeyboardEvent<HTMLDivElement>
+type Direction = 'left' | 'right'
 
 export type Mark = {
   value: number
@@ -68,7 +77,7 @@ export const Slider = React.forwardRef<
   })
 
   const position = getPosition({ value: sliderValue, min, max })
-
+  const [inputValue, setInputValue] = useState<number>(position / 100)
   const { ref: container, isActive } = useMove(({ x }) => setInputValue(x))
 
   const sliderLabel =
@@ -79,17 +88,13 @@ export const Slider = React.forwardRef<
 
   const isInteracting = isActive || isFocused
 
-  const [inputValue, setInputValue] = useState<number>(null)
-
   /**
    * Dragging clamp logic:
    * - If dragging, clamp to decimal places for smooth UX.
    * - If releasing, snap to closest step value.
    */
   useEffect(() => {
-    if (inputValue === null) return
-
-    const setWithDecimals = smoothDrag && isInteracting
+    const setWithDecimals = smoothDrag && isActive
 
     const targetValue = getChangeValue({
       value: inputValue,
@@ -106,23 +111,38 @@ export const Slider = React.forwardRef<
   const isLabelVisible =
     labelAlwaysVisible || isInteracting || (showLabelOnHover && isHovering)
 
-  const handleKeydownCapture = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    switch (event.nativeEvent.code) {
-      case 'ArrowUp':
-      case 'ArrowRight': {
-        event.preventDefault()
-        thumb.current.focus()
-        setValue(Math.min(Math.max(sliderValue + 1, min), max))
-        break
-      }
+  const onKeyDown = ({
+    direction,
+    event,
+  }: {
+    direction: Direction
+    event: CaptureEvent
+  }) => {
+    event.preventDefault()
+    thumb.current.focus()
 
-      case 'ArrowDown':
-      case 'ArrowLeft': {
-        event.preventDefault()
-        thumb.current.focus()
-        setValue(Math.min(Math.max(sliderValue - 1, min), max))
-        break
-      }
+    const increment = Math.abs(step) > 1 ? step : 1
+    const delta = direction === 'right' ? increment : -increment
+
+    const newValue = Math.min(Math.max(sliderValue + delta, min), max)
+    const newPosition = getPosition({ value: newValue, min, max })
+
+    setInputValue(newPosition / 100)
+  }
+
+  const handleKeydownCapture = (event: KeyboardEvent<HTMLDivElement>) => {
+    const { code } = event.nativeEvent
+
+    const keyMap: { [key: string]: Direction } = {
+      ArrowDown: 'left',
+      ArrowLeft: 'left',
+      ArrowUp: 'right',
+      ArrowRight: 'right',
+    }
+
+    const direction = keyMap[code]
+    if (direction) {
+      onKeyDown({ direction, event })
     }
   }
 
