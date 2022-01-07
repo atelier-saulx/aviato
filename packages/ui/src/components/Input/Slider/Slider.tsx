@@ -1,10 +1,20 @@
-import React, { ElementRef, useEffect, useState } from 'react'
+import React, {
+  ElementRef,
+  useEffect,
+  useRef,
+  useState,
+  KeyboardEvent,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 import { styled } from '~/theme'
 import { getChangeValue, getPosition } from './utils'
 import { Track } from './Track'
+import { Thumb } from './Thumb'
+
+type CaptureEvent = KeyboardEvent<HTMLDivElement>
+type Direction = 'left' | 'right'
 
 export type Mark = {
   value: number
@@ -17,7 +27,7 @@ const StyledSlider = styled('div', {
   position: 'relative',
   cursor: 'pointer',
   width: '100%',
-  height: 16,
+  height: 24,
   touchAction: 'none',
 })
 
@@ -56,6 +66,8 @@ export const Slider = React.forwardRef<
     ...remainingProps
   } = properties
 
+  const thumb = useRef<HTMLDivElement>()
+
   const [sliderValue, setValue] = useUncontrolled({
     value,
     defaultValue,
@@ -65,14 +77,16 @@ export const Slider = React.forwardRef<
   })
 
   const position = getPosition({ value: sliderValue, min, max })
-
+  const [inputValue, setInputValue] = useState<number>(position / 100)
   const { ref: container, isActive } = useMove(({ x }) => setInputValue(x))
 
   const sliderLabel =
     typeof label === 'function' ? label(Math.round(sliderValue)) : label
 
   const [isHovering, setIsHovering] = useState(false)
-  const [inputValue, setInputValue] = useState<number>(null)
+  const [isFocused, setIsFocused] = useState(false)
+
+  const isInteracting = isActive || isFocused
 
   /**
    * Dragging clamp logic:
@@ -80,8 +94,6 @@ export const Slider = React.forwardRef<
    * - If releasing, snap to closest step value.
    */
   useEffect(() => {
-    if (inputValue === null) return
-
     const setWithDecimals = smoothDrag && isActive
 
     const targetValue = getChangeValue({
@@ -97,25 +109,73 @@ export const Slider = React.forwardRef<
   }, [smoothDrag, isActive, inputValue, step])
 
   const isLabelVisible =
-    labelAlwaysVisible || isActive || (showLabelOnHover && isHovering)
+    labelAlwaysVisible || isInteracting || (showLabelOnHover && isHovering)
+
+  const onKeyDown = ({
+    direction,
+    event,
+  }: {
+    direction: Direction
+    event: CaptureEvent
+  }) => {
+    event.preventDefault()
+    thumb.current.focus()
+
+    const increment = Math.abs(step) > 1 ? step : 1
+    const delta = direction === 'right' ? increment : -increment
+
+    const newValue = Math.min(Math.max(sliderValue + delta, min), max)
+    const newPosition = getPosition({ value: newValue, min, max })
+
+    setInputValue(newPosition / 100)
+  }
+
+  const handleKeydownCapture = (event: KeyboardEvent<HTMLDivElement>) => {
+    const { code } = event.nativeEvent
+
+    const keyMap: { [key: string]: Direction } = {
+      ArrowDown: 'left',
+      ArrowLeft: 'left',
+      ArrowUp: 'right',
+      ArrowRight: 'right',
+    }
+
+    const direction = keyMap[code]
+    if (direction) {
+      onKeyDown({ direction, event })
+    }
+  }
 
   return (
     <StyledSlider
+      tabIndex={-1}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      onKeyDownCapture={handleKeydownCapture}
+      onMouseDownCapture={() => container.current?.focus()}
       ref={useMergedRef(container, forwardedRef)}
       {...remainingProps}
     >
       <Track
         value={sliderValue}
-        label={sliderLabel}
-        marks={marks}
         min={min}
         max={max}
         position={position}
-        isActive={isActive}
-        isLabelVisible={isLabelVisible}
-      />
+        marks={marks}
+      >
+        <Thumb
+          ref={thumb}
+          label={sliderLabel}
+          position={position}
+          isLabelVisible={isLabelVisible}
+          isActive={isInteracting}
+          value={sliderValue}
+          min={min}
+          max={max}
+        />
+      </Track>
 
       <input type="hidden" value={sliderValue} />
     </StyledSlider>
