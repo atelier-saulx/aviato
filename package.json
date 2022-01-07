@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "shx": "^0.3.3",
-    "turbo": "1.0.23"
+    "turbo": "1.0.24"
   },
   "devDependencies": {
     "husky": "^7.0.4",
