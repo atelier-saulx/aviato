@@ -1,15 +1,12 @@
-import React, {
-  createContext,
-  ElementRef,
-  useCallback,
-  useState,
-  useMemo,
-} from 'react'
+import React, { ElementRef, useState, useMemo } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled, ThemeProvider, ToggleThemeButton } from '~/theme'
-import { ToggleMenuButton, menuWidth } from '../SideMenu'
+import { styled, ThemeProvider } from '~/theme'
+
+import { MenuStateContext, menuWidth } from '../SideMenu'
 import { Header, headerHeight } from './Header'
 import { Group } from './Group'
+import { ToggleThemeButton } from './ToggleThemeButton'
+import { ToggleMenuButton } from './ToggleMenuButton'
 
 const StyledApplicationRoot = styled('div', {
   position: 'relative',
@@ -66,16 +63,6 @@ export type ApplicationRootProps = {
 type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
   ApplicationRootProps
 
-interface MenuStateContextType {
-  isMenuOpen: boolean
-  setIsMenuOpen: any
-}
-
-export const MenuStateContext = createContext<MenuStateContextType>({
-  isMenuOpen: false,
-  setIsMenuOpen: (() => {}) as any,
-})
-
 export const ApplicationRoot = React.forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ForwardProps
@@ -88,18 +75,13 @@ export const ApplicationRoot = React.forwardRef<
   const hasSideMenu = Boolean(navigation)
   const NavigationComponent = navigation ? React.cloneElement(navigation) : null
 
-  const handleMenuButtonClick = useCallback(() => {
-    const newState = !isMenuOpen
-    setIsMenuOpen(newState)
-  }, [isMenuOpen])
-
   return (
     <ThemeProvider>
       <MenuStateContext.Provider value={value}>
         <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
           <Header>
             <Group>
-              <ToggleMenuButton onClick={() => handleMenuButtonClick()} />
+              <ToggleMenuButton />
               <ToggleThemeButton />
             </Group>
           </Header>

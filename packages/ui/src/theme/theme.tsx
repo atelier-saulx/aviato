@@ -38,7 +38,7 @@ export const themes = {
 export const getCurrentTheme: () => 'light' | 'dark' = () => {
   if (isBrowser) {
     const root = document.documentElement
-    return root.classList.contains(themes.dark) ? 'dark' : 'light'
+    return root.classList.contains(themes.light) ? 'light' : 'dark'
   }
 
   return 'light'

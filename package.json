@@ -24,20 +24,23 @@
   ],
   "scripts": {
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true",
+    "syncpack": "syncpack fix-mismatches",
     "watch": "turbo run watch",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "test": "turbo run test",
     "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
   "dependencies": {
     "shx": "^0.3.3",
-    "turbo": "1.0.23"
+    "turbo": "1.0.24"
   },
   "devDependencies": {
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2"
+    "lint-staged": "^12.1.2",
+    "rimraf": "^3.0.2",
+    "syncpack": "^6.2.0"
   },
   "lint-staged": {
     "*": [
@@ -64,9 +67,6 @@
         "outputs": []
       },
       "watch": {
-        "cache": false
-      },
-      "clean": {
         "dependsOn": [
           "^build"
         ],

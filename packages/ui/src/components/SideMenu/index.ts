@@ -1,2 +1,2 @@
 export * from './SideMenu'
-export * from './ToggleMenuButton'
+export * from './provider'
