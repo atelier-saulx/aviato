@@ -121,6 +121,7 @@ export const StyledInput = styled('input', {
   lineHeight: '$md',
   fontSize: '$md',
   color: '$TextPrimary',
+  userSelect: 'text',
 
   '&:disabled': {
     background: 'transparent',
