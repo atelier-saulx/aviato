@@ -1,5 +1,6 @@
 import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
 import { log } from '@aviato/utils'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -60,16 +61,6 @@ const TextFieldPage = () => {
               placeholder="Autosize without a row limit"
             />
           </Row>
-
-          <BigSpacer />
-
-          <Row css={{ width: '100%' }}>
-            <TextField
-              variant={variant}
-              invalid
-              placeholder="This is an error state"
-            />
-          </Row>
         </Column>
       </>
     )
@@ -86,17 +77,6 @@ const TextFieldPage = () => {
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
-            />
-          </Row>
-
-          <BigSpacer />
-
-          <Row css={{ width: '100%' }}>
-            <TextField
-              placeholder="Type something here"
-              label="This is a label"
-              description="This is a description"
-              error="This is an error"
             />
           </Row>
         </Column>
