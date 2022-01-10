@@ -46,6 +46,10 @@ const componentsSubMenu: MenuDataItems[] = [
     title: 'Tooltip',
     route: '/components/tooltip',
   },
+  {
+    title: 'Alert',
+    route: '/components/alert',
+  },
 ]
 
 const mainMenu: MenuDataItems[] = [
