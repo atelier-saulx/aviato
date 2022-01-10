@@ -23,7 +23,7 @@ const IconsPage = () => {
       <NextTitle>Icons</NextTitle>
 
       <NextText color="Secondary">
-        Chakra provides multiple ways to use icons in your project
+        Aviato provides multiple ways to use icons in your project
       </NextText>
 
       <ShowcaseComponent background="transparent">
