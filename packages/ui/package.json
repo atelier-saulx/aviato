@@ -13,6 +13,7 @@
   "dependencies": {
     "@aviato/hooks": "*",
     "@aviato/utils": "*",
+    "@radix-ui/react-tooltip": "^0.1.6",
     "@stitches/react": "^1.2.6",
     "next-themes": "^0.0.15",
     "react": "17.0.2",
