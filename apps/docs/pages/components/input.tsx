@@ -7,8 +7,10 @@ import {
   getRandomIcon,
   InputVariant,
 } from '@aviato/ui'
+import { useEffect, useState } from 'react'
 import { log } from '@aviato/utils'
 import { useHasLoaded } from '@aviato/hooks'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -33,6 +35,13 @@ const InputPage = () => {
 
   const ShowInput = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
+
+    const [inputValue, setInputValue] = useState('')
+    const [isInvalid, setIsInvalid] = useState(false)
+
+    useEffect(() => {
+      setIsInvalid(inputValue === 'test')
+    }, [inputValue])
 
     return (
       <>
@@ -85,8 +94,13 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              placeholder="Type something here"
-              invalid
+              placeholder="Type `test` to see invalid input field"
+              value={inputValue}
+              invalid={isInvalid}
+              onChange={(value, payload) => {
+                log.global.debug('Input change: ', { value, payload })
+                setInputValue(value)
+              }}
             />
           </Row>
 
@@ -117,17 +131,6 @@ const InputPage = () => {
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
-            />
-          </Row>
-
-          <BigSpacer />
-
-          <Row css={{ width: '100%' }}>
-            <Input
-              placeholder="Type something here"
-              label="This is a label"
-              description="This is a description"
-              error="This is an error"
             />
           </Row>
         </Column>
