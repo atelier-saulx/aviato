@@ -103,25 +103,27 @@ export const ToastProvider = ({ children }) => {
     toastsRef.current = []
   }
 
+  const toasts = toastsRef.current.map(({ id, children }, index) => {
+    return (
+      <div
+        key={id}
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 16,
+          transform: `translate3d(0,${16 + index * 96}px,0)`,
+          transition: 'transform 0.3s',
+        }}
+      >
+        {children}
+      </div>
+    )
+  })
+
   return (
     <ToastContext.Provider value={toastRef.current}>
       {children}
-      {toastsRef.current.map(({ id, children }, index) => {
-        return (
-          <div
-            key={id}
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 16,
-              transform: `translate3d(0,${16 + index * 96}px,0)`,
-              transition: 'transform 0.3s',
-            }}
-          >
-            {children}
-          </div>
-        )
-      })}
+      {toasts}
     </ToastContext.Provider>
   )
 }
