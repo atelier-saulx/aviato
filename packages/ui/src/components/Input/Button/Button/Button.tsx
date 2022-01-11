@@ -250,7 +250,7 @@ export const Button = React.forwardRef<
     }
 
     onClick()
-  }, [])
+  }, [disabled])
 
   const isFilled = variant === 'filled'
   const isOutlined = variant === 'outlined'
