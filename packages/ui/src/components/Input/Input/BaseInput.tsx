@@ -1,10 +1,12 @@
 import React, { ElementRef, useCallback, BaseSyntheticEvent } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
+import { useUncontrolled, useUuid } from '@aviato/hooks'
+
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
 import { InputType, InputVariant } from './types'
 import { onChange } from '~/types/events'
-import { noop } from '@aviato/utils'
 
 /**
  * NOTICE
@@ -40,7 +42,25 @@ const BaseInputWrapper = styled('div', {
 
   '&.isInvalid': {
     '&::after': {
-      border: '1px solid $ErrorOutline',
+      border: '2px solid $ErrorOutline',
+    },
+
+    '&:hover': {
+      '&::after': {
+        border: '2px solid $ErrorOutline',
+      },
+
+      '&.isActive': {
+        '&::after': {
+          border: '2px solid $ErrorOutline',
+        },
+      },
+    },
+
+    '&.isActive': {
+      '&::after': {
+        border: '2px solid $ErrorOutline',
+      },
     },
   },
 
@@ -183,6 +203,8 @@ export interface OnInputChange extends onChange {
 }
 
 export interface BaseInputProps {
+  value?: string
+  defaultValue?: string
   component?: React.ElementType
   type?: InputType
   placeholder?: string
@@ -205,6 +227,8 @@ export const BaseInput = React.forwardRef<
   ForwardProps
 >((properties, forwardedRef) => {
   const {
+    value,
+    defaultValue,
     component = 'input',
     leftIcon = null,
     rightIcon = null,
@@ -214,6 +238,16 @@ export const BaseInput = React.forwardRef<
     onChange = noop,
     ...remainingProps
   } = properties
+
+  const uuid = useUuid({ prefix: 'input' })
+
+  const [inputValue, setInputValue] = useUncontrolled({
+    value,
+    defaultValue,
+    finalValue: '',
+    rule: (value) => typeof value === 'string',
+    onChange: () => {},
+  })
 
   const [isActive, setIsActive] = React.useState(false)
   const hasLeftIcon = Boolean(leftIcon)
@@ -230,6 +264,7 @@ export const BaseInput = React.forwardRef<
   const handleChange = useCallback((event: BaseSyntheticEvent) => {
     const { value } = event?.target ?? {}
 
+    setInputValue(value)
     onChange(value, { value, event })
   }, [])
 
@@ -244,11 +279,13 @@ export const BaseInput = React.forwardRef<
       <StyledInput
         as={component}
         ref={forwardedRef}
+        id={uuid}
         className={classes}
+        value={inputValue}
+        onInput={handleChange}
         onFocus={() => setIsActive(true)}
         onBlur={() => setIsActive(false)}
         disabled={isDisabled}
-        onChange={handleChange}
         {...remainingProps}
       />
 
