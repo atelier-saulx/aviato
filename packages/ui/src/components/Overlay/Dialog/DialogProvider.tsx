@@ -2,16 +2,22 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import { DialogContext } from './DialogContext'
 import { Backdrop, Button, Input } from '~/components'
 import { Dialog } from './Dialog'
-import { useHotkeys } from '@aviato/hooks'
+import { useHotkeys, HotkeyItem } from '@aviato/hooks'
 
-const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
+const Prompt = ({
+  type = 'prompt',
+  onCancel,
+  onConfirm,
+  hotKeys = ['enter'],
+  ...props
+}) => {
   const ref = useRef<HTMLInputElement>()
   const isPrompt = type === 'prompt'
   const isAlert = type === 'alert'
   const confirm = isPrompt ? () => onConfirm(ref.current.value) : onConfirm
 
   useHotkeys([
-    ['enter', confirm],
+    ...hotKeys.map((key) => [key, confirm] as HotkeyItem),
     ['escape', onCancel],
   ])
 

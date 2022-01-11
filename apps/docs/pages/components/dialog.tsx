@@ -1,11 +1,4 @@
-import {
-  Page,
-  useDialog,
-  DialogProvider,
-  Dialog,
-  Button,
-  IconClose,
-} from '@aviato/ui'
+import { Page, useDialog, DialogProvider, Dialog, Button } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
