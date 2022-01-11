@@ -1,9 +1,53 @@
-import { Page, toast, Toaster, Toast } from '@aviato/ui'
+import {
+  Page,
+  useToast,
+  ToastProvider,
+  Toast,
+  Button,
+  IconClose,
+} from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
+const Notification = ({ children }) => {
+  const toast = useToast()
+  return (
+    <div
+      style={{
+        cursor: 'pointer',
+        marginBottom: 16,
+      }}
+      onClick={() => {
+        toast(children)
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
+const CloseAllButton = () => {
+  const toast = useToast()
+  const amount = toast.useAmount()
+
+  return (
+    <>
+      <Button
+        disabled={!amount}
+        leftIcon={<IconClose />}
+        onClick={() => {
+          toast.close()
+        }}
+      >
+        Close All Toasts ({amount})
+      </Button>
+    </>
+  )
+}
+
 const IconsPage = () => {
   const hasLoaded = useHasLoaded()
+
   if (!hasLoaded) {
     return null
   }
@@ -30,28 +74,15 @@ const IconsPage = () => {
       </NextText>
 
       <ShowcaseComponent background="transparent">
-        <div>
-          {toasts.map((notification, index) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  cursor: 'pointer',
-                  marginTop: index ? 16 : 0,
-                }}
-                onClick={() => {
-                  toast(notification)
-                }}
-              >
-                {notification}
-              </div>
-            )
-          })}
-        </div>
+        <ToastProvider>
+          <div>
+            {toasts.map((notification, index) => {
+              return <Notification key={index}>{notification}</Notification>
+            })}
+            <CloseAllButton />
+          </div>
+        </ToastProvider>
       </ShowcaseComponent>
-      <div style={{ zIndex: 99 }}>
-        <Toaster />
-      </div>
     </Page>
   )
 }
