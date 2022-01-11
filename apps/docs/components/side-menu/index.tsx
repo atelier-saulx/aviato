@@ -38,6 +38,18 @@ const componentsSubMenu: MenuDataItems[] = [
     title: 'Text Field',
     route: '/components/text-field',
   },
+  {
+    title: 'Icons',
+    route: '/components/icons',
+  },
+  {
+    title: 'Tooltip',
+    route: '/components/tooltip',
+  },
+  {
+    title: 'Alert',
+    route: '/components/alert',
+  },
 ]
 
 const mainMenu: MenuDataItems[] = [
