@@ -1,4 +1,4 @@
-import { Page, icons, toast, Toaster, Toast } from '@aviato/ui'
+import { Page, toast, Toaster, Toast } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 

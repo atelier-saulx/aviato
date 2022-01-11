@@ -4,8 +4,6 @@ import React, {
   ComponentProps,
   ReactChildren,
   ReactNode,
-  useState,
-  useEffect,
 } from 'react'
 
 import { styled } from '~/theme'
