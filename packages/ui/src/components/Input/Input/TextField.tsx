@@ -46,9 +46,14 @@ export const TextField = React.forwardRef<
 
   const isInvalid = Boolean(error || invalid)
 
-  const InputComponent = () => {
-    if (autosize) {
-      return (
+  return (
+    <InputWrapper
+      label={label}
+      description={description}
+      error={error}
+      css={{ width: '100%' }}
+    >
+      {autosize ? (
         <BaseInput
           component={TextareaAutosize}
           css={TextFieldStyles}
@@ -59,29 +64,16 @@ export const TextField = React.forwardRef<
           ref={forwardedRef}
           {...remainingProps}
         />
-      )
-    }
-
-    return (
-      <BaseInput
-        component="textarea"
-        css={TextFieldStyles}
-        id={uuid}
-        invalid={isInvalid}
-        ref={forwardedRef}
-        {...remainingProps}
-      />
-    )
-  }
-
-  return (
-    <InputWrapper
-      label={label}
-      description={description}
-      error={error}
-      css={{ width: '100%' }}
-    >
-      <InputComponent />
+      ) : (
+        <BaseInput
+          component="textarea"
+          css={TextFieldStyles}
+          id={uuid}
+          invalid={isInvalid}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
+      )}
     </InputWrapper>
   )
 })
