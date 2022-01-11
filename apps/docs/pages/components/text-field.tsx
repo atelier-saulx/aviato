@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
@@ -12,6 +13,13 @@ const BigSpacer = styled('div', {
 const TextFieldPage = () => {
   const ShowTextField = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
+
+    const [inputValue, setInputValue] = useState('')
+    const [isInvalid, setIsInvalid] = useState(false)
+
+    useEffect(() => {
+      setIsInvalid(inputValue === 'test')
+    }, [inputValue])
 
     return (
       <>
@@ -59,6 +67,21 @@ const TextFieldPage = () => {
               variant={variant}
               autosize
               placeholder="Autosize without a row limit"
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <TextField
+              variant={variant}
+              placeholder="Type `test` to see invalid input field"
+              value={inputValue}
+              invalid={isInvalid}
+              onChange={(value, payload) => {
+                log.global.debug('Input change: ', { value, payload })
+                setInputValue(value)
+              }}
             />
           </Row>
         </Column>
