@@ -1,5 +1,7 @@
+import React, { useState } from 'react'
 import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
 import { log } from '@aviato/utils'
+import { useWhyDidYouUpdate } from '@aviato/hooks'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
@@ -12,6 +14,10 @@ const BigSpacer = styled('div', {
 const TextFieldPage = () => {
   const ShowTextField = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
+
+    const [inputValue, setInputValue] = useState('')
+
+    useWhyDidYouUpdate('Input value: ', { inputValue })
 
     return (
       <>
@@ -59,6 +65,18 @@ const TextFieldPage = () => {
               variant={variant}
               autosize
               placeholder="Autosize without a row limit"
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <TextField
+              variant={variant}
+              placeholder="This is an error state"
+              onChange={(value) => {
+                setInputValue(value)
+              }}
             />
           </Row>
         </Column>
