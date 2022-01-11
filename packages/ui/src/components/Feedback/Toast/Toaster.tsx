@@ -39,8 +39,21 @@ const ToastWrapper = ({ id, children, onClick = null, toast }) => {
   )
 }
 
-export const ToastProvider = ({ children }) => {
+type PositionStyleProps = {
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export const ToastProvider = ({
+  children,
+  position = 'bottom-right',
+  fixed = true,
+}) => {
   const [length, setLength] = useState(0)
+  const positionRef = useRef<typeof position>()
+  const positionStyleRef = useRef<PositionStyleProps>()
   const toastsRef = useRef<
     {
       id: number
@@ -103,16 +116,38 @@ export const ToastProvider = ({ children }) => {
     toastsRef.current = []
   }
 
+  if (positionRef.current !== position) {
+    positionRef.current = position
+    const [y, x] = position.split('-')
+    const positionStyle: PositionStyleProps = {}
+    if (y === 'bottom') {
+      positionStyle.bottom = 16
+    } else {
+      positionStyle.top = 16
+    }
+    if (x === 'left') {
+      positionStyle.left = 16
+    } else {
+      positionStyle.right = 16
+    }
+    positionStyleRef.current = positionStyle
+  }
+
   const toasts = toastsRef.current.map(({ id, children }, index) => {
+    let y = index * 96
+
+    if ('bottom' in positionStyleRef.current) {
+      y *= -1
+    }
+
     return (
       <div
         key={id}
         style={{
-          position: 'absolute',
-          top: 0,
-          right: 16,
-          transform: `translate3d(0,${16 + index * 96}px,0)`,
+          position: fixed ? 'fixed' : 'absolute',
+          transform: `translate3d(0,${y}px,0)`,
           transition: 'transform 0.3s',
+          ...positionStyleRef.current,
         }}
       >
         {children}

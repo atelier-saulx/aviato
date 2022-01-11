@@ -72,7 +72,6 @@ const IconsPage = () => {
         Show dynamic notifications and alerts to user, part of notifications
         system
       </NextText>
-
       <ShowcaseComponent background="transparent">
         <ToastProvider>
           <div>
