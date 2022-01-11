@@ -217,6 +217,7 @@ export interface BaseInputProps {
   maxRows?: number
   minRows?: number
   onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
 }
 
 type StitchedProps = ComponentProps<typeof StyledInput>

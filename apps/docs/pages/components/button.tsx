@@ -10,7 +10,6 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -40,7 +39,6 @@ const ButtonPage = () => {
 
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
-
     const [isDisabled, setIsDisabled] = useState(false)
     const Icon = useMemo(() => <RandomIcon />, [])
 

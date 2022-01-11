@@ -20,9 +20,7 @@ export const Input = React.forwardRef<
   ForwardProps
 >((properties, forwardedRef) => {
   const { label, description, error, invalid, ...remainingProps } = properties
-
   const uuid = useUuid({ prefix: 'input' })
-
   const isInvalid = Boolean(error || invalid)
 
   return (

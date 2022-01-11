@@ -54,6 +54,10 @@ const componentsSubMenu: MenuDataItems[] = [
     title: 'Toast',
     route: '/components/toast',
   },
+  {
+    title: 'Dialog',
+    route: '/components/dialog',
+  },
 ]
 
 const mainMenu: MenuDataItems[] = [
