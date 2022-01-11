@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react'
 import {
   Page,
   Switch,
@@ -10,7 +11,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-import { useState } from 'react'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
@@ -36,12 +37,13 @@ const IconButtonPage = () => {
     return null
   }
 
-  const randomIcon = () => getRandomIconName() as IconName
+  const randomIconName = () => getRandomIconName() as IconName
 
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
     const [isDisabled, setIsDisabled] = useState(false)
+    const Icon = useMemo(() => randomIconName(), [])
 
     return (
       <>
@@ -66,7 +68,7 @@ const IconButtonPage = () => {
                   type={type}
                   variant="filled"
                   disabled={isDisabled}
-                  icon={randomIcon()}
+                  icon={Icon}
                 />
               </Row>
             </Column>
@@ -77,6 +79,8 @@ const IconButtonPage = () => {
   }
 
   const ShowDisabledButtons = () => {
+    const Icon = useMemo(() => randomIconName(), [])
+
     return (
       <>
         <Column>
@@ -84,19 +88,15 @@ const IconButtonPage = () => {
           <Row>
             <Column>
               <Row>
-                <IconButton variant="filled" disabled icon={randomIcon()} />
+                <IconButton variant="filled" disabled icon={Icon} />
 
                 <Spacer />
 
-                <IconButton variant="outlined" disabled icon={randomIcon()} />
+                <IconButton variant="outlined" disabled icon={Icon} />
 
                 <Spacer />
 
-                <IconButton
-                  variant="transparent"
-                  disabled
-                  icon={randomIcon()}
-                />
+                <IconButton variant="transparent" disabled icon={Icon} />
               </Row>
             </Column>
           </Row>
@@ -127,21 +127,6 @@ const IconButtonPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowDisabledButtons />
-      </ShowcaseComponent>
-
-      <ShowcaseComponent background="transparent">
-        <IconButton
-          type="primary"
-          variant="filled"
-          icon={randomIcon()}
-          css={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-            width: 200,
-            height: 200,
-          }}
-        />
       </ShowcaseComponent>
     </Page>
   )

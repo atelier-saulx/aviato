@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import {
   Column,
   Row,
@@ -7,7 +8,6 @@ import {
   getRandomIcon,
   InputVariant,
 } from '@aviato/ui'
-import { useEffect, useState } from 'react'
 import { log } from '@aviato/utils'
 import { useHasLoaded } from '@aviato/hooks'
 
@@ -38,6 +38,7 @@ const InputPage = () => {
 
     const [inputValue, setInputValue] = useState('')
     const [isInvalid, setIsInvalid] = useState(false)
+    const Icon = useMemo(() => <RandomIcon />, [])
 
     useEffect(() => {
       setIsInvalid(inputValue === 'test')
@@ -63,7 +64,7 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              leftIcon={<RandomIcon />}
+              leftIcon={Icon}
               placeholder="Type something here"
             />
           </Row>
@@ -73,7 +74,7 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              rightIcon={<RandomIcon />}
+              rightIcon={Icon}
               placeholder="Type something here"
             />
           </Row>
@@ -83,8 +84,8 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              leftIcon={<RandomIcon />}
-              rightIcon={<RandomIcon />}
+              leftIcon={Icon}
+              rightIcon={Icon}
               placeholder="Type something here"
             />
           </Row>
@@ -109,8 +110,8 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              leftIcon={<RandomIcon />}
-              rightIcon={<RandomIcon />}
+              leftIcon={Icon}
+              rightIcon={Icon}
               placeholder="Type something here"
               disabled
             />
