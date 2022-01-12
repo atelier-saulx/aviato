@@ -109,9 +109,8 @@ type MenuDataItems = {
 }
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
-  const [activeRoute, setActiveRoute] = useState('/')
-  const { asPath, events } = router
-
+  const { asPath, events, pathname } = router
+  const [activeRoute, setActiveRoute] = useState(pathname)
   const { setIsMenuOpen } = useContext(MenuStateContext)
 
   const handleRouteChange = useCallback(() => {
