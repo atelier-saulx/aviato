@@ -1,4 +1,11 @@
-import { Page, useDialog, DialogProvider, Dialog, Button } from '@aviato/ui'
+import {
+  Page,
+  useDialog,
+  DialogProvider,
+  Dialog,
+  Button,
+  Input,
+} from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -64,6 +71,50 @@ const DialogPage = () => {
           Show dynamic notifications and alerts to user, part of notifications
           system
         </NextText>
+        <ShowcaseComponent background="transparent">
+          <div>
+            <Dialog>Only title</Dialog>
+            <br />
+            <Dialog title="Title">And description</Dialog>
+            <br />
+            <Dialog title="Title and buttons">
+              <Dialog.Buttons>
+                <Button variant="outlined">Cancel</Button>
+                <Button>OK</Button>
+              </Dialog.Buttons>
+            </Dialog>
+            <br />
+            <Dialog title="Title">
+              <Dialog.Body>Description and buttons</Dialog.Body>
+              <Dialog.Buttons>
+                <Button variant="outlined">Cancel</Button>
+                <Button>OK</Button>
+              </Dialog.Buttons>
+            </Dialog>
+            <br />
+            <Dialog title="Subscribe">
+              <Dialog.Body>
+                To subscribe to this website, please neter your email address
+                here. We will send updates occasionally.
+                <Input />
+              </Dialog.Body>
+              <Dialog.Buttons>
+                <Button variant="outlined">Cancel</Button>
+                <Button>OK</Button>
+              </Dialog.Buttons>
+            </Dialog>
+            <br />
+            <Dialog title="Only input">
+              <Dialog.Body>
+                <Input />
+              </Dialog.Body>
+              <Dialog.Buttons>
+                <Button variant="outlined">Cancel</Button>
+                <Button>OK</Button>
+              </Dialog.Buttons>
+            </Dialog>
+          </div>
+        </ShowcaseComponent>
         <ShowcaseComponent background="transparent">
           <div>
             <DialogButton />

@@ -1,4 +1,10 @@
-import React, { forwardRef, ElementRef, ComponentProps, ReactNode } from 'react'
+import React, {
+  forwardRef,
+  ElementRef,
+  ComponentProps,
+  ReactNode,
+  Fragment,
+} from 'react'
 import { styled } from '~/theme'
 import { Text } from '~/components'
 
@@ -7,38 +13,66 @@ const Container = styled('div', {
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
   backgroundColor: '$Background1dp',
+  paddingTop: 24,
   paddingLeft: 24,
   paddingRight: 24,
   paddingBottom: 24,
-})
-
-const StyledTitle = styled(Text, {
-  marginTop: 24,
-})
-
-const StyledBody = styled('div', {
-  marginTop: 12,
 })
 
 const StyledButtons = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  marginTop: 24,
+  paddingTop: 24,
+})
+
+const ButtonSpacer = styled('div', {
+  width: 16,
+})
+
+const BodySpacer = styled('div', {
+  height: 16,
 })
 
 const Title = ({ children }) => {
-  return children ? (
-    <StyledTitle weight="semibold">{children}</StyledTitle>
-  ) : null
+  return <Text weight="semibold">{children}</Text>
 }
 
 const Body = ({ children }) => {
-  return children ? <StyledBody>{children}</StyledBody> : null
+  if (typeof children === 'string') {
+    return <Text css={{ paddingTop: 8 }}>{children}</Text>
+  } else if (Array.isArray(children)) {
+    return (
+      <>
+        {children.map((child, index) => (
+          <Body key={index}>{child}</Body>
+        ))}
+      </>
+    )
+  } else {
+    return (
+      <>
+        <BodySpacer />
+        {children}
+      </>
+    )
+  }
 }
 
 const Buttons = ({ children }) => {
-  return children ? <StyledButtons>{children}</StyledButtons> : null
+  if (Array.isArray(children)) {
+    children = children.map((child, index) => {
+      return index ? (
+        <Fragment key={index}>
+          <ButtonSpacer />
+          {child}
+        </Fragment>
+      ) : (
+        child
+      )
+    })
+  }
+  return <StyledButtons>{children}</StyledButtons>
 }
 
 export interface DialogProps extends ComponentProps<typeof Container> {
@@ -49,6 +83,14 @@ export interface DialogProps extends ComponentProps<typeof Container> {
 export const Dialog = Object.assign(
   forwardRef<ElementRef<typeof Container>, DialogProps>(
     ({ children, title, ...props }, forwardedRef) => {
+      if (typeof children === 'string') {
+        if (!title) {
+          title = children
+          children = null
+        } else {
+          children = <Body>{children}</Body>
+        }
+      }
       return (
         <Container ref={forwardedRef} {...props}>
           <Dialog.Title>{title}</Dialog.Title>

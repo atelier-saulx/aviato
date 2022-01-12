@@ -34,9 +34,7 @@ const Prompt = ({
             Cancel
           </Button>
         )}
-        <Button css={{ marginLeft: 24 }} onClick={confirm}>
-          OK
-        </Button>
+        <Button onClick={confirm}>OK</Button>
       </Dialog.Buttons>
     </Dialog>
   )
@@ -134,7 +132,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
         key={id}
         css={{
           position: fixed ? 'fixed' : 'absolute',
-          cursor: 'pointer',
+          // cursor: 'pointer',
           // TEMP HACK UNITL WE HAVE PORTAL WORKING
           zIndex: portal ? 999 : null,
           alignItems: 'center',
