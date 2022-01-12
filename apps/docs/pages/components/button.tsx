@@ -10,7 +10,6 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 

@@ -1,4 +1,4 @@
-import { Page, Tooltip } from '@aviato/ui'
+import { Page, Tooltip, Button } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -17,7 +17,9 @@ const TooltipPage = () => {
       </NextText>
 
       <ShowcaseComponent background="transparent">
-        <Tooltip content={"I'm a tooltip!"}>Hover me!</Tooltip>
+        <Tooltip content={"I'm a tooltip!"}>
+          <Button>Hover me!</Button>
+        </Tooltip>
       </ShowcaseComponent>
     </Page>
   )

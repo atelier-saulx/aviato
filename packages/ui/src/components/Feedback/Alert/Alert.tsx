@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { IconCloseCircle } from '~/icons'
 import { styled } from '~/theme'
-import { Text } from '~/components'
+import { Text } from '../../Text'
 
 const Container = styled('div', {
   backgroundColor: '$ErrorLight',
@@ -21,6 +21,7 @@ const IconColumn = styled('div', {
   paddingTop: 16,
   paddingBottom: 16,
   paddingRight: 12,
+  flexShrink: 0,
 })
 
 const TextColumn = styled('div', {

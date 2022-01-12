@@ -49,21 +49,24 @@ type ForwardProps = ComponentProps<typeof StyledText> & TextProps
 export const Text = React.forwardRef<
   ElementRef<typeof StyledText>,
   ForwardProps
+  // @ts-ignore
 >((properties, forwardedRef) => {
-  const {
-    size = 'medium',
-    weight = 'regular',
-    color = 'Primary',
-    ...remainingProps
-  } = properties
-
-  return (
-    <StyledText
-      color={color}
-      size={size}
-      weight={weight}
-      ref={forwardedRef}
-      {...remainingProps}
-    />
-  )
+  if (typeof properties.children === 'string') {
+    const {
+      size = 'medium',
+      weight = 'regular',
+      color = 'Primary',
+      ...remainingProps
+    } = properties
+    return (
+      <StyledText
+        color={color}
+        size={size}
+        weight={weight}
+        ref={forwardedRef}
+        {...remainingProps}
+      />
+    )
+  }
+  return properties.children
 })
