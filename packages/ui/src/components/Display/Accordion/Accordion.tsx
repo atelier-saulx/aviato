@@ -40,13 +40,25 @@ const ItemHeader = styled('header', {
   height: 40,
   display: 'flex',
   alignItems: 'center',
+
   variants: {
     state: {
       active: {
         backgroundColor: '$ActionMainHover',
+        '&:hover': {
+          background: '$ActionMainSelected',
+        },
+        '&:active': {
+          background: '$ActionMainHover',
+        },
       },
       inactive: {
-        backgroundColor: null,
+        '&:hover': {
+          background: '$ActionMainHover',
+        },
+        '&:active': {
+          background: '$ActionMainSelected',
+        },
       },
     },
   },
