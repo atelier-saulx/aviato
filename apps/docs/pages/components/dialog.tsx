@@ -8,6 +8,7 @@ import {
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { useEffect, useRef } from 'react'
 
 const DialogButton = ({ level = 1 }) => {
   const { confirm, alert, prompt } = useDialog()
@@ -45,10 +46,20 @@ const DialogButton = ({ level = 1 }) => {
 
 const DialogButtonAndClose = () => {
   const dialog = useDialog()
+  const timer = useRef<NodeJS.Timeout>()
+
+  useEffect(() => {
+    return () => clearTimeout(timer.current)
+  }, [])
+
   return (
     <Button
       onClick={() => {
-        dialog(<Dialog title="I will dissappear!">Oh noooo!</Dialog>)
+        const id = dialog(<Dialog title="I will dissappear!">Oh noooo!</Dialog>)
+
+        timer.current = setTimeout(() => {
+          dialog.close(id)
+        }, 3000)
       }}
     >
       Open Dialog and close after 3 seconds
