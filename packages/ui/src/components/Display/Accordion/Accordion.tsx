@@ -63,7 +63,6 @@ const Icon = styled(IconChevronDown, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  transition: 'transform 0.3s',
   variants: {
     state: {
       active: {
