@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import { DialogContext } from './DialogContext'
-import { Backdrop, Button, Input } from '~/components'
+import { Backdrop, Input } from '~/components'
 import { Dialog } from './Dialog'
 import { useHotkeys, HotkeyItem } from '@aviato/hooks'
 
@@ -29,12 +29,8 @@ const Prompt = ({
         </Dialog.Body>
       ) : null}
       <Dialog.Buttons>
-        {isAlert ? null : (
-          <Button variant="outlined" onClick={onCancel}>
-            Cancel
-          </Button>
-        )}
-        <Button onClick={confirm}>OK</Button>
+        {isAlert ? null : <Dialog.Cancel onClick={onCancel} />}
+        <Dialog.Confirm onClick={onConfirm} />
       </Dialog.Buttons>
     </Dialog>
   )

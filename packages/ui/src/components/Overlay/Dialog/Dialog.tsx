@@ -6,7 +6,7 @@ import React, {
   Fragment,
 } from 'react'
 import { styled } from '~/theme'
-import { Text } from '~/components'
+import { Text, Button } from '~/components'
 
 const Container = styled('div', {
   width: 520,
@@ -76,6 +76,15 @@ const Buttons = ({ children }) => {
   return <StyledButtons>{children}</StyledButtons>
 }
 
+const Confirm = ({ children = 'OK', ...props }) => (
+  <Button {...props}>{children}</Button>
+)
+const Cancel = ({ children = 'Cancel', ...props }) => (
+  <Button type="ghost" variant="outlined" {...props}>
+    {children}
+  </Button>
+)
+
 export interface DialogProps extends ComponentProps<typeof Container> {
   children?: ReactNode
   title?: string
@@ -104,5 +113,7 @@ export const Dialog = Object.assign(
     Title,
     Body,
     Buttons,
+    Confirm,
+    Cancel,
   }
 )

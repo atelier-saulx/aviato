@@ -90,28 +90,28 @@ const DialogPage = () => {
             <br />
             <Dialog title="Title and buttons">
               <Dialog.Buttons>
-                <Button variant="outlined">Cancel</Button>
-                <Button>OK</Button>
+                <Dialog.Cancel />
+                <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
             <br />
             <Dialog title="Are you sure you want to permanently delete this content model?">
               <Dialog.Body>This action cannot be undone.</Dialog.Body>
               <Dialog.Buttons>
-                <Button variant="outlined">Cancel</Button>
-                <Button>OK</Button>
+                <Dialog.Cancel />
+                <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
             <br />
             <Dialog title="Subscribe">
               <Dialog.Body>
-                To subscribe to this website, please neter your email address
+                To subscribe to this website, please enter your email address
                 here. We will send updates occasionally.
                 <Input />
               </Dialog.Body>
               <Dialog.Buttons>
-                <Button variant="outlined">Cancel</Button>
-                <Button>OK</Button>
+                <Dialog.Cancel />
+                <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
             <br />
@@ -120,8 +120,8 @@ const DialogPage = () => {
                 <Input />
               </Dialog.Body>
               <Dialog.Buttons>
-                <Button variant="outlined">Cancel</Button>
-                <Button>OK</Button>
+                <Dialog.Cancel />
+                <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
           </div>
