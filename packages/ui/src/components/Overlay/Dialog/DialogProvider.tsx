@@ -131,6 +131,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
       <Backdrop
         key={id}
         css={{
+          padding: 20,
           position: fixed ? 'fixed' : 'absolute',
           // cursor: 'pointer',
           // TEMP HACK UNITL WE HAVE PORTAL WORKING
@@ -153,7 +154,6 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
   return (
     <DialogContext.Provider value={dialogRef.current}>
       {children}
-      {/* {dialogs} */}
       {dialogs}
     </DialogContext.Provider>
   )

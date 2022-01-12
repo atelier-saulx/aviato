@@ -34,7 +34,7 @@ const DialogButton = ({ level = 1 }) => {
       <br />
       <Button
         onClick={async () => {
-          const name = await prompt('What is your name')
+          const name = await prompt('What is your name?')
           console.log({ name })
         }}
       >
@@ -83,7 +83,7 @@ const DialogPage = () => {
           system
         </NextText>
         <ShowcaseComponent background="transparent">
-          <div>
+          <div style={{ maxWidth: '100%' }}>
             <Dialog>Only title</Dialog>
             <br />
             <Dialog title="Title">And description</Dialog>
@@ -95,8 +95,8 @@ const DialogPage = () => {
               </Dialog.Buttons>
             </Dialog>
             <br />
-            <Dialog title="Title">
-              <Dialog.Body>Description and buttons</Dialog.Body>
+            <Dialog title="Are you sure you want to permanently delete this content model?">
+              <Dialog.Body>This action cannot be undone.</Dialog.Body>
               <Dialog.Buttons>
                 <Button variant="outlined">Cancel</Button>
                 <Button>OK</Button>

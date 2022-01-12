@@ -10,6 +10,7 @@ import { Text } from '~/components'
 
 const Container = styled('div', {
   width: 520,
+  maxWidth: '100%',
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
   backgroundColor: '$Background1dp',
