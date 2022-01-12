@@ -34,18 +34,22 @@ const ItemContainer = styled('div', {
   width: '100%',
   cursor: 'pointer',
   borderBottom: '1px solid $OtherDivider',
+  '&:hover': {
+    '>header': {
+      background: '$ActionMainHover',
+    },
+  },
+  '&:active': {
+    '>header': {
+      background: '$ActionMainSelected',
+    },
+  },
 })
 
 const ItemHeader = styled('header', {
   height: 40,
   display: 'flex',
   alignItems: 'center',
-  '&:hover': {
-    background: '$ActionMainHover',
-  },
-  '&:active': {
-    background: '$ActionMainSelected',
-  },
   variants: {
     state: {
       active: {

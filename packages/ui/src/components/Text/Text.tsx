@@ -68,5 +68,5 @@ export const Text = React.forwardRef<
       />
     )
   }
-  return properties.children
+  return properties.children || null
 })
