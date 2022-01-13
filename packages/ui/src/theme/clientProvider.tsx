@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { LocalStorage } from '@aviato/utils'
 import { themes } from './theme'
-
-const COLOR_MODE_KEY = 'colorMode'
+import { THEME_STORAGE_KEY } from './provider'
 
 type ColorMode = 'light' | 'dark'
 
@@ -28,7 +27,7 @@ export const ThemeProvider: React.FC = ({ children }) => {
   const [colorMode, rawSetColorMode] = useState<ColorMode>('light')
 
   useEffect(() => {
-    let initialColorMode = LocalStorage.getItem(COLOR_MODE_KEY) as ColorMode
+    let initialColorMode = LocalStorage.getItem(THEME_STORAGE_KEY) as ColorMode
     if (!initialColorMode) {
       const root = document.documentElement
       initialColorMode = root.classList.contains(themes.dark) ? 'dark' : 'light'
@@ -40,7 +39,7 @@ export const ThemeProvider: React.FC = ({ children }) => {
 
   const contextValue: ThemeProps = React.useMemo(() => {
     function setTheme(newValue: ColorMode): void {
-      LocalStorage.setItem(COLOR_MODE_KEY, newValue)
+      LocalStorage.setItem(THEME_STORAGE_KEY, newValue)
       baseSetColorMode(newValue)
       rawSetColorMode(newValue)
     }

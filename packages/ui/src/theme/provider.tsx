@@ -1,12 +1,12 @@
 import React from 'react'
-import {
-  ThemeProvider as NextThemeProvider,
-  useTheme as useNextTheme,
-} from 'next-themes'
 import { themes } from './theme'
 import {
-  ThemeProvider as CSRThemeProvider,
-  useTheme as useCSRTheme,
+  ThemeProvider as NextThemeProvider,
+  useTheme as useNextContext,
+} from 'next-themes'
+import {
+  ThemeProvider as ClientSideThemeProvider,
+  useTheme as useClientSideContext,
   ThemeProps,
 } from './clientProvider'
 
@@ -33,8 +33,10 @@ interface NextThemeProps {
 let isSSR: boolean = false
 
 export const useTheme: () => NextThemeProps | ThemeProps = () => {
-  return isSSR ? useNextTheme() : useCSRTheme()
+  return isSSR ? useNextContext() : useClientSideContext()
 }
+
+export const THEME_STORAGE_KEY = 'colorMode'
 
 export interface ThemeProviderProps {
   isSSRApplication?: boolean
@@ -53,6 +55,7 @@ export function ThemeProvider({
         disableTransitionOnChange
         attribute="class"
         defaultTheme="system"
+        storageKey={THEME_STORAGE_KEY}
         value={themes}
       >
         {children}
@@ -60,5 +63,5 @@ export function ThemeProvider({
     )
   }
 
-  return <CSRThemeProvider>{children}</CSRThemeProvider>
+  return <ClientSideThemeProvider>{children}</ClientSideThemeProvider>
 }
