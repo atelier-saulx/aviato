@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
 import { log } from '@aviato/utils'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -11,6 +13,13 @@ const BigSpacer = styled('div', {
 const TextFieldPage = () => {
   const ShowTextField = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
+
+    const [inputValue, setInputValue] = useState('')
+    const [isInvalid, setIsInvalid] = useState(false)
+
+    useEffect(() => {
+      setIsInvalid(inputValue === 'test')
+    }, [inputValue])
 
     return (
       <>
@@ -66,8 +75,13 @@ const TextFieldPage = () => {
           <Row css={{ width: '100%' }}>
             <TextField
               variant={variant}
-              invalid
-              placeholder="This is an error state"
+              placeholder="Type `test` to see invalid input field"
+              value={inputValue}
+              invalid={isInvalid}
+              onChange={(value, payload) => {
+                log.global.debug('Input change: ', { value, payload })
+                setInputValue(value)
+              }}
             />
           </Row>
         </Column>
@@ -86,17 +100,6 @@ const TextFieldPage = () => {
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
-            />
-          </Row>
-
-          <BigSpacer />
-
-          <Row css={{ width: '100%' }}>
-            <TextField
-              placeholder="Type something here"
-              label="This is a label"
-              description="This is a description"
-              error="This is an error"
             />
           </Row>
         </Column>

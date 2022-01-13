@@ -38,6 +38,26 @@ const componentsSubMenu: MenuDataItems[] = [
     title: 'Text Field',
     route: '/components/text-field',
   },
+  {
+    title: 'Icons',
+    route: '/components/icons',
+  },
+  {
+    title: 'Tooltip',
+    route: '/components/tooltip',
+  },
+  {
+    title: 'Alert',
+    route: '/components/alert',
+  },
+  {
+    title: 'Toast',
+    route: '/components/toast',
+  },
+  {
+    title: 'Dialog',
+    route: '/components/dialog',
+  },
 ]
 
 const mainMenu: MenuDataItems[] = [
@@ -89,8 +109,8 @@ type MenuDataItems = {
 }
 
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
-  const [activeRoute, setActiveRoute] = useState('/')
-  const { asPath, events } = router
+  const { asPath, events, pathname } = router
+  const [activeRoute, setActiveRoute] = useState(pathname)
 
   const { setIsMenuOpen } = useMenuContext()
 

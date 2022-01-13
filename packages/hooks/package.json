@@ -12,7 +12,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@aviato/utils": "*",
-    "react": "^17.0.2"
+    "react": "17.0.2"
   },
   "devDependencies": {
     "@aviato/eslint-config": "*",
@@ -24,8 +24,8 @@
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
-    "tsup": "^5.10.1",
-    "typescript": "4.5.2"
+    "tsup": "5.11.10",
+    "typescript": "4.5.4"
   },
   "prettier": "@aviato/prettier-config",
   "eslintConfig": {
@@ -38,7 +38,6 @@
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",
-    "lint:prettier": "prettier --write './src/**/*.ts{,x}'",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "lint:prettier": "prettier --write './src/**/*.ts{,x}'"
   }
 }
