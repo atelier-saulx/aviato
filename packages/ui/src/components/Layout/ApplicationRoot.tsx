@@ -58,6 +58,7 @@ const NavigationWrapper = styled('div', {
 
 export type ApplicationRootProps = {
   navigation?: React.ReactElement
+  SSR?: boolean
 }
 
 type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
@@ -67,7 +68,7 @@ export const ApplicationRoot = React.forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { children, navigation, ...remainingProps } = properties
+  const { SSR = false, children, navigation, ...remainingProps } = properties
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
@@ -76,7 +77,7 @@ export const ApplicationRoot = React.forwardRef<
   const NavigationComponent = navigation ? React.cloneElement(navigation) : null
 
   return (
-    <ThemeProvider>
+    <ThemeProvider isSSRApplication={SSR}>
       <MenuStateContext.Provider value={value}>
         <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
           <Header>

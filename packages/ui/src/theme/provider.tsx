@@ -1,76 +1,53 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ThemeProvider as NextThemeProvider } from 'next-themes'
-import { LocalStorage } from '@aviato/utils'
+import React from 'react'
+import {
+  ThemeProvider as NextThemeProvider,
+  useTheme as useNextTheme,
+} from 'next-themes'
 import { themes } from './theme'
+import {
+  ThemeProvider as CSRThemeProvider,
+  useTheme as useCSRTheme,
+  ThemeProps,
+} from './clientProvider'
 
-const COLOR_MODE_KEY = 'colorMode'
+interface NextThemeProps {
+  /** List of all available theme names */
+  themes: string[]
 
-type ColorMode = 'light' | 'dark'
+  /** Forced theme name for the current page */
+  forcedTheme?: string
 
-type SimpleThemeContextValue = {
-  colorMode: ColorMode
-  setColorMode: (newValue: ColorMode) => void
+  /** Update the theme */
+  setTheme: (theme: string) => void
+
+  /** Active theme name */
+  theme?: string
+
+  /** If `enableSystem` is true and the active theme is "system", this returns whether the system preference resolved to "dark" or "light". Otherwise, identical to `theme` */
+  resolvedTheme?: string
+
+  /** If enableSystem is true, returns the System theme preference ("dark" or "light"), regardless what the active theme is */
+  systemTheme?: 'dark' | 'light'
 }
 
-export const SimpleThemeContext = React.createContext<SimpleThemeContextValue>({
-  colorMode: 'light',
-  setColorMode: () => {},
-})
+let isSSR: boolean = false
 
-function baseSetColorMode(newValue: ColorMode): void {
-  document.documentElement.classList.remove(themes.dark)
-  document.documentElement.classList.remove(themes.light)
-  document.documentElement.classList.add(themes[newValue])
-}
-
-const SimpleThemeProvider: React.FC = ({ children }) => {
-  const [colorMode, rawSetColorMode] = useState<ColorMode>('light')
-
-  useEffect(() => {
-    let initialColorMode = LocalStorage.getItem(COLOR_MODE_KEY) as ColorMode
-    if (!initialColorMode) {
-      const root = document.documentElement
-      initialColorMode = root.classList.contains(themes.dark) ? 'dark' : 'light'
-    }
-
-    rawSetColorMode(initialColorMode)
-    baseSetColorMode(initialColorMode)
-  }, [])
-
-  const contextValue: SimpleThemeContextValue = React.useMemo(() => {
-    function setColorMode(newValue: ColorMode): void {
-      LocalStorage.setItem(COLOR_MODE_KEY, newValue)
-      baseSetColorMode(newValue)
-      rawSetColorMode(newValue)
-    }
-
-    return {
-      colorMode,
-      setColorMode,
-    }
-  }, [colorMode, rawSetColorMode])
-
-  return (
-    <SimpleThemeContext.Provider value={contextValue}>
-      {children}
-    </SimpleThemeContext.Provider>
-  )
-}
-
-export const useThemeContext: () => SimpleThemeContextValue = () => {
-  return useContext(SimpleThemeContext)
+export const useTheme: () => NextThemeProps | ThemeProps = () => {
+  return isSSR ? useNextTheme() : useCSRTheme()
 }
 
 export interface ThemeProviderProps {
-  isNextProject?: boolean
+  isSSRApplication?: boolean
   children: React.ReactNode
 }
 
 export function ThemeProvider({
-  isNextProject = false,
+  isSSRApplication,
   children,
 }: ThemeProviderProps) {
-  if (isNextProject) {
+  if (isSSRApplication) {
+    isSSR = true
+
     return (
       <NextThemeProvider
         disableTransitionOnChange
@@ -83,5 +60,5 @@ export function ThemeProvider({
     )
   }
 
-  return <SimpleThemeProvider>{children}</SimpleThemeProvider>
+  return <CSRThemeProvider>{children}</CSRThemeProvider>
 }
