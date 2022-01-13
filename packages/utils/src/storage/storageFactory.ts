@@ -12,9 +12,7 @@ export function storageFactory(storage: () => Storage): Storage {
   function setItem(key: string, value: string): void {
     try {
       return storage().setItem(key, value)
-    } catch {
-      return null
-    }
+    } catch {}
   }
 
   function removeItem(key: string): void {
