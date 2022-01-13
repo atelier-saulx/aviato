@@ -1,13 +1,20 @@
-import { log } from '~/logging'
+import { log } from '../logging'
+import { NoopStorage } from './noopStorage'
 import { storageFactory } from './storageFactory'
 import { Storage } from './types'
 
+const errorMessage =
+  '[WARNING]: Session-storage is not available. Nothing is stored.'
+
 function getSessionStorage(): Storage {
-  if (!window.sessionStorage || global.sessionStorage) {
-    log.global.error('Could not create sessionStorage adapter.')
+  const storage = window?.sessionStorage || global?.sessionStorage
+  if (!storage) {
+    log.global.error(errorMessage)
+
+    return NoopStorage
   }
 
-  return window.sessionStorage || global.sessionStorage
+  return storage
 }
 
 export const SessionStorage = storageFactory(getSessionStorage)
