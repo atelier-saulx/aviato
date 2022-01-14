@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  ReactNode,
-  useContext,
-} from 'react'
+import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import { ToastContext } from './ToastContext'
 
 const ToastWrapper = ({ id, children, onClick = null, toast }) => {
@@ -163,18 +157,4 @@ export const ToastProvider = ({
       {toasts}
     </ToastContext.Provider>
   )
-}
-
-export const useToast = () => {
-  const toast = useContext(ToastContext)
-  if (toast) {
-    return toast
-  }
-
-  const noContext = () => {
-    console.warn('No ToastContext found')
-  }
-
-  noContext.close = noContext
-  return noContext
 }
