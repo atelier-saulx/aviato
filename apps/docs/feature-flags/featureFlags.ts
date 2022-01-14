@@ -13,7 +13,7 @@ export function defaultFlagConfig(): FeatureFlagConfig {
 
     Select: {
       description: 'Showcase Select component',
-      isEnabled: false,
+      isEnabled: true,
     },
   }
 }
