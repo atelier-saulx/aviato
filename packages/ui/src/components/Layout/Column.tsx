@@ -8,13 +8,11 @@ const StyledColumn = styled('div', {
   height: '100%',
 })
 
-export interface ColumnProps {}
-
-type ForwardProps = ComponentProps<typeof StyledColumn> & ColumnProps
+export interface ColumnProps extends ComponentProps<typeof StyledColumn> {}
 
 export const Column = React.forwardRef<
   ElementRef<typeof StyledColumn>,
-  ForwardProps
+  ColumnProps
 >((properties, forwardedRef) => {
   const { children, ...remainingProps } = properties
 

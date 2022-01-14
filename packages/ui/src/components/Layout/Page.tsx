@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 
@@ -19,21 +19,18 @@ const StyledPage = styled('div', {
   },
 })
 
-export type PageProps = {
+export interface PageProps extends ComponentProps<typeof StyledPage> {
   mode?: 'center'
 }
 
-type ForwardProps = ComponentProps<typeof StyledPage> & PageProps
+export const Page = forwardRef<ElementRef<typeof StyledPage>, PageProps>(
+  (properties, forwardedRef) => {
+    const { mode, children, ...remainingProps } = properties
 
-export const Page = React.forwardRef<
-  ElementRef<typeof StyledPage>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const { mode, children, ...remainingProps } = properties
-
-  return (
-    <StyledPage mode={mode} ref={forwardedRef} {...remainingProps}>
-      {children}
-    </StyledPage>
-  )
-})
+    return (
+      <StyledPage mode={mode} ref={forwardedRef} {...remainingProps}>
+        {children}
+      </StyledPage>
+    )
+  }
+)

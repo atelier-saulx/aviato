@@ -1,4 +1,4 @@
-import React, { ElementRef, useCallback } from 'react'
+import React, { ElementRef, forwardRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { IconButton } from '../Input/Button/IconButton'
@@ -13,11 +13,12 @@ const StyledToggleMenuButton = styled('div', {
   },
 })
 
-type ForwardProps = ComponentProps<typeof StyledToggleMenuButton>
+export interface ToggleMenuButtonProps
+  extends ComponentProps<typeof StyledToggleMenuButton> {}
 
-export const ToggleMenuButton = React.forwardRef<
+export const ToggleMenuButton = forwardRef<
   ElementRef<typeof StyledToggleMenuButton>,
-  ForwardProps
+  ToggleMenuButtonProps
 >((properties, forwardedRef) => {
   const { isMenuOpen, setIsMenuOpen } = useMenuContext()
 

@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
@@ -31,13 +31,11 @@ const StyledSideMenu = styled('div', {
   },
 })
 
-export interface SideMenuProps {}
+type SideMenuProps = ComponentProps<typeof StyledSideMenu>
 
-type ForwardProps = ComponentProps<typeof StyledSideMenu> & SideMenuProps
-
-export const SideMenu = React.forwardRef<
+export const SideMenu = forwardRef<
   ElementRef<typeof StyledSideMenu>,
-  ForwardProps
+  SideMenuProps
 >((properties, forwardedRef) => {
   const { children, ...remainingProps } = properties
 

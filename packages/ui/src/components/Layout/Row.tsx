@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 
@@ -8,11 +8,9 @@ const StyledRow = styled('div', {
   height: '100%',
 })
 
-export interface RowProps {}
+export interface RowProps extends ComponentProps<typeof StyledRow> {}
 
-type ForwardProps = ComponentProps<typeof StyledRow> & RowProps
-
-export const Row = React.forwardRef<ElementRef<typeof StyledRow>, ForwardProps>(
+export const Row = forwardRef<ElementRef<typeof StyledRow>, RowProps>(
   (properties, forwardedRef) => {
     const { children, ...remainingProps } = properties
 

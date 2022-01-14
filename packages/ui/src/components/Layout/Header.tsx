@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 
@@ -18,19 +18,16 @@ const StyledHeader = styled('div', {
   backgroundColor: '$Background2dp',
 })
 
-export interface HeaderProps {}
+export interface HeaderProps extends ComponentProps<typeof StyledHeader> {}
 
-type ForwardProps = ComponentProps<typeof StyledHeader> & HeaderProps
+export const Header = forwardRef<ElementRef<typeof StyledHeader>, HeaderProps>(
+  (properties, forwardedRef) => {
+    const { children, ...remainingProps } = properties
 
-export const Header = React.forwardRef<
-  ElementRef<typeof StyledHeader>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const { children, ...remainingProps } = properties
-
-  return (
-    <StyledHeader ref={forwardedRef} {...remainingProps}>
-      {children}
-    </StyledHeader>
-  )
-})
+    return (
+      <StyledHeader ref={forwardedRef} {...remainingProps}>
+        {children}
+      </StyledHeader>
+    )
+  }
+)

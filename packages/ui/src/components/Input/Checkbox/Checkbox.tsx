@@ -1,6 +1,7 @@
 import React, {
   BaseSyntheticEvent,
   ElementRef,
+  forwardRef,
   FunctionComponent,
   useCallback,
   useEffect,
@@ -158,7 +159,7 @@ export interface CheckboxProps extends StitchedProps {
   onChange?: (value: boolean, payload: OnCheckboxChange) => void
 }
 
-export const Checkbox = React.forwardRef<
+export const Checkbox = forwardRef<
   ElementRef<typeof StyledCheckboxWrapper>,
   CheckboxProps
 >((properties, forwardedRef) => {

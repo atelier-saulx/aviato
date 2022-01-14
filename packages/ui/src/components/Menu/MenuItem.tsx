@@ -1,4 +1,4 @@
-import React, { ElementRef, useCallback, useState } from 'react'
+import React, { ElementRef, forwardRef, useCallback, useState } from 'react'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { noop } from '@aviato/utils'
@@ -48,7 +48,7 @@ const Column = styled('div', {
   alignItems: 'center',
 })
 
-export interface MenuItemProps {
+export interface MenuItemProps extends ComponentProps<typeof StyledMenuItem> {
   title: string
   isActive?: boolean
   isHeader?: boolean
@@ -56,11 +56,9 @@ export interface MenuItemProps {
   onClick?: (value) => void
 }
 
-type ForwardProps = ComponentProps<typeof StyledMenuItem> & MenuItemProps
-
-export const MenuItem = React.forwardRef<
+export const MenuItem = forwardRef<
   ElementRef<typeof StyledMenuItem>,
-  ForwardProps
+  MenuItemProps
 >((properties, forwardedRef) => {
   const {
     title,

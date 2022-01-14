@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 import { BaseFontVariants, BaseTextStyles } from './styles'
@@ -46,24 +46,23 @@ export interface TextProps {
 
 type ForwardProps = ComponentProps<typeof StyledText> & TextProps
 
-export const Text = React.forwardRef<
-  ElementRef<typeof StyledText>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    size = 'medium',
-    weight = 'regular',
-    color = 'Primary',
-    ...remainingProps
-  } = properties
+export const Text = forwardRef<ElementRef<typeof StyledText>, ForwardProps>(
+  (properties, forwardedRef) => {
+    const {
+      size = 'medium',
+      weight = 'regular',
+      color = 'Primary',
+      ...remainingProps
+    } = properties
 
-  return (
-    <StyledText
-      color={color}
-      size={size}
-      weight={weight}
-      ref={forwardedRef}
-      {...remainingProps}
-    />
-  )
-})
+    return (
+      <StyledText
+        color={color}
+        size={size}
+        weight={weight}
+        ref={forwardedRef}
+        {...remainingProps}
+      />
+    )
+  }
+)

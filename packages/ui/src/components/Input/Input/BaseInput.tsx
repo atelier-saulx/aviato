@@ -1,4 +1,11 @@
-import React, { ElementRef, useCallback, BaseSyntheticEvent } from 'react'
+import React, {
+  ElementRef,
+  useCallback,
+  BaseSyntheticEvent,
+  ElementType,
+  ReactNode,
+  forwardRef,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 import { useUncontrolled, useUuid } from '@aviato/hooks'
@@ -207,11 +214,11 @@ type StitchedProps = Omit<ComponentProps<typeof StyledInput>, 'onChange'>
 export interface BaseInputProps extends StitchedProps {
   value?: string
   defaultValue?: string
-  component?: React.ElementType
+  component?: ElementType
   type?: InputType
   placeholder?: string
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
   variant?: InputVariant
   disabled?: boolean
   invalid?: boolean
@@ -221,7 +228,7 @@ export interface BaseInputProps extends StitchedProps {
   onChange?: (value: string, payload: OnInputChange) => void
 }
 
-export const BaseInput = React.forwardRef<
+export const BaseInput = forwardRef<
   ElementRef<typeof StyledInput>,
   BaseInputProps
 >((properties, forwardedRef) => {

@@ -1,4 +1,9 @@
-import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
+import React, {
+  ElementRef,
+  forwardRef,
+  MouseEventHandler,
+  useCallback,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
@@ -26,7 +31,7 @@ export interface IconButtonProps extends ComponentProps<typeof StyledButton> {
   css?: StitchedCSS
 }
 
-export const IconButton = React.forwardRef<
+export const IconButton = forwardRef<
   ElementRef<typeof StyledButton>,
   IconButtonProps
 >((properties, forwardedRef) => {

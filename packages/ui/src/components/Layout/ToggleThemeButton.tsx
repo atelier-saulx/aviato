@@ -1,4 +1,4 @@
-import React, { useCallback, ElementRef } from 'react'
+import React, { useCallback, ElementRef, forwardRef } from 'react'
 import { useHasLoaded } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
 
@@ -7,11 +7,12 @@ import { IconButton } from '../Input/Button/IconButton'
 
 const StyledToggleThemeButton = styled('div', {})
 
-type ForwardProps = ComponentProps<typeof StyledToggleThemeButton>
+export interface ToggleThemeButtonProps
+  extends ComponentProps<typeof StyledToggleThemeButton> {}
 
-export const ToggleThemeButton = React.forwardRef<
+export const ToggleThemeButton = forwardRef<
   ElementRef<typeof StyledToggleThemeButton>,
-  ForwardProps
+  ToggleThemeButtonProps
 >((properties, forwardedRef) => {
   const hasLoaded = useHasLoaded()
   const { setTheme } = useTheme()
