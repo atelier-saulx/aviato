@@ -23,6 +23,7 @@ const SelectPage = () => {
               data={[
                 { value: 'flurpy', label: 'Flurpy' },
                 { value: 'snark', label: 'Snark' },
+                { value: 'snorkles', label: 'Snorkles' },
               ]}
             />
           </Row>
