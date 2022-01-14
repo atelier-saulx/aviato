@@ -1,15 +1,17 @@
 import React, { useRef, forwardRef, ElementRef, useCallback } from 'react'
-import { ComponentProps } from '@stitches/react'
 import { useMergedRef, useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
+import { DropdownMenu } from './Dropdown'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
 
-const SelectStyles: StitchedCSS = {}
+const SelectStyles: StitchedCSS = {
+  cursor: 'pointer',
+}
 
 export interface OnSelectChange extends onChange {
   value: string | SelectItem
@@ -21,21 +23,22 @@ export interface SelectProps extends BaseInputProps {
   description?: string
   error?: string
   invalid?: boolean
+  searchable?: boolean
+  disabled?: boolean
   onChange?: (value: string, payload: OnSelectChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledInput>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & SelectProps
-
-export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
+export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
   (properties, forwardedRef) => {
     const {
       label,
       description,
       error,
       invalid,
+      placeholder,
+      data,
+      searchable = false,
       onChange = noop,
-      ...remainingProps
     } = properties
 
     const uuid = useUuid({ prefix: 'select' })
@@ -43,8 +46,23 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
 
     const isInvalid = Boolean(error || invalid)
 
-    const handleChange = useCallback((event) => {
-      onChange(event)
+    const formattedData: SelectItem[] = data.map((item) => {
+      if (typeof item === 'string') {
+        return { label: item, value: item, disabled: false }
+      }
+
+      return item
+    })
+
+    const handleChange = useCallback((event, payload) => {
+      onChange(event, payload)
+    }, [])
+
+    const handleOpenChange = useCallback((isOpen: boolean) => {
+      // TODO: Force focus to input field
+      if (isOpen) {
+        inputRef.current?.focus()
+      }
     }, [])
 
     return (
@@ -59,10 +77,17 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
           id={uuid}
           invalid={isInvalid}
           ref={useMergedRef(forwardedRef, inputRef)}
-          readOnly
-          onChange={handleChange}
-          {...remainingProps}
+          readOnly={!searchable}
+          placeholder={placeholder}
         />
+
+        <DropdownMenu
+          items={formattedData}
+          onChange={handleChange}
+          onOpenChange={handleOpenChange}
+        >
+          Dropdown
+        </DropdownMenu>
       </InputWrapper>
     )
   }

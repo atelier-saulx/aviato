@@ -62,7 +62,7 @@ export const NativeSelect = forwardRef<
   const handleChange = useCallback((value, { event }) => {
     const index = formattedData.findIndex((item) => item.value === value)
 
-    onChange(value, { event, index })
+    onChange(value, { event, value, index })
   }, [])
 
   return (

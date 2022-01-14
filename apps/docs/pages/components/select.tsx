@@ -23,6 +23,7 @@ const SelectPage = () => {
               data={[
                 { value: 'flurpy', label: 'Flurpy' },
                 { value: 'snark', label: 'Snark' },
+                { value: 'snorkles', label: 'Snorkles' },
               ]}
             />
           </Row>
@@ -31,7 +32,7 @@ const SelectPage = () => {
 
           <Row css={{ width: '100%' }}>
             <Select
-              placeholder="Type something here"
+              placeholder="Select a thing"
               label="This is a label"
               description="This is a description"
               onChange={(value, payload) => {
@@ -40,6 +41,28 @@ const SelectPage = () => {
               data={[
                 { value: 'flurpy', label: 'Flurpy' },
                 { value: 'snark', label: 'Snark' },
+                { value: 'snorkles', label: 'Snorkles' },
+                { value: 'disabled', label: 'Disabled', disabled: true },
+              ]}
+            />
+          </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <Select
+              placeholder="Search for a thing"
+              label="This is a label"
+              description="This is a description"
+              searchable
+              onChange={(value, payload) => {
+                log.global.debug('Select change: ', { value, payload })
+              }}
+              data={[
+                { value: 'flurpy', label: 'Flurpy' },
+                { value: 'snark', label: 'Snark' },
+                { value: 'snorkles', label: 'Snorkles' },
+                { value: 'disabled', label: 'Disabled', disabled: true },
               ]}
             />
           </Row>
