@@ -1,5 +1,12 @@
-import React, { useRef, forwardRef, ElementRef, useCallback } from 'react'
-import { useMergedRef, useUuid } from '@aviato/hooks'
+import React, {
+  useRef,
+  forwardRef,
+  ElementRef,
+  useCallback,
+  useState,
+  useEffect,
+} from 'react'
+import { useMergedRef, useUuid, useUncontrolled } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { StitchedCSS } from '~/theme'
@@ -8,6 +15,7 @@ import { SelectItem } from './types'
 import { DropdownMenu } from './Dropdown'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
+import { groupOptions } from './utils'
 
 const SelectStyles: StitchedCSS = {
   cursor: 'pointer',
@@ -18,6 +26,8 @@ export interface OnSelectChange extends onChange {
 }
 
 export interface SelectProps extends BaseInputProps {
+  value?: string
+  defaultValue?: string
   data: (string | SelectItem)[]
   label?: string
   description?: string
@@ -31,6 +41,8 @@ export interface SelectProps extends BaseInputProps {
 export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
   (properties, forwardedRef) => {
     const {
+      value,
+      defaultValue,
       label,
       description,
       error,
@@ -54,16 +66,49 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       return item
     })
 
-    const handleChange = useCallback((event, payload) => {
-      onChange(event, payload)
+    const sortedData = groupOptions({ data: formattedData })
+
+    const [_value, handleChange, inputMode] = useUncontrolled({
+      value,
+      defaultValue,
+      finalValue: null,
+      onChange,
+      rule: (val) => typeof val === 'string' || val === null,
+    })
+
+    const selectedValue = sortedData.find((item) => item.value === _value)
+    const [inputValue, setInputValue] = useState(selectedValue?.label ?? '')
+
+    const handleOpenChange = useCallback(() => {
+      // TODO: Force focus to input field
     }, [])
 
-    const handleOpenChange = useCallback((isOpen: boolean) => {
-      // TODO: Force focus to input field
-      if (isOpen) {
-        inputRef.current?.focus()
+    const handleInputChange = (value) => {
+      handleSearchChange(value)
+    }
+
+    const handleSearchChange = (value: string) => {
+      setInputValue(value)
+    }
+
+    const handleItemSelect = useCallback((event, payload) => {
+      handleChange(payload.value)
+      onChange(event, payload)
+
+      if (inputMode === 'uncontrolled') {
+        handleSearchChange(payload.label)
       }
     }, [])
+
+    useEffect(() => {
+      const newSelectedValue = sortedData.find((item) => item.value === _value)
+
+      if (newSelectedValue) {
+        handleSearchChange(newSelectedValue.label)
+      } else if (!_value) {
+        handleSearchChange('')
+      }
+    }, [_value])
 
     return (
       <InputWrapper
@@ -79,11 +124,13 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           ref={useMergedRef(forwardedRef, inputRef)}
           readOnly={!searchable}
           placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
         />
 
         <DropdownMenu
           items={formattedData}
-          onChange={handleChange}
+          onChange={handleItemSelect}
           onOpenChange={handleOpenChange}
         >
           Dropdown
