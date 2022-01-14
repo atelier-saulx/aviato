@@ -43,3 +43,5 @@ export const getColorMode: () => 'light' | 'dark' = () => {
 
   return 'light'
 }
+
+export { getZIndex } from './zIndex'
