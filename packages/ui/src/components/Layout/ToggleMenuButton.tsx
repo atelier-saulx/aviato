@@ -1,9 +1,9 @@
-import React, { ElementRef, useCallback, useContext } from 'react'
+import React, { ElementRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { IconButton } from '../Input/Button/IconButton'
 import { styled } from '~/theme'
-import { MenuStateContext } from '../SideMenu'
+import { useMenuContext } from '../SideMenu'
 
 const StyledToggleMenuButton = styled('div', {
   visibility: 'visible',
@@ -19,7 +19,7 @@ export const ToggleMenuButton = React.forwardRef<
   ElementRef<typeof StyledToggleMenuButton>,
   ForwardProps
 >((properties, forwardedRef) => {
-  const { isMenuOpen, setIsMenuOpen } = useContext(MenuStateContext)
+  const { isMenuOpen, setIsMenuOpen } = useMenuContext()
 
   const handleMenuButtonClick = useCallback(() => {
     const newState = !isMenuOpen
