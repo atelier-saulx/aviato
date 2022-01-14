@@ -8,7 +8,6 @@ import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
-import { SelectDropdown } from './SelectDropdown'
 
 const SelectStyles: StitchedCSS = {}
 
@@ -41,7 +40,6 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
 
     const uuid = useUuid({ prefix: 'select' })
     const inputRef = useRef<HTMLInputElement>()
-    const dropdownRef = useRef<HTMLDivElement>()
 
     const isInvalid = Boolean(error || invalid)
 
@@ -65,17 +63,6 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
           onChange={handleChange}
           {...remainingProps}
         />
-
-        <SelectDropdown
-          referenceElement={inputRef.current}
-          mounted={false}
-          uuid={uuid}
-          maxDropdownHeight={220}
-          ref={dropdownRef}
-          dropdownPosition="bottom"
-        >
-          Test
-        </SelectDropdown>
       </InputWrapper>
     )
   }
