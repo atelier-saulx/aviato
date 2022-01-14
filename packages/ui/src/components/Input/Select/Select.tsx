@@ -4,9 +4,9 @@ import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { StitchedCSS } from '~/theme'
-import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
-import { InputWrapper } from '../InputWrapper'
+import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
+import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
 
 const SelectStyles: StitchedCSS = {}
