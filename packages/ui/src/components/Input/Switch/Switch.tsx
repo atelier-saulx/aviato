@@ -1,6 +1,13 @@
-import React, { ElementRef, useCallback, useEffect, useState } from 'react'
+import React, {
+  forwardRef,
+  ElementRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
+
 import { styled } from '~/theme'
 import { onChange } from '~/types/events'
 import { Group } from '~/components/Layout'
@@ -135,11 +142,13 @@ const StyledSwitch = styled('input', {
   },
 })
 
-export interface OnSwitchChange extends onChange<Event> {
+interface OnSwitchChange extends onChange<Event> {
   isChecked: boolean
 }
 
-export interface SwitchProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledSwitch>, 'onChange'>
+
+export interface SwitchProps extends StitchedProps {
   size?: SwitchSize
   checked?: boolean
   disabled?: boolean
@@ -150,66 +159,62 @@ export interface SwitchProps {
   onChange?: (value: boolean, payload: OnSwitchChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledSwitch>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & SwitchProps
+export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
+  (properties, forwardedRef) => {
+    const {
+      size = 'normal',
+      checked = false,
+      disabled = false,
+      onChange = noop,
+      text,
+      label,
+      description,
+      error,
+      ...remainingProps
+    } = properties
 
-export const Switch = React.forwardRef<
-  ElementRef<typeof StyledSwitch>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    size = 'normal',
-    checked = false,
-    disabled = false,
-    onChange = noop,
-    text,
-    label,
-    description,
-    error,
-    ...remainingProps
-  } = properties
+    const [isDisabled, setIsDisbled] = useState(disabled)
+    const [isChecked, setIsChecked] = useState(false)
 
-  const [isDisabled, setIsDisbled] = useState(disabled)
-  const [isChecked, setIsChecked] = useState(false)
+    useEffect(() => {
+      setIsDisbled(disabled)
+      setIsChecked(checked)
+    }, [checked, disabled])
 
-  useEffect(() => {
-    setIsDisbled(disabled)
-    setIsChecked(checked)
-  }, [checked, disabled])
+    const handleChange = useCallback(
+      (event) => {
+        if (isDisabled) {
+          return noop()
+        }
 
-  const handleChange = useCallback(
-    (event) => {
-      if (isDisabled) {
-        return noop()
-      }
+        const isSwitchChecked = !isChecked
+        setIsChecked(isSwitchChecked)
 
-      const isSwitchChecked = !isChecked
-      setIsChecked(isSwitchChecked)
+        onChange(isSwitchChecked, {
+          isChecked: isSwitchChecked,
+          isDisabled,
+          event,
+        })
+      },
+      [isChecked]
+    )
 
-      onChange(isSwitchChecked, {
-        isChecked: isSwitchChecked,
-        isDisabled,
-        event,
-      })
-    },
-    [isChecked]
-  )
+    return (
+      <InputWrapper label={label} description={description} error={error}>
+        <Group>
+          <StyledSwitch
+            type="checkbox"
+            size={size}
+            checked={isChecked}
+            onChange={handleChange}
+            disabled={isDisabled}
+            ref={forwardedRef}
+            {...remainingProps}
+          />
 
-  return (
-    <InputWrapper label={label} description={description} error={error}>
-      <Group>
-        <StyledSwitch
-          type="checkbox"
-          size={size}
-          checked={isChecked}
-          onChange={handleChange}
-          disabled={isDisabled}
-          ref={forwardedRef}
-          {...remainingProps}
-        />
-
-        <Text onClick={handleChange}>{text}</Text>
-      </Group>
-    </InputWrapper>
-  )
-})
+          <Text onClick={handleChange}>{text}</Text>
+        </Group>
+      </InputWrapper>
+    )
+  }
+)

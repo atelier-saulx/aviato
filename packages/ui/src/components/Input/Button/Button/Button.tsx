@@ -1,4 +1,10 @@
-import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
+import React, {
+  forwardRef,
+  ReactNode,
+  ElementRef,
+  MouseEventHandler,
+  useCallback,
+} from 'react'
 import { noop } from '@aviato/utils'
 import { ComponentProps } from '@stitches/react'
 
@@ -218,70 +224,68 @@ export const StyledButton = styled('button', {
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
-export interface ButtonProps {
+export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   type?: ButtonType
   variant?: ButtonVariant
   disabled?: boolean
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
+  css?: StitchedCSS
 }
 
-type ForwardProps = ComponentProps<typeof StyledButton> & ButtonProps
+export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
+  (properties, forwardedRef) => {
+    const {
+      type = 'primary',
+      variant = 'filled',
+      disabled = false,
+      onClick = noop,
+      leftIcon = null,
+      rightIcon = null,
+      children,
+      ...remainingProps
+    } = properties
 
-export const Button = React.forwardRef<
-  ElementRef<typeof StyledButton>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    type = 'primary',
-    variant = 'filled',
-    disabled = false,
-    onClick = noop,
-    leftIcon = null,
-    rightIcon = null,
-    children,
-    ...remainingProps
-  } = properties
+    const handleClick = useCallback(() => {
+      if (disabled) {
+        return noop()
+      }
 
-  const handleClick = useCallback(() => {
-    if (disabled) {
-      return noop()
-    }
+      onClick()
+    }, [disabled])
 
-    onClick()
-  }, [])
+    const isFilled = variant === 'filled'
+    const isOutlined = variant === 'outlined'
+    const isTransparent = variant === 'transparent'
 
-  const isFilled = variant === 'filled'
-  const isOutlined = variant === 'outlined'
-  const isTransparent = variant === 'transparent'
+    const classes = classNames({
+      isFilled,
+      isOutlined,
+      isTransparent,
+    })
 
-  const classes = classNames({
-    isFilled,
-    isOutlined,
-    isTransparent,
-  })
+    return (
+      <StyledButton
+        type={type}
+        onClick={handleClick}
+        disabled={disabled}
+        className={classes}
+        ref={forwardedRef}
+        {...remainingProps}
+      >
+        <Conditional test={leftIcon}>
+          <IconWrapper type="start">{leftIcon}</IconWrapper>
+        </Conditional>
 
-  return (
-    <StyledButton
-      type={type}
-      onClick={handleClick}
-      disabled={disabled}
-      className={classes}
-      ref={forwardedRef}
-      {...remainingProps}
-    >
-      <Conditional test={leftIcon}>
-        <IconWrapper type="start">{leftIcon}</IconWrapper>
-      </Conditional>
+        <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+          {children}
+        </Text>
 
-      <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
-        {children}
-      </Text>
-
-      <Conditional test={rightIcon}>
-        <IconWrapper type="end">{rightIcon}</IconWrapper>
-      </Conditional>
-    </StyledButton>
-  )
-})
+        <Conditional test={rightIcon}>
+          <IconWrapper type="end">{rightIcon}</IconWrapper>
+        </Conditional>
+      </StyledButton>
+    )
+  }
+)

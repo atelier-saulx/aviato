@@ -23,7 +23,7 @@ export function defaultFlagConfig(): FeatureFlagConfig {
   }
 }
 
-type FeatureFlagOptions = {
+type FeatureFlagFactory = {
   initialise(): void
   isEnabled(featureFlag: FeatureFlag): boolean
   enable(featureFlag: FeatureFlag): void
@@ -32,7 +32,7 @@ type FeatureFlagOptions = {
   getEnabledFlags(): FeatureFlag[]
 }
 
-function featureFlagFactory(): FeatureFlagOptions {
+function featureFlagFactory(): FeatureFlagFactory {
   let featureFlags = defaultFlagConfig()
 
   function initialise(): void {

@@ -1,9 +1,9 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useUuid } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
-import { StitchedCSS } from '~/theme'
+import { useUuid } from '@aviato/hooks'
 
+import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'
 
@@ -27,7 +27,7 @@ export interface TextFieldProps extends BaseInputProps {
 type StitchedProps = ComponentProps<typeof StyledInput>
 type ForwardProps = Omit<StitchedProps, 'onChange'> & TextFieldProps
 
-export const TextField = React.forwardRef<
+export const TextField = forwardRef<
   ElementRef<typeof StyledInput>,
   ForwardProps
 >((properties, forwardedRef) => {
@@ -46,9 +46,14 @@ export const TextField = React.forwardRef<
 
   const isInvalid = Boolean(error || invalid)
 
-  const InputComponent = () => {
-    if (autosize) {
-      return (
+  return (
+    <InputWrapper
+      label={label}
+      description={description}
+      error={error}
+      css={{ width: '100%' }}
+    >
+      {autosize ? (
         <BaseInput
           component={TextareaAutosize}
           css={TextFieldStyles}
@@ -59,29 +64,16 @@ export const TextField = React.forwardRef<
           ref={forwardedRef}
           {...remainingProps}
         />
-      )
-    }
-
-    return (
-      <BaseInput
-        component="textarea"
-        css={TextFieldStyles}
-        id={uuid}
-        invalid={isInvalid}
-        ref={forwardedRef}
-        {...remainingProps}
-      />
-    )
-  }
-
-  return (
-    <InputWrapper
-      label={label}
-      description={description}
-      error={error}
-      css={{ width: '100%' }}
-    >
-      <InputComponent />
+      ) : (
+        <BaseInput
+          component="textarea"
+          css={TextFieldStyles}
+          id={uuid}
+          invalid={isInvalid}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
+      )}
     </InputWrapper>
   )
 })

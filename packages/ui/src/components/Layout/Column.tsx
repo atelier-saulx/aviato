@@ -1,5 +1,6 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 
 const StyledColumn = styled('div', {
@@ -8,19 +9,16 @@ const StyledColumn = styled('div', {
   height: '100%',
 })
 
-export interface ColumnProps {}
+export interface ColumnProps extends ComponentProps<typeof StyledColumn> {}
 
-type ForwardProps = ComponentProps<typeof StyledColumn> & ColumnProps
+export const Column = forwardRef<ElementRef<typeof StyledColumn>, ColumnProps>(
+  (properties, forwardedRef) => {
+    const { children, ...remainingProps } = properties
 
-export const Column = React.forwardRef<
-  ElementRef<typeof StyledColumn>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const { children, ...remainingProps } = properties
-
-  return (
-    <StyledColumn ref={forwardedRef} {...remainingProps}>
-      {children}
-    </StyledColumn>
-  )
-})
+    return (
+      <StyledColumn ref={forwardedRef} {...remainingProps}>
+        {children}
+      </StyledColumn>
+    )
+  }
+)

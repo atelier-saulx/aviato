@@ -1,15 +1,19 @@
 import React, {
-  createContext,
+  forwardRef,
   ElementRef,
-  useCallback,
   useState,
   useMemo,
+  ReactElement,
+  cloneElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled, ThemeProvider, ToggleThemeButton } from '~/theme'
-import { ToggleMenuButton, menuWidth } from '../SideMenu'
+
+import { styled, ThemeProvider } from '~/theme'
+import { MenuStateContext, menuWidth } from '../SideMenu'
 import { Header, headerHeight } from './Header'
 import { Group } from './Group'
+import { ToggleThemeButton } from './ToggleThemeButton'
+import { ToggleMenuButton } from './ToggleMenuButton'
 
 const StyledApplicationRoot = styled('div', {
   position: 'relative',
@@ -59,47 +63,31 @@ const NavigationWrapper = styled('div', {
   },
 })
 
-export type ApplicationRootProps = {
-  navigation?: React.ReactElement
+export interface ApplicationRootProps
+  extends ComponentProps<typeof StyledApplicationRoot> {
+  navigation?: ReactElement
+  SSR?: boolean
 }
 
-type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
-  ApplicationRootProps
-
-interface MenuStateContextType {
-  isMenuOpen: boolean
-  setIsMenuOpen: any
-}
-
-export const MenuStateContext = createContext<MenuStateContextType>({
-  isMenuOpen: false,
-  setIsMenuOpen: (() => {}) as any,
-})
-
-export const ApplicationRoot = React.forwardRef<
+export const ApplicationRoot = forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
-  ForwardProps
+  ApplicationRootProps
 >((properties, forwardedRef) => {
-  const { children, navigation, ...remainingProps } = properties
+  const { SSR = false, children, navigation, ...remainingProps } = properties
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
 
   const hasSideMenu = Boolean(navigation)
-  const NavigationComponent = navigation ? React.cloneElement(navigation) : null
-
-  const handleMenuButtonClick = useCallback(() => {
-    const newState = !isMenuOpen
-    setIsMenuOpen(newState)
-  }, [isMenuOpen])
+  const NavigationComponent = navigation ? cloneElement(navigation) : null
 
   return (
-    <ThemeProvider>
+    <ThemeProvider isSSRApplication={SSR}>
       <MenuStateContext.Provider value={value}>
         <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
           <Header>
             <Group>
-              <ToggleMenuButton onClick={() => handleMenuButtonClick()} />
+              <ToggleMenuButton />
               <ToggleThemeButton />
             </Group>
           </Header>
