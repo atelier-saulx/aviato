@@ -1,4 +1,3 @@
-import { log } from '@aviato/utils'
 import { useEffect, useRef } from 'react'
 
 export type UpdateProps = Record<string, any>
@@ -27,7 +26,7 @@ function useWhyDidYouUpdate(componentName: string, props: UpdateProps) {
       })
 
       if (Object.keys(changedProps).length) {
-        log.global.debug('[why-did-you-update]', componentName, changedProps)
+        console.warn('[why-did-you-update]', componentName, changedProps)
       }
     }
 
