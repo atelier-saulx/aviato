@@ -27,7 +27,7 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
     <>
       <HeadContent />
 
-      <ApplicationRoot navigation={<SideMenu />}>
+      <ApplicationRoot navigation={<SideMenu />} SSR>
         <Component {...pageProps} />
       </ApplicationRoot>
     </>

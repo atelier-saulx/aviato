@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, ReactNode } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  ReactNode,
+  useContext,
+} from 'react'
 import { ToastContext } from './ToastContext'
 
 const ToastWrapper = ({ id, children, onClick = null, toast }) => {
@@ -38,6 +44,11 @@ type PositionStyleProps = {
   right?: number
 }
 
+type Toast = {
+  id: number
+  children: ReactNode
+}
+
 export const ToastProvider = ({
   children,
   position = 'bottom-right',
@@ -46,12 +57,7 @@ export const ToastProvider = ({
   const [length, setLength] = useState(0)
   const positionRef = useRef<typeof position>()
   const positionStyleRef = useRef<PositionStyleProps>()
-  const toastsRef = useRef<
-    {
-      id: number
-      children: ReactNode
-    }[]
-  >()
+  const toastsRef = useRef<Toast[]>()
   const toastRef = useRef<Function & { close: Function }>()
 
   if (!toastRef.current) {
@@ -110,18 +116,22 @@ export const ToastProvider = ({
 
   if (positionRef.current !== position) {
     positionRef.current = position
+
     const [y, x] = position.split('-')
     const positionStyle: PositionStyleProps = {}
+
     if (y === 'bottom') {
       positionStyle.bottom = 16
     } else {
       positionStyle.top = 16
     }
+
     if (x === 'left') {
       positionStyle.left = 16
     } else {
       positionStyle.right = 16
     }
+
     positionStyleRef.current = positionStyle
   }
 
@@ -153,4 +163,18 @@ export const ToastProvider = ({
       {toasts}
     </ToastContext.Provider>
   )
+}
+
+export const useToast = () => {
+  const toast = useContext(ToastContext)
+  if (toast) {
+    return toast
+  }
+
+  const noContext = () => {
+    console.warn('No ToastContext found')
+  }
+
+  noContext.close = noContext
+  return noContext
 }

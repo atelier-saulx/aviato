@@ -1,28 +1,26 @@
-import React, { useState, useCallback, ElementRef } from 'react'
+import React, { useCallback, ElementRef, forwardRef } from 'react'
 import { useHasLoaded } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
-import { useTheme } from 'next-themes'
 
-import { getCurrentTheme, styled } from '~/theme'
+import { getColorMode, styled, useTheme } from '~/theme'
 import { IconButton } from '../Input/Button/IconButton'
 
 const StyledToggleThemeButton = styled('div', {})
 
-type ForwardProps = ComponentProps<typeof StyledToggleThemeButton>
+export interface ToggleThemeButtonProps
+  extends ComponentProps<typeof StyledToggleThemeButton> {}
 
-export const ToggleThemeButton = React.forwardRef<
+export const ToggleThemeButton = forwardRef<
   ElementRef<typeof StyledToggleThemeButton>,
-  ForwardProps
+  ToggleThemeButtonProps
 >((properties, forwardedRef) => {
   const hasLoaded = useHasLoaded()
   const { setTheme } = useTheme()
-  const [currentTheme, setCurrentTheme] = useState(getCurrentTheme())
 
   const toggleTheme = useCallback(() => {
-    const targetTheme = getCurrentTheme() === 'light' ? 'dark' : 'light'
+    const targetTheme = getColorMode() === 'light' ? 'dark' : 'light'
 
     setTheme(targetTheme)
-    setCurrentTheme(targetTheme)
   }, [setTheme])
 
   if (!hasLoaded) {
@@ -34,7 +32,7 @@ export const ToggleThemeButton = React.forwardRef<
       <IconButton
         type="ghost"
         onClick={toggleTheme}
-        icon={currentTheme === 'light' ? 'IconDark' : 'IconLight'}
+        icon={getColorMode() === 'light' ? 'IconDark' : 'IconLight'}
       />
     </StyledToggleThemeButton>
   )
