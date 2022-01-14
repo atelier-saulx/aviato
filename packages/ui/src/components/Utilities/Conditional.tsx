@@ -8,7 +8,7 @@ type ConditionalProps = {
 }
 
 /**
- * Render children conditionally, if test returns true.
+ * Render children conditionally if test returns true.
  */
 export const Conditional: FunctionComponent<ConditionalProps> = ({
   test: isTruthy,

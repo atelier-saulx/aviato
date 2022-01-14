@@ -1,5 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  FunctionComponent,
+} from 'react'
 import { LocalStorage } from '@aviato/utils'
+
 import { themes } from './theme'
 import { THEME_STORAGE_KEY } from './provider'
 
@@ -23,7 +31,7 @@ function baseSetColorMode(newValue: ColorMode): void {
   document.documentElement.classList.add(themes[newValue])
 }
 
-export const ThemeProvider: React.FC = ({ children }) => {
+export const ThemeProvider: FunctionComponent = ({ children }) => {
   const [colorMode, rawSetColorMode] = useState<ColorMode>('light')
 
   useEffect(() => {
@@ -37,7 +45,7 @@ export const ThemeProvider: React.FC = ({ children }) => {
     baseSetColorMode(initialColorMode)
   }, [])
 
-  const contextValue: ThemeProps = React.useMemo(() => {
+  const contextValue: ThemeProps = useMemo(() => {
     function setTheme(newValue: ColorMode): void {
       LocalStorage.setItem(THEME_STORAGE_KEY, newValue)
       baseSetColorMode(newValue)

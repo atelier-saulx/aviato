@@ -1,9 +1,9 @@
-import React, { ElementRef, useCallback } from 'react'
-import { useUuid } from '@aviato/hooks'
+import React, { forwardRef, ElementRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
-import { StitchedCSS } from '~/theme'
 
+import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'
 import { SelectItem } from './types'
@@ -27,7 +27,7 @@ export interface NativeSelectProps extends BaseInputProps {
 type StitchedProps = ComponentProps<typeof StyledInput>
 type ForwardProps = Omit<StitchedProps, 'onChange'> & NativeSelectProps
 
-export const NativeSelect = React.forwardRef<
+export const NativeSelect = forwardRef<
   ElementRef<typeof StyledInput>,
   ForwardProps
 >((properties, forwardedRef) => {
