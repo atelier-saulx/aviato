@@ -79,10 +79,6 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
     const selectedValue = sortedData.find((item) => item.value === _value)
     const [inputValue, setInputValue] = useState(selectedValue?.label ?? '')
 
-    const handleOpenChange = useCallback(() => {
-      // TODO: Force focus to input field
-    }, [])
-
     const handleInputChange = (value) => {
       handleSearchChange(value)
     }
@@ -128,13 +124,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           onChange={handleInputChange}
         />
 
-        <DropdownMenu
-          items={formattedData}
-          onChange={handleItemSelect}
-          onOpenChange={handleOpenChange}
-        >
-          Dropdown
-        </DropdownMenu>
+        <DropdownMenu items={formattedData} onChange={handleItemSelect} />
       </InputWrapper>
     )
   }
