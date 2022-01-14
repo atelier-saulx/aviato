@@ -1,6 +1,6 @@
-import React, { forwardRef, ElementRef, useCallback } from 'react'
+import React, { useRef, forwardRef, ElementRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { useUuid } from '@aviato/hooks'
+import { useMergedRef, useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { StitchedCSS } from '~/theme'
@@ -8,6 +8,7 @@ import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
+import { SelectDropdown } from './SelectDropdown'
 
 const SelectStyles: StitchedCSS = {}
 
@@ -39,6 +40,8 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
     } = properties
 
     const uuid = useUuid({ prefix: 'select' })
+    const inputRef = useRef<HTMLInputElement>()
+    const dropdownRef = useRef<HTMLDivElement>()
 
     const isInvalid = Boolean(error || invalid)
 
@@ -57,11 +60,22 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
           css={SelectStyles}
           id={uuid}
           invalid={isInvalid}
-          ref={forwardedRef}
+          ref={useMergedRef(forwardedRef, inputRef)}
           readOnly
           onChange={handleChange}
           {...remainingProps}
         />
+
+        <SelectDropdown
+          referenceElement={inputRef.current}
+          mounted={false}
+          uuid={uuid}
+          maxDropdownHeight={220}
+          ref={dropdownRef}
+          dropdownPosition="bottom"
+        >
+          Test
+        </SelectDropdown>
       </InputWrapper>
     )
   }
