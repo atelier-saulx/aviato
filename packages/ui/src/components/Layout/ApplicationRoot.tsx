@@ -1,31 +1,104 @@
-import React, { ElementRef } from 'react'
+import React, {
+  forwardRef,
+  ElementRef,
+  useState,
+  useMemo,
+  ReactElement,
+  cloneElement,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled } from '~/theme'
+
+import { styled, ThemeProvider } from '~/theme'
+import { MenuStateContext, menuWidth } from '../SideMenu'
+import { Header, headerHeight } from './Header'
+import { Group } from './Group'
+import { ToggleThemeButton } from './ToggleThemeButton'
+import { ToggleMenuButton } from './ToggleMenuButton'
 
 const StyledApplicationRoot = styled('div', {
   position: 'relative',
   display: 'flex',
-  width: '100vw',
-  height: '100vh',
+  flexDirection: 'row',
+  width: '100%',
+  height: '100%',
+  minHeight: '100vh',
+  backgroundColor: '$Background2dp',
   overflowX: 'hidden',
   overflowY: 'hidden',
-  backgroundColor: '$Background2dp',
 })
 
-export type ApplicationRootProps = {}
+const PageWrapper = styled('div', {
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+  backgroundColor: '$Background2dp',
+  marginTop: headerHeight,
 
-type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
-  ApplicationRootProps
+  variants: {
+    sideMenu: {
+      true: {
+        '@breakpoint1': {
+          paddingLeft: menuWidth,
+        },
+      },
+    },
+  },
+})
 
-export const ApplicationRoot = React.forwardRef<
+const NavigationWrapper = styled('div', {
+  variants: {
+    isOpen: {
+      true: {
+        display: 'block',
+      },
+
+      false: {
+        display: 'none',
+
+        '@breakpoint1': {
+          display: 'block',
+        },
+      },
+    },
+  },
+})
+
+export interface ApplicationRootProps
+  extends ComponentProps<typeof StyledApplicationRoot> {
+  navigation?: ReactElement
+  SSR?: boolean
+}
+
+export const ApplicationRoot = forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
-  ForwardProps
+  ApplicationRootProps
 >((properties, forwardedRef) => {
-  const { children, ...remainingProps } = properties
+  const { SSR = false, children, navigation, ...remainingProps } = properties
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
+
+  const hasSideMenu = Boolean(navigation)
+  const NavigationComponent = navigation ? cloneElement(navigation) : null
 
   return (
-    <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
-      {children}
-    </StyledApplicationRoot>
+    <ThemeProvider isSSRApplication={SSR}>
+      <MenuStateContext.Provider value={value}>
+        <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
+          <Header>
+            <Group>
+              <ToggleMenuButton />
+              <ToggleThemeButton />
+            </Group>
+          </Header>
+
+          <NavigationWrapper isOpen={isMenuOpen}>
+            {NavigationComponent}
+          </NavigationWrapper>
+
+          <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
+        </StyledApplicationRoot>
+      </MenuStateContext.Provider>
+    </ThemeProvider>
   )
 })

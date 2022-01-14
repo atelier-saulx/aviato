@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import {
   Column,
   Row,
@@ -9,6 +10,7 @@ import {
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 import { useHasLoaded } from '@aviato/hooks'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -34,6 +36,14 @@ const InputPage = () => {
   const ShowInput = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
 
+    const [inputValue, setInputValue] = useState('')
+    const [isInvalid, setIsInvalid] = useState(false)
+    const Icon = useMemo(() => <RandomIcon />, [])
+
+    useEffect(() => {
+      setIsInvalid(inputValue === 'test')
+    }, [inputValue])
+
     return (
       <>
         <Column css={{ width: '100%' }}>
@@ -54,7 +64,7 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              leftIcon={<RandomIcon />}
+              leftIcon={Icon}
               placeholder="Type something here"
             />
           </Row>
@@ -64,7 +74,7 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              rightIcon={<RandomIcon />}
+              rightIcon={Icon}
               placeholder="Type something here"
             />
           </Row>
@@ -74,8 +84,8 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              leftIcon={<RandomIcon />}
-              rightIcon={<RandomIcon />}
+              leftIcon={Icon}
+              rightIcon={Icon}
               placeholder="Type something here"
             />
           </Row>
@@ -85,8 +95,13 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              placeholder="Type something here"
-              invalid
+              placeholder="Type `test` to see invalid input field"
+              value={inputValue}
+              invalid={isInvalid}
+              onChange={(value, payload) => {
+                log.global.debug('Input change: ', { value, payload })
+                setInputValue(value)
+              }}
             />
           </Row>
 
@@ -95,8 +110,8 @@ const InputPage = () => {
           <Row css={{ width: '100%' }}>
             <Input
               variant={variant}
-              leftIcon={<RandomIcon />}
-              rightIcon={<RandomIcon />}
+              leftIcon={Icon}
+              rightIcon={Icon}
               placeholder="Type something here"
               disabled
             />
@@ -110,24 +125,13 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle>Form</NextTitle>
+          <NextTitle size="small">Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
             <Input
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
-            />
-          </Row>
-
-          <BigSpacer />
-
-          <Row css={{ width: '100%' }}>
-            <Input
-              placeholder="Type something here"
-              label="This is a label"
-              description="This is a description"
-              error="This is an error"
             />
           </Row>
         </Column>
@@ -141,15 +145,15 @@ const InputPage = () => {
 
       <NextText color="Secondary">Capture string input from user</NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowInput variant="outlined" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowInput variant="filled" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent background="transparent" padding="small">
         <ShowComplexInput />
       </ShowcaseComponent>
     </Page>

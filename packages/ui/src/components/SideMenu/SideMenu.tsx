@@ -1,38 +1,46 @@
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import React, { ElementRef } from 'react'
+
 import { styled } from '~/theme'
+import { headerHeight } from '../Layout/Header'
+
+export const menuWidth = 224
 
 const StyledSideMenu = styled('div', {
+  position: 'fixed',
+  left: 0,
+  top: 0,
+  bottom: 0,
+  flexGrow: '1',
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
-  width: 224,
-  minWidth: 224,
+  width: '100%',
+  minWidth: '100%',
   backgroundColor: '$Background2dp',
-  borderRight: '1px solid $OtherDivider',
   overflowX: 'hidden',
+  padding: 8,
+  zIndex: 10,
+  marginTop: headerHeight,
+
+  '@breakpoint1': {
+    width: menuWidth,
+    minWidth: menuWidth,
+    borderRight: '1px solid $OtherDivider',
+    marginTop: 0,
+  },
 })
 
-export interface SideMenuProps {
-  useBorder?: boolean
-}
+export interface SideMenuProps extends ComponentProps<typeof StyledSideMenu> {}
 
-type ForwardProps = ComponentProps<typeof StyledSideMenu> & SideMenuProps
-
-export const SideMenu = React.forwardRef<
+export const SideMenu = forwardRef<
   ElementRef<typeof StyledSideMenu>,
-  ForwardProps
+  SideMenuProps
 >((properties, forwardedRef) => {
   const { children, ...remainingProps } = properties
 
   return (
-    <StyledSideMenu
-      ref={forwardedRef}
-      css={{
-        padding: 8,
-      }}
-      {...remainingProps}
-    >
+    <StyledSideMenu ref={forwardedRef} {...remainingProps}>
       {children}
     </StyledSideMenu>
   )

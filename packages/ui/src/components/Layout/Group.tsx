@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import React, { CSSProperties, ElementRef } from 'react'
+import React, { forwardRef, CSSProperties, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { StitchedCSS, styled } from '~/theme'
@@ -62,7 +59,7 @@ const mappedPositions = {
 
 export type GroupPosition = 'left' | 'center' | 'right' | 'apart'
 
-export interface GroupProps {
+export interface GroupProps extends ComponentProps<typeof StyledGroup> {
   direction?: 'row' | 'column'
   align?: CSSProperties['alignItems']
   position?: GroupPosition
@@ -71,51 +68,48 @@ export interface GroupProps {
   spacing?: Size
 }
 
-type ForwardProps = ComponentProps<typeof StyledGroup> & GroupProps
+export const Group = forwardRef<ElementRef<typeof StyledGroup>, GroupProps>(
+  (properties, forwardedRef) => {
+    const {
+      direction = 'row',
+      position = 'left',
+      wrap = true,
+      grow = false,
+      spacing = 'sm',
+      align,
+      children,
+      ...remainingProps
+    } = properties
 
-export const Group = React.forwardRef<
-  ElementRef<typeof StyledGroup>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    direction = 'row',
-    position = 'left',
-    wrap = true,
-    grow = false,
-    spacing = 'sm',
-    align,
-    children,
-    ...remainingProps
-  } = properties
+    const alignItems =
+      align ||
+      (direction === 'row'
+        ? 'center'
+        : grow
+        ? 'stretch'
+        : position === 'apart'
+        ? 'flex-start'
+        : mappedPositions[position])
 
-  const alignItems =
-    align ||
-    (direction === 'row'
-      ? 'center'
-      : grow
-      ? 'stretch'
-      : position === 'apart'
-      ? 'flex-start'
-      : mappedPositions[position])
+    const styledCSS: StitchedCSS = {
+      flexWrap: wrap ? 'wrap' : 'nowrap',
+      alignItems,
+    }
 
-  const styledCSS: StitchedCSS = {
-    flexWrap: wrap ? 'wrap' : 'nowrap',
-    alignItems,
+    if (direction === 'row') {
+      styledCSS.justifyContent = mappedPositions[position]
+    }
+
+    return (
+      <StyledGroup
+        direction={direction}
+        css={styledCSS}
+        space={spacing}
+        ref={forwardedRef}
+        {...remainingProps}
+      >
+        {children}
+      </StyledGroup>
+    )
   }
-
-  if (direction === 'row') {
-    styledCSS.justifyContent = mappedPositions[position]
-  }
-
-  return (
-    <StyledGroup
-      direction={direction}
-      css={styledCSS}
-      space={spacing}
-      ref={forwardedRef}
-      {...remainingProps}
-    >
-      {children}
-    </StyledGroup>
-  )
-})
+)

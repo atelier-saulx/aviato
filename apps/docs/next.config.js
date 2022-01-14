@@ -4,7 +4,7 @@ module.exports = {
   distDir: 'dist',
 
   env: {
-    PASSWORD_PROTECT: process.env.ENVIRONMENT !== 'development',
+    ENVIRONMENT: process.env.ENVIRONMENT,
     FLAGS: process.env.FLAGS ?? 'none',
   },
 }

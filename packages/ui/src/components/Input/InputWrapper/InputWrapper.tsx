@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
@@ -34,18 +34,16 @@ const Error = styled('div', {
   color: '$ErrorMain',
 })
 
-export interface InputWrapperProps {
+export interface InputWrapperProps
+  extends ComponentProps<typeof StyledInputWrapper> {
   label?: string
   description?: string
   error?: string
 }
 
-type ForwardProps = ComponentProps<typeof StyledInputWrapper> &
-  InputWrapperProps
-
-export const InputWrapper = React.forwardRef<
+export const InputWrapper = forwardRef<
   ElementRef<typeof StyledInputWrapper>,
-  ForwardProps
+  InputWrapperProps
 >((properties, forwardRef) => {
   const { label, description, error, children, ...remainingProps } = properties
 
@@ -72,7 +70,7 @@ export const InputWrapper = React.forwardRef<
           </IconWrapper>
 
           <Error>
-            <Text>{error}</Text>
+            <Text color="Inherit">{error}</Text>
           </Error>
         </ErrorWrapper>
       </Conditional>

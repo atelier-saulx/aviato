@@ -1,15 +1,7 @@
-import React, { ElementRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled } from '~/theme'
 
-const PageWrapper = styled('div', {
-  position: 'relative',
-  width: '100%',
-  height: '100%',
-  overflowX: 'hidden',
-  overflowY: 'scroll',
-  backgroundColor: '$Background2dp',
-})
+import { styled } from '~/theme'
 
 const StyledPage = styled('div', {
   display: 'flex',
@@ -24,29 +16,22 @@ const StyledPage = styled('div', {
         margin: '0 auto',
         maxWidth: '860px',
       },
-
-      fullscreen: {},
     },
   },
 })
 
-export type PageProps = {
-  mode?: 'center' | 'fullscreen'
+export interface PageProps extends ComponentProps<typeof StyledPage> {
+  mode?: 'center'
 }
 
-type ForwardProps = ComponentProps<typeof StyledPage> & PageProps
+export const Page = forwardRef<ElementRef<typeof StyledPage>, PageProps>(
+  (properties, forwardedRef) => {
+    const { mode, children, ...remainingProps } = properties
 
-export const Page = React.forwardRef<
-  ElementRef<typeof StyledPage>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const { mode, children, ...remainingProps } = properties
-
-  return (
-    <PageWrapper>
+    return (
       <StyledPage mode={mode} ref={forwardedRef} {...remainingProps}>
         {children}
       </StyledPage>
-    </PageWrapper>
-  )
-})
+    )
+  }
+)

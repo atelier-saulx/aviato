@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react'
 import {
   Page,
   Switch,
@@ -9,7 +10,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
-import { useState } from 'react'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
@@ -41,6 +42,7 @@ const ButtonPage = () => {
     const uppercasedType = capitalize(type)
 
     const [isDisabled, setIsDisabled] = useState(false)
+    const Icon = useMemo(() => <RandomIcon />, [])
 
     return (
       <>
@@ -64,36 +66,7 @@ const ButtonPage = () => {
                 <Button
                   type={type}
                   variant="filled"
-                  leftIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button type={type} variant="filled" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="filled"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="filled"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
+                  leftIcon={Icon}
                   disabled={isDisabled}
                 >
                   Lorem
@@ -106,36 +79,7 @@ const ButtonPage = () => {
                 <Button
                   type={type}
                   variant="outlined"
-                  leftIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button type={type} variant="outlined" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="outlined"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="outlined"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
+                  leftIcon={Icon}
                   disabled={isDisabled}
                 >
                   Lorem
@@ -148,36 +92,7 @@ const ButtonPage = () => {
                 <Button
                   type={type}
                   variant="transparent"
-                  leftIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button type={type} variant="transparent" disabled={isDisabled}>
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="transparent"
-                  rightIcon={<RandomIcon />}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <Button
-                  type={type}
-                  variant="transparent"
-                  leftIcon={<RandomIcon />}
-                  rightIcon={<RandomIcon />}
+                  leftIcon={Icon}
                   disabled={isDisabled}
                 >
                   Lorem
@@ -191,6 +106,8 @@ const ButtonPage = () => {
   }
 
   const ShowDisabledButtons = () => {
+    const Icon = useMemo(() => <RandomIcon />, [])
+
     return (
       <>
         <Column>
@@ -214,7 +131,7 @@ const ButtonPage = () => {
               <BigSpacer />
 
               <Row>
-                <Button variant="filled" disabled leftIcon={<RandomIcon />}>
+                <Button variant="filled" disabled leftIcon={Icon}>
                   Disabled
                 </Button>
                 <Spacer />
@@ -222,11 +139,7 @@ const ButtonPage = () => {
                   Disabled
                 </Button>
                 <Spacer />
-                <Button
-                  variant="transparent"
-                  disabled
-                  rightIcon={<RandomIcon />}
-                >
+                <Button variant="transparent" disabled rightIcon={Icon}>
                   Disabled
                 </Button>
               </Row>
@@ -261,22 +174,6 @@ const ButtonPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowDisabledButtons />
-      </ShowcaseComponent>
-
-      <ShowcaseComponent background="transparent">
-        <Button
-          type="primary"
-          variant="filled"
-          css={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-            width: 200,
-            height: 200,
-          }}
-        >
-          With CSS
-        </Button>
       </ShowcaseComponent>
     </Page>
   )

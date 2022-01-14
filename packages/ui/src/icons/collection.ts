@@ -1,67 +1,10 @@
 import { FunctionComponent } from 'react'
 
-import {
-  IconAlignCenter,
-  IconAlignJustify,
-  IconAlignLeft,
-  IconAlignRight,
-  IconAperture,
-  IconCheck,
-  IconChevronBack,
-  IconChevronDown,
-  IconClipboard,
-  IconCopy,
-  IconDark,
-  IconDelete,
-  IconEdit,
-  IconEmail,
-  IconExpand,
-  IconExpanded,
-  IconLight,
-  IconLoading,
-  IconMinus,
-  IconModel,
-  IconMore,
-  IconPlus,
-  IconSchedule,
-  IconSearch,
-  IconSettings,
-  IconSort,
-  IconTarget,
-  IconUserGroups,
-} from './components'
-
 import { SVGProperties } from './types'
+import * as IconComponents from './components'
 
 export const icons = {
-  IconAlignCenter,
-  IconAlignJustify,
-  IconAlignLeft,
-  IconAlignRight,
-  IconAperture,
-  IconCheck,
-  IconChevronBack,
-  IconChevronDown,
-  IconClipboard,
-  IconCopy,
-  IconDark,
-  IconDelete,
-  IconEdit,
-  IconEmail,
-  IconExpand,
-  IconExpanded,
-  IconLight,
-  IconLoading,
-  IconMinus,
-  IconModel,
-  IconMore,
-  IconPlus,
-  IconSchedule,
-  IconSearch,
-  IconSettings,
-  IconSort,
-  IconTarget,
-  IconUserGroups,
+  ...IconComponents,
 }
 
 export type IconName = keyof typeof icons
@@ -89,6 +32,7 @@ export const getIconFromType = (input: IconName): Icon | null => {
  */
 export const getRandomIcon = (): Icon => {
   const values = Object.values(icons)
+
   return values[Math.floor(Math.random() * values.length)]
 }
 

@@ -13,6 +13,7 @@ const BigSpacer = styled('div', {
 
 const SliderPage = () => {
   const simpleMarks = [
+    { value: 0 },
     { value: 10 },
     { value: 20 },
     { value: 30 },
@@ -36,9 +37,9 @@ const SliderPage = () => {
   const ShowSlider = () => {
     return (
       <>
-        <Column css={{ width: '90%' }}>
+        <Column css={{ width: '100%' }}>
           <NextText>Basic slider.</NextText>
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider />
           </Row>
 
@@ -47,14 +48,14 @@ const SliderPage = () => {
           <NextText>
             Clamp steps to increment of 10, do not show label when hovering.
           </NextText>
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider step={10} showLabelOnHover={false} marks={simpleMarks} />
           </Row>
 
           <BigSpacer />
 
           <NextText>Negative values are fine (min -10, max 10).</NextText>
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider
               defaultValue={5}
               min={-10}
@@ -67,7 +68,7 @@ const SliderPage = () => {
 
           <NextText>Example with percentage marks, always show label.</NextText>
           <SmallSpacer />
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider
               showLabelOnHover={false}
               labelAlwaysVisible
@@ -87,7 +88,7 @@ const SliderPage = () => {
           <NextText>
             Example with large steps; default to 50, steps of 25.
           </NextText>
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider
               defaultValue={50}
               step={25}
@@ -104,7 +105,7 @@ const SliderPage = () => {
           <BigSpacer />
 
           <NextText>Above example without smooth-dragging.</NextText>
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider
               defaultValue={50}
               step={25}
@@ -123,7 +124,7 @@ const SliderPage = () => {
 
           <NextText>Custom label format.</NextText>
           <SmallSpacer />
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider
               label={(value) => `${value} °C`}
               labelAlwaysVisible
@@ -135,7 +136,7 @@ const SliderPage = () => {
 
           <NextText>Custom mark label setup.</NextText>
           <SmallSpacer />
-          <Row css={{ width: '90%' }}>
+          <Row>
             <Slider
               defaultValue={50}
               step={25}

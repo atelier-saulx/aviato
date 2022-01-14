@@ -2,8 +2,19 @@ import React, { FunctionComponent } from 'react'
 import { Conditional } from '~/components'
 import { styled } from '~/theme'
 import { isMarkFilled, getPosition } from './utils'
+import { Mark } from './types'
 
-const StyledMarks = styled('div', {})
+const StyledMarks = styled('div', {
+  '& > div:first-child > div': {
+    borderTopRightRadius: '0',
+    borderBottomRightRadius: '0',
+  },
+
+  '& > div:last-child > div': {
+    borderTopLeftRadius: '0',
+    borderBottomLeftRadius: '0',
+  },
+})
 
 const MarkWrapper = styled('div', {
   position: 'absolute',
@@ -56,7 +67,7 @@ const Label = styled('div', {
 
 export interface MarksProps {
   value: number
-  marks?: { value: number; label?: React.ReactNode }[]
+  marks?: Mark[]
   min?: number
   max?: number
   offset?: number

@@ -13,14 +13,10 @@
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint --ignore-path .gitignore './**/*.{ts,tsx}'",
     "lint:prettier": "prettier --write './**/*.ts{,x}'",
-    "lint:next": "next lint",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "lint:next": "next lint"
   },
   "dependencies": {
-    "@storyofams/next-password-protect": "^1.5.14",
     "next": "12.0.7",
-    "next-themes": "^0.0.15",
-    "nprogress": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
@@ -32,8 +28,8 @@
     "@aviato/ui": "*",
     "@aviato/utils": "*",
     "@babel/core": "^7.0.0-0",
-    "@types/node": "16.11.7",
-    "@types/react": "17.0.35",
+    "@types/node": "^16.11.12",
+    "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "concurrently": "^6.5.0",
     "eslint": "7.28.0",
@@ -41,7 +37,7 @@
     "npm-run-all": "^4.1.5",
     "open": "^8.4.0",
     "prettier": "2.5.1",
-    "typescript": "4.5.2"
+    "typescript": "4.5.4"
   },
   "prettier": "@aviato/prettier-config"
 }

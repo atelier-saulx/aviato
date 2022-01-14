@@ -111,7 +111,7 @@ async function parseTokens() {
     return logWarning('\n\n Warning: No JSON to read.')
   }
 
-  const outputDir = path.join('./src', 'theme')
+  const outputDir = path.join('./src', 'theme', 'schemas')
 
   if (!fs.existsSync(outputDir)) {
     await fs.mkdir(outputDir, { recursive: true })
