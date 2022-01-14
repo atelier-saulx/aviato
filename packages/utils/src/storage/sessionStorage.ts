@@ -1,4 +1,3 @@
-import { log } from '../logging'
 import { NoopStorage } from './noopStorage'
 import { storageFactory } from './storageFactory'
 import { Storage } from './types'
@@ -9,7 +8,7 @@ const errorMessage =
 function getSessionStorage(): Storage {
   const storage = window?.sessionStorage || global?.sessionStorage
   if (!storage) {
-    log.global.error(errorMessage)
+    console.warn(errorMessage)
 
     return NoopStorage
   }
