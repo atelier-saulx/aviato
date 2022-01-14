@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 
 import { styled } from '~/theme'
-import { Text } from '~/components'
+import { Conditional, Text } from '~/components'
 import { IconCheckCircle, IconCloseCircle } from '~/icons'
 
 const Container = styled('div', {
@@ -42,25 +42,32 @@ const ErrorIcon = styled(IconCloseCircle, {
 })
 
 export interface ToastProps extends ComponentProps<typeof Container> {
-  children?: ReactChildren | string
   title?: string
-  icon?: ReactNode
   type?: 'success' | 'error'
+  icon?: ReactNode
+  children?: ReactChildren | string
 }
 
 export const Toast = forwardRef<ElementRef<typeof Container>, ToastProps>(
-  ({ children, title, icon, type, ...props }, forwardedRef) => {
-    if (type === 'success') {
-      icon = <SuccessIcon />
-    } else if (type === 'error') {
-      icon = <ErrorIcon />
+  (properties, forwardedRef) => {
+    const { title, type, icon, children, ...remainingProps } = properties
+
+    const iconMap = {
+      success: <SuccessIcon />,
+      error: <ErrorIcon />,
     }
+
+    const toastIcon = icon ?? iconMap[type]
+
     return (
-      <Container ref={forwardedRef} {...props}>
+      <Container ref={forwardedRef} {...remainingProps}>
         <Header>
-          {icon ? <Icon>{icon}</Icon> : null}
+          <Conditional test={toastIcon}>
+            <Icon>{toastIcon}</Icon>
+          </Conditional>
           <Text weight="semibold">{title}</Text>
         </Header>
+
         <Text>{children}</Text>
       </Container>
     )

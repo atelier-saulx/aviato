@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { IconCloseCircle } from '~/icons'
 import { styled } from '~/theme'
-import { Text } from '~/components'
+import { Conditional, Text } from '~/components'
 
 const Container = styled('div', {
   backgroundColor: '$ErrorLight',
@@ -43,13 +43,20 @@ export interface AlertProps extends ComponentProps<typeof Container> {
 }
 
 export const Alert = forwardRef<ElementRef<typeof Container>, AlertProps>(
-  (
-    { children, title = 'Error', icon = <DefaultIcon />, ...props },
-    forwardedRef
-  ) => {
+  (properties, forwardedRef) => {
+    const {
+      children,
+      title = 'Error',
+      icon = <DefaultIcon />,
+      ...remainingProps
+    } = properties
+
     return (
-      <Container ref={forwardedRef} {...props}>
-        {icon ? <IconColumn>{icon}</IconColumn> : null}
+      <Container ref={forwardedRef} {...remainingProps}>
+        <Conditional test={icon}>
+          <IconColumn>{icon}</IconColumn>
+        </Conditional>
+
         <TextColumn>
           <Title weight="semibold">{title}</Title>
           <Text>{children}</Text>
