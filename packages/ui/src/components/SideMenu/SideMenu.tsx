@@ -31,7 +31,7 @@ const StyledSideMenu = styled('div', {
   },
 })
 
-type SideMenuProps = ComponentProps<typeof StyledSideMenu>
+export interface SideMenuProps extends ComponentProps<typeof StyledSideMenu> {}
 
 export const SideMenu = forwardRef<
   ElementRef<typeof StyledSideMenu>,

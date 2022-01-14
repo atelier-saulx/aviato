@@ -1,5 +1,6 @@
-import React, { ElementRef, forwardRef } from 'react'
+import React, { ElementRef, forwardRef, Children } from 'react'
 import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 
 const StyledMenu = styled('div', {
@@ -20,7 +21,7 @@ export const Menu = forwardRef<ElementRef<typeof StyledMenu>, MenuProps>(
   (properties, forwardedRef) => {
     const { children, ...remainingProps } = properties
 
-    const WrappedChildren = React.Children.map(children, (child, index) => {
+    const WrappedChildren = Children.map(children, (child, index) => {
       return <StyledChild key={`StyledChild-${index}`}>{child}</StyledChild>
     })
 

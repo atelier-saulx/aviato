@@ -1,9 +1,9 @@
-import React, { ElementRef, useCallback } from 'react'
-import { useUuid } from '@aviato/hooks'
+import React, { forwardRef, ElementRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
-import { StitchedCSS } from '~/theme'
 
+import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'
 import { SelectItem } from './types'
@@ -27,43 +27,42 @@ export interface SelectProps extends BaseInputProps {
 type StitchedProps = ComponentProps<typeof StyledInput>
 type ForwardProps = Omit<StitchedProps, 'onChange'> & SelectProps
 
-export const Select = React.forwardRef<
-  ElementRef<typeof StyledInput>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    label,
-    description,
-    error,
-    invalid,
-    onChange = noop,
-    ...remainingProps
-  } = properties
+export const Select = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
+  (properties, forwardedRef) => {
+    const {
+      label,
+      description,
+      error,
+      invalid,
+      onChange = noop,
+      ...remainingProps
+    } = properties
 
-  const uuid = useUuid({ prefix: 'select' })
+    const uuid = useUuid({ prefix: 'select' })
 
-  const isInvalid = Boolean(error || invalid)
+    const isInvalid = Boolean(error || invalid)
 
-  const handleChange = useCallback((event) => {
-    onChange(event)
-  }, [])
+    const handleChange = useCallback((event) => {
+      onChange(event)
+    }, [])
 
-  return (
-    <InputWrapper
-      label={label}
-      description={description}
-      error={error}
-      css={{ width: '100%' }}
-    >
-      <BaseInput
-        css={SelectStyles}
-        id={uuid}
-        invalid={isInvalid}
-        ref={forwardedRef}
-        readOnly
-        onChange={handleChange}
-        {...remainingProps}
-      />
-    </InputWrapper>
-  )
-})
+    return (
+      <InputWrapper
+        label={label}
+        description={description}
+        error={error}
+        css={{ width: '100%' }}
+      >
+        <BaseInput
+          css={SelectStyles}
+          id={uuid}
+          invalid={isInvalid}
+          ref={forwardedRef}
+          readOnly
+          onChange={handleChange}
+          {...remainingProps}
+        />
+      </InputWrapper>
+    )
+  }
+)

@@ -1,5 +1,6 @@
 import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 import { BaseFontVariants, BaseTextStyles } from './styles'
 
@@ -38,15 +39,13 @@ const StyledText = styled('p', {
 
 type TextSize = 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge'
 
-export interface TextProps {
+export interface TextProps extends ComponentProps<typeof StyledText> {
   size?: TextSize
   weight?: FontWeight
   color?: FontColor
 }
 
-type ForwardProps = ComponentProps<typeof StyledText> & TextProps
-
-export const Text = forwardRef<ElementRef<typeof StyledText>, ForwardProps>(
+export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
   (properties, forwardedRef) => {
     const {
       size = 'medium',

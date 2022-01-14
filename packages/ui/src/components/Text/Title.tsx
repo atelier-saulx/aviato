@@ -1,5 +1,6 @@
 import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 import { BaseTextStyles, BaseFontVariants } from './styles'
 

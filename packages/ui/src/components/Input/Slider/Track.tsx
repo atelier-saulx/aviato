@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { styled } from '~/theme'
-import { Mark } from '.'
 import { Marks } from './Marks'
+import { Mark } from './types'
 
 const StyledTrack = styled('div', {
   position: 'absolute',

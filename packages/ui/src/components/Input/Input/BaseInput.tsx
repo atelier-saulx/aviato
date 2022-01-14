@@ -5,6 +5,7 @@ import React, {
   ElementType,
   ReactNode,
   forwardRef,
+  useState,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
@@ -255,7 +256,7 @@ export const BaseInput = forwardRef<
     onChange: () => {},
   })
 
-  const [isActive, setIsActive] = React.useState(false)
+  const [isActive, setIsActive] = useState(false)
   const hasLeftIcon = Boolean(leftIcon)
   const hasRightIcon = Boolean(rightIcon)
 

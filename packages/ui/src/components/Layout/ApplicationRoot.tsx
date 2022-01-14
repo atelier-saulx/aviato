@@ -1,7 +1,14 @@
-import React, { ElementRef, useState, useMemo } from 'react'
+import React, {
+  forwardRef,
+  ElementRef,
+  useState,
+  useMemo,
+  ReactElement,
+  cloneElement,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
-import { styled, ThemeProvider } from '~/theme'
 
+import { styled, ThemeProvider } from '~/theme'
 import { MenuStateContext, menuWidth } from '../SideMenu'
 import { Header, headerHeight } from './Header'
 import { Group } from './Group'
@@ -56,17 +63,15 @@ const NavigationWrapper = styled('div', {
   },
 })
 
-export type ApplicationRootProps = {
-  navigation?: React.ReactElement
+export interface ApplicationRootProps
+  extends ComponentProps<typeof StyledApplicationRoot> {
+  navigation?: ReactElement
   SSR?: boolean
 }
 
-type ForwardProps = ComponentProps<typeof StyledApplicationRoot> &
-  ApplicationRootProps
-
-export const ApplicationRoot = React.forwardRef<
+export const ApplicationRoot = forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
-  ForwardProps
+  ApplicationRootProps
 >((properties, forwardedRef) => {
   const { SSR = false, children, navigation, ...remainingProps } = properties
 
@@ -74,7 +79,7 @@ export const ApplicationRoot = React.forwardRef<
   const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
 
   const hasSideMenu = Boolean(navigation)
-  const NavigationComponent = navigation ? React.cloneElement(navigation) : null
+  const NavigationComponent = navigation ? cloneElement(navigation) : null
 
   return (
     <ThemeProvider isSSRApplication={SSR}>

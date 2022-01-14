@@ -1,4 +1,4 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
@@ -41,7 +41,7 @@ export interface InputWrapperProps
   error?: string
 }
 
-export const InputWrapper = React.forwardRef<
+export const InputWrapper = forwardRef<
   ElementRef<typeof StyledInputWrapper>,
   InputWrapperProps
 >((properties, forwardRef) => {

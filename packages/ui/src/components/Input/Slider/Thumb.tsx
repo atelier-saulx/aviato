@@ -1,5 +1,6 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 
 const StyledThumb = styled('div', {
@@ -59,7 +60,11 @@ const Label = styled('div', {
   },
 })
 
-export interface ThumbProps {
+type ThumbEvent =
+  | React.MouseEvent<HTMLDivElement>
+  | React.TouchEvent<HTMLDivElement>
+
+export interface ThumbProps extends ComponentProps<typeof StyledThumb> {
   label: string
   position: number
   isLabelVisible: boolean
@@ -69,53 +74,48 @@ export interface ThumbProps {
   max: number
 }
 
-type ForwardProps = ComponentProps<typeof StyledThumb> & ThumbProps
+export const Thumb = forwardRef<ElementRef<typeof StyledThumb>, ThumbProps>(
+  (properties, forwardedRef) => {
+    const {
+      label,
+      position,
+      isLabelVisible,
+      isActive,
+      value: sliderValue,
+      min,
+      max,
+      ...remainingProps
+    } = properties
 
-export const Thumb = React.forwardRef<
-  ElementRef<typeof StyledThumb>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    label,
-    position,
-    isLabelVisible,
-    isActive,
-    value: sliderValue,
-    min,
-    max,
-    ...remainingProps
-  } = properties
+    const hasValidLabel = label !== ''
+    const labelMode = isLabelVisible && hasValidLabel ? 'visible' : 'hidden'
 
-  const hasValidLabel = label !== ''
-  const labelMode = isLabelVisible && hasValidLabel ? 'visible' : 'hidden'
-
-  const handleThumbDown = (
-    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
-  ) => {
-    if (event.cancelable) {
-      event.preventDefault()
-      event.stopPropagation()
+    const handleThumbDown = (event: ThumbEvent) => {
+      if (event.cancelable) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
     }
+
+    return (
+      <StyledThumb
+        tabIndex={0}
+        role="slider"
+        aria-valuemax={max}
+        aria-valuemin={min}
+        aria-valuenow={sliderValue}
+        style={{ left: `${position}%` }}
+        mode={isActive ? 'active' : 'inactive'}
+        onMouseDown={handleThumbDown}
+        onTouchStart={handleThumbDown}
+        onClick={(event) => event.stopPropagation()}
+        ref={forwardedRef}
+        {...remainingProps}
+      >
+        <ThumbPoint />
+
+        <Label mode={labelMode}>{label}</Label>
+      </StyledThumb>
+    )
   }
-
-  return (
-    <StyledThumb
-      tabIndex={0}
-      role="slider"
-      aria-valuemax={max}
-      aria-valuemin={min}
-      aria-valuenow={sliderValue}
-      style={{ left: `${position}%` }}
-      mode={isActive ? 'active' : 'inactive'}
-      onMouseDown={handleThumbDown}
-      onTouchStart={handleThumbDown}
-      onClick={(event) => event.stopPropagation()}
-      ref={forwardedRef}
-      {...remainingProps}
-    >
-      <ThumbPoint />
-
-      <Label mode={labelMode}>{label}</Label>
-    </StyledThumb>
-  )
-})
+)

@@ -1,9 +1,10 @@
 import React, { ElementRef, forwardRef, useCallback, useState } from 'react'
+import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
+
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
-import { noop } from '@aviato/utils'
 import { styled, classNames } from '~/theme'
-import { ComponentProps } from '@stitches/react'
 
 const StyledMenuItem = styled('button', {
   width: '100%',
