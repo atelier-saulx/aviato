@@ -1,4 +1,4 @@
-import { Column, Row, Page } from '@aviato/ui'
+import { ContextMenu, Column, Row, Page } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const ContextMenuPage = () => {
@@ -6,7 +6,9 @@ const ContextMenuPage = () => {
     return (
       <>
         <Column>
-          <Row>Context Menu</Row>
+          <Row>
+            <ContextMenu />
+          </Row>
         </Column>
       </>
     )
