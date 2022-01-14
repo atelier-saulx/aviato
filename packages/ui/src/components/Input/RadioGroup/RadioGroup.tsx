@@ -21,7 +21,9 @@ export interface OnRadioGroupChange
   value: string
 }
 
-export interface RadioGroupProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledRadioGroup>, 'onChange'>
+
+export interface RadioGroupProps extends StitchedProps {
   value?: string
   defaultValue?: string
   label?: string
@@ -31,12 +33,9 @@ export interface RadioGroupProps {
   onChange?: (value: string, payload: OnRadioGroupChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledRadioGroup>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & RadioGroupProps
-
 export const RadioGroup = React.forwardRef<
   ElementRef<typeof Group>,
-  ForwardProps
+  RadioGroupProps
 >((properties, forwardedRef) => {
   const {
     value,

@@ -202,7 +202,9 @@ export interface OnInputChange extends onChange {
   value: string
 }
 
-export interface BaseInputProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledInput>, 'onChange'>
+
+export interface BaseInputProps extends StitchedProps {
   value?: string
   defaultValue?: string
   component?: React.ElementType
@@ -219,12 +221,9 @@ export interface BaseInputProps {
   onChange?: (value: string, payload: OnInputChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledInput>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & BaseInputProps
-
 export const BaseInput = React.forwardRef<
   ElementRef<typeof StyledInput>,
-  ForwardProps
+  BaseInputProps
 >((properties, forwardedRef) => {
   const {
     value,

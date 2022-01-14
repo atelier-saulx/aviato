@@ -135,11 +135,13 @@ const StyledSwitch = styled('input', {
   },
 })
 
-export interface OnSwitchChange extends onChange<Event> {
+interface OnSwitchChange extends onChange<Event> {
   isChecked: boolean
 }
 
-export interface SwitchProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledSwitch>, 'onChange'>
+
+export interface SwitchProps extends StitchedProps {
   size?: SwitchSize
   checked?: boolean
   disabled?: boolean
@@ -150,12 +152,9 @@ export interface SwitchProps {
   onChange?: (value: boolean, payload: OnSwitchChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledSwitch>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & SwitchProps
-
 export const Switch = React.forwardRef<
   ElementRef<typeof StyledSwitch>,
-  ForwardProps
+  SwitchProps
 >((properties, forwardedRef) => {
   const {
     size = 'normal',

@@ -142,7 +142,12 @@ export interface OnCheckboxChange extends onChange<BaseSyntheticEvent> {
   isChecked: boolean
 }
 
-export interface CheckboxProps {
+type StitchedProps = Omit<
+  ComponentProps<typeof StyledCheckboxWrapper>,
+  'onChange'
+>
+
+export interface CheckboxProps extends StitchedProps {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
@@ -153,12 +158,9 @@ export interface CheckboxProps {
   onChange?: (value: boolean, payload: OnCheckboxChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledCheckboxWrapper>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & CheckboxProps
-
 export const Checkbox = React.forwardRef<
   ElementRef<typeof StyledCheckboxWrapper>,
-  ForwardProps
+  CheckboxProps
 >((properties, forwardedRef) => {
   const {
     size = 'small',

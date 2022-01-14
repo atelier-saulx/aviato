@@ -34,18 +34,16 @@ const Error = styled('div', {
   color: '$ErrorMain',
 })
 
-export interface InputWrapperProps {
+export interface InputWrapperProps
+  extends ComponentProps<typeof StyledInputWrapper> {
   label?: string
   description?: string
   error?: string
 }
 
-type ForwardProps = ComponentProps<typeof StyledInputWrapper> &
-  InputWrapperProps
-
 export const InputWrapper = React.forwardRef<
   ElementRef<typeof StyledInputWrapper>,
-  ForwardProps
+  InputWrapperProps
 >((properties, forwardRef) => {
   const { label, description, error, children, ...remainingProps } = properties
 

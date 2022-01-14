@@ -31,7 +31,9 @@ const StyledSlider = styled('div', {
   touchAction: 'none',
 })
 
-export interface SliderProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledSlider>, 'onChange'>
+
+interface SliderProps extends StitchedProps {
   value?: number
   defaultValue?: number
   min?: number
@@ -45,11 +47,9 @@ export interface SliderProps {
   onChange?(value: string): void
 }
 
-type ForwardProps = ComponentProps<typeof StyledSlider> & SliderProps
-
 export const Slider = React.forwardRef<
   ElementRef<typeof StyledSlider>,
-  ForwardProps
+  SliderProps
 >((properties, forwardedRef) => {
   const {
     value,
