@@ -1,14 +1,15 @@
 import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
+import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
+
+import { StitchedCSS } from '~/theme'
+import { IconName, getIconFromType, Icon } from '~/icons'
 import {
   Button,
   ButtonVariant,
   ButtonType,
   StyledButton,
 } from '~/components/Input/Button/Button'
-import { noop } from '@aviato/utils'
-
-import { IconName, getIconFromType, Icon } from '~/icons'
-import { StitchedCSS } from '~/theme'
 
 const IconButtonStyles: StitchedCSS = {
   padding: '8px 8px',
@@ -16,7 +17,7 @@ const IconButtonStyles: StitchedCSS = {
   width: 'max-content',
 }
 
-export interface IconButtonProps {
+export interface IconButtonProps extends ComponentProps<typeof StyledButton> {
   type?: ButtonType
   variant?: ButtonVariant
   disabled?: boolean
@@ -25,11 +26,9 @@ export interface IconButtonProps {
   css?: StitchedCSS
 }
 
-type ForwardProps = IconButtonProps
-
 export const IconButton = React.forwardRef<
   ElementRef<typeof StyledButton>,
-  ForwardProps
+  IconButtonProps
 >((properties, forwardedRef) => {
   const {
     type = 'primary',

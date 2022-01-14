@@ -218,20 +218,19 @@ export const StyledButton = styled('button', {
 export type ButtonType = 'primary' | 'ghost' | 'error'
 export type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
-export interface ButtonProps {
+export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   type?: ButtonType
   variant?: ButtonVariant
   disabled?: boolean
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
+  css?: StitchedCSS
 }
-
-type ForwardProps = ComponentProps<typeof StyledButton> & ButtonProps
 
 export const Button = React.forwardRef<
   ElementRef<typeof StyledButton>,
-  ForwardProps
+  ButtonProps
 >((properties, forwardedRef) => {
   const {
     type = 'primary',

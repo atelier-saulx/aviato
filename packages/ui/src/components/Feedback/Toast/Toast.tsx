@@ -1,12 +1,7 @@
-import React, {
-  forwardRef,
-  ElementRef,
-  ComponentProps,
-  ReactChildren,
-  ReactNode,
-} from 'react'
+import React, { forwardRef, ElementRef, ReactChildren, ReactNode } from 'react'
+import { ComponentProps } from '@stitches/react'
 
-import { styled } from '~/theme'
+import { StitchedCSS, styled } from '~/theme'
 import { Conditional, Text } from '~/components'
 import { IconCheckCircle, IconCloseCircle } from '~/icons'
 
@@ -45,6 +40,7 @@ export interface ToastProps extends ComponentProps<typeof Container> {
   title?: string
   type?: 'success' | 'error'
   icon?: ReactNode
+  css?: StitchedCSS
   children?: ReactChildren | string
 }
 

@@ -1,12 +1,8 @@
-import React, {
-  forwardRef,
-  ElementRef,
-  ComponentProps,
-  ReactChildren,
-  ReactNode,
-} from 'react'
+import React, { forwardRef, ElementRef, ReactChildren, ReactNode } from 'react'
+import { ComponentProps } from '@stitches/react'
+
 import { IconCloseCircle } from '~/icons'
-import { styled } from '~/theme'
+import { StitchedCSS, styled } from '~/theme'
 import { Conditional, Text } from '~/components'
 
 const Container = styled('div', {
@@ -37,9 +33,10 @@ const DefaultIcon = styled(IconCloseCircle, {
 })
 
 export interface AlertProps extends ComponentProps<typeof Container> {
-  children?: ReactChildren | string
   title?: string
   icon?: ReactNode
+  css?: StitchedCSS
+  children?: ReactChildren | string
 }
 
 export const Alert = forwardRef<ElementRef<typeof Container>, AlertProps>(
