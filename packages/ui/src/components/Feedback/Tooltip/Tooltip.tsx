@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import React, {
   forwardRef,
   ForwardedRef,
@@ -31,10 +28,12 @@ export interface TooltipProps extends SharedPopperProps {
   opened?: boolean
   delay?: number
   disabled?: boolean
-  tooltipRef?: ForwardedRef<HTMLDivElement>
+  width?: number | 'auto'
+  allowPointerEvents?: boolean
+  wrapLines?: boolean
   onMouseLeave?: () => void
   onMouseEnter?: () => void
-  width?: number | 'auto'
+  tooltipRef?: ForwardedRef<HTMLDivElement>
 
   /**
    * useEffect dependencies to force update tooltip position
@@ -56,7 +55,6 @@ export const Tooltip = forwardRef<
     delay = 0,
     opened,
     disabled = false,
-    withArrow = false,
     position = 'bottom',
     placement = 'center',
     zIndex = getZIndex('Popover'),
@@ -66,15 +64,19 @@ export const Tooltip = forwardRef<
     onMouseLeave = noop,
     onMouseEnter = noop,
     width = 'auto',
-    positionDependencies = [],
+    withArrow = false,
+    wrapLines = false,
     withinPortal = true,
+    allowPointerEvents = false,
+    positionDependencies = [],
     children,
     ...remainingProps
   } = properties
 
   const timeoutRef = useRef<number>()
-  const [_opened, setOpened] = useState(false)
-  const visible = (typeof opened === 'boolean' ? opened : _opened) && !disabled
+  const [isOpen, setOpened] = useState(false)
+
+  const isVisible = (typeof opened === 'boolean' ? opened : isOpen) && !disabled
 
   const [referenceElement, setReferenceElement] = useState(null)
 
@@ -110,7 +112,7 @@ export const Tooltip = forwardRef<
     >
       <Popper
         referenceElement={referenceElement}
-        mounted={visible}
+        mounted={isVisible}
         position={position}
         placement={placement}
         gutter={gutter}
@@ -121,7 +123,14 @@ export const Tooltip = forwardRef<
         forceUpdateDependencies={[...positionDependencies]}
         withinPortal={withinPortal}
       >
-        <TooltipContainer ref={tooltipRef} css={{ width }}>
+        <TooltipContainer
+          ref={tooltipRef}
+          css={{
+            pointerEvents: allowPointerEvents ? 'all' : 'none',
+            whiteSpace: wrapLines ? 'normal' : 'nowrap',
+            width,
+          }}
+        >
           {label}
         </TooltipContainer>
       </Popper>
