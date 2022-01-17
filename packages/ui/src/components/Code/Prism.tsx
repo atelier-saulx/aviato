@@ -6,7 +6,8 @@ import { useClipboard, useHasLoaded } from '@aviato/hooks'
 import { styled } from '~/theme'
 import { Tooltip } from '../Feedback/Tooltip'
 import { CodeLanguage } from './types'
-import { Conditional, IconButton } from '..'
+import { Conditional } from '..'
+import { CopyButton } from './CopyButton'
 
 const StyledPrism = styled('div', {
   position: 'relative',
@@ -48,8 +49,8 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
         <Conditional test={hasLoaded}>
           <TooltipContainer>
             <Tooltip content={clipboard.copied ? copiedLabel : copyLabel}>
-              <IconButton
-                icon={clipboard.copied ? 'IconCheck' : 'IconCopy'}
+              <CopyButton
+                wasCopied={clipboard.copied}
                 onClick={() => clipboard.copy(code)}
               />
             </Tooltip>
