@@ -1,5 +1,5 @@
 import { log } from '@aviato/utils'
-import { getSettledFlagsState } from './consolidateFlagState'
+import { getSettledFlagsState } from './settleFlagState'
 import { defaultFlagConfig, FeatureFlag } from './defaultConfig'
 import { MappedFlagConfig } from './types'
 
