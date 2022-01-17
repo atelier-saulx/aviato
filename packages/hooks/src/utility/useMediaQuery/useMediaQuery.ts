@@ -23,6 +23,7 @@ function getInitialValue(query: string) {
   if (typeof window !== 'undefined' && 'matchMedia' in window) {
     return window.matchMedia(query).matches
   }
+
   return false
 }
 
@@ -30,11 +31,11 @@ export function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(getInitialValue(query))
   const queryRef = useRef<MediaQueryList>()
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if ('matchMedia' in window) {
       queryRef.current = window.matchMedia(query)
       setMatches(queryRef.current.matches)
+
       return attachMediaListener(queryRef.current, (event) =>
         setMatches(event.matches)
       )
