@@ -1,6 +1,6 @@
 import React from 'react'
 import { getZIndex } from '~/theme'
-import { Portal } from '../../Utilities'
+import { Portal } from '..'
 
 export interface PopperContainerProps {
   children: React.ReactNode

@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { usePopper, StrictModifier } from 'react-popper'
 import type { Placement } from '@popperjs/core'
 import { useDidUpdate } from '@aviato/hooks'
+import { noop } from '@aviato/utils'
 
 import { PopperContainer } from './Container'
 import { flipPlacement, flipPosition, parsePopperPosition } from './utils'
 import { classNames, getZIndex, styled } from '~/theme'
 import { Conditional } from '~/components'
+import { Transition, TransitionPrimitive } from '../Transition'
 
+const PopperElement = styled('div', {})
 const Arrow = styled('div', {})
 
 export interface SharedPopperProps {
@@ -18,6 +21,10 @@ export interface SharedPopperProps {
   arrowDistance?: number
   withArrow?: boolean
   zIndex?: number
+  transition?: TransitionPrimitive
+  transitionDuration?: number
+  exitTransitionDuration?: number
+  transitionTimingFunction?: string
 }
 
 export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
@@ -30,6 +37,7 @@ export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
   onTransitionEnd?(): void
   modifiers?: StrictModifier[]
   withinPortal?: boolean
+  onTransitionEnd?(): void
 }
 
 export function Popper<T extends HTMLElement = HTMLDivElement>({
@@ -45,6 +53,11 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   modifiers = [],
   withinPortal = true,
   mounted,
+  transition = 'pop-top-left',
+  transitionDuration,
+  exitTransitionDuration = transitionDuration,
+  transitionTimingFunction,
+  onTransitionEnd = noop,
   children,
 }: PopperProps<T>) {
   const padding = withArrow ? gutter + arrowSize : gutter
@@ -86,22 +99,33 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   })
 
   return (
-    <Conditional test={mounted}>
-      <PopperContainer withinPortal={withinPortal} zIndex={zIndex}>
-        <div
-          ref={setPopperElement}
-          style={{ ...styles.popper, pointerEvents: 'none' }}
-          {...attributes.popper}
-        >
-          <div>
-            {children}
+    <Transition
+      mounted={mounted && !!referenceElement}
+      duration={transitionDuration}
+      exitDuration={exitTransitionDuration}
+      transition={transition}
+      timingFunction={transitionTimingFunction}
+      onExited={onTransitionEnd}
+    >
+      {(transitionStyles) => (
+        <div>
+          <PopperContainer withinPortal={withinPortal} zIndex={zIndex}>
+            <PopperElement
+              ref={setPopperElement}
+              style={{ ...styles.popper, pointerEvents: 'none' }}
+              {...attributes.popper}
+            >
+              <div style={transitionStyles}>
+                {children}
 
-            <Conditional test={withArrow}>
-              <Arrow style={arrowStyle} className={classes} />
-            </Conditional>
-          </div>
+                <Conditional test={withArrow}>
+                  <Arrow style={arrowStyle} className={classes} />
+                </Conditional>
+              </div>
+            </PopperElement>
+          </PopperContainer>
         </div>
-      </PopperContainer>
-    </Conditional>
+      )}
+    </Transition>
   )
 }

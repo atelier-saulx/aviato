@@ -86,6 +86,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
             withArrow
             arrowSize={4}
             gutter={8}
+            transition="fade"
           >
             <CopyButton
               wasCopied={clipboard.copied}

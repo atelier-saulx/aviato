@@ -10,7 +10,7 @@ import { mergeRefs } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
-import { Popper, SharedPopperProps } from '~/components/Overlay'
+import { Popper, SharedPopperProps } from '~/components'
 
 const StyledTooltip = styled('div', {})
 
@@ -69,6 +69,9 @@ export const Tooltip = forwardRef<
     withinPortal = true,
     allowPointerEvents = false,
     positionDependencies = [],
+    transition = 'fade',
+    transitionDuration = 200,
+    transitionTimingFunction,
     children,
     ...remainingProps
   } = properties
@@ -122,6 +125,9 @@ export const Tooltip = forwardRef<
         zIndex={zIndex}
         forceUpdateDependencies={[...positionDependencies]}
         withinPortal={withinPortal}
+        transitionDuration={transitionDuration}
+        transition={transition}
+        transitionTimingFunction={transitionTimingFunction}
       >
         <TooltipContainer
           ref={tooltipRef}
