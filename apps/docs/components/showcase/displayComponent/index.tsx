@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 
-import { styled } from '@aviato/ui'
+import { Prism, styled, Conditional, CodeBlock } from '@aviato/ui'
 
 const WrapperDiv = styled('div', {
   marginLeft: '0px',
@@ -61,18 +61,24 @@ const InnerDiv = styled('div', {
 export type DisplayComponentProps = {
   background?: 'filled' | 'transparent'
   padding?: 'small' | 'regular' | 'large'
+  codeBlock?: CodeBlock
 }
 
 export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
-  children,
   background = 'filled',
   padding = 'regular',
+  codeBlock,
+  children,
 }) => {
   return (
     <WrapperDiv>
       <ComponentWrapperDiv background={background}>
         <InnerDiv padding={padding}>{children}</InnerDiv>
       </ComponentWrapperDiv>
+
+      <Conditional test={codeBlock}>
+        <Prism codeBlock={codeBlock} />
+      </Conditional>
     </WrapperDiv>
   )
 }

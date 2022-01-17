@@ -29,7 +29,23 @@ const SwitchPage = () => {
 
       <NextText color="Secondary">Capture boolean input from user.</NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={{
+          language: 'typescript',
+          code: `
+            <Switch
+              label="This is a switch"
+              description="With a description"
+              text="This text is beside the switch"
+              size={size}
+              onChange={(value, payload) => {
+                log.global.debug('Switch change: ', { value, payload })
+              }}
+            />
+        `,
+        }}
+      >
         <ShowSwitch size="normal" />
       </ShowcaseComponent>
     </Page>

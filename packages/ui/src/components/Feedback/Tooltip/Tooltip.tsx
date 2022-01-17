@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent, ReactNode } from 'react'
 import { styled } from '~/theme'
 import { Root, Content, Trigger } from '@radix-ui/react-tooltip'
 
@@ -14,7 +14,16 @@ const TooltipTrigger = styled(Trigger, {
   cursor: 'pointer',
 })
 
-export const Tooltip = ({ children, content, delayDuration = 0 }) => {
+export interface TooltipProps {
+  content: ReactNode | string
+  delayDuration?: number
+}
+
+export const Tooltip: FunctionComponent<TooltipProps> = ({
+  content,
+  delayDuration = 0,
+  children,
+}) => {
   return (
     <Root delayDuration={delayDuration}>
       <TooltipTrigger>{children}</TooltipTrigger>
