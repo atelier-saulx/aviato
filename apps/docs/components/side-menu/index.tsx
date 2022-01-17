@@ -11,10 +11,6 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/button',
   },
   {
-    title: 'Icon Button',
-    route: '/components/icon-button',
-  },
-  {
     title: 'Checkbox',
     route: '/components/checkbox',
   },

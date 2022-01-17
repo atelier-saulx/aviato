@@ -1,3 +1,4 @@
+export * from './useClipboard'
 export * from './useEffectOnce'
 export * from './useMergedRef'
 export * from './useThrottledCallback'

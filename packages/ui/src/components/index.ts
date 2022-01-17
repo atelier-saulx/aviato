@@ -1,3 +1,4 @@
+export * from './Code'
 export * from './Feedback'
 export * from './Input'
 export * from './Layout'

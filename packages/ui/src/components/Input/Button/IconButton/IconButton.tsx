@@ -1,11 +1,4 @@
-import React, {
-  ElementRef,
-  forwardRef,
-  MouseEventHandler,
-  useCallback,
-} from 'react'
-import { ComponentProps } from '@stitches/react'
-import { noop } from '@aviato/utils'
+import React, { ElementRef, forwardRef, MouseEventHandler } from 'react'
 
 import { StitchedCSS } from '~/theme'
 import { IconName, getIconFromType, Icon } from '~/icons'
@@ -22,7 +15,7 @@ const IconButtonStyles: StitchedCSS = {
   width: 'max-content',
 }
 
-export interface IconButtonProps extends ComponentProps<typeof StyledButton> {
+export interface IconButtonProps {
   type?: ButtonType
   variant?: ButtonVariant
   disabled?: boolean
@@ -39,18 +32,9 @@ export const IconButton = forwardRef<
     type = 'primary',
     variant = 'filled',
     disabled = false,
-    onClick = noop,
     icon = 'IconPlus',
     ...remainingProps
   } = properties
-
-  const handleClick = useCallback(() => {
-    if (disabled) {
-      return noop()
-    }
-
-    onClick()
-  }, [])
 
   const TargetIcon = getIconFromType(icon as IconName) as Icon
 
@@ -58,7 +42,6 @@ export const IconButton = forwardRef<
     <Button
       type={type}
       variant={variant}
-      onClick={handleClick}
       disabled={disabled}
       css={IconButtonStyles}
       ref={forwardedRef}
