@@ -70,7 +70,7 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   codeBlock,
   children,
 }) => {
-  const { language, code } = codeBlock
+  const { language, code } = codeBlock ?? {}
 
   return (
     <WrapperDiv>
