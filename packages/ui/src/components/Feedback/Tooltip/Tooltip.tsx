@@ -26,7 +26,7 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
 }) => {
   return (
     <Root delayDuration={delayDuration}>
-      <TooltipTrigger>{children}</TooltipTrigger>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent>{content}</TooltipContent>
     </Root>
   )

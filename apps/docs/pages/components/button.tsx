@@ -10,6 +10,7 @@ import {
   ButtonType,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
+import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
@@ -68,6 +69,9 @@ const ButtonPage = () => {
                   variant="filled"
                   leftIcon={Icon}
                   disabled={isDisabled}
+                  onClick={() => {
+                    log.global.debug('Button clicked')
+                  }}
                 >
                   Lorem
                 </Button>

@@ -3,9 +3,7 @@ import React, {
   ReactNode,
   ElementRef,
   MouseEventHandler,
-  useCallback,
 } from 'react'
-import { noop } from '@aviato/utils'
 import { ComponentProps } from '@stitches/react'
 
 import { classNames, styled, StitchedCSS } from '~/theme'
@@ -240,20 +238,11 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       type = 'primary',
       variant = 'filled',
       disabled = false,
-      onClick = noop,
       leftIcon = null,
       rightIcon = null,
       children,
       ...remainingProps
     } = properties
-
-    const handleClick = useCallback(() => {
-      if (disabled) {
-        return noop()
-      }
-
-      onClick()
-    }, [disabled])
 
     const isFilled = variant === 'filled'
     const isOutlined = variant === 'outlined'
@@ -265,10 +254,11 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       isTransparent,
     })
 
+    const isTextChild = typeof children === 'string'
+
     return (
       <StyledButton
         type={type}
-        onClick={handleClick}
         disabled={disabled}
         className={classes}
         ref={forwardedRef}
@@ -278,9 +268,13 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
           <IconWrapper type="start">{leftIcon}</IconWrapper>
         </Conditional>
 
-        <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
-          {children}
-        </Text>
+        <Conditional test={isTextChild}>
+          <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+            {children}
+          </Text>
+        </Conditional>
+
+        <Conditional test={!isTextChild}>{children}</Conditional>
 
         <Conditional test={rightIcon}>
           <IconWrapper type="end">{rightIcon}</IconWrapper>
