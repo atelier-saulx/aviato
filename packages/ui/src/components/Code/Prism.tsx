@@ -1,5 +1,6 @@
 import React, { forwardRef, ElementRef } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import theme from 'prism-react-renderer/themes/oceanicNext'
 import { ComponentProps } from '@stitches/react'
 import { useClipboard, useHasLoaded } from '@aviato/hooks'
 
@@ -21,6 +22,30 @@ const TooltipContainer = styled('div', {
   zIndex: '2',
 })
 
+const Pre = styled('pre', {
+  lineHeight: '1.55',
+  borderRadius: '4px',
+  fontSize: '15px',
+  padding: '10px',
+  margin: '0px',
+  overflowX: 'auto',
+})
+
+const Line = styled('div', {
+  display: 'table-row',
+})
+
+const LineNo = styled('div', {
+  display: 'table-cell',
+  textAlign: 'right',
+  paddingRight: '1em',
+  opacity: '0.5',
+})
+
+const LineContent = styled('div', {
+  display: 'table-cell',
+})
+
 export interface CodeBlock {
   code: string
   language: CodeLanguage
@@ -29,7 +54,9 @@ export interface CodeBlock {
 export interface PrismProps extends ComponentProps<typeof StyledPrism> {
   copyLabel: string
   copiedLabel: string
-  codeBlock: CodeBlock
+  language: CodeLanguage
+  withLineNumbers?: boolean
+  children: string
 }
 
 export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
@@ -37,9 +64,12 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
     const {
       copyLabel = 'Copy code',
       copiedLabel = 'Copied',
-      codeBlock,
+      language,
+      withLineNumbers = false,
+      children = '',
     } = properties
-    const { language, code } = codeBlock
+
+    const trimmedCode = children.trim()
 
     const hasLoaded = useHasLoaded()
     const clipboard = useClipboard()
@@ -51,29 +81,33 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
             <Tooltip content={clipboard.copied ? copiedLabel : copyLabel}>
               <CopyButton
                 wasCopied={clipboard.copied}
-                onClick={() => clipboard.copy(code)}
+                onClick={() => clipboard.copy(trimmedCode)}
               />
             </Tooltip>
           </TooltipContainer>
         </Conditional>
 
-        <Highlight {...defaultProps} code={code} language={language}>
+        <Highlight
+          {...defaultProps}
+          code={trimmedCode}
+          language={language}
+          theme={theme}
+        >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <pre className={className} style={style}>
+            <Pre className={className} style={style}>
               {tokens.map((line, index) => (
-                <div
-                  key={`div-${index}`}
-                  {...getLineProps({ line, key: index })}
-                >
-                  {line.map((token, key) => (
-                    <span
-                      key={`span-${index}`}
-                      {...getTokenProps({ token, key })}
-                    />
-                  ))}
-                </div>
+                <Line key={index} {...getLineProps({ line, key: index })}>
+                  <Conditional test={withLineNumbers}>
+                    <LineNo>{index + 1}</LineNo>
+                  </Conditional>
+                  <LineContent>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token, key })} />
+                    ))}
+                  </LineContent>
+                </Line>
               ))}
-            </pre>
+            </Pre>
           )}
         </Highlight>
       </StyledPrism>

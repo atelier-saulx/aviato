@@ -70,6 +70,8 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   codeBlock,
   children,
 }) => {
+  const { language, code } = codeBlock
+
   return (
     <WrapperDiv>
       <ComponentWrapperDiv background={background}>
@@ -77,7 +79,7 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
       </ComponentWrapperDiv>
 
       <Conditional test={codeBlock}>
-        <Prism codeBlock={codeBlock} />
+        <Prism language={language}>{code}</Prism>
       </Conditional>
     </WrapperDiv>
   )
