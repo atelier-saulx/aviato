@@ -18,7 +18,7 @@ function featureFlagFactory(): FeatureFlagFactory {
   function initialise(): void {
     featureFlags = getSettledFlagsState()
 
-    log.debug(`Feature-flag state: `, featureFlags)
+    log.debug('Feature-flag state: ', featureFlags)
   }
 
   function isEnabled(featureFlag: FeatureFlag): boolean {
