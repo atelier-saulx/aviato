@@ -1,12 +1,12 @@
 import React, { forwardRef, ElementRef } from 'react'
-import Highlight, { defaultProps } from 'prism-react-renderer'
 import { ComponentProps } from '@stitches/react'
+import Highlight, { defaultProps } from 'prism-react-renderer'
 import { useClipboard } from '@aviato/hooks'
 
 import { styled, useTheme } from '~/theme'
 import { Tooltip } from '../Feedback/Tooltip'
+import { Conditional } from '../Utilities/Conditional'
 import { CodeLanguage } from './types'
-import { Conditional } from '..'
 import { CopyButton } from './CopyButton'
 import { getPrismTheme } from './theme'
 

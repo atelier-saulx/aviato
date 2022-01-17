@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 
-import { Prism, styled, Conditional, CodeBlock } from '@aviato/ui'
+import { Prism, styled, Conditional, CodeBlock, CodeLanguage } from '@aviato/ui'
 
 const WrapperDiv = styled('div', {
   marginLeft: '0px',
@@ -70,8 +70,8 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   codeBlock,
   children,
 }) => {
-  let code
-  let language = 'tsx'
+  let code: string
+  let language: CodeLanguage = 'tsx'
 
   if (codeBlock) {
     if (typeof codeBlock === 'string') {
