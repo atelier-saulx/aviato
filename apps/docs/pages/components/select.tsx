@@ -1,6 +1,15 @@
-import { Column, Row, Select, NativeSelect, Page, styled } from '@aviato/ui'
+import {
+  Conditional,
+  Column,
+  Row,
+  Select,
+  NativeSelect,
+  Page,
+  styled,
+} from '@aviato/ui'
 import { log } from '@aviato/utils'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { featureFlags } from '../../feature-flags'
 
 const BigSpacer = styled('div', {
   width: '100%',
@@ -8,6 +17,8 @@ const BigSpacer = styled('div', {
 })
 
 const SelectPage = () => {
+  const showSelect = featureFlags.isEnabled('Select')
+
   const ShowSelect = () => {
     return (
       <>
@@ -23,26 +34,51 @@ const SelectPage = () => {
               data={[
                 { value: 'flurpy', label: 'Flurpy' },
                 { value: 'snark', label: 'Snark' },
+                { value: 'snorkles', label: 'Snorkles' },
               ]}
             />
           </Row>
 
-          <BigSpacer />
+          <Conditional test={showSelect}>
+            <BigSpacer />
 
-          <Row css={{ width: '100%' }}>
-            <Select
-              placeholder="Type something here"
-              label="This is a label"
-              description="This is a description"
-              onChange={(value, payload) => {
-                log.global.debug('Select change: ', { value, payload })
-              }}
-              data={[
-                { value: 'flurpy', label: 'Flurpy' },
-                { value: 'snark', label: 'Snark' },
-              ]}
-            />
-          </Row>
+            <Row css={{ width: '100%' }}>
+              <Select
+                placeholder="Select a thing"
+                label="This is a label"
+                description="This is a description"
+                onChange={(value, payload) => {
+                  log.global.debug('Select change: ', { value, payload })
+                }}
+                data={[
+                  { value: 'flurpy', label: 'Flurpy' },
+                  { value: 'snark', label: 'Snark' },
+                  { value: 'snorkles', label: 'Snorkles' },
+                  { value: 'disabled', label: 'Disabled', disabled: true },
+                ]}
+              />
+            </Row>
+
+            <BigSpacer />
+
+            <Row css={{ width: '100%' }}>
+              <Select
+                placeholder="Search for a thing"
+                label="This is a label"
+                description="This is a description"
+                searchable
+                onChange={(value, payload) => {
+                  log.global.debug('Select change: ', { value, payload })
+                }}
+                data={[
+                  { value: 'flurpy', label: 'Flurpy' },
+                  { value: 'snark', label: 'Snark' },
+                  { value: 'snorkles', label: 'Snorkles' },
+                  { value: 'disabled', label: 'Disabled', disabled: true },
+                ]}
+              />
+            </Row>
+          </Conditional>
         </Column>
       </>
     )

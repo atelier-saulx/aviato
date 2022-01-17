@@ -1,5 +1,5 @@
 import { isBrowser } from '@aviato/utils'
-import { defaultFlagConfig, FeatureFlag } from '.'
+import { defaultFlagConfig, FeatureFlag } from './defaultConfig'
 import { FeatureFlagConfig } from './types'
 
 function setupFlagsFromEnv(currentState: FeatureFlagConfig): FeatureFlagConfig {

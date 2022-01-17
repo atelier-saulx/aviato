@@ -4,7 +4,7 @@ import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { StitchedCSS } from '~/theme'
-import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
+import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { InputWrapper } from '../InputWrapper'
 import { SelectItem } from './types'
 import { onChange } from '~/types'
@@ -62,7 +62,7 @@ export const NativeSelect = forwardRef<
   const handleChange = useCallback((value, { event }) => {
     const index = formattedData.findIndex((item) => item.value === value)
 
-    onChange(value, { event, index })
+    onChange(value, { event, value, index })
   }, [])
 
   return (
