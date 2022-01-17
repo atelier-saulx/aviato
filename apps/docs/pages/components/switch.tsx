@@ -32,7 +32,7 @@ const SwitchPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={{
-          language: 'typescript',
+          language: 'tsx',
           code: `
   <Switch
     label="This is a switch"
