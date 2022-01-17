@@ -183,9 +183,7 @@ const ButtonPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
-<Button type='ghost'>
-  Ipsum
-</Button>
+<Button type='ghost'>Ipsum</Button>
 
 <IconButton type='ghost' />
       `}
@@ -196,9 +194,7 @@ const ButtonPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
-<Button type='error'>
-  Dolor
-</Button>
+<Button type='error'>Dolor</Button>
 
 <IconButton type='error' />
       `}
