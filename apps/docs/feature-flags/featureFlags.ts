@@ -3,8 +3,6 @@ import { getSettledFlagsState } from './consolidateFlagState'
 import { defaultFlagConfig, FeatureFlag } from './defaultConfig'
 import { MappedFlagConfig } from './types'
 
-export { FeatureFlag }
-
 type FeatureFlagFactory = {
   initialise(): void
   isEnabled(featureFlag: FeatureFlag): boolean
