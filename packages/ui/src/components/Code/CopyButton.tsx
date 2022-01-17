@@ -8,11 +8,11 @@ const StyledCopyButton = styled('div', {
 })
 
 const StyledCheck = styled(IconCheck, {
-  color: '$TextInverted',
+  color: '$TextPrimary',
 })
 
 const StyledCopy = styled(IconCopy, {
-  color: '$TextInverted',
+  color: '$TextPrimary',
 })
 
 export interface CopyButtonProps {

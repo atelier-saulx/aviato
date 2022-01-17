@@ -1,14 +1,14 @@
 import React, { forwardRef, ElementRef } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/oceanicNext'
 import { ComponentProps } from '@stitches/react'
 import { useClipboard, useHasLoaded } from '@aviato/hooks'
 
-import { styled } from '~/theme'
+import { styled, useTheme } from '~/theme'
 import { Tooltip } from '../Feedback/Tooltip'
 import { CodeLanguage } from './types'
 import { Conditional } from '..'
 import { CopyButton } from './CopyButton'
+import { getPrismTheme } from './theme'
 
 const StyledPrism = styled('div', {
   position: 'relative',
@@ -69,10 +69,17 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
       children = '',
     } = properties
 
+    const { theme } = useTheme()
+    const colorMode = theme as 'light' | 'dark'
+
     const trimmedCode = children.trim()
 
     const hasLoaded = useHasLoaded()
     const clipboard = useClipboard()
+
+    if (!hasLoaded) {
+      return null
+    }
 
     return (
       <StyledPrism ref={forwardedRef}>
@@ -91,7 +98,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
           {...defaultProps}
           code={trimmedCode}
           language={language}
-          theme={theme}
+          theme={getPrismTheme(colorMode)}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <Pre className={className} style={style}>
