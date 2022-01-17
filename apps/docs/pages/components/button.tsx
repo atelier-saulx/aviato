@@ -8,6 +8,9 @@ import {
   getRandomIcon,
   styled,
   ButtonType,
+  IconButton,
+  getRandomIconName,
+  IconName,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { log } from '@aviato/utils'
@@ -15,14 +18,14 @@ import { log } from '@aviato/utils'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'
 
-const BigSpacer = styled('div', {
-  width: '100%',
+const Spacer = styled('div', {
+  width: 6,
   height: 20,
 })
 
-const Spacer = styled('div', {
-  width: 6,
-  height: 6,
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
 })
 
 /**
@@ -39,11 +42,14 @@ const ButtonPage = () => {
     return <Icon />
   }
 
+  const randomIconName = () => getRandomIconName() as IconName
+
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
     const [isDisabled, setIsDisabled] = useState(false)
     const Icon = useMemo(() => <RandomIcon />, [])
+    const IconString = useMemo(() => randomIconName(), [])
 
     return (
       <>
@@ -75,6 +81,15 @@ const ButtonPage = () => {
                 >
                   Lorem
                 </Button>
+
+                <Spacer />
+
+                <IconButton
+                  type={type}
+                  variant="filled"
+                  icon={IconString}
+                  disabled={isDisabled}
+                />
               </Row>
 
               <BigSpacer />
@@ -88,6 +103,15 @@ const ButtonPage = () => {
                 >
                   Lorem
                 </Button>
+
+                <Spacer />
+
+                <IconButton
+                  type={type}
+                  variant="outlined"
+                  icon={IconString}
+                  disabled={isDisabled}
+                />
               </Row>
 
               <BigSpacer />
@@ -101,51 +125,15 @@ const ButtonPage = () => {
                 >
                   Lorem
                 </Button>
-              </Row>
-            </Column>
-          </Row>
-        </Column>
-      </>
-    )
-  }
 
-  const ShowDisabledButtons = () => {
-    const Icon = useMemo(() => <RandomIcon />, [])
+                <Spacer />
 
-    return (
-      <>
-        <Column>
-          <NextTitle>Disabled</NextTitle>
-          <Row>
-            <Column>
-              <Row>
-                <Button variant="filled" disabled>
-                  Disabled
-                </Button>
-                <Spacer />
-                <Button variant="outlined" disabled>
-                  Disabled
-                </Button>
-                <Spacer />
-                <Button variant="transparent" disabled>
-                  Disabled
-                </Button>
-              </Row>
-
-              <BigSpacer />
-
-              <Row>
-                <Button variant="filled" disabled leftIcon={Icon}>
-                  Disabled
-                </Button>
-                <Spacer />
-                <Button variant="outlined" disabled>
-                  Disabled
-                </Button>
-                <Spacer />
-                <Button variant="transparent" disabled rightIcon={Icon}>
-                  Disabled
-                </Button>
+                <IconButton
+                  type={type}
+                  variant="transparent"
+                  icon={IconString}
+                  disabled={isDisabled}
+                />
               </Row>
             </Column>
           </Row>
@@ -168,16 +156,26 @@ const ButtonPage = () => {
         background="transparent"
         codeBlock={`
 <Button
-  type='Primary'
+  type='primary'
   variant={'filled' | 'outlined' | 'transparent'}
-  leftIcon={<Icon />}
+  leftIcon={<IconPlus />}
+  rightIcon={<IconCheck />}
   onClick={() => {
-    log.global.debug('Button clicked')
+    console.log('Button clicked')
   }}
 >
   Lorem
 </Button>
-        `}
+
+<IconButton
+  type='primary'
+  variant={'filled' | 'outlined' | 'transparent'}
+  icon="IconPlus"
+  onClick={() => {
+    console.log('Button clicked')
+  }}
+/>
+      `}
       >
         <ShowButtons type="primary" />
       </ShowcaseComponent>
@@ -185,23 +183,27 @@ const ButtonPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
-<Button
-  type='Ghost'
-  variant={'filled' | 'outlined' | 'transparent'}
->
-  Lorem
+<Button type='ghost'>
+  Ipsum
 </Button>
-        `}
+
+<IconButton type='ghost' />
+      `}
       >
         <ShowButtons type="ghost" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
-        <ShowButtons type="error" />
-      </ShowcaseComponent>
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Button type='error'>
+  Dolor
+</Button>
 
-      <ShowcaseComponent background="transparent">
-        <ShowDisabledButtons />
+<IconButton type='error' />
+      `}
+      >
+        <ShowButtons type="error" />
       </ShowcaseComponent>
     </Page>
   )
