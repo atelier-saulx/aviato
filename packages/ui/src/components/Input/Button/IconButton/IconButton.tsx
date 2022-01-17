@@ -1,5 +1,4 @@
 import React, { ElementRef, forwardRef, MouseEventHandler } from 'react'
-import { ComponentProps } from '@stitches/react'
 
 import { StitchedCSS } from '~/theme'
 import { IconName, getIconFromType, Icon } from '~/icons'
@@ -16,14 +15,13 @@ const IconButtonStyles: StitchedCSS = {
   width: 'max-content',
 }
 
-export interface IconButtonProps extends ComponentProps<typeof StyledButton> {
+export interface IconButtonProps {
   type?: ButtonType
   variant?: ButtonVariant
   disabled?: boolean
   icon?: IconName
   onClick?: MouseEventHandler<HTMLButtonElement>
   css?: StitchedCSS
-  as?: any
 }
 
 export const IconButton = forwardRef<
