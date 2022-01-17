@@ -164,11 +164,35 @@ const ButtonPage = () => {
         a delete operation.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Button
+  type='Primary'
+  variant={'filled' | 'outlined' | 'transparent'}
+  leftIcon={<Icon />}
+  onClick={() => {
+    log.global.debug('Button clicked')
+  }}
+>
+  Lorem
+</Button>
+        `}
+      >
         <ShowButtons type="primary" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Button
+  type='Ghost'
+  variant={'filled' | 'outlined' | 'transparent'}
+>
+  Lorem
+</Button>
+        `}
+      >
         <ShowButtons type="ghost" />
       </ShowcaseComponent>
 

@@ -61,7 +61,7 @@ const InnerDiv = styled('div', {
 export type DisplayComponentProps = {
   background?: 'filled' | 'transparent'
   padding?: 'small' | 'regular' | 'large'
-  codeBlock?: CodeBlock
+  codeBlock?: string | CodeBlock
 }
 
 export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
@@ -70,7 +70,17 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   codeBlock,
   children,
 }) => {
-  const { language, code } = codeBlock ?? {}
+  let code
+  let language = 'tsx'
+
+  if (codeBlock) {
+    if (typeof codeBlock === 'string') {
+      code = codeBlock
+    } else {
+      code = codeBlock.code
+      language = codeBlock.language
+    }
+  }
 
   return (
     <WrapperDiv>
@@ -78,7 +88,7 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
         <InnerDiv padding={padding}>{children}</InnerDiv>
       </ComponentWrapperDiv>
 
-      <Conditional test={codeBlock}>
+      <Conditional test={code}>
         <Prism language={language}>{code}</Prism>
       </Conditional>
     </WrapperDiv>

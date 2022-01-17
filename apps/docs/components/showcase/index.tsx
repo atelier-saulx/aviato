@@ -20,7 +20,7 @@ export type DisplayComponentProps = {
   description?: string
   background?: 'filled' | 'transparent'
   padding?: 'small' | 'regular' | 'large'
-  codeBlock?: CodeBlock
+  codeBlock?: string | CodeBlock
 }
 
 export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({

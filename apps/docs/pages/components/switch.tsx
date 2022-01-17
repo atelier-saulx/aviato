@@ -31,9 +31,7 @@ const SwitchPage = () => {
 
       <ShowcaseComponent
         background="transparent"
-        codeBlock={{
-          language: 'tsx',
-          code: `
+        codeBlock={`
 <Switch
   label="This is a switch"
   description="With a description"
@@ -43,8 +41,7 @@ const SwitchPage = () => {
     log.global.debug('Switch change: ', { value, payload })
   }}
 />
-        `,
-        }}
+        `}
       >
         <ShowSwitch size="normal" />
       </ShowcaseComponent>
