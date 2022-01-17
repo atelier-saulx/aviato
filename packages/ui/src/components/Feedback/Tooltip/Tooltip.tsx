@@ -57,7 +57,7 @@ export const Tooltip = forwardRef<
     opened,
     disabled = false,
     withArrow = false,
-    position = 'top',
+    position = 'bottom',
     placement = 'center',
     zIndex = getZIndex('Popover'),
     gutter = 5,
