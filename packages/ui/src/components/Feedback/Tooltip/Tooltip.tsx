@@ -17,16 +17,18 @@ const TooltipTrigger = styled(Trigger, {
 export interface TooltipProps {
   content: ReactNode | string
   delayDuration?: number
+  asChild?: boolean
 }
 
 export const Tooltip: FunctionComponent<TooltipProps> = ({
   content,
   delayDuration = 0,
+  asChild = false,
   children,
 }) => {
   return (
     <Root delayDuration={delayDuration}>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
       <TooltipContent>{content}</TooltipContent>
     </Root>
   )

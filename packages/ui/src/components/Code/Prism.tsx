@@ -1,7 +1,7 @@
 import React, { forwardRef, ElementRef } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import { ComponentProps } from '@stitches/react'
-import { useClipboard, useHasLoaded } from '@aviato/hooks'
+import { useClipboard } from '@aviato/hooks'
 
 import { styled, useTheme } from '~/theme'
 import { Tooltip } from '../Feedback/Tooltip'
@@ -74,25 +74,18 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
 
     const trimmedCode = children.trim()
 
-    const hasLoaded = useHasLoaded()
     const clipboard = useClipboard()
-
-    if (!hasLoaded) {
-      return null
-    }
 
     return (
       <StyledPrism ref={forwardedRef}>
-        <Conditional test={hasLoaded}>
-          <TooltipContainer>
-            <Tooltip content={clipboard.copied ? copiedLabel : copyLabel}>
-              <CopyButton
-                wasCopied={clipboard.copied}
-                onClick={() => clipboard.copy(trimmedCode)}
-              />
-            </Tooltip>
-          </TooltipContainer>
-        </Conditional>
+        <TooltipContainer>
+          <Tooltip content={clipboard.copied ? copiedLabel : copyLabel} asChild>
+            <CopyButton
+              wasCopied={clipboard.copied}
+              onClick={() => clipboard.copy(trimmedCode)}
+            />
+          </Tooltip>
+        </TooltipContainer>
 
         <Highlight
           {...defaultProps}
