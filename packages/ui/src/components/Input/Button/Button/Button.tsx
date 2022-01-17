@@ -254,7 +254,15 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       isTransparent,
     })
 
-    const isTextChild = typeof children === 'string'
+    const isText = typeof children === 'string'
+
+    const TextComponent = isText ? (
+      <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+        {children}
+      </Text>
+    ) : (
+      children
+    )
 
     return (
       <StyledButton
@@ -268,13 +276,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
           <IconWrapper type="start">{leftIcon}</IconWrapper>
         </Conditional>
 
-        <Conditional test={isTextChild}>
-          <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
-            {children}
-          </Text>
-        </Conditional>
-
-        <Conditional test={!isTextChild}>{children}</Conditional>
+        {TextComponent}
 
         <Conditional test={rightIcon}>
           <IconWrapper type="end">{rightIcon}</IconWrapper>
