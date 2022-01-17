@@ -44,11 +44,11 @@ const IconsPage = () => {
                   const Icon = icons[key]
 
                   return (
-                    <Tooltip key={`Tooltip-${index}`} content={key}>
-                      <GridItem>
+                    <GridItem key={`GridItem-${index}`}>
+                      <Tooltip label={key}>
                         <Icon />
-                      </GridItem>
-                    </Tooltip>
+                      </Tooltip>
+                    </GridItem>
                   )
                 })}
               </Row>

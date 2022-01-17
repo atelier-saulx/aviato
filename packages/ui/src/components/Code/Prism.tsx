@@ -79,7 +79,14 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
     return (
       <StyledPrism ref={forwardedRef}>
         <TooltipContainer>
-          <Tooltip content={clipboard.copied ? copiedLabel : copyLabel} asChild>
+          <Tooltip
+            label={clipboard.copied ? copiedLabel : copyLabel}
+            position="left"
+            placement="center"
+            withArrow
+            arrowSize={4}
+            gutter={8}
+          >
             <CopyButton
               wasCopied={clipboard.copied}
               onClick={() => clipboard.copy(trimmedCode)}
