@@ -23,16 +23,59 @@ const TooltipContainer = styled('div', {
 })
 
 export interface TooltipProps extends SharedPopperProps {
+  /**
+   * Text or component to show when label is active
+   */
   label: ReactNode | string
+
+  /**
+   * Target child to wrap label display
+   */
   children: ReactNode
+
+  /**
+   * Control Tooltip state yourself
+   */
   opened?: boolean
+
+  /**
+   * Delay before showing tooltip
+   */
   delay?: number
+
+  /**
+   * Disable tooltip
+   */
   disabled?: boolean
+
+  /**
+   * Set specific tooltip width
+   */
   width?: number | 'auto'
+
+  /**
+   * Escape-hatch to allow pointer-events
+   */
   allowPointerEvents?: boolean
+
+  /**
+   * Use with multi-line tooltip text
+   */
   wrapLines?: boolean
-  onMouseLeave?: () => void
+
+  /**
+   * Triggers when the mouse enters the target component bounding box
+   */
   onMouseEnter?: () => void
+
+  /**
+   * Triggers when the mouse leaves the target component bounding box
+   */
+  onMouseLeave?: () => void
+
+  /**
+   * Forward a reference to the tooltip itself
+   */
   tooltipRef?: ForwardedRef<HTMLDivElement>
 
   /**

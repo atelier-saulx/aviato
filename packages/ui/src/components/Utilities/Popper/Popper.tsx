@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { usePopper, StrictModifier } from 'react-popper'
-import type { Placement } from '@popperjs/core'
 import { useDidUpdate } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
@@ -9,13 +8,14 @@ import { flipPlacement, flipPosition, parsePopperPosition } from './utils'
 import { classNames, getZIndex, styled } from '~/theme'
 import { Conditional } from '~/components'
 import { Transition, TransitionPrimitive } from '../Transition'
+import { BasePlacement, BasePosition, Placement } from './types'
 
 const PopperElement = styled('div', {})
 const Arrow = styled('div', {})
 
 export interface SharedPopperProps {
-  position?: 'top' | 'left' | 'bottom' | 'right'
-  placement?: 'start' | 'center' | 'end'
+  position?: BasePosition
+  placement?: BasePlacement
   gutter?: number
   arrowSize?: number
   arrowDistance?: number
@@ -62,27 +62,32 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
 }: PopperProps<T>) {
   const padding = withArrow ? gutter + arrowSize : gutter
   const [popperElement, setPopperElement] = useState(null)
-  const _placement = flipPlacement(placement, 'ltr')
-  const _position = flipPosition(position, 'ltr')
+
+  const internalPlacement = flipPlacement(placement, 'ltr')
+  const internalPosition = flipPosition(position, 'ltr')
 
   const initialPlacement: Placement =
-    _placement === 'center' ? _position : `${_position}-${_placement}`
+    internalPlacement === 'center'
+      ? internalPosition
+      : `${internalPosition}-${internalPlacement}`
+
+  const popperOptions = {
+    placement: initialPlacement,
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, padding],
+        },
+      },
+      ...modifiers,
+    ],
+  }
 
   const { styles, attributes, forceUpdate } = usePopper(
     referenceElement,
     popperElement,
-    {
-      placement: initialPlacement,
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: [0, padding],
-          },
-        },
-        ...modifiers,
-      ],
-    }
+    popperOptions
   )
 
   useDidUpdate(() => {
