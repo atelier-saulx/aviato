@@ -5,6 +5,7 @@ import { Conditional } from '..'
 
 const StyledCopyButton = styled('div', {
   position: 'relative',
+  cursor: 'pointer',
 })
 
 const StyledCheck = styled(IconCheck, {

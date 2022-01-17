@@ -1,9 +1,7 @@
 import { log } from '@aviato/utils'
-import { getSettledFlagsState } from './consolidateFlagState'
+import { getSettledFlagsState } from './settleFlagState'
 import { defaultFlagConfig, FeatureFlag } from './defaultConfig'
 import { MappedFlagConfig } from './types'
-
-export { FeatureFlag }
 
 type FeatureFlagFactory = {
   initialise(): void
@@ -20,7 +18,7 @@ function featureFlagFactory(): FeatureFlagFactory {
   function initialise(): void {
     featureFlags = getSettledFlagsState()
 
-    log.debug(`Feature-flag state: `, featureFlags)
+    log.debug('Feature-flag state: ', featureFlags)
   }
 
   function isEnabled(featureFlag: FeatureFlag): boolean {

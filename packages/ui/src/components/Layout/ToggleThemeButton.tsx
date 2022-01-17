@@ -4,6 +4,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { getColorMode, styled, useTheme } from '~/theme'
 import { IconButton } from '../Input/Button/IconButton'
+import { Tooltip } from '../Feedback'
 
 const StyledToggleThemeButton = styled('div', {})
 
@@ -29,11 +30,18 @@ export const ToggleThemeButton = forwardRef<
 
   return (
     <StyledToggleThemeButton ref={forwardedRef} {...properties}>
-      <IconButton
-        type="ghost"
-        onClick={toggleTheme}
-        icon={getColorMode() === 'light' ? 'IconDark' : 'IconLight'}
-      />
+      <Tooltip
+        label={getColorMode() === 'light' ? 'Light mode' : 'Dark mode'}
+        position="bottom"
+        placement="start"
+        gutter={8}
+      >
+        <IconButton
+          type="ghost"
+          onClick={toggleTheme}
+          icon={getColorMode() === 'light' ? 'IconDark' : 'IconLight'}
+        />
+      </Tooltip>
     </StyledToggleThemeButton>
   )
 })
