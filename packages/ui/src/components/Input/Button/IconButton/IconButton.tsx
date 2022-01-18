@@ -1,7 +1,7 @@
 import React, { ElementRef, forwardRef, MouseEventHandler } from 'react'
 
 import { StitchedCSS } from '~/theme'
-import { IconName, getIconFromType, Icon } from '~/components/Icons'
+import { IconName, getIconFromName } from '~/components/Icons'
 import {
   Button,
   ButtonVariant,
@@ -36,7 +36,7 @@ export const IconButton = forwardRef<
     ...remainingProps
   } = properties
 
-  const TargetIcon = getIconFromType(icon as IconName) as Icon
+  const TargetIcon = getIconFromName(icon)
 
   return (
     <Button
