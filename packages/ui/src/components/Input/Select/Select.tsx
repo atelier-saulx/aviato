@@ -12,7 +12,7 @@ import { noop } from '@aviato/utils'
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
-import { DropdownMenu } from './Dropdown'
+import { Dropdown } from './Dropdown'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
 import { groupOptions } from './utils'
@@ -36,6 +36,8 @@ export interface SelectProps extends BaseInputProps {
   searchable?: boolean
   disabled?: boolean
   onChange?: (value: string, payload: OnSelectChange) => void
+  onDropdownOpen?(): void
+  onDropdownClose?(): void
 }
 
 export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
@@ -51,10 +53,20 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       data,
       searchable = false,
       onChange = noop,
+      onDropdownOpen,
+      onDropdownClose,
     } = properties
 
     const uuid = useUuid({ prefix: 'select' })
     const inputRef = useRef<HTMLInputElement>()
+
+    const [dropdownOpened, _setDropdownOpened] = useState(false)
+
+    const setDropdownOpened = (opened: boolean) => {
+      _setDropdownOpened(opened)
+      const handler = opened ? onDropdownOpen : onDropdownClose
+      typeof handler === 'function' && handler()
+    }
 
     const isInvalid = Boolean(error || invalid)
 
@@ -106,6 +118,30 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       }
     }, [_value])
 
+    const handleInputClick = () => {
+      let dropdownOpen = true
+
+      if (!searchable) {
+        dropdownOpen = !dropdownOpened
+      }
+
+      setDropdownOpened(dropdownOpen)
+    }
+
+    const handleInputFocus = () => {
+      if (searchable) {
+        setDropdownOpened(true)
+      }
+    }
+
+    const handleInputBlur = () => {
+      const selected = sortedData.find((item) => item.value === _value)
+      handleSearchChange(selected?.label || '')
+      setDropdownOpened(false)
+    }
+
+    const shouldShowDropdown = dropdownOpened
+
     return (
       <InputWrapper
         label={label}
@@ -117,14 +153,23 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           css={SelectStyles}
           id={uuid}
           invalid={isInvalid}
-          ref={useMergedRef(forwardedRef, inputRef)}
+          ref={useMergedRef(inputRef, forwardedRef)}
           readOnly={!searchable}
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
+          onClick={handleInputClick}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
 
-        <DropdownMenu items={formattedData} onChange={handleItemSelect} />
+        <Dropdown
+          items={formattedData}
+          mounted={shouldShowDropdown}
+          onChange={handleItemSelect}
+          referenceElement={inputRef.current}
+          uuid={uuid}
+        />
       </InputWrapper>
     )
   }

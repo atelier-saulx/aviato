@@ -54,7 +54,7 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   withinPortal = true,
   mounted,
   transition = 'pop-top-left',
-  transitionDuration,
+  transitionDuration = 0,
   exitTransitionDuration = transitionDuration,
   transitionTimingFunction,
   onTransitionEnd = noop,

@@ -6,6 +6,9 @@ import { noop } from '@aviato/utils'
 
 import { onChange } from '~/types'
 import { SelectItem } from './types'
+import { Popper } from '~/components/Utilities'
+import { getZIndex } from '~/theme'
+import { ContextMenu, ContextItem } from '~/components/Overlay'
 
 export interface OnDropdownChange extends onChange {
   value: string | SelectItem
@@ -13,21 +16,49 @@ export interface OnDropdownChange extends onChange {
 
 export interface DropdownMenuProps {
   items: SelectItem[]
+  referenceElement?: HTMLElement
+  mounted: boolean
+  withinPortal?: boolean
+  zIndex?: number
+  uuid: string
   onChange?: (value: string, payload: OnDropdownChange) => void
 }
 
-export const DropdownMenu: FunctionComponent<DropdownMenuProps> = (
-  properties
-) => {
-  const { items, onChange = noop } = properties
+export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
+  const {
+    items,
+    onChange = noop,
+    referenceElement,
+    mounted,
+    withinPortal = true,
+    uuid,
+    zIndex = getZIndex('Popover'),
+  } = properties
 
   const handleSelect = useCallback((event, { value, index }) => {
     onChange(value, { event, value, index })
   }, [])
 
   const MenuItems = items.map(({ value, label, disabled }, index) => (
-    <p key={`DropdownItem-${value}-${index}`}>{label}</p>
+    <ContextItem key={`DropdownItem-${value}-${index}`}>{label}</ContextItem>
   ))
 
-  return <>{MenuItems}</>
+  return (
+    <Popper
+      referenceElement={referenceElement}
+      mounted={mounted}
+      position="bottom"
+      placement="start"
+      withinPortal={withinPortal}
+      zIndex={zIndex}
+      modifiers={[
+        {
+          name: 'preventOverflow',
+          enabled: false,
+        },
+      ]}
+    >
+      <ContextMenu id={`${uuid}-items`}>{MenuItems}</ContextMenu>
+    </Popper>
+  )
 }
