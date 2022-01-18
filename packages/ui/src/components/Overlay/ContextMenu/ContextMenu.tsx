@@ -40,6 +40,7 @@ const StyledItem = styled('div', {
   height: '32px',
   justifyContent: 'start',
   alignItems: 'center',
+  paddingLeft: '16px',
 
   '&:hover': {
     background: '$ActionMain',
