@@ -10,7 +10,6 @@ import {
   ButtonType,
   IconButton,
   getRandomIconName,
-  IconName,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { log } from '@aviato/utils'
@@ -42,7 +41,7 @@ const ButtonPage = () => {
     return <Icon />
   }
 
-  const randomIconName = () => getRandomIconName() as IconName
+  const randomIconName = () => getRandomIconName()
 
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)

@@ -32,14 +32,13 @@ export const getIconFromType = (input: IconName): Icon | null => {
  */
 export const getRandomIcon = (): Icon => {
   const values = Object.values(icons)
-
   return values[Math.floor(Math.random() * values.length)]
 }
 
 /**
  * Returns a random icon string, e.g. "IconPlus"
  */
-export const getRandomIconName = (): string => {
+export const getRandomIconName = (): IconName => {
   const keys = Object.keys(icons)
-  return keys[Math.floor(Math.random() * keys.length)]
+  return keys[Math.floor(Math.random() * keys.length)] as IconName
 }
