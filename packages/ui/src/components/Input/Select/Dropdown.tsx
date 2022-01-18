@@ -48,7 +48,7 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
       referenceElement={referenceElement}
       mounted={mounted}
       position="bottom"
-      placement="start"
+      placement="center"
       withinPortal={withinPortal}
       zIndex={zIndex}
       modifiers={[
