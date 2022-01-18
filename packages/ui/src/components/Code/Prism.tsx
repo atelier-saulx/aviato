@@ -40,6 +40,7 @@ const LineNo = styled('div', {
   textAlign: 'right',
   paddingRight: '1em',
   opacity: '0.5',
+  userSelect: 'none',
 })
 
 const LineContent = styled('div', {
