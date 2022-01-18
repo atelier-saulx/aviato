@@ -63,10 +63,10 @@ export interface PrismProps extends ComponentProps<typeof StyledPrism> {
 export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
   (properties, forwardedRef) => {
     const {
-      copyLabel = 'Copy code',
-      copiedLabel = 'Copied',
       language,
       withLineNumbers = false,
+      copyLabel = 'Copy code',
+      copiedLabel = 'Copied',
       children = '',
     } = properties
 
@@ -74,7 +74,6 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
     const colorMode = theme as 'light' | 'dark'
 
     const trimmedCode = children.trim()
-
     const clipboard = useClipboard()
 
     return (
@@ -109,6 +108,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
                   <Conditional test={withLineNumbers}>
                     <LineNo>{index + 1}</LineNo>
                   </Conditional>
+
                   <LineContent>
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({ token, key })} />
