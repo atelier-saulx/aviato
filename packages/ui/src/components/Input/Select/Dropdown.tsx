@@ -33,12 +33,23 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
     zIndex = getZIndex('Popover'),
   } = properties
 
-  const handleSelect = useCallback((event, { value, index }) => {
+  const handleSelect = useCallback((event, { value, index, disabled }) => {
+    if (disabled) {
+      return
+    }
+
     onChange(value, { event, value, index })
   }, [])
 
   const MenuItems = items.map(({ value, label, disabled }, index) => (
-    <ContextItem key={`DropdownItem-${value}-${index}`}>{label}</ContextItem>
+    <ContextItem
+      key={`DropdownItem-${value}-${index}`}
+      onMouseDown={(event) => {
+        handleSelect(event, { value, index, disabled })
+      }}
+    >
+      {label}
+    </ContextItem>
   ))
 
   return (

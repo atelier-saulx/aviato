@@ -43,7 +43,6 @@ const SelectPage = () => {
                 { value: 'flurpy', label: 'Flurpy' },
                 { value: 'snark', label: 'Snark' },
                 { value: 'snorkles', label: 'Snorkles' },
-                { value: 'disabled', label: 'Disabled', disabled: true },
               ]}
             />
           </Row>
@@ -63,7 +62,6 @@ const SelectPage = () => {
                 { value: 'flurpy', label: 'Flurpy' },
                 { value: 'snark', label: 'Snark' },
                 { value: 'snorkles', label: 'Snorkles' },
-                { value: 'disabled', label: 'Disabled', disabled: true },
               ]}
             />
           </Row>
