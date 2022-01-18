@@ -240,7 +240,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
         <Dropdown
           items={formattedData}
           mounted={shouldShowDropdown}
-          onChange={(value, payload) => {
+          onChange={(_, payload) => {
             handleItemSelect(data[payload.index])
           }}
           referenceElement={inputRef.current}

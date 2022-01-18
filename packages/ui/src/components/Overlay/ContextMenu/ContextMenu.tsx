@@ -3,6 +3,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
 import { Text } from '~/components/Text'
+import { Switch } from '~/components/Input'
 
 /**
  * ContextMenu
@@ -68,5 +69,56 @@ export const ContextItem = forwardRef<
     <StyledItem ref={forwardedRef} {...remainingProps}>
       {TextComponent}
     </StyledItem>
+  )
+})
+
+/**
+ * Toggle
+ */
+const StyledToggle = styled('div', {
+  display: 'flex',
+  height: '32px',
+  width: '100%',
+  justifyContent: 'start',
+  alignItems: 'center',
+  paddingLeft: '16px',
+
+  '&:hover': {
+    background: '$ActionMain',
+  },
+})
+
+const SwitchItem = styled('div', {
+  justifySelf: 'end',
+  marginLeft: 'auto',
+  display: 'flex',
+  justifyContent: 'end',
+})
+
+export interface ContextToggleProps
+  extends ComponentProps<typeof StyledContextMenu> {}
+
+export const ContextToggle = forwardRef<
+  ElementRef<typeof StyledContextMenu>,
+  ContextToggleProps
+>((properties, forwardedRef) => {
+  const { children, ...remainingProps } = properties
+
+  const isText = typeof children === 'string'
+
+  const TextComponent = isText ? (
+    <Text color="Inherit">{children}</Text>
+  ) : (
+    children
+  )
+
+  return (
+    <StyledToggle ref={forwardedRef} {...remainingProps}>
+      {TextComponent}
+
+      <SwitchItem>
+        <Switch />
+      </SwitchItem>
+    </StyledToggle>
   )
 })
