@@ -3,7 +3,7 @@ import { SVGProps } from 'react'
 type SvgElementProperties = SVGProps<SVGSVGElement>
 
 /**
- * Extend from default SVG properties, expose having custom props in the future.
+ * Extend default SVG properties
  */
 export interface SVGProperties extends SVGProps<SVGSVGElement> {
   fill?: SvgElementProperties['fill']
