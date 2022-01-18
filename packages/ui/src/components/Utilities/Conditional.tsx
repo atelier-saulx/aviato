@@ -1,5 +1,5 @@
 import React, { ReactNode, FunctionComponent } from 'react'
-import { Icon } from '~/icons/collection'
+import { Icon } from '~/components/Icons/collection'
 
 type TruthyOrFalsy = ReactNode | Icon | boolean | string | null | undefined
 

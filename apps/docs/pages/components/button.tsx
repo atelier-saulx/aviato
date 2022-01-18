@@ -5,12 +5,11 @@ import {
   Button,
   Column,
   Row,
-  getRandomIcon,
-  styled,
   ButtonType,
   IconButton,
+  getRandomIcon,
   getRandomIconName,
-  IconName,
+  styled,
 } from '@aviato/ui'
 import { useHasLoaded } from '@aviato/hooks'
 import { log } from '@aviato/utils'
@@ -37,19 +36,19 @@ const ButtonPage = () => {
     return null
   }
 
-  const RandomIcon = () => {
-    const Icon = getRandomIcon()
-    return <Icon />
-  }
-
-  const randomIconName = () => getRandomIconName() as IconName
-
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
 
     const [isDisabled, setIsDisabled] = useState(false)
-    const Icon = useMemo(() => <RandomIcon />, [])
-    const IconString = useMemo(() => randomIconName(), [])
+
+    const Icon = useMemo(() => {
+      const RandomIcon = getRandomIcon()
+      return <RandomIcon />
+    }, [])
+
+    const IconString = useMemo(() => {
+      return getRandomIconName()
+    }, [])
 
     return (
       <>

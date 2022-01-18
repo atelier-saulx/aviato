@@ -12,7 +12,6 @@ import ora from 'ora'
 import _ from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
-import { exec } from 'promisify-child-process'
 
 let warningCount = 0
 
@@ -31,7 +30,6 @@ logInfo('')
 async function start() {
   try {
     await parseTokens()
-    await exec('yarn lint')
   } catch (error) {
     logError(`\nError parsing tokens. ${error}\n`)
     throw new Error(error)
@@ -60,7 +58,7 @@ function IsJsonString(string) {
 }
 
 async function parseTokens() {
-  const inputDir = path.join('./json', 'tokens')
+  const inputDir = path.join('./dependencies', 'tokens')
 
   if (!fs.existsSync(inputDir)) {
     await fs.mkdir(inputDir, { recursive: true })

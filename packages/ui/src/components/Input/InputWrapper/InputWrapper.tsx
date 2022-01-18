@@ -4,7 +4,7 @@ import { ComponentProps } from '@stitches/react'
 import { styled } from '~/theme'
 import { Text } from '~/components/Text'
 import { Conditional } from '~/components/Utilities'
-import { IconError } from '~/icons'
+import { IconError } from '~/components/Icons'
 
 const StyledInputWrapper = styled('div', {})
 

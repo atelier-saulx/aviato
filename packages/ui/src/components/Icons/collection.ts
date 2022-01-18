@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
-import { SVGProperties } from './types'
 import * as IconComponents from './components'
+import { SVGProperties } from './types'
 
 export const icons = {
   ...IconComponents,
@@ -18,7 +18,7 @@ export type Icon = FunctionComponent<SVGProperties>
  * input === 'IconPlus'
  * output === <IconPlus />
  */
-export const getIconFromType = (input: IconName): Icon | null => {
+export const getIconFromName = (input: IconName): Icon => {
   if (input && typeof input === 'string') {
     const targetIcon = input[0].toUpperCase() + input.slice(1)
     return icons[targetIcon]
@@ -32,14 +32,13 @@ export const getIconFromType = (input: IconName): Icon | null => {
  */
 export const getRandomIcon = (): Icon => {
   const values = Object.values(icons)
-
-  return values[Math.floor(Math.random() * values.length)]
+  return values[Math.floor(Math.random() * values.length)] as Icon
 }
 
 /**
  * Returns a random icon string, e.g. "IconPlus"
  */
-export const getRandomIconName = (): string => {
+export const getRandomIconName = (): IconName => {
   const keys = Object.keys(icons)
-  return keys[Math.floor(Math.random() * keys.length)]
+  return keys[Math.floor(Math.random() * keys.length)] as IconName
 }
