@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
-import { SVGProperties } from './types'
 import * as IconComponents from './components'
+import { SVGProperties } from './types'
 
 export const icons = {
   ...IconComponents,
