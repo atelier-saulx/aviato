@@ -60,7 +60,7 @@ function IsJsonString(string) {
 }
 
 async function parseTokens() {
-  const inputDir = path.join('./json', 'tokens')
+  const inputDir = path.join('./dependencies', 'tokens')
 
   if (!fs.existsSync(inputDir)) {
     await fs.mkdir(inputDir, { recursive: true })

@@ -1,7 +1,7 @@
 import React, { forwardRef, ElementRef, ReactChildren, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { IconCloseCircle } from '~/icons'
+import { IconCloseCircle } from '~/components/Icons'
 import { StitchedCSS, styled } from '~/theme'
 import { Conditional, Text } from '~/components'
 

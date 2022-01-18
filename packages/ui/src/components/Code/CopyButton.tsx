@@ -1,5 +1,5 @@
 import React, { forwardRef, ElementRef } from 'react'
-import { IconCheck, IconCopy } from '~/icons'
+import { IconCheck, IconCopy } from '~/components/Icons'
 import { styled } from '~/theme'
 import { Conditional } from '..'
 

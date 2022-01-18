@@ -14,7 +14,7 @@ import { styled } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { Column } from '~/components/Layout'
-import { IconCheck, IconMinus } from '~/icons'
+import { IconCheck, IconMinus } from '~/components/Icons'
 import { onChange } from '~/types/events'
 
 const StyledCheckboxWrapper = styled('div', {

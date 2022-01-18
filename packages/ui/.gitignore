@@ -2,4 +2,4 @@ temp
 dist
 .turbo
 
-src/icons/parsed
+dependencies/icons/parsed

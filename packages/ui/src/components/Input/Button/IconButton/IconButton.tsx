@@ -1,7 +1,7 @@
 import React, { ElementRef, forwardRef, MouseEventHandler } from 'react'
 
 import { StitchedCSS } from '~/theme'
-import { IconName, getIconFromType, Icon } from '~/icons'
+import { IconName, getIconFromType, Icon } from '~/components/Icons'
 import {
   Button,
   ButtonVariant,

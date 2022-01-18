@@ -5,7 +5,7 @@ import fs from 'fs-extra'
 import path from 'path'
 
 function checkForSVGs() {
-  const inputDir = path.join('./src', 'icons', 'svg')
+  const inputDir = path.join('./dependencies', 'icons', 'svg')
 
   const vectorFilesInDir = fs
     .readdirSync(inputDir)
@@ -23,10 +23,9 @@ async function generateReactFromSVG() {
     return logInfo('Note: SVG folder is empty.')
   }
 
-  const outputDir = path.join('./src', 'icons', 'parsed')
+  const outputDir = path.join('./dependencies', 'icons', 'parsed')
 
   await fs.emptyDir(outputDir)
-  await fs.writeFile(path.join(outputDir, '.gitkeep'), '')
 
   await startIconFormatting()
 
@@ -36,30 +35,21 @@ async function generateReactFromSVG() {
     '--no-svgo',
     '--template ./scripts/svgrTemplate.js',
     '--index-template ./scripts/svgrIndexTemplate.js',
-    '--out-dir ./src/icons/parsed',
-    './src/icons/parsed/svg',
+    '--out-dir ./dependencies/icons/parsed/react',
+    './dependencies/icons/parsed/svg',
   ]
 
   const parseIconsCommand = parseCommand.join(' ')
 
   await exec(parseIconsCommand)
 
-  const deleteVectorFolder = true
-  if (deleteVectorFolder) {
-    const vectorDir = path.join(outputDir, 'svg')
-
-    await fs.emptyDir(vectorDir)
-    await fs.rmdir(vectorDir)
-  }
-
   const overrideComponents = true
   if (overrideComponents) {
-    const reactDir = path.join('./src', 'icons', 'parsed')
-    const componentDir = path.join('./src', 'icons', 'components')
+    const reactDir = path.join('./dependencies', 'icons', 'parsed', 'react')
+    const componentDir = path.join('./src', 'components', 'Icons', 'components')
 
     await fs.emptyDir(componentDir)
     await fs.copy(reactDir, componentDir)
-    await fs.rm(path.join(componentDir, '.gitkeep'))
   }
 
   logInfo('Done converting SVGs to React Components.')

@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { StitchedCSS, styled } from '~/theme'
 import { Conditional, Text } from '~/components'
-import { IconCheckCircle, IconCloseCircle } from '~/icons'
+import { IconCheckCircle, IconCloseCircle } from '~/components/Icons'
 
 const Container = styled('div', {
   width: 400,
