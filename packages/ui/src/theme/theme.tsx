@@ -14,8 +14,6 @@ const createdConfig = createStitches({
   },
 })
 
-export type StitchedCSS = Stitches.CSS<typeof config>
-
 export const {
   config,
   createTheme,
@@ -26,14 +24,14 @@ export const {
   theme,
 } = createdConfig
 
-export { classNames } from './utils'
-
 export const darkTheme = createTheme(DarkTheme)
 
 export const themes = {
   light: 'light',
   dark: darkTheme.className,
 }
+
+export type StitchedCSS = Stitches.CSS<typeof config>
 
 export const getColorMode: () => 'light' | 'dark' = () => {
   if (isBrowser) {
@@ -44,4 +42,5 @@ export const getColorMode: () => 'light' | 'dark' = () => {
   return 'light'
 }
 
+export { classNames } from './utils'
 export { getZIndex } from './zIndex'
