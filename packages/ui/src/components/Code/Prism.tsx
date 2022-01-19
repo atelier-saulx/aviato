@@ -71,10 +71,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
     } = properties
 
     const { theme } = useTheme()
-    const colorMode = theme as 'light' | 'dark'
-
     const trimmedCode = children.trim()
-
     const clipboard = useClipboard()
 
     return (
@@ -100,7 +97,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
           {...defaultProps}
           code={trimmedCode}
           language={language}
-          theme={getPrismTheme(colorMode)}
+          theme={getPrismTheme(theme)}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <Pre className={className} style={style}>

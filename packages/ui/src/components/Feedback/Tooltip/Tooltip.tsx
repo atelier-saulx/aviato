@@ -10,7 +10,7 @@ import { mergeRefs } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
-import { Popper, SharedPopperProps } from '~/components'
+import { Popper, SharedPopperProps, Text } from '~/components'
 
 const StyledTooltip = styled('div', {})
 
@@ -20,6 +20,10 @@ const TooltipContainer = styled('div', {
   border: '1px solid $OtherDivider',
   color: '$TextPrimary',
   borderRadius: 4,
+})
+
+const TextContainer = styled('div', {
+  color: '$TextPrimary',
 })
 
 export interface TooltipProps extends SharedPopperProps {
@@ -109,7 +113,7 @@ export const Tooltip = forwardRef<
     width = 'auto',
     withArrow = false,
     wrapLines = false,
-    withinPortal = true,
+    withinPortal = false,
     allowPointerEvents = false,
     positionDependencies = [],
     transition = 'fade',
@@ -140,6 +144,16 @@ export const Tooltip = forwardRef<
       setOpened(false)
     }
   }
+
+  const isText = typeof children === 'string'
+
+  const TextComponent = isText ? (
+    <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+      {children}
+    </Text>
+  ) : (
+    children
+  )
 
   return (
     <StyledTooltip
@@ -184,7 +198,7 @@ export const Tooltip = forwardRef<
         </TooltipContainer>
       </Popper>
 
-      {children}
+      <TextContainer>{TextComponent}</TextContainer>
     </StyledTooltip>
   )
 })

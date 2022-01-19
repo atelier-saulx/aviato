@@ -29,7 +29,7 @@ const AlertPage = () => {
           </Alert>
           <br />
           <Alert
-            title="Custom css"
+            title="Custom CSS"
             css={{
               backgroundColor: 'rgba(0,0,0,0.1)',
             }}

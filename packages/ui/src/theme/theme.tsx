@@ -22,7 +22,21 @@ export const {
   globalCss,
   styled,
   theme,
+  reset,
 } = createdConfig
+
+/**
+ * SSR: Get the CSS and reset the internal css representation.
+ *
+ * Note:
+ * This is very *IMPORTANT* to do as the server might handle multiple requests
+ * and we don't want to have the css accumulated from previous requests.
+ */
+export const getCssAndReset = () => {
+  const css = getCssText()
+  reset()
+  return css
+}
 
 export const darkTheme = createTheme(DarkTheme)
 
