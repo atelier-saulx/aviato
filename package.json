@@ -24,7 +24,10 @@
   ],
   "scripts": {
     "postinstall": "[ -d '.husky' ] && (husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks) || true",
+    "deduplicate": "npx yarn-deduplicate -s fewer yarn.lock",
+    "deduplicate:check": "npx yarn-deduplicate -s fewer yarn.lock --list --fail",
     "syncpack": "syncpack fix-mismatches",
+    "syncpack:check": "syncpack list-mismatches",
     "watch": "turbo run watch",
     "lint": "turbo run lint",
     "build": "turbo run build",
@@ -34,7 +37,7 @@
   },
   "dependencies": {
     "shx": "^0.3.3",
-    "turbo": "1.0.24"
+    "turbo": "1.0.28"
   },
   "devDependencies": {
     "husky": "^7.0.4",
