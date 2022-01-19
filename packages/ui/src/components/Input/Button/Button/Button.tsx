@@ -5,6 +5,7 @@ import React, {
   MouseEventHandler,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { isText } from '@aviato/utils'
 
 import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
@@ -254,9 +255,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       isTransparent,
     })
 
-    const isText = typeof children === 'string'
-
-    const ChildVariant = isText ? (
+    const ChildVariant = isText(children) ? (
       <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
         {children}
       </Text>

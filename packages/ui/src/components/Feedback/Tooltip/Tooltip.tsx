@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react'
 import { mergeRefs } from '@aviato/hooks'
-import { noop } from '@aviato/utils'
+import { isText, noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
 import { Popper, SharedPopperProps, Text } from '~/components'
@@ -145,9 +145,7 @@ export const Tooltip = forwardRef<
     }
   }
 
-  const isText = typeof children === 'string'
-
-  const ChildVariant = isText ? (
+  const ChildVariant = isText(children) ? (
     <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
       {children}
     </Text>
