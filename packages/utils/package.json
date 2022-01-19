@@ -46,5 +46,11 @@
     "release:patch": "yarn release -- --release-as patch",
     "release:minor": "yarn release -- --release-as minor",
     "release:major": "yarn release -- --release-as major"
+  },
+  "standard-version": {
+    "skip": {
+      "commit": true,
+      "tag": true
+    }
   }
 }
