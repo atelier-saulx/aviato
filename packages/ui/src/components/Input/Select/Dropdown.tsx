@@ -54,25 +54,12 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
       referenceElement={referenceElement}
       mounted={mounted}
       position="bottom"
-      placement="center"
+      placement="start"
       zIndex={zIndex}
       modifiers={[
         {
           name: 'preventOverflow',
           enabled: false,
-        },
-        {
-          // @ts-ignore
-          name: 'sameWidth',
-          enabled: true,
-          phase: 'beforeWrite',
-          requires: ['computeStyles'],
-          fn: ({ state }) => {
-            state.styles.popper.width = `${state.rects.reference.width}px`
-          },
-          effect: ({ state }: any) => {
-            state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
-          },
         },
       ]}
     >
