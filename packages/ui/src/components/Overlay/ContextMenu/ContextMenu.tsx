@@ -93,6 +93,7 @@ const SwitchItem = styled('div', {
   marginLeft: 'auto',
   display: 'flex',
   justifyContent: 'end',
+  paddingRight: '12px',
 })
 
 export interface ContextToggleProps

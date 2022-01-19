@@ -199,8 +199,8 @@ export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
       [isChecked]
     )
 
-    return (
-      <InputWrapper label={label} description={description} error={error}>
+    const SwitchVariant =
+      text !== undefined ? (
         <Group>
           <StyledSwitch
             type="checkbox"
@@ -211,9 +211,23 @@ export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
             ref={forwardedRef}
             {...remainingProps}
           />
-
           <Text onClick={handleChange}>{text}</Text>
         </Group>
+      ) : (
+        <StyledSwitch
+          type="checkbox"
+          size={size}
+          checked={isChecked}
+          onChange={handleChange}
+          disabled={isDisabled}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
+      )
+
+    return (
+      <InputWrapper label={label} description={description} error={error}>
+        {SwitchVariant}
       </InputWrapper>
     )
   }
