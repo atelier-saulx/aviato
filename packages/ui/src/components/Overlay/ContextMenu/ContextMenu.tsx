@@ -59,7 +59,7 @@ export const ContextItem = forwardRef<
 
   const isText = typeof children === 'string'
 
-  const TextComponent = isText ? (
+  const ChildVariant = isText ? (
     <Text color="Inherit">{children}</Text>
   ) : (
     children
@@ -67,7 +67,7 @@ export const ContextItem = forwardRef<
 
   return (
     <StyledItem ref={forwardedRef} {...remainingProps}>
-      {TextComponent}
+      {ChildVariant}
     </StyledItem>
   )
 })
@@ -106,7 +106,7 @@ export const ContextToggle = forwardRef<
 
   const isText = typeof children === 'string'
 
-  const TextComponent = isText ? (
+  const ChildVariant = isText ? (
     <Text color="Inherit">{children}</Text>
   ) : (
     children
@@ -114,7 +114,7 @@ export const ContextToggle = forwardRef<
 
   return (
     <StyledToggle ref={forwardedRef} {...remainingProps}>
-      {TextComponent}
+      {ChildVariant}
 
       <SwitchItem>
         <Switch />

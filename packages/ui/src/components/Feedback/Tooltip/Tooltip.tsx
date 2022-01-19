@@ -147,7 +147,7 @@ export const Tooltip = forwardRef<
 
   const isText = typeof children === 'string'
 
-  const TextComponent = isText ? (
+  const ChildVariant = isText ? (
     <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
       {children}
     </Text>
@@ -198,7 +198,7 @@ export const Tooltip = forwardRef<
         </TooltipContainer>
       </Popper>
 
-      <TextContainer>{TextComponent}</TextContainer>
+      <TextContainer>{ChildVariant}</TextContainer>
     </StyledTooltip>
   )
 })
