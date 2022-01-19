@@ -30,12 +30,13 @@ const TextColumn = styled('div', {
   paddingBottom: 16,
 })
 
-const DefaultIcon = styled(IconCloseCircle, {
+const IconContainer = styled('div', {
   color: '$ErrorMain',
 })
 
-const DefaultRightIcon = styled(IconClose, {
+const CloseIconContainer = styled('div', {
   cursor: 'pointer',
+  color: '$TextPrimary',
 })
 
 const CloseIconColumn = styled('div', {
@@ -58,14 +59,16 @@ export const Alert = forwardRef<ElementRef<typeof Container>, AlertProps>(
     const {
       children,
       title = 'Error',
-      icon = <DefaultIcon />,
-      closeIcon: rightIcon = <DefaultRightIcon />,
+      icon = <IconCloseCircle />,
+      closeIcon: rightIcon = <IconClose />,
       ...remainingProps
     } = properties
 
     return (
       <Container ref={forwardedRef} {...remainingProps}>
-        <IconColumn>{icon}</IconColumn>
+        <IconColumn>
+          <IconContainer>{icon}</IconContainer>
+        </IconColumn>
 
         <TextColumn>
           <Text weight="semibold" css={TitleCSS}>
@@ -75,7 +78,9 @@ export const Alert = forwardRef<ElementRef<typeof Container>, AlertProps>(
         </TextColumn>
 
         <Conditional test={rightIcon}>
-          <CloseIconColumn>{rightIcon}</CloseIconColumn>
+          <CloseIconColumn>
+            <CloseIconContainer>{rightIcon}</CloseIconContainer>
+          </CloseIconColumn>
         </Conditional>
       </Container>
     )
