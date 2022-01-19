@@ -1,7 +1,7 @@
 {
   "name": "@aviato/ui",
   "description": "A library of Front-end React components",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
@@ -65,6 +65,10 @@
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",
-    "lint:prettier": "prettier --write './src/**/*.ts{,x}'"
+    "lint:prettier": "prettier --write './src/**/*.ts{,x}'",
+    "release": "standard-version",
+    "release:patch": "yarn release -- --release-as patch",
+    "release:minor": "yarn release -- --release-as minor",
+    "release:major": "yarn release -- --release-as major"
   }
 }
