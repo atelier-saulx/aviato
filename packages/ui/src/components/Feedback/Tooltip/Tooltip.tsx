@@ -113,9 +113,6 @@ export const Tooltip = forwardRef<
     withArrow = false,
     wrapLines = false,
     allowPointerEvents = false,
-    transition = 'fade',
-    transitionDuration = 200,
-    transitionTimingFunction,
     children,
     ...remainingProps
   } = properties
