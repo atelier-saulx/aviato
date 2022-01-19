@@ -16,8 +16,9 @@ const StyledPrism = styled('div', {
 const TooltipContainer = styled('div', {
   display: 'inline-block',
   position: 'absolute',
-  top: '10px',
-  right: '10px',
+  top: '0px',
+  right: '0px',
+  padding: '16px',
   zIndex: '2',
 })
 
@@ -75,10 +76,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
             label={clipboard.copied ? copiedLabel : copyLabel}
             position="left"
             placement="center"
-            withArrow
-            arrowSize={4}
             gutter={8}
-            transition="fade"
           >
             <CopyButton
               wasCopied={clipboard.copied}

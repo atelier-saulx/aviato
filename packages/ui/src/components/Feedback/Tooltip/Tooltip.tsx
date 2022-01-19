@@ -9,8 +9,8 @@ import React, {
 import { mergeRefs } from '@aviato/hooks'
 import { isText, noop } from '@aviato/utils'
 
-import { getZIndex, styled } from '~/theme'
-import { Popper, SharedPopperProps, Text } from '~/components'
+import { styled } from '~/theme'
+import { Text, Popper, SharedPopperProps } from '~/components'
 
 const StyledTooltip = styled('div', {})
 
@@ -99,14 +99,13 @@ export const Tooltip = forwardRef<
 >((properties, forwardedRef) => {
   const {
     label,
+    position = 'bottom',
+    placement = 'center',
+    gutter = 5,
+    arrowSize = 2,
     delay = 0,
     opened,
     disabled = false,
-    position = 'bottom',
-    placement = 'center',
-    zIndex = getZIndex('Popover'),
-    gutter = 5,
-    arrowSize = 2,
     tooltipRef,
     onMouseLeave = noop,
     onMouseEnter = noop,
@@ -114,11 +113,9 @@ export const Tooltip = forwardRef<
     withArrow = false,
     wrapLines = false,
     allowPointerEvents = false,
-    positionDependencies = [],
     transition = 'fade',
     transitionDuration = 200,
     transitionTimingFunction,
-    withinPortal = false,
     children,
     ...remainingProps
   } = properties
@@ -176,13 +173,6 @@ export const Tooltip = forwardRef<
         gutter={gutter}
         withArrow={withArrow}
         arrowSize={arrowSize}
-        arrowDistance={7}
-        zIndex={zIndex}
-        forceUpdateDependencies={[...positionDependencies]}
-        withinPortal={withinPortal}
-        transitionDuration={transitionDuration}
-        transition={transition}
-        transitionTimingFunction={transitionTimingFunction}
       >
         <TooltipContainer
           ref={tooltipRef}

@@ -3,13 +3,10 @@ import { ComponentProps } from '@stitches/react'
 import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
-import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { InputWrapper } from '../InputWrapper'
 import { SelectItem } from './types'
 import { onChange } from '~/types'
-
-const NativeSelectStyles: StitchedCSS = {}
 
 export interface OnNativeSelectChange extends onChange {
   value: string | SelectItem
@@ -74,7 +71,6 @@ export const NativeSelect = forwardRef<
     >
       <BaseInput
         component="select"
-        css={NativeSelectStyles}
         id={uuid}
         invalid={isInvalid}
         ref={forwardedRef}

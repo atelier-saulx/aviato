@@ -1,14 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import React, { FunctionComponent, useCallback } from 'react'
 import { noop } from '@aviato/utils'
 
 import { onChange } from '~/types'
 import { SelectItem } from './types'
-import { Popper } from '~/components/Utilities'
-import { getZIndex } from '~/theme'
 import { ContextMenu, ContextItem } from '~/components/Overlay'
+import { Popper } from '~/components'
+import { getZIndex } from '~/theme'
 
 export interface OnDropdownChange extends onChange {
   value: string | SelectItem
@@ -58,7 +55,6 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
       mounted={mounted}
       position="bottom"
       placement="center"
-      withinPortal={false}
       zIndex={zIndex}
       modifiers={[
         {
@@ -74,7 +70,7 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
           fn: ({ state }) => {
             state.styles.popper.width = `${state.rects.reference.width}px`
           },
-          effect: ({ state }) => {
+          effect: ({ state }: any) => {
             state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
           },
         },
