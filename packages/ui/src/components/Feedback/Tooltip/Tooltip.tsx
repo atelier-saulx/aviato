@@ -113,12 +113,12 @@ export const Tooltip = forwardRef<
     width = 'auto',
     withArrow = false,
     wrapLines = false,
-    withinPortal = false,
     allowPointerEvents = false,
     positionDependencies = [],
     transition = 'fade',
     transitionDuration = 200,
     transitionTimingFunction,
+    withinPortal = false,
     children,
     ...remainingProps
   } = properties

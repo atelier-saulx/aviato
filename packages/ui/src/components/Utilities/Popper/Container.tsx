@@ -12,20 +12,11 @@ export interface PopperContainerProps {
 export function PopperContainer({
   children,
   zIndex = getZIndex('Popover'),
-  className,
   withinPortal = true,
 }: PopperContainerProps) {
   if (withinPortal) {
-    return (
-      <Portal className={className} zIndex={zIndex}>
-        {children}
-      </Portal>
-    )
+    return <Portal zIndex={zIndex}>{children}</Portal>
   }
 
-  return (
-    <div className={className} style={{ position: 'relative', zIndex }}>
-      {children}
-    </div>
-  )
+  return <div style={{ position: 'relative', zIndex }}>{children}</div>
 }

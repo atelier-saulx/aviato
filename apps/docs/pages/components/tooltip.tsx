@@ -11,13 +11,7 @@ const TooltipPage = () => {
       </NextText>
 
       <ShowcaseComponent background="transparent">
-        <Tooltip
-          label="I'm a tooltip!"
-          transition="fade"
-          transitionDuration={200}
-        >
-          Hover me!
-        </Tooltip>
+        <Tooltip label="I'm a tooltip!">Hover me!</Tooltip>
       </ShowcaseComponent>
     </Page>
   )

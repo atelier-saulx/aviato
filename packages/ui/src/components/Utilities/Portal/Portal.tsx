@@ -13,7 +13,6 @@ export function Portal({
   children,
   zIndex = 1,
   target,
-  className,
 }: PortalProps): ReactPortal {
   const [mounted, setMounted] = useState(false)
   const ref = useRef<HTMLElement>()
@@ -41,9 +40,7 @@ export function Portal({
   }
 
   return createPortal(
-    <div className={className} style={{ position: 'relative', zIndex }}>
-      {children}
-    </div>,
+    <div style={{ position: 'relative', zIndex }}>{children}</div>,
     ref.current
   )
 }
