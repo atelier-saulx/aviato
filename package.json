@@ -6,7 +6,6 @@
     "url": "https://github.com/atelier-saulx/aviato-ui/issues"
   },
   "homepage": "https://github.com/atelier-saulx/aviato-ui#readme",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atelier-saulx/aviato-ui.git"
