@@ -96,7 +96,7 @@ export const ToastProvider = ({
       return id
     }
 
-    toast.close = (id: number) => {
+    toast.close = (id?: number) => {
       if (typeof id === 'number') {
         const index = toastsRef.current.findIndex(
           ({ id: toastId }) => toastId === id
