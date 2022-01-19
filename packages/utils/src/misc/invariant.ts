@@ -1,9 +1,7 @@
 const isProduction: boolean = process.env.NODE_ENV === 'production'
+
 const prefix: string = 'Invariant failed'
 
-/**
- * Credit: https://github.com/alexreardon/tiny-invariant/blob/master/src/tiny-invariant.ts
- */
 export function invariant(
   condition: any,
   message?: string | (() => string)
