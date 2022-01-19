@@ -1,7 +1,7 @@
 import React, { forwardRef, ElementRef } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import { useClipboard } from '@aviato/hooks'
 
+import { useClipboard } from '~/hooks'
 import { styled, useTheme } from '~/theme'
 import { Tooltip } from '../Feedback/Tooltip'
 import { Conditional } from '../Utilities/Conditional'

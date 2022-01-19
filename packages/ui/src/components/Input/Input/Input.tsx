@@ -1,5 +1,5 @@
 import React, { ElementRef, forwardRef } from 'react'
-import { useUuid } from '@aviato/hooks'
+import { useUuid } from '~/hooks'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'

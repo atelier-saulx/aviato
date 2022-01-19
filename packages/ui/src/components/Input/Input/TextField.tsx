@@ -1,7 +1,7 @@
 import React, { forwardRef, ElementRef } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useUuid } from '@aviato/hooks'
 
+import { useUuid } from '~/hooks'
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'

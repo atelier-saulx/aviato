@@ -1,8 +1,8 @@
 import React from 'react'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
-import { useUuid } from '@aviato/hooks'
 import { Options } from '@popperjs/core'
 
+import { useUuid } from '~/hooks'
 import { BasePlacement, BasePosition, Placement } from './types'
 import { flipPlacement, flipPosition } from './utils'
 import { getZIndex, styled } from '~/theme'

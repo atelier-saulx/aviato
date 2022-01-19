@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useRafState } from '~/state/useRafState'
+import { useRafState } from '~/hooks/state/useRafState'
 import { isBrowser, off, on } from '@aviato/utils'
 
 function useWindowSize(initialWidth = Infinity, initialHeight = Infinity) {

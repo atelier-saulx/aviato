@@ -6,9 +6,9 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { mergeRefs } from '@aviato/hooks'
 import { isText, noop } from '@aviato/utils'
 
+import { mergeRefs } from '~/hooks'
 import { styled } from '~/theme'
 import { Text, Popper, SharedPopperProps } from '~/components'
 

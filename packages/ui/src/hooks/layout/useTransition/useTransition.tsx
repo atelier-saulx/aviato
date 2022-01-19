@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { useReducedMotion, useDidUpdate } from '@aviato/hooks'
+
+import { useReducedMotion, useDidUpdate } from '~/hooks'
 
 export type TransitionStatus =
   | 'entered'

@@ -1,4 +1,5 @@
 import { Page, Tooltip } from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const TooltipPage = () => {

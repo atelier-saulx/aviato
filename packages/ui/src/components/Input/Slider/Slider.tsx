@@ -8,9 +8,9 @@ import React, {
   ReactNode,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { useUncontrolled, useMove, useMergedRef } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
+import { useUncontrolled, useMove, useMergedRef } from '~/hooks'
 import { styled } from '~/theme'
 import { getChangeValue, getPosition } from './utils'
 import { Track } from './Track'
