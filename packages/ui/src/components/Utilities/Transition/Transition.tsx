@@ -1,7 +1,7 @@
 import React from 'react'
 import { getTransitionStyles } from './utils'
 import { TransitionPrimitive } from './transitions'
-import { useTransition } from './useTransition'
+import { useTransition } from '~/hooks'
 
 export interface TransitionProps {
   transition: TransitionPrimitive

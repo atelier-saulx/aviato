@@ -11,15 +11,14 @@
   "iife": "dist/index.global.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@aviato/hooks": "*",
     "@aviato/utils": "*",
     "@mui/base": "^5.0.0-alpha.65",
     "@stitches/react": "^1.2.6",
     "next-themes": "^0.0.15",
     "prism-react-renderer": "^1.2.1",
-    "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-textarea-autosize": "^8.3.3",
+    "react": "17.0.2",
     "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
@@ -43,6 +42,7 @@
     "prettier": "2.5.1",
     "promisify-child-process": "^4.1.1",
     "rimraf": "^3.0.2",
+    "standard-version": "^9.3.2",
     "svgo": "^2.8.0",
     "tsup": "5.11.10",
     "typedoc": "^0.22.11",

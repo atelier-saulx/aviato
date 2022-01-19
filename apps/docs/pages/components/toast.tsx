@@ -5,8 +5,9 @@ import {
   Toast,
   Button,
   IconClose,
+  useHasLoaded,
 } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const Notification = ({ children }) => {

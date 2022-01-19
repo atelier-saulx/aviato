@@ -1,8 +1,8 @@
 import React, { forwardRef, ElementRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
+import { useUuid } from '~/hooks'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { InputWrapper } from '../InputWrapper'
 import { SelectItem } from './types'

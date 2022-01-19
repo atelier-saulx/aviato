@@ -30,7 +30,7 @@ You can use these components either as the base layer of your application, or ad
 - 📦 - A set of high-quality React components out of the box.
 - 🛡 - Written in TypeScript with predictable static types.
 - 🎨 - Powerful theme customization.
-- 🪝 - Contains a comprehensive collection of basic Hooks.
+- 🪝 - Contains a comprehensive collection of React Hooks.
 
 ---
 
@@ -43,12 +43,11 @@ You can use these components either as the base layer of your application, or ad
 
 ## 📦 Public Packages
 
-| Name            | Description                                                      | Status     |
-| --------------- | ---------------------------------------------------------------- | ---------- |
-| `@aviato/ui`    | Component library. A suite of ready-to-use components & theming. | Soon 🚀    |
-| `@aviato/hooks` | A curated collection of hooks for State and UI management.       | Soon 🚀    |
-| `@aviato/utils` | Utility functions to facilitate DX and easier development.       | Soon 🚀    |
-| `@aviato/next`  | Setup server side rendering utilities for Next.js.               | On hold 🌙 |
+| Name            | Description                                                              | Status     |
+| --------------- | ------------------------------------------------------------------------ | ---------- |
+| `@aviato/ui`    | Component library & hooks. A suite of ready-to-use components & theming. | Soon 🚀    |
+| `@aviato/utils` | Utility functions to facilitate DX and easier development.               | Soon 🚀    |
+| `@aviato/next`  | Setup server side rendering utilities for Next.js.                       | On hold 🌙 |
 
 ---
 

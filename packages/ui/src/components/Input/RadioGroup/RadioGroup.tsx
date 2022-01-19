@@ -8,9 +8,9 @@ import React, {
   ReactElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { useUncontrolled, useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
+import { useUncontrolled, useUuid } from '~/hooks'
 import { styled } from '~/theme'
 import { Group } from '~/components/Layout'
 import { onChange } from '~/types/events'

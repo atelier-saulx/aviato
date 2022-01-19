@@ -1,4 +1,5 @@
 import { Column, Row, Slider, Page, styled } from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const SmallSpacer = styled('div', {

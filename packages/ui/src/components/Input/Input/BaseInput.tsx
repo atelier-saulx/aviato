@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
-import { useUncontrolled, useUuid } from '@aviato/hooks'
+import { useUncontrolled, useUuid } from '~/hooks'
 
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'

@@ -1,7 +1,7 @@
 import React, { useCallback, ElementRef, forwardRef } from 'react'
-import { useHasLoaded } from '@aviato/hooks'
 import { ComponentProps } from '@stitches/react'
 
+import { useHasLoaded } from '~/hooks'
 import { getColorMode, styled, useTheme } from '~/theme'
 import { IconButton } from '../Input/Button/IconButton'
 import { Tooltip } from '../Feedback'

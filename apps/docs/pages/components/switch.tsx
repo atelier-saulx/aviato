@@ -1,5 +1,6 @@
 import { log } from '@aviato/utils'
 import { Column, Row, Switch, SwitchSize, Page } from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const SwitchPage = () => {

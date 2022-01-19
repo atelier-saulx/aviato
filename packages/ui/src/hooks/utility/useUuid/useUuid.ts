@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { getRandomId } from '@aviato/utils'
-import { useIsomorphicEffect } from '~/layout'
+import { useIsomorphicEffect } from '~/hooks/layout'
 
 export function useUuid({
   staticId,

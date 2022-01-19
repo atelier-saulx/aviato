@@ -1,5 +1,5 @@
-import { Page, Alert, IconCheck } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+import { Page, Alert, IconCheck, useHasLoaded } from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const AlertPage = () => {

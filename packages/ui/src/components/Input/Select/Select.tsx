@@ -5,8 +5,8 @@ import React, {
   useState,
   useEffect,
 } from 'react'
-import { useMergedRef, useUuid, useUncontrolled } from '@aviato/hooks'
 
+import { useMergedRef, useUuid, useUncontrolled } from '~/hooks'
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'

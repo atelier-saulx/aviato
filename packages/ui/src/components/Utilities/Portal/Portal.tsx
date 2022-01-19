@@ -1,6 +1,6 @@
 import React, { ReactNode, ReactPortal, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useIsomorphicEffect } from '@aviato/hooks'
+import { useIsomorphicEffect } from '~/hooks'
 
 export interface PortalProps {
   children: ReactNode
