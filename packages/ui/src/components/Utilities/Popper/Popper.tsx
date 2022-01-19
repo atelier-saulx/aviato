@@ -1,5 +1,5 @@
 import React from 'react'
-import { PopperUnstyled } from '@mui/base'
+import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { useUuid } from '@aviato/hooks'
 import { Options } from '@popperjs/core'
 
