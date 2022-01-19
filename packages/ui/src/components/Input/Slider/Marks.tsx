@@ -16,7 +16,7 @@ const StyledMarks = styled('div', {
   },
 })
 
-const MarkWrapper = styled('div', {
+const MarkContainer = styled('div', {
   position: 'absolute',
   top: '0',
 })
@@ -89,7 +89,7 @@ export const Marks: FunctionComponent<MarksProps> = (properties) => {
     const leftOffset = getPosition({ value: mark.value, min, max })
 
     return (
-      <MarkWrapper
+      <MarkContainer
         style={{ left: `${leftOffset}%` }}
         key={`mark-${index}`}
         {...remainingProps}
@@ -99,7 +99,7 @@ export const Marks: FunctionComponent<MarksProps> = (properties) => {
         <Conditional test={mark.label}>
           <Label>{mark.label}</Label>
         </Conditional>
-      </MarkWrapper>
+      </MarkContainer>
     )
   })
 

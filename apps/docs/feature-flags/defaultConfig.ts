@@ -15,7 +15,7 @@ const config = {
 
   ContextMenu: {
     description: 'Showcase ContextMenu component',
-    isEnabled: false,
+    isEnabled: true,
   },
 }
 

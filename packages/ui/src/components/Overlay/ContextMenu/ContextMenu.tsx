@@ -1,20 +1,28 @@
 import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+
 import { styled } from '~/theme'
 
-const Container = styled('div', {})
+const StyledBase = styled('div', {
+  background: '$Background2dp',
+  minWidth: '256px',
+  width: '100%',
+  border: '1px solid $OtherDivider',
+  borderRadius: '4px',
+  pointerEvents: 'all',
+})
 
-export interface ContextMenuProps extends ComponentProps<typeof Container> {}
+export interface ContextMenuProps extends ComponentProps<typeof StyledBase> {}
 
 export const ContextMenu = forwardRef<
-  ElementRef<typeof Container>,
+  ElementRef<typeof StyledBase>,
   ContextMenuProps
 >((properties, forwardedRef) => {
-  const { ...remainingProps } = properties
+  const { children, ...remainingProps } = properties
 
   return (
-    <Container ref={forwardedRef} {...remainingProps}>
-      ContextMenu
-    </Container>
+    <StyledBase ref={forwardedRef} {...remainingProps}>
+      {children}
+    </StyledBase>
   )
 })

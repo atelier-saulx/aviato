@@ -9,7 +9,7 @@ import React, {
 
 const ToastContext = createContext(undefined)
 
-const ToastWrapper = ({ id, children, onClick = null, toast }) => {
+const ToastContainer = ({ id, children, onClick = null, toast }) => {
   const [fade, setFade] = useState(0)
   const close = () => toast.close(id)
 
@@ -75,9 +75,9 @@ export const ToastProvider = ({
         toastsRef.current.unshift({
           id,
           children: (
-            <ToastWrapper id={id} toast={toast}>
+            <ToastContainer id={id} toast={toast}>
               {children}
-            </ToastWrapper>
+            </ToastContainer>
           ),
         })
       )

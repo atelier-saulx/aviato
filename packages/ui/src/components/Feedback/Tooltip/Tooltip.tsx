@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react'
 import { mergeRefs } from '@aviato/hooks'
-import { noop } from '@aviato/utils'
+import { isText, noop } from '@aviato/utils'
 
-import { getZIndex, styled } from '~/theme'
-import { Popper, SharedPopperProps, Text } from '~/components'
+import { styled } from '~/theme'
+import { Text, Popper, SharedPopperProps } from '~/components'
 
 const StyledTooltip = styled('div', {})
 
@@ -99,26 +99,20 @@ export const Tooltip = forwardRef<
 >((properties, forwardedRef) => {
   const {
     label,
+    position = 'bottom',
+    placement = 'center',
+    gutter = 5,
+    arrowSize = 2,
     delay = 0,
     opened,
     disabled = false,
-    position = 'bottom',
-    placement = 'center',
-    zIndex = getZIndex('Popover'),
-    gutter = 5,
-    arrowSize = 2,
     tooltipRef,
     onMouseLeave = noop,
     onMouseEnter = noop,
     width = 'auto',
     withArrow = false,
     wrapLines = false,
-    withinPortal = false,
     allowPointerEvents = false,
-    positionDependencies = [],
-    transition = 'fade',
-    transitionDuration = 200,
-    transitionTimingFunction,
     children,
     ...remainingProps
   } = properties
@@ -145,9 +139,7 @@ export const Tooltip = forwardRef<
     }
   }
 
-  const isText = typeof children === 'string'
-
-  const TextComponent = isText ? (
+  const ChildVariant = isText(children) ? (
     <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
       {children}
     </Text>
@@ -178,13 +170,6 @@ export const Tooltip = forwardRef<
         gutter={gutter}
         withArrow={withArrow}
         arrowSize={arrowSize}
-        arrowDistance={7}
-        zIndex={zIndex}
-        forceUpdateDependencies={[...positionDependencies]}
-        withinPortal={withinPortal}
-        transitionDuration={transitionDuration}
-        transition={transition}
-        transitionTimingFunction={transitionTimingFunction}
       >
         <TooltipContainer
           ref={tooltipRef}
@@ -198,7 +183,7 @@ export const Tooltip = forwardRef<
         </TooltipContainer>
       </Popper>
 
-      <TextContainer>{TextComponent}</TextContainer>
+      <TextContainer>{ChildVariant}</TextContainer>
     </StyledTooltip>
   )
 })

@@ -5,12 +5,13 @@ import React, {
   MouseEventHandler,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { isText } from '@aviato/utils'
 
 import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 
-const primaryButtonCSS: StitchedCSS = {
+const PrimaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$PrimaryMainContrast',
     background: '$PrimaryMain',
@@ -68,7 +69,7 @@ const primaryButtonCSS: StitchedCSS = {
   },
 }
 
-const ghostButtonCSS: StitchedCSS = {
+const GhostButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$ActionMainContrast',
     background: '$ActionMain',
@@ -124,7 +125,7 @@ const ghostButtonCSS: StitchedCSS = {
   },
 }
 
-const errorButtonCSS: StitchedCSS = {
+const ErrorButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$ErrorMainContrast',
     background: '$ErrorMain',
@@ -182,7 +183,7 @@ const errorButtonCSS: StitchedCSS = {
   },
 }
 
-const IconWrapper = styled('span', {
+const IconContainer = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
   flexShrink: 0,
@@ -212,9 +213,9 @@ export const StyledButton = styled('button', {
 
   variants: {
     type: {
-      primary: primaryButtonCSS,
-      ghost: ghostButtonCSS,
-      error: errorButtonCSS,
+      primary: PrimaryButtonCSS,
+      ghost: GhostButtonCSS,
+      error: ErrorButtonCSS,
     },
   },
 })
@@ -254,9 +255,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       isTransparent,
     })
 
-    const isText = typeof children === 'string'
-
-    const TextComponent = isText ? (
+    const ChildVariant = isText(children) ? (
       <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
         {children}
       </Text>
@@ -273,13 +272,13 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         {...remainingProps}
       >
         <Conditional test={leftIcon}>
-          <IconWrapper type="start">{leftIcon}</IconWrapper>
+          <IconContainer type="start">{leftIcon}</IconContainer>
         </Conditional>
 
-        {TextComponent}
+        {ChildVariant}
 
         <Conditional test={rightIcon}>
-          <IconWrapper type="end">{rightIcon}</IconWrapper>
+          <IconContainer type="end">{rightIcon}</IconContainer>
         </Conditional>
       </StyledButton>
     )

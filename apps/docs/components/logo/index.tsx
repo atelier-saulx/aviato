@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react'
 import { styled } from '@aviato/ui'
 
-const Wrapper = styled('div', {
+const Container = styled('div', {
   color: '$TextPrimary',
 })
 
 export const AviatoLogo: FunctionComponent = () => {
   return (
-    <Wrapper>
+    <Container>
       <svg
         width="103"
         height="24"
@@ -56,6 +56,6 @@ export const AviatoLogo: FunctionComponent = () => {
           fill="#261E87"
         />
       </svg>
-    </Wrapper>
+    </Container>
   )
 }

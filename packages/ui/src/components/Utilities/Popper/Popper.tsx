@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
-import { usePopper, StrictModifier } from 'react-popper'
-import { useDidUpdate } from '@aviato/hooks'
-import { noop } from '@aviato/utils'
+import React from 'react'
+import PopperUnstyled from '@mui/base/PopperUnstyled'
+import { useUuid } from '@aviato/hooks'
+import { Options } from '@popperjs/core'
 
-import { PopperContainer } from './Container'
-import { flipPlacement, flipPosition, parsePopperPosition } from './utils'
-import { classNames, getZIndex, styled } from '~/theme'
-import { Conditional } from '~/components'
-import { Transition, TransitionPrimitive } from '../Transition'
 import { BasePlacement, BasePosition, Placement } from './types'
+import { flipPlacement, flipPosition } from './utils'
+import { getZIndex, styled } from '~/theme'
 
 const PopperElement = styled('div', {})
-const Arrow = styled('div', {})
 
 export interface SharedPopperProps {
   position?: BasePosition
@@ -20,24 +16,15 @@ export interface SharedPopperProps {
   arrowSize?: number
   arrowDistance?: number
   withArrow?: boolean
-  zIndex?: number
-  transition?: TransitionPrimitive
-  transitionDuration?: number
-  exitTransitionDuration?: number
-  transitionTimingFunction?: string
 }
 
 export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
   referenceElement: T
   children: React.ReactNode
   mounted: boolean
-  arrowClassName?: string
-  arrowStyle?: React.CSSProperties
-  forceUpdateDependencies?: any[]
-  onTransitionEnd?(): void
-  modifiers?: StrictModifier[]
-  withinPortal?: boolean
-  onTransitionEnd?(): void
+  disablePortal?: boolean
+  modifiers?: Options['modifiers']
+  zIndex?: number
 }
 
 export function Popper<T extends HTMLElement = HTMLDivElement>({
@@ -47,21 +34,15 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   arrowSize = 2,
   withArrow = false,
   referenceElement,
-  arrowStyle,
-  zIndex = getZIndex('Popover'),
-  forceUpdateDependencies = [],
-  modifiers = [],
-  withinPortal = true,
   mounted,
-  transition = 'pop-top-left',
-  transitionDuration,
-  exitTransitionDuration = transitionDuration,
-  transitionTimingFunction,
-  onTransitionEnd = noop,
+  disablePortal = false,
+  modifiers = [],
+  zIndex = getZIndex('Popover'),
   children,
 }: PopperProps<T>) {
   const padding = withArrow ? gutter + arrowSize : gutter
-  const [popperElement, setPopperElement] = useState(null)
+
+  const uuid = useUuid({ prefix: 'popper' })
 
   const internalPlacement = flipPlacement(placement, 'ltr')
   const internalPosition = flipPosition(position, 'ltr')
@@ -71,66 +52,26 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
       ? internalPosition
       : `${internalPosition}-${internalPlacement}`
 
-  const popperOptions = {
-    placement: initialPlacement,
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, padding],
-        },
+  const popperModifiers = [
+    {
+      name: 'offset',
+      options: {
+        offset: [0, padding],
       },
-      ...modifiers,
-    ],
-  }
-
-  const { styles, attributes, forceUpdate } = usePopper(
-    referenceElement,
-    popperElement,
-    popperOptions
-  )
-
-  useDidUpdate(() => {
-    typeof forceUpdate === 'function' && forceUpdate()
-  }, forceUpdateDependencies)
-
-  const parsedAttributes = parsePopperPosition(
-    attributes.popper?.['data-popper-placement']
-  )
-
-  const classes = classNames({
-    [`${parsedAttributes.placement}`]: true,
-    [`${parsedAttributes.position}`]: true,
-  })
+    },
+    ...modifiers,
+  ]
 
   return (
-    <Transition
-      mounted={mounted && !!referenceElement}
-      duration={transitionDuration}
-      exitDuration={exitTransitionDuration}
-      transition={transition}
-      timingFunction={transitionTimingFunction}
-      onExited={onTransitionEnd}
+    <PopperUnstyled
+      id={uuid}
+      anchorEl={referenceElement}
+      open={mounted}
+      disablePortal={disablePortal}
+      placement={initialPlacement}
+      modifiers={popperModifiers}
     >
-      {(transitionStyles) => (
-        <div>
-          <PopperContainer withinPortal={withinPortal} zIndex={zIndex}>
-            <PopperElement
-              ref={setPopperElement}
-              style={{ ...styles.popper, pointerEvents: 'none' }}
-              {...attributes.popper}
-            >
-              <div style={transitionStyles}>
-                {children}
-
-                <Conditional test={withArrow}>
-                  <Arrow style={arrowStyle} className={classes} />
-                </Conditional>
-              </div>
-            </PopperElement>
-          </PopperContainer>
-        </div>
-      )}
-    </Transition>
+      <PopperElement css={{ zIndex }}>{children}</PopperElement>
+    </PopperUnstyled>
   )
 }

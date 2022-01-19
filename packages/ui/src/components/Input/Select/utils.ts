@@ -1,3 +1,5 @@
+import { SelectItem } from './types'
+
 interface GroupData {
   data: { group?: string }[]
 }
@@ -22,4 +24,42 @@ export function groupOptions({ data }: GroupData) {
   sortedData.push(...unGroupedData.map((itemIndex) => data[itemIndex]))
 
   return sortedData
+}
+
+interface FilterData {
+  data: SelectItem[]
+  limit: number
+  searchable: boolean
+  searchValue: string
+  filter(value: string, item: SelectItem): boolean
+}
+
+export function filterData({
+  data,
+  searchable,
+  limit,
+  searchValue,
+  filter,
+}: FilterData) {
+  if (!searchable) {
+    return data
+  }
+
+  const result = []
+
+  for (let i = 0; i < data.length; i += 1) {
+    if (filter(searchValue, data[i])) {
+      result.push(data[i])
+    }
+
+    if (result.length >= limit) {
+      break
+    }
+  }
+
+  return result
+}
+
+export function defaultFilter(value: string, item: SelectItem) {
+  return item.label.toLowerCase().trim().includes(value.toLowerCase().trim())
 }

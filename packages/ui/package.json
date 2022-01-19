@@ -13,12 +13,12 @@
   "dependencies": {
     "@aviato/hooks": "*",
     "@aviato/utils": "*",
+    "@mui/base": "^5.0.0-alpha.65",
     "@stitches/react": "^1.2.6",
     "next-themes": "^0.0.15",
     "prism-react-renderer": "^1.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-popper": "^2.2.5",
     "react-textarea-autosize": "^8.3.3",
     "throttle-debounce": "^3.0.1"
   },
@@ -42,8 +42,10 @@
     "ora": "^6.0.1",
     "prettier": "2.5.1",
     "promisify-child-process": "^4.1.1",
+    "rimraf": "^3.0.2",
     "svgo": "^2.8.0",
     "tsup": "5.11.10",
+    "typedoc": "^0.22.11",
     "typescript": "4.5.4"
   },
   "prettier": "@aviato/prettier-config",
@@ -59,6 +61,7 @@
     "parse:lint": "yarn lint",
     "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",
     "build": "tsup ./src/index.ts",
+    "docs": "rimraf docs && typedoc --out docs src/index.ts",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",

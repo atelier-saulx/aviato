@@ -1,5 +1,4 @@
 import React, { forwardRef, ElementRef } from 'react'
-import { ComponentProps } from '@stitches/react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import { useClipboard } from '@aviato/hooks'
 
@@ -17,8 +16,9 @@ const StyledPrism = styled('div', {
 const TooltipContainer = styled('div', {
   display: 'inline-block',
   position: 'absolute',
-  top: '10px',
-  right: '10px',
+  top: '0px',
+  right: '0px',
+  padding: '16px',
   zIndex: '2',
 })
 
@@ -47,26 +47,21 @@ const LineContent = styled('div', {
   display: 'table-cell',
 })
 
-export interface CodeBlock {
-  code: string
-  language: CodeLanguage
-}
-
-export interface PrismProps extends ComponentProps<typeof StyledPrism> {
-  copyLabel: string
-  copiedLabel: string
+export interface PrismProps {
   language: CodeLanguage
   withLineNumbers?: boolean
+  copyLabel?: string
+  copiedLabel?: string
   children: string
 }
 
 export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
   (properties, forwardedRef) => {
     const {
-      copyLabel = 'Copy code',
-      copiedLabel = 'Copied',
       language,
       withLineNumbers = false,
+      copyLabel = 'Copy code',
+      copiedLabel = 'Copied',
       children = '',
     } = properties
 
@@ -81,10 +76,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
             label={clipboard.copied ? copiedLabel : copyLabel}
             position="left"
             placement="center"
-            withArrow
-            arrowSize={4}
             gutter={8}
-            transition="fade"
           >
             <CopyButton
               wasCopied={clipboard.copied}
@@ -106,6 +98,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
                   <Conditional test={withLineNumbers}>
                     <LineNo>{index + 1}</LineNo>
                   </Conditional>
+
                   <LineContent>
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({ token, key })} />

@@ -73,7 +73,6 @@ export const RadioGroup = forwardRef<ElementRef<typeof Group>, RadioGroupProps>(
       defaultValue,
       finalValue: '',
       rule: (value) => typeof value === 'string',
-      onChange: () => {},
     })
 
     const childrenArray = Children.toArray(children) as ReactElement[]

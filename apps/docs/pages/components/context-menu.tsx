@@ -1,5 +1,19 @@
-import { ContextMenu, Column, Row, Page } from '@aviato/ui'
+import {
+  ContextMenu,
+  ContextItem,
+  ContextToggle,
+  Column,
+  Row,
+  Page,
+  styled,
+} from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
 
 const ContextMenuPage = () => {
   const ShowContextMenu = () => {
@@ -7,7 +21,21 @@ const ContextMenuPage = () => {
       <>
         <Column>
           <Row>
-            <ContextMenu />
+            <ContextMenu>
+              <ContextItem>Test 1</ContextItem>
+              <ContextItem>Test 2</ContextItem>
+              <ContextToggle>Test 3</ContextToggle>
+            </ContextMenu>
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <ContextMenu>
+              <ContextItem>Floop 1</ContextItem>
+              <ContextItem>Floop 2</ContextItem>
+              <ContextToggle>Floop 3</ContextToggle>
+            </ContextMenu>
           </Row>
         </Column>
       </>

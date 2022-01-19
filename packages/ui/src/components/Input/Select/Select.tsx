@@ -2,20 +2,18 @@ import React, {
   useRef,
   forwardRef,
   ElementRef,
-  useCallback,
   useState,
   useEffect,
 } from 'react'
 import { useMergedRef, useUuid, useUncontrolled } from '@aviato/hooks'
-import { noop } from '@aviato/utils'
 
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
-import { DropdownMenu } from './Dropdown'
+import { Dropdown } from './Dropdown'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
-import { groupOptions } from './utils'
+import { defaultFilter, filterData, groupOptions } from './utils'
 
 const SelectStyles: StitchedCSS = {
   cursor: 'pointer',
@@ -28,14 +26,15 @@ export interface OnSelectChange extends onChange {
 export interface SelectProps extends BaseInputProps {
   value?: string
   defaultValue?: string
-  data: (string | SelectItem)[]
+  data: SelectItem[]
   label?: string
   description?: string
   error?: string
   invalid?: boolean
   searchable?: boolean
   disabled?: boolean
-  onChange?: (value: string, payload: OnSelectChange) => void
+  limit?: number
+  filter?(value: string, item: SelectItem): boolean
 }
 
 export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
@@ -50,11 +49,16 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       placeholder,
       data,
       searchable = false,
-      onChange = noop,
+      disabled = false,
+      limit = Infinity,
+      filter = defaultFilter,
     } = properties
 
     const uuid = useUuid({ prefix: 'select' })
     const inputRef = useRef<HTMLInputElement>()
+
+    const [dropdownOpened, setDropdownOpened] = useState(false)
+    const [hovered, setHovered] = useState(-1)
 
     const isInvalid = Boolean(error || invalid)
 
@@ -72,29 +76,46 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       value,
       defaultValue,
       finalValue: null,
-      onChange,
-      rule: (val) => typeof val === 'string' || val === null,
+      rule: (value) => typeof value === 'string' || value === null,
     })
 
     const selectedValue = sortedData.find((item) => item.value === _value)
     const [inputValue, setInputValue] = useState(selectedValue?.label ?? '')
 
-    const handleInputChange = (value) => {
+    const filteredData = filterData({
+      data: sortedData,
+      searchable,
+      limit,
+      searchValue: inputValue,
+      filter,
+    })
+
+    const handleInputChange = (value: string) => {
       handleSearchChange(value)
+      setHovered(0)
+      setDropdownOpened(true)
     }
 
     const handleSearchChange = (value: string) => {
       setInputValue(value)
     }
 
-    const handleItemSelect = useCallback((event, payload) => {
-      handleChange(payload.value)
-      onChange(event, payload)
+    const handleItemSelect = (item: SelectItem) => {
+      if (selectedValue?.value === item.value) {
+        handleChange(null)
+        setDropdownOpened(false)
+      } else {
+        handleChange(item.value)
 
-      if (inputMode === 'uncontrolled') {
-        handleSearchChange(payload.label)
+        if (inputMode === 'uncontrolled') {
+          handleSearchChange(item.label)
+        }
+
+        setHovered(-1)
+        setDropdownOpened(false)
+        inputRef.current.focus()
       }
-    }, [])
+    }
 
     useEffect(() => {
       const newSelectedValue = sortedData.find((item) => item.value === _value)
@@ -105,6 +126,92 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
         handleSearchChange('')
       }
     }, [_value])
+
+    const handleInputClick = () => {
+      let dropdownOpen = true
+
+      if (!searchable) {
+        dropdownOpen = !dropdownOpened
+      }
+
+      setDropdownOpened(dropdownOpen)
+    }
+
+    const handleInputFocus = () => {
+      if (searchable) {
+        setDropdownOpened(true)
+      }
+    }
+
+    const handleInputBlur = () => {
+      const selected = sortedData.find((item) => item.value === _value)
+      handleSearchChange(selected?.label || '')
+      setDropdownOpened(false)
+    }
+
+    const selectedItemIndex = _value
+      ? filteredData.findIndex((element) => element.value === _value)
+      : 0
+
+    const handleInputKeydown = (
+      event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+      switch (event.nativeEvent.code) {
+        case 'ArrowUp': {
+          event.preventDefault()
+
+          if (!dropdownOpened) {
+            setHovered(selectedItemIndex)
+            setDropdownOpened(true)
+          }
+
+          break
+        }
+
+        case 'ArrowDown': {
+          event.preventDefault()
+
+          if (!dropdownOpened) {
+            setHovered(selectedItemIndex)
+            setDropdownOpened(true)
+          }
+
+          break
+        }
+
+        case 'Escape': {
+          event.preventDefault()
+          setDropdownOpened(false)
+          break
+        }
+
+        case 'Space': {
+          if (!searchable) {
+            if (filteredData[hovered] && dropdownOpened) {
+              event.preventDefault()
+              handleItemSelect(filteredData[hovered])
+            } else {
+              setDropdownOpened(!dropdownOpened)
+            }
+          }
+
+          break
+        }
+
+        case 'Enter': {
+          event.preventDefault()
+
+          if (filteredData[hovered] && dropdownOpened) {
+            event.preventDefault()
+            handleItemSelect(filteredData[hovered])
+          } else {
+            setDropdownOpened(true)
+          }
+        }
+      }
+    }
+
+    const shouldShowDropdown = dropdownOpened
 
     return (
       <InputWrapper
@@ -117,14 +224,27 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           css={SelectStyles}
           id={uuid}
           invalid={isInvalid}
-          ref={useMergedRef(forwardedRef, inputRef)}
+          ref={useMergedRef(inputRef, forwardedRef)}
           readOnly={!searchable}
+          disabled={disabled}
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
+          onClick={handleInputClick}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          onKeyDown={handleInputKeydown}
         />
 
-        <DropdownMenu items={formattedData} onChange={handleItemSelect} />
+        <Dropdown
+          items={formattedData}
+          mounted={shouldShowDropdown}
+          onChange={(_, payload) => {
+            handleItemSelect(data[payload.index])
+          }}
+          referenceElement={inputRef.current}
+          uuid={uuid}
+        />
       </InputWrapper>
     )
   }

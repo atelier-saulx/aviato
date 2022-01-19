@@ -23,7 +23,9 @@
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
+    "rimraf": "^3.0.2",
     "tsup": "5.11.10",
+    "typedoc": "^0.22.11",
     "typescript": "4.5.4"
   },
   "prettier": "@aviato/prettier-config",
@@ -34,6 +36,7 @@
     "types": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir ./dist",
     "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",
     "build": "tsup ./src/index.ts",
+    "docs": "rimraf docs && typedoc --out docs src/index.ts",
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",

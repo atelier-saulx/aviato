@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react'
 
-import { Prism, styled, Conditional, CodeBlock, CodeLanguage } from '@aviato/ui'
+import { Prism, styled, Conditional, CodeLanguage } from '@aviato/ui'
+import { CodeBlock } from '..'
 
-const WrapperDiv = styled('div', {
+const BaseContainer = styled('div', {
   marginLeft: '0px',
   marginBottom: '20px',
 })
 
-const ComponentWrapperDiv = styled('div', {
+const Container = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   padding: '20px',
@@ -83,14 +84,14 @@ export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
   }
 
   return (
-    <WrapperDiv>
-      <ComponentWrapperDiv background={background}>
+    <BaseContainer>
+      <Container background={background}>
         <InnerDiv padding={padding}>{children}</InnerDiv>
-      </ComponentWrapperDiv>
+      </Container>
 
       <Conditional test={code}>
         <Prism language={language}>{code}</Prism>
       </Conditional>
-    </WrapperDiv>
+    </BaseContainer>
   )
 }

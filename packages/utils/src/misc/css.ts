@@ -1,30 +1,5 @@
 import { invariant } from './invariant'
 
-/**
- * Credit: https://github.com/alexreardon/css-box-model/blob/master/src/index.js
- */
-
-/**
- # The CSS box model
- > https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
-
-  ------------------------------------
-  |              MARGIN              |  (marginBox)
-  |  ------------------------------  |
-  |  |           BORDER           |  |  (borderBox)
-  |  |  ------------------------  |  |
-  |  |  |       PADDING        |  |  |  (paddingBox) - not used by anything really
-  |  |  |  ------------------  |  |  |
-  |  |  |  |    CONTENT     |  |  |  |  (contentBox)
-  |  |  |  |                |  |  |  |
-  |  |  |  |                |  |  |  |
-  |  |  |  |                |  |  |  |
-  |  |  |  ------------------  |  |  |
-  |  |  ------------------------  |  |
-  |  ------------------------------  |
-  ------------------------------------
- */
-
 export type Position = {
   x: number
   y: number
@@ -42,15 +17,23 @@ export type Rect = {
   center: Position
 }
 
+/**
+ * The CSS box model
+ * Link: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
+ */
 export type BoxModel = {
   // content + padding + border + margin
   marginBox: Rect
+
   // content + padding + border
   borderBox: Rect
+
   // content + padding
   paddingBox: Rect
+
   // content
   contentBox: Rect
+
   // for your own consumption
   border: Spacing
   padding: Spacing
@@ -78,9 +61,11 @@ export const getRect = ({ top, right, bottom, left }: Spacing): Rect => {
     left,
     width,
     height,
+
     // DOMRect
     x: left,
     y: top,
+
     // Rect
     center: {
       x: (right + left) / 2,
@@ -95,6 +80,7 @@ export const expand = (target: Spacing, expandBy: Spacing): Spacing => ({
   // pulling back to increase size
   top: target.top - expandBy.top,
   left: target.left - expandBy.left,
+
   // pushing forward to increase size
   bottom: target.bottom + expandBy.bottom,
   right: target.right + expandBy.right,
@@ -104,6 +90,7 @@ export const shrink = (target: Spacing, shrinkBy: Spacing): Spacing => ({
   // pushing forward to decrease size
   top: target.top + shrinkBy.top,
   left: target.left + shrinkBy.left,
+
   // pulling backwards to decrease size
   bottom: target.bottom - shrinkBy.bottom,
   right: target.right - shrinkBy.right,
@@ -162,14 +149,6 @@ const parse = (raw: string): number => {
   const value: string = raw.slice(0, -2)
   const suffix: string = raw.slice(-2)
 
-  // ## Used values vs computed values
-  // `getComputedStyle` will return the * used values * if the
-  // element has `display: none` and the *computed values* otherwise
-  // *used values* can include 'rem' etc.
-  // Rather than throwing we are returning `0`.
-  // Given that the element is _not visible_ it takes up no visible space and so `0` is correct
-  // ## `jsdom`
-  // The `raw` value can also not be populated in jsdom
   if (suffix !== 'px') {
     return 0
   }
