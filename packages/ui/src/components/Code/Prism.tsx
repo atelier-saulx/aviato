@@ -1,5 +1,4 @@
 import React, { forwardRef, ElementRef } from 'react'
-import { ComponentProps } from '@stitches/react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import { useClipboard } from '@aviato/hooks'
 
@@ -47,16 +46,11 @@ const LineContent = styled('div', {
   display: 'table-cell',
 })
 
-export interface CodeBlock {
-  code: string
-  language: CodeLanguage
-}
-
-export interface PrismProps extends ComponentProps<typeof StyledPrism> {
-  copyLabel: string
-  copiedLabel: string
+export interface PrismProps {
   language: CodeLanguage
   withLineNumbers?: boolean
+  copyLabel?: string
+  copiedLabel?: string
   children: string
 }
 

@@ -88,7 +88,7 @@ const StyledToggle = styled('div', {
   },
 })
 
-const SwitchItem = styled('div', {
+const SwitchContainer = styled('div', {
   justifySelf: 'end',
   marginLeft: 'auto',
   display: 'flex',
@@ -117,9 +117,9 @@ export const ContextToggle = forwardRef<
     <StyledToggle ref={forwardedRef} {...remainingProps}>
       {ChildVariant}
 
-      <SwitchItem>
+      <SwitchContainer>
         <Switch />
-      </SwitchItem>
+      </SwitchContainer>
     </StyledToggle>
   )
 })

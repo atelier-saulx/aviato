@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react'
 import { DisplayComponent } from './displayComponent'
 import { NextTitle, NextText } from '../text'
 
-import { styled, Conditional, CodeBlock } from '@aviato/ui'
+import { styled, Conditional, CodeLanguage } from '@aviato/ui'
 
-const ComponentWrapperDiv = styled('div', {
+const Container = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   width: '100%',
@@ -14,6 +14,11 @@ const ComponentWrapperDiv = styled('div', {
 const PaddingTop = styled('div', {
   paddingTop: '20px',
 })
+
+export interface CodeBlock {
+  code: string
+  language: CodeLanguage
+}
 
 export type DisplayComponentProps = {
   title?: string
@@ -32,7 +37,7 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
   children,
 }) => {
   return (
-    <ComponentWrapperDiv>
+    <Container>
       <Conditional test={title}>
         <NextTitle>{title}</NextTitle>
       </Conditional>
@@ -50,6 +55,6 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
           {children}
         </DisplayComponent>
       </PaddingTop>
-    </ComponentWrapperDiv>
+    </Container>
   )
 }

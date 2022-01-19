@@ -182,7 +182,7 @@ const ErrorButtonCSS: StitchedCSS = {
   },
 }
 
-const IconWrapper = styled('span', {
+const IconContainer = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
   flexShrink: 0,
@@ -273,13 +273,13 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         {...remainingProps}
       >
         <Conditional test={leftIcon}>
-          <IconWrapper type="start">{leftIcon}</IconWrapper>
+          <IconContainer type="start">{leftIcon}</IconContainer>
         </Conditional>
 
         {ChildVariant}
 
         <Conditional test={rightIcon}>
-          <IconWrapper type="end">{rightIcon}</IconWrapper>
+          <IconContainer type="end">{rightIcon}</IconContainer>
         </Conditional>
       </StyledButton>
     )

@@ -23,7 +23,7 @@ import { onChange } from '~/types/events'
  * It's not meant to be used by itself.
  */
 
-const BaseInputWrapper = styled('div', {
+const Container = styled('div', {
   position: 'relative',
   width: '100%',
   borderRadius: '4px',
@@ -173,7 +173,7 @@ export const StyledInput = styled('input', {
   },
 })
 
-const IconWrapper = styled('span', {
+const IconContainer = styled('span', {
   position: 'absolute',
   top: 0,
   bottom: 0,
@@ -276,11 +276,11 @@ export const BaseInput = forwardRef<
   }, [])
 
   return (
-    <BaseInputWrapper variant={variant} className={classes}>
+    <Container variant={variant} className={classes}>
       <Conditional test={leftIcon}>
-        <IconWrapper type="start" className={classes}>
+        <IconContainer type="start" className={classes}>
           {leftIcon}
-        </IconWrapper>
+        </IconContainer>
       </Conditional>
 
       <StyledInput
@@ -297,10 +297,10 @@ export const BaseInput = forwardRef<
       />
 
       <Conditional test={rightIcon}>
-        <IconWrapper type="end" className={classes}>
+        <IconContainer type="end" className={classes}>
           {rightIcon}
-        </IconWrapper>
+        </IconContainer>
       </Conditional>
-    </BaseInputWrapper>
+    </Container>
   )
 })
