@@ -253,7 +253,6 @@ export const BaseInput = forwardRef<
     defaultValue,
     finalValue: '',
     rule: (value) => typeof value === 'string',
-    onChange: () => {},
   })
 
   const [isActive, setIsActive] = useState(false)

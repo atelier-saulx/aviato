@@ -76,8 +76,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       value,
       defaultValue,
       finalValue: null,
-      rule: (val) => typeof val === 'string' || val === null,
-      onChange: () => {},
+      rule: (value) => typeof value === 'string' || value === null,
     })
 
     const selectedValue = sortedData.find((item) => item.value === _value)
