@@ -67,6 +67,8 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     path.join(__dirname, "../package.json"),
   ]);
 
+  // await git.commit(`[release] Version: ${incrementedVersion}`);
+
   open(
     githubRelease({
       user: "atelier-saulx",
