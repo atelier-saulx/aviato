@@ -62,7 +62,10 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     tag,
   });
 
-  await git.add([path.join(__dirname, "../packages")]);
+  await git.add([
+    path.join(__dirname, "../packages"),
+    path.join(__dirname, "../package.json"),
+  ]);
 
   console.info(`\n  Released successfully! \n`);
 })();

@@ -18,18 +18,23 @@ export async function setPackagesVersion(
     type,
   });
 
+  const src = path.join(__dirname, "../packages");
+
+  const folders = (await fs.readdir(src)).filter((folder) => {
+    return fs.pathExistsSync(path.join(src, folder, "/package.json"));
+  });
+
+  await Promise.all(
+    folders.map((folder) =>
+      writeVersionToPackageJson(
+        path.join(src, folder, "/package.json"),
+        incrementedVersion
+      )
+    )
+  );
+
   await writeVersionToPackageJson(
     path.join(__dirname, "../package.json"),
-    incrementedVersion
-  );
-
-  await writeVersionToPackageJson(
-    path.join(__dirname, "../packages/ui/package.json"),
-    incrementedVersion
-  );
-
-  await writeVersionToPackageJson(
-    path.join(__dirname, "../packages/utils/package.json"),
     incrementedVersion
   );
 }
