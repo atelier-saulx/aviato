@@ -4,16 +4,19 @@ import fs from "fs-extra";
 import { execa } from "execa";
 
 export async function publishAllPackages(tag: string) {
-  const src = path.join(__dirname, "../packages");
+  /**
+   * Publish all public packages
+   */
+  const packages = path.join(__dirname, "../packages");
 
-  const folders = (await fs.readdir(src)).filter((folder) => {
-    return fs.pathExistsSync(path.join(src, folder, "/package.json"));
+  const packageFolders = (await fs.readdir(packages)).filter((folder) => {
+    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
   });
 
   await Promise.all(
-    folders.map(async (folder) => {
+    packageFolders.map(async (folder) => {
       const packageJson = await fs.readJSON(
-        path.join(src, folder, "/package.json")
+        path.join(packages, folder, "/package.json")
       );
 
       if (packageJson.private) {
@@ -23,7 +26,36 @@ export async function publishAllPackages(tag: string) {
       }
 
       await publishPackage({
-        path: path.join(src, folder),
+        path: path.join(packages, folder),
+        name: packageJson.name,
+        tag,
+      });
+    })
+  );
+
+  /**
+   * Publish all public apps
+   */
+  const apps = path.join(__dirname, "../apps");
+
+  const appFolders = (await fs.readdir(apps)).filter((folder) => {
+    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
+  });
+
+  await Promise.all(
+    appFolders.map(async (folder) => {
+      const packageJson = await fs.readJSON(
+        path.join(apps, folder, "/package.json")
+      );
+
+      if (packageJson.private) {
+        return console.log(
+          `- Private package ${chalk.cyan(packageJson.name)} was skipped`
+        );
+      }
+
+      await publishPackage({
+        path: path.join(apps, folder),
         name: packageJson.name,
         tag,
       });

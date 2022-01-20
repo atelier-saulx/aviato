@@ -10,21 +10,45 @@ async function writeVersionToPackageJson(filePath: string, version: string) {
 }
 
 export async function updateAllPackageVersions(version: string) {
-  const src = path.join(__dirname, "../packages");
+  /**
+   * Update package versions
+   */
+  const packages = path.join(__dirname, "../packages");
 
-  const folders = (await fs.readdir(src)).filter((folder) => {
-    return fs.pathExistsSync(path.join(src, folder, "/package.json"));
+  const packageFolders = (await fs.readdir(packages)).filter((folder) => {
+    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
   });
 
   await Promise.all(
-    folders.map((folder) =>
+    packageFolders.map((folder) =>
       writeVersionToPackageJson(
-        path.join(src, folder, "/package.json"),
+        path.join(packages, folder, "/package.json"),
         version
       )
     )
   );
 
+  /**
+   * Update app versions
+   */
+  const apps = path.join(__dirname, "../apps");
+
+  const appFolders = (await fs.readdir(apps)).filter((folder) => {
+    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
+  });
+
+  await Promise.all(
+    appFolders.map((folder) =>
+      writeVersionToPackageJson(
+        path.join(apps, folder, "/package.json"),
+        version
+      )
+    )
+  );
+
+  /**
+   * Update root package version
+   */
   await writeVersionToPackageJson(
     path.join(__dirname, "../package.json"),
     version
