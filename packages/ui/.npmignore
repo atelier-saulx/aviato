@@ -1,2 +1,8 @@
 test/
 tsconfig.*
+
+dependencies/
+docs/
+src/
+scripts/
+.turbo
