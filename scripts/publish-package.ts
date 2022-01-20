@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import execa from "execa";
+import { execa } from "execa";
 
 export async function publishPackage({
   path,
@@ -11,7 +11,9 @@ export async function publishPackage({
   tag: string;
 }) {
   try {
-    await (execa as any)("yarn", ["publish", path, "--tag", tag]);
+    // await (execa as any)("npm", ["publish", path, "--tag", tag]);
+    // await execa("yarn", ["release"]);
+
     console.log(`Package ${chalk.cyan(name)} was published`);
   } catch (error) {
     console.error(`Failed to publish package ${chalk.red(name)}`);
