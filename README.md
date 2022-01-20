@@ -43,11 +43,10 @@ You can use these components either as the base layer of your application, or ad
 
 ## 📦 Public Packages
 
-| Name            | Description                                                              | Status     |
-| --------------- | ------------------------------------------------------------------------ | ---------- |
-| `@aviato/ui`    | Component library & hooks. A suite of ready-to-use components & theming. | Soon 🚀    |
-| `@aviato/utils` | Utility functions to facilitate DX and easier development.               | Soon 🚀    |
-| `@aviato/next`  | Setup server side rendering utilities for Next.js.                       | On hold 🌙 |
+| Name            | Description                                                              | Status  |
+| --------------- | ------------------------------------------------------------------------ | ------- |
+| `@aviato/ui`    | Component library & hooks. A suite of ready-to-use components & theming. | Soon 🚀 |
+| `@aviato/utils` | Utility functions to facilitate DX and easier development.               | Soon 🚀 |
 
 ---
 
@@ -105,6 +104,14 @@ _**Note**: We are still in pre-release alpha. No release has been made._
 - Maarten de Winther ([@maartensaulx](https://github.com/maartensaulx))
 - Yves Beer ([@cowboybeer](https://github.com/cowboybeer))
 - Atelier Saulx ([@atelier-saulx](https://github.com/atelier-saulx)) - [Saulx](https://www.saulx.com/)
+
+---
+
+## Credits
+
+- Mantine - [github](https://github.com/mantinedev/mantine) & [link](https://mantine.dev/)
+- Radix Primitives - [link](https://www.radix-ui.com/)
+- Material UI (MUI) - [link](https://mui.com/)
 
 ---
 
