@@ -1,5 +1,18 @@
-test/
+/node_modules/
+*.log
+*.DS_Store
+.idea
+*-dev/
+.vscode
+.idea
+*.ipr
+*.iml
+*.iws
+_doc
+npm-debug.log
 tsconfig.*
+typedoc.json
+tsup.config.js
 
 dependencies/
 docs/
