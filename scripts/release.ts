@@ -54,7 +54,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
   });
 
   try {
-    await updateAllPackageVersions(packageJson.version);
+    await updateAllPackageVersions(incrementedVersion);
   } catch (error) {
     console.error("Build failed - error: ", error);
     process.exit(1);
