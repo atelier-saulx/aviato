@@ -3,26 +3,6 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import { execa } from "execa";
 
-export async function publishPackage({
-  path,
-  name,
-  tag,
-}: {
-  path: string;
-  name: string;
-  tag: string;
-}) {
-  try {
-    // await execa("npm", ["publish", path, "--tag", tag]);
-
-    console.log(`- Package ${chalk.cyan(name)} was published`);
-  } catch (error) {
-    console.error(`Failed to publish package ${chalk.red(name)}`);
-    process.stdout.write(chalk.red`${error.message}\n`);
-    process.exit(1);
-  }
-}
-
 export async function publishAllPackages(tag: string) {
   const src = path.join(__dirname, "../packages");
 
@@ -49,4 +29,27 @@ export async function publishAllPackages(tag: string) {
       });
     })
   );
+}
+
+export async function publishPackage({
+  path,
+  name,
+  tag,
+}: {
+  path: string;
+  name: string;
+  tag: string;
+}) {
+  try {
+    // await execa("npm", ["publish", "--tag", tag, "--access", "public"], {
+    //   stdio: "inherit",
+    //   cwd: path,
+    // });
+
+    console.log(`- Package ${chalk.cyan(name)} was published`);
+  } catch (error) {
+    console.error(`Failed to publish package ${chalk.red(name)}`);
+    process.stdout.write(chalk.red`${error.message}\n`);
+    process.exit(1);
+  }
 }

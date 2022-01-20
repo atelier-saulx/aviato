@@ -30,56 +30,51 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
   ]);
 
 (async () => {
+  const status = await git.status();
+
+  // if (status.files.length !== 0) {
+  //   console.error("Working tree is not clean");
+  //   process.exit(1);
+  // }
+
+  const { type, tag } = argv;
+
+  console.info(`Releasing packages \n`);
+
   try {
-    const status = await git.status();
-
-    if (status.files.length !== 0) {
-      console.error("Working tree is not clean");
-      process.exit(1);
-    }
-
-    const { type, tag } = argv;
-
-    console.info(`Releasing packages \n`);
-
-    try {
-      await execa("yarn", ["build"], { stdio: "inherit" });
-    } catch (error) {
-      console.error("Build failed - error: ", error);
-      process.exit(1);
-    }
-
-    const releaseType = argv._[0] ?? type;
-    const incrementedVersion = getIncrementedVersion(packageJson.version, {
-      type: releaseType,
-    });
-
-    try {
-      await updateAllPackageVersions(packageJson.version);
-    } catch (error) {
-      console.error("Build failed - error: ", error);
-      process.exit(1);
-    }
-
-    await publishAllPackages(tag);
-
-    await git.add([
-      path.join(__dirname, "../packages"),
-      path.join(__dirname, "../package.json"),
-    ]);
-
-    open(
-      githubRelease({
-        user: "atelier-saulx",
-        repo: "aviato-ui",
-        tag: incrementedVersion,
-        title: incrementedVersion,
-      })
-    );
-
-    console.info(`\n  Released successfully! \n`);
+    await execa("yarn", ["build"], { stdio: "inherit" });
   } catch (error) {
-    console.error("Release failed - error: ", error);
+    console.error("Build failed - error: ", error);
     process.exit(1);
   }
+
+  const releaseType = argv._[0] ?? type;
+  const incrementedVersion = getIncrementedVersion(packageJson.version, {
+    type: releaseType,
+  });
+
+  try {
+    await updateAllPackageVersions(packageJson.version);
+  } catch (error) {
+    console.error("Build failed - error: ", error);
+    process.exit(1);
+  }
+
+  // await publishAllPackages(tag);
+
+  await git.add([
+    path.join(__dirname, "../packages"),
+    path.join(__dirname, "../package.json"),
+  ]);
+
+  open(
+    githubRelease({
+      user: "atelier-saulx",
+      repo: "aviato-ui",
+      tag: incrementedVersion,
+      title: incrementedVersion,
+    })
+  );
+
+  console.info(`\n  Released successfully! \n`);
 })();
