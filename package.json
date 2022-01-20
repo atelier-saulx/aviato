@@ -7,6 +7,7 @@
   },
   "homepage": "https://github.com/atelier-saulx/aviato-ui#readme",
   "private": true,
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atelier-saulx/aviato-ui.git"
@@ -32,19 +33,28 @@
     "lint": "turbo run lint",
     "build": "turbo run build",
     "test": "turbo run test",
-    "release": "turbo run release",
+    "release": "esno scripts/release",
     "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
   "dependencies": {
-    "shx": "^0.3.3",
+    "new-github-release-url": "^2.0.0",
     "turbo": "1.0.28"
   },
   "devDependencies": {
+    "@types/yargs": "^17.0.0",
+    "chalk": "^5.0.0",
+    "esno": "^0.14.0",
+    "execa": "^6.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
+    "open": "^8.4.0",
     "rimraf": "^3.0.2",
-    "syncpack": "^6.2.0"
+    "shx": "^0.3.3",
+    "simple-git": "^3.0.3",
+    "syncpack": "^6.2.0",
+    "typescript": "4.5.4",
+    "yargs": "^17.3.1"
   },
   "lint-staged": {
     "*": [
