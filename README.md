@@ -43,10 +43,10 @@ You can use these components either as the base layer of your application, or ad
 
 ## 📦 Public Packages
 
-| Name            | Description                                                              | Status  |
-| --------------- | ------------------------------------------------------------------------ | ------- |
-| `@aviato/ui`    | Component library & hooks. A suite of ready-to-use components & theming. | Soon 🚀 |
-| `@aviato/utils` | Utility functions to facilitate DX and easier development.               | Soon 🚀 |
+| Name            | Description                                                              | NPM                                                                                               |
+| --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `@aviato/ui`    | Component library & hooks. A suite of ready-to-use components & theming. | [![npm](https://img.shields.io/npm/v/@aviato/ui)](https://www.npmjs.com/package/@aviato/ui)       |
+| `@aviato/utils` | Utility functions to facilitate DX and easier development.               | [![npm](https://img.shields.io/npm/v/@aviato/utils)](https://www.npmjs.com/package/@aviato/utils) |
 
 ---
 
@@ -86,19 +86,13 @@ npm install --save @aviato/ui
 
 _We do not currently accept community-driven code contributions_, as Aviato is still in concept phase, but feel free to fork Aviato for your own use. This is subject to change in the future.
 
-If you are an onboarded maintainer (or curious), then please check out the [Contributing guide](CONTRIBUTING.md) for guidelines about how to proceed.
+<a href="https://github.com/atelier-saulx/aviato-ui/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=atelier-saulx/aviato-ui" />
+</a>
 
 ---
 
-## Releases
-
-For changelog, visit [https://github.com/atelier-saulx/aviato-ui/releases](https://github.com/atelier-saulx/aviato-ui/releases).
-
-_**Note**: We are still in pre-release alpha. No release has been made._
-
----
-
-## Authors
+## ✍️ Authors
 
 - Morten Broesby-Olsen ([@mortenbroesby](https://github.com/mortenbroesby))
 - Maarten de Winther ([@maartensaulx](https://github.com/maartensaulx))
