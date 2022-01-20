@@ -64,6 +64,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
 
   await git.add([
     path.join(__dirname, "../packages"),
+    path.join(__dirname, "../apps"),
     path.join(__dirname, "../package.json"),
   ]);
 

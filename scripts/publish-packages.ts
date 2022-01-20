@@ -39,7 +39,7 @@ export async function publishAllPackages(tag: string) {
   const apps = path.join(__dirname, "../apps");
 
   const appFolders = (await fs.readdir(apps)).filter((folder) => {
-    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
+    return fs.pathExistsSync(path.join(apps, folder, "/package.json"));
   });
 
   await Promise.all(
