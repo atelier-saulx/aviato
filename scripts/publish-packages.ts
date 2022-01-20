@@ -3,7 +3,10 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import { execa } from "execa";
 
-export async function publishAllPackages(tag: string) {
+export async function publishAllPackages(
+  tag: string,
+  incrementedVersion: string
+) {
   /**
    * Publish all public packages
    */
@@ -28,6 +31,7 @@ export async function publishAllPackages(tag: string) {
       await publishPackage({
         path: path.join(packages, folder),
         name: packageJson.name,
+        version: incrementedVersion,
         tag,
       });
     })
@@ -57,6 +61,7 @@ export async function publishAllPackages(tag: string) {
       await publishPackage({
         path: path.join(apps, folder),
         name: packageJson.name,
+        version: incrementedVersion,
         tag,
       });
     })
@@ -66,21 +71,19 @@ export async function publishAllPackages(tag: string) {
 export async function publishPackage({
   path,
   name,
+  version,
   tag,
 }: {
   path: string;
   name: string;
+  version: string;
   tag: string;
 }) {
   try {
-    await execa(
-      "npm",
-      ["publish", `${name}`, "--tag", tag, "--access", "public"],
-      {
-        stdio: "inherit",
-        cwd: path,
-      }
-    );
+    await execa("npm", ["publish", path, "--access", "public", "--tag", tag], {
+      stdio: "inherit",
+      cwd: path,
+    });
 
     console.log(`- Package ${chalk.cyan(name)} was published`);
   } catch (error) {
