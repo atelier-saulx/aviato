@@ -60,7 +60,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     process.exit(1);
   }
 
-  // await publishAllPackages(tag);
+  await publishAllPackages(tag);
 
   await git.add([
     path.join(__dirname, "../packages"),
