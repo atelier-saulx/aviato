@@ -11,10 +11,12 @@ export async function publishPackage({
   tag: string;
 }) {
   try {
-    await execa("yarn", ["release"], {
-      stdio: "inherit",
-      cwd: path,
-    });
+    // await execa("yarn", ["release"], {
+    //   stdio: "inherit",
+    //   cwd: path,
+    // });
+
+    // await execa("npm", ["publish", path, "--tag", tag]);
 
     console.log(`Package ${chalk.cyan(name)} was published`);
   } catch (error) {

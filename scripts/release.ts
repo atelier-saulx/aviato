@@ -45,4 +45,8 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     name: "@aviato/utils",
     tag,
   });
+
+  await git.add([path.join(__dirname, "../packages")]);
+
+  console.info(`Released successfully! \n`);
 })();
