@@ -34,7 +34,22 @@ const ToggleGroupPage = () => {
         A set of two-state buttons that can be toggled on or off.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<ToggleGroup
+  defaultValue="first"
+  onValueChange={(value) => {
+    console.log('ToggleGroup change: ', { value })
+  }}
+>
+  <ToggleItem value="first">First</ToggleItem>
+  <ToggleItem value="second">Second</ToggleItem>
+  <ToggleItem value="third">Third</ToggleItem>
+  <ToggleItem value="fourth">Fourth</ToggleItem>
+</ToggleGroup>
+        `}
+      >
         <ShowToggleGroup />
       </ShowcaseComponent>
     </Page>
