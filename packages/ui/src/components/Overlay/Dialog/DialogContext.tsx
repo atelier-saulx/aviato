@@ -1,3 +1,11 @@
-import { createContext } from 'react'
+import { createContext, ReactNode } from 'react'
 
-export const DialogContext = createContext(undefined)
+export interface DialogContextType {
+  add: (children: ReactNode) => string | number
+  close: (id?: string | number) => void
+  confirm: (id?: string | number) => void
+  alert: (id?: string | number) => void
+  prompt: (id?: string | number) => void
+}
+
+export const DialogContext = createContext<DialogContextType>(undefined)

@@ -12,8 +12,8 @@ export const useToast: () => ToastContextType = () => {
     console.warn('No ToastContext found')
   }
 
-  noContext.add = noContext as ToastContextType['add']
-  noContext.close = noContext as ToastContextType['close']
+  noContext.add = noContext as any
+  noContext.close = noContext as any
   noContext.getAmount = noContext as any
 
   return noContext

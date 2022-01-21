@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react'
-import { DialogContext } from './DialogContext'
+
+import { DialogContext, DialogContextType } from './DialogContext'
 import { Backdrop, Input } from '~/components'
 import { Dialog } from './Dialog'
 import { useHotkeys, HotkeyItem } from '~/hooks'
@@ -44,7 +45,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
       children: ReactNode
     }[]
   >()
-  const dialogRef = useRef<Function & { close: Function }>()
+  const dialogRef = useRef<DialogContextType>()
 
   if (!dialogRef.current) {
     let cnt = 0
@@ -53,25 +54,17 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const dialog = (children) => {
-      const id = cnt++
-      update(
-        dialogsRef.current.push({
-          id,
-          children,
-        })
-      )
-      return id
-    }
+    const dialog = () => {}
 
-    const prompt = (type, props) =>
-      new Promise((resolve) => {
+    const prompt = (type, props) => {
+      return new Promise((resolve) => {
         if (typeof props === 'string') {
           props = {
             title: props,
           }
         }
-        const id = dialog(
+
+        const id = dialog.add(
           <Prompt
             {...props}
             type={type}
@@ -86,6 +79,19 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
           />
         )
       })
+    }
+
+    dialog.add = (children) => {
+      const id = cnt++
+
+      update(
+        dialogsRef.current.push({
+          id,
+          children,
+        })
+      )
+      return id
+    }
 
     dialog.close = (id) => {
       if (typeof id === 'number') {
@@ -105,6 +111,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
     dialog.prompt = (props) => prompt('prompt', props)
     dialog.alert = (props) => prompt('alert', props)
     dialog.confirm = (props) => prompt('confirm', props)
+
     dialog.useAmount = () => {
       const [state, setState] = useState(length)
 
@@ -136,8 +143,8 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
           display: 'flex',
           justifyContent: 'center',
         }}
-        onClick={(e) => {
-          if (e.currentTarget === e.target) {
+        onClick={(event) => {
+          if (event.currentTarget === event.target) {
             dialogRef.current.close(id)
           }
         }}

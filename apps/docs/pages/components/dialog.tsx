@@ -61,7 +61,9 @@ const DialogButtonAndClose = () => {
   return (
     <Button
       onClick={() => {
-        const id = dialog(<Dialog title="I will dissappear!">Oh noooo!</Dialog>)
+        const id = dialog.add(
+          <Dialog title="I will dissappear!">Oh noooo!</Dialog>
+        )
 
         timer.current = setTimeout(() => {
           dialog.close(id)
