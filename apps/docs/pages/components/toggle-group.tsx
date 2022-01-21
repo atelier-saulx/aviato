@@ -1,4 +1,5 @@
-import { Column, Row, Page, ToggleGroup } from '@aviato/ui'
+import { Column, Row, Page, ToggleGroup, ToggleItem } from '@aviato/ui'
+import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -8,7 +9,17 @@ const ToggleGroupPage = () => {
       <>
         <Column>
           <Row>
-            <ToggleGroup />
+            <ToggleGroup
+              defaultValue="first"
+              onValueChange={(value) => {
+                log.global.debug('ToggleGroup change: ', { value })
+              }}
+            >
+              <ToggleItem value="first">First</ToggleItem>
+              <ToggleItem value="second">Second</ToggleItem>
+              <ToggleItem value="third">Third</ToggleItem>
+              <ToggleItem value="fourth">Fourth</ToggleItem>
+            </ToggleGroup>
           </Row>
         </Column>
       </>
