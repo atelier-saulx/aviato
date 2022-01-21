@@ -6,6 +6,7 @@ export interface DialogContextType {
   confirm: (id?: string | number) => void
   alert: (id?: string | number) => void
   prompt: (id?: string | number) => void
+  getAmount: () => number
 }
 
 export const DialogContext = createContext<DialogContextType>(undefined)

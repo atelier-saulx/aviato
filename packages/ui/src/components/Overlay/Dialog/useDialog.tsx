@@ -17,6 +17,7 @@ export const useDialog: () => DialogContextType = () => {
   noContext.confirm = noContext as any
   noContext.alert = noContext as any
   noContext.prompt = noContext as any
+  noContext.getAmount = noContext as any
 
   return noContext
 }

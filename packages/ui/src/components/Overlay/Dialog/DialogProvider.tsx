@@ -37,18 +37,18 @@ const Prompt = ({
   )
 }
 
+interface DialogItem {
+  id: number
+  children: ReactNode
+}
+
 export const DialogProvider = ({ children, fixed = true, portal }) => {
   const [length, setLength] = useState(0)
-  const dialogsRef = useRef<
-    {
-      id: number
-      children: ReactNode
-    }[]
-  >()
+  const dialogsRef = useRef<DialogItem[]>()
   const dialogRef = useRef<DialogContextType>()
 
   if (!dialogRef.current) {
-    let cnt = 0
+    let count = 0
     const listeners = new Set([setLength])
     const update = (length) => {
       listeners.forEach((fn) => fn(length))
@@ -82,7 +82,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
     }
 
     dialog.add = (children) => {
-      const id = cnt++
+      const id = count++
 
       update(
         dialogsRef.current.push({
@@ -90,6 +90,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
           children,
         })
       )
+
       return id
     }
 
@@ -112,7 +113,7 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
     dialog.alert = (props) => prompt('alert', props)
     dialog.confirm = (props) => prompt('confirm', props)
 
-    dialog.useAmount = () => {
+    dialog.getAmount = () => {
       const [state, setState] = useState(length)
 
       useEffect(() => {
