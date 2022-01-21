@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import {
   Page,
   useDialog,
@@ -5,10 +6,11 @@ import {
   Dialog,
   Button,
   Input,
+  useHasLoaded,
 } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+import { log } from '@aviato/utils'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-import { useEffect, useRef } from 'react'
 
 const DialogButton = ({ level = 1 }) => {
   const { confirm, alert, prompt } = useDialog()
@@ -18,7 +20,7 @@ const DialogButton = ({ level = 1 }) => {
       <Button
         onClick={async () => {
           const ok = await confirm('Confirm please')
-          console.log({ ok })
+          log.global.debug('confirm', { ok })
         }}
       >
         Confirm #{level}
@@ -35,7 +37,7 @@ const DialogButton = ({ level = 1 }) => {
       <Button
         onClick={async () => {
           const name = await prompt('What is your name?')
-          console.log({ name })
+          log.global.debug('name: ', { name })
         }}
       >
         Prompt #{level}

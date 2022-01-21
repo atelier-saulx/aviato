@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import { DialogContext } from './DialogContext'
 import { Backdrop, Input } from '~/components'
 import { Dialog } from './Dialog'
-import { useHotkeys, HotkeyItem } from '@aviato/hooks'
+import { useHotkeys, HotkeyItem } from '~/hooks'
 
 const Prompt = ({
   type = 'prompt',

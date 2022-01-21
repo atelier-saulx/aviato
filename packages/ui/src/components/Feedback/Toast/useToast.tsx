@@ -1,8 +1,9 @@
 import { useContext } from 'react'
-import { ToastContext } from './ToastContext'
 
-export const useToast = () => {
-  const toast = useContext(ToastContext)
+import { ToastContext, ToastContextType } from './ToastContext'
+
+export const useToast: () => ToastContextType = () => {
+  const toast = useContext<ToastContextType>(ToastContext)
   if (toast) {
     return toast
   }
@@ -11,6 +12,9 @@ export const useToast = () => {
     console.warn('No ToastContext found')
   }
 
-  noContext.close = noContext
+  noContext.add = noContext as ToastContextType['add']
+  noContext.close = noContext as ToastContextType['close']
+  noContext.getAmount = noContext as any
+
   return noContext
 }
