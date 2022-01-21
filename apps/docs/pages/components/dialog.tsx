@@ -25,7 +25,9 @@ const DialogButton = ({ level = 1 }) => {
       >
         Confirm #{level}
       </Button>
+
       <br />
+
       <Button
         onClick={async () => {
           await alert('Alert please')
@@ -33,7 +35,9 @@ const DialogButton = ({ level = 1 }) => {
       >
         Alert #{level}
       </Button>
+
       <br />
+
       <Button
         onClick={async () => {
           const name = await prompt('What is your name?')
@@ -80,23 +84,31 @@ const DialogPage = () => {
     <Page>
       <DialogProvider portal={document.body}>
         <NextTitle>Dialog</NextTitle>
+
         <NextText color="Secondary">
           Show dynamic notifications and alerts to user, part of notifications
           system
         </NextText>
+
         <ShowcaseComponent background="transparent">
           <div style={{ maxWidth: '100%' }}>
             <Dialog>Only title</Dialog>
+
             <br />
+
             <Dialog title="Title">And description</Dialog>
+
             <br />
+
             <Dialog title="Title and buttons">
               <Dialog.Buttons>
                 <Dialog.Cancel />
                 <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
+
             <br />
+
             <Dialog title="Are you sure you want to permanently delete this content model?">
               <Dialog.Body>This action cannot be undone.</Dialog.Body>
               <Dialog.Buttons>
@@ -104,7 +116,9 @@ const DialogPage = () => {
                 <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
+
             <br />
+
             <Dialog title="Subscribe">
               <Dialog.Body>
                 To subscribe to this website, please enter your email address
@@ -116,7 +130,9 @@ const DialogPage = () => {
                 <Dialog.Confirm />
               </Dialog.Buttons>
             </Dialog>
+
             <br />
+
             <Dialog title="Only input">
               <Dialog.Body>
                 <Input />
@@ -128,6 +144,7 @@ const DialogPage = () => {
             </Dialog>
           </div>
         </ShowcaseComponent>
+
         <ShowcaseComponent background="transparent">
           <div>
             <DialogButton />
