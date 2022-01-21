@@ -51,7 +51,7 @@ export const InputWrapper = forwardRef<
   const hasLabelOrDescription = hasLabel || hasDescription
 
   return (
-    <Container {...remainingProps} ref={forwardRef}>
+    <Container ref={forwardRef} {...remainingProps}>
       <Conditional test={hasLabelOrDescription}>
         <TextContainer>
           <Text weight="semibold">{label}</Text>

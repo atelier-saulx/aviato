@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { noop } from '@aviato/utils'
+import { isText, noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { onChange } from '~/types/events'
@@ -199,21 +199,8 @@ export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
       [isChecked]
     )
 
-    const SwitchVariant =
-      text !== undefined ? (
-        <Group>
-          <StyledSwitch
-            type="checkbox"
-            size={size}
-            checked={isChecked}
-            onChange={handleChange}
-            disabled={isDisabled}
-            ref={forwardedRef}
-            {...remainingProps}
-          />
-          <Text onClick={handleChange}>{text}</Text>
-        </Group>
-      ) : (
+    const SwitchVariant = isText(text) ? (
+      <Group>
         <StyledSwitch
           type="checkbox"
           size={size}
@@ -223,7 +210,19 @@ export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
           ref={forwardedRef}
           {...remainingProps}
         />
-      )
+        <Text onClick={handleChange}>{text}</Text>
+      </Group>
+    ) : (
+      <StyledSwitch
+        type="checkbox"
+        size={size}
+        checked={isChecked}
+        onChange={handleChange}
+        disabled={isDisabled}
+        ref={forwardedRef}
+        {...remainingProps}
+      />
+    )
 
     return (
       <InputWrapper label={label} description={description} error={error}>

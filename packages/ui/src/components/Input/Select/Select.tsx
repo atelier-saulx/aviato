@@ -52,6 +52,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       disabled = false,
       limit = Infinity,
       filter = defaultFilter,
+      ...remainingProps
     } = properties
 
     const uuid = useUuid({ prefix: 'select' })
@@ -234,6 +235,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           onKeyDown={handleInputKeydown}
+          {...remainingProps}
         />
 
         <Dropdown

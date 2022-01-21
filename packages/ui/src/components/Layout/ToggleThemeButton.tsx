@@ -15,6 +15,8 @@ export const ToggleThemeButton = forwardRef<
   ElementRef<typeof StyledToggleThemeButton>,
   ToggleThemeButtonProps
 >((properties, forwardedRef) => {
+  const { ...remainingProps } = properties
+
   const hasLoaded = useHasLoaded()
   const { setTheme } = useTheme()
 
@@ -29,7 +31,7 @@ export const ToggleThemeButton = forwardRef<
   }
 
   return (
-    <StyledToggleThemeButton ref={forwardedRef} {...properties}>
+    <StyledToggleThemeButton ref={forwardedRef} {...remainingProps}>
       <Tooltip
         label={getColorMode() === 'light' ? 'Light mode' : 'Dark mode'}
         position="bottom"

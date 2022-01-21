@@ -63,6 +63,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
       copyLabel = 'Copy code',
       copiedLabel = 'Copied',
       children = '',
+      ...remainingProps
     } = properties
 
     const { theme } = useTheme()
@@ -70,7 +71,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
     const clipboard = useClipboard()
 
     return (
-      <StyledPrism ref={forwardedRef}>
+      <StyledPrism ref={forwardedRef} {...remainingProps}>
         <TooltipContainer>
           <Tooltip
             label={clipboard.copied ? copiedLabel : copyLabel}

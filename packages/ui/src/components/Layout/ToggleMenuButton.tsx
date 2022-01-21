@@ -20,6 +20,8 @@ export const ToggleMenuButton = forwardRef<
   ElementRef<typeof StyledToggleMenuButton>,
   ToggleMenuButtonProps
 >((properties, forwardedRef) => {
+  const { ...remainingProps } = properties
+
   const { isMenuOpen, setIsMenuOpen } = useMenuContext()
 
   const handleMenuButtonClick = useCallback(() => {
@@ -31,7 +33,7 @@ export const ToggleMenuButton = forwardRef<
     <StyledToggleMenuButton
       onClick={handleMenuButtonClick}
       ref={forwardedRef}
-      {...properties}
+      {...remainingProps}
     >
       <IconButton type="ghost" icon="IconAlignJustify" />
     </StyledToggleMenuButton>

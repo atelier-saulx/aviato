@@ -207,34 +207,32 @@ export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
       [isChecked]
     )
 
-    const CheckboxComponent: FunctionComponent = (properties) => {
-      return (
-        <CheckboxContainer>
-          <Column>
-            <Centered>
-              <StyledCheckbox
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleChange}
-                disabled={disabled}
-                size={size}
-                {...properties}
-              />
+    const CheckboxComponent: FunctionComponent = (properties) => (
+      <CheckboxContainer>
+        <Column>
+          <Centered>
+            <StyledCheckbox
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleChange}
+              disabled={disabled}
+              size={size}
+              {...properties}
+            />
 
-              <IconContainer size={size}>
-                <Conditional test={isChecked && !hasIndeterminateState}>
-                  <IconCheck />
-                </Conditional>
+            <IconContainer size={size}>
+              <Conditional test={isChecked && !hasIndeterminateState}>
+                <IconCheck />
+              </Conditional>
 
-                <Conditional test={isChecked && hasIndeterminateState}>
-                  <IconMinus />
-                </Conditional>
-              </IconContainer>
-            </Centered>
-          </Column>
-        </CheckboxContainer>
-      )
-    }
+              <Conditional test={isChecked && hasIndeterminateState}>
+                <IconMinus />
+              </Conditional>
+            </IconContainer>
+          </Centered>
+        </Column>
+      </CheckboxContainer>
+    )
 
     if (hasLabelOrDescription) {
       return (
