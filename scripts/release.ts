@@ -5,10 +5,10 @@ import yargs from "yargs/yargs";
 import githubRelease from "new-github-release-url";
 import { hideBin } from "yargs/helpers";
 import { execa } from "execa";
-import { publishAllPackages } from "./publish-packages";
-import { updateAllPackageVersions } from "./update-versions";
-import packageJson from "../package.json";
+import { publishAllPackagesInProject as publishAllPackagesInRepository } from "./publish-packages";
+import { updatePackageVersionsInProject as updatePackageVersionsInRepository } from "./update-versions";
 import { getIncrementedVersion } from "./get-version";
+import packageJson from "../package.json";
 
 const git = simpleGit();
 
@@ -23,8 +23,29 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     default: "latest",
     description: "Tag",
   })
+  .option("skip-build", {
+    type: "boolean",
+    default: false,
+    description: "Skip build step.",
+  })
+  .option("skip-version", {
+    type: "boolean",
+    default: false,
+    description: "Skip version increment step.",
+  })
+  .option("skip-publish", {
+    type: "boolean",
+    default: false,
+    description: "Skip publish step.",
+  })
+  .option("skip-commit", {
+    type: "boolean",
+    default: false,
+    description: "Skip commit step.",
+  })
   .example([
-    ["$0 minor", "Release minor update"],
+    ["$0 --skip-build", "Skip building packages."],
+    ["$0 minor", "Release minor update."],
     ["$0 --type minor", "Release minor update."],
     ["$0 --tag latest", "Release patch with latest tag."],
   ]);
@@ -32,52 +53,91 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
 (async () => {
   const status = await git.status();
 
-  // if (status.files.length !== 0) {
-  //   console.error("Working tree is not clean");
-  //   process.exit(1);
-  // }
-
-  const { type, tag } = argv;
-
-  console.info(`Releasing packages \n`);
-
-  try {
-    await execa("yarn", ["build"], { stdio: "inherit" });
-  } catch (error) {
-    console.error("Build failed - error: ", error);
+  if (status.files.length !== 0) {
+    console.error("Working tree is not clean");
     process.exit(1);
   }
+
+  const {
+    type,
+    tag,
+    skipBuild,
+    skipVersion: skipVersionIncrement,
+    skipPublish,
+    skipCommit,
+  } = argv;
 
   const releaseType = argv._[0] ?? type;
-  const incrementedVersion = getIncrementedVersion(packageJson.version, {
-    type: releaseType,
-  });
 
-  try {
-    await updateAllPackageVersions(incrementedVersion);
-  } catch (error) {
-    console.error("Build failed - error: ", error);
-    process.exit(1);
+  console.info(`\n  Releasing packages! \n`);
+
+  /**
+   * Build project to ensure latest changes are present
+   */
+  if (!skipBuild) {
+    try {
+      await execa("yarn", ["build"], { stdio: "inherit" });
+    } catch (error) {
+      console.error("Release failed, error: ", error);
+      process.exit(1);
+    }
   }
 
-  await publishAllPackages(tag, incrementedVersion);
+  let targetVersion = packageJson.version;
 
-  await git.add([
-    path.join(__dirname, "../packages"),
-    path.join(__dirname, "../apps"),
-    path.join(__dirname, "../package.json"),
-  ]);
+  /**
+   * Increment all packages in project
+   */
+  if (!skipVersionIncrement) {
+    targetVersion = getIncrementedVersion({
+      version: packageJson.version,
+      type: releaseType,
+    });
 
-  // await git.commit(`[release] Version: ${incrementedVersion}`);
+    try {
+      await updatePackageVersionsInRepository({
+        version: targetVersion,
+      });
+    } catch (error) {
+      console.error("Release failed, error: ", error);
+      process.exit(1);
+    }
+  }
 
+  /**
+   * Publish all public packages in repository
+   */
+  if (!skipPublish) {
+    await publishAllPackagesInRepository({
+      version: targetVersion,
+      tag,
+    });
+  }
+
+  /**
+   * Stage and commit + push target version
+   */
+  if (!skipCommit) {
+    await git.add([
+      path.join(__dirname, "../packages"),
+      path.join(__dirname, "../apps"),
+      path.join(__dirname, "../package.json"),
+    ]);
+
+    await git.commit(`[release] Version: ${targetVersion}`);
+  }
+
+  /**
+   * Open up a browser tab within github to publish new release
+   */
   open(
     githubRelease({
       user: "atelier-saulx",
       repo: "aviato-ui",
-      tag: incrementedVersion,
-      title: incrementedVersion,
+      tag: targetVersion,
+      title: targetVersion,
     })
   );
 
-  console.info(`\n  Released successfully! \n`);
+  console.info(`\n  Released version ${targetVersion} successfully! \n`);
 })();

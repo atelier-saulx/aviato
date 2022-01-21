@@ -9,42 +9,40 @@ async function writeVersionToPackageJson(filePath: string, version: string) {
   await fs.writeJSON(filePath, packageJson, { spaces: 2 });
 }
 
-export async function updateAllPackageVersions(version: string) {
-  /**
-   * Update package versions
-   */
-  const packages = path.join(__dirname, "../packages");
+async function writeVersionToModulesInFolder(
+  inputFolder: string,
+  version: string
+) {
+  const sourceFolder = path.join(__dirname, `../${inputFolder}`);
 
-  const packageFolders = (await fs.readdir(packages)).filter((folder) => {
-    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
+  const targetFolders = (await fs.readdir(sourceFolder)).filter((folder) => {
+    return fs.pathExistsSync(path.join(sourceFolder, folder, "/package.json"));
   });
 
   await Promise.all(
-    packageFolders.map((folder) =>
+    targetFolders.map((folder) =>
       writeVersionToPackageJson(
-        path.join(packages, folder, "/package.json"),
+        path.join(sourceFolder, folder, "/package.json"),
         version
       )
     )
   );
+}
+
+export async function updatePackageVersionsInProject({
+  version,
+}: {
+  version: string;
+}) {
+  /**
+   * Update package versions
+   */
+  await writeVersionToModulesInFolder("packages", version);
 
   /**
    * Update app versions
    */
-  const apps = path.join(__dirname, "../apps");
-
-  const appFolders = (await fs.readdir(apps)).filter((folder) => {
-    return fs.pathExistsSync(path.join(apps, folder, "/package.json"));
-  });
-
-  await Promise.all(
-    appFolders.map((folder) =>
-      writeVersionToPackageJson(
-        path.join(apps, folder, "/package.json"),
-        version
-      )
-    )
-  );
+  await writeVersionToModulesInFolder("apps", version);
 
   /**
    * Update root package version

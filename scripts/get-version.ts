@@ -1,19 +1,27 @@
 import chalk from "chalk";
 
-const VERSION_INCREMENT: string[] = ["patch", "minor", "major"];
+/**
+ * Bump / incrememt version with patch, minor or major.
+ *
+ * @param version - input version, in the format of `{major}.{minor}.{patch}`
+ * @param options - publish type - { major | minor | patch }
+ * @returns string
+ */
+export function getIncrementedVersion({
+  version,
+  type,
+}: {
+  version: string;
+  type: string;
+}): string {
+  const INCREMENT_TYPES: string[] = ["patch", "minor", "major"];
 
-export function getIncrementedVersion(
-  version: string,
-  options: { type: string }
-): string {
-  const { type } = options;
+  if (!INCREMENT_TYPES.includes(type)) {
+    const errorMessage = `Incorrect version type: ${chalk.red(
+      type
+    )}, it should be one of these values: ${INCREMENT_TYPES.join(", ")}`;
 
-  if (!VERSION_INCREMENT.includes(options.type)) {
-    console.error(
-      `Incorrect version type: ${chalk.red(
-        options.type
-      )}, it should be one of these values: ${VERSION_INCREMENT.join(", ")}`
-    );
+    console.error(errorMessage);
 
     process.exit(1);
   }
@@ -42,7 +50,7 @@ export function getIncrementedVersion(
   try {
     return updateVersion(version);
   } catch (error) {
-    console.error("Failed to parse core package.json");
+    console.error("Failed to update version");
     process.exit(1);
   }
 }

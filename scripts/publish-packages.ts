@@ -3,71 +3,9 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import { execa } from "execa";
 
-export async function publishAllPackages(
-  tag: string,
-  incrementedVersion: string
-) {
-  /**
-   * Publish all public packages
-   */
-  const packages = path.join(__dirname, "../packages");
-
-  const packageFolders = (await fs.readdir(packages)).filter((folder) => {
-    return fs.pathExistsSync(path.join(packages, folder, "/package.json"));
-  });
-
-  await Promise.all(
-    packageFolders.map(async (folder) => {
-      const packageJson = await fs.readJSON(
-        path.join(packages, folder, "/package.json")
-      );
-
-      if (packageJson.private) {
-        return console.log(
-          `- Private package ${chalk.cyan(packageJson.name)} was skipped`
-        );
-      }
-
-      await publishPackage({
-        path: path.join(packages, folder),
-        name: packageJson.name,
-        version: incrementedVersion,
-        tag,
-      });
-    })
-  );
-
-  /**
-   * Publish all public apps
-   */
-  const apps = path.join(__dirname, "../apps");
-
-  const appFolders = (await fs.readdir(apps)).filter((folder) => {
-    return fs.pathExistsSync(path.join(apps, folder, "/package.json"));
-  });
-
-  await Promise.all(
-    appFolders.map(async (folder) => {
-      const packageJson = await fs.readJSON(
-        path.join(apps, folder, "/package.json")
-      );
-
-      if (packageJson.private) {
-        return console.log(
-          `- Private package ${chalk.cyan(packageJson.name)} was skipped`
-        );
-      }
-
-      await publishPackage({
-        path: path.join(apps, folder),
-        name: packageJson.name,
-        version: incrementedVersion,
-        tag,
-      });
-    })
-  );
-}
-
+/**
+ * Publish target package
+ */
 export async function publishPackage({
   path,
   name,
@@ -80,6 +18,23 @@ export async function publishPackage({
   tag: string;
 }) {
   try {
+    // Print current registry config for good measure
+    await execa("npm", ["config", "get", "registry"], {
+      stdio: "inherit",
+      cwd: path,
+    });
+
+    // Make sure we publish to the NPM registry
+    await execa(
+      "npm",
+      ["config", "set", "registry", "https://registry.npmjs.org/"],
+      {
+        stdio: "inherit",
+        cwd: path,
+      }
+    );
+
+    // Publish target package to NPM registry
     await execa("npm", ["publish", path, "--access", "public", "--tag", tag], {
       stdio: "inherit",
       cwd: path,
@@ -91,4 +46,73 @@ export async function publishPackage({
     process.stdout.write(chalk.red`${error.message}\n`);
     process.exit(1);
   }
+}
+
+/**
+ * Publish all packages within target folder
+ */
+async function publishPackagesInFolder({
+  inputFolder,
+  version,
+  tag,
+}: {
+  inputFolder: string;
+  version: string;
+  tag: string;
+}) {
+  const sourceFolder = path.join(__dirname, `../${inputFolder}`);
+
+  const targetFolders = (await fs.readdir(sourceFolder)).filter((folder) => {
+    return fs.pathExistsSync(path.join(sourceFolder, folder, "/package.json"));
+  });
+
+  await Promise.all(
+    targetFolders.map(async (folder) => {
+      const packageJson = await fs.readJSON(
+        path.join(sourceFolder, folder, "/package.json")
+      );
+
+      if (packageJson.private) {
+        return console.log(
+          `- Private package ${chalk.cyan(packageJson.name)} was skipped`
+        );
+      }
+
+      await publishPackage({
+        path: path.join(sourceFolder, folder),
+        name: packageJson.name,
+        version,
+        tag,
+      });
+    })
+  );
+}
+
+/**
+ * Publish all packages in the project
+ */
+export async function publishAllPackagesInProject({
+  version,
+  tag,
+}: {
+  version: string;
+  tag: string;
+}) {
+  /**
+   * Publish all public packages
+   */
+  await publishPackagesInFolder({
+    inputFolder: "packages",
+    version,
+    tag,
+  });
+
+  /**
+   * Publish all public apps
+   */
+  await publishPackagesInFolder({
+    inputFolder: "apps",
+    version,
+    tag,
+  });
 }
