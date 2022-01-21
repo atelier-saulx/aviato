@@ -1,8 +1,7 @@
 import React, { forwardRef, ElementRef } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { ComponentProps } from '@stitches/react'
-import { useUuid } from '@aviato/hooks'
 
+import { useUuid } from '~/hooks'
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'
@@ -24,12 +23,9 @@ export interface TextFieldProps extends BaseInputProps {
   invalid?: boolean
 }
 
-type StitchedProps = ComponentProps<typeof StyledInput>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & TextFieldProps
-
 export const TextField = forwardRef<
   ElementRef<typeof StyledInput>,
-  ForwardProps
+  TextFieldProps
 >((properties, forwardedRef) => {
   const {
     autosize = true,

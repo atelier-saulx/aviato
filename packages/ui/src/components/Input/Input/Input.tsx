@@ -1,6 +1,5 @@
 import React, { ElementRef, forwardRef } from 'react'
-import { useUuid } from '@aviato/hooks'
-import { ComponentProps } from '@stitches/react'
+import { useUuid } from '~/hooks'
 
 import { BaseInput, BaseInputProps, StyledInput } from './BaseInput'
 import { InputWrapper } from '../InputWrapper'
@@ -12,10 +11,7 @@ export interface InputProps extends BaseInputProps {
   invalid?: boolean
 }
 
-type StitchedProps = ComponentProps<typeof StyledInput>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & InputProps
-
-export const Input = forwardRef<ElementRef<typeof StyledInput>, ForwardProps>(
+export const Input = forwardRef<ElementRef<typeof StyledInput>, InputProps>(
   (properties, forwardedRef) => {
     const { label, description, error, invalid, ...remainingProps } = properties
 

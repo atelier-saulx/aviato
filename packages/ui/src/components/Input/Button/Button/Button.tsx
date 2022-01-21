@@ -3,16 +3,15 @@ import React, {
   ReactNode,
   ElementRef,
   MouseEventHandler,
-  useCallback,
 } from 'react'
-import { noop } from '@aviato/utils'
 import { ComponentProps } from '@stitches/react'
+import { isText } from '@aviato/utils'
 
 import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 
-const primaryButtonCSS: StitchedCSS = {
+const PrimaryButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$PrimaryMainContrast',
     background: '$PrimaryMain',
@@ -70,7 +69,7 @@ const primaryButtonCSS: StitchedCSS = {
   },
 }
 
-const ghostButtonCSS: StitchedCSS = {
+const GhostButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$ActionMainContrast',
     background: '$ActionMain',
@@ -126,7 +125,7 @@ const ghostButtonCSS: StitchedCSS = {
   },
 }
 
-const errorButtonCSS: StitchedCSS = {
+const ErrorButtonCSS: StitchedCSS = {
   '&.isFilled': {
     color: '$ErrorMainContrast',
     background: '$ErrorMain',
@@ -184,7 +183,7 @@ const errorButtonCSS: StitchedCSS = {
   },
 }
 
-const IconWrapper = styled('span', {
+const IconContainer = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
   flexShrink: 0,
@@ -214,9 +213,9 @@ export const StyledButton = styled('button', {
 
   variants: {
     type: {
-      primary: primaryButtonCSS,
-      ghost: ghostButtonCSS,
-      error: errorButtonCSS,
+      primary: PrimaryButtonCSS,
+      ghost: GhostButtonCSS,
+      error: ErrorButtonCSS,
     },
   },
 })
@@ -240,20 +239,11 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       type = 'primary',
       variant = 'filled',
       disabled = false,
-      onClick = noop,
       leftIcon = null,
       rightIcon = null,
       children,
       ...remainingProps
     } = properties
-
-    const handleClick = useCallback(() => {
-      if (disabled) {
-        return noop()
-      }
-
-      onClick()
-    }, [disabled])
 
     const isFilled = variant === 'filled'
     const isOutlined = variant === 'outlined'
@@ -265,25 +255,30 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       isTransparent,
     })
 
+    const ChildVariant = isText(children) ? (
+      <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+        {children}
+      </Text>
+    ) : (
+      children
+    )
+
     return (
       <StyledButton
         type={type}
-        onClick={handleClick}
         disabled={disabled}
         className={classes}
         ref={forwardedRef}
         {...remainingProps}
       >
         <Conditional test={leftIcon}>
-          <IconWrapper type="start">{leftIcon}</IconWrapper>
+          <IconContainer type="start">{leftIcon}</IconContainer>
         </Conditional>
 
-        <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
-          {children}
-        </Text>
+        {ChildVariant}
 
         <Conditional test={rightIcon}>
-          <IconWrapper type="end">{rightIcon}</IconWrapper>
+          <IconContainer type="end">{rightIcon}</IconContainer>
         </Conditional>
       </StyledButton>
     )

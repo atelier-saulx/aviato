@@ -1,4 +1,5 @@
 import { Column, Row, Slider, Page, styled } from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const SmallSpacer = styled('div', {
@@ -159,7 +160,23 @@ const SliderPage = () => {
         Sliders allow users to make selections from a range of values.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Slider
+  defaultValue={0 | 50}
+  step={1 | 25}
+  label={(value) => \`\${value} °C\`}
+  marks={[
+    { value: 0, label: 'xs' },
+    { value: 25, label: 'sm' },
+    { value: 50, label: 'md' },
+    { value: 75, label: 'lg' },
+    { value: 100, label: 'xl' },
+  ]}
+/>
+      `}
+      >
         <ShowSlider />
       </ShowcaseComponent>
     </Page>

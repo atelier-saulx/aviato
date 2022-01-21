@@ -27,7 +27,7 @@ const StyledApplicationRoot = styled('div', {
   overflowY: 'hidden',
 })
 
-const PageWrapper = styled('div', {
+const PageContainer = styled('div', {
   position: 'relative',
   width: '100%',
   height: '100%',
@@ -45,7 +45,7 @@ const PageWrapper = styled('div', {
   },
 })
 
-const NavigationWrapper = styled('div', {
+const NavigationContainer = styled('div', {
   variants: {
     isOpen: {
       true: {
@@ -92,11 +92,11 @@ export const ApplicationRoot = forwardRef<
             </Group>
           </Header>
 
-          <NavigationWrapper isOpen={isMenuOpen}>
+          <NavigationContainer isOpen={isMenuOpen}>
             {NavigationComponent}
-          </NavigationWrapper>
+          </NavigationContainer>
 
-          <PageWrapper sideMenu={hasSideMenu}>{children}</PageWrapper>
+          <PageContainer sideMenu={hasSideMenu}>{children}</PageContainer>
         </StyledApplicationRoot>
       </MenuStateContext.Provider>
     </ThemeProvider>

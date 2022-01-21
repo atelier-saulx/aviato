@@ -18,8 +18,8 @@ const RadioGroupPage = () => {
         <Column>
           <Row>
             <RadioGroup
-              label="Select your favorite developer"
-              description="This is not anonymous, of course"
+              label="Uncontrolled example"
+              description="Select anything"
               onChange={(value, payload) => {
                 log.global.debug('RadioGroup change: ', { value, payload })
               }}
@@ -36,8 +36,8 @@ const RadioGroupPage = () => {
           <Row>
             <RadioGroup
               label="Controlled example"
-              description="Do not select Thing 1"
-              error={value === 'Thing 1' ? 'Elderberries!' : null}
+              description="Select Thing 1 to see an error"
+              error={value === 'Thing 1' ? 'Error!' : null}
               value={value}
               onChange={(value) => setValue(value)}
             >
@@ -78,7 +78,23 @@ const RadioGroupPage = () => {
         options.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<RadioGroup
+  label="Controlled example"
+  description="Select Thing 1 to see an error"
+  error={value === 'Thing 1' ? 'Error!' : null}
+  value={value}
+  onChange={(value) => setValue(value)}
+>
+  <Radio value="Thing 1">Thing 1</Radio>
+  <Radio value="Thing 2">Thing 2</Radio>
+  <Radio value="Thing 3">Thing 3</Radio>
+  <Radio value="Thing 4">Thing 4</Radio>
+</RadioGroup>
+        `}
+      >
         <ShowRadiogroup />
       </ShowcaseComponent>
     </Page>

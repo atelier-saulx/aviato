@@ -1,8 +1,8 @@
 import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { useUuid } from '@aviato/hooks'
 import { noop } from '@aviato/utils'
 
+import { useUuid } from '~/hooks'
 import { styled } from '~/theme'
 import { Text } from '~/components/Text'
 

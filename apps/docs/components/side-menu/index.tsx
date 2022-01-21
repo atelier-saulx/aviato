@@ -11,10 +11,6 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/button',
   },
   {
-    title: 'Icon Button',
-    route: '/components/icon-button',
-  },
-  {
     title: 'Checkbox',
     route: '/components/checkbox',
   },
@@ -39,6 +35,14 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/text-field',
   },
   {
+    title: 'Select',
+    route: '/components/select',
+  },
+  {
+    title: 'Context Menu',
+    route: '/components/context-menu',
+  },
+  {
     title: 'Icons',
     route: '/components/icons',
   },
@@ -57,6 +61,10 @@ const componentsSubMenu: MenuDataItems[] = [
   {
     title: 'Dialog',
     route: '/components/dialog',
+  },
+  {
+    title: 'Toggle Group',
+    route: '/components/toggle-group',
   },
 ]
 
@@ -78,13 +86,6 @@ if (featureFlags.isEnabled('DemoFlag')) {
   componentsSubMenu.push({
     title: 'Demo Page',
     route: '/components/demo-page',
-  })
-}
-
-if (featureFlags.isEnabled('Select')) {
-  componentsSubMenu.push({
-    title: 'Select',
-    route: '/components/select',
   })
 }
 

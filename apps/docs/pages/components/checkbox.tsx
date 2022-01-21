@@ -1,5 +1,6 @@
 import { styled, Page, Checkbox, Text, Column, Row } from '@aviato/ui'
 import { log } from '@aviato/utils'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BigSpacer = styled('div', {
@@ -88,7 +89,17 @@ const CheckboxPage = () => {
         checked.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Checkbox
+  label="Accept terms and conditions"
+  onChange={(value, payload) => {
+    console.log('Checkbox change: ', { value, payload })
+  }}
+/>
+        `}
+      >
         <ShowCheckboxes />
       </ShowcaseComponent>
     </Page>

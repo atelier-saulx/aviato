@@ -1,18 +1,26 @@
-import { Page, styled, icons, Tooltip } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+import {
+  Page,
+  styled,
+  icons,
+  Column,
+  Row,
+  Tooltip,
+  useHasLoaded,
+} from '@aviato/ui'
+import { chunk } from '@aviato/utils'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const GridItem = styled('div', {
-  padding: 10,
-})
-
-const Grid = styled('div', {
-  margin: -10,
-  display: 'flex',
-  flexWrap: 'wrap',
+  padding: 20,
+  minWidth: 20,
+  minHeight: 20,
 })
 
 const IconsPage = () => {
+  const iconArray = Object.keys(icons)
+  const iconGroups = chunk(iconArray, 6)
+
   const hasLoaded = useHasLoaded()
   if (!hasLoaded) {
     return null
@@ -27,18 +35,34 @@ const IconsPage = () => {
       </NextText>
 
       <ShowcaseComponent background="transparent">
-        <Grid>
-          {Object.keys(icons).map((name) => {
-            const Icon = icons[name]
+        <Column
+          css={{
+            flexWrap: 'wrap',
+          }}
+        >
+          {iconGroups.map((iconGroup, groupIndex) => {
             return (
-              <Tooltip key={name} content={name}>
-                <GridItem>
-                  <Icon />
-                </GridItem>
-              </Tooltip>
+              <Row
+                key={groupIndex}
+                css={{
+                  flexWrap: 'wrap',
+                }}
+              >
+                {iconGroup.map((key, index) => {
+                  const Icon = icons[key]
+
+                  return (
+                    <GridItem key={`GridItem-${index}`}>
+                      <Tooltip label={key}>
+                        <Icon />
+                      </Tooltip>
+                    </GridItem>
+                  )
+                })}
+              </Row>
             )
           })}
-        </Grid>
+        </Column>
       </ShowcaseComponent>
     </Page>
   )

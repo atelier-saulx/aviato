@@ -10,13 +10,7 @@ import { LocalStorage } from '@aviato/utils'
 
 import { themes } from './theme'
 import { THEME_STORAGE_KEY } from './provider'
-
-type ColorMode = 'light' | 'dark'
-
-export type ThemeProps = {
-  theme: ColorMode
-  setTheme: (newValue: ColorMode) => void
-}
+import { ColorMode, ThemeProps } from './types'
 
 export const ThemeContext = createContext<ThemeProps>({
   theme: 'light',

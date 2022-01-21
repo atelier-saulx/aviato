@@ -14,8 +14,6 @@ const createdConfig = createStitches({
   },
 })
 
-export type StitchedCSS = Stitches.CSS<typeof config>
-
 export const {
   config,
   createTheme,
@@ -24,9 +22,21 @@ export const {
   globalCss,
   styled,
   theme,
+  reset,
 } = createdConfig
 
-export { classNames } from './utils'
+/**
+ * SSR: Get the CSS and reset the internal css representation.
+ *
+ * Note:
+ * This is very *IMPORTANT* to do as the server might handle multiple requests
+ * and we don't want to have the css accumulated from previous requests.
+ */
+export const getCssAndReset = () => {
+  const css = getCssText()
+  reset()
+  return css
+}
 
 export const darkTheme = createTheme(DarkTheme)
 
@@ -34,6 +44,8 @@ export const themes = {
   light: 'light',
   dark: darkTheme.className,
 }
+
+export type StitchedCSS = Stitches.CSS<typeof config>
 
 export const getColorMode: () => 'light' | 'dark' = () => {
   if (isBrowser) {
@@ -43,3 +55,6 @@ export const getColorMode: () => 'light' | 'dark' = () => {
 
   return 'light'
 }
+
+export { classNames } from './utils'
+export { getZIndex } from './zIndex'

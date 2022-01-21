@@ -7,9 +7,9 @@ import {
   styled,
   getRandomIcon,
   InputVariant,
+  useHasLoaded,
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
-import { useHasLoaded } from '@aviato/hooks'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { capitalize } from '../../utils'

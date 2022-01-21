@@ -1,15 +1,17 @@
 import React, { forwardRef, ElementRef, ReactChildren, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { IconCloseCircle } from '~/icons'
+import { IconCloseCircle, IconClose } from '~/components/Icons'
 import { StitchedCSS, styled } from '~/theme'
 import { Conditional, Text } from '~/components'
 
 const Container = styled('div', {
+  position: 'relative',
   backgroundColor: '$ErrorLight',
   borderRadius: 4,
   display: 'flex',
   padding: '0 16px',
+  paddingRight: '90px',
   width: '100%',
 })
 
@@ -19,23 +21,36 @@ const IconColumn = styled('div', {
   paddingRight: 12,
 })
 
+const TitleCSS: StitchedCSS = {
+  paddingBottom: 4,
+}
+
 const TextColumn = styled('div', {
   paddingTop: 12,
   paddingBottom: 16,
 })
 
-const Title = styled(Text, {
-  paddingBottom: 4,
+const IconContainer = styled('div', {
+  color: '$ErrorMain',
 })
 
-const DefaultIcon = styled(IconCloseCircle, {
-  color: '$ErrorMain',
+const CloseIconContainer = styled('div', {
+  cursor: 'pointer',
+  color: '$TextPrimary',
+})
+
+const CloseIconColumn = styled('div', {
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  padding: 16,
 })
 
 export interface AlertProps extends ComponentProps<typeof Container> {
   title?: string
-  icon?: ReactNode
   css?: StitchedCSS
+  icon?: ReactNode
+  closeIcon?: ReactNode
   children?: ReactChildren | string
 }
 
@@ -44,20 +59,29 @@ export const Alert = forwardRef<ElementRef<typeof Container>, AlertProps>(
     const {
       children,
       title = 'Error',
-      icon = <DefaultIcon />,
+      icon = <IconCloseCircle />,
+      closeIcon: rightIcon = <IconClose />,
       ...remainingProps
     } = properties
 
     return (
       <Container ref={forwardedRef} {...remainingProps}>
-        <Conditional test={icon}>
-          <IconColumn>{icon}</IconColumn>
-        </Conditional>
+        <IconColumn>
+          <IconContainer>{icon}</IconContainer>
+        </IconColumn>
 
         <TextColumn>
-          <Title weight="semibold">{title}</Title>
+          <Text weight="semibold" css={TitleCSS}>
+            {title}
+          </Text>
           <Text>{children}</Text>
         </TextColumn>
+
+        <Conditional test={rightIcon}>
+          <CloseIconColumn>
+            <CloseIconContainer>{rightIcon}</CloseIconContainer>
+          </CloseIconColumn>
+        </Conditional>
       </Container>
     )
   }

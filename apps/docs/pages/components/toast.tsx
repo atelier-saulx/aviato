@@ -5,21 +5,21 @@ import {
   Toast,
   Button,
   IconClose,
+  useHasLoaded,
 } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const Notification = ({ children }) => {
   const toast = useToast()
+
   return (
     <div
       style={{
         cursor: 'pointer',
         marginBottom: 16,
       }}
-      onClick={() => {
-        toast(children)
-      }}
+      onClick={() => toast.add(children)}
     >
       {children}
     </div>
@@ -28,16 +28,14 @@ const Notification = ({ children }) => {
 
 const CloseAllButton = () => {
   const toast = useToast()
-  const amount = toast.useAmount()
+  const amount = toast.getAmount()
 
   return (
     <>
       <Button
         disabled={!amount}
         leftIcon={<IconClose />}
-        onClick={() => {
-          toast.close()
-        }}
+        onClick={() => toast.close()}
       >
         Close All Toasts ({amount})
       </Button>
@@ -47,7 +45,6 @@ const CloseAllButton = () => {
 
 const ToastPage = () => {
   const hasLoaded = useHasLoaded()
-
   if (!hasLoaded) {
     return null
   }
@@ -56,9 +53,11 @@ const ToastPage = () => {
     <Toast key={0} type="success" title="Account created.">
       We’ve created your account for you.
     </Toast>,
+
     <Toast key={1} type="error" title="Oops!">
       Something went wrong.
     </Toast>,
+
     <Toast key={2} title="Lil' Message?">
       Just something to think about.
     </Toast>,

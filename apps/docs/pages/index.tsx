@@ -3,7 +3,7 @@ import { styled, Page } from '@aviato/ui'
 
 import { NextTitle, NextText } from '../components'
 
-const Wrapper = styled('div', {
+const Container = styled('div', {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
 
       <BigSpacer />
 
-      <Wrapper>
+      <Container>
         <Row>
           <NextText weight="bold" size="large">
             Features
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         <Line>🛡 - Written in TypeScript with predictable static types.</Line>
         <Line>🎨 - Powerful theme customization.</Line>
         <Line>🪝 - Contains a comprehensive collection of basic Hooks.</Line>
-      </Wrapper>
+      </Container>
     </Page>
   )
 }

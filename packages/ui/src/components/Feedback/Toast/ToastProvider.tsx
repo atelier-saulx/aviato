@@ -1,7 +1,13 @@
-import React, { useState, useEffect, useRef, ReactNode } from 'react'
-import { ToastContext } from './ToastContext'
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  ReactNode,
+} from 'react'
+import { ToastContext, ToastContextType } from './ToastContext'
 
-const ToastWrapper = ({ id, children, onClick = null, toast }) => {
+const ToastContainer = ({ id, children, onClick = null, toast }) => {
   const [fade, setFade] = useState(0)
   const close = () => toast.close(id)
 
@@ -9,7 +15,9 @@ const ToastWrapper = ({ id, children, onClick = null, toast }) => {
     const fadeout = () => {
       setFade(300)
     }
+
     const timer = setTimeout(fadeout, 5e3)
+
     return () => clearTimeout(timer)
   }, [])
 
@@ -52,31 +60,37 @@ export const ToastProvider = ({
   const positionRef = useRef<typeof position>()
   const positionStyleRef = useRef<PositionStyleProps>()
   const toastsRef = useRef<Toast[]>()
-  const toastRef = useRef<Function & { close: Function }>()
 
+  const toastRef = useRef<ToastContextType>()
   if (!toastRef.current) {
-    let cnt = 0
+    let count = 0
+
     const listeners = new Set([setLength])
+
     const update = (length) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const toast = (children) => {
-      const id = cnt++
+    const toast = () => {}
+
+    toast.add = (child) => {
+      const id = count++
+
       update(
         toastsRef.current.unshift({
           id,
           children: (
-            <ToastWrapper id={id} toast={toast}>
-              {children}
-            </ToastWrapper>
+            <ToastContainer id={id} toast={toast}>
+              {child}
+            </ToastContainer>
           ),
         })
       )
+
       return id
     }
 
-    toast.close = (id) => {
+    toast.close = (id?: number) => {
       if (typeof id === 'number') {
         const index = toastsRef.current.findIndex(
           ({ id: toastId }) => toastId === id
@@ -91,7 +105,7 @@ export const ToastProvider = ({
       }
     }
 
-    toast.useAmount = () => {
+    toast.getAmount = () => {
       const [state, setState] = useState(length)
 
       useEffect(() => {
@@ -157,4 +171,21 @@ export const ToastProvider = ({
       {toasts}
     </ToastContext.Provider>
   )
+}
+
+export const useToast: () => ToastContextType = () => {
+  const toast = useContext<ToastContextType>(ToastContext)
+  if (toast) {
+    return toast
+  }
+
+  const noContext = () => {
+    console.warn('No ToastContext found')
+  }
+
+  noContext.add = noContext as ToastContextType['add']
+  noContext.close = noContext as ToastContextType['close']
+  noContext.getAmount = noContext as any
+
+  return noContext
 }
