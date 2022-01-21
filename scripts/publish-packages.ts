@@ -91,7 +91,7 @@ async function publishPackagesInFolder({
 /**
  * Publish all packages in the project
  */
-export async function publishAllPackagesInProject({
+export async function publishAllPackagesInRepository({
   version,
   tag,
 }: {

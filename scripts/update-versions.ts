@@ -1,7 +1,13 @@
 import path from "path";
 import fs from "fs-extra";
 
-async function writeVersionToPackageJson(filePath: string, version: string) {
+async function writeVersionToPackageJson({
+  filePath,
+  version,
+}: {
+  filePath: string;
+  version: string;
+}) {
   const packageJson = await fs.readJSON(filePath);
 
   packageJson.version = version;
@@ -21,15 +27,15 @@ async function writeVersionToModulesInFolder(
 
   await Promise.all(
     targetFolders.map((folder) =>
-      writeVersionToPackageJson(
-        path.join(sourceFolder, folder, "/package.json"),
-        version
-      )
+      writeVersionToPackageJson({
+        filePath: path.join(sourceFolder, folder, "/package.json"),
+        version,
+      })
     )
   );
 }
 
-export async function updatePackageVersionsInProject({
+export async function updatePackageVersionsInRepository({
   version,
 }: {
   version: string;
@@ -47,8 +53,8 @@ export async function updatePackageVersionsInProject({
   /**
    * Update root package version
    */
-  await writeVersionToPackageJson(
-    path.join(__dirname, "../package.json"),
-    version
-  );
+  await writeVersionToPackageJson({
+    filePath: path.join(__dirname, "../package.json"),
+    version,
+  });
 }

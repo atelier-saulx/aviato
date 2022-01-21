@@ -5,8 +5,8 @@ import yargs from "yargs/yargs";
 import githubRelease from "new-github-release-url";
 import { hideBin } from "yargs/helpers";
 import { execa } from "execa";
-import { publishAllPackagesInProject as publishAllPackagesInRepository } from "./publish-packages";
-import { updatePackageVersionsInProject as updatePackageVersionsInRepository } from "./update-versions";
+import { publishAllPackagesInRepository } from "./publish-packages";
+import { updatePackageVersionsInRepository } from "./update-versions";
 import { getIncrementedVersion } from "./get-version";
 import packageJson from "../package.json";
 
