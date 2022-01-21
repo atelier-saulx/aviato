@@ -43,7 +43,7 @@ const CloseAllButton = () => {
   )
 }
 
-const IconsPage = () => {
+const ToastPage = () => {
   const hasLoaded = useHasLoaded()
   if (!hasLoaded) {
     return null
@@ -85,4 +85,4 @@ const IconsPage = () => {
   )
 }
 
-export default IconsPage
+export default ToastPage

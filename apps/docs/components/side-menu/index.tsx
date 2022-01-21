@@ -39,6 +39,10 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/select',
   },
   {
+    title: 'Context Menu',
+    route: '/components/context-menu',
+  },
+  {
     title: 'Icons',
     route: '/components/icons',
   },
@@ -53,6 +57,10 @@ const componentsSubMenu: MenuDataItems[] = [
   {
     title: 'Toast',
     route: '/components/toast',
+  },
+  {
+    title: 'Toggle Group',
+    route: '/components/toggle-group',
   },
 ]
 
@@ -74,13 +82,6 @@ if (featureFlags.isEnabled('DemoFlag')) {
   componentsSubMenu.push({
     title: 'Demo Page',
     route: '/components/demo-page',
-  })
-}
-
-if (featureFlags.isEnabled('ContextMenu')) {
-  componentsSubMenu.push({
-    title: 'Context Menu',
-    route: '/components/context-menu',
   })
 }
 
