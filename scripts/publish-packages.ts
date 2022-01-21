@@ -41,9 +41,9 @@ export async function publishPackage({
     });
 
     console.log(`- Package ${chalk.cyan(name)} was published`);
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Failed to publish package ${chalk.red(name)}`);
-    process.stdout.write(chalk.red`${error.message}\n`);
+    console.error(chalk.red`${error?.message}\n`);
     process.exit(1);
   }
 }

@@ -7,12 +7,17 @@
     "target": "es2020",
     "module": "ESNext",
     "moduleResolution": "node",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "outDir": "dist",
     "baseUrl": ".",
     "rootDir": "./src",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "src/*"
+      ]
     }
   },
   "include": [

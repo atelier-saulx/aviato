@@ -8,6 +8,8 @@ import { execa } from "execa";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
 import { getIncrementedVersion } from "./get-version";
+
+// @ts-ignore
 import packageJson from "../package.json";
 
 const git = simpleGit();
