@@ -38,7 +38,6 @@ const ButtonPage = () => {
 
   const ShowButtons = ({ type }: { type: ButtonType }) => {
     const uppercasedType = capitalize(type)
-
     const [isDisabled, setIsDisabled] = useState(false)
 
     const Icon = useMemo(() => {

@@ -59,6 +59,10 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/toast',
   },
   {
+    title: 'Dialog',
+    route: '/components/dialog',
+  },
+  {
     title: 'Toggle Group',
     route: '/components/toggle-group',
   },

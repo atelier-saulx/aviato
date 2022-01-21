@@ -2,6 +2,7 @@ export const BaseTextStyles = {
   display: 'block',
   fontVariantNumeric: 'tabular-nums',
   margin: 0,
+  letterSpacing: '-0.015em',
 }
 
 export const BaseFontWeight = {

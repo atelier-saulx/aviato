@@ -1,19 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-  useRef,
-  ReactNode,
-} from 'react'
+import React, { useState, useEffect, useRef, ReactNode } from 'react'
 
-interface ToastContextType {
-  add: (toast: ReactNode) => void
-  close: (id?: number) => void
-  getAmount: () => number
-}
-
-const ToastContext = createContext<ToastContextType>(undefined)
+import { ToastContext, ToastContextType } from './ToastContext'
 
 const ToastContainer = ({ id, children, onClick = null, toast }) => {
   const [fade, setFade] = useState(0)
@@ -23,7 +10,9 @@ const ToastContainer = ({ id, children, onClick = null, toast }) => {
     const fadeout = () => {
       setFade(300)
     }
+
     const timer = setTimeout(fadeout, 5e3)
+
     return () => clearTimeout(timer)
   }, [])
 
@@ -177,21 +166,4 @@ export const ToastProvider = ({
       {toasts}
     </ToastContext.Provider>
   )
-}
-
-export const useToast: () => ToastContextType = () => {
-  const toast = useContext<ToastContextType>(ToastContext)
-  if (toast) {
-    return toast
-  }
-
-  const noContext = () => {
-    console.warn('No ToastContext found')
-  }
-
-  noContext.add = noContext as ToastContextType['add']
-  noContext.close = noContext as ToastContextType['close']
-  noContext.getAmount = noContext as any
-
-  return noContext
 }

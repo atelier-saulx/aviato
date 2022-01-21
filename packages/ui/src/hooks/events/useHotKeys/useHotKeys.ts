@@ -3,7 +3,7 @@ import { getHotkeyMatcher, getHotkeyHandler } from './parseHotKey'
 
 export { getHotkeyHandler }
 
-type HotkeyItem = [string, (event: KeyboardEvent) => void]
+export type HotkeyItem = [string, (event: KeyboardEvent) => void]
 
 export function useHotkeys(hotkeys: HotkeyItem[]) {
   useEffect(() => {

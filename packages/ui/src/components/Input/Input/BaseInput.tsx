@@ -227,6 +227,7 @@ export interface BaseInputProps extends StitchedProps {
   maxRows?: number
   minRows?: number
   onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
 }
 
 export const BaseInput = forwardRef<
