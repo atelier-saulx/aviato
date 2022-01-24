@@ -16,38 +16,6 @@ const StyledAvatar = styled('div', {
     size: {
       extrasmall: {
         minWidth: '24px',
-        height: '24px',
-        borderRadius: '24px',
-      },
-      small: {
-        minWidth: '28px',
-        height: '28px',
-        borderRadius: '28px',
-      },
-      medium: {
-        minWidth: '32px',
-        height: '32px',
-        borderRadius: '32px',
-      },
-      large: {
-        minWidth: '36px',
-        height: '36px',
-        borderRadius: '36px',
-      },
-      extralarge: {
-        minWidth: '40px',
-        height: '40px',
-        borderRadius: '40px',
-      },
-    },
-  },
-})
-
-const Image = styled('img', {
-  variants: {
-    size: {
-      extrasmall: {
-        minWidth: '24px',
         maxWidth: '24px',
         height: '24px',
         borderRadius: '24px',
@@ -77,12 +45,6 @@ const Image = styled('img', {
         borderRadius: '40px',
       },
     },
-
-    hasError: {
-      true: {
-        visibility: 'hidden',
-      },
-    },
   },
 })
 
@@ -108,7 +70,7 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   return (
     <StyledAvatar size={size} {...remainingProps}>
       <Conditional test={imagesPreloaded}>
-        <Image src={src} alt={alt} size={size} />
+        <img src={src} alt={alt} />
       </Conditional>
 
       <Conditional test={!imagesPreloaded}>
