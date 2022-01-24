@@ -7,12 +7,13 @@ import React, {
 } from 'react'
 
 import { IconChevronDown } from '~/components/Icons/components'
+import { Conditional } from '~/components'
 import { styled } from '~/theme'
 import { Text } from '../../Text'
 
 const AccordionContext = createContext(undefined)
 
-const initalState = new Set()
+const initialState = new Set()
 
 const multiple = (selected, index) => {
   selected = new Set(selected)
@@ -92,7 +93,7 @@ const Body = styled(Text, {
 export const Accordion = ({ children, type = 'multiple' }) => {
   const [selected, toggle] = useReducer(
     type === 'single' ? single : multiple,
-    initalState
+    initialState
   )
 
   return (
@@ -105,7 +106,7 @@ export const Accordion = ({ children, type = 'multiple' }) => {
         }}
       >
         {children.map((child, index) =>
-          cloneElement(child, { key: index, index })
+          cloneElement(child, { key: `Accordion-${index}`, index })
         )}
       </AccordionContext.Provider>
     </Container>
@@ -135,7 +136,9 @@ Accordion.Item = ({ title, children, index = 0, active = false }) => {
         <Text weight="medium">{title}</Text>
       </ItemHeader>
 
-      {isActive ? <Body>{children}</Body> : null}
+      <Conditional test={isActive}>
+        <Body>{children}</Body>
+      </Conditional>
     </ItemContainer>
   )
 }
