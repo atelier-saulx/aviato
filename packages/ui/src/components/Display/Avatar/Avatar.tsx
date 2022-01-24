@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 
 import { styled } from '~/theme'
 import { Conditional } from '~/components'
-import { getLettersFromAlt } from './utils'
+import useImagePreloader, { getLettersFromAlt } from './utils'
 
 const StyledAvatar = styled('div', {
   display: 'flex',
@@ -101,27 +101,17 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
   children,
   ...remainingProps
 }) => {
-  const [error, setError] = useState(!src)
-
-  useEffect(() => {
-    !src ? setError(true) : setError(false)
-  }, [src])
+  const { imagesPreloaded } = useImagePreloader([src])
 
   const fallbackLetters = getLettersFromAlt(alt)
 
   return (
     <StyledAvatar size={size} {...remainingProps}>
-      <Conditional test={!error}>
-        <Image
-          src={src}
-          alt={alt}
-          size={size}
-          hasError={error}
-          onError={() => setError(true)}
-        />
+      <Conditional test={imagesPreloaded}>
+        <Image src={src} alt={alt} size={size} />
       </Conditional>
 
-      <Conditional test={error}>
+      <Conditional test={!imagesPreloaded}>
         <div title={alt}>{fallbackLetters ?? children}</div>
       </Conditional>
     </StyledAvatar>
