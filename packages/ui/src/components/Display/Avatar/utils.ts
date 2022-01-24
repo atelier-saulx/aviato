@@ -33,6 +33,7 @@ export default function useImagePreloader(imageList: string[]) {
 
   useEffect(() => {
     let isCancelled = false
+    let hasFailed = false
 
     async function effect() {
       if (isCancelled) {
@@ -45,13 +46,17 @@ export default function useImagePreloader(imageList: string[]) {
         imagesPromiseList.push(preloadImage(index))
       }
 
-      await Promise.all(imagesPromiseList).catch(() => {})
+      await Promise.all(imagesPromiseList).catch(() => {
+        hasFailed = true
+      })
 
       if (isCancelled) {
         return
       }
 
-      setImagesPreloaded(true)
+      if (!hasFailed) {
+        setImagesPreloaded(true)
+      }
     }
 
     effect()
