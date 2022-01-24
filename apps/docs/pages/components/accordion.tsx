@@ -1,7 +1,7 @@
 import { Page, Accordion, useHasLoaded } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
-const AlertPage = () => {
+const AccordionPage = () => {
   const hasLoaded = useHasLoaded()
   if (!hasLoaded) {
     return null
@@ -52,4 +52,4 @@ const AlertPage = () => {
   )
 }
 
-export default AlertPage
+export default AccordionPage

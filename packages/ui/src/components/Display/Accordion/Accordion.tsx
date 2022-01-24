@@ -134,6 +134,7 @@ Accordion.Item = ({ title, children, index = 0, active = false }) => {
         <Icon state={state} />
         <Text weight="medium">{title}</Text>
       </ItemHeader>
+
       {isActive ? <Body>{children}</Body> : null}
     </ItemContainer>
   )

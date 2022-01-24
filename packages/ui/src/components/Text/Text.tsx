@@ -47,7 +47,7 @@ export interface TextProps extends ComponentProps<typeof StyledText> {
 }
 
 export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
-  (properties, forwardedRef): any => {
+  (properties, forwardedRef) => {
     const { children } = properties
 
     if (isText(children)) {
@@ -69,6 +69,6 @@ export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
       )
     }
 
-    return children || null
+    return children || (null as any)
   }
 )
