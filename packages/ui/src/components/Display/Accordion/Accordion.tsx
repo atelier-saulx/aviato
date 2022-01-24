@@ -5,20 +5,24 @@ import React, {
   cloneElement,
   useRef,
 } from 'react'
+
+import { IconChevronDown } from '~/components/Icons/components'
 import { styled } from '~/theme'
-import { IconChevronDown } from '~/icons'
 import { Text } from '../../Text'
 
 const AccordionContext = createContext(undefined)
 
 const initalState = new Set()
+
 const multiple = (selected, index) => {
   selected = new Set(selected)
+
   if (selected.has(index)) {
     selected.delete(index)
   } else {
     selected.add(index)
   }
+
   return selected
 }
 
@@ -90,6 +94,7 @@ export const Accordion = ({ children, type = 'multiple' }) => {
     type === 'single' ? single : multiple,
     initalState
   )
+
   return (
     <Container>
       <AccordionContext.Provider

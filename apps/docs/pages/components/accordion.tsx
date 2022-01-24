@@ -1,5 +1,4 @@
-import { Page, Accordion } from '@aviato/ui'
-import { useHasLoaded } from '@aviato/hooks'
+import { Page, Accordion, useHasLoaded } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const AlertPage = () => {
@@ -32,6 +31,7 @@ const AlertPage = () => {
           </Accordion.Item>
         </Accordion>
       </ShowcaseComponent>
+
       <ShowcaseComponent background="transparent">
         <Accordion type="single">
           <Accordion.Item title="Single Section 1" active>
