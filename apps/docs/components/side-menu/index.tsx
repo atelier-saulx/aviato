@@ -23,6 +23,11 @@ const inputMenuItems: MenuDataItems[] = [
     route: '/input/checkbox',
   },
   {
+    title: 'Color Picker',
+    route: '/input/upload',
+    isMissing: true,
+  },
+  {
     title: 'Icons',
     route: '/input/icons',
   },
@@ -35,12 +40,12 @@ const inputMenuItems: MenuDataItems[] = [
     route: '/input/radio-group',
   },
   {
-    title: 'Slider',
-    route: '/input/slider',
-  },
-  {
     title: 'Select',
     route: '/input/select',
+  },
+  {
+    title: 'Slider',
+    route: '/input/slider',
   },
   {
     title: 'Switch',
@@ -53,6 +58,11 @@ const inputMenuItems: MenuDataItems[] = [
   {
     title: 'Toggle Group',
     route: '/input/toggle-group',
+  },
+  {
+    title: 'Upload',
+    route: '/input/upload',
+    isMissing: true,
   },
 ]
 
@@ -72,18 +82,13 @@ const dataDisplayMenuItems: MenuDataItems[] = [
     isMissing: true,
   },
   {
+    title: 'Card',
+    route: '/data-display/card',
+    isMissing: true,
+  },
+  {
     title: 'Chip',
     route: '/data-display/chip',
-    isMissing: true,
-  },
-  {
-    title: 'List',
-    route: '/data-display/list',
-    isMissing: true,
-  },
-  {
-    title: 'Table',
-    route: '/data-display/table',
     isMissing: true,
   },
   {
@@ -92,8 +97,33 @@ const dataDisplayMenuItems: MenuDataItems[] = [
     isMissing: true,
   },
   {
+    title: 'Grid',
+    route: '/data-display/grid',
+    isMissing: true,
+  },
+  {
+    title: 'Image',
+    route: '/data-display/image',
+    isMissing: true,
+  },
+  {
+    title: 'List',
+    route: '/data-display/list',
+    isMissing: true,
+  },
+  {
+    title: 'Stat',
+    route: '/data-display/stat',
+    isMissing: true,
+  },
+  {
     title: 'Tabs',
     route: '/data-display/tabs',
+    isMissing: true,
+  },
+  {
+    title: 'Table',
+    route: '/data-display/table',
     isMissing: true,
   },
 ]
@@ -115,13 +145,8 @@ const feedbackMenuItems: MenuDataItems[] = [
 
 const navigationMenuItems: MenuDataItems[] = [
   {
-    title: 'Side Menu',
-    route: '/navigation/side-menu',
-    isMissing: true,
-  },
-  {
-    title: 'Top Bar',
-    route: '/navigation/top-bar',
+    title: 'Breadcrumbs',
+    route: '/navigation/breadcrumbs',
     isMissing: true,
   },
   {
@@ -130,8 +155,13 @@ const navigationMenuItems: MenuDataItems[] = [
     isMissing: true,
   },
   {
-    title: 'Breadcrumbs',
-    route: '/navigation/breadcrumbs',
+    title: 'Side Menu',
+    route: '/navigation/side-menu',
+    isMissing: true,
+  },
+  {
+    title: 'Top Bar',
+    route: '/navigation/top-bar',
     isMissing: true,
   },
 ]
