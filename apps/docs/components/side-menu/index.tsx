@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { withRouter } from 'next/router'
 
 import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
+
 import { AviatoLogo } from '../logo'
 import { featureFlags } from '../../feature-flags/featureFlags'
 
