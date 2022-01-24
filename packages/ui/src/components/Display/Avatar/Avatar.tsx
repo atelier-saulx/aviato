@@ -9,7 +9,7 @@ const StyledAvatar = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '$PrimaryMain',
-  color: '$PrimaryContrastHigh',
+  color: '$PrimaryMainContrast',
   overflow: 'hidden',
 
   variants: {
@@ -48,26 +48,31 @@ const Image = styled('img', {
     size: {
       extrasmall: {
         minWidth: '24px',
+        maxWidth: '24px',
         height: '24px',
         borderRadius: '24px',
       },
       small: {
         minWidth: '28px',
+        maxWidth: '28px',
         height: '28px',
         borderRadius: '28px',
       },
       medium: {
         minWidth: '32px',
+        maxWidth: '32px',
         height: '32px',
         borderRadius: '32px',
       },
       large: {
         minWidth: '36px',
+        maxWidth: '36px',
         height: '36px',
         borderRadius: '36px',
       },
       extralarge: {
         minWidth: '40px',
+        maxWidth: '40px',
         height: '40px',
         borderRadius: '40px',
       },
