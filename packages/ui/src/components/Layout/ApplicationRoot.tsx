@@ -9,7 +9,7 @@ import React, {
 import { ComponentProps } from '@stitches/react'
 
 import { styled, ThemeProvider } from '~/theme'
-import { MenuStateContext, menuWidth } from '../SideMenu'
+import { MenuStateContext, menuWidth } from '../Navigation'
 import { Header, headerHeight } from './Header'
 import { Group } from './Group'
 import { ToggleThemeButton } from './ToggleThemeButton'

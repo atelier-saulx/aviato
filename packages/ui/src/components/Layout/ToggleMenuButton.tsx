@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { IconButton } from '../Input/Button/IconButton'
 import { styled } from '~/theme'
-import { useMenuContext } from '../SideMenu'
+import { useMenuContext } from '../Navigation'
 
 const StyledToggleMenuButton = styled('div', {
   visibility: 'visible',

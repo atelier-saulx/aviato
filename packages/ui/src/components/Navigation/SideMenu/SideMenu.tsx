@@ -2,8 +2,8 @@ import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
-import { headerHeight } from '../Layout/Header'
-import { ScrollArea } from '../Utilities'
+import { headerHeight } from '../../Layout/Header'
+import { ScrollArea } from '../../Utilities'
 
 export const menuWidth = 224
 
