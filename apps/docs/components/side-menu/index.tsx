@@ -59,6 +59,34 @@ const dataDisplayMenuItems: MenuDataItems[] = [
     title: 'Accordion',
     route: '/data-display/accordion',
   },
+  {
+    title: 'Avatar',
+    route: '/data-display/avatar',
+  },
+  {
+    title: 'Badge',
+    route: '/data-display/badge',
+  },
+  {
+    title: 'Chip',
+    route: '/data-display/chip',
+  },
+  {
+    title: 'List',
+    route: '/data-display/list',
+  },
+  {
+    title: 'Table',
+    route: '/data-display/table',
+  },
+  {
+    title: 'Code Snippet',
+    route: '/data-display/code-snippet',
+  },
+  {
+    title: 'Tabs',
+    route: '/data-display/tabs',
+  },
 ]
 
 const feedbackMenuItems: MenuDataItems[] = [
@@ -67,7 +95,7 @@ const feedbackMenuItems: MenuDataItems[] = [
     route: '/feedback/alert',
   },
   {
-    title: 'Toast',
+    title: 'Toast / Notification',
     route: '/feedback/toast',
   },
   {
