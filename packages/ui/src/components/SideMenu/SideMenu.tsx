@@ -3,8 +3,13 @@ import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
 import { headerHeight } from '../Layout/Header'
+import { ScrollArea } from '../Utilities'
 
 export const menuWidth = 224
+
+const Padding = styled('div', {
+  padding: 8,
+})
 
 const StyledSideMenu = styled('div', {
   position: 'fixed',
@@ -19,7 +24,6 @@ const StyledSideMenu = styled('div', {
   minWidth: '100%',
   backgroundColor: '$Background2dp',
   overflowX: 'hidden',
-  padding: 8,
   zIndex: 10,
   marginTop: headerHeight,
 
@@ -41,7 +45,9 @@ export const SideMenu = forwardRef<
 
   return (
     <StyledSideMenu ref={forwardedRef} {...remainingProps}>
-      {children}
+      <ScrollArea>
+        <Padding>{children}</Padding>
+      </ScrollArea>
     </StyledSideMenu>
   )
 })

@@ -204,22 +204,22 @@ const rootMenu: MenuDataItems[] = [
       },
       {
         title: 'Data Display',
-        startOpen: false,
+        startOpen: true,
         subMenu: dataDisplayMenuItems,
       },
       {
         title: 'Feedback',
-        startOpen: false,
+        startOpen: true,
         subMenu: feedbackMenuItems,
       },
       {
         title: 'Navigation',
-        startOpen: false,
+        startOpen: true,
         subMenu: navigationMenuItems,
       },
       {
         title: 'Overlay',
-        startOpen: false,
+        startOpen: true,
         subMenu: overlayMenuItems,
       },
     ],
