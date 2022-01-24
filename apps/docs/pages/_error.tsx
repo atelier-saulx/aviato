@@ -32,8 +32,8 @@ const getContent = ({ statusCode }: { statusCode: number }) => {
   const errorStatus: StatusType = errorCodeMap[statusCode] ?? 'unknown'
 
   const statusMap: { [key in StatusType]: string } = {
-    unauthorized: "👀It looks like you're not supposed to be here 👀",
-    notFound: '🛰 We could not find the page you were looking for 🛰',
+    unauthorized: "It looks like you're not supposed to be here",
+    notFound: 'We could not find the page you were looking for',
     internal: '🔥 Our server had some trouble processing that request 🔥',
     unknown: "🤯 Even we don't know what happened 🤯",
   }
