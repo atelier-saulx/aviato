@@ -45,7 +45,7 @@ export default function useImagePreloader(imageList: string[]) {
         imagesPromiseList.push(preloadImage(index))
       }
 
-      await Promise.all(imagesPromiseList)
+      await Promise.all(imagesPromiseList).catch(() => {})
 
       if (isCancelled) {
         return
