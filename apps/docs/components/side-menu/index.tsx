@@ -168,7 +168,7 @@ const rootMenu: MenuDataItems[] = [
     subMenu: [
       {
         title: 'Input',
-        startOpen: false,
+        startOpen: true,
         subMenu: inputMenuItems,
       },
       {
