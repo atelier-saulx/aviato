@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react'
 
-import { styled } from '@aviato/ui'
+import { Prism, styled, Conditional, CodeLanguage } from '@aviato/ui'
+import { CodeBlock } from '..'
 
-const WrapperDiv = styled('div', {
+const BaseContainer = styled('div', {
   marginLeft: '0px',
   marginBottom: '20px',
 })
 
-const ComponentWrapperDiv = styled('div', {
+const Container = styled('div', {
   display: 'flex',
   flexFlow: 'column nowrap',
   padding: '20px',
@@ -61,18 +62,36 @@ const InnerDiv = styled('div', {
 export type DisplayComponentProps = {
   background?: 'filled' | 'transparent'
   padding?: 'small' | 'regular' | 'large'
+  codeBlock?: string | CodeBlock
 }
 
 export const DisplayComponent: FunctionComponent<DisplayComponentProps> = ({
-  children,
   background = 'filled',
   padding = 'regular',
+  codeBlock,
+  children,
 }) => {
+  let code: string
+  let language: CodeLanguage = 'tsx'
+
+  if (codeBlock) {
+    if (typeof codeBlock === 'string') {
+      code = codeBlock
+    } else {
+      code = codeBlock.code
+      language = codeBlock.language
+    }
+  }
+
   return (
-    <WrapperDiv>
-      <ComponentWrapperDiv background={background}>
+    <BaseContainer>
+      <Container background={background}>
         <InnerDiv padding={padding}>{children}</InnerDiv>
-      </ComponentWrapperDiv>
-    </WrapperDiv>
+      </Container>
+
+      <Conditional test={code}>
+        <Prism language={language}>{code}</Prism>
+      </Conditional>
+    </BaseContainer>
   )
 }

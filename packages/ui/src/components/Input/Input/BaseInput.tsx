@@ -1,7 +1,15 @@
-import React, { ElementRef, useCallback, BaseSyntheticEvent } from 'react'
+import React, {
+  ElementRef,
+  useCallback,
+  BaseSyntheticEvent,
+  ElementType,
+  ReactNode,
+  forwardRef,
+  useState,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
-import { useUncontrolled, useUuid } from '@aviato/hooks'
+import { useUncontrolled, useUuid } from '~/hooks'
 
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
@@ -15,7 +23,7 @@ import { onChange } from '~/types/events'
  * It's not meant to be used by itself.
  */
 
-const BaseInputWrapper = styled('div', {
+const Container = styled('div', {
   position: 'relative',
   width: '100%',
   borderRadius: '4px',
@@ -165,7 +173,7 @@ export const StyledInput = styled('input', {
   },
 })
 
-const IconWrapper = styled('span', {
+const IconContainer = styled('span', {
   position: 'absolute',
   top: 0,
   bottom: 0,
@@ -202,14 +210,16 @@ export interface OnInputChange extends onChange {
   value: string
 }
 
-export interface BaseInputProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledInput>, 'onChange'>
+
+export interface BaseInputProps extends StitchedProps {
   value?: string
   defaultValue?: string
-  component?: React.ElementType
+  component?: ElementType
   type?: InputType
   placeholder?: string
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
   variant?: InputVariant
   disabled?: boolean
   invalid?: boolean
@@ -217,14 +227,12 @@ export interface BaseInputProps {
   maxRows?: number
   minRows?: number
   onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
 }
 
-type StitchedProps = ComponentProps<typeof StyledInput>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & BaseInputProps
-
-export const BaseInput = React.forwardRef<
+export const BaseInput = forwardRef<
   ElementRef<typeof StyledInput>,
-  ForwardProps
+  BaseInputProps
 >((properties, forwardedRef) => {
   const {
     value,
@@ -246,10 +254,9 @@ export const BaseInput = React.forwardRef<
     defaultValue,
     finalValue: '',
     rule: (value) => typeof value === 'string',
-    onChange: () => {},
   })
 
-  const [isActive, setIsActive] = React.useState(false)
+  const [isActive, setIsActive] = useState(false)
   const hasLeftIcon = Boolean(leftIcon)
   const hasRightIcon = Boolean(rightIcon)
 
@@ -269,11 +276,11 @@ export const BaseInput = React.forwardRef<
   }, [])
 
   return (
-    <BaseInputWrapper variant={variant} className={classes}>
+    <Container variant={variant} className={classes}>
       <Conditional test={leftIcon}>
-        <IconWrapper type="start" className={classes}>
+        <IconContainer type="start" className={classes}>
           {leftIcon}
-        </IconWrapper>
+        </IconContainer>
       </Conditional>
 
       <StyledInput
@@ -290,10 +297,10 @@ export const BaseInput = React.forwardRef<
       />
 
       <Conditional test={rightIcon}>
-        <IconWrapper type="end" className={classes}>
+        <IconContainer type="end" className={classes}>
           {rightIcon}
-        </IconWrapper>
+        </IconContainer>
       </Conditional>
-    </BaseInputWrapper>
+    </Container>
   )
 })

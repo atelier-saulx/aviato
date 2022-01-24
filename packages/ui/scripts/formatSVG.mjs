@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import path from 'path'
 
 function checkForSVGs() {
-  const inputDir = path.join('./src', 'icons', 'svg')
+  const inputDir = path.join('./dependencies', 'icons', 'svg')
 
   const vectorFilesInDir = fs
     .readdirSync(inputDir)
@@ -25,9 +25,9 @@ async function formatIcons() {
   const parseCommand = [
     'svgo',
     '--config ./scripts/svgoConfig.js',
-    '--output ./src/icons/parsed/svg',
+    '--output ./dependencies/icons/parsed/svg',
     '-f',
-    './src/icons/svg',
+    './dependencies/icons/svg',
   ]
 
   const formatIconsCommand = parseCommand.join(' ')

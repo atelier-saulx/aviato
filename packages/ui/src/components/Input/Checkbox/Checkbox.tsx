@@ -1,6 +1,7 @@
 import React, {
   BaseSyntheticEvent,
   ElementRef,
+  forwardRef,
   FunctionComponent,
   useCallback,
   useEffect,
@@ -13,10 +14,10 @@ import { styled } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { Column } from '~/components/Layout'
-import { IconCheck, IconMinus } from '~/icons'
+import { IconCheck, IconMinus } from '~/components/Icons'
 import { onChange } from '~/types/events'
 
-const StyledCheckboxWrapper = styled('div', {
+const Container = styled('div', {
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -32,7 +33,7 @@ const Centered = styled('div', {
   flexDirection: 'row',
 })
 
-const AlignmentWrapper = styled('div', {
+const AlignmentContainer = styled('div', {
   position: 'relative',
   display: 'flex',
   flexDirection: 'row',
@@ -40,11 +41,11 @@ const AlignmentWrapper = styled('div', {
   justifyContent: 'center',
 })
 
-const CheckboxWrapper = styled('div', {
+const CheckboxContainer = styled('div', {
   paddingTop: 3,
 })
 
-const TextWrapper = styled('div', {
+const TextContainer = styled('div', {
   paddingLeft: 12,
 })
 
@@ -98,7 +99,7 @@ const StyledCheckbox = styled('input', {
   },
 })
 
-const IconWrapper = styled('div', {
+const IconContainer = styled('div', {
   position: 'absolute',
   zIndex: '1',
   top: '0',
@@ -142,7 +143,9 @@ export interface OnCheckboxChange extends onChange<BaseSyntheticEvent> {
   isChecked: boolean
 }
 
-export interface CheckboxProps {
+type StitchedProps = Omit<ComponentProps<typeof Container>, 'onChange'>
+
+export interface CheckboxProps extends StitchedProps {
   size?: CheckboxSize
   checked?: boolean
   disabled?: boolean
@@ -153,65 +156,59 @@ export interface CheckboxProps {
   onChange?: (value: boolean, payload: OnCheckboxChange) => void
 }
 
-type StitchedProps = ComponentProps<typeof StyledCheckboxWrapper>
-type ForwardProps = Omit<StitchedProps, 'onChange'> & CheckboxProps
+export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
+  (properties, forwardedRef) => {
+    const {
+      size = 'small',
+      checked = false,
+      disabled = false,
+      indeterminate = false,
+      label,
+      description,
+      onChange = noop,
+      index = 0,
+      ...remainingProps
+    } = properties
 
-export const Checkbox = React.forwardRef<
-  ElementRef<typeof StyledCheckboxWrapper>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    size = 'small',
-    checked = false,
-    disabled = false,
-    indeterminate = false,
-    label,
-    description,
-    onChange = noop,
-    index = 0,
-    ...remainingProps
-  } = properties
+    const [isDisabled, setIsDisbled] = useState(disabled)
+    const [isChecked, setIsChecked] = useState(checked)
+    const [hasIndeterminateState] = useState(indeterminate)
 
-  const [isDisabled, setIsDisbled] = useState(disabled)
-  const [isChecked, setIsChecked] = useState(checked)
-  const [hasIndeterminateState] = useState(indeterminate)
+    const hasLabel = Boolean(label)
+    const hasDescription = Boolean(description)
+    const hasLabelOrDescription = hasLabel || hasDescription
 
-  const hasLabel = Boolean(label)
-  const hasDescription = Boolean(description)
-  const hasLabelOrDescription = hasLabel || hasDescription
+    useEffect(() => {
+      setIsDisbled(disabled)
+      setIsChecked(checked)
+    }, [checked, disabled])
 
-  useEffect(() => {
-    setIsDisbled(disabled)
-    setIsChecked(checked)
-  }, [checked, disabled])
+    const handleChange = useCallback(
+      (event: BaseSyntheticEvent) => {
+        if (isDisabled) {
+          return noop()
+        }
 
-  const handleChange = useCallback(
-    (event: BaseSyntheticEvent) => {
-      if (isDisabled) {
-        return noop()
-      }
+        const isCheckboxChecked = !isChecked
+        setIsChecked(isCheckboxChecked)
 
-      const isCheckboxChecked = !isChecked
-      setIsChecked(isCheckboxChecked)
+        const checkboxState = isCheckboxChecked
+          ? CHECKBOX_STATES.Checked
+          : CHECKBOX_STATES.Unchecked
 
-      const checkboxState = isCheckboxChecked
-        ? CHECKBOX_STATES.Checked
-        : CHECKBOX_STATES.Unchecked
+        onChange(isCheckboxChecked, {
+          isChecked: isCheckboxChecked,
+          checkboxState: checkboxState,
+          isDisabled,
+          index,
+          event,
+        })
+      },
+      [isChecked]
+    )
 
-      onChange(isCheckboxChecked, {
-        isChecked: isCheckboxChecked,
-        checkboxState: checkboxState,
-        isDisabled,
-        index,
-        event,
-      })
-    },
-    [isChecked]
-  )
-
-  const CheckboxComponent: FunctionComponent = (properties) => {
-    return (
-      <CheckboxWrapper>
+    const CheckboxComponent: FunctionComponent = (properties) => (
+      <CheckboxContainer>
         <Column>
           <Centered>
             <StyledCheckbox
@@ -223,7 +220,7 @@ export const Checkbox = React.forwardRef<
               {...properties}
             />
 
-            <IconWrapper size={size}>
+            <IconContainer size={size}>
               <Conditional test={isChecked && !hasIndeterminateState}>
                 <IconCheck />
               </Conditional>
@@ -231,36 +228,36 @@ export const Checkbox = React.forwardRef<
               <Conditional test={isChecked && hasIndeterminateState}>
                 <IconMinus />
               </Conditional>
-            </IconWrapper>
+            </IconContainer>
           </Centered>
         </Column>
-      </CheckboxWrapper>
+      </CheckboxContainer>
     )
+
+    if (hasLabelOrDescription) {
+      return (
+        <Container>
+          <AlignmentContainer>
+            <CheckboxComponent ref={forwardedRef} {...remainingProps} />
+
+            <Conditional test={hasLabelOrDescription}>
+              <TextContainer onClick={handleChange}>
+                <Text weight={hasDescription ? 'semibold' : 'medium'}>
+                  {label}
+                </Text>
+
+                <Conditional test={hasLabel}>
+                  <Spacer />
+                </Conditional>
+
+                <Text>{description}</Text>
+              </TextContainer>
+            </Conditional>
+          </AlignmentContainer>
+        </Container>
+      )
+    }
+
+    return <CheckboxComponent ref={forwardedRef} {...remainingProps} />
   }
-
-  if (hasLabelOrDescription) {
-    return (
-      <StyledCheckboxWrapper>
-        <AlignmentWrapper>
-          <CheckboxComponent ref={forwardedRef} {...remainingProps} />
-
-          <Conditional test={hasLabelOrDescription}>
-            <TextWrapper onClick={handleChange}>
-              <Text weight={hasDescription ? 'semibold' : 'medium'}>
-                {label}
-              </Text>
-
-              <Conditional test={hasLabel}>
-                <Spacer />
-              </Conditional>
-
-              <Text>{description}</Text>
-            </TextWrapper>
-          </Conditional>
-        </AlignmentWrapper>
-      </StyledCheckboxWrapper>
-    )
-  }
-
-  return <CheckboxComponent ref={forwardedRef} {...remainingProps} />
-})
+)

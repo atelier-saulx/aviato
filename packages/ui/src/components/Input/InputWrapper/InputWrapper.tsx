@@ -1,24 +1,24 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
 import { Text } from '~/components/Text'
 import { Conditional } from '~/components/Utilities'
-import { IconError } from '~/icons'
+import { IconError } from '~/components/Icons'
 
-const StyledInputWrapper = styled('div', {})
+const Container = styled('div', {})
 
-const TextWrapper = styled('div', {
+const TextContainer = styled('div', {
   paddingBottom: 8,
 })
 
-const ErrorWrapper = styled('div', {
+const ErrorContainer = styled('div', {
   display: 'flex',
   flexDirection: 'row',
   marginTop: 8,
 })
 
-const IconWrapper = styled('div', {
+const IconContainer = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -34,18 +34,15 @@ const Error = styled('div', {
   color: '$ErrorMain',
 })
 
-export interface InputWrapperProps {
+export interface InputWrapperProps extends ComponentProps<typeof Container> {
   label?: string
   description?: string
   error?: string
 }
 
-type ForwardProps = ComponentProps<typeof StyledInputWrapper> &
+export const InputWrapper = forwardRef<
+  ElementRef<typeof Container>,
   InputWrapperProps
-
-export const InputWrapper = React.forwardRef<
-  ElementRef<typeof StyledInputWrapper>,
-  ForwardProps
 >((properties, forwardRef) => {
   const { label, description, error, children, ...remainingProps } = properties
 
@@ -54,28 +51,28 @@ export const InputWrapper = React.forwardRef<
   const hasLabelOrDescription = hasLabel || hasDescription
 
   return (
-    <StyledInputWrapper {...remainingProps} ref={forwardRef}>
+    <Container ref={forwardRef} {...remainingProps}>
       <Conditional test={hasLabelOrDescription}>
-        <TextWrapper>
+        <TextContainer>
           <Text weight="semibold">{label}</Text>
 
           <Text>{description}</Text>
-        </TextWrapper>
+        </TextContainer>
       </Conditional>
 
       {children}
 
       <Conditional test={error}>
-        <ErrorWrapper>
-          <IconWrapper>
+        <ErrorContainer>
+          <IconContainer>
             <IconError />
-          </IconWrapper>
+          </IconContainer>
 
           <Error>
             <Text color="Inherit">{error}</Text>
           </Error>
-        </ErrorWrapper>
+        </ErrorContainer>
       </Conditional>
-    </StyledInputWrapper>
+    </Container>
   )
 })

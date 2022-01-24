@@ -1,9 +1,9 @@
-import React, { ElementRef, useCallback, useContext } from 'react'
+import React, { ElementRef, forwardRef, useCallback } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { IconButton } from '../Input/Button/IconButton'
 import { styled } from '~/theme'
-import { MenuStateContext } from '../SideMenu'
+import { useMenuContext } from '../SideMenu'
 
 const StyledToggleMenuButton = styled('div', {
   visibility: 'visible',
@@ -13,13 +13,16 @@ const StyledToggleMenuButton = styled('div', {
   },
 })
 
-type ForwardProps = ComponentProps<typeof StyledToggleMenuButton>
+export interface ToggleMenuButtonProps
+  extends ComponentProps<typeof StyledToggleMenuButton> {}
 
-export const ToggleMenuButton = React.forwardRef<
+export const ToggleMenuButton = forwardRef<
   ElementRef<typeof StyledToggleMenuButton>,
-  ForwardProps
+  ToggleMenuButtonProps
 >((properties, forwardedRef) => {
-  const { isMenuOpen, setIsMenuOpen } = useContext(MenuStateContext)
+  const { ...remainingProps } = properties
+
+  const { isMenuOpen, setIsMenuOpen } = useMenuContext()
 
   const handleMenuButtonClick = useCallback(() => {
     const newState = !isMenuOpen
@@ -30,7 +33,7 @@ export const ToggleMenuButton = React.forwardRef<
     <StyledToggleMenuButton
       onClick={handleMenuButtonClick}
       ref={forwardedRef}
-      {...properties}
+      {...remainingProps}
     >
       <IconButton type="ghost" icon="IconAlignJustify" />
     </StyledToggleMenuButton>

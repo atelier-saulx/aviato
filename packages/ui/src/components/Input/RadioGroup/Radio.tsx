@@ -1,9 +1,10 @@
-import React, { ElementRef } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
+
+import { useUuid } from '~/hooks'
 import { styled } from '~/theme'
 import { Text } from '~/components/Text'
-import { noop } from '@aviato/utils'
-import { useUuid } from '@aviato/hooks'
 
 const Label = styled('label', {
   display: 'flex',
@@ -52,39 +53,38 @@ export interface RadioProps {
 type StitchedProps = ComponentProps<typeof StyledRadio>
 type ForwardProps = Omit<StitchedProps, 'onChange'> & RadioProps
 
-export const Radio = React.forwardRef<
-  ElementRef<typeof StyledRadio>,
-  ForwardProps
->((properties, forwardedRef) => {
-  const {
-    value,
-    checked = false,
-    disabled = false,
-    onChange = noop,
-    name,
-    children,
-    ...remainingProps
-  } = properties
+export const Radio = forwardRef<ElementRef<typeof StyledRadio>, ForwardProps>(
+  (properties, forwardedRef) => {
+    const {
+      value,
+      checked = false,
+      disabled = false,
+      onChange = noop,
+      name,
+      children,
+      ...remainingProps
+    } = properties
 
-  const uuid = useUuid({ prefix: 'radio-item' })
+    const uuid = useUuid({ prefix: 'radio-item' })
 
-  return (
-    <Label>
-      <StyledRadio
-        type="radio"
-        value={value}
-        checked={checked}
-        disabled={disabled}
-        onChange={onChange}
-        id={uuid}
-        name={name}
-        ref={forwardedRef}
-        {...remainingProps}
-      />
+    return (
+      <Label>
+        <StyledRadio
+          type="radio"
+          value={value}
+          checked={checked}
+          disabled={disabled}
+          onChange={onChange}
+          id={uuid}
+          name={name}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
 
-      <Span>
-        <Text>{children}</Text>
-      </Span>
-    </Label>
-  )
-})
+        <Span>
+          <Text>{children}</Text>
+        </Span>
+      </Label>
+    )
+  }
+)

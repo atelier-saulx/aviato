@@ -1,14 +1,13 @@
-import React, { ElementRef, MouseEventHandler, useCallback } from 'react'
+import React, { ElementRef, forwardRef, MouseEventHandler } from 'react'
+
+import { StitchedCSS } from '~/theme'
+import { IconName, getIconFromName } from '~/components/Icons'
 import {
   Button,
   ButtonVariant,
   ButtonType,
   StyledButton,
 } from '~/components/Input/Button/Button'
-import { noop } from '@aviato/utils'
-
-import { IconName, getIconFromType, Icon } from '~/icons'
-import { StitchedCSS } from '~/theme'
 
 const IconButtonStyles: StitchedCSS = {
   padding: '8px 8px',
@@ -25,36 +24,24 @@ export interface IconButtonProps {
   css?: StitchedCSS
 }
 
-type ForwardProps = IconButtonProps
-
-export const IconButton = React.forwardRef<
+export const IconButton = forwardRef<
   ElementRef<typeof StyledButton>,
-  ForwardProps
+  IconButtonProps
 >((properties, forwardedRef) => {
   const {
     type = 'primary',
     variant = 'filled',
     disabled = false,
-    onClick = noop,
     icon = 'IconPlus',
     ...remainingProps
   } = properties
 
-  const handleClick = useCallback(() => {
-    if (disabled) {
-      return noop()
-    }
-
-    onClick()
-  }, [])
-
-  const TargetIcon = getIconFromType(icon as IconName) as Icon
+  const TargetIcon = getIconFromName(icon)
 
   return (
     <Button
       type={type}
       variant={variant}
-      onClick={handleClick}
       disabled={disabled}
       css={IconButtonStyles}
       ref={forwardedRef}

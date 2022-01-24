@@ -1,7 +1,7 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { withRouter, NextRouter } from 'next/router'
 
-import { SideMenu, Menu, MenuItem, styled, MenuStateContext } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 import { featureFlags } from '../../feature-flags'
 
@@ -27,10 +27,6 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/dialog',
   },
   {
-    title: 'Icon Button',
-    route: '/components/icon-button',
-  },
-  {
     title: 'Icons',
     route: '/components/icons',
   },
@@ -47,6 +43,18 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/slider',
   },
   {
+    title: 'Select',
+    route: '/components/select',
+  },
+  {
+    title: 'Context Menu',
+    route: '/components/context-menu',
+  },
+  {
+    title: 'Icons',
+    route: '/components/icons',
+  },
+  {
     title: 'Switch',
     route: '/components/switch',
   },
@@ -61,6 +69,10 @@ const componentsSubMenu: MenuDataItems[] = [
   {
     title: 'Tooltip',
     route: '/components/tooltip',
+  },
+  {
+    title: 'Toggle Group',
+    route: '/components/toggle-group',
   },
 ]
 
@@ -82,13 +94,6 @@ if (featureFlags.isEnabled('DemoFlag')) {
   componentsSubMenu.push({
     title: 'Demo Page',
     route: '/components/demo-page',
-  })
-}
-
-if (featureFlags.isEnabled('Select')) {
-  componentsSubMenu.push({
-    title: 'Select',
-    route: '/components/select',
   })
 }
 
@@ -115,7 +120,8 @@ type MenuDataItems = {
 const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
   const { asPath, events, pathname } = router
   const [activeRoute, setActiveRoute] = useState(pathname)
-  const { setIsMenuOpen } = useContext(MenuStateContext)
+
+  const { setIsMenuOpen } = useMenuContext()
 
   const handleRouteChange = useCallback(() => {
     setIsMenuOpen(false)
