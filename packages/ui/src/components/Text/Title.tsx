@@ -3,7 +3,6 @@ import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
 import { BaseTextStyles, BaseFontVariants } from './styles'
-
 import { FontWeight, FontColor } from './types'
 
 const StyledTitle = styled('h1', {

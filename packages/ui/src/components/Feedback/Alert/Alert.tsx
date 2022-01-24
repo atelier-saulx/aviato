@@ -19,6 +19,7 @@ const IconColumn = styled('div', {
   paddingTop: 16,
   paddingBottom: 16,
   paddingRight: 12,
+  flexShrink: 0,
 })
 
 const TitleCSS: StitchedCSS = {

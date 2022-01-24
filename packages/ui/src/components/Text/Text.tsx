@@ -1,5 +1,6 @@
 import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { isText } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { BaseFontVariants, BaseTextStyles } from './styles'
@@ -47,21 +48,27 @@ export interface TextProps extends ComponentProps<typeof StyledText> {
 
 export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
   (properties, forwardedRef) => {
-    const {
-      size = 'medium',
-      weight = 'regular',
-      color = 'Primary',
-      ...remainingProps
-    } = properties
+    const { children } = properties
 
-    return (
-      <StyledText
-        color={color}
-        size={size}
-        weight={weight}
-        ref={forwardedRef}
-        {...remainingProps}
-      />
-    )
+    if (isText(children)) {
+      const {
+        size = 'medium',
+        weight = 'regular',
+        color = 'Primary',
+        ...remainingProps
+      } = properties
+
+      return (
+        <StyledText
+          color={color}
+          size={size}
+          weight={weight}
+          ref={forwardedRef}
+          {...remainingProps}
+        />
+      )
+    }
+
+    return children || (null as any)
   }
 )

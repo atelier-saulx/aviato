@@ -7,6 +7,14 @@ import { featureFlags } from '../../feature-flags'
 
 const componentsSubMenu: MenuDataItems[] = [
   {
+    title: 'Accordion',
+    route: '/components/accordion',
+  },
+  {
+    title: 'Alert',
+    route: '/components/alert',
+  },
+  {
     title: 'Button',
     route: '/components/button',
   },
@@ -15,8 +23,16 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/checkbox',
   },
   {
-    title: 'Switch',
-    route: '/components/switch',
+    title: 'Dialog',
+    route: '/components/dialog',
+  },
+  {
+    title: 'Icons',
+    route: '/components/icons',
+  },
+  {
+    title: 'Input',
+    route: '/components/input',
   },
   {
     title: 'Radio Group',
@@ -25,14 +41,6 @@ const componentsSubMenu: MenuDataItems[] = [
   {
     title: 'Slider',
     route: '/components/slider',
-  },
-  {
-    title: 'Input',
-    route: '/components/input',
-  },
-  {
-    title: 'Text Field',
-    route: '/components/text-field',
   },
   {
     title: 'Select',
@@ -47,20 +55,20 @@ const componentsSubMenu: MenuDataItems[] = [
     route: '/components/icons',
   },
   {
-    title: 'Tooltip',
-    route: '/components/tooltip',
+    title: 'Switch',
+    route: '/components/switch',
   },
   {
-    title: 'Alert',
-    route: '/components/alert',
+    title: 'Text Field',
+    route: '/components/text-field',
   },
   {
     title: 'Toast',
     route: '/components/toast',
   },
   {
-    title: 'Dialog',
-    route: '/components/dialog',
+    title: 'Tooltip',
+    route: '/components/tooltip',
   },
   {
     title: 'Toggle Group',

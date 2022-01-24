@@ -1,5 +1,5 @@
 export * from './Code'
-export * from './Feedback'
+export * from './Display'
 export * from './Feedback'
 export * from './Icons'
 export * from './Input'
