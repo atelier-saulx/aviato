@@ -12,10 +12,9 @@ import {
   styled,
   useHasLoaded,
 } from '@aviato/ui'
-import { log } from '@aviato/utils'
+import { log, capitalize } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-import { capitalize } from '../../utils'
 
 const Spacer = styled('div', {
   width: 6,

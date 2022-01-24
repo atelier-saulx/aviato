@@ -1,78 +1,89 @@
 import { useCallback, useEffect, useState } from 'react'
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter } from 'next/router'
 
 import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
-import { featureFlags } from '../../feature-flags'
 
-const componentsSubMenu: MenuDataItems[] = [
-  {
-    title: 'Accordion',
-    route: '/components/accordion',
-  },
-  {
-    title: 'Alert',
-    route: '/components/alert',
-  },
+type MenuDataItems = {
+  title: string
+  route?: string
+  startOpen?: boolean
+  subMenu?: MenuDataItems[]
+}
+
+const inputMenuItems: MenuDataItems[] = [
   {
     title: 'Button',
-    route: '/components/button',
+    route: '/input/button',
   },
   {
     title: 'Checkbox',
-    route: '/components/checkbox',
-  },
-  {
-    title: 'Dialog',
-    route: '/components/dialog',
+    route: '/input/checkbox',
   },
   {
     title: 'Icons',
-    route: '/components/icons',
+    route: '/input/icons',
   },
   {
     title: 'Input',
-    route: '/components/input',
+    route: '/input/input',
   },
   {
     title: 'Radio Group',
-    route: '/components/radio-group',
+    route: '/input/radio-group',
   },
   {
     title: 'Slider',
-    route: '/components/slider',
+    route: '/input/slider',
   },
   {
     title: 'Select',
-    route: '/components/select',
-  },
-  {
-    title: 'Context Menu',
-    route: '/components/context-menu',
-  },
-  {
-    title: 'Icons',
-    route: '/components/icons',
+    route: '/input/select',
   },
   {
     title: 'Switch',
-    route: '/components/switch',
+    route: '/input/switch',
   },
   {
     title: 'Text Field',
-    route: '/components/text-field',
-  },
-  {
-    title: 'Toast',
-    route: '/components/toast',
-  },
-  {
-    title: 'Tooltip',
-    route: '/components/tooltip',
+    route: '/input/text-field',
   },
   {
     title: 'Toggle Group',
-    route: '/components/toggle-group',
+    route: '/input/toggle-group',
+  },
+]
+
+const dataDisplayMenuItems: MenuDataItems[] = [
+  {
+    title: 'Accordion',
+    route: '/data-display/accordion',
+  },
+]
+
+const feedbackMenuItems: MenuDataItems[] = [
+  {
+    title: 'Alert',
+    route: '/feedback/alert',
+  },
+  {
+    title: 'Toast',
+    route: '/feedback/toast',
+  },
+  {
+    title: 'Tooltip',
+    route: '/feedback/tooltip',
+  },
+]
+
+const overlayMenuItems: MenuDataItems[] = [
+  {
+    title: 'Context Menu',
+    route: '/overlay/context-menu',
+  },
+  {
+    title: 'Dialog',
+    route: '/overlay/dialog',
   },
 ]
 
@@ -83,19 +94,31 @@ const mainMenu: MenuDataItems[] = [
   },
   {
     title: 'Components',
-    subMenu: componentsSubMenu,
+    route: '/components',
+    subMenu: [
+      {
+        title: 'Input',
+        startOpen: true,
+        subMenu: inputMenuItems,
+      },
+      {
+        title: 'Data Display',
+        startOpen: true,
+        subMenu: dataDisplayMenuItems,
+      },
+      {
+        title: 'Feedback',
+        startOpen: true,
+        subMenu: feedbackMenuItems,
+      },
+      {
+        title: 'Overlay',
+        startOpen: true,
+        subMenu: overlayMenuItems,
+      },
+    ],
   },
 ]
-
-/**
- * Add pages under a feature flag using the below approach.
- */
-if (featureFlags.isEnabled('DemoFlag')) {
-  componentsSubMenu.push({
-    title: 'Demo Page',
-    route: '/components/demo-page',
-  })
-}
 
 const HeaderDiv = styled('div', {
   display: 'flex',
@@ -107,17 +130,7 @@ const HeaderDiv = styled('div', {
   color: '$Primary',
 })
 
-interface MainSideMenuProps {
-  router: NextRouter
-}
-
-type MenuDataItems = {
-  title: string
-  route?: string
-  subMenu?: MenuDataItems[]
-}
-
-const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
+const MainSideMenu = withRouter(({ router }) => {
   const { asPath, events, pathname } = router
   const [activeRoute, setActiveRoute] = useState(pathname)
 
@@ -153,32 +166,56 @@ const MainSideMenu = withRouter(({ router }: MainSideMenuProps) => {
     [router]
   )
 
-  const mainMenuItems = mainMenu.map(({ title, route, subMenu }, menuIndex) => {
-    const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
+  const mainMenuItems = mainMenu.map(
+    ({ title, route, subMenu, startOpen = false }, menuIndex) => {
+      const mappedSubmenu = subMenu?.map(
+        ({ title, route, subMenu, startOpen = false }, submenuIndex) => {
+          const mappedSubmenu = subMenu?.map(
+            ({ title, route }, submenuIndex) => {
+              return (
+                <MenuItem
+                  title={title}
+                  onClick={() => setRoute(route)}
+                  key={`SubMenuItem-${submenuIndex}`}
+                  isActive={isActiveRoute(route)}
+                  startOpen={startOpen}
+                />
+              )
+            }
+          )
+
+          const hasSubmenu = Boolean(subMenu)
+
+          return (
+            <MenuItem
+              title={title}
+              onClick={() => setRoute(route)}
+              key={`SubMenuItem-${submenuIndex}`}
+              isActive={isActiveRoute(route)}
+              startOpen={startOpen}
+            >
+              {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
+            </MenuItem>
+          )
+        }
+      )
+
+      const hasSubmenu = Boolean(subMenu)
+
       return (
         <MenuItem
           title={title}
           onClick={() => setRoute(route)}
-          key={`SubMenuItem-${submenuIndex}`}
+          key={`MenuItem-${menuIndex}`}
+          isHeader={hasSubmenu}
           isActive={isActiveRoute(route)}
-        />
+          startOpen={startOpen}
+        >
+          {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
+        </MenuItem>
       )
-    })
-
-    const hasSubmenu = Boolean(subMenu)
-
-    return (
-      <MenuItem
-        title={title}
-        onClick={() => setRoute(route)}
-        key={`MenuItem-${menuIndex}`}
-        isHeader={hasSubmenu}
-        isActive={isActiveRoute(route)}
-      >
-        {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
-      </MenuItem>
-    )
-  })
+    }
+  )
 
   return (
     <SideMenu>

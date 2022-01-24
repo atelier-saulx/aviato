@@ -24,16 +24,6 @@ export const isBrowser = !!(
 )
 
 /**
- * Is target value a string?
- *
- * @param value - input
- * @returns boolean
- */
-export const isText = (value) => {
-  return typeof value === 'string' || value instanceof String
-}
-
-/**
  * Generate a random identifier string.
  *
  * @param prefix - Optional prefix

@@ -1,10 +1,17 @@
-import React, { ElementRef, forwardRef, useCallback, useState } from 'react'
+import React, {
+  ElementRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { styled, classNames } from '~/theme'
+import { IconChevronDown } from '~/components/Icons/components'
 
 const StyledMenuItem = styled('button', {
   width: '100%',
@@ -47,6 +54,24 @@ const Column = styled('div', {
   flexDirection: 'row',
   flexWrap: 'nowrap',
   alignItems: 'center',
+  width: '100%',
+})
+
+const Icon = styled(IconChevronDown, {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginLeft: 'auto',
+  variants: {
+    state: {
+      active: {
+        transform: 'rotate(180deg)',
+      },
+      inactive: {
+        transform: 'rotate(360deg)',
+      },
+    },
+  },
 })
 
 export interface MenuItemProps extends ComponentProps<typeof StyledMenuItem> {
@@ -67,13 +92,18 @@ export const MenuItem = forwardRef<
     children,
     isActive = false,
     isHeader = false,
-    startOpen = true,
+    startOpen = false,
     ...remainingProps
   } = properties
 
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
+
   const [isOpen, setIsOpen] = useState(startOpen)
+
+  useEffect(() => {
+    setIsOpen(isHeader || startOpen)
+  }, [isHeader])
 
   const toggle = useCallback(() => {
     if (!isCollapsible) {
@@ -92,6 +122,8 @@ export const MenuItem = forwardRef<
     isHeader,
   })
 
+  const iconState = isOpen ? 'active' : 'inactive'
+
   return (
     <>
       <StyledMenuItem
@@ -102,11 +134,15 @@ export const MenuItem = forwardRef<
       >
         <Column>
           <Text
-            weight={isHeader || hasChildren ? 'bold' : 'regular'}
+            weight={isHeader ? 'bold' : 'regular'}
             color={isHeader || hasChildren ? 'Primary' : 'Inherit'}
           >
             {title}
           </Text>
+
+          <Conditional test={hasChildren && !isHeader}>
+            <Icon state={iconState} />
+          </Conditional>
         </Column>
       </StyledMenuItem>
 
