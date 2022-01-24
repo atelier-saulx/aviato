@@ -95,7 +95,6 @@ const dataDisplayMenuItems: MenuDataItems[] = [
   {
     title: 'Code Snippet',
     route: '/data-display/code-snippet',
-    isMissing: true,
   },
   {
     title: 'Grid',
