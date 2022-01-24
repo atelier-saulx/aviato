@@ -157,7 +157,6 @@ const navigationMenuItems: MenuDataItems[] = [
   {
     title: 'Side Menu',
     route: '/navigation/side-menu',
-    isMissing: true,
   },
   {
     title: 'Top Bar',
