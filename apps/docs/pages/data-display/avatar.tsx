@@ -14,7 +14,7 @@ const AvatarPage = () => {
         <Column>
           <Row css={{ alignItems: 'center ' }}>
             <Avatar
-              src="https://picsum.photos/200/300"
+              src="https://picsum.photos/24/24"
               alt="Lorem Ipsum"
               size="extrasmall"
             />
@@ -22,7 +22,7 @@ const AvatarPage = () => {
             <SmallSpacer />
 
             <Avatar
-              src="https://picsum.photos/200/300"
+              src="https://picsum.photos/28/28"
               alt="Lorem Ipsum"
               size="small"
             />
@@ -30,7 +30,7 @@ const AvatarPage = () => {
             <SmallSpacer />
 
             <Avatar
-              src="https://picsum.photos/200/300"
+              src="https://picsum.photos/32/32"
               alt="Lorem Ipsum"
               size="medium"
             />
@@ -38,7 +38,7 @@ const AvatarPage = () => {
             <SmallSpacer />
 
             <Avatar
-              src="https://picsum.photos/200/300"
+              src="https://picsum.photos/36/36"
               alt="Lorem Ipsum"
               size="large"
             />
@@ -46,7 +46,7 @@ const AvatarPage = () => {
             <SmallSpacer />
 
             <Avatar
-              src="https://picsum.photos/200/300"
+              src="https://picsum.photos/40/40"
               alt="Lorem Ipsum"
               size="extralarge"
             />
