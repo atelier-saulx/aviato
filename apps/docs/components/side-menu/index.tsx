@@ -75,7 +75,6 @@ const dataDisplayMenuItems: MenuDataItems[] = [
   {
     title: 'Avatar',
     route: '/data-display/avatar',
-    isMissing: true,
   },
   {
     title: 'Badge',
