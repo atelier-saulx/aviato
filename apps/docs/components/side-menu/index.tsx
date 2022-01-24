@@ -3,11 +3,13 @@ import { withRouter } from 'next/router'
 
 import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
+import { featureFlags } from '../../feature-flags/featureFlags'
 
 type MenuDataItems = {
   title: string
   route?: string
   startOpen?: boolean
+  isMissing?: boolean
   subMenu?: MenuDataItems[]
 }
 
@@ -62,30 +64,37 @@ const dataDisplayMenuItems: MenuDataItems[] = [
   {
     title: 'Avatar',
     route: '/data-display/avatar',
+    isMissing: true,
   },
   {
     title: 'Badge',
     route: '/data-display/badge',
+    isMissing: true,
   },
   {
     title: 'Chip',
     route: '/data-display/chip',
+    isMissing: true,
   },
   {
     title: 'List',
     route: '/data-display/list',
+    isMissing: true,
   },
   {
     title: 'Table',
     route: '/data-display/table',
+    isMissing: true,
   },
   {
     title: 'Code Snippet',
     route: '/data-display/code-snippet',
+    isMissing: true,
   },
   {
     title: 'Tabs',
     route: '/data-display/tabs',
+    isMissing: true,
   },
 ]
 
@@ -115,7 +124,7 @@ const overlayMenuItems: MenuDataItems[] = [
   },
 ]
 
-const mainMenu: MenuDataItems[] = [
+const rootMenu: MenuDataItems[] = [
   {
     title: 'Introduction',
     route: '/',
@@ -158,6 +167,26 @@ const HeaderDiv = styled('div', {
   color: '$Primary',
 })
 
+function getMenuItems(menu: MenuDataItems[]) {
+  const filteredMenu = menu
+    .map((item) => {
+      if (item.subMenu) {
+        item.subMenu = getMenuItems(item.subMenu)
+      }
+
+      if (!featureFlags.isEnabled('ShowUnfinishedPages')) {
+        if (item.isMissing) {
+          return null
+        }
+      }
+
+      return item
+    })
+    .filter((item) => item !== null)
+
+  return filteredMenu
+}
+
 const MainSideMenu = withRouter(({ router }) => {
   const { asPath, events, pathname } = router
   const [activeRoute, setActiveRoute] = useState(pathname)
@@ -193,6 +222,8 @@ const MainSideMenu = withRouter(({ router }) => {
     },
     [router]
   )
+
+  const mainMenu = getMenuItems(rootMenu)
 
   const mainMenuItems = mainMenu.map(
     ({ title, route, subMenu, startOpen = false }, menuIndex) => {
