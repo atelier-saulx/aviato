@@ -2,12 +2,12 @@ import { Column, Row, Page } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
-const BadgePage = () => {
-  const ShowBadge = () => {
+const TablePage = () => {
+  const ShowTable = () => {
     return (
       <>
         <Column>
-          <Row>Badge</Row>
+          <Row>Table</Row>
         </Column>
       </>
     )
@@ -15,15 +15,17 @@ const BadgePage = () => {
 
   return (
     <Page>
-      <NextTitle>Badge</NextTitle>
+      <NextTitle>Table</NextTitle>
 
-      <NextText color="Secondary">Display badge, pill or tag.</NextText>
+      <NextText color="Secondary">
+        Tables are used to organize and display data efficiently.
+      </NextText>
 
       <ShowcaseComponent background="transparent">
-        <ShowBadge />
+        <ShowTable />
       </ShowcaseComponent>
     </Page>
   )
 }
 
-export default BadgePage
+export default TablePage

@@ -2,12 +2,12 @@ import { Column, Row, Page } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
-const BadgePage = () => {
-  const ShowBadge = () => {
+const ListPage = () => {
+  const ShowList = () => {
     return (
       <>
         <Column>
-          <Row>Badge</Row>
+          <Row>List</Row>
         </Column>
       </>
     )
@@ -15,15 +15,17 @@ const BadgePage = () => {
 
   return (
     <Page>
-      <NextTitle>Badge</NextTitle>
+      <NextTitle>List</NextTitle>
 
-      <NextText color="Secondary">Display badge, pill or tag.</NextText>
+      <NextText color="Secondary">
+        Lists are continuous, vertical indexes of text or images.
+      </NextText>
 
       <ShowcaseComponent background="transparent">
-        <ShowBadge />
+        <ShowList />
       </ShowcaseComponent>
     </Page>
   )
 }
 
-export default BadgePage
+export default ListPage
