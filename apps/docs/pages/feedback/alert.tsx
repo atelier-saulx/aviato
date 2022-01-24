@@ -22,12 +22,16 @@ const AlertPage = () => {
             This is an error alert, because your computer is obviously broken.
             Thanks!
           </Alert>
+
           <br />
+
           <Alert title="Custom icon" icon={<IconCheck />}>
             This is an error alert, because your computer is obviously broken.
             Thanks!
           </Alert>
+
           <br />
+
           <Alert
             title="Custom CSS"
             css={{

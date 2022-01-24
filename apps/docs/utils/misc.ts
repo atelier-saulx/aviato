@@ -15,8 +15,4 @@ const initialiseApplication = () => {
   log.debug('Application has been started.')
 }
 
-const capitalize = (input: string) => {
-  return input.charAt(0).toUpperCase() + input.slice(1)
-}
-
-export { initialiseApplication, inDevEnvironment, capitalize }
+export { initialiseApplication, inDevEnvironment }

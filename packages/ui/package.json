@@ -12,6 +12,7 @@
   "dependencies": {
     "@aviato/utils": "*",
     "@mui/base": "^5.0.0-alpha.65",
+    "@radix-ui/react-scroll-area": "^0.1.3",
     "@radix-ui/react-toggle-group": "^0.1.4",
     "@stitches/react": "^1.2.6",
     "next-themes": "^0.0.15",

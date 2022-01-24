@@ -1,21 +1,43 @@
-import { useEffect, useState } from 'react'
-import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
-import { log } from '@aviato/utils'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  Column,
+  Row,
+  Input,
+  Page,
+  styled,
+  getRandomIcon,
+  InputVariant,
+  useHasLoaded,
+} from '@aviato/ui'
+import { log, capitalize } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-import { capitalize } from '../../utils'
 
 const BigSpacer = styled('div', {
   width: '100%',
   height: 10,
 })
 
-const TextFieldPage = () => {
-  const ShowTextField = ({ variant }: { variant: InputVariant }) => {
+/**
+ * TODO: Fix SSR issue with Vector Icons!
+ */
+const InputPage = () => {
+  const hasLoaded = useHasLoaded()
+  if (!hasLoaded) {
+    return null
+  }
+
+  const RandomIcon = () => {
+    const Icon = getRandomIcon()
+    return <Icon />
+  }
+
+  const ShowInput = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
 
     const [inputValue, setInputValue] = useState('')
     const [isInvalid, setIsInvalid] = useState(false)
+    const Icon = useMemo(() => <RandomIcon />, [])
 
     useEffect(() => {
       setIsInvalid(inputValue === 'test')
@@ -27,11 +49,11 @@ const TextFieldPage = () => {
           <NextTitle size="small">{uppercaseVariant}</NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <TextField
+            <Input
               variant={variant}
               placeholder="Type something here"
               onChange={(value, payload) => {
-                log.global.debug('TextField change: ', { value, payload })
+                log.global.debug('Input change: ', { value, payload })
               }}
             />
           </Row>
@@ -39,41 +61,38 @@ const TextFieldPage = () => {
           <BigSpacer />
 
           <Row css={{ width: '100%' }}>
-            <TextField
+            <Input
               variant={variant}
-              autosize
-              minRows={3}
-              maxRows={3}
-              placeholder="Autosize with 3 rows"
+              leftIcon={Icon}
+              placeholder="Type something here"
             />
           </Row>
 
           <BigSpacer />
 
           <Row css={{ width: '100%' }}>
-            <TextField
+            <Input
               variant={variant}
-              autosize
-              minRows={2}
-              maxRows={6}
-              placeholder="Autosize with 6 rows max, 2 min"
+              rightIcon={Icon}
+              placeholder="Type something here"
             />
           </Row>
 
           <BigSpacer />
 
           <Row css={{ width: '100%' }}>
-            <TextField
+            <Input
               variant={variant}
-              autosize
-              placeholder="Autosize without a row limit"
+              leftIcon={Icon}
+              rightIcon={Icon}
+              placeholder="Type something here"
             />
           </Row>
 
           <BigSpacer />
 
           <Row css={{ width: '100%' }}>
-            <TextField
+            <Input
               variant={variant}
               placeholder="Type `test` to see invalid input field"
               value={inputValue}
@@ -84,19 +103,31 @@ const TextFieldPage = () => {
               }}
             />
           </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <Input
+              variant={variant}
+              leftIcon={Icon}
+              rightIcon={Icon}
+              placeholder="Type something here"
+              disabled
+            />
+          </Row>
         </Column>
       </>
     )
   }
 
-  const ShowComplexTextField = () => {
+  const ShowComplexInput = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
           <NextTitle size="small">Form</NextTitle>
 
           <Row css={{ width: '100%' }}>
-            <TextField
+            <Input
               placeholder="Type something here"
               label="This is a label"
               description="This is a description"
@@ -109,23 +140,23 @@ const TextFieldPage = () => {
 
   return (
     <Page>
-      <NextTitle>Text Field</NextTitle>
+      <NextTitle>Input</NextTitle>
 
       <NextText color="Secondary">Capture string input from user</NextText>
 
       <ShowcaseComponent background="transparent" padding="small">
-        <ShowTextField variant="outlined" />
+        <ShowInput variant="outlined" />
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent" padding="small">
-        <ShowTextField variant="filled" />
+        <ShowInput variant="filled" />
       </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent" padding="small">
-        <ShowComplexTextField />
+        <ShowComplexInput />
       </ShowcaseComponent>
     </Page>
   )
 }
 
-export default TextFieldPage
+export default InputPage
