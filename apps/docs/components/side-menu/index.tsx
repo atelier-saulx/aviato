@@ -113,6 +113,29 @@ const feedbackMenuItems: MenuDataItems[] = [
   },
 ]
 
+const navigationMenuItems: MenuDataItems[] = [
+  {
+    title: 'Side Menu',
+    route: '/navigation/side-menu',
+    isMissing: true,
+  },
+  {
+    title: 'Top Bar',
+    route: '/navigation/top-bar',
+    isMissing: true,
+  },
+  {
+    title: 'Link',
+    route: '/navigation/link',
+    isMissing: true,
+  },
+  {
+    title: 'Breadcrumbs',
+    route: '/navigation/breadcrumbs',
+    isMissing: true,
+  },
+]
+
 const overlayMenuItems: MenuDataItems[] = [
   {
     title: 'Context Menu',
@@ -121,6 +144,16 @@ const overlayMenuItems: MenuDataItems[] = [
   {
     title: 'Dialog',
     route: '/overlay/dialog',
+  },
+  {
+    title: 'Drawer',
+    route: '/overlay/drawer',
+    isMissing: true,
+  },
+  {
+    title: 'Modal',
+    route: '/overlay/modal',
+    isMissing: true,
   },
 ]
 
@@ -135,22 +168,27 @@ const rootMenu: MenuDataItems[] = [
     subMenu: [
       {
         title: 'Input',
-        startOpen: true,
+        startOpen: false,
         subMenu: inputMenuItems,
       },
       {
         title: 'Data Display',
-        startOpen: true,
+        startOpen: false,
         subMenu: dataDisplayMenuItems,
       },
       {
         title: 'Feedback',
-        startOpen: true,
+        startOpen: false,
         subMenu: feedbackMenuItems,
       },
       {
+        title: 'Navigation',
+        startOpen: false,
+        subMenu: navigationMenuItems,
+      },
+      {
         title: 'Overlay',
-        startOpen: true,
+        startOpen: false,
         subMenu: overlayMenuItems,
       },
     ],
