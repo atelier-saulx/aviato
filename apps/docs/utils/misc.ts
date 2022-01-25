@@ -2,7 +2,11 @@ import { log } from '@aviato/utils'
 import { featureFlags } from '../feature-flags'
 import { setupApplicationLogging } from './log'
 
-const isProduction = Boolean(process?.env?.NODE_ENV === 'development') === false
+let isProduction = false
+
+if (process && process.env.NODE_ENV === 'production') {
+  isProduction = true
+}
 
 const initialiseApplication = () => {
   setupApplicationLogging()
