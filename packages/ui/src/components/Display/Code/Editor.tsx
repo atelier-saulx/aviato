@@ -79,6 +79,9 @@ export const Editor = forwardRef<ElementRef<typeof StyledEditor>, EditorProps>(
           onChange={(value) => {
             handleChange(value)
           }}
+          style={{
+            fontSize: '15px',
+          }}
         />
       </StyledEditor>
     )
