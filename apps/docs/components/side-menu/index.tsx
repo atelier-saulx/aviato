@@ -103,7 +103,6 @@ const dataDisplayMenuItems: MenuDataItems[] = [
   {
     title: 'Image',
     route: '/data-display/image',
-    isMissing: true,
   },
   {
     title: 'List',
