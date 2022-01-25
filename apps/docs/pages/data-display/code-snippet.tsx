@@ -1,4 +1,4 @@
-import { Page, Column, Prism } from '@aviato/ui'
+import { Page, Column, Snippet } from '@aviato/ui'
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const CodeSnippetPage = () => {
@@ -12,15 +12,15 @@ const CodeSnippetPage = () => {
 
       <ShowcaseComponent
         codeBlock={`
-import { Prism } from '@aviato/ui'
+import { Snippet } from '@aviato/ui'
 
-<Prism language="bash">
+<Snippet language="bash">
 npm install @aviato/ui
-</Prism>
+</Snippet>
       `}
       >
         <Column css={{ width: '100%' }}>
-          <Prism language="bash">npm install @aviato/ui</Prism>
+          <Snippet language="bash">npm install @aviato/ui</Snippet>
         </Column>
       </ShowcaseComponent>
     </Page>
