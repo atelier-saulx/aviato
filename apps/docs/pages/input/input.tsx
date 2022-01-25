@@ -4,19 +4,18 @@ import {
   Row,
   Input,
   Page,
-  styled,
   getRandomIcon,
   InputVariant,
   useHasLoaded,
 } from '@aviato/ui'
 import { log, capitalize } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 10,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  BigSpacer,
+} from '../../components'
 
 /**
  * TODO: Fix SSR issue with Vector Icons!

@@ -1,17 +1,13 @@
-import { styled, Page, Checkbox, Text, Column, Row } from '@aviato/ui'
+import { Page, Checkbox, Text, Column, Row } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
-
-const Spacer = styled('div', {
-  width: 12,
-  height: 12,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  BigSpacer,
+  Spacer,
+} from '../../components'
 
 const CheckboxPage = () => {
   const ShowCheckboxes = () => {

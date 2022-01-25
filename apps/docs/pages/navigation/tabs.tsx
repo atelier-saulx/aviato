@@ -4,7 +4,6 @@ import {
   Page,
   Tabs,
   Tab,
-  styled,
   useHasLoaded,
   IconAperture,
   IconSchedule,
@@ -14,12 +13,12 @@ import {
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  BigSpacer,
+} from '../../components'
 
 const TabsPage = () => {
   const hasLoaded = useHasLoaded()

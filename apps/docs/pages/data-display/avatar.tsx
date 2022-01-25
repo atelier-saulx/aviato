@@ -1,11 +1,11 @@
-import { Column, Row, Page, Avatar, styled } from '@aviato/ui'
+import { Column, Row, Page, Avatar } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const SmallSpacer = styled('div', {
-  width: 10,
-  height: 10,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  SmallSpacer,
+} from '../../components'
 
 const AvatarPage = () => {
   const ShowAvatar = () => {
