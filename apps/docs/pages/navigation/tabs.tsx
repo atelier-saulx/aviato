@@ -10,6 +10,7 @@ import {
   IconSchedule,
   IconUploadCloud,
   IconEmail,
+  IconAttachment,
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
@@ -58,6 +59,9 @@ const TabsPage = () => {
               </Tab>
               <Tab value="resources" leftIcon={<IconEmail />} disabled>
                 Resources
+              </Tab>
+              <Tab value="files" leftIcon={<IconAttachment />}>
+                Files
               </Tab>
             </Tabs>
           </Row>
