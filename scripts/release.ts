@@ -1,9 +1,8 @@
 import path from "path";
 import simpleGit from "simple-git";
 import open from "open";
-import yargs from "yargs/yargs";
+import { Command } from "commander";
 import githubRelease from "new-github-release-url";
-import { hideBin } from "yargs/helpers";
 import { execa } from "execa";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
@@ -14,43 +13,37 @@ import packageJson from "../package.json";
 
 const git = simpleGit();
 
-const { argv }: { argv: any } = yargs(hideBin(process.argv))
-  .option("type", {
-    type: "string",
-    default: "patch",
-    description: "Type",
-  })
-  .option("tag", {
-    type: "string",
-    default: "latest",
-    description: "Tag",
-  })
-  .option("skip-build", {
-    type: "boolean",
-    default: false,
-    description: "Skip build step.",
-  })
-  .option("skip-version", {
-    type: "boolean",
-    default: false,
-    description: "Skip version increment step.",
-  })
-  .option("skip-publish", {
-    type: "boolean",
-    default: false,
-    description: "Skip publish step.",
-  })
-  .option("skip-commit", {
-    type: "boolean",
-    default: false,
-    description: "Skip commit step.",
-  })
-  .example([
-    ["$0 --skip-build", "Skip building packages."],
-    ["$0 minor", "Release minor update."],
-    ["$0 --type minor", "Release minor update."],
-    ["$0 --tag latest", "Release patch with latest tag."],
-  ]);
+const program = new Command();
+
+export type ReleaseOptions = {
+  tag: string;
+  build: boolean;
+  version: boolean;
+  publish: boolean;
+  commit: boolean;
+};
+
+const INCREMENT_TYPES: string[] = ["patch", "minor", "major"];
+
+let targetReleaseType = "patch";
+
+program
+  .version("0.1.0")
+  .argument("[release-type]", "Type of release", "patch")
+  .option("-T, --tag <type>", "Release tag name", "latest")
+  .option("-b, --no-build", "Skip building", false)
+  .option("-v, --no-version", "Skip version increment step", false)
+  .option("-p, --no-publish", "Skip publish step", false)
+  .option("-c, --no-commit", "Skip commit step", false)
+  .action((releaseType) => {
+    if (INCREMENT_TYPES.includes(releaseType)) {
+      targetReleaseType = releaseType;
+    }
+  });
+
+program.parse(process.argv);
+
+const options: ReleaseOptions = program.opts();
 
 (async () => {
   const status = await git.status();
@@ -61,22 +54,19 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
   }
 
   const {
-    type,
     tag,
-    skipBuild,
-    skipVersion: skipVersionIncrement,
-    skipPublish,
-    skipCommit,
-  } = argv;
-
-  const releaseType = argv._[0] ?? type;
+    build: createBuild,
+    version: incrementVersion,
+    publish: publishChanges,
+    commit: commitChanges,
+  } = options;
 
   console.info(`\n  Releasing packages! \n`);
 
   /**
    * Build project to ensure latest changes are present
    */
-  if (!skipBuild) {
+  if (createBuild) {
     try {
       await execa("yarn", ["build"], { stdio: "inherit" });
     } catch (error) {
@@ -90,10 +80,10 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
   /**
    * Increment all packages in project
    */
-  if (!skipVersionIncrement) {
+  if (incrementVersion) {
     targetVersion = getIncrementedVersion({
       version: packageJson.version,
-      type: releaseType,
+      type: targetReleaseType,
     });
 
     try {
@@ -109,17 +99,19 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
   /**
    * Publish all public packages in repository
    */
-  if (!skipPublish) {
+  if (publishChanges) {
     await publishAllPackagesInRepository({
       version: targetVersion,
       tag,
     });
+
+    console.info(`\n  Released version ${targetVersion} successfully! \n`);
   }
 
   /**
    * Stage and commit + push target version
    */
-  if (!skipCommit) {
+  if (commitChanges) {
     await git.add([
       path.join(__dirname, "../packages"),
       path.join(__dirname, "../apps"),
@@ -127,19 +119,17 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     ]);
 
     await git.commit(`[release] Version: ${targetVersion}`);
+
+    /**
+     * Open up a browser tab within github to publish new release
+     */
+    open(
+      githubRelease({
+        user: "atelier-saulx",
+        repo: "aviato-ui",
+        tag: targetVersion,
+        title: targetVersion,
+      })
+    );
   }
-
-  /**
-   * Open up a browser tab within github to publish new release
-   */
-  open(
-    githubRelease({
-      user: "atelier-saulx",
-      repo: "aviato-ui",
-      tag: targetVersion,
-      title: targetVersion,
-    })
-  );
-
-  console.info(`\n  Released version ${targetVersion} successfully! \n`);
 })();
