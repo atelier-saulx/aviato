@@ -1,8 +1,8 @@
-import { inDevEnvironment } from './misc'
+import { isProduction } from './misc'
 import { LogLevel, setupLogging, createConsoleAdapter } from '@aviato/utils'
 
 const setupApplicationLogging = () => {
-  const logLevel = inDevEnvironment ? LogLevel.DEBUG : LogLevel.ERROR
+  const logLevel = isProduction ? LogLevel.ERROR : LogLevel.DEBUG
   const adapters = [createConsoleAdapter()]
 
   setupLogging({

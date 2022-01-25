@@ -1,8 +1,7 @@
+import { isProduction } from '../utils'
 import { FeatureFlagConfig } from './types'
 
 export type FeatureFlag = 'DemoFlag' | 'ShowUnfinishedPages' // 'DemoFlag' | 'Flag2' | 'Etc'.
-
-const isProduction = process.env.NODE_ENV === 'production'
 
 const config = {
   DemoFlag: {
