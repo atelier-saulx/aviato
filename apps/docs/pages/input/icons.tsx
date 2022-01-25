@@ -34,7 +34,27 @@ const IconsPage = () => {
         Aviato provides multiple ways to use icons in your project
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { IconPlus, icons } from '@aviato/ui'
+
+const TestComponent = () => {
+  return <IconPlus />
+}
+
+Object.keys(icons).forEach((iconName) => {
+  console.log('Icon name: ', iconName)
+})
+
+const OtherTestComponent = () => {
+  const { IconPlus } = icons
+
+  return <IconPlus />
+}
+
+      `}
+      >
         <Column
           css={{
             flexWrap: 'wrap',
@@ -54,7 +74,7 @@ const IconsPage = () => {
                   return (
                     <GridItem key={`GridItem-${index}`}>
                       <Tooltip label={key}>
-                        <Icon />
+                        <Icon width={16} height={16} />
                       </Tooltip>
                     </GridItem>
                   )
