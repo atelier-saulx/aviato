@@ -4,7 +4,7 @@ module.exports = {
   distDir: 'dist',
 
   env: {
-    ENVIRONMENT: process.env.ENVIRONMENT,
+    ENV: process.env.ENVIRONMENT ?? 'development',
     FLAGS: process.env.FLAGS ?? 'none',
   },
 }

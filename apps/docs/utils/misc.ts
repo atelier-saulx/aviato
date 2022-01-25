@@ -15,7 +15,7 @@ const initialiseApplication = () => {
   log.debug('Application has been started.')
 
   const environment = {
-    ENVIRONMENT: process.env.ENVIRONMENT,
+    ENV: process.env.ENV,
     NODE_ENV: process.env.NODE_ENV,
   }
 
