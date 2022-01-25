@@ -1,4 +1,5 @@
 import { Column, Row, Page, Tabs, Tab } from '@aviato/ui'
+import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -8,11 +9,15 @@ const TabsPage = () => {
       <>
         <Column>
           <Row>
-            <Tabs>
-              <Tab>Components</Tab>
-              <Tab>Design</Tab>
-              <Tab>Docs</Tab>
-              <Tab>Resources</Tab>
+            <Tabs
+              onChange={(value, payload) => {
+                log.global.debug('Tab change: ', { value, payload })
+              }}
+            >
+              <Tab value="components">Components</Tab>
+              <Tab value="design">Design</Tab>
+              <Tab value="docs">Docs</Tab>
+              <Tab value="resources">Resources</Tab>
             </Tabs>
           </Row>
         </Column>
@@ -28,7 +33,7 @@ const TabsPage = () => {
         Switch between different views, features and environments.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent>
         <ShowTabs />
       </ShowcaseComponent>
     </Page>

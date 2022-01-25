@@ -58,11 +58,12 @@ const mappedPositions = {
 }
 
 export type GroupPosition = 'left' | 'center' | 'right' | 'apart'
+export type GroupDirection = 'row' | 'column'
 
 export interface GroupProps extends ComponentProps<typeof StyledGroup> {
-  direction?: 'row' | 'column'
-  align?: CSSProperties['alignItems']
+  direction?: GroupDirection
   position?: GroupPosition
+  align?: CSSProperties['alignItems']
   wrap?: boolean
   grow?: boolean
   spacing?: Size
