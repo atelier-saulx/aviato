@@ -1,7 +1,23 @@
-import { Column, Row, Page, ToggleGroup, ToggleItem } from '@aviato/ui'
+import {
+  Column,
+  Row,
+  Page,
+  ToggleGroup,
+  ToggleItem,
+  styled,
+  IconAlignLeft,
+  IconAlignCenter,
+  IconAlignRight,
+  IconAlignJustify,
+} from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
 
 const ToggleGroupPage = () => {
   const ShowToggleGroup = () => {
@@ -19,6 +35,25 @@ const ToggleGroupPage = () => {
               <ToggleItem value="second">Second</ToggleItem>
               <ToggleItem value="third">Third</ToggleItem>
               <ToggleItem value="fourth">Fourth</ToggleItem>
+            </ToggleGroup>
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <ToggleGroup defaultValue="first">
+              <ToggleItem value="first">
+                <IconAlignLeft />
+              </ToggleItem>
+              <ToggleItem value="second">
+                <IconAlignCenter />
+              </ToggleItem>
+              <ToggleItem value="third">
+                <IconAlignRight />
+              </ToggleItem>
+              <ToggleItem value="fourth">
+                <IconAlignJustify />
+              </ToggleItem>
             </ToggleGroup>
           </Row>
         </Column>
