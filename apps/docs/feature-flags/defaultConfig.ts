@@ -1,5 +1,6 @@
-import { isProduction } from '../utils'
 import { FeatureFlagConfig } from './types'
+
+const isProduction: boolean = process.env.NODE_ENV === 'production'
 
 export type FeatureFlag = 'DemoFlag' | 'ShowUnfinishedPages' // 'DemoFlag' | 'Flag2' | 'Etc'.
 
