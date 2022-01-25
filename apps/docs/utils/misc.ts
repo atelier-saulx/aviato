@@ -2,12 +2,6 @@ import { log } from '@aviato/utils'
 import { featureFlags } from '../feature-flags'
 import { setupApplicationLogging } from './log'
 
-let isProduction = false
-
-if (process && process.env.NODE_ENV === 'production') {
-  isProduction = true
-}
-
 const initialiseApplication = () => {
   setupApplicationLogging()
   featureFlags.initialise()
@@ -22,4 +16,4 @@ const initialiseApplication = () => {
   log.global.debug('Environment: ', environment)
 }
 
-export { initialiseApplication, isProduction }
+export { initialiseApplication }
