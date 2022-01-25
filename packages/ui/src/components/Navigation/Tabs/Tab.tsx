@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementRef } from 'react'
+import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
@@ -33,15 +33,28 @@ const Indicator = styled('div', {
 export interface TabProps extends ComponentProps<typeof StyledTab> {
   value?: string
   isActive?: boolean
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
 }
 
 export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
   (properties, forwardedRef) => {
-    const { children, isActive = false, ...remainingProps } = properties
+    const {
+      children,
+      isActive = false,
+      leftIcon = null,
+      rightIcon = null,
+      ...remainingProps
+    } = properties
 
     return (
       <StyledTab ref={forwardedRef} {...remainingProps}>
-        <Button type="ghost" variant="transparent">
+        <Button
+          type="ghost"
+          variant="transparent"
+          leftIcon={leftIcon}
+          rightIcon={rightIcon}
+        >
           {children}
         </Button>
 

@@ -1,9 +1,32 @@
-import { Column, Row, Page, Tabs, Tab } from '@aviato/ui'
+import {
+  Column,
+  Row,
+  Page,
+  Tabs,
+  Tab,
+  styled,
+  useHasLoaded,
+  IconAperture,
+  IconSchedule,
+  IconUploadCloud,
+  IconCheckCircle,
+  IconEmail,
+} from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
+const BigSpacer = styled('div', {
+  width: '100%',
+  height: 20,
+})
+
 const TabsPage = () => {
+  const hasLoaded = useHasLoaded()
+  if (!hasLoaded) {
+    return null
+  }
+
   const ShowTabs = () => {
     return (
       <>
@@ -18,6 +41,25 @@ const TabsPage = () => {
               <Tab value="design">Design</Tab>
               <Tab value="docs">Docs</Tab>
               <Tab value="resources">Resources</Tab>
+            </Tabs>
+          </Row>
+
+          <BigSpacer />
+
+          <Row>
+            <Tabs>
+              <Tab value="components" leftIcon={<IconAperture />}>
+                Components
+              </Tab>
+              <Tab value="design" leftIcon={<IconSchedule />}>
+                Design
+              </Tab>
+              <Tab value="docs" leftIcon={<IconUploadCloud />}>
+                Docs
+              </Tab>
+              <Tab value="resources" leftIcon={<IconEmail />}>
+                Resources
+              </Tab>
             </Tabs>
           </Row>
         </Column>
