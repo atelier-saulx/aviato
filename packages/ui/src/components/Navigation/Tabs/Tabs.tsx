@@ -16,7 +16,7 @@ import { findInitialTab, getNextTab, getPreviousTab } from './utils'
 import { onChange } from '~/types'
 
 type CaptureEvent = KeyboardEvent<HTMLDivElement>
-type Direction = 'left' | 'right'
+type Direction = 'left' | 'right' | 'none'
 
 const StyledTabs = styled('div', {
   position: 'relative',
@@ -51,7 +51,7 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
 
     const tabChildren = filterChildrenByType(children, Tab)
 
-    const [_activeTab, setActiveTabIndex] = useUncontrolled({
+    const [_activeTabIndex, setActiveTabIndex] = useUncontrolled({
       value: active,
       defaultValue: initialTab,
       finalValue: findInitialTab(tabChildren),
@@ -59,8 +59,8 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
       onChange: () => {},
     })
 
-    const activeTab = clamp({
-      value: _activeTab,
+    const activeTabIndex = clamp({
+      value: _activeTabIndex,
       min: 0,
       max: tabChildren.length - 1,
     })
@@ -86,15 +86,12 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
     const handleKeyDown = (event: CaptureEvent) => {
       const { code } = event?.nativeEvent ?? {}
 
-      if (code === 'Enter') {
-        return event.preventDefault()
-      }
-
       const keyMap: { [key: string]: Direction } = {
         ArrowDown: 'left',
         ArrowLeft: 'left',
         ArrowUp: 'right',
         ArrowRight: 'right',
+        Enter: 'none',
       }
 
       const direction = keyMap[code]
@@ -112,29 +109,44 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
     }) => {
       event.preventDefault()
 
-      if (direction === 'left') {
-        const previousTab = getPreviousTab(activeTab, tabChildren)
-        setActiveTabIndex(previousTab)
-      } else {
-        const nextTab = getNextTab(activeTab, tabChildren)
-        setActiveTabIndex(nextTab)
-      }
+      const targetIndex =
+        direction === 'left'
+          ? getPreviousTab(activeTabIndex, tabChildren)
+          : direction === 'right'
+          ? getNextTab(activeTabIndex, tabChildren)
+          : activeTabIndex
+
+      setActiveTab({
+        index: targetIndex,
+        event,
+      })
+    }
+
+    const setActiveTab = ({
+      index,
+      event,
+    }: {
+      index: number
+      event: CaptureEvent | SyntheticEvent
+    }) => {
+      event.preventDefault()
+
+      const targetChild = tabChildren[index]
+      const { value } = targetChild?.props ?? {}
+      const targetValue = value ?? index
+
+      handleChange({ value: targetValue, index, event })
+      setActiveTabIndex(index)
     }
 
     const mappedTabChildren = tabChildren.map((tab, index) => {
       return cloneElement(tab, {
         name: uuid,
         key: `TabItem-${index}`,
-        isActive: activeTab === index,
+        isActive: activeTabIndex === index,
         onKeyDown: (event) => handleKeyDown(event),
         onClick: (event: SyntheticEvent) => {
-          const targetChild = tabChildren[index]
-          const { value } = targetChild?.props ?? {}
-          const targetValue = value ?? index
-
-          handleChange({ value: targetValue, index, event })
-
-          return setActiveTabIndex(index)
+          return setActiveTab({ index, event })
         },
       })
     })
