@@ -1,4 +1,4 @@
-import { logInfo, logError } from './utils.mjs'
+import { logInfo, logError } from './utils'
 import { exec } from 'promisify-child-process'
 import fs from 'fs-extra'
 import path from 'path'

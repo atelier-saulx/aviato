@@ -1,12 +1,7 @@
-import { Column, Row, Select, Page, styled } from '@aviato/ui'
+import { Column, Row, Select, Page } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
 
 const SelectPage = () => {
   const ShowSelect = () => {
@@ -18,25 +13,6 @@ const SelectPage = () => {
               placeholder="Select a thing"
               label="This is a label"
               description="This is a description"
-              onChange={(value, payload) => {
-                log.global.debug('Select change: ', { value, payload })
-              }}
-              data={[
-                { value: 'flurpy', label: 'Flurpy' },
-                { value: 'snark', label: 'Snark' },
-                { value: 'snorkles', label: 'Snorkles' },
-              ]}
-            />
-          </Row>
-
-          <BigSpacer />
-
-          <Row css={{ width: '100%' }}>
-            <Select
-              placeholder="Search for a thing"
-              label="This is a label"
-              description="This is a description"
-              searchable
               onChange={(value, payload) => {
                 log.global.debug('Select change: ', { value, payload })
               }}

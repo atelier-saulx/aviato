@@ -1,25 +1,7 @@
 import type { NextPage } from 'next'
-import { styled, Page } from '@aviato/ui'
+import { Page, Column, Row } from '@aviato/ui'
 
-import { NextTitle, NextText } from '../components'
-
-const Container = styled('div', {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-})
-
-const Row = styled('div', {
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'no-wrap',
-})
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
+import { NextTitle, NextText, BigSpacer } from '../components'
 
 const Home: NextPage = () => {
   const Line = ({ children }: any) => {
@@ -47,7 +29,7 @@ const Home: NextPage = () => {
 
       <BigSpacer />
 
-      <Container>
+      <Column>
         <Row>
           <NextText weight="bold" size="large">
             Features
@@ -58,7 +40,7 @@ const Home: NextPage = () => {
         <Line>🛡 - Written in TypeScript with predictable static types.</Line>
         <Line>🎨 - Powerful theme customization.</Line>
         <Line>🪝 - Contains a comprehensive collection of basic Hooks.</Line>
-      </Container>
+      </Column>
     </Page>
   )
 }

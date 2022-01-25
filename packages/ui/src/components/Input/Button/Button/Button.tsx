@@ -3,9 +3,10 @@ import React, {
   ReactNode,
   ElementRef,
   MouseEventHandler,
+  useCallback,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { isText } from '@aviato/utils'
+import { isText, noop } from '@aviato/utils'
 
 import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
@@ -241,6 +242,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       disabled = false,
       leftIcon = null,
       rightIcon = null,
+      onClick = noop,
       children,
       ...remainingProps
     } = properties
@@ -263,12 +265,24 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       children
     )
 
+    const handleClick = useCallback(
+      (event) => {
+        if (disabled) {
+          return noop()
+        }
+
+        return onClick(event)
+      },
+      [disabled]
+    )
+
     return (
       <StyledButton
         type={type}
         disabled={disabled}
         className={classes}
         ref={forwardedRef}
+        onClick={(event) => handleClick(event)}
         {...remainingProps}
       >
         <Conditional test={leftIcon}>

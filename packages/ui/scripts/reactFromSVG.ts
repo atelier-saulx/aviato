@@ -1,6 +1,6 @@
 import { exec } from 'promisify-child-process'
-import { logInfo, logError } from './utils.mjs'
-import { startIconFormatting } from './formatSVG.mjs'
+import { logInfo, logError } from './utils'
+import { startIconFormatting } from './formatSVG'
 import fs from 'fs-extra'
 import path from 'path'
 

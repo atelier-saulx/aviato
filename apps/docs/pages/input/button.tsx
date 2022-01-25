@@ -9,22 +9,17 @@ import {
   IconButton,
   getRandomIcon,
   getRandomIconName,
-  styled,
   useHasLoaded,
 } from '@aviato/ui'
 import { log, capitalize } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const Spacer = styled('div', {
-  width: 6,
-  height: 20,
-})
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 20,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  BigSpacer,
+  Spacer,
+} from '../../components'
 
 /**
  * TODO: Fix SSR issue with Vector Icons!

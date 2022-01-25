@@ -1,16 +1,12 @@
-import { Column, Row, Slider, Page, styled } from '@aviato/ui'
+import { Column, Row, Slider, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const SmallSpacer = styled('div', {
-  width: '100%',
-  height: 30,
-})
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 50,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  SmallSpacer,
+  HugeSpacer,
+} from '../../components'
 
 const SliderPage = () => {
   const simpleMarks = [
@@ -44,7 +40,7 @@ const SliderPage = () => {
             <Slider />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>
             Clamp steps to increment of 10, do not show label when hovering.
@@ -53,7 +49,7 @@ const SliderPage = () => {
             <Slider step={10} showLabelOnHover={false} marks={simpleMarks} />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>Negative values are fine (min -10, max 10).</NextText>
           <Row>
@@ -65,7 +61,7 @@ const SliderPage = () => {
             />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>Example with percentage marks, always show label.</NextText>
           <SmallSpacer />
@@ -84,7 +80,7 @@ const SliderPage = () => {
             />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>
             Example with large steps; default to 50, steps of 25.
@@ -103,7 +99,7 @@ const SliderPage = () => {
             />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>Above example without smooth-dragging.</NextText>
           <Row>
@@ -121,7 +117,7 @@ const SliderPage = () => {
             />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>Custom label format.</NextText>
           <SmallSpacer />
@@ -133,7 +129,7 @@ const SliderPage = () => {
             />
           </Row>
 
-          <BigSpacer />
+          <HugeSpacer />
 
           <NextText>Custom mark label setup.</NextText>
           <SmallSpacer />

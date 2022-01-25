@@ -6,7 +6,7 @@ import {
   logProgress,
   logWarning as utilsLogWarning,
   logError,
-} from './utils.mjs'
+} from './utils'
 
 import ora from 'ora'
 import _ from 'lodash'
@@ -124,7 +124,7 @@ async function parseTokens() {
   await Promise.all(writeFilesPromises)
 }
 
-function getPropertyRecursive({ object, property, parent = {} }) {
+function getPropertyRecursive({ object, property, parent = {} }: any) {
   let values = {}
 
   _.each(object, (value, key) => {
@@ -135,7 +135,7 @@ function getPropertyRecursive({ object, property, parent = {} }) {
         parent: value,
       })
     } else if (value === 'color') {
-      values = parent.value
+      values = (parent as any).value
     }
   })
 
@@ -230,7 +230,7 @@ function lookupVariablesAndReplace(object) {
           if (partial.includes(',')) {
             const splitPartial = partial.split(',')
             const token = splitPartial[0]
-            let matchingToken = findToken(token, object)
+            let matchingToken = findToken(token, object) as any
             if (matchingToken) {
               if (matchingToken.includes('#')) {
                 matchingToken = convertHexToRGBA(matchingToken)

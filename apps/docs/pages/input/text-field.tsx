@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Column, Row, TextField, Page, styled, InputVariant } from '@aviato/ui'
+import { Column, Row, TextField, Page, InputVariant } from '@aviato/ui'
 import { log, capitalize } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
-
-const BigSpacer = styled('div', {
-  width: '100%',
-  height: 10,
-})
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  BigSpacer,
+} from '../../components'
 
 const TextFieldPage = () => {
   const ShowTextField = ({ variant }: { variant: InputVariant }) => {

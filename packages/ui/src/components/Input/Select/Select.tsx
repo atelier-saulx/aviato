@@ -157,7 +157,9 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
     const handleInputKeydown = (
       event: React.KeyboardEvent<HTMLInputElement>
     ) => {
-      switch (event.nativeEvent.code) {
+      const { code } = event?.nativeEvent ?? {}
+
+      switch (code) {
         case 'ArrowUp': {
           event.preventDefault()
 

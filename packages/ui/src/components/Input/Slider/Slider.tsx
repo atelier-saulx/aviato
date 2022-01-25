@@ -129,7 +129,7 @@ export const Slider = forwardRef<ElementRef<typeof StyledSlider>, SliderProps>(
     }
 
     const handleKeydownCapture = (event: KeyboardEvent<HTMLDivElement>) => {
-      const { code } = event.nativeEvent
+      const { code } = event?.nativeEvent ?? {}
 
       const keyMap: { [key: string]: Direction } = {
         ArrowDown: 'left',

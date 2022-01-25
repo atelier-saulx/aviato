@@ -1,14 +1,12 @@
 import React, {
   forwardRef,
-  Children,
   cloneElement,
   ChangeEvent,
   ElementRef,
   useEffect,
-  ReactElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { noop } from '@aviato/utils'
+import { noop, filterChildrenByType } from '@aviato/utils'
 
 import { useUncontrolled, useUuid } from '~/hooks'
 import { styled } from '~/theme'
@@ -75,8 +73,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof Group>, RadioGroupProps>(
       rule: (value) => typeof value === 'string',
     })
 
-    const childrenArray = Children.toArray(children) as ReactElement[]
-    const radioChildren = childrenArray.filter((item) => item.type === Radio)
+    const radioChildren = filterChildrenByType(children, Radio)
 
     /**
      * Set default value if none is set.
