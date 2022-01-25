@@ -1,4 +1,4 @@
-import { Column, Row, Page } from '@aviato/ui'
+import { Column, Row, Page, Tabs, Tab } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -7,7 +7,14 @@ const TabsPage = () => {
     return (
       <>
         <Column>
-          <Row>Tabs</Row>
+          <Row>
+            <Tabs>
+              <Tab>Components</Tab>
+              <Tab>Design</Tab>
+              <Tab>Docs</Tab>
+              <Tab>Resources</Tab>
+            </Tabs>
+          </Row>
         </Column>
       </>
     )

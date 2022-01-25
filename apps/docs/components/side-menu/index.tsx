@@ -116,11 +116,6 @@ const dataDisplayMenuItems: MenuDataItems[] = [
     isMissing: true,
   },
   {
-    title: 'Tabs',
-    route: '/data-display/tabs',
-    isMissing: true,
-  },
-  {
     title: 'Table',
     route: '/data-display/table',
     isMissing: true,
@@ -156,6 +151,11 @@ const navigationMenuItems: MenuDataItems[] = [
   {
     title: 'Side Menu',
     route: '/navigation/side-menu',
+  },
+  {
+    title: 'Tabs',
+    route: '/navigation/tabs',
+    isMissing: true,
   },
   {
     title: 'Top Bar',
