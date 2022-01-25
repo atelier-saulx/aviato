@@ -3,6 +3,7 @@ import React, {
   ElementRef,
   cloneElement,
   SyntheticEvent,
+  KeyboardEvent,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { clamp, filterChildrenByType, noop } from '@aviato/utils'
@@ -11,8 +12,11 @@ import { styled } from '~/theme'
 import { Tab } from './Tab'
 import { useUncontrolled, useUuid } from '~/hooks'
 import { Group } from '~/components/Layout'
-import { findInitialTab } from './utils'
+import { findInitialTab, getNextTab, getPreviousTab } from './utils'
 import { onChange } from '~/types'
+
+type CaptureEvent = KeyboardEvent<HTMLDivElement>
+type Direction = 'left' | 'right'
 
 const StyledTabs = styled('div', {
   position: 'relative',
@@ -24,7 +28,7 @@ const StyledTabs = styled('div', {
 })
 
 export interface OnTabChange extends onChange {
-  value: string
+  value: string | number
 }
 
 type StitchedProps = Omit<ComponentProps<typeof StyledTabs>, 'onChange'>
@@ -32,7 +36,7 @@ type StitchedProps = Omit<ComponentProps<typeof StyledTabs>, 'onChange'>
 export interface TabsProps extends StitchedProps {
   initialTab?: number
   active?: number
-  onChange?: (value: string, payload: OnTabChange) => void
+  onChange?: (value: string | number, payload: OnTabChange) => void
 }
 
 export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
@@ -79,11 +83,50 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
       })
     }
 
+    const handleKeyDown = (event: CaptureEvent) => {
+      const { code } = event?.nativeEvent ?? {}
+
+      if (code === 'Enter') {
+        return event.preventDefault()
+      }
+
+      const keyMap: { [key: string]: Direction } = {
+        ArrowDown: 'left',
+        ArrowLeft: 'left',
+        ArrowUp: 'right',
+        ArrowRight: 'right',
+      }
+
+      const direction = keyMap[code]
+      if (direction) {
+        onKeyDown({ direction, event })
+      }
+    }
+
+    const onKeyDown = ({
+      direction,
+      event,
+    }: {
+      direction: Direction
+      event: CaptureEvent
+    }) => {
+      event.preventDefault()
+
+      if (direction === 'left') {
+        const previousTab = getPreviousTab(activeTab, tabChildren)
+        setActiveTabIndex(previousTab)
+      } else {
+        const nextTab = getNextTab(activeTab, tabChildren)
+        setActiveTabIndex(nextTab)
+      }
+    }
+
     const mappedTabChildren = tabChildren.map((tab, index) => {
       return cloneElement(tab, {
         name: uuid,
         key: `TabItem-${index}`,
         isActive: activeTab === index,
+        onKeyDown: (event) => handleKeyDown(event),
         onClick: (event: SyntheticEvent) => {
           if (activeTab === index) return
 

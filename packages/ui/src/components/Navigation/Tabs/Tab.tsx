@@ -48,7 +48,13 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
     } = properties
 
     return (
-      <StyledTab ref={forwardedRef} {...remainingProps}>
+      <StyledTab
+        role="tab"
+        aria-selected={isActive}
+        tabIndex={isActive ? 0 : -1}
+        ref={forwardedRef}
+        {...remainingProps}
+      >
         <Button
           type="ghost"
           variant="transparent"
