@@ -9,7 +9,6 @@ import {
   IconAperture,
   IconSchedule,
   IconUploadCloud,
-  IconCheckCircle,
   IconEmail,
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
