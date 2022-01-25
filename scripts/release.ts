@@ -43,9 +43,10 @@ program
       )}, it should be one of these values: ${INCREMENT_TYPES.join(", ")}`;
 
       console.error(errorMessage);
-
       process.exit(1);
     }
+
+    targetReleaseType = releaseType;
   });
 
 program.parse(process.argv);
@@ -60,6 +61,9 @@ const options: ReleaseOptions = program.opts();
     process.exit(1);
   }
 
+  console.info(`\n  Releasing Aviato...`);
+  console.info(`\n  Release type: ${chalk.blueBright(targetReleaseType)}`);
+
   const {
     tag,
     build: createBuild,
@@ -67,8 +71,6 @@ const options: ReleaseOptions = program.opts();
     publish: publishChanges,
     commit: commitChanges,
   } = options;
-
-  console.info(`\n  Releasing packages! \n`);
 
   /**
    * Build project to ensure latest changes are present
@@ -102,6 +104,8 @@ const options: ReleaseOptions = program.opts();
       process.exit(1);
     }
   }
+
+  console.info(`\n  Target version: ${chalk.greenBright(targetVersion)}`);
 
   /**
    * Publish all public packages in repository
@@ -139,4 +143,6 @@ const options: ReleaseOptions = program.opts();
       })
     );
   }
+
+  console.info(`\n  Release process has finished. \n`);
 })();
