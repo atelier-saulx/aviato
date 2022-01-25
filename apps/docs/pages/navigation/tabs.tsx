@@ -71,7 +71,8 @@ const TabsPage = () => {
       <NextTitle>Tabs</NextTitle>
 
       <NextText color="Secondary">
-        Switch between different views, features and environments.
+        Can be used to switch between different views, features and
+        environments.
       </NextText>
 
       <ShowcaseComponent>
