@@ -145,7 +145,7 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
         key: `TabItem-${index}`,
         isActive: activeTabIndex === index,
         onKeyDown: (event) => handleKeyDown(event),
-        onClick: (event: SyntheticEvent) => {
+        onClick: (event) => {
           return setActiveTab({ index, event })
         },
       })
