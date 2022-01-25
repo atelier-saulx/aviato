@@ -79,7 +79,20 @@ const TabsPage = () => {
         environments.
       </NextText>
 
-      <ShowcaseComponent>
+      <ShowcaseComponent
+        codeBlock={`
+<Tabs
+  onChange={(value, payload) => {
+    console.log('Tab change: ', { value, payload })
+  }}
+>
+  <Tab value="components">Components</Tab>
+  <Tab value="design">Design</Tab>
+  <Tab value="docs">Docs</Tab>
+  <Tab value="resources">Resources</Tab>
+</Tabs>
+      `}
+      >
         <ShowTabs />
       </ShowcaseComponent>
     </Page>
