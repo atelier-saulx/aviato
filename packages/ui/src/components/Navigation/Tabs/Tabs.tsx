@@ -128,8 +128,6 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
         isActive: activeTab === index,
         onKeyDown: (event) => handleKeyDown(event),
         onClick: (event: SyntheticEvent) => {
-          if (activeTab === index) return
-
           const targetChild = tabChildren[index]
           const { value } = targetChild?.props ?? {}
           const targetValue = value ?? index

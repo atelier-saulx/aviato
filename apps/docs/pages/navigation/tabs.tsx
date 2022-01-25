@@ -56,7 +56,7 @@ const TabsPage = () => {
               <Tab value="docs" leftIcon={<IconUploadCloud />}>
                 Docs
               </Tab>
-              <Tab value="resources" leftIcon={<IconEmail />}>
+              <Tab value="resources" leftIcon={<IconEmail />} disabled>
                 Resources
               </Tab>
             </Tabs>

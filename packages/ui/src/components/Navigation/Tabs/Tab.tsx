@@ -1,8 +1,15 @@
-import React, { forwardRef, ElementRef, ReactNode } from 'react'
+import React, {
+  forwardRef,
+  ElementRef,
+  ReactNode,
+  useCallback,
+  MouseEventHandler,
+} from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
 import { Button } from '~/components/Input'
+import { noop } from '@aviato/utils'
 
 const StyledTab = styled('div', {
   position: 'relative',
@@ -33,8 +40,10 @@ const Indicator = styled('div', {
 export interface TabProps extends ComponentProps<typeof StyledTab> {
   value?: string
   isActive?: boolean
+  disabled?: boolean
   leftIcon?: ReactNode
   rightIcon?: ReactNode
+  onClick?: MouseEventHandler<HTMLDivElement>
 }
 
 export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
@@ -44,8 +53,21 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
       isActive = false,
       leftIcon = null,
       rightIcon = null,
+      disabled = false,
+      onClick = noop,
       ...remainingProps
     } = properties
+
+    const handleClick = useCallback(
+      (event) => {
+        if (disabled) {
+          return noop()
+        }
+
+        return onClick(event)
+      },
+      [disabled]
+    )
 
     return (
       <StyledTab
@@ -60,6 +82,8 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
           variant="transparent"
           leftIcon={leftIcon}
           rightIcon={rightIcon}
+          disabled={disabled}
+          onClick={(event) => handleClick(event)}
         >
           {children}
         </Button>
