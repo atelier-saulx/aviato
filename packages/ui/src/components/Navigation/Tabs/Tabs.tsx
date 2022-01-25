@@ -1,7 +1,6 @@
 import React, {
   forwardRef,
   ElementRef,
-  cloneElement,
   SyntheticEvent,
   KeyboardEvent,
 } from 'react'
@@ -10,7 +9,7 @@ import { clamp, filterChildrenByType, noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Tab } from './Tab'
-import { useUncontrolled, useUuid } from '~/hooks'
+import { useUncontrolled } from '~/hooks'
 import { Group } from '~/components/Layout'
 import { findInitialTab, getNextTab, getPreviousTab } from './utils'
 import { onChange } from '~/types'
@@ -64,8 +63,6 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
       min: 0,
       max: tabChildren.length - 1,
     })
-
-    const uuid = useUuid({ prefix: 'tabs' })
 
     const handleChange = ({
       value,
@@ -132,24 +129,26 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
       event.preventDefault()
 
       const targetChild = tabChildren[index]
-      const { value } = targetChild?.props ?? {}
-      const targetValue = value ?? index
+      if (targetChild) {
+        const { value } = targetChild?.props ?? {}
+        const targetValue = value ?? index
 
-      handleChange({ value: targetValue, index, event })
-      setActiveTabIndex(index)
+        handleChange({ value: targetValue, index, event })
+        setActiveTabIndex(index)
+      }
     }
 
-    const mappedTabChildren = tabChildren.map((tab, index) => {
-      return cloneElement(tab, {
-        name: uuid,
-        key: `TabItem-${index}`,
-        isActive: activeTabIndex === index,
-        onKeyDown: (event) => handleKeyDown(event),
-        onClick: (event) => {
+    const TabChildren = tabChildren.map((tab, index) => (
+      <Tab
+        {...tab.props}
+        key={`TabItem-${index}`}
+        isActive={activeTabIndex === index}
+        onKeyDown={handleKeyDown}
+        onClick={(event) => {
           return setActiveTab({ index, event })
-        },
-      })
-    })
+        }}
+      />
+    ))
 
     return (
       <StyledTabs ref={forwardedRef} {...remainingProps}>
@@ -159,7 +158,7 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
           direction="row"
           spacing="xxl"
         >
-          {mappedTabChildren}
+          {TabChildren}
         </Group>
       </StyledTabs>
     )
