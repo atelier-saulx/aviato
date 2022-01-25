@@ -1,4 +1,6 @@
-import React, { forwardRef, ElementRef } from 'react'
+import React, { useState, forwardRef, ElementRef, useCallback } from 'react'
+import { LiveEditor } from 'react-live'
+import { noop } from '@aviato/utils'
 
 import { useClipboard } from '~/hooks'
 import { styled, useTheme } from '~/theme'
@@ -6,6 +8,7 @@ import { Tooltip } from '../../Feedback/Tooltip'
 import { CodeLanguage } from './types'
 import { CopyButton } from './CopyButton'
 import { getPrismTheme } from './theme'
+import { ComponentProps } from '@stitches/react'
 
 const StyledEditor = styled('div', {
   position: 'relative',
@@ -20,12 +23,14 @@ const TooltipContainer = styled('div', {
   zIndex: '2',
 })
 
-export interface EditorProps {
+type StitchedProps = Omit<ComponentProps<typeof StyledEditor>, 'onChange'>
+
+export interface EditorProps extends StitchedProps {
   language: CodeLanguage
-  readOnly?: boolean
   copyLabel?: string
   copiedLabel?: string
   children: string
+  onChange?: (value: string) => void
 }
 
 export const Editor = forwardRef<ElementRef<typeof StyledEditor>, EditorProps>(
@@ -35,6 +40,7 @@ export const Editor = forwardRef<ElementRef<typeof StyledEditor>, EditorProps>(
       copyLabel = 'Copy code',
       copiedLabel = 'Copied',
       children = '',
+      onChange = noop,
       ...remainingProps
     } = properties
 
@@ -43,7 +49,12 @@ export const Editor = forwardRef<ElementRef<typeof StyledEditor>, EditorProps>(
     const clipboard = useClipboard()
     const prismTheme = getPrismTheme(theme)
 
-    console.log('Editor: ', { language, prismTheme })
+    const [activeCode, setActiveCode] = useState(trimmedCode)
+
+    const handleChange = useCallback((value: string) => {
+      setActiveCode(value)
+      onChange(value)
+    }, [])
 
     return (
       <StyledEditor ref={forwardedRef} {...remainingProps}>
@@ -56,11 +67,19 @@ export const Editor = forwardRef<ElementRef<typeof StyledEditor>, EditorProps>(
           >
             <CopyButton
               wasCopied={clipboard.copied}
-              onClick={() => clipboard.copy(trimmedCode)}
+              onClick={() => clipboard.copy(activeCode)}
             />
           </Tooltip>
         </TooltipContainer>
-        Editor goes here
+
+        <LiveEditor
+          code={trimmedCode}
+          language={language}
+          theme={prismTheme}
+          onChange={(value) => {
+            handleChange(value)
+          }}
+        />
       </StyledEditor>
     )
   }
