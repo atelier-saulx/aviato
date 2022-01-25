@@ -1,5 +1,6 @@
 export * from './useClipboard'
 export * from './useEffectOnce'
+export * from './useImagePreloader'
 export * from './useMediaQuery'
 export * from './useMergedRef'
 export * from './useReducedMotion'

@@ -2,7 +2,8 @@ import React, { FunctionComponent } from 'react'
 
 import { styled } from '~/theme'
 import { Conditional } from '~/components'
-import useImagePreloader, { getLettersFromAlt } from './utils'
+import { getLettersFromAlt } from './utils'
+import { useImagePreloader } from '~/hooks'
 
 const StyledAvatar = styled('div', {
   display: 'flex',
