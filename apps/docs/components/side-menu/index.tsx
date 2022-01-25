@@ -155,7 +155,6 @@ const navigationMenuItems: MenuDataItems[] = [
   {
     title: 'Tabs',
     route: '/navigation/tabs',
-    isMissing: true,
   },
   {
     title: 'Top Bar',
