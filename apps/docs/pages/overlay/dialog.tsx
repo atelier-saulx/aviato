@@ -84,7 +84,7 @@ const DialogPage = () => {
 
   return (
     <Page>
-      <DialogProvider portal={document.body}>
+      <DialogProvider>
         <NextTitle>Dialog</NextTitle>
 
         <NextText color="Secondary">

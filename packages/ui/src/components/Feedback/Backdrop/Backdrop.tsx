@@ -1,5 +1,7 @@
 import React, { forwardRef, ElementRef, ComponentProps } from 'react'
-import { styled } from '~/theme'
+
+import { Portal } from '~/components/Utilities'
+import { getZIndex, styled } from '~/theme'
 
 const Container = styled('div', {
   backgroundColor: '$OtherOverlay',
@@ -10,13 +12,26 @@ const Container = styled('div', {
   bottom: 0,
 })
 
-export const Backdrop = forwardRef<
-  ElementRef<typeof Container>,
-  ComponentProps<typeof Container>
->(({ children, ...props }, forwardedRef) => {
-  return (
-    <Container ref={forwardedRef} {...props}>
-      {children}
-    </Container>
-  )
-})
+export interface BackdropProps extends ComponentProps<typeof Container> {
+  disablePortal?: boolean
+  zIndex?: number
+}
+
+export const Backdrop = forwardRef<ElementRef<typeof Container>, BackdropProps>(
+  (properties, forwardedRef) => {
+    const {
+      disablePortal = false,
+      zIndex = getZIndex('Overlay'),
+      children,
+      ...remainingProps
+    } = properties
+
+    return (
+      <Portal disablePortal={disablePortal} zIndex={zIndex}>
+        <Container ref={forwardedRef} {...remainingProps}>
+          {children}
+        </Container>
+      </Portal>
+    )
+  }
+)

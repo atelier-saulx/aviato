@@ -1,19 +1,20 @@
 import React, { ReactNode, ReactPortal, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useIsomorphicEffect } from '~/hooks'
+import { getZIndex } from '~/theme'
 
-export interface PortalProps {
+interface BasePortalProps {
   children: ReactNode
   zIndex?: number
   target?: HTMLElement | string
   className?: string
 }
 
-export function Portal({
+function BasePortal({
   children,
   zIndex = 1,
   target,
-}: PortalProps): ReactPortal {
+}: BasePortalProps): ReactPortal {
   const [mounted, setMounted] = useState(false)
   const ref = useRef<HTMLElement>()
 
@@ -43,4 +44,27 @@ export function Portal({
     <div style={{ position: 'relative', zIndex }}>{children}</div>,
     ref.current
   )
+}
+
+export interface PopperContainerProps {
+  /** PopperContainer children, for example, modal or popover */
+  children: React.ReactNode
+
+  /** Root element z-index property */
+  zIndex?: number
+
+  /** Whether to render the target element in a Portal */
+  disablePortal?: boolean
+}
+
+export function Portal({
+  children,
+  zIndex = getZIndex('Popover'),
+  disablePortal = true,
+}: PopperContainerProps) {
+  if (disablePortal) {
+    return <div style={{ position: 'relative', zIndex }}>{children}</div>
+  }
+
+  return <BasePortal zIndex={zIndex}>{children}</BasePortal>
 }

@@ -42,7 +42,7 @@ interface DialogItem {
   children: ReactNode
 }
 
-export const DialogProvider = ({ children, fixed = true, portal }) => {
+export const DialogProvider = ({ children, fixed = true }) => {
   const [length, setLength] = useState(0)
   const dialogsRef = useRef<DialogItem[]>()
   const dialogRef = useRef<DialogContextType>()
@@ -135,14 +135,11 @@ export const DialogProvider = ({ children, fixed = true, portal }) => {
       <Backdrop
         key={id}
         css={{
-          padding: 20,
           position: fixed ? 'fixed' : 'absolute',
-          // cursor: 'pointer',
-          // TEMP HACK UNITL WE HAVE PORTAL WORKING
-          zIndex: portal ? 999 : null,
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
+          padding: 20,
         }}
         onClick={(event) => {
           if (event.currentTarget === event.target) {
