@@ -3,7 +3,7 @@ import { SVGProperties } from '../types'
 
 const SvgPlaceholder = (props: SVGProperties) => {
   return (
-    <svg width={16} height={16} fill="none" viewBox="0 0 16 16" {...props}>
+    <svg width={32} height={32} fill="none" viewBox="0 0 32 32" {...props}>
       <path
         fill="currentColor"
         fillOpacity={0.6}

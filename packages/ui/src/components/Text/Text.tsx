@@ -44,6 +44,7 @@ export interface TextProps extends ComponentProps<typeof StyledText> {
   size?: TextSize
   weight?: FontWeight
   color?: FontColor
+  as?: any
 }
 
 export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(

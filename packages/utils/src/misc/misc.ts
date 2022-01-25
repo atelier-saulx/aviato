@@ -36,3 +36,25 @@ export function getRandomId(prefix?: string) {
 
   return `${Math.random().toString(36).substr(2, 9)}`
 }
+
+/**
+ * Preload image
+ *
+ * @param src - image source
+ * @returns promise
+ */
+export function preloadImage(src: string) {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+
+    img.onload = function () {
+      resolve(img)
+    }
+
+    img.onerror = img.onabort = function () {
+      reject(src)
+    }
+
+    img.src = src
+  })
+}
