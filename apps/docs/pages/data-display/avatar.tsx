@@ -106,7 +106,18 @@ const AvatarPage = () => {
         Display user profile image, initials or fallback icon.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { Avatar } from '@aviato/ui'
+
+<Avatar
+  src="https://picsum.photos/36/36"
+  alt="Image text"
+  size="large"
+/>
+      `}
+      >
         <ShowAvatar />
       </ShowcaseComponent>
     </Page>

@@ -33,6 +33,8 @@ const SwitchPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { Switch } from '@aviato/ui'
+
 <Switch
   label="This is a switch"
   description="With a description"

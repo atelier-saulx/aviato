@@ -67,7 +67,19 @@ const ImagePage = () => {
 
       <NextText color="Secondary">Show an image in your app.</NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { Image } from '@aviato/ui'
+
+<Image
+  src="https://i.pinimg.com/564x/13/59/44/1359448657b6bb68d565a2e6ddfc0b21.jpg"
+  alt="Ryan Jones - Pain"
+  width={200}
+  caption="Ryan Jones ‘Pain’ album cover"
+/>
+      `}
+      >
         <ShowImage />
       </ShowcaseComponent>
     </Page>

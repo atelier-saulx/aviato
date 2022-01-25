@@ -147,6 +147,8 @@ const ButtonPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { Button, IconButton } from '@aviato/ui'
+
 <Button
   type='primary'
   variant={'filled' | 'outlined' | 'transparent'}

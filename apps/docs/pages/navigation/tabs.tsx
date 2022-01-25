@@ -80,6 +80,8 @@ const TabsPage = () => {
 
       <ShowcaseComponent
         codeBlock={`
+import { Tabs } from '@aviato/ui'
+
 <Tabs
   onChange={(value, payload) => {
     console.log('Tab change: ', { value, payload })

@@ -88,6 +88,8 @@ const CheckboxPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { Checkbox } from '@aviato/ui'
+
 <Checkbox
   label="Accept terms and conditions"
   onChange={(value, payload) => {

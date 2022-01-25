@@ -81,6 +81,8 @@ const RadioGroupPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { RadioGroup } from '@aviato/ui'
+
 <RadioGroup
   label="Controlled example"
   description="Select Thing 1 to see an error"

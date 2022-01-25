@@ -159,6 +159,8 @@ const SliderPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { Slider } from '@aviato/ui'
+
 <Slider
   defaultValue={0 | 50}
   step={1 | 25}
