@@ -3,6 +3,7 @@ import simpleGit from "simple-git";
 import open from "open";
 import { Command } from "commander";
 import githubRelease from "new-github-release-url";
+import chalk from "chalk";
 import { execa } from "execa";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
@@ -36,8 +37,14 @@ program
   .option("-p, --no-publish", "Skip publish step", false)
   .option("-c, --no-commit", "Skip commit step", false)
   .action((releaseType) => {
-    if (INCREMENT_TYPES.includes(releaseType)) {
-      targetReleaseType = releaseType;
+    if (!INCREMENT_TYPES.includes(releaseType)) {
+      const errorMessage = `Incorrect release type: ${chalk.red(
+        releaseType
+      )}, it should be one of these values: ${INCREMENT_TYPES.join(", ")}`;
+
+      console.error(errorMessage);
+
+      process.exit(1);
     }
   });
 
