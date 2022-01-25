@@ -38,7 +38,6 @@
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
   "dependencies": {
-    "new-github-release-url": "^2.0.0",
     "turbo": "1.0.28"
   },
   "devDependencies": {
@@ -48,6 +47,7 @@
     "execa": "^6.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
+    "new-github-release-url": "^2.0.0",
     "open": "^8.4.0",
     "rimraf": "^3.0.2",
     "shx": "^0.3.3",
