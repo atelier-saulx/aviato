@@ -23,6 +23,14 @@ const LinkPage = () => {
               Visit aviato
             </Link>
           </Row>
+
+          <SmallSpacer />
+
+          <Row>
+            <Link href="https://aviato.design" useIcon underline>
+              Visit aviato
+            </Link>
+          </Row>
         </Column>
       </>
     )

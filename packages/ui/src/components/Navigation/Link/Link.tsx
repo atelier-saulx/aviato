@@ -1,17 +1,18 @@
 import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { StitchedCSS, styled } from '~/theme'
+import { styled } from '~/theme'
 import { Conditional, IconExternalLink, Text } from '~/components'
 
 const StyledLink = styled('a', {
+  position: 'relative',
   color: '$TextPrimary',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
 })
 
-const LinkCSS: StitchedCSS = {
+const UnderlinedText = styled(Text, {
   position: 'relative',
 
   '&:hover': {
@@ -25,7 +26,23 @@ const LinkCSS: StitchedCSS = {
       bottom: 2,
     },
   },
-}
+
+  variants: {
+    underline: {
+      true: {
+        '&::before': {
+          content: `''`,
+          display: 'block',
+          backgroundColor: 'currentColor',
+          position: 'absolute',
+          width: '100%',
+          height: 1,
+          bottom: 2,
+        },
+      },
+    },
+  },
+})
 
 const IconContainer = styled('div', {
   display: 'flex',
@@ -35,12 +52,13 @@ const IconContainer = styled('div', {
   height: 16,
   marginLeft: 6,
   cursor: 'pointer',
-  color: 'inherit',
+  color: '$TextPrimary',
 })
 
 export interface LinkProps extends ComponentProps<typeof StyledLink> {
   children: ReactNode
   useIcon?: boolean
+  underline?: boolean
   icon?: ReactNode
 }
 
@@ -49,15 +67,16 @@ export const Link = forwardRef<ElementRef<typeof StyledLink>, LinkProps>(
     const {
       icon = <IconExternalLink />,
       useIcon = false,
+      underline = false,
       children,
       ...remainingProps
     } = properties
 
     return (
       <StyledLink ref={forwardedRef} {...remainingProps}>
-        <Text color="Inherit" css={LinkCSS}>
+        <UnderlinedText color="Inherit" underline={underline}>
           {children}
-        </Text>
+        </UnderlinedText>
 
         <Conditional test={useIcon}>
           <IconContainer>{icon}</IconContainer>
