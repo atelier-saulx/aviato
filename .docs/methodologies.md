@@ -24,7 +24,7 @@ Example:
   css={{
     display: "flex",
     justifyContent: "center",
-    alignContent: "center",
+    alignItems: "center",
     width: 200,
     height: 200,
   }}

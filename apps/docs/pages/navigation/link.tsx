@@ -1,13 +1,28 @@
-import { Column, Row, Page } from '@aviato/ui'
+import { Column, Row, Page, Link } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  SmallSpacer,
+} from '../../components'
 
 const LinkPage = () => {
   const ShowLink = () => {
     return (
       <>
         <Column>
-          <Row>Link</Row>
+          <Row>
+            <Link href="https://aviato.design">Visit aviato</Link>
+          </Row>
+
+          <SmallSpacer />
+
+          <Row>
+            <Link href="https://aviato.design" useIcon>
+              Visit aviato
+            </Link>
+          </Row>
         </Column>
       </>
     )

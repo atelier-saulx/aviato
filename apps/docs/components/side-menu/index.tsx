@@ -144,12 +144,10 @@ const navigationMenuItems: MenuDataItems[] = [
   {
     title: 'Breadcrumbs',
     route: '/navigation/breadcrumbs',
-    isMissing: true,
   },
   {
     title: 'Link',
     route: '/navigation/link',
-    isMissing: true,
   },
   {
     title: 'Side Menu',
