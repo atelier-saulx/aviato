@@ -4,6 +4,8 @@ export type FontColor =
   | 'Secondary'
   | 'Disabled'
   | 'Error'
+  | 'PrimaryContrastHigh'
+  | 'PrimaryMain'
 
 export type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
 
