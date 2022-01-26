@@ -45,9 +45,6 @@ const UnderlinedText = styled(Text, {
 })
 
 const IconContainer = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignContent: 'center',
   width: 16,
   height: 16,
   marginLeft: 6,
