@@ -6,15 +6,15 @@ import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
 import { AviatoLogo } from '../logo'
 import { featureFlags } from '../../feature-flags/featureFlags'
 
-type MenuDataItems = {
+interface MenuDataItem {
   title: string
   route?: string
-  startOpen?: boolean
   isMissing?: boolean
-  subMenu?: MenuDataItems[]
+  subMenu?: MenuDataItem[]
+  startOpen?: boolean
 }
 
-const inputMenuItems: MenuDataItems[] = [
+const inputMenuItems: MenuDataItem[] = [
   {
     title: 'Button',
     route: '/input/button',
@@ -67,7 +67,7 @@ const inputMenuItems: MenuDataItems[] = [
   },
 ]
 
-const dataDisplayMenuItems: MenuDataItems[] = [
+const dataDisplayMenuItems: MenuDataItem[] = [
   {
     title: 'Accordion',
     route: '/data-display/accordion',
@@ -125,7 +125,7 @@ const dataDisplayMenuItems: MenuDataItems[] = [
   },
 ]
 
-const feedbackMenuItems: MenuDataItems[] = [
+const feedbackMenuItems: MenuDataItem[] = [
   {
     title: 'Alert',
     route: '/feedback/alert',
@@ -140,7 +140,7 @@ const feedbackMenuItems: MenuDataItems[] = [
   },
 ]
 
-const navigationMenuItems: MenuDataItems[] = [
+const navigationMenuItems: MenuDataItem[] = [
   {
     title: 'Breadcrumbs',
     route: '/navigation/breadcrumbs',
@@ -164,7 +164,7 @@ const navigationMenuItems: MenuDataItems[] = [
   },
 ]
 
-const overlayMenuItems: MenuDataItems[] = [
+const overlayMenuItems: MenuDataItem[] = [
   {
     title: 'Context Menu',
     route: '/overlay/context-menu',
@@ -185,38 +185,38 @@ const overlayMenuItems: MenuDataItems[] = [
   },
 ]
 
-const rootMenu: MenuDataItems[] = [
+const rootMenu: MenuDataItem[] = [
   {
     title: 'Introduction',
     route: '/',
   },
   {
     title: 'Components',
-    route: '/components',
     subMenu: [
       {
         title: 'Input',
-        startOpen: true,
+        route: '/input',
         subMenu: inputMenuItems,
+        startOpen: true,
       },
       {
         title: 'Data Display',
-        startOpen: true,
+        route: '/data-display',
         subMenu: dataDisplayMenuItems,
       },
       {
         title: 'Feedback',
-        startOpen: true,
+        route: '/feedback',
         subMenu: feedbackMenuItems,
       },
       {
         title: 'Navigation',
-        startOpen: true,
+        route: '/navigation',
         subMenu: navigationMenuItems,
       },
       {
         title: 'Overlay',
-        startOpen: true,
+        route: '/overlay',
         subMenu: overlayMenuItems,
       },
     ],
@@ -233,12 +233,31 @@ const HeaderDiv = styled('div', {
   color: '$Primary',
 })
 
-function getMenuItems(menu: MenuDataItems[]) {
-  const filteredMenu = menu
+const hasActiveRoute = (item: MenuDataItem, activeRoute: string): boolean => {
+  const itemRoute = item?.route?.replace(/\//g, '')
+  const targetRoute = activeRoute.replace(/\//g, '')
+
+  const hasActiveRoute = itemRoute !== '' && targetRoute.includes(itemRoute)
+  return hasActiveRoute
+}
+
+function getMenuItems({
+  targetMenu,
+  activeRoute,
+}: {
+  targetMenu?: MenuDataItem[]
+  activeRoute: string
+}) {
+  if (!targetMenu) {
+    return undefined
+  }
+
+  const filteredMenu = targetMenu
     .map((item) => {
-      if (item.subMenu) {
-        item.subMenu = getMenuItems(item.subMenu)
-      }
+      item.subMenu = getMenuItems({
+        targetMenu: item.subMenu,
+        activeRoute,
+      })
 
       if (!featureFlags.isEnabled('ShowUnfinishedPages')) {
         if (item.isMissing) {
@@ -289,52 +308,53 @@ const MainSideMenu = withRouter(({ router }) => {
     [router]
   )
 
-  const mainMenu = getMenuItems(rootMenu)
+  const mainMenuItems = getMenuItems({ targetMenu: rootMenu, activeRoute }).map(
+    (menuItem, menuIndex) => {
+      const { title, route, subMenu } = menuItem
+      const hasSubmenu = Boolean(subMenu)
 
-  const mainMenuItems = mainMenu.map(
-    ({ title, route, subMenu, startOpen = false }, menuIndex) => {
-      const mappedSubmenu = subMenu?.map(
-        ({ title, route, subMenu, startOpen = false }, submenuIndex) => {
-          const mappedSubmenu = subMenu?.map(
-            ({ title, route }, submenuIndex) => {
-              return (
-                <MenuItem
-                  title={title}
-                  onClick={() => setRoute(route)}
-                  key={`SubMenuItem-${submenuIndex}`}
-                  isActive={isActiveRoute(route)}
-                  startOpen={startOpen}
-                />
-              )
-            }
-          )
+      const mappedSubmenu = subMenu?.map((subMenuItem, submenuIndex) => {
+        const { title, route, subMenu, startOpen = false } = subMenuItem
+        const hasSubmenu = Boolean(subMenu)
 
-          const hasSubmenu = Boolean(subMenu)
-
+        const mappedSubmenu = subMenu?.map(({ title, route }, submenuIndex) => {
           return (
             <MenuItem
               title={title}
               onClick={() => setRoute(route)}
               key={`SubMenuItem-${submenuIndex}`}
               isActive={isActiveRoute(route)}
-              startOpen={startOpen}
-            >
-              {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
-            </MenuItem>
+            />
           )
-        }
-      )
+        })
 
-      const hasSubmenu = Boolean(subMenu)
+        /**
+         * Keep menu open if on root route and startOpen is true
+         */
+        const isRootRoute = activeRoute === '/'
+        const isMenuOpen =
+          hasActiveRoute(subMenuItem, activeRoute) || (isRootRoute && startOpen)
+
+        return (
+          <MenuItem
+            key={`SubMenuItem-${submenuIndex}`}
+            title={title}
+            onClick={() => setRoute(route)}
+            isActive={isActiveRoute(route)}
+            isOpen={isMenuOpen}
+          >
+            {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
+          </MenuItem>
+        )
+      })
 
       return (
         <MenuItem
+          key={`MenuItem-${menuIndex}`}
           title={title}
           onClick={() => setRoute(route)}
-          key={`MenuItem-${menuIndex}`}
           isHeader={hasSubmenu}
           isActive={isActiveRoute(route)}
-          startOpen={startOpen}
         >
           {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
         </MenuItem>

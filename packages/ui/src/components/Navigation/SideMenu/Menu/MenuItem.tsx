@@ -79,6 +79,7 @@ export interface MenuItemProps extends ComponentProps<typeof StyledMenuItem> {
   isActive?: boolean
   isHeader?: boolean
   startOpen?: boolean
+  isOpen?: boolean
   onClick?: (value) => void
 }
 
@@ -93,17 +94,24 @@ export const MenuItem = forwardRef<
     isActive = false,
     isHeader = false,
     startOpen = false,
+    isOpen,
     ...remainingProps
   } = properties
 
   const hasChildren = Boolean(children)
   const isCollapsible = !isHeader && hasChildren
 
-  const [isOpen, setIsOpen] = useState(startOpen)
+  const [isOpenState, setIsOpenState] = useState(startOpen)
 
   useEffect(() => {
-    setIsOpen(isHeader || startOpen)
+    setIsOpenState(isHeader || startOpen)
   }, [isHeader])
+
+  useEffect(() => {
+    if (isOpen !== undefined) {
+      setIsOpenState(isOpen)
+    }
+  }, [isOpen])
 
   const toggle = useCallback(() => {
     if (!isCollapsible) {
@@ -111,18 +119,18 @@ export const MenuItem = forwardRef<
     }
 
     if (hasChildren) {
-      setIsOpen(!isOpen)
+      setIsOpenState(!isOpenState)
     } else {
       onClick()
     }
-  }, [isCollapsible, isOpen, hasChildren])
+  }, [isCollapsible, isOpenState, hasChildren])
 
   const classes = classNames({
     isActive,
     isHeader,
   })
 
-  const iconState = isOpen ? 'active' : 'inactive'
+  const iconState = isOpenState ? 'active' : 'inactive'
 
   return (
     <>
@@ -146,7 +154,7 @@ export const MenuItem = forwardRef<
         </Column>
       </StyledMenuItem>
 
-      <Conditional test={isOpen}>
+      <Conditional test={isOpenState}>
         <StyledChild onClick={(event) => event.stopPropagation()}>
           {children}
         </StyledChild>
