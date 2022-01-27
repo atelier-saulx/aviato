@@ -22,12 +22,14 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
 
     const listItemChildren = filterChildrenByType(children, ListItem)
 
+    const listItems = listItemChildren.map((listItem, index) => {
+      return <ListItem {...listItem.props} key={`ListItem-${index}`} />
+    })
+
     return (
       <StyledList ref={forwardedRef} {...remainingProps}>
         <Group role="list" direction="column" space="none">
-          {listItemChildren.map((listItem, index) => {
-            return <ListItem {...listItem.props} key={`ListItem-${index}`} />
-          })}
+          {listItems}
         </Group>
       </StyledList>
     )

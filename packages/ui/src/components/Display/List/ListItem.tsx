@@ -12,18 +12,28 @@ const StyledListItem = styled('div', {
   '&:hover': {
     background: '$ActionMain',
   },
+
+  variants: {
+    isActive: {
+      true: {
+        background: '$ActionMainSelected',
+      },
+    },
+  },
 })
 
-export interface ListItemProps extends ComponentProps<typeof StyledListItem> {}
+export interface ListItemProps extends ComponentProps<typeof StyledListItem> {
+  isActive?: boolean
+}
 
 export const ListItem = forwardRef<
   ElementRef<typeof StyledListItem>,
   ListItemProps
 >((properties, forwardedRef) => {
-  const { children, ...remainingProps } = properties
+  const { children, isActive = false, ...remainingProps } = properties
 
   return (
-    <StyledListItem ref={forwardedRef} {...remainingProps}>
+    <StyledListItem ref={forwardedRef} {...remainingProps} isActive={isActive}>
       {children}
     </StyledListItem>
   )

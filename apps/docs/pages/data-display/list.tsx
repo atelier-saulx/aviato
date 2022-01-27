@@ -9,7 +9,7 @@ const ListPage = () => {
         <Column>
           <Row>
             <List>
-              <ListItem>Monday</ListItem>
+              <ListItem isActive>Monday</ListItem>
               <ListItem>Tuesday</ListItem>
               <ListItem>Wednesday</ListItem>
               <ListItem>Thursday</ListItem>
