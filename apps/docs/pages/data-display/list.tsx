@@ -1,13 +1,26 @@
-import { Column, Row, Page, List, ListItem } from '@aviato/ui'
+import {
+  Column,
+  Row,
+  Page,
+  List,
+  ListItem,
+  IconCheck,
+  Switch,
+} from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  SmallSpacer,
+} from '../../components'
 
 const ListPage = () => {
   const ShowList = () => {
     return (
       <>
         <Column>
-          <Row>
+          <Row css={{ minWidth: 600 }}>
             <List>
               <ListItem isActive>Monday</ListItem>
               <ListItem>Tuesday</ListItem>
@@ -16,6 +29,16 @@ const ListPage = () => {
               <ListItem>Friday</ListItem>
               <ListItem>Saturday</ListItem>
               <ListItem>Sunday</ListItem>
+            </List>
+          </Row>
+
+          <SmallSpacer />
+
+          <Row css={{ minWidth: 600 }}>
+            <List>
+              <ListItem leftArea={<IconCheck />} rightArea={<Switch />}>
+                Edit
+              </ListItem>
             </List>
           </Row>
         </Column>
