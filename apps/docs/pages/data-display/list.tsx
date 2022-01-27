@@ -127,7 +127,7 @@ const ListPage = () => {
                 Name
               </ListItem>
               <ListItem
-                leftArea={<ListIcon icon="IconModel" size="large" />}
+                leftArea={<ListIcon icon="IconLink" size="large" />}
                 showDragIcon
               >
                 Name
