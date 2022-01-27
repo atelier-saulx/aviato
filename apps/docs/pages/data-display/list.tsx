@@ -63,11 +63,11 @@ const ListPage = () => {
               header={{
                 leftArea: <ListIcon icon="IconModel" />,
                 rightArea: <IconMore />,
-                content: 'Header Title',
+                children: 'Header Title',
               }}
               footer={{
                 leftArea: <IconPlus />,
-                content: 'Footer Title',
+                children: 'Footer Title',
               }}
             >
               <ListItem

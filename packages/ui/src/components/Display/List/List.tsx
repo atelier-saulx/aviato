@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementRef, ReactNode } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { filterChildrenByType } from '@aviato/utils'
 
@@ -30,18 +30,10 @@ const StyledList = styled('div', {
 
 export type ListType = 'simple' | 'complex'
 
-export interface ListHeader extends ListItemProps {
-  content: ReactNode
-}
-
-export interface ListFooter extends ListItemProps {
-  content: ReactNode
-}
-
 export interface ListProps extends ComponentProps<typeof StyledList> {
   type?: ListType
-  header?: ListHeader
-  footer?: ListFooter
+  header?: ListItemProps
+  footer?: ListItemProps
 }
 
 export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
@@ -69,15 +61,9 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
     })
 
     return (
-      <StyledList ref={forwardedRef} {...remainingProps} type={type}>
+      <StyledList type={type} ref={forwardedRef} {...remainingProps}>
         <Conditional test={header}>
-          <ListItem
-            leftArea={header?.leftArea}
-            rightArea={header?.rightArea}
-            type="header"
-          >
-            {header?.content}
-          </ListItem>
+          <ListItem {...header} type="header" />
         </Conditional>
 
         <Group role="list" direction="column" space="none">
@@ -85,13 +71,7 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
         </Group>
 
         <Conditional test={footer}>
-          <ListItem
-            leftArea={footer?.leftArea}
-            rightArea={footer?.rightArea}
-            type="footer"
-          >
-            {footer?.content}
-          </ListItem>
+          <ListItem {...footer} type="footer" />
         </Conditional>
       </StyledList>
     )

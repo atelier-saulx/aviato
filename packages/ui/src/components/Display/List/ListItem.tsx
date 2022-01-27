@@ -78,6 +78,7 @@ export interface ListItemProps extends ComponentProps<typeof StyledListItem> {
   showDragIcon?: boolean
   isFirstItem?: boolean
   isLastItem?: boolean
+  children?: ReactNode
 }
 
 export const ListItem = forwardRef<
