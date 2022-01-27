@@ -4,10 +4,14 @@ import { filterChildrenByType } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { ListItem } from './ListItem'
+import { Group } from '~/components'
 
 const StyledList = styled('div', {
   width: '100%',
   height: '100%',
+  background: '$Background1dp',
+  padding: 16,
+  borderRadius: 4,
 })
 
 export interface ListProps extends ComponentProps<typeof StyledList> {}
@@ -20,7 +24,11 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
 
     return (
       <StyledList ref={forwardedRef} {...remainingProps}>
-        {listItemChildren}
+        <Group role="list" direction="column" space="none">
+          {listItemChildren.map((listItem, index) => {
+            return <ListItem {...listItem.props} key={`ListItem-${index}`} />
+          })}
+        </Group>
       </StyledList>
     )
   }

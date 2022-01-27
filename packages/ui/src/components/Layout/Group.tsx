@@ -19,6 +19,7 @@ const StyledGroup = styled('div', {
     },
 
     space: {
+      none: {},
       xxxs: {
         gap: '$xxxs',
       },
@@ -66,7 +67,7 @@ export interface GroupProps extends ComponentProps<typeof StyledGroup> {
   align?: CSSProperties['alignItems']
   wrap?: boolean
   grow?: boolean
-  spacing?: Size
+  spacing?: Size | 'none'
 }
 
 export const Group = forwardRef<ElementRef<typeof StyledGroup>, GroupProps>(

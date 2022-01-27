@@ -9,10 +9,13 @@ const ListPage = () => {
         <Column>
           <Row>
             <List>
-              <ListItem>Test</ListItem>
-              <ListItem>Test</ListItem>
-              <ListItem>Test</ListItem>
-              <ListItem>Test</ListItem>
+              <ListItem>Monday</ListItem>
+              <ListItem>Tuesday</ListItem>
+              <ListItem>Wednesday</ListItem>
+              <ListItem>Thursday</ListItem>
+              <ListItem>Friday</ListItem>
+              <ListItem>Saturday</ListItem>
+              <ListItem>Sunday</ListItem>
             </List>
           </Row>
         </Column>
@@ -28,7 +31,7 @@ const ListPage = () => {
         Lists are continuous, vertical indexes of text or images.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent>
         <ShowList />
       </ShowcaseComponent>
     </Page>
