@@ -10,6 +10,7 @@ import {
   Checkbox,
   IconCheckCircle,
   IconMore,
+  IconPlus,
 } from '@aviato/ui'
 
 import {
@@ -60,9 +61,13 @@ const ListPage = () => {
           <Row css={{ minWidth: 600 }}>
             <List
               header={{
-                title: 'Title',
                 leftArea: <IconModel />,
                 rightArea: <IconMore />,
+                content: 'Header Title',
+              }}
+              footer={{
+                leftArea: <IconPlus />,
+                content: 'Add type',
               }}
             >
               <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>

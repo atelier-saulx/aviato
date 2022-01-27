@@ -12,7 +12,7 @@ const StyledListItem = styled('div', {
   height: '100%',
   padding: '4px 16px',
 
-  '&.simple': {
+  '&.isSimple': {
     background: '$Background1dp',
 
     '&:hover': {
@@ -20,18 +20,33 @@ const StyledListItem = styled('div', {
     },
   },
 
-  '&.complex': {
+  '&.isComplex': {
     background: '$Background1dp',
     padding: '8px 16px',
 
     '&:hover': {
       background: '$ActionMain',
     },
+
+    '&.isFirstItem': {
+      borderTop: '1px solid $OtherDivider',
+      borderBottom: '1px solid $OtherDivider',
+    },
+    '&:not(.isFirstItem):not(.isLastItem)': {
+      borderBottom: '1px solid $OtherDivider',
+    },
+    '&.isLastItem': {
+      borderBottom: '1px solid $OtherDivider',
+    },
   },
 
-  '&.header': {
+  '&.isHeader': {
     background: '$ActionMain',
-    borderBottom: '1px solid $OtherDivider',
+    padding: '8px 16px',
+  },
+
+  '&.isFooter': {
+    background: '$Background1dp',
     padding: '8px 16px',
   },
 
@@ -58,13 +73,15 @@ const Container = styled('span', {
   },
 })
 
-export type ListItemType = 'simple' | 'complex' | 'header'
+export type ListItemType = 'simple' | 'complex' | 'header' | 'footer'
 
 export interface ListItemProps extends ComponentProps<typeof StyledListItem> {
   type?: ListItemType
-  isActive?: boolean
   leftArea?: ReactNode
   rightArea?: ReactNode
+  isActive?: boolean
+  isFirstItem?: boolean
+  isLastItem?: boolean
 }
 
 export const ListItem = forwardRef<
@@ -74,17 +91,27 @@ export const ListItem = forwardRef<
   const {
     type = 'simple',
     isActive = false,
+    isFirstItem = false,
+    isLastItem = false,
     leftArea,
     rightArea,
     children,
     ...remainingProps
   } = properties
 
+  const isSimple = type === 'simple'
+  const isComplex = type === 'complex'
+  const isHeader = type === 'header'
+  const isFooter = type === 'footer'
+
   const classes = classNames({
-    simple: type === 'simple',
-    complex: type === 'complex',
-    header: type === 'header',
+    isSimple,
+    isComplex,
+    isHeader,
+    isFooter,
     isActive,
+    isFirstItem,
+    isLastItem,
   })
 
   return (

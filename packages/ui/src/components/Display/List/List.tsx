@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 import { filterChildrenByType } from '@aviato/utils'
 
 import { styled } from '~/theme'
-import { ListItem } from './ListItem'
+import { ListItem, ListItemProps } from './ListItem'
 import { Conditional, Group } from '~/components'
 
 const StyledList = styled('div', {
@@ -28,17 +28,24 @@ const StyledList = styled('div', {
   },
 })
 
+const ListContainer = styled('div', {
+  width: '100%',
+})
+
 export type ListType = 'simple' | 'complex'
 
-export interface ListHeader {
-  title: string
-  leftArea?: ReactNode
-  rightArea?: ReactNode
+export interface ListHeader extends ListItemProps {
+  content: ReactNode
+}
+
+export interface ListFooter extends ListItemProps {
+  content: ReactNode
 }
 
 export interface ListProps extends ComponentProps<typeof StyledList> {
   type?: ListType
   header?: ListHeader
+  footer?: ListFooter
 }
 
 export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
@@ -46,31 +53,51 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
     const {
       children,
       header,
-      type = header ? 'complex' : 'simple',
+      footer,
+      type = header || footer ? 'complex' : 'simple',
       ...remainingProps
     } = properties
-
-    const { title, leftArea, rightArea } = header ?? {}
 
     const listItemChildren = filterChildrenByType(children, ListItem)
 
     const listItems = listItemChildren.map((listItem, index) => {
       return (
-        <ListItem {...listItem.props} key={`ListItem-${index}`} type={type} />
+        <ListContainer key={`ListItem-${index}`}>
+          <ListItem
+            {...listItem.props}
+            type={type}
+            isFirstItem={index === 0}
+            isLastItem={index === listItemChildren.length - 1}
+          />
+        </ListContainer>
       )
     })
 
     return (
       <StyledList ref={forwardedRef} {...remainingProps} type={type}>
         <Conditional test={header}>
-          <ListItem leftArea={leftArea} rightArea={rightArea} type="header">
-            {title}
+          <ListItem
+            leftArea={header?.leftArea}
+            rightArea={header?.rightArea}
+            type="header"
+          >
+            {header?.content}
           </ListItem>
         </Conditional>
 
         <Group role="list" direction="column" space="none">
           {listItems}
         </Group>
+
+        <Conditional test={footer}>
+          <ListItem
+            leftArea={footer?.leftArea}
+            rightArea={footer?.rightArea}
+            type="footer"
+          >
+            {footer?.content}
+          </ListItem>
+        </Conditional>
       </StyledList>
     )
   }
