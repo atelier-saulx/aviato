@@ -110,24 +110,25 @@ const ListPage = () => {
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
                 rightArea={<IconMore />}
+                showDragIcon
               >
                 Name
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
-                rightArea={<IconMore />}
+                showDragIcon
               >
                 Name
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
-                rightArea={<IconMore />}
+                showDragIcon
               >
                 Name
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
-                rightArea={<IconMore />}
+                showDragIcon
               >
                 Name
               </ListItem>

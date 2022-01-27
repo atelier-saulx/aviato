@@ -2,7 +2,7 @@ import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { classNames, styled } from '~/theme'
-import { Conditional } from '~/components'
+import { Conditional, IconDragDrop } from '~/components'
 
 const StyledListItem = styled('div', {
   display: 'flex',
@@ -75,6 +75,7 @@ export interface ListItemProps extends ComponentProps<typeof StyledListItem> {
   leftArea?: ReactNode
   rightArea?: ReactNode
   isActive?: boolean
+  showDragIcon?: boolean
   isFirstItem?: boolean
   isLastItem?: boolean
 }
@@ -86,6 +87,7 @@ export const ListItem = forwardRef<
   const {
     type = 'simple',
     isActive = false,
+    showDragIcon = false,
     isFirstItem = false,
     isLastItem = false,
     leftArea,
@@ -109,8 +111,14 @@ export const ListItem = forwardRef<
     isLastItem,
   })
 
+  const dragIcon = <IconDragDrop />
+
   return (
     <StyledListItem className={classes} ref={forwardedRef} {...remainingProps}>
+      <Conditional test={showDragIcon}>
+        <Container type="start">{dragIcon}</Container>
+      </Conditional>
+
       <Conditional test={leftArea}>
         <Container type="start">{leftArea}</Container>
       </Conditional>
