@@ -140,7 +140,7 @@ export const Tooltip = forwardRef<
   }
 
   const ChildVariant = isText(children) ? (
-    <Text weight="medium" color="Inherit" css={{ lineHeight: '24px' }}>
+    <Text weight="medium" color="inherit" css={{ lineHeight: '24px' }}>
       {children}
     </Text>
   ) : (

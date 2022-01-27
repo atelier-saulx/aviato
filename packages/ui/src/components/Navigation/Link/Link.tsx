@@ -71,7 +71,7 @@ export const Link = forwardRef<ElementRef<typeof StyledLink>, LinkProps>(
 
     return (
       <StyledLink ref={forwardedRef} {...remainingProps}>
-        <UnderlinedText color="Inherit" underline={underline}>
+        <UnderlinedText color="inherit" underline={underline}>
           {children}
         </UnderlinedText>
 

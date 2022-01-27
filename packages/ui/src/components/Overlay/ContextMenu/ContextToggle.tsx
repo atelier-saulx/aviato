@@ -36,7 +36,7 @@ export const ContextToggle = forwardRef<
   const { children, ...remainingProps } = properties
 
   const ChildVariant = isText(children) ? (
-    <Text color="Inherit">{children}</Text>
+    <Text color="inherit">{children}</Text>
   ) : (
     children
   )
