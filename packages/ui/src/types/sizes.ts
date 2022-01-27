@@ -8,3 +8,10 @@ export type Size =
   | 'xl'
   | 'xxl'
   | 'xxxl'
+
+export type BaseSize =
+  | 'extrasmall'
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'extralarge'

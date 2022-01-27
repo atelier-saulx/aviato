@@ -1,4 +1,4 @@
-import { Column, Row, Page } from '@aviato/ui'
+import { Column, Row, Page, Badge } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -7,7 +7,9 @@ const BadgePage = () => {
     return (
       <>
         <Column>
-          <Row>Badge</Row>
+          <Row>
+            <Badge>Badge</Badge>
+          </Row>
         </Column>
       </>
     )
