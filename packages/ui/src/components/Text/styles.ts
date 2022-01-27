@@ -19,14 +19,14 @@ export const BaseFontWeight = {
     bold: {
       fontWeight: 700,
     },
+    inherit: {
+      fontWeight: 'inherit',
+    },
   },
 }
 
 export const BaseFontColor = {
   color: {
-    Inherit: {
-      color: 'inherit',
-    },
     Primary: {
       color: '$TextPrimary',
     },
@@ -44,6 +44,9 @@ export const BaseFontColor = {
     },
     PrimaryMain: {
       color: '$PrimaryMain',
+    },
+    inherit: {
+      color: 'inherit',
     },
   },
 }
