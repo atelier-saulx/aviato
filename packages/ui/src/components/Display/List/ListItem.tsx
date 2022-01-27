@@ -38,6 +38,7 @@ const Container = styled('span', {
       },
       end: {
         marginLeft: 'auto',
+        paddingLeft: 10,
       },
     },
   },
