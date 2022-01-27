@@ -28,10 +28,6 @@ const StyledList = styled('div', {
   },
 })
 
-const ListContainer = styled('div', {
-  width: '100%',
-})
-
 export type ListType = 'simple' | 'complex'
 
 export interface ListHeader extends ListItemProps {
@@ -62,14 +58,13 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
 
     const listItems = listItemChildren.map((listItem, index) => {
       return (
-        <ListContainer key={`ListItem-${index}`}>
-          <ListItem
-            {...listItem.props}
-            type={type}
-            isFirstItem={index === 0}
-            isLastItem={index === listItemChildren.length - 1}
-          />
-        </ListContainer>
+        <ListItem
+          {...listItem.props}
+          key={`ListItem-${index}`}
+          type={type}
+          isFirstItem={index === 0}
+          isLastItem={index === listItemChildren.length - 1}
+        />
       )
     })
 

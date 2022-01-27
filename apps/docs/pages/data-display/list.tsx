@@ -5,12 +5,12 @@ import {
   List,
   ListItem,
   IconCheck,
-  IconModel,
   Switch,
   Checkbox,
   IconCheckCircle,
   IconMore,
   IconPlus,
+  ListIcon,
 } from '@aviato/ui'
 
 import {
@@ -61,7 +61,7 @@ const ListPage = () => {
           <Row css={{ minWidth: 600 }}>
             <List
               header={{
-                leftArea: <IconModel />,
+                leftArea: <ListIcon icon="IconModel" />,
                 rightArea: <IconMore />,
                 content: 'Header Title',
               }}
@@ -70,16 +70,65 @@ const ListPage = () => {
                 content: 'Add type',
               }}
             >
-              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" />}
+                rightArea={<IconMore />}
+              >
                 Name
               </ListItem>
-              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" />}
+                rightArea={<IconMore />}
+              >
                 Name
               </ListItem>
-              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" />}
+                rightArea={<IconMore />}
+              >
                 Name
               </ListItem>
-              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" />}
+                rightArea={<IconMore />}
+              >
+                Name
+              </ListItem>
+            </List>
+          </Row>
+        </Column>
+      </>
+    )
+  }
+
+  const ShowLargeList = () => {
+    return (
+      <>
+        <Column>
+          <Row css={{ minWidth: 600 }}>
+            <List type="complex">
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" size="large" />}
+                rightArea={<IconMore />}
+              >
+                Name
+              </ListItem>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" size="large" />}
+                rightArea={<IconMore />}
+              >
+                Name
+              </ListItem>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" size="large" />}
+                rightArea={<IconMore />}
+              >
+                Name
+              </ListItem>
+              <ListItem
+                leftArea={<ListIcon icon="IconModel" size="large" />}
+                rightArea={<IconMore />}
+              >
                 Name
               </ListItem>
             </List>
@@ -103,6 +152,10 @@ const ListPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowComplexList />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowLargeList />
       </ShowcaseComponent>
     </Page>
   )

@@ -11,6 +11,7 @@ const StyledListItem = styled('div', {
   width: '100%',
   height: '100%',
   padding: '4px 16px',
+  lineHeight: 1,
 
   '&.isSimple': {
     background: '$Background1dp',
@@ -22,32 +23,26 @@ const StyledListItem = styled('div', {
 
   '&.isComplex': {
     background: '$Background1dp',
-    padding: '8px 16px',
+    padding: '13px 16px',
 
-    '&:hover': {
-      background: '$ActionMain',
-    },
-
-    '&.isFirstItem': {
-      borderTop: '1px solid $OtherDivider',
+    '&.isFirstItem': {},
+    '&:not(.isLastItem)': {
       borderBottom: '1px solid $OtherDivider',
     },
-    '&:not(.isFirstItem):not(.isLastItem)': {
-      borderBottom: '1px solid $OtherDivider',
-    },
-    '&.isLastItem': {
-      borderBottom: '1px solid $OtherDivider',
-    },
+    '&.isLastItem': {},
   },
 
   '&.isHeader': {
     background: '$ActionMain',
-    padding: '8px 16px',
+    padding: '13px 16px',
+    borderBottom: '1px solid $OtherDivider',
   },
 
   '&.isFooter': {
     background: '$Background1dp',
-    padding: '8px 16px',
+    padding: '13px 16px',
+    color: '$TextSecondary',
+    borderTop: '1px solid $OtherDivider',
   },
 
   '&.isActive': {
