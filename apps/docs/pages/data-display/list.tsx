@@ -67,7 +67,7 @@ const ListPage = () => {
               }}
               footer={{
                 leftArea: <IconPlus />,
-                content: 'Add type',
+                content: 'Footer Title',
               }}
             >
               <ListItem

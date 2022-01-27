@@ -10,11 +10,11 @@ const StyledListItem = styled('div', {
   alignItems: 'center',
   width: '100%',
   height: '100%',
-  padding: '4px 16px',
   lineHeight: 1,
 
   '&.isSimple': {
     background: '$Background1dp',
+    padding: '8px 16px',
 
     '&:hover': {
       background: '$ActionMain',
