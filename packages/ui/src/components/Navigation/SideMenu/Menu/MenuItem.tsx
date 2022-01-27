@@ -13,6 +13,31 @@ import { Text } from '~/components/Text'
 import { styled, classNames } from '~/theme'
 import { IconChevronDown } from '~/components/Icons/components'
 
+const IconContainer = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginLeft: 'auto',
+  width: 24,
+  height: 24,
+  borderRadius: 24,
+})
+
+const ExpandIndicator = styled(IconChevronDown, {
+  color: '$ActionMainContrast',
+
+  variants: {
+    state: {
+      expanded: {
+        transform: 'rotate(180deg)',
+      },
+      hidden: {
+        transform: 'rotate(360deg)',
+      },
+    },
+  },
+})
+
 const StyledMenuItem = styled('button', {
   width: '100%',
   padding: '4px 12px',
@@ -20,20 +45,32 @@ const StyledMenuItem = styled('button', {
   outline: 'none',
   cursor: 'pointer',
   borderRadius: 4,
-  color: '$TextSecondary',
   background: 'transparent',
+  color: '$TextPrimary',
 
   '&:hover': {
-    background: '$ActionMainHover',
+    '&:not(.isExpandable)': {
+      background: '$ActionMainHover',
+    },
+
+    '&.isExpandable': {
+      [`& ${IconContainer}`]: {
+        background: '$ActionMainHover',
+      },
+    },
   },
 
-  '&:active': {
-    color: '$TextPrimary',
-    background: '$PrimaryLightSelected',
-  },
-  '&.isActive': {
-    color: '$TextPrimary',
-    background: '$PrimaryLightSelected',
+  '&:active, &.isActive': {
+    '&:not(.isExpandable)': {
+      color: '$TextPrimary',
+      background: '$PrimaryLightSelected',
+    },
+
+    '&.isExpandable': {
+      [`& ${IconContainer}`]: {
+        background: '$ActionMainSelected',
+      },
+    },
   },
 
   '&.isHeader': {
@@ -55,23 +92,6 @@ const Column = styled('div', {
   flexWrap: 'nowrap',
   alignItems: 'center',
   width: '100%',
-})
-
-const Icon = styled(IconChevronDown, {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginLeft: 'auto',
-  variants: {
-    state: {
-      active: {
-        transform: 'rotate(180deg)',
-      },
-      inactive: {
-        transform: 'rotate(360deg)',
-      },
-    },
-  },
 })
 
 export interface MenuItemProps extends ComponentProps<typeof StyledMenuItem> {
@@ -99,6 +119,7 @@ export const MenuItem = forwardRef<
   } = properties
 
   const hasChildren = Boolean(children)
+  const isExpandable = hasChildren && !isHeader
   const isCollapsible = !isHeader && hasChildren
 
   const [isOpenState, setIsOpenState] = useState(startOpen)
@@ -128,9 +149,11 @@ export const MenuItem = forwardRef<
   const classes = classNames({
     isActive,
     isHeader,
+    isExpandable,
   })
 
-  const iconState = isOpenState ? 'active' : 'inactive'
+  const iconState = isOpenState ? 'expanded' : 'hidden'
+  const fontWeight = isHeader ? 'bold' : isExpandable ? 'semibold' : 'regular'
 
   return (
     <>
@@ -141,15 +164,14 @@ export const MenuItem = forwardRef<
         {...remainingProps}
       >
         <Column>
-          <Text
-            weight={isHeader ? 'bold' : 'regular'}
-            color={isHeader || hasChildren ? 'Primary' : 'Inherit'}
-          >
+          <Text color="inherit" weight={fontWeight}>
             {title}
           </Text>
 
-          <Conditional test={hasChildren && !isHeader}>
-            <Icon state={iconState} />
+          <Conditional test={isExpandable}>
+            <IconContainer>
+              <ExpandIndicator state={iconState} />
+            </IconContainer>
           </Conditional>
         </Column>
       </StyledMenuItem>

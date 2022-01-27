@@ -41,10 +41,6 @@ const AlignmentContainer = styled('div', {
   justifyContent: 'center',
 })
 
-const CheckboxContainer = styled('div', {
-  paddingTop: 3,
-})
-
 const TextContainer = styled('div', {
   paddingLeft: 12,
 })
@@ -208,30 +204,28 @@ export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
     )
 
     const CheckboxComponent: FunctionComponent = (properties) => (
-      <CheckboxContainer>
-        <Column>
-          <Centered>
-            <StyledCheckbox
-              type="checkbox"
-              checked={isChecked}
-              onChange={handleChange}
-              disabled={disabled}
-              size={size}
-              {...properties}
-            />
+      <Column>
+        <Centered>
+          <StyledCheckbox
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleChange}
+            disabled={disabled}
+            size={size}
+            {...properties}
+          />
 
-            <IconContainer size={size}>
-              <Conditional test={isChecked && !hasIndeterminateState}>
-                <IconCheck />
-              </Conditional>
+          <IconContainer size={size}>
+            <Conditional test={isChecked && !hasIndeterminateState}>
+              <IconCheck />
+            </Conditional>
 
-              <Conditional test={isChecked && hasIndeterminateState}>
-                <IconMinus />
-              </Conditional>
-            </IconContainer>
-          </Centered>
-        </Column>
-      </CheckboxContainer>
+            <Conditional test={isChecked && hasIndeterminateState}>
+              <IconMinus />
+            </Conditional>
+          </IconContainer>
+        </Centered>
+      </Column>
     )
 
     if (hasLabelOrDescription) {
@@ -242,7 +236,10 @@ export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
 
             <Conditional test={hasLabelOrDescription}>
               <TextContainer onClick={handleChange}>
-                <Text weight={hasDescription ? 'semibold' : 'medium'}>
+                <Text
+                  weight={hasDescription ? 'semibold' : 'medium'}
+                  css={{ lineHeight: 1 }}
+                >
                   {label}
                 </Text>
 

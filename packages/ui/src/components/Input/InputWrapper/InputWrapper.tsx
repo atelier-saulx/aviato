@@ -69,7 +69,7 @@ export const InputWrapper = forwardRef<
           </IconContainer>
 
           <Error>
-            <Text color="Inherit">{error}</Text>
+            <Text color="inherit">{error}</Text>
           </Error>
         </ErrorContainer>
       </Conditional>
