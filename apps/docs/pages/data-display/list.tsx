@@ -5,7 +5,11 @@ import {
   List,
   ListItem,
   IconCheck,
+  IconModel,
   Switch,
+  Checkbox,
+  IconCheckCircle,
+  IconMore,
 } from '@aviato/ui'
 
 import {
@@ -16,7 +20,7 @@ import {
 } from '../../components'
 
 const ListPage = () => {
-  const ShowList = () => {
+  const ShowSimpleList = () => {
     return (
       <>
         <Column>
@@ -37,7 +41,41 @@ const ListPage = () => {
           <Row css={{ minWidth: 600 }}>
             <List>
               <ListItem leftArea={<IconCheck />} rightArea={<Switch />}>
-                Edit
+                Test 1
+              </ListItem>
+              <ListItem leftArea={<IconCheckCircle />} rightArea={<Checkbox />}>
+                Test 2
+              </ListItem>
+            </List>
+          </Row>
+        </Column>
+      </>
+    )
+  }
+
+  const ShowComplexList = () => {
+    return (
+      <>
+        <Column>
+          <Row css={{ minWidth: 600 }}>
+            <List
+              header={{
+                title: 'Title',
+                leftArea: <IconModel />,
+                rightArea: <IconMore />,
+              }}
+            >
+              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+                Name
+              </ListItem>
+              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+                Name
+              </ListItem>
+              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+                Name
+              </ListItem>
+              <ListItem leftArea={<IconModel />} rightArea={<IconMore />}>
+                Name
               </ListItem>
             </List>
           </Row>
@@ -55,7 +93,11 @@ const ListPage = () => {
       </NextText>
 
       <ShowcaseComponent>
-        <ShowList />
+        <ShowSimpleList />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowComplexList />
       </ShowcaseComponent>
     </Page>
   )

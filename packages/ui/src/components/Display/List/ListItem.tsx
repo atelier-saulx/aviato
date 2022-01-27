@@ -1,7 +1,7 @@
 import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { styled } from '~/theme'
+import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components'
 
 const StyledListItem = styled('div', {
@@ -10,19 +10,33 @@ const StyledListItem = styled('div', {
   alignItems: 'center',
   width: '100%',
   height: '100%',
-  background: '$Background1dp',
   padding: '4px 16px',
 
-  '&:hover': {
-    background: '$ActionMain',
+  '&.simple': {
+    background: '$Background1dp',
+
+    '&:hover': {
+      background: '$ActionMain',
+    },
   },
 
-  variants: {
-    isActive: {
-      true: {
-        background: '$ActionMainSelected',
-      },
+  '&.complex': {
+    background: '$Background1dp',
+    padding: '8px 16px',
+
+    '&:hover': {
+      background: '$ActionMain',
     },
+  },
+
+  '&.header': {
+    background: '$ActionMain',
+    borderBottom: '1px solid $OtherDivider',
+    padding: '8px 16px',
+  },
+
+  '&.isActive': {
+    background: '$ActionMainSelected',
   },
 })
 
@@ -44,7 +58,10 @@ const Container = styled('span', {
   },
 })
 
+export type ListItemType = 'simple' | 'complex' | 'header'
+
 export interface ListItemProps extends ComponentProps<typeof StyledListItem> {
+  type?: ListItemType
   isActive?: boolean
   leftArea?: ReactNode
   rightArea?: ReactNode
@@ -55,6 +72,7 @@ export const ListItem = forwardRef<
   ListItemProps
 >((properties, forwardedRef) => {
   const {
+    type = 'simple',
     isActive = false,
     leftArea,
     rightArea,
@@ -62,8 +80,15 @@ export const ListItem = forwardRef<
     ...remainingProps
   } = properties
 
+  const classes = classNames({
+    simple: type === 'simple',
+    complex: type === 'complex',
+    header: type === 'header',
+    isActive,
+  })
+
   return (
-    <StyledListItem ref={forwardedRef} {...remainingProps} isActive={isActive}>
+    <StyledListItem className={classes} ref={forwardedRef} {...remainingProps}>
       <Conditional test={leftArea}>
         <Container type="start">{leftArea}</Container>
       </Conditional>
