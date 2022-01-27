@@ -30,15 +30,6 @@ export const BaseFontColor = {
     Primary: {
       color: '$TextPrimary',
     },
-    PrimaryContrastHigh: {
-      color: '$PrimaryContrastHigh',
-    },
-    PrimaryMain: {
-      color: '$PrimaryMain',
-    },
-    ActionDisabledContent: {
-      color: '$PrimaryContrastHigh',
-    },
     Secondary: {
       color: '$TextSecondary',
     },
@@ -47,6 +38,12 @@ export const BaseFontColor = {
     },
     Error: {
       color: '$ErrorMain',
+    },
+    PrimaryContrastHigh: {
+      color: '$PrimaryContrastHigh',
+    },
+    PrimaryMain: {
+      color: '$PrimaryMain',
     },
   },
 }
