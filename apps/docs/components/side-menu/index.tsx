@@ -111,7 +111,6 @@ const dataDisplayMenuItems: MenuDataItem[] = [
   {
     title: 'List',
     route: '/data-display/list',
-    isMissing: true,
   },
   {
     title: 'Stat',
