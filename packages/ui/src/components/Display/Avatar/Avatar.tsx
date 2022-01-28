@@ -80,3 +80,5 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
     </StyledAvatar>
   )
 }
+
+Avatar.displayName = 'Avatar'

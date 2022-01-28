@@ -1,4 +1,5 @@
-import { Page, Column, Snippet } from '@aviato/ui'
+import { Page, Column, CodeSnippet } from '@aviato/ui'
+
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const CodeSnippetPage = () => {
@@ -12,15 +13,15 @@ const CodeSnippetPage = () => {
 
       <ShowcaseComponent
         codeBlock={`
-import { Snippet } from '@aviato/ui'
+import { CodeSnippet } from '@aviato/ui'
 
-<Snippet language="bash">
+<CodeSnippet language="bash">
 npm install @aviato/ui
-</Snippet>
+</CodeSnippet>
       `}
       >
         <Column css={{ width: '100%' }}>
-          <Snippet language="bash">npm install @aviato/ui</Snippet>
+          <CodeSnippet language="bash">npm install @aviato/ui</CodeSnippet>
         </Column>
       </ShowcaseComponent>
     </Page>

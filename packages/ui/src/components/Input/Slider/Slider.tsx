@@ -180,3 +180,5 @@ export const Slider = forwardRef<ElementRef<typeof StyledSlider>, SliderProps>(
     )
   }
 )
+
+Slider.displayName = 'Slider'

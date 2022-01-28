@@ -39,3 +39,5 @@ export const ToggleMenuButton = forwardRef<
     </StyledToggleMenuButton>
   )
 })
+
+ToggleMenuButton.displayName = 'ToggleMenuButton'

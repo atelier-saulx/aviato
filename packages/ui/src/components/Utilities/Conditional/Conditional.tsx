@@ -20,3 +20,5 @@ export const Conditional: FunctionComponent<ConditionalProps> = ({
 
   return null
 }
+
+Conditional.displayName = 'Conditional'

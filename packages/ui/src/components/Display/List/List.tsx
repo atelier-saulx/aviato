@@ -77,3 +77,5 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
     )
   }
 )
+
+List.displayName = 'List'

@@ -35,3 +35,5 @@ export const Page = forwardRef<ElementRef<typeof StyledPage>, PageProps>(
     )
   }
 )
+
+Page.displayName = 'Page'

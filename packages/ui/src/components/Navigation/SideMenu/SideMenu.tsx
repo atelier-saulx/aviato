@@ -51,3 +51,5 @@ export const SideMenu = forwardRef<
     </StyledSideMenu>
   )
 })
+
+SideMenu.displayName = 'SideMenu'

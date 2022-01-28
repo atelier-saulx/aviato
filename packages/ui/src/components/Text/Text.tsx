@@ -73,3 +73,5 @@ export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
     return children || (null as any)
   }
 )
+
+Text.displayName = 'Text'

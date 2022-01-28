@@ -115,3 +115,5 @@ export const Group = forwardRef<ElementRef<typeof StyledGroup>, GroupProps>(
     )
   }
 )
+
+Group.displayName = 'Group'

@@ -1,17 +1,17 @@
-import { Page, Column, Editor } from '@aviato/ui'
+import { Page, Column, CodeEditor } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const CodeToDisplay = `
-import { Editor } from '@aviato/ui'
+import { CodeEditor } from '@aviato/ui'
 
-<Editor language="tsx">
+<CodeEditor language="tsx">
   // Import component
   import { Button } from '@aviato/ui'
 
   <Button>Lorem</Button>
-</Editor>
+</CodeEditor>
 `
 
 const CodeEditorPage = () => {
@@ -23,14 +23,14 @@ const CodeEditorPage = () => {
 
       <ShowcaseComponent codeBlock={CodeToDisplay}>
         <Column css={{ width: '100%' }}>
-          <Editor
+          <CodeEditor
             language="tsx"
             onChange={(value) => {
               log.global.debug('Editor change: ', { value })
             }}
           >
             {CodeToDisplay}
-          </Editor>
+          </CodeEditor>
         </Column>
       </ShowcaseComponent>
     </Page>

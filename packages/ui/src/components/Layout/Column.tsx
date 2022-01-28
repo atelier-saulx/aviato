@@ -22,3 +22,5 @@ export const Column = forwardRef<ElementRef<typeof StyledColumn>, ColumnProps>(
     )
   }
 )
+
+Column.displayName = 'Column'

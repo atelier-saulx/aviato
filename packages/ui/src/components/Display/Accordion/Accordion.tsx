@@ -1,17 +1,8 @@
-import React, {
-  createContext,
-  useContext,
-  useReducer,
-  cloneElement,
-  useRef,
-} from 'react'
+import React, { useReducer, cloneElement } from 'react'
 
-import { IconChevronDown } from '~/components/Icons/components'
-import { Conditional } from '~/components'
 import { styled } from '~/theme'
-import { Text } from '../../Text'
-
-const AccordionContext = createContext(undefined)
+import { AccordionItem } from './AccordionItem'
+import { AccordionContext } from './AccordionContext'
 
 const initialState = new Set()
 
@@ -33,61 +24,6 @@ const single = (selected, index) => {
 
 const Container = styled('div', {
   width: '100%',
-})
-
-const ItemContainer = styled('div', {
-  width: '100%',
-  cursor: 'pointer',
-  borderBottom: '1px solid $OtherDivider',
-  '&:hover': {
-    '>header': {
-      background: '$ActionMainHover',
-    },
-  },
-  '&:active': {
-    '>header': {
-      background: '$ActionMainSelected',
-    },
-  },
-})
-
-const ItemHeader = styled('header', {
-  height: 40,
-  display: 'flex',
-  alignItems: 'center',
-  variants: {
-    state: {
-      active: {
-        backgroundColor: '$ActionMain',
-      },
-      inactive: {
-        backgroundColor: null,
-      },
-    },
-  },
-})
-
-const Icon = styled(IconChevronDown, {
-  width: 40,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  variants: {
-    state: {
-      active: {
-        transform: 'rotate(180deg)',
-      },
-      inactive: {
-        transform: 'rotate(360deg)',
-      },
-    },
-  },
-})
-
-const Body = styled(Text, {
-  paddingTop: 12,
-  paddingBottom: 16,
-  paddingLeft: 40,
 })
 
 export const Accordion = ({ children, type = 'multiple' }) => {
@@ -113,32 +49,6 @@ export const Accordion = ({ children, type = 'multiple' }) => {
   )
 }
 
-Accordion.Item = ({ title, children, index = 0, active = false }) => {
-  const { selected, toggle } = useContext(AccordionContext)
-  const activeRef = useRef(false)
+Accordion.displayName = 'Accordion'
 
-  if (activeRef.current !== active) {
-    activeRef.current = active
-    if (active) {
-      selected.add(index)
-    } else {
-      selected.delete(index)
-    }
-  }
-
-  const isActive = selected.has(index)
-  const state = selected.has(index) ? 'active' : 'inactive'
-
-  return (
-    <ItemContainer onClick={() => toggle(index)}>
-      <ItemHeader state={state}>
-        <Icon state={state} />
-        <Text weight="medium">{title}</Text>
-      </ItemHeader>
-
-      <Conditional test={isActive}>
-        <Body>{children}</Body>
-      </Conditional>
-    </ItemContainer>
-  )
-}
+Accordion.Item = AccordionItem

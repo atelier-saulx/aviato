@@ -51,3 +51,5 @@ export const IconButton = forwardRef<
     </Button>
   )
 })
+
+IconButton.displayName = 'IconButton'

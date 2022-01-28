@@ -258,3 +258,5 @@ export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
     return <CheckboxComponent ref={forwardedRef} {...remainingProps} />
   }
 )
+
+Checkbox.displayName = 'Checkbox'

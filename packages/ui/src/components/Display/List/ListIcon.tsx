@@ -72,3 +72,5 @@ export const ListIcon = forwardRef<
     </StyledListIcon>
   )
 })
+
+ListIcon.displayName = 'ListIcon'

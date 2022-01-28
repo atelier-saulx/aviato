@@ -82,3 +82,5 @@ export const NativeSelect = forwardRef<
     </InputWrapper>
   )
 })
+
+NativeSelect.displayName = 'NativeSelect'

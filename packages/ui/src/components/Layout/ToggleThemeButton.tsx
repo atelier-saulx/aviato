@@ -47,3 +47,5 @@ export const ToggleThemeButton = forwardRef<
     </StyledToggleThemeButton>
   )
 })
+
+ToggleThemeButton.displayName = 'ToggleThemeButton'

@@ -73,3 +73,5 @@ export const TextField = forwardRef<
     </InputWrapper>
   )
 })
+
+TextField.displayName = 'TextField'
