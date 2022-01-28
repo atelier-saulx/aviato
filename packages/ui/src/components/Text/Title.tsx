@@ -52,3 +52,5 @@ export const Title = forwardRef<ElementRef<typeof StyledTitle>, TitleProps>(
     )
   }
 )
+
+Title.displayName = 'Title'

@@ -87,3 +87,5 @@ export const Alert = forwardRef<ElementRef<typeof Container>, AlertProps>(
     )
   }
 )
+
+Alert.displayName = 'Alert'

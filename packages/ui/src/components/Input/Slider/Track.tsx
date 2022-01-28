@@ -52,3 +52,5 @@ export const Track: FunctionComponent<TrackProps> = (properties) => {
     </StyledTrack>
   )
 }
+
+Track.displayName = 'Track'

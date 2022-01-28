@@ -126,3 +126,5 @@ export const Image = forwardRef<ElementRef<typeof Figure>, ImageProps>(
     )
   }
 )
+
+Image.displayName = 'Image'

@@ -75,3 +75,5 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
     </PopperUnstyled>
   )
 }
+
+Popper.displayName = 'Popper'

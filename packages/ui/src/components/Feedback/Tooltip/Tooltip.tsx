@@ -187,3 +187,5 @@ export const Tooltip = forwardRef<
     </StyledTooltip>
   )
 })
+
+Tooltip.displayName = 'Tooltip'

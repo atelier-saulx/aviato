@@ -51,3 +51,5 @@ export const ContextToggle = forwardRef<
     </StyledContextToggle>
   )
 })
+
+ContextToggle.displayName = 'ContextToggle'

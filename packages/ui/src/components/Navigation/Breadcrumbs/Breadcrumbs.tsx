@@ -54,3 +54,5 @@ export const Breadcrumbs = forwardRef<
     </StyledBreadcrumbs>
   )
 })
+
+Breadcrumbs.displayName = 'Breadcrumbs'

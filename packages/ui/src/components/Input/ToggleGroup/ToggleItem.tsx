@@ -45,3 +45,5 @@ export const ToggleItem = forwardRef<
     </RadixItem>
   )
 })
+
+ToggleItem.displayName = 'ToggleItem'

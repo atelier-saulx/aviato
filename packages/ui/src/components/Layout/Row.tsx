@@ -22,3 +22,5 @@ export const Row = forwardRef<ElementRef<typeof StyledRow>, RowProps>(
     )
   }
 )
+
+Row.displayName = 'Row'

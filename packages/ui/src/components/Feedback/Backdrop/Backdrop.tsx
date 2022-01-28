@@ -35,3 +35,5 @@ export const Backdrop = forwardRef<ElementRef<typeof Container>, BackdropProps>(
     )
   }
 )
+
+Backdrop.displayName = 'Backdrop'

@@ -114,3 +114,5 @@ export const RadioGroup = forwardRef<ElementRef<typeof Group>, RadioGroupProps>(
     )
   }
 )
+
+RadioGroup.displayName = 'RadioGroup'

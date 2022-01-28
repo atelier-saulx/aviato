@@ -36,3 +36,5 @@ export const Input = forwardRef<ElementRef<typeof StyledInput>, InputProps>(
     )
   }
 )
+
+Input.displayName = 'Input'

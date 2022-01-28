@@ -26,3 +26,5 @@ export const ContextMenu = forwardRef<
     </StyledBase>
   )
 })
+
+ContextMenu.displayName = 'ContextMenu'

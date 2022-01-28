@@ -32,3 +32,5 @@ export const Header = forwardRef<ElementRef<typeof StyledHeader>, HeaderProps>(
     )
   }
 )
+
+Header.displayName = 'Header'

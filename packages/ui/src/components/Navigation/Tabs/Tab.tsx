@@ -93,3 +93,5 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
     )
   }
 )
+
+Tab.displayName = 'Tab'

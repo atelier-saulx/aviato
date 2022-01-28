@@ -184,3 +184,5 @@ export const MenuItem = forwardRef<
     </>
   )
 })
+
+MenuItem.displayName = 'MenuItem'
