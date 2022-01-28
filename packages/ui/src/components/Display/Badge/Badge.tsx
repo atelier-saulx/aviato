@@ -7,38 +7,34 @@ import { BaseSize } from '~/types'
 const PrimaryBadgeCSS: StitchedCSS = {
   '&.isLight': {
     background: '$PrimaryLight',
-    border: '1px solid $PrimaryLight',
     color: '$PrimaryLightContrast',
   },
 
   '&.isFilled': {
     background: '$PrimaryMain',
-    border: '1px solid $PrimaryMain',
     color: '$PrimaryMainContrast',
   },
 
   '&.isOutlined': {
     color: '$PrimaryMain',
-    border: '1px solid $PrimaryOutline',
+    outline: '1px solid $PrimaryOutline',
   },
 }
 
 const ActionBadgeCSS: StitchedCSS = {
   '&.isLight': {
     background: '$ActionLight',
-    border: '1px solid $ActionLight',
     color: '$ActionLightContrast',
   },
 
   '&.isFilled': {
     background: '$ActionLight',
-    border: '1px solid $ActionLight',
     color: '$ActionLightContrast',
   },
 
   '&.isOutlined': {
     background: 'transparent',
-    border: '1px solid $ActionOutline',
+    outline: '1px solid $ActionOutline',
     color: '$ActionLightContrast',
   },
 }
