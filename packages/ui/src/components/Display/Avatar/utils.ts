@@ -1,4 +1,4 @@
-export function getLettersFromAlt(input: string) {
+export function getLettersFromLabel(input: string) {
   const separatedBySpace = input.split(' ')
   if (separatedBySpace.length > 1) {
     const initials =

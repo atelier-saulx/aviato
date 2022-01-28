@@ -79,7 +79,6 @@ const dataDisplayMenuItems: MenuDataItem[] = [
   {
     title: 'Badge',
     route: '/data-display/badge',
-    isMissing: true,
   },
   {
     title: 'Card',
@@ -89,7 +88,6 @@ const dataDisplayMenuItems: MenuDataItem[] = [
   {
     title: 'Chip',
     route: '/data-display/chip',
-    isMissing: true,
   },
   {
     title: 'Code Snippet',

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 
 import { styled } from '~/theme'
 import { Conditional } from '~/components'
-import { getLettersFromAlt } from './utils'
+import { getLettersFromLabel } from './utils'
 import { useImagePreloader } from '~/hooks'
 
 const StyledAvatar = styled('div', {
@@ -52,30 +52,30 @@ const StyledAvatar = styled('div', {
 type AvatarSize = 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge'
 
 export interface AvatarProps {
-  src: string
-  alt: string
+  src?: string
+  label: string
   size?: AvatarSize
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
   src,
-  alt,
+  label,
   size = 'extralarge',
   children,
   ...remainingProps
 }) => {
   const { imagesPreloaded } = useImagePreloader([src])
 
-  const fallbackLetters = getLettersFromAlt(alt)
+  const fallbackLetters = getLettersFromLabel(label)
 
   return (
     <StyledAvatar size={size} {...remainingProps}>
       <Conditional test={imagesPreloaded}>
-        <img src={src} alt={alt} />
+        <img src={src} alt={label} />
       </Conditional>
 
       <Conditional test={!imagesPreloaded}>
-        <div title={alt}>{fallbackLetters ?? children}</div>
+        <div title={label}>{fallbackLetters ?? children}</div>
       </Conditional>
     </StyledAvatar>
   )
