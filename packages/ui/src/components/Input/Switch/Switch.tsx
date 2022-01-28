@@ -231,3 +231,5 @@ export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
     )
   }
 )
+
+Switch.displayName = 'Switch'

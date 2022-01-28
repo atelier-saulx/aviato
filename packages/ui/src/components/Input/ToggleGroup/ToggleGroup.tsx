@@ -47,3 +47,5 @@ export const ToggleGroup = forwardRef<
     </RadixToggleRoot>
   )
 })
+
+ToggleGroup.displayName = 'ToggleGroup'
