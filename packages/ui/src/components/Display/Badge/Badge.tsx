@@ -187,3 +187,5 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
     )
   }
 )
+
+Badge.displayName = 'Badge'

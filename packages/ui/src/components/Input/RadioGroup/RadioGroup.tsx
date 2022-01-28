@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  cloneElement,
-  ChangeEvent,
-  ElementRef,
-  useEffect,
-} from 'react'
+import React, { forwardRef, cloneElement, ChangeEvent, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop, filterChildrenByType } from '@aviato/utils'
 
@@ -64,37 +58,32 @@ export const RadioGroup = forwardRef<ElementRef<typeof Group>, RadioGroupProps>(
         index,
         event,
       })
+
+      setValue(value)
+    }
+
+    const radioChildren = filterChildrenByType(children, Radio)
+
+    const getDefaultValue = () => {
+      return radioChildren?.[0].props?.value ?? ''
     }
 
     const [radioGroupValue, setValue] = useUncontrolled({
       value,
       defaultValue,
-      finalValue: '',
+      finalValue: getDefaultValue(),
       rule: (value) => typeof value === 'string',
     })
 
-    const radioChildren = filterChildrenByType(children, Radio)
-
-    /**
-     * Set default value if none is set.
-     */
-    useEffect(() => {
-      if (radioGroupValue === '' && radioChildren.length > 0) {
-        setValue(radioChildren?.[0].props?.value)
-      }
-    })
-
     const mappedRadioChildren = radioChildren.map((radio, index) => {
+      const { value } = radio.props ?? {}
+
       return cloneElement(radio, {
         name: uuid,
         key: `RadioGroupItem-${index}`,
-        checked: radioGroupValue === radio.props.value,
+        checked: radioGroupValue === value,
         onChange: (event: ChangeEvent<HTMLInputElement>) => {
-          const { value } = event?.currentTarget ?? {}
-
           handleChange({ value, index, event })
-
-          return setValue(value)
         },
       })
     })

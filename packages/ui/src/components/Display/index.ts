@@ -1,6 +1,7 @@
 export * from './Accordion'
 export * from './Avatar'
 export * from './Badge'
+export * from './Chip'
 export * from './Code'
 export * from './Image'
 export * from './List'
