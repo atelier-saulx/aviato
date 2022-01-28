@@ -6,12 +6,13 @@ import {
   BadgeType,
   BadgeSize,
   Group,
+  Row,
 } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BadgePage = () => {
-  const ShowBadge = () => {
+  const ShowBadgeMatrix = () => {
     const badgeTypes: BadgeType[] = ['primary', 'action']
 
     const badgeVariants: BadgeVariant[] = ['light', 'filled', 'outlined']
@@ -76,6 +77,26 @@ const BadgePage = () => {
     return <Column>{getBadges()}</Column>
   }
 
+  const ShowBadgeExamples = () => {
+    return (
+      <Group direction="column">
+        <Column>
+          <NextText color="Secondary">Full width</NextText>
+          <Row css={{ width: 200 }}>
+            <Badge fullWidth>Full width</Badge>
+          </Row>
+        </Column>
+
+        <Column>
+          <NextText color="Secondary">Overflow</NextText>
+          <Row css={{ width: 200 }}>
+            <Badge fullWidth>Lorem ipsum dolor sit amet consectur</Badge>
+          </Row>
+        </Column>
+      </Group>
+    )
+  }
+
   return (
     <Page>
       <NextTitle>Badge</NextTitle>
@@ -83,7 +104,11 @@ const BadgePage = () => {
       <NextText color="Secondary">Display badge, pill or tag.</NextText>
 
       <ShowcaseComponent background="transparent">
-        <ShowBadge />
+        <ShowBadgeMatrix />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowBadgeExamples />
       </ShowcaseComponent>
     </Page>
   )

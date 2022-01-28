@@ -45,6 +45,18 @@ const StyledBadge = styled('div', {
   alignItems: 'center',
   userSelect: 'none',
   fontWeight: 500,
+  textTransform: 'uppercase',
+
+  '&.fullWidth': {
+    width: '100%',
+  },
+
+  '&.overflow': {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    textAlign: 'left',
+  },
 
   variants: {
     type: {
@@ -87,6 +99,15 @@ const StyledBadge = styled('div', {
   },
 })
 
+const Inner = styled('div', {
+  '&.overflow': {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    textAlign: 'left',
+  },
+})
+
 export type BadgeType = 'primary' | 'action'
 export type BadgeVariant = 'light' | 'filled' | 'outlined'
 export type BadgeSize = BaseSize
@@ -95,6 +116,8 @@ export interface BadgeProps extends ComponentProps<typeof StyledBadge> {
   type?: BadgeType
   variant?: BadgeVariant
   size?: BadgeSize
+  fullWidth?: boolean
+  overflow?: boolean
 }
 
 export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
@@ -103,6 +126,8 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
       type = 'primary',
       variant = 'filled',
       size = 'medium',
+      fullWidth = false,
+      overflow = true,
       children,
       ...remainingProps
     } = properties
@@ -115,6 +140,8 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
       isLight,
       isFilled,
       isOutlined,
+      fullWidth,
+      overflow,
     })
 
     return (
@@ -125,7 +152,7 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
         ref={forwardedRef}
         {...remainingProps}
       >
-        {children}
+        <Inner className={classes}>{children}</Inner>
       </StyledBadge>
     )
   }
