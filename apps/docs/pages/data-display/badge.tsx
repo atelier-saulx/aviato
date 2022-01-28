@@ -1,18 +1,79 @@
-import { Column, Row, Page, Badge } from '@aviato/ui'
+import {
+  Column,
+  Page,
+  Badge,
+  BadgeVariant,
+  BadgeType,
+  BadgeSize,
+  Group,
+} from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const BadgePage = () => {
   const ShowBadge = () => {
-    return (
-      <>
-        <Column>
-          <Row>
-            <Badge>Badge</Badge>
-          </Row>
-        </Column>
-      </>
-    )
+    const badgeTypes: BadgeType[] = ['primary', 'action']
+
+    const badgeVariants: BadgeVariant[] = ['light', 'filled', 'outlined']
+
+    const badgeSizes: BadgeSize[] = [
+      'extrasmall',
+      'small',
+      'medium',
+      'large',
+      'extralarge',
+    ]
+
+    const getBadgeSizes = (type: BadgeType, variant: BadgeVariant) => {
+      const mappedSizes: { [key in BadgeSize]: string } = {
+        extrasmall: 'XS',
+        small: 'SM',
+        medium: 'MD',
+        large: 'LG',
+        extralarge: 'XL',
+      }
+
+      return badgeSizes.map((size, index) => {
+        const mappedSize = mappedSizes[size]
+
+        return (
+          <Badge
+            type={type}
+            variant={variant}
+            size={size}
+            key={`BadgeExample${index}`}
+          >
+            {mappedSize} SIZE
+          </Badge>
+        )
+      })
+    }
+
+    const getBadgeVariants = (type: BadgeType) => {
+      return badgeVariants.map((variant, index) => {
+        return (
+          <Group key={`BadgeVariant-${index}`} direction="row">
+            {getBadgeSizes(type, variant)}
+          </Group>
+        )
+      })
+    }
+
+    const getBadges = () => {
+      return badgeTypes.map((type, index) => {
+        return (
+          <Group
+            key={`BadgeType-${index}`}
+            direction="column"
+            css={{ paddingBottom: 20 }}
+          >
+            {getBadgeVariants(type)}
+          </Group>
+        )
+      })
+    }
+
+    return <Column>{getBadges()}</Column>
   }
 
   return (
