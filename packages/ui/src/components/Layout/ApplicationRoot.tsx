@@ -102,3 +102,5 @@ export const ApplicationRoot = forwardRef<
     </ThemeProvider>
   )
 })
+
+ApplicationRoot.displayName = 'ApplicationRoot'

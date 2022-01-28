@@ -304,3 +304,5 @@ export const BaseInput = forwardRef<
     </Container>
   )
 })
+
+BaseInput.displayName = 'BaseInput'

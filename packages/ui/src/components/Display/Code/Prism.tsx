@@ -115,6 +115,10 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
   }
 )
 
-const Snippet = Prism
+Prism.displayName = 'Prism'
 
-export { Snippet }
+const CodeSnippet = Prism
+
+CodeSnippet.displayName = 'CodeSnippet'
+
+export { CodeSnippet }

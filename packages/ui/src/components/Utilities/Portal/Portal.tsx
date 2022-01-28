@@ -4,16 +4,26 @@ import { useIsomorphicEffect } from '~/hooks'
 import { getZIndex } from '~/theme'
 
 interface BasePortalProps {
-  children: ReactNode
+  /**
+   * Portal z-index hierachy
+   */
   zIndex?: number
+
+  /**
+   * Target where portal will render it's children
+   */
   target?: HTMLElement | string
-  className?: string
+
+  /**
+   * Children - any React node
+   */
+  children: ReactNode
 }
 
 function BasePortal({
-  children,
   zIndex = 1,
   target,
+  children,
 }: BasePortalProps): ReactPortal {
   const [mounted, setMounted] = useState(false)
   const ref = useRef<HTMLElement>()
@@ -46,25 +56,45 @@ function BasePortal({
   )
 }
 
-export interface PopperContainerProps {
-  /** PopperContainer children, for example, modal or popover */
-  children: React.ReactNode
+BasePortal.displayName = 'BasePortal'
 
-  /** Root element z-index property */
+export interface PortalProps {
+  /**
+   * Portal z-index hierachy
+   */
   zIndex?: number
 
-  /** Whether to render the target element in a Portal */
+  /**
+   * Target where portal will render it's children
+   */
+  target?: HTMLElement | string
+
+  /**
+   * Whether to render the target element in a Portal
+   */
   disablePortal?: boolean
+
+  /**
+   * Children - any React node
+   */
+  children: React.ReactNode
 }
 
 export function Portal({
-  children,
+  target,
   zIndex = getZIndex('Popover'),
   disablePortal = true,
-}: PopperContainerProps) {
+  children,
+}: PortalProps) {
   if (disablePortal) {
     return <div style={{ position: 'relative', zIndex }}>{children}</div>
   }
 
-  return <BasePortal zIndex={zIndex}>{children}</BasePortal>
+  return (
+    <BasePortal zIndex={zIndex} target={target}>
+      {children}
+    </BasePortal>
+  )
 }
+
+Portal.displayName = 'Portal'

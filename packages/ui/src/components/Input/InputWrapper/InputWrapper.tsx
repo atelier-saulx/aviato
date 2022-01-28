@@ -76,3 +76,5 @@ export const InputWrapper = forwardRef<
     </Container>
   )
 })
+
+InputWrapper.displayName = 'InputWrapper'

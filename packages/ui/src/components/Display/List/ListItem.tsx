@@ -132,3 +132,5 @@ export const ListItem = forwardRef<
     </StyledListItem>
   )
 })
+
+ListItem.displayName = 'ListItem'

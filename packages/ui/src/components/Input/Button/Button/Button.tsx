@@ -298,3 +298,5 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
     )
   }
 )
+
+Button.displayName = 'Button'

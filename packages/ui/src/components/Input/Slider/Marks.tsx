@@ -105,3 +105,5 @@ export const Marks: FunctionComponent<MarksProps> = (properties) => {
 
   return <StyledMarks>{markItems}</StyledMarks>
 }
+
+Marks.displayName = 'Marks'

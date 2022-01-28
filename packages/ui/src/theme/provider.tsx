@@ -47,3 +47,5 @@ export function ThemeProvider({
 
   return <ClientSideThemeProvider>{children}</ClientSideThemeProvider>
 }
+
+ThemeProvider.displayName = 'ThemeProvider'

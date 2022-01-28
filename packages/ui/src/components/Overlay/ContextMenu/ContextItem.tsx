@@ -37,3 +37,5 @@ export const ContextItem = forwardRef<
     </StyledContextItem>
   )
 })
+
+ContextItem.displayName = 'ContextItem'

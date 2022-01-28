@@ -69,3 +69,5 @@ export const Toast = forwardRef<ElementRef<typeof Container>, ToastProps>(
     )
   }
 )
+
+Toast.displayName = 'Toast'

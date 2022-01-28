@@ -32,3 +32,5 @@ export const Menu = forwardRef<ElementRef<typeof StyledMenu>, MenuProps>(
     )
   }
 )
+
+Menu.displayName = 'Menu'

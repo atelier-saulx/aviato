@@ -39,3 +39,5 @@ export const CopyButton = forwardRef<
     </StyledCopyButton>
   )
 })
+
+CopyButton.displayName = 'CopyButton'

@@ -253,3 +253,5 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
     )
   }
 )
+
+Select.displayName = 'Select'

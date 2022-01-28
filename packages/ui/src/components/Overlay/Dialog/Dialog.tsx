@@ -80,6 +80,7 @@ const Buttons = ({ children }) => {
 const Confirm = ({ children = 'OK', ...props }) => (
   <Button {...props}>{children}</Button>
 )
+
 const Cancel = ({ children = 'Cancel', ...props }) => (
   <Button type="ghost" variant="outlined" {...props}>
     {children}
@@ -118,3 +119,5 @@ export const Dialog = Object.assign(
     Cancel,
   }
 )
+
+Dialog.displayName = 'Dialog'

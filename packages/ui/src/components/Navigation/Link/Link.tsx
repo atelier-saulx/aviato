@@ -82,3 +82,5 @@ export const Link = forwardRef<ElementRef<typeof StyledLink>, LinkProps>(
     )
   }
 )
+
+Link.displayName = 'Link'

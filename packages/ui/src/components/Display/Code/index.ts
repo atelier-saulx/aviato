@@ -1,3 +1,3 @@
 export * from './Prism'
-export * from './Editor'
+export * from './CodeEditor'
 export * from './types'

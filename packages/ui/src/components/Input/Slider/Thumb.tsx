@@ -119,3 +119,5 @@ export const Thumb = forwardRef<ElementRef<typeof StyledThumb>, ThumbProps>(
     )
   }
 )
+
+Thumb.displayName = 'Thumb'
