@@ -15,7 +15,7 @@ const AvatarPage = () => {
           <Row css={{ alignItems: 'center ' }}>
             <Avatar
               src="https://picsum.photos/24/24"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="extrasmall"
             />
 
@@ -23,7 +23,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.photos/28/28"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="small"
             />
 
@@ -31,7 +31,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.photos/32/32"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="medium"
             />
 
@@ -39,7 +39,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.photos/36/36"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="large"
             />
 
@@ -47,7 +47,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.photos/40/40"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="extralarge"
             />
           </Row>
@@ -57,7 +57,7 @@ const AvatarPage = () => {
           <Row css={{ alignItems: 'center ' }}>
             <Avatar
               src="https://picsum.invalid.invalid"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="extrasmall"
             />
 
@@ -65,7 +65,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.invalid.invalid"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="small"
             />
 
@@ -73,7 +73,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.invalid.invalid"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="medium"
             />
 
@@ -81,7 +81,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.invalid.invalid"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="large"
             />
 
@@ -89,7 +89,7 @@ const AvatarPage = () => {
 
             <Avatar
               src="https://picsum.invalid.invalid"
-              alt="Lorem Ipsum"
+              label="Lorem Ipsum"
               size="extralarge"
             />
           </Row>

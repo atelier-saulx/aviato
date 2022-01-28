@@ -1,8 +1,9 @@
+import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
-import React, { forwardRef, ElementRef } from 'react'
 
 import { classNames, StitchedCSS, styled } from '~/theme'
 import { BaseSize } from '~/types'
+import { Conditional } from '~/components'
 
 const PrimaryBadgeCSS: StitchedCSS = {
   '&.isLight': {
@@ -108,6 +109,23 @@ const Inner = styled('div', {
   },
 })
 
+const Container = styled('span', {
+  display: 'inline-flex',
+  alignSelf: 'center',
+  flexShrink: 0,
+
+  variants: {
+    type: {
+      start: {
+        marginRight: 10,
+      },
+      end: {
+        marginLeft: 10,
+      },
+    },
+  },
+})
+
 export type BadgeType = 'primary' | 'action'
 export type BadgeVariant = 'light' | 'filled' | 'outlined'
 export type BadgeSize = BaseSize
@@ -118,6 +136,8 @@ export interface BadgeProps extends ComponentProps<typeof StyledBadge> {
   size?: BadgeSize
   fullWidth?: boolean
   overflow?: boolean
+  leftArea?: ReactNode
+  rightArea?: ReactNode
 }
 
 export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
@@ -128,6 +148,8 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
       size = 'medium',
       fullWidth = false,
       overflow = true,
+      leftArea,
+      rightArea,
       children,
       ...remainingProps
     } = properties
@@ -152,7 +174,15 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
         ref={forwardedRef}
         {...remainingProps}
       >
+        <Conditional test={leftArea}>
+          <Container type="start">{leftArea}</Container>
+        </Conditional>
+
         <Inner className={classes}>{children}</Inner>
+
+        <Conditional test={rightArea}>
+          <Container type="end">{rightArea}</Container>
+        </Conditional>
       </StyledBadge>
     )
   }

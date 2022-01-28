@@ -7,6 +7,10 @@ import {
   BadgeSize,
   Group,
   Row,
+  IconCheck,
+  IconClipboard,
+  IconAperture,
+  IconLoading,
 } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
@@ -81,6 +85,29 @@ const BadgePage = () => {
     return (
       <Group direction="column">
         <Column>
+          <NextText color="Secondary">Left area</NextText>
+          <Row css={{ width: 200 }}>
+            <Badge leftArea={<IconCheck />}>Left area</Badge>
+          </Row>
+        </Column>
+
+        <Column>
+          <NextText color="Secondary">Right area</NextText>
+          <Row>
+            <Badge rightArea={<IconClipboard />}>Right area</Badge>
+          </Row>
+        </Column>
+
+        <Column>
+          <NextText color="Secondary">Both areas</NextText>
+          <Row css={{ width: 200 }}>
+            <Badge leftArea={<IconAperture />} rightArea={<IconLoading />}>
+              Both areas
+            </Badge>
+          </Row>
+        </Column>
+
+        <Column>
           <NextText color="Secondary">Full width</NextText>
           <Row css={{ width: 200 }}>
             <Badge fullWidth>Full width</Badge>
@@ -103,11 +130,36 @@ const BadgePage = () => {
 
       <NextText color="Secondary">Display badge, pill or tag.</NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { Badge } from '@aviato/ui'
+
+<Badge
+  type="primary"
+  variant="filled"
+  size="normal"
+>
+  Badge text
+</Badge>
+      `}
+      >
         <ShowBadgeMatrix />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { Badge } from '@aviato/ui'
+
+<Badge
+  leftArea={<IconCheck />}
+  rightArea={<IconAperture />}
+>
+  Badge text
+</Badge>
+      `}
+      >
         <ShowBadgeExamples />
       </ShowcaseComponent>
     </Page>
