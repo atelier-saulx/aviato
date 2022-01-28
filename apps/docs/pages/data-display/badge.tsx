@@ -34,7 +34,7 @@ const BadgePage = () => {
       }
 
       return badgeSizes.map((size, index) => {
-        const mappedSize = mappedSizes[size]
+        const mappedSize = `${mappedSizes[size]} SIZE`
 
         return (
           <Badge
@@ -43,7 +43,7 @@ const BadgePage = () => {
             size={size}
             key={`BadgeExample${index}`}
           >
-            {mappedSize} SIZE
+            {mappedSize}
           </Badge>
         )
       })
