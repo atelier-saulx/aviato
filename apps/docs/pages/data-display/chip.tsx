@@ -43,6 +43,18 @@ const ChipPage = () => {
               <ChipItem value="option-4">Option 4</ChipItem>
             </Chip>
           </Row>
+
+          <BigSpacer />
+
+          <NextText color="Secondary">Outlined</NextText>
+          <Row>
+            <Chip type="outline">
+              <ChipItem value="option-1">Option 1</ChipItem>
+              <ChipItem value="option-2">Option 2</ChipItem>
+              <ChipItem value="option-3">Option 3</ChipItem>
+              <ChipItem value="option-4">Option 4</ChipItem>
+            </Chip>
+          </Row>
         </Column>
       </>
     )

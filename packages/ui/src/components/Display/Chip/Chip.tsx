@@ -5,7 +5,7 @@ import { filterChildrenByType, noop } from '@aviato/utils'
 import { useUncontrolled } from '~/hooks'
 import { styled } from '~/theme'
 import { Group } from '~/components'
-import { ChipItem } from './ChipItem'
+import { ChipItem, ChipType } from './ChipItem'
 
 const StyledChip = styled('div', {})
 
@@ -31,11 +31,17 @@ export interface ChipProps extends StitchedProps {
    * Called when value changes
    */
   onChange?(value: string[] | string): void
+
+  /**
+   * Chip type
+   */
+  type?: ChipType
 }
 
 export const Chip = forwardRef<ElementRef<typeof StyledChip>, ChipProps>(
   (properties, forwardedRef) => {
     const {
+      type = 'light',
       value,
       defaultValue,
       multiple,
@@ -69,31 +75,30 @@ export const Chip = forwardRef<ElementRef<typeof StyledChip>, ChipProps>(
     })
 
     const setSelectedValue = (value: string) => {
-      const selectedValue = selected.includes(value)
-        ? selected.filter((filterValue) => filterValue !== value)
-        : [...selected, value]
+      let selectedValue: string[] | string = value
+
+      if (Array.isArray(selected)) {
+        selectedValue = selected.includes(value)
+          ? selected.filter((filterValue) => filterValue !== value)
+          : [...selected, value]
+      }
 
       setSelected(selectedValue)
     }
 
     const mappedChips = chipChildren.map((chip, index) => {
+      const isSelected = Array.isArray(selected)
+        ? selected.includes(chip.props.value)
+        : chip.props.value === selected
+
       return (
         <ChipItem
           {...chip.props}
           key={`ChipItem-${index}`}
-          isSelected={
-            Array.isArray(selected)
-              ? selected.includes(chip.props.value)
-              : chip.props.value === selected
-          }
+          isSelected={isSelected}
+          type={type}
           onClick={() => {
-            const { value } = chip.props ?? {}
-
-            if (Array.isArray(selected)) {
-              setSelectedValue(value)
-            } else {
-              setSelected(value)
-            }
+            setSelectedValue(chip.props.value)
           }}
         />
       )

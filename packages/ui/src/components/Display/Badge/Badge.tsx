@@ -40,13 +40,12 @@ const ActionBadgeCSS: StitchedCSS = {
   },
 }
 
-const StyledBadge = styled('div', {
+export const StyledBadge = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   userSelect: 'none',
   fontWeight: 500,
-  textTransform: 'uppercase',
 
   '&.fullWidth': {
     width: '100%',
@@ -138,6 +137,7 @@ export interface BadgeProps extends ComponentProps<typeof StyledBadge> {
   overflow?: boolean
   leftArea?: ReactNode
   rightArea?: ReactNode
+  isSelected?: boolean
 }
 
 export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
