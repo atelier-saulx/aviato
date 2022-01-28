@@ -25,15 +25,15 @@ const BadgePage = () => {
     ]
 
     const getBadgeSizes = (type: BadgeType, variant: BadgeVariant) => {
-      const mappedSizes: { [key in BadgeSize]: string } = {
-        extrasmall: 'XS',
-        small: 'SM',
-        medium: 'MD',
-        large: 'LG',
-        extralarge: 'XL',
-      }
-
       return badgeSizes.map((size, index) => {
+        const mappedSizes: { [key in BadgeSize]: string } = {
+          extrasmall: 'XS',
+          small: 'SM',
+          medium: 'MD',
+          large: 'LG',
+          extralarge: 'XL',
+        }
+
         const mappedSize = `${mappedSizes[size]} SIZE`
 
         return (
