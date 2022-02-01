@@ -9,7 +9,7 @@ import React, {
 import { ComponentProps } from '@stitches/react'
 
 import { styled, ThemeProvider } from '~/theme'
-import { MenuStateContext, menuWidth } from '../Navigation'
+import { MenuStateContext } from '../Navigation'
 import { headerHeight } from './Header'
 
 const StyledApplicationRoot = styled('div', {
@@ -24,6 +24,10 @@ const StyledApplicationRoot = styled('div', {
   overflowY: 'hidden',
 })
 
+const NavigationContainer = styled('div', {
+  marginTop: headerHeight,
+})
+
 const PageContainer = styled('div', {
   position: 'relative',
   width: '100%',
@@ -31,36 +35,10 @@ const PageContainer = styled('div', {
   backgroundColor: '$Background2dp',
   marginTop: headerHeight,
 
-  '@breakpoint1': {
-    paddingLeft: menuWidth,
-  },
-
   variants: {
     headerStyle: {
       fullWidth: {},
       split: {},
-    },
-  },
-})
-
-const NavigationContainer = styled('div', {
-  height: '100%',
-  width: 'auto',
-  marginTop: headerHeight,
-
-  variants: {
-    isOpen: {
-      true: {
-        display: 'block',
-      },
-
-      false: {
-        display: 'none',
-
-        '@breakpoint1': {
-          display: 'block',
-        },
-      },
     },
   },
 })
@@ -100,9 +78,7 @@ export const ApplicationRoot = forwardRef<
         <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
           {HeaderComponent}
 
-          <NavigationContainer isOpen={isMenuOpen}>
-            {NavigationComponent}
-          </NavigationContainer>
+          <NavigationContainer>{NavigationComponent}</NavigationContainer>
 
           <PageContainer headerStyle={headerStyle}>{children}</PageContainer>
         </StyledApplicationRoot>
