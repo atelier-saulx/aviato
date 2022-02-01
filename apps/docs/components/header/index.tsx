@@ -11,7 +11,6 @@ import { AviatoLogo } from '../logo'
 const LogoContainer = styled('div', {
   justifyContent: 'flex-start',
   alignItems: 'flex-start',
-  padding: '8px',
   cursor: 'pointer',
   color: '$Primary',
   display: 'none',
