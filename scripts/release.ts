@@ -5,6 +5,7 @@ import { Command } from "commander";
 import githubRelease from "new-github-release-url";
 import chalk from "chalk";
 import { execa } from "execa";
+import { prompt } from "enquirer";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
 import { getIncrementedVersion } from "./get-version";
@@ -18,10 +19,10 @@ const program = new Command();
 
 export type ReleaseOptions = {
   tag: string;
-  build: boolean;
-  version: boolean;
-  publish: boolean;
-  commit: boolean;
+  skipBuild: boolean;
+  skipVersion: boolean;
+  skipPublish: boolean;
+  skipCommit: boolean;
 };
 
 const INCREMENT_TYPES: string[] = ["patch", "minor", "major"];
@@ -29,13 +30,13 @@ const INCREMENT_TYPES: string[] = ["patch", "minor", "major"];
 let targetReleaseType = "patch";
 
 program
-  .version("0.1.0")
+  .version("0.1.1")
   .argument("[release-type]", "Type of release", "patch")
   .option("-T, --tag <type>", "Release tag name", "latest")
-  .option("-b, --no-build", "Skip building")
-  .option("-V, --no-version", "Skip version increment step")
-  .option("-p, --no-publish", "Skip publish step")
-  .option("-c, --no-commit", "Skip commit step")
+  .option("-b, --skipBuild", "Skip building", false)
+  .option("-V, --skipVersion", "Skip version increment step", false)
+  .option("-p, --skipPublish", "Skip publish step", true)
+  .option("-c, --skipCommit", "Skip commit step", false)
   .action((releaseType) => {
     if (!INCREMENT_TYPES.includes(releaseType)) {
       const errorMessage = `Incorrect release type: ${chalk.red(
@@ -64,27 +65,39 @@ const options: ReleaseOptions = program.opts();
   console.info(`\n  Releasing Aviato...`);
   console.info(`\n  Release type: ${chalk.blueBright(targetReleaseType)}`);
 
-  await timeout(1000);
+  const { tag, skipBuild, skipVersion, skipPublish, skipCommit } = options;
 
-  const {
+  let shouldTriggerBuild = Boolean(skipBuild) === false;
+  let shouldIncrementVersion = Boolean(skipVersion) === false;
+  let shouldPublishToNPM = Boolean(skipPublish) === false;
+  let shouldCommitChanges = Boolean(skipCommit) === false;
+
+  const printedOptions = {
     tag,
-    build: createBuild = true,
-    version: incrementVersion = true,
-    publish: publishChanges = false,
-    commit: commitChanges = true,
-  } = options;
+    shouldTriggerBuild,
+    shouldIncrementVersion,
+    shouldPublishToNPM,
+    shouldCommitChanges,
+  };
 
-  console.info("\n Options: ", {
-    createBuild,
-    incrementVersion,
-    publishChanges,
-    commitChanges,
+  console.info(`\n Options: %o \n`, printedOptions);
+
+  await prompt({
+    type: "confirm",
+    name: "shouldRelease",
+    message: "Confirm release?",
+  }).then(({ shouldRelease }: any) => {
+    if (!shouldRelease) {
+      console.info("User aborted the release.");
+
+      return process.exit(0);
+    }
   });
 
   /**
    * Build project to ensure latest changes are present
    */
-  if (createBuild) {
+  if (shouldTriggerBuild) {
     try {
       await execa("yarn", ["build"], { stdio: "inherit" });
     } catch (error) {
@@ -98,7 +111,7 @@ const options: ReleaseOptions = program.opts();
   /**
    * Increment all packages in project
    */
-  if (incrementVersion) {
+  if (shouldIncrementVersion) {
     targetVersion = getIncrementedVersion({
       version: packageJson.version,
       type: targetReleaseType,
@@ -119,26 +132,42 @@ const options: ReleaseOptions = program.opts();
   /**
    * Publish all public packages in repository
    */
-  if (publishChanges) {
-    await publishAllPackagesInRepository({
-      version: targetVersion,
-      tag,
-    });
+  if (shouldPublishToNPM) {
+    await prompt({
+      type: "confirm",
+      name: "publishChangesToNPM",
+      message: "Publish release to NPM?",
+    }).then(async ({ publishChangesToNPM }: any) => {
+      if (publishChangesToNPM) {
+        await publishAllPackagesInRepository({
+          version: targetVersion,
+          tag,
+        });
 
-    console.info(`\n  Released version ${targetVersion} successfully! \n`);
+        console.info(`\n  Released version ${targetVersion} successfully! \n`);
+      }
+    });
   }
 
   /**
    * Stage and commit + push target version
    */
-  if (commitChanges) {
-    await git.add([
-      path.join(__dirname, "../packages"),
-      path.join(__dirname, "../apps"),
-      path.join(__dirname, "../package.json"),
-    ]);
+  if (shouldCommitChanges) {
+    await prompt({
+      type: "confirm",
+      name: "commitChanges",
+      message: "Commit changes to Git?",
+    }).then(async ({ commitChanges }: any) => {
+      if (commitChanges) {
+        await git.add([
+          path.join(__dirname, "../packages"),
+          path.join(__dirname, "../apps"),
+          path.join(__dirname, "../package.json"),
+        ]);
 
-    await git.commit(`[release] Version: ${targetVersion}`);
+        await git.commit(`[release] Version: ${targetVersion}`);
+      }
+    });
 
     /**
      * Open up a browser tab within github to publish new release
@@ -156,6 +185,6 @@ const options: ReleaseOptions = program.opts();
   console.info(`\n  Release process has finished. \n`);
 })();
 
-function timeout(milliseconds: number) {
+export function timeout(milliseconds: number) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }

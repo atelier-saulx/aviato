@@ -38,12 +38,12 @@
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
   "dependencies": {
-    "prompt-confirm": "^2.0.4",
     "turbo": "1.0.28"
   },
   "devDependencies": {
     "chalk": "^5.0.0",
     "commander": "^8.3.0",
+    "enquirer": "^2.3.6",
     "esno": "^0.14.0",
     "execa": "^6.0.0",
     "husky": "^7.0.4",
