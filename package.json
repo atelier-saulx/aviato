@@ -7,7 +7,7 @@
   },
   "homepage": "https://github.com/atelier-saulx/aviato-ui#readme",
   "private": true,
-  "version": "0.2.2",
+  "version": "0.2.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atelier-saulx/aviato-ui.git"
@@ -38,6 +38,7 @@
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
   "dependencies": {
+    "prompt-confirm": "^2.0.4",
     "turbo": "1.0.28"
   },
   "devDependencies": {

@@ -56,10 +56,10 @@ const options: ReleaseOptions = program.opts();
 (async () => {
   const status = await git.status();
 
-  // if (status.files.length !== 0) {
-  //   console.error("Working tree is not clean");
-  //   process.exit(1);
-  // }
+  if (status.files.length !== 0) {
+    console.error("Working tree is not clean");
+    process.exit(1);
+  }
 
   console.info(`\n  Releasing Aviato...`);
   console.info(`\n  Release type: ${chalk.blueBright(targetReleaseType)}`);
@@ -70,7 +70,7 @@ const options: ReleaseOptions = program.opts();
     tag,
     build: createBuild = true,
     version: incrementVersion = true,
-    publish: publishChanges = true,
+    publish: publishChanges = false,
     commit: commitChanges = true,
   } = options;
 
@@ -98,7 +98,6 @@ const options: ReleaseOptions = program.opts();
   /**
    * Increment all packages in project
    */
-  console.log(">>>>>> incrementVersion: ", incrementVersion);
   if (incrementVersion) {
     targetVersion = getIncrementedVersion({
       version: packageJson.version,
