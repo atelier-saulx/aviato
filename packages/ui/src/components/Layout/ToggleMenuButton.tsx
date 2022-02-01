@@ -5,13 +5,7 @@ import { IconButton } from '../Input/Button/IconButton'
 import { styled } from '~/theme'
 import { useMenuContext } from '../Navigation'
 
-const StyledToggleMenuButton = styled('div', {
-  visibility: 'visible',
-
-  '@breakpoint1': {
-    visibility: 'hidden',
-  },
-})
+const StyledToggleMenuButton = styled('div', {})
 
 export interface ToggleMenuButtonProps
   extends ComponentProps<typeof StyledToggleMenuButton> {}

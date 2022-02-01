@@ -32,6 +32,8 @@ const SideMenuPage = () => {
             css={{
               position: 'relative',
               height: 300,
+              minWidth: 224,
+              maxWidth: 224,
             }}
           >
             <HeaderDiv>

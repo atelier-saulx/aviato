@@ -9,12 +9,24 @@ import {
 import { AviatoLogo } from '../logo'
 
 const LogoContainer = styled('div', {
-  display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'flex-start',
   padding: '8px',
   cursor: 'pointer',
   color: '$Primary',
+  display: 'none',
+
+  '@breakpoint1': {
+    display: 'flex',
+  },
+})
+
+const MenuButton = styled(ToggleMenuButton, {
+  display: 'flex',
+
+  '@breakpoint1': {
+    display: 'none',
+  },
 })
 
 const Container = styled('span', {
@@ -47,14 +59,17 @@ const MainHeader = () => {
   return (
     <Header>
       <Container type="start">
-        <LogoContainer onClick={() => setRoute('/')}>
-          <AviatoLogo />
-        </LogoContainer>
+        <Group>
+          <LogoContainer onClick={() => setRoute('/')}>
+            <AviatoLogo />
+          </LogoContainer>
+
+          <MenuButton />
+        </Group>
       </Container>
 
       <Container type="end">
         <Group>
-          <ToggleMenuButton />
           <ToggleThemeButton />
         </Group>
       </Container>
