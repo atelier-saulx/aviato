@@ -6,14 +6,15 @@ import { styled } from '~/theme'
 export const headerHeight = '60px'
 
 const StyledHeader = styled('div', {
+  display: 'flex',
+  justifyContent: 'start',
   position: 'fixed',
   left: '0',
   right: '0',
   top: '0',
   height: headerHeight,
   zIndex: '6',
-  display: 'flex',
-  justifyContent: 'end',
+  paddingLeft: '$sm',
   paddingRight: '$sm',
   borderBottom: '1px solid $OtherDivider',
   backgroundColor: '$Background2dp',

@@ -8,9 +8,7 @@ import { isBrowser } from '@aviato/utils'
 const createdConfig = createStitches({
   theme: LightTheme,
   media: {
-    breakpoint1: '(min-width: 640px)',
-    breakpoint2: '(min-width: 768px)',
-    breakpoint3: '(min-width: 1024px)',
+    breakpoint1: '(min-width: 768px)',
   },
 })
 

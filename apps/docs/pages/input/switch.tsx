@@ -41,7 +41,7 @@ import { Switch } from '@aviato/ui'
   text="This text is beside the switch"
   size={size}
   onChange={(value, payload) => {
-    log.global.debug('Switch change: ', { value, payload })
+    console.log('Switch change: ', { value, payload })
   }}
 />
         `}
