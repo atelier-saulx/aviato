@@ -32,10 +32,10 @@ program
   .version("0.1.0")
   .argument("[release-type]", "Type of release", "patch")
   .option("-T, --tag <type>", "Release tag name", "latest")
-  .option("-b, --no-build", "Skip building", false)
-  .option("-v, --no-version", "Skip version increment step", false)
-  .option("-p, --no-publish", "Skip publish step", false)
-  .option("-c, --no-commit", "Skip commit step", false)
+  .option("-b, --no-build", "Skip building")
+  .option("-V, --no-version", "Skip version increment step")
+  .option("-p, --no-publish", "Skip publish step")
+  .option("-c, --no-commit", "Skip commit step")
   .action((releaseType) => {
     if (!INCREMENT_TYPES.includes(releaseType)) {
       const errorMessage = `Incorrect release type: ${chalk.red(
@@ -56,21 +56,30 @@ const options: ReleaseOptions = program.opts();
 (async () => {
   const status = await git.status();
 
-  if (status.files.length !== 0) {
-    console.error("Working tree is not clean");
-    process.exit(1);
-  }
+  // if (status.files.length !== 0) {
+  //   console.error("Working tree is not clean");
+  //   process.exit(1);
+  // }
 
   console.info(`\n  Releasing Aviato...`);
   console.info(`\n  Release type: ${chalk.blueBright(targetReleaseType)}`);
 
+  await timeout(1000);
+
   const {
     tag,
-    build: createBuild,
-    version: incrementVersion,
-    publish: publishChanges,
-    commit: commitChanges,
+    build: createBuild = true,
+    version: incrementVersion = true,
+    publish: publishChanges = true,
+    commit: commitChanges = true,
   } = options;
+
+  console.info("\n Options: ", {
+    createBuild,
+    incrementVersion,
+    publishChanges,
+    commitChanges,
+  });
 
   /**
    * Build project to ensure latest changes are present
@@ -89,6 +98,7 @@ const options: ReleaseOptions = program.opts();
   /**
    * Increment all packages in project
    */
+  console.log(">>>>>> incrementVersion: ", incrementVersion);
   if (incrementVersion) {
     targetVersion = getIncrementedVersion({
       version: packageJson.version,
@@ -146,3 +156,7 @@ const options: ReleaseOptions = program.opts();
 
   console.info(`\n  Release process has finished. \n`);
 })();
+
+function timeout(milliseconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
