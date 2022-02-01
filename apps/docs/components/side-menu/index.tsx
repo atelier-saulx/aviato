@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { withRouter } from 'next/router'
 
-import { SideMenu, Menu, MenuItem, styled, useMenuContext } from '@aviato/ui'
+import { SideMenu, Menu, MenuItem, useMenuContext } from '@aviato/ui'
 
-import { AviatoLogo } from '../logo'
 import { featureFlags } from '../../feature-flags/featureFlags'
 
 interface MenuDataItem {
@@ -220,16 +219,6 @@ const rootMenu: MenuDataItem[] = [
   },
 ]
 
-const HeaderDiv = styled('div', {
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  padding: '8px',
-  paddingBottom: '69px',
-  cursor: 'pointer',
-  color: '$Primary',
-})
-
 const hasActiveRoute = (item: MenuDataItem, activeRoute: string): boolean => {
   const itemRoute = item?.route?.replace(/\//g, '')
   const targetRoute = activeRoute.replace(/\//g, '')
@@ -275,9 +264,13 @@ const MainSideMenu = withRouter(({ router }) => {
 
   const { setIsMenuOpen } = useMenuContext()
 
-  const handleRouteChange = useCallback(() => {
-    setIsMenuOpen(false)
-  }, [setIsMenuOpen])
+  const handleRouteChange = useCallback(
+    (targetRoute) => {
+      setActiveRoute(targetRoute)
+      setIsMenuOpen(false)
+    },
+    [setIsMenuOpen]
+  )
 
   useEffect(() => {
     events.on('routeChangeComplete', handleRouteChange)
@@ -297,7 +290,6 @@ const MainSideMenu = withRouter(({ router }) => {
     (targetRoute: string | undefined) => {
       if (!targetRoute) return
 
-      setActiveRoute(targetRoute)
       router.push({
         pathname: targetRoute,
       })
@@ -361,10 +353,6 @@ const MainSideMenu = withRouter(({ router }) => {
 
   return (
     <SideMenu>
-      <HeaderDiv onClick={() => setRoute('/')}>
-        <AviatoLogo />
-      </HeaderDiv>
-
       <Menu>{mainMenuItems}</Menu>
     </SideMenu>
   )

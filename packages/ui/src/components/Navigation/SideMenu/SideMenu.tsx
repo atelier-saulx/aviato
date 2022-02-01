@@ -12,11 +12,6 @@ const Padding = styled('div', {
 })
 
 const StyledSideMenu = styled('div', {
-  position: 'fixed',
-  left: 0,
-  top: 0,
-  bottom: 0,
-  flexGrow: '1',
   display: 'flex',
   flexDirection: 'column',
   height: '100%',

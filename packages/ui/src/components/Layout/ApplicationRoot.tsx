@@ -10,10 +10,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { styled, ThemeProvider } from '~/theme'
 import { MenuStateContext, menuWidth } from '../Navigation'
-import { Header, headerHeight } from './Header'
-import { Group } from './Group'
-import { ToggleThemeButton } from './ToggleThemeButton'
-import { ToggleMenuButton } from './ToggleMenuButton'
+import { headerHeight } from './Header'
 
 const StyledApplicationRoot = styled('div', {
   position: 'relative',
@@ -34,18 +31,23 @@ const PageContainer = styled('div', {
   backgroundColor: '$Background2dp',
   marginTop: headerHeight,
 
+  '@breakpoint1': {
+    paddingLeft: menuWidth,
+  },
+
   variants: {
-    sideMenu: {
-      true: {
-        '@breakpoint1': {
-          paddingLeft: menuWidth,
-        },
-      },
+    headerStyle: {
+      fullWidth: {},
+      split: {},
     },
   },
 })
 
 const NavigationContainer = styled('div', {
+  height: '100%',
+  width: 'auto',
+  marginTop: headerHeight,
+
   variants: {
     isOpen: {
       true: {
@@ -63,9 +65,13 @@ const NavigationContainer = styled('div', {
   },
 })
 
+export type HeaderStyle = 'fullWidth' | 'split'
+
 export interface ApplicationRootProps
   extends ComponentProps<typeof StyledApplicationRoot> {
   navigation?: ReactElement
+  header?: ReactElement
+  headerStyle?: HeaderStyle
   SSR?: boolean
 }
 
@@ -73,30 +79,32 @@ export const ApplicationRoot = forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ApplicationRootProps
 >((properties, forwardedRef) => {
-  const { SSR = false, children, navigation, ...remainingProps } = properties
+  const {
+    SSR = false,
+    navigation,
+    header,
+    headerStyle = 'fullWidth',
+    children,
+    ...remainingProps
+  } = properties
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
 
-  const hasSideMenu = Boolean(navigation)
   const NavigationComponent = navigation ? cloneElement(navigation) : null
+  const HeaderComponent = header ? cloneElement(header) : null
 
   return (
     <ThemeProvider isSSRApplication={SSR}>
       <MenuStateContext.Provider value={value}>
         <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
-          <Header>
-            <Group>
-              <ToggleMenuButton />
-              <ToggleThemeButton />
-            </Group>
-          </Header>
+          {HeaderComponent}
 
           <NavigationContainer isOpen={isMenuOpen}>
             {NavigationComponent}
           </NavigationContainer>
 
-          <PageContainer sideMenu={hasSideMenu}>{children}</PageContainer>
+          <PageContainer headerStyle={headerStyle}>{children}</PageContainer>
         </StyledApplicationRoot>
       </MenuStateContext.Provider>
     </ThemeProvider>
