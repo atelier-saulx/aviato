@@ -24,7 +24,7 @@ const inputMenuItems: MenuDataItem[] = [
   },
   {
     title: 'Color Picker',
-    route: '/input/upload',
+    route: '/input/color-picker',
     isMissing: true,
   },
   {
@@ -330,7 +330,7 @@ const MainSideMenu = withRouter(({ router }) => {
             title={title}
             onClick={() => setRoute(route)}
             isActive={isActiveRoute(route)}
-            isOpen={isMenuOpen}
+            startOpen={isMenuOpen}
           >
             {hasSubmenu ? <Menu>{mappedSubmenu}</Menu> : null}
           </MenuItem>
