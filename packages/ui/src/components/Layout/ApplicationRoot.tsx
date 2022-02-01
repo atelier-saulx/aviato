@@ -12,6 +12,8 @@ import { styled, ThemeProvider } from '~/theme'
 import { MenuStateContext } from '../Navigation'
 import { headerHeight } from './Header'
 
+const MENU_WIDTH = 224
+
 const StyledApplicationRoot = styled('div', {
   position: 'relative',
   display: 'flex',
@@ -29,31 +31,25 @@ const NavigationContainer = styled('div', {
   marginTop: headerHeight,
   minWidth: '100%',
   maxWidth: '100%',
+  zIndex: 500,
+
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
 
   '@breakpoint1': {
-    minWidth: '224px',
-    maxWidth: '224px',
+    right: 'unset',
+    minWidth: `${MENU_WIDTH}px`,
+    maxWidth: `${MENU_WIDTH}px`,
     borderRight: '1px solid $OtherDivider',
+    zIndex: 1,
   },
 
   variants: {
     isOpen: {
-      true: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        zIndex: 500,
-
-        '@breakpoint1': {
-          position: 'relative',
-          top: 'unset',
-          left: 'unset',
-          bottom: 'unset',
-          right: 'unset',
-        },
-      },
+      true: {},
 
       false: {
         display: 'none',
@@ -72,22 +68,17 @@ const PageContainer = styled('div', {
   height: '100%',
   backgroundColor: '$Background2dp',
   marginTop: headerHeight,
+  paddingLeft: 0,
 
-  variants: {
-    headerStyle: {
-      fullWidth: {},
-      split: {},
-    },
+  '@breakpoint1': {
+    paddingLeft: `${MENU_WIDTH}px`,
   },
 })
-
-export type HeaderStyle = 'fullWidth' | 'split'
 
 export interface ApplicationRootProps
   extends ComponentProps<typeof StyledApplicationRoot> {
   navigation?: ReactElement
   header?: ReactElement
-  headerStyle?: HeaderStyle
   SSR?: boolean
 }
 
@@ -99,7 +90,6 @@ export const ApplicationRoot = forwardRef<
     SSR = false,
     navigation,
     header,
-    headerStyle = 'fullWidth',
     children,
     ...remainingProps
   } = properties
@@ -120,7 +110,7 @@ export const ApplicationRoot = forwardRef<
             {NavigationComponent}
           </NavigationContainer>
 
-          <PageContainer headerStyle={headerStyle}>{children}</PageContainer>
+          <PageContainer>{children}</PageContainer>
         </StyledApplicationRoot>
       </MenuStateContext.Provider>
     </ThemeProvider>
