@@ -18,22 +18,6 @@ export async function publishPackage({
   tag: string;
 }) {
   try {
-    // Print current registry config for good measure
-    await execa("npm", ["config", "get", "registry"], {
-      stdio: "inherit",
-      cwd: path,
-    });
-
-    // Make sure we publish to the NPM registry
-    await execa(
-      "npm",
-      ["config", "set", "registry", "https://registry.npmjs.org/"],
-      {
-        stdio: "inherit",
-        cwd: path,
-      }
-    );
-
     // Publish target package to NPM registry
     await execa(
       "npm",

@@ -213,7 +213,14 @@ async function releaseProject() {
         path.join(__dirname, "../package.json"),
       ]);
 
+      await git.addAnnotatedTag(
+        targetVersion,
+        `[release] Version: ${targetVersion}`
+      );
+
       await git.commit(`[release] Version: ${targetVersion}`);
+
+      await git.push();
 
       /**
        * Open up a browser tab within github to publish new release
@@ -229,7 +236,7 @@ async function releaseProject() {
     }
   }
 
-  console.info(`\n  Release process has finished. \n`);
+  console.info(`\n  The release process has finished. \n`);
 }
 
 (async () => {
