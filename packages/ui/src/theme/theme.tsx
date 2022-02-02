@@ -21,6 +21,7 @@ export const {
   styled,
   theme,
   reset,
+  keyframes,
 } = createdConfig
 
 /**

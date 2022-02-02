@@ -16,7 +16,7 @@ const IconButtonStyles: StitchedCSS = {
 }
 
 export interface IconButtonProps {
-  type?: ButtonMode
+  mode?: ButtonMode
   variant?: ButtonVariant
   disabled?: boolean
   icon?: IconName
@@ -29,7 +29,7 @@ export const IconButton = forwardRef<
   IconButtonProps
 >((properties, forwardedRef) => {
   const {
-    type = 'primary',
+    mode = 'primary',
     variant = 'filled',
     disabled = false,
     icon = 'IconPlus',
@@ -40,7 +40,7 @@ export const IconButton = forwardRef<
 
   return (
     <Button
-      mode={type}
+      mode={mode}
       variant={variant}
       disabled={disabled}
       css={IconButtonStyles}
