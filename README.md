@@ -18,7 +18,7 @@
 
 ## 🔍 Description
 
-Aviato is UI component library with a focus on customization and developer experience (DX).
+Aviato is a React components and hooks library with focus on usability, accessibility and developer experience.
 
 You can use these components either as the base layer of your application, or adopt them incrementally.
 
@@ -29,8 +29,8 @@ You can use these components either as the base layer of your application, or ad
 - 🗳 - A UI suite designed for CMS + DMS interfaces and web applications.
 - 📦 - A set of high-quality React components out of the box.
 - 🛡 - Written in TypeScript with predictable static types.
-- 🎨 - Powerful theme customization.
 - 🪝 - Contains a comprehensive collection of React Hooks.
+- 🌙 - Dark theme support out of the box.
 
 ---
 
