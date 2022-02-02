@@ -23,6 +23,7 @@ export type ReleaseOptions = {
   skipVersion: boolean;
   skipPublish: boolean;
   skipCommit: boolean;
+  force: boolean;
 };
 
 const { argv }: { argv: any } = yargs(hideBin(process.argv))
@@ -56,6 +57,11 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     default: false,
     description: "Skip commit step.",
   })
+  .option("force", {
+    type: "boolean",
+    default: false,
+    description: "Force release.",
+  })
   .example([
     ["$0 minor", "Release minor update."],
     ["$0 --type minor", "Release minor update."],
@@ -64,6 +70,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     ["$0 --skip-publish", "Skip publishing packages."],
     ["$0 --skip-version", "Skip incrementing package versions."],
     ["$0 --skip-commit", "Skip committing changes to Git."],
+    ["$0 --force", "Do not prompt while releasing."],
   ]);
 
 async function releaseProject() {
@@ -80,6 +87,7 @@ async function releaseProject() {
     skipVersion,
     skipPublish,
     skipCommit,
+    force,
   } = argv as ReleaseOptions;
 
   const releaseType = validateReleaseType(argv._[0] ?? type);
@@ -94,6 +102,7 @@ async function releaseProject() {
   let shouldIncrementVersion = Boolean(skipVersion) === false;
   let shouldPublishToNPM = Boolean(skipPublish) === false;
   let shouldCommitChanges = Boolean(skipCommit) === false;
+  let shouldIgnorePrompts = Boolean(force) === true;
 
   const printedOptions = {
     releaseType,
@@ -111,37 +120,72 @@ async function releaseProject() {
 
   console.info(`\n Options: %o \n`, printedOptions);
 
-  const { shouldRelease } = await prompt<{
+  await prompt<{
     shouldRelease: boolean;
   }>({
-    type: "confirm",
-    name: "shouldRelease",
     message: "Confirm release?",
+    name: "shouldRelease",
+    type: "confirm",
+  }).then(({ shouldRelease }) => {
+    if (!shouldRelease) {
+      console.info("User aborted the release.");
+      process.exit(0);
+    }
   });
 
-  if (!shouldRelease) {
-    console.info("User aborted the release.");
-    process.exit(0);
+  /**
+   * Prompt for release configuration
+   */
+  if (!shouldIgnorePrompts) {
+    await prompt<{
+      triggerBuild: boolean;
+    }>({
+      message: "Trigger full project build?",
+      name: "triggerBuild",
+      type: "confirm",
+    }).then(({ triggerBuild }) => {
+      shouldTriggerBuild = triggerBuild;
+    });
+
+    await prompt<{
+      incrementVersion: boolean;
+    }>({
+      message: `Increment project version from ${packageJson.version} to ${incrementedVersion}?`,
+      name: "incrementVersion",
+      type: "confirm",
+    }).then(({ incrementVersion }) => {
+      shouldIncrementVersion = incrementVersion;
+    });
+
+    await prompt<{
+      publishChangesToNPM: boolean;
+    }>({
+      message: "Publish release to NPM?",
+      name: "publishChangesToNPM",
+      type: "confirm",
+    }).then(({ publishChangesToNPM }) => {
+      shouldPublishToNPM = publishChangesToNPM;
+    });
+
+    await prompt<{
+      commitChanges: boolean;
+    }>({
+      message: "Commit changes to Git?",
+      name: "commitChanges",
+      type: "confirm",
+    }).then(({ commitChanges }) => {
+      shouldCommitChanges = commitChanges;
+    });
   }
 
   /**
    * Build project to ensure latest changes are present
    */
   if (shouldTriggerBuild) {
-    const { triggerBuild } = await prompt<{
-      triggerBuild: boolean;
-    }>({
-      type: "confirm",
-      name: "triggerBuild",
-      message: "Trigger full project build?",
-    });
-
-    if (triggerBuild) {
-      try {
-        await execa("yarn", ["build"], { stdio: "inherit" });
-      } catch (error) {
-        throw "Error encountered when building project.";
-      }
+    try {
+      await execa("yarn", ["build"], { stdio: "inherit" });
+    } catch (error) {
+      throw "Error encountered when building project.";
     }
   }
 
@@ -149,24 +193,14 @@ async function releaseProject() {
    * Increment all packages in project
    */
   if (shouldIncrementVersion) {
-    const { incrementVersion } = await prompt<{
-      incrementVersion: boolean;
-    }>({
-      type: "confirm",
-      name: "incrementVersion",
-      message: `Increment project version from ${packageJson.version} to ${incrementedVersion}?`,
-    });
+    targetVersion = incrementedVersion;
 
-    if (incrementVersion) {
-      targetVersion = incrementedVersion;
-
-      try {
-        await updatePackageVersionsInRepository({
-          version: targetVersion,
-        });
-      } catch (error) {
-        throw "There was an error updating package versions";
-      }
+    try {
+      await updatePackageVersionsInRepository({
+        version: targetVersion,
+      });
+    } catch (error) {
+      throw "There was an error updating package versions";
     }
   }
 
@@ -174,66 +208,46 @@ async function releaseProject() {
    * Publish all public packages in repository
    */
   if (shouldPublishToNPM) {
-    const { publishChangesToNPM } = await prompt<{
-      publishChangesToNPM: boolean;
-    }>({
-      type: "confirm",
-      name: "publishChangesToNPM",
-      message: "Publish release to NPM?",
+    await publishAllPackagesInRepository({
+      version: targetVersion,
+      tag: releaseTag,
+    }).catch(() => {
+      throw "Publishing to NPM failed.";
     });
 
-    if (publishChangesToNPM) {
-      await publishAllPackagesInRepository({
-        version: targetVersion,
-        tag: releaseTag,
-      }).catch(() => {
-        throw "Publishing to NPM failed.";
-      });
-
-      console.info(`\n  Released version ${targetVersion} successfully! \n`);
-    }
+    console.info(`\n  Released version ${targetVersion} successfully! \n`);
   }
 
   /**
    * Stage and commit + push target version
    */
   if (shouldCommitChanges) {
-    const { commitChanges } = await prompt<{
-      commitChanges: boolean;
-    }>({
-      type: "confirm",
-      name: "commitChanges",
-      message: "Commit changes to Git?",
-    });
+    await git.add([
+      path.join(__dirname, "../packages"),
+      path.join(__dirname, "../apps"),
+      path.join(__dirname, "../package.json"),
+    ]);
 
-    if (commitChanges) {
-      await git.add([
-        path.join(__dirname, "../packages"),
-        path.join(__dirname, "../apps"),
-        path.join(__dirname, "../package.json"),
-      ]);
+    await git.commit(`[release] Version: ${targetVersion}`);
 
-      await git.commit(`[release] Version: ${targetVersion}`);
+    await git.push();
 
-      await git.push();
+    await git.addAnnotatedTag(
+      targetVersion,
+      `[release] Version: ${targetVersion}`
+    );
 
-      await git.addAnnotatedTag(
-        targetVersion,
-        `[release] Version: ${targetVersion}`
-      );
-
-      /**
-       * Open up a browser tab within github to publish new release
-       */
-      open(
-        githubRelease({
-          user: "atelier-saulx",
-          repo: "aviato-ui",
-          tag: targetVersion,
-          title: targetVersion,
-        })
-      );
-    }
+    /**
+     * Open up a browser tab within github to publish new release
+     */
+    open(
+      githubRelease({
+        user: "atelier-saulx",
+        repo: "aviato-ui",
+        tag: targetVersion,
+        title: targetVersion,
+      })
+    );
   }
 
   console.info(`\n  The release process has finished. \n`);
