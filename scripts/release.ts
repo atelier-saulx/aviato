@@ -213,14 +213,14 @@ async function releaseProject() {
         path.join(__dirname, "../package.json"),
       ]);
 
+      await git.commit(`[release] Version: ${targetVersion}`);
+
+      await git.push();
+
       await git.addAnnotatedTag(
         targetVersion,
         `[release] Version: ${targetVersion}`
       );
-
-      await git.commit(`[release] Version: ${targetVersion}`);
-
-      await git.push();
 
       /**
        * Open up a browser tab within github to publish new release
