@@ -37,6 +37,9 @@
     "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "dependencies": {
     "turbo": "1.0.28"
   },

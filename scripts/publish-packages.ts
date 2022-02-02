@@ -35,10 +35,23 @@ export async function publishPackage({
     );
 
     // Publish target package to NPM registry
-    await execa("npm", ["publish", path, "--access", "public", "--tag", tag], {
-      stdio: "inherit",
-      cwd: path,
-    });
+    await execa(
+      "npm",
+      [
+        "publish",
+        path,
+        "--registry",
+        "https://registry.npmjs.org/",
+        "--access",
+        "public",
+        "--tag",
+        tag,
+      ],
+      {
+        stdio: "inherit",
+        cwd: path,
+      }
+    );
 
     console.log(`- Package ${chalk.cyan(name)} was published`);
   } catch (error: any) {
