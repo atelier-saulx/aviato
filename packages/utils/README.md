@@ -4,6 +4,8 @@ Aviato Utils is an open source utility library.
 
 It's goal is to take repeated utility functions and types, and package it up into one importable module.
 
+Disclaimer: This project is still in it's concept stage. Use at your own risk.
+
 ## 🔗 Links
 
 - [Documentation](https://aviato.design/)
