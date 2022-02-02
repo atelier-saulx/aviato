@@ -3,7 +3,6 @@ import '@aviato/ui/css/fonts.css'
 import '../styles/playground.css'
 
 import React from 'react'
-
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { ApplicationRoot } from '@aviato/ui'
