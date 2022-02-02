@@ -82,7 +82,7 @@ const Confirm = ({ children = 'OK', ...props }) => (
 )
 
 const Cancel = ({ children = 'Cancel', ...props }) => (
-  <Button type="ghost" variant="outlined" {...props}>
+  <Button mode="ghost" variant="outlined" {...props}>
     {children}
   </Button>
 )

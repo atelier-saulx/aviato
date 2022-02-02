@@ -213,7 +213,7 @@ export const StyledButton = styled('button', {
   },
 
   variants: {
-    type: {
+    mode: {
       primary: PrimaryButtonCSS,
       ghost: GhostButtonCSS,
       error: ErrorButtonCSS,
@@ -221,11 +221,11 @@ export const StyledButton = styled('button', {
   },
 })
 
-export type ButtonType = 'primary' | 'ghost' | 'error'
+export type ButtonMode = 'primary' | 'ghost' | 'error'
 export type ButtonVariant = 'filled' | 'outlined' | 'transparent'
 
 export interface ButtonProps extends ComponentProps<typeof StyledButton> {
-  type?: ButtonType
+  mode?: ButtonMode
   variant?: ButtonVariant
   disabled?: boolean
   leftIcon?: ReactNode
@@ -237,7 +237,7 @@ export interface ButtonProps extends ComponentProps<typeof StyledButton> {
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
   (properties, forwardedRef) => {
     const {
-      type = 'primary',
+      mode = 'primary',
       variant = 'filled',
       disabled = false,
       leftIcon = null,
@@ -278,7 +278,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
 
     return (
       <StyledButton
-        type={type}
+        mode={mode}
         disabled={disabled}
         className={classes}
         ref={forwardedRef}

@@ -5,7 +5,7 @@ import {
   Button,
   Column,
   Row,
-  ButtonType,
+  ButtonMode,
   IconButton,
   getRandomIcon,
   getRandomIconName,
@@ -30,8 +30,8 @@ const ButtonPage = () => {
     return null
   }
 
-  const ShowButtons = ({ type }: { type: ButtonType }) => {
-    const uppercasedType = capitalize(type)
+  const ShowButtons = ({ mode }: { mode: ButtonMode }) => {
+    const uppercasedMode = capitalize(mode)
     const [isDisabled, setIsDisabled] = useState(false)
 
     const Icon = useMemo(() => {
@@ -46,7 +46,7 @@ const ButtonPage = () => {
     return (
       <>
         <Column>
-          <NextTitle size="small">{uppercasedType}</NextTitle>
+          <NextTitle size="small">{uppercasedMode}</NextTitle>
 
           <Row>
             <Switch
@@ -63,7 +63,7 @@ const ButtonPage = () => {
             <Column>
               <Row>
                 <Button
-                  type={type}
+                  mode={mode}
                   variant="filled"
                   leftIcon={Icon}
                   disabled={isDisabled}
@@ -77,7 +77,7 @@ const ButtonPage = () => {
                 <Spacer />
 
                 <IconButton
-                  type={type}
+                  mode={mode}
                   variant="filled"
                   icon={IconString}
                   disabled={isDisabled}
@@ -88,7 +88,7 @@ const ButtonPage = () => {
 
               <Row>
                 <Button
-                  type={type}
+                  mode={mode}
                   variant="outlined"
                   leftIcon={Icon}
                   disabled={isDisabled}
@@ -99,7 +99,7 @@ const ButtonPage = () => {
                 <Spacer />
 
                 <IconButton
-                  type={type}
+                  mode={mode}
                   variant="outlined"
                   icon={IconString}
                   disabled={isDisabled}
@@ -110,7 +110,7 @@ const ButtonPage = () => {
 
               <Row>
                 <Button
-                  type={type}
+                  mode={mode}
                   variant="transparent"
                   leftIcon={Icon}
                   disabled={isDisabled}
@@ -121,7 +121,7 @@ const ButtonPage = () => {
                 <Spacer />
 
                 <IconButton
-                  type={type}
+                  mode={mode}
                   variant="transparent"
                   icon={IconString}
                   disabled={isDisabled}
@@ -171,7 +171,7 @@ import { Button, IconButton } from '@aviato/ui'
 />
       `}
       >
-        <ShowButtons type="primary" />
+        <ShowButtons mode="primary" />
       </ShowcaseComponent>
 
       <ShowcaseComponent
@@ -182,7 +182,7 @@ import { Button, IconButton } from '@aviato/ui'
 <IconButton type='ghost' />
       `}
       >
-        <ShowButtons type="ghost" />
+        <ShowButtons mode="ghost" />
       </ShowcaseComponent>
 
       <ShowcaseComponent
@@ -193,7 +193,7 @@ import { Button, IconButton } from '@aviato/ui'
 <IconButton type='error' />
       `}
       >
-        <ShowButtons type="error" />
+        <ShowButtons mode="error" />
       </ShowcaseComponent>
     </Page>
   )

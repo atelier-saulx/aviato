@@ -5,7 +5,7 @@ import { IconName, getIconFromName } from '~/components/Icons'
 import {
   Button,
   ButtonVariant,
-  ButtonType,
+  ButtonMode,
   StyledButton,
 } from '~/components/Input/Button/Button'
 
@@ -16,7 +16,7 @@ const IconButtonStyles: StitchedCSS = {
 }
 
 export interface IconButtonProps {
-  type?: ButtonType
+  type?: ButtonMode
   variant?: ButtonVariant
   disabled?: boolean
   icon?: IconName
@@ -40,7 +40,7 @@ export const IconButton = forwardRef<
 
   return (
     <Button
-      type={type}
+      mode={type}
       variant={variant}
       disabled={disabled}
       css={IconButtonStyles}

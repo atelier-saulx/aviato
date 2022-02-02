@@ -78,7 +78,7 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
         {...remainingProps}
       >
         <Button
-          type="ghost"
+          mode="ghost"
           variant="transparent"
           leftIcon={leftIcon}
           rightIcon={rightIcon}
