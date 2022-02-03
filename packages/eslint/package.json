@@ -5,7 +5,6 @@
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
-  "private": true,
   "main": "eslint.config.js",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.9.1",
