@@ -1,16 +1,14 @@
 import React, {
   forwardRef,
   ElementRef,
-  useState,
-  useMemo,
   ReactElement,
   cloneElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { styled, ThemeProvider } from '~/theme'
-import { MenuStateContext } from '../Navigation'
+import { styled } from '~/theme'
 import { headerHeight } from './Header'
+import { useMenuContext } from '../Navigation'
 
 const MENU_WIDTH = 224
 
@@ -86,34 +84,23 @@ export const ApplicationRoot = forwardRef<
   ElementRef<typeof StyledApplicationRoot>,
   ApplicationRootProps
 >((properties, forwardedRef) => {
-  const {
-    SSR = false,
-    navigation,
-    header,
-    children,
-    ...remainingProps
-  } = properties
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const value = useMemo(() => ({ isMenuOpen, setIsMenuOpen }), [isMenuOpen])
+  const { navigation, header, children, ...remainingProps } = properties
 
   const NavigationComponent = navigation ? cloneElement(navigation) : null
   const HeaderComponent = header ? cloneElement(header) : null
 
+  const { isMenuOpen } = useMenuContext()
+
   return (
-    <ThemeProvider isSSRApplication={SSR}>
-      <MenuStateContext.Provider value={value}>
-        <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
-          {HeaderComponent}
+    <StyledApplicationRoot ref={forwardedRef} {...remainingProps}>
+      {HeaderComponent}
 
-          <NavigationContainer isOpen={isMenuOpen}>
-            {NavigationComponent}
-          </NavigationContainer>
+      <NavigationContainer isOpen={isMenuOpen}>
+        {NavigationComponent}
+      </NavigationContainer>
 
-          <PageContainer>{children}</PageContainer>
-        </StyledApplicationRoot>
-      </MenuStateContext.Provider>
-    </ThemeProvider>
+      <PageContainer>{children}</PageContainer>
+    </StyledApplicationRoot>
   )
 })
 

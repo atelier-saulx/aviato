@@ -5,7 +5,7 @@ import '../styles/playground.css'
 import React from 'react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { ApplicationRoot } from '@aviato/ui'
+import { AviatoProvider, ApplicationRoot } from '@aviato/ui'
 
 import { initialiseApplication } from '../utils'
 import { SideMenu } from '../components/side-menu'
@@ -27,9 +27,11 @@ const MainApplication = ({ Component, pageProps }: AppProps) => {
     <>
       <HeadContent />
 
-      <ApplicationRoot navigation={<SideMenu />} header={<Header />} SSR>
-        <Component {...pageProps} />
-      </ApplicationRoot>
+      <AviatoProvider>
+        <ApplicationRoot navigation={<SideMenu />} header={<Header />}>
+          <Component {...pageProps} />
+        </ApplicationRoot>
+      </AviatoProvider>
     </>
   )
 }
