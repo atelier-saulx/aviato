@@ -11,7 +11,7 @@ export default defineConfig((options) => {
     sourcemap: isWatching,
     minify: !isWatching,
     dts: shouldCreateTypeDefinitions,
-    external: ['react', 'next-themes'],
+    external: ['react'],
     env: {
       NODE_ENV: isWatching ? 'development' : 'production',
     },

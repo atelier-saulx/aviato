@@ -8,7 +8,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
 import { headerHeight } from './Header'
-import { useMenuContext } from '../Navigation'
+import { useMenuContext } from '~/providers'
 
 const MENU_WIDTH = 224
 
@@ -77,7 +77,6 @@ export interface ApplicationRootProps
   extends ComponentProps<typeof StyledApplicationRoot> {
   navigation?: ReactElement
   header?: ReactElement
-  SSR?: boolean
 }
 
 export const ApplicationRoot = forwardRef<

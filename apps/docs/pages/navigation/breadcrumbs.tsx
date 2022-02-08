@@ -44,7 +44,17 @@ const BreadcrumbsPage = () => {
         Separate navigational items with a given separator.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { Breadcrumbs, Link } from '@aviato/ui'
+
+<Breadcrumbs>
+  <Link href="/">Home</Link>
+  <Link href="/overview">Overview</Link>
+</Breadcrumbs>
+        `}
+      >
         <ShowBreadcrumbs />
       </ShowcaseComponent>
     </Page>
