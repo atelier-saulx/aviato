@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { IconButton } from '../Input/Button/IconButton'
 import { styled } from '~/theme'
-import { useMenuContext } from '../Navigation'
+import { useMenuContext } from '~/providers'
 
 const StyledToggleMenuButton = styled('div', {})
 

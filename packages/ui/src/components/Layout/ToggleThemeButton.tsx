@@ -2,7 +2,8 @@ import React, { useCallback, ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { useHasLoaded } from '~/hooks'
-import { getColorMode, styled, useTheme } from '~/theme'
+import { useTheme } from '~/providers'
+import { getColorMode, styled } from '~/theme'
 import { IconButton } from '../Input/Button/IconButton'
 import { Tooltip } from '../Feedback'
 

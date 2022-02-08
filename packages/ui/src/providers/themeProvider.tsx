@@ -8,9 +8,10 @@ import React, {
 } from 'react'
 import { LocalStorage } from '@aviato/utils'
 
-import { themes } from './theme'
-import { THEME_STORAGE_KEY } from './provider'
-import { ColorMode, ThemeProps } from './types'
+import { themes } from '../theme/theme'
+import { ColorMode, ThemeProps } from '../theme/types'
+
+const THEME_STORAGE_KEY = 'mode'
 
 export const ThemeContext = createContext<ThemeProps>({
   theme: 'light',
@@ -58,3 +59,5 @@ export const ThemeProvider: FunctionComponent = ({ children }) => {
     </ThemeContext.Provider>
   )
 }
+
+ThemeProvider.displayName = 'ThemeProvider'

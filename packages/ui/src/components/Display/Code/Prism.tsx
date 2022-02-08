@@ -1,8 +1,9 @@
 import React, { forwardRef, ElementRef } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 
+import { styled } from '~/theme'
 import { useClipboard } from '~/hooks'
-import { styled, useTheme } from '~/theme'
+import { useTheme } from '~/providers'
 import { Tooltip } from '../../Feedback/Tooltip'
 import { Conditional } from '../../Utilities/Conditional'
 import { CodeLanguage } from './types'
