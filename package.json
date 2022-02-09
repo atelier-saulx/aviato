@@ -29,7 +29,7 @@
     "deduplicate:check": "npx yarn-deduplicate -s fewer yarn.lock --list --fail",
     "syncpack": "syncpack fix-mismatches",
     "syncpack:check": "syncpack list-mismatches",
-    "watch": "turbo run watch",
+    "watch": "turbo run watch --parallel --no-cache",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "test": "turbo run test",

@@ -28,7 +28,8 @@ const checkTab = (data) => {
   }
 }
 
-const stream = {}
+const stream: any = {}
+
 stream.writable = true
 stream.write = (data) => {
   checkTab(data)
