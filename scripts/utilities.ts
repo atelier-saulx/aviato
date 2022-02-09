@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Inquiry, Prompts, Question } from "types";
+import { ReleaseType, Inquiry, Prompts, Question } from "types";
 
 /**
  * Bump / incrememt version with patch, minor or major.
@@ -102,3 +102,18 @@ export const FormatOptions = (printedOptions: {
     return [toSentence, toReadableValue];
   });
 };
+
+export const INCREMENT_TYPES: ReleaseType[] = ["patch", "minor", "major"];
+
+export function validateReleaseType(input: ReleaseType): string {
+  if (!INCREMENT_TYPES.includes(input)) {
+    const errorMessage = `Incorrect release type: ${chalk.red(
+      input
+    )}, it should be one of these values: ${INCREMENT_TYPES.join(", ")}`;
+
+    console.error(errorMessage);
+    throw "Invalid release arguments";
+  }
+
+  return input;
+}

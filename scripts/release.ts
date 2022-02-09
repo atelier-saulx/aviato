@@ -9,8 +9,13 @@ import { execa } from "execa";
 import { prompt } from "enquirer";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
-import { FormatOptions, getIncrementedVersion, MapPrompts } from "./utilities";
-import { Answers } from "types";
+import { Answers, ReleaseType } from "types";
+import {
+  FormatOptions,
+  getIncrementedVersion,
+  MapPrompts,
+  validateReleaseType,
+} from "./utilities";
 
 const packageJson = require("../package.json");
 
@@ -100,10 +105,10 @@ async function releaseProject() {
   } = argv as ReleaseOptions;
 
   const inputType = argv._[0] ?? type;
-  const releaseType = validateReleaseType(inputType);
+  let releaseType = validateReleaseType(inputType);
   let targetVersion = packageJson.version;
 
-  const incrementedVersion = getIncrementedVersion({
+  let incrementedVersion = getIncrementedVersion({
     version: packageJson.version,
     type: releaseType,
   });
@@ -122,7 +127,7 @@ async function releaseProject() {
     shouldPublishChanges,
     shouldCommitChanges,
     currentVersion: packageJson.version,
-    incrementedVersion,
+    targetVersion: incrementedVersion,
   };
 
   console.info(`\n  Releasing Aviato...`);
@@ -140,7 +145,7 @@ async function releaseProject() {
   await prompt<{
     shouldRelease: boolean;
   }>({
-    message: "Proceed to release?",
+    message: "Do you want to to release?",
     name: "shouldRelease",
     type: "confirm",
     initial: true,
@@ -157,7 +162,7 @@ async function releaseProject() {
   await prompt<{
     makeInteractive: boolean;
   }>({
-    message: "Make release interactive?",
+    message: "Configure release options?",
     name: "makeInteractive",
     type: "confirm",
     initial: true,
@@ -169,6 +174,27 @@ async function releaseProject() {
    * Configure release interactively. Ignore by using `yarn release --force`
    */
   if (shouldShowQuestions) {
+    await prompt<{ chosenReleaseType: ReleaseType }>([
+      {
+        type: "select",
+        name: "chosenReleaseType",
+        message: "Select release type",
+        initial: 0,
+        choices: [
+          { name: "patch", message: "Patch" },
+          { name: "minor", message: "Minor" },
+          { name: "major", message: "Major" },
+        ],
+      },
+    ]).then(({ chosenReleaseType }) => {
+      releaseType = chosenReleaseType;
+
+      incrementedVersion = getIncrementedVersion({
+        version: packageJson.version,
+        type: releaseType,
+      });
+    });
+
     const Questions = MapPrompts({
       triggerBuild: "Trigger full project build?",
       incrementVersion: `Increment project version from ${packageJson.version} to ${incrementedVersion}?`,
@@ -274,20 +300,6 @@ async function releaseProject() {
     return process.exit(1);
   }
 })();
-
-function validateReleaseType(input: string): string {
-  const INCREMENT_TYPES: string[] = ["patch", "minor", "major"];
-  if (!INCREMENT_TYPES.includes(input)) {
-    const errorMessage = `Incorrect release type: ${chalk.red(
-      input
-    )}, it should be one of these values: ${INCREMENT_TYPES.join(", ")}`;
-
-    console.error(errorMessage);
-    throw "Invalid release arguments";
-  }
-
-  return input;
-}
 
 function getErrorMessage(input: any) {
   const fallbackMessage = "Unknown error";

@@ -17,3 +17,5 @@ export type Inquiry = {
 export type Answers = {
   [key in Question]: boolean;
 };
+
+export type ReleaseType = "patch" | "minor" | "major";
