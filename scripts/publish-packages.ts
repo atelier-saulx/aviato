@@ -9,12 +9,10 @@ import { execa } from "execa";
 export async function publishPackage({
   path,
   name,
-  version,
   tag,
 }: {
   path: string;
   name: string;
-  version: string;
   tag: string;
 }) {
   try {
@@ -78,7 +76,6 @@ async function publishPackagesInFolder({
       await publishPackage({
         path: path.join(sourceFolder, folder),
         name: packageJson.name,
-        version,
         tag,
       });
     })

@@ -73,11 +73,21 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     ["$0 --force", "Do not prompt while releasing."],
   ]);
 
+const getBranch = async () => {
+  const currentBranch = await git.raw("rev-parse", "--abbrev-ref", "HEAD");
+  return currentBranch.trim();
+};
+
 async function releaseProject() {
+  const currentBranch = await getBranch();
+  if (currentBranch !== "main") {
+    throw `Incorrect branch: ${currentBranch}. We only release from main branch.`;
+  }
+
   const status = await git.status();
 
   if (status.files.length !== 0) {
-    throw "Working tree is not clean";
+    throw "You have unstaged changes in git. To release, commit or stash all changes.";
   }
 
   const {
