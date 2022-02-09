@@ -22,7 +22,7 @@ Aviato is a React components and hooks library with focus on usability, accessib
 
 You can use these components either as the base layer of your application, or adopt them incrementally.
 
-Disclaimer: This project is still in it's concept stage. Use at your own risk.
+Disclaimer: *This project is still in it's concept stage. Use at your own risk.*
 
 ---
 
