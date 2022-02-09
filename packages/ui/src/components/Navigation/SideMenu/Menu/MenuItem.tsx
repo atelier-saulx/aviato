@@ -49,28 +49,12 @@ const StyledMenuItem = styled('button', {
   color: '$TextPrimary',
 
   '&:hover': {
-    '&:not(.isExpandable)': {
-      background: '$ActionMainHover',
-    },
-
-    '&.isExpandable': {
-      [`& ${IconContainer}`]: {
-        background: '$ActionMainHover',
-      },
-    },
+    background: '$ActionMainHover',
   },
 
   '&:active, &.isActive': {
-    '&:not(.isExpandable)': {
-      color: '$TextPrimary',
-      background: '$PrimaryLightSelected',
-    },
-
-    '&.isExpandable': {
-      [`& ${IconContainer}`]: {
-        background: '$ActionMainSelected',
-      },
-    },
+    color: '$TextPrimary',
+    background: '$PrimaryLightSelected',
   },
 
   '&.isHeader': {
