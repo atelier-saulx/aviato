@@ -10,9 +10,7 @@ import { prompt } from "enquirer";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
 import { getIncrementedVersion } from "./get-version";
-
-// @ts-ignore
-import packageJson from "../package.json";
+const packageJson = require("../package.json");
 
 const git = simpleGit();
 
@@ -85,7 +83,6 @@ async function releaseProject() {
   }
 
   const status = await git.status();
-
   if (status.files.length !== 0) {
     throw "You have unstaged changes in git. To release, commit or stash all changes.";
   }
@@ -100,7 +97,8 @@ async function releaseProject() {
     force,
   } = argv as ReleaseOptions;
 
-  const releaseType = validateReleaseType(argv._[0] ?? type);
+  const inputType = argv._[0] ?? type;
+  const releaseType = validateReleaseType(inputType);
   let targetVersion = packageJson.version;
 
   const incrementedVersion = getIncrementedVersion({
