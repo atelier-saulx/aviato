@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { Inquiry, Prompts, Question } from "types";
 
 /**
  * Bump / incrememt version with patch, minor or major.
@@ -54,3 +55,50 @@ export function getIncrementedVersion({
     process.exit(1);
   }
 }
+
+export const MapPrompts = (prompts: Prompts): Inquiry[] => {
+  const Questions: Inquiry[] = Object.entries(prompts).map((prompt) => {
+    const [name, message] = prompt as [Question, string];
+
+    return {
+      type: "confirm",
+      name,
+      message,
+      initial: true,
+    };
+  });
+
+  return Questions;
+};
+
+export const CamelToSentence = (camelCase: string) => {
+  const toSentence = camelCase.replace(/([A-Z]+)*([A-Z][a-z])/g, "$1 $2");
+  const lowerCaseAll = toSentence.toLowerCase();
+  const upperCased =
+    lowerCaseAll.charAt(0).toUpperCase() + lowerCaseAll.slice(1);
+
+  return upperCased;
+};
+
+export const ToReadable = (input: string | boolean) => {
+  if (typeof input === "string") {
+    return input;
+  }
+
+  return input ? "Yes" : "No";
+};
+
+type FormattedOptions = [string, string];
+
+export const FormatOptions = (printedOptions: {
+  [key: string]: string | boolean;
+}): FormattedOptions[] => {
+  return Object.entries(printedOptions).map((option) => {
+    const [optionName, value] = option;
+
+    const toSentence = CamelToSentence(optionName);
+    const toReadableValue = ToReadable(value);
+
+    return [toSentence, toReadableValue];
+  });
+};

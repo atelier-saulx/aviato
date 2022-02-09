@@ -9,7 +9,9 @@ import { execa } from "execa";
 import { prompt } from "enquirer";
 import { publishAllPackagesInRepository } from "./publish-packages";
 import { updatePackageVersionsInRepository } from "./update-versions";
-import { getIncrementedVersion } from "./get-version";
+import { FormatOptions, getIncrementedVersion, MapPrompts } from "./utilities";
+import { Answers } from "types";
+
 const packageJson = require("../package.json");
 
 const git = simpleGit();
@@ -108,32 +110,40 @@ async function releaseProject() {
 
   let shouldTriggerBuild = Boolean(skipBuild) === false;
   let shouldIncrementVersion = Boolean(skipVersion) === false;
-  let shouldPublishToNPM = Boolean(skipPublish) === false;
+  let shouldPublishChanges = Boolean(skipPublish) === false;
   let shouldCommitChanges = Boolean(skipCommit) === false;
-  let shouldIgnorePrompts = Boolean(force) === true;
+  let shouldShowQuestions = Boolean(force) === true;
 
   const printedOptions = {
     releaseType,
     releaseTag,
     shouldTriggerBuild,
     shouldIncrementVersion,
-    shouldPublishToNPM,
+    shouldPublishChanges,
     shouldCommitChanges,
     currentVersion: packageJson.version,
     incrementedVersion,
   };
 
   console.info(`\n  Releasing Aviato...`);
-  console.info(`\n  Release type: ${chalk.blueBright(releaseType)}`);
+  console.info(`\n  ${chalk.bold("[ Release Options ]")} \n`);
 
-  console.info(`\n Options: %o \n`, printedOptions);
+  FormatOptions(printedOptions).forEach(([message, value]) => {
+    console.info(`  ${chalk.white(message)}: ${chalk.bold.yellow(value)}`);
+  });
 
+  console.info(`\n`);
+
+  /**
+   * Escape hatch: Do you want to cancel this release?
+   */
   await prompt<{
     shouldRelease: boolean;
   }>({
-    message: "Confirm release?",
+    message: "Proceed to release?",
     name: "shouldRelease",
     type: "confirm",
+    initial: true,
   }).then(({ shouldRelease }) => {
     if (!shouldRelease) {
       console.info("User aborted the release.");
@@ -142,46 +152,41 @@ async function releaseProject() {
   });
 
   /**
-   * Prompt for release configuration
+   * Escape hatch: Do you want interactivity?
    */
-  if (!shouldIgnorePrompts) {
-    await prompt<{
-      triggerBuild: boolean;
-    }>({
-      message: "Trigger full project build?",
-      name: "triggerBuild",
-      type: "confirm",
-    }).then(({ triggerBuild }) => {
+  await prompt<{
+    makeInteractive: boolean;
+  }>({
+    message: "Make release interactive?",
+    name: "makeInteractive",
+    type: "confirm",
+    initial: true,
+  }).then(({ makeInteractive }) => {
+    shouldShowQuestions = makeInteractive;
+  });
+
+  /**
+   * Configure release interactively. Ignore by using `yarn release --force`
+   */
+  if (shouldShowQuestions) {
+    const Questions = MapPrompts({
+      triggerBuild: "Trigger full project build?",
+      incrementVersion: `Increment project version from ${packageJson.version} to ${incrementedVersion}?`,
+      publishChangesToNPM: "Publish release to NPM?",
+      commitChanges: "Commit changes to Git?",
+    });
+
+    await prompt<Answers>(Questions).then((answers) => {
+      const {
+        triggerBuild,
+        incrementVersion,
+        publishChangesToNPM,
+        commitChanges,
+      } = answers;
+
       shouldTriggerBuild = triggerBuild;
-    });
-
-    await prompt<{
-      incrementVersion: boolean;
-    }>({
-      message: `Increment project version from ${packageJson.version} to ${incrementedVersion}?`,
-      name: "incrementVersion",
-      type: "confirm",
-    }).then(({ incrementVersion }) => {
       shouldIncrementVersion = incrementVersion;
-    });
-
-    await prompt<{
-      publishChangesToNPM: boolean;
-    }>({
-      message: "Publish release to NPM?",
-      name: "publishChangesToNPM",
-      type: "confirm",
-    }).then(({ publishChangesToNPM }) => {
-      shouldPublishToNPM = publishChangesToNPM;
-    });
-
-    await prompt<{
-      commitChanges: boolean;
-    }>({
-      message: "Commit changes to Git?",
-      name: "commitChanges",
-      type: "confirm",
-    }).then(({ commitChanges }) => {
+      shouldPublishChanges = publishChangesToNPM;
       shouldCommitChanges = commitChanges;
     });
   }
@@ -215,7 +220,7 @@ async function releaseProject() {
   /**
    * Publish all public packages in repository
    */
-  if (shouldPublishToNPM) {
+  if (shouldPublishChanges) {
     await publishAllPackagesInRepository({
       version: targetVersion,
       tag: releaseTag,
