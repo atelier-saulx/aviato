@@ -29,19 +29,16 @@
     "deduplicate:check": "npx yarn-deduplicate -s fewer yarn.lock --list --fail",
     "syncpack": "syncpack fix-mismatches",
     "syncpack:check": "syncpack list-mismatches",
-    "watch": "turbo run watch",
+    "watch": "turbo run watch --parallel --no-cache",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "test": "turbo run test",
     "release": "esno scripts/release",
     "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
-    "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rimraf node_modules && yarn"
   },
   "dependencies": {
-    "turbo": "1.0.28"
+    "turbo": "1.1.2"
   },
   "devDependencies": {
     "@types/yargs": "^17.0.0",
@@ -70,29 +67,8 @@
       "pre-push": "yarn lint"
     }
   },
-  "turbo": {
-    "baseBranch": "origin/main",
-    "pipeline": {
-      "build": {
-        "outputs": [
-          "dist/**"
-        ],
-        "dependsOn": [
-          "^build"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "watch": {
-        "dependsOn": [
-          "^build"
-        ],
-        "cache": false
-      },
-      "release": {
-        "outputs": []
-      }
-    }
-  }
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "packageManager": "yarn@1.22.17"
 }
