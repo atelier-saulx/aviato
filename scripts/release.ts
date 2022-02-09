@@ -29,43 +29,49 @@ export type ReleaseOptions = {
   skipPublish: boolean;
   skipCommit: boolean;
   force: boolean;
+  dryRun: boolean;
 };
 
 const { argv }: { argv: any } = yargs(hideBin(process.argv))
   .option("type", {
     type: "string",
     default: "patch",
-    description: "Type",
+    description: "Release type",
   })
   .option("tag", {
     type: "string",
     default: "latest",
-    description: "Tag",
+    description: "Release tag",
   })
   .option("skip-build", {
     type: "boolean",
     default: false,
-    description: "Skip build step.",
+    description: "Skip build step",
   })
   .option("skip-version", {
     type: "boolean",
     default: false,
-    description: "Skip version increment step.",
+    description: "Skip version increment step",
   })
   .option("skip-publish", {
     type: "boolean",
     default: false,
-    description: "Skip publish step.",
+    description: "Skip publish step",
   })
   .option("skip-commit", {
     type: "boolean",
     default: false,
-    description: "Skip commit step.",
+    description: "Skip commit step",
   })
   .option("force", {
     type: "boolean",
     default: false,
-    description: "Force release.",
+    description: "Ignore interactivity",
+  })
+  .option("dry-run", {
+    type: "boolean",
+    default: false,
+    description: "Dry-run release",
   })
   .example([
     ["$0 minor", "Release minor update."],
@@ -102,6 +108,7 @@ async function releaseProject() {
     skipPublish,
     skipCommit,
     force: hideInteractivity,
+    dryRun: isDryRun,
   } = argv as ReleaseOptions;
 
   const inputType = argv._[0] ?? type;
@@ -226,6 +233,11 @@ async function releaseProject() {
       process.exit(0);
     }
   });
+
+  if (isDryRun) {
+    console.info("Aborted. This was a dry run release.");
+    process.exit(0);
+  }
 
   /**
    * Build project to ensure latest changes are present
