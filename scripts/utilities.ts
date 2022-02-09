@@ -61,10 +61,12 @@ export const MapPrompts = (prompts: Prompts): Inquiry[] => {
     const [name, message] = prompt as [Question, string];
 
     return {
-      type: "confirm",
+      type: "toggle",
       name,
       message,
       initial: true,
+      enabled: "Yes",
+      disabled: "No",
     };
   });
 

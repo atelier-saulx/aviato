@@ -101,7 +101,7 @@ async function releaseProject() {
     skipVersion,
     skipPublish,
     skipCommit,
-    force,
+    force: hideInteractivity,
   } = argv as ReleaseOptions;
 
   const inputType = argv._[0] ?? type;
@@ -117,58 +117,48 @@ async function releaseProject() {
   let shouldIncrementVersion = Boolean(skipVersion) === false;
   let shouldPublishChanges = Boolean(skipPublish) === false;
   let shouldCommitChanges = Boolean(skipCommit) === false;
-  let shouldShowQuestions = Boolean(force) === true;
-
-  const printedOptions = {
-    releaseType,
-    releaseTag,
-    shouldTriggerBuild,
-    shouldIncrementVersion,
-    shouldPublishChanges,
-    shouldCommitChanges,
-    currentVersion: packageJson.version,
-    targetVersion: incrementedVersion,
-  };
+  let shouldShowQuestions = hideInteractivity === false;
 
   console.info(`\n  Releasing Aviato...`);
-  console.info(`\n  ${chalk.bold("[ Release Options ]")} \n`);
 
-  FormatOptions(printedOptions).forEach(([message, value]) => {
-    console.info(`  ${chalk.white(message)}: ${chalk.bold.yellow(value)}`);
-  });
+  const printReleaseOptions = () => {
+    const printedOptions = {
+      releaseType: shouldIncrementVersion ? releaseType : "override",
+      releaseTag,
+      triggerBuild: shouldTriggerBuild,
+      incrementVersion: shouldIncrementVersion,
+      publishChanges: shouldPublishChanges,
+      commitChanges: shouldCommitChanges,
+      currentVersion: packageJson.version,
+      targetVersion: shouldIncrementVersion
+        ? incrementedVersion
+        : packageJson.version,
+    };
 
-  console.info(`\n`);
-
-  /**
-   * Escape hatch: Do you want to cancel this release?
-   */
-  await prompt<{
-    shouldRelease: boolean;
-  }>({
-    message: "Do you want to to release?",
-    name: "shouldRelease",
-    type: "confirm",
-    initial: true,
-  }).then(({ shouldRelease }) => {
-    if (!shouldRelease) {
-      console.info("User aborted the release.");
-      process.exit(0);
-    }
-  });
+    console.info(`\n  ${chalk.bold("[ Release Options ]")} \n`);
+    FormatOptions(printedOptions).forEach(([message, value]) => {
+      console.info(`  ${chalk.white(message)}: ${chalk.bold.yellow(value)}`);
+    });
+    console.info(`\n`);
+  };
 
   /**
    * Escape hatch: Do you want interactivity?
    */
-  await prompt<{
-    makeInteractive: boolean;
-  }>({
-    message: "Configure release options?",
-    name: "makeInteractive",
-    type: "confirm",
-    initial: true,
-  }).then(({ makeInteractive }) => {
-    shouldShowQuestions = makeInteractive;
-  });
+  if (shouldShowQuestions) {
+    await prompt<{
+      makeInteractive: boolean;
+    }>({
+      message: "Configure release options?",
+      name: "makeInteractive",
+      type: "toggle",
+      initial: true,
+      enabled: "Yes",
+      disabled: "No",
+    } as any).then(({ makeInteractive }) => {
+      shouldShowQuestions = makeInteractive;
+    });
+  }
 
   /**
    * Configure release interactively. Ignore by using `yarn release --force`
@@ -215,7 +205,27 @@ async function releaseProject() {
       shouldPublishChanges = publishChangesToNPM;
       shouldCommitChanges = commitChanges;
     });
+
+    printReleaseOptions();
+  } else {
+    printReleaseOptions();
   }
+
+  await prompt<{
+    shouldRelease: boolean;
+  }>({
+    message: "Do you want to to release?",
+    name: "shouldRelease",
+    type: "toggle",
+    initial: true,
+    enabled: "Yes",
+    disabled: "No",
+  } as any).then(({ shouldRelease }) => {
+    if (!shouldRelease) {
+      console.info("User aborted the release.");
+      process.exit(0);
+    }
+  });
 
   /**
    * Build project to ensure latest changes are present
