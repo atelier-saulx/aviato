@@ -37,13 +37,9 @@
     "deploy-docs": "turbo run build --continue --scope=app --includeDependencies --no-deps",
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rm -rf node_modules"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
   "dependencies": {
     "turbo": "1.1.2"
   },
-  "packageManager": "yarn@1.22.17",
   "devDependencies": {
     "@types/yargs": "^17.0.0",
     "chalk": "^5.0.0",
@@ -70,5 +66,9 @@
     "hooks": {
       "pre-push": "yarn lint"
     }
-  }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "packageManager": "yarn@1.22.17"
 }
