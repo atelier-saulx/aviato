@@ -36,7 +36,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
   .option("type", {
     type: "string",
     default: "patch",
-    description: "Release type",
+    description: "Type <patch|minor|major>",
   })
   .option("tag", {
     type: "string",
@@ -82,6 +82,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv))
     ["$0 --skip-version", "Skip incrementing package versions."],
     ["$0 --skip-commit", "Skip committing changes to Git."],
     ["$0 --force", "Do not prompt while releasing."],
+    ["$0 --dry-run", "Only build, do nothing else."],
   ]);
 
 const getBranch = async () => {
@@ -234,11 +235,6 @@ async function releaseProject() {
     }
   });
 
-  if (isDryRun) {
-    console.info("Aborted. This was a dry run release.");
-    process.exit(0);
-  }
-
   /**
    * Build project to ensure latest changes are present
    */
@@ -248,6 +244,11 @@ async function releaseProject() {
     } catch (error) {
       throw "Error encountered when building project.";
     }
+  }
+
+  if (isDryRun) {
+    console.info("Aborted. This was a dry run release.");
+    process.exit(0);
   }
 
   /**
