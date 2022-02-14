@@ -47,10 +47,10 @@ export const CodeEditor = forwardRef<
     ...remainingProps
   } = properties
 
-  const { theme } = useTheme()
+  const { activeTheme } = useTheme()
   const trimmedCode = children.trim()
   const clipboard = useClipboard()
-  const prismTheme = getPrismTheme(theme)
+  const prismTheme = getPrismTheme(activeTheme)
 
   const [activeCode, setActiveCode] = useState(trimmedCode)
 

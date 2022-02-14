@@ -67,7 +67,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
       ...remainingProps
     } = properties
 
-    const { theme } = useTheme()
+    const { activeTheme } = useTheme()
     const trimmedCode = children.trim()
     const clipboard = useClipboard()
 
@@ -91,7 +91,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
           {...defaultProps}
           code={trimmedCode}
           language={language}
-          theme={getPrismTheme(theme)}
+          theme={getPrismTheme(activeTheme)}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <Pre className={className} style={style}>

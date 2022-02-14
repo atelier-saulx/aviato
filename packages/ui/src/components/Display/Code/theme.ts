@@ -368,5 +368,6 @@ export const light = (): PrismTheme => ({
   ],
 })
 
-export const getPrismTheme = (colorScheme: 'light' | 'dark') =>
-  colorScheme === 'dark' ? dark() : light()
+export const getPrismTheme = (colorScheme: string) => {
+  return colorScheme === 'dark' ? dark() : light()
+}
