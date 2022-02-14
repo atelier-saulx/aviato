@@ -3,7 +3,6 @@ import type * as Stitches from '@stitches/react'
 
 import { theme as LightTheme } from './schemas/theme.light'
 import { theme as DarkTheme } from './schemas/theme.dark'
-import { isBrowser } from '@aviato/utils'
 
 const createdConfig = createStitches({
   theme: LightTheme,
