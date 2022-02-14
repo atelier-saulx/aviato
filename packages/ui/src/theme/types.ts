@@ -1,9 +1,10 @@
-export type ColorMode = 'light' | 'dark'
-
 export interface ThemeProps {
   /** Active theme name */
-  theme: ColorMode
+  activeTheme: string
 
   /** Update the theme */
-  setTheme: (updatedValue: ColorMode) => void
+  setActiveTheme: (targetTheme: string) => void
+
+  /** Get next available theme */
+  getNextTheme: () => string
 }

@@ -46,14 +46,5 @@ export const themes = {
 
 export type StitchedCSS = Stitches.CSS<typeof config>
 
-export const getColorMode: () => 'light' | 'dark' = () => {
-  if (isBrowser) {
-    const root = document.documentElement
-    return root.classList.contains(themes.light) ? 'light' : 'dark'
-  }
-
-  return 'light'
-}
-
 export { classNames } from './utils'
 export { getZIndex } from './zIndex'

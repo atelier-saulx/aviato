@@ -1,9 +1,8 @@
 import React, { useCallback, ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { useHasLoaded } from '~/hooks'
 import { useTheme } from '~/providers'
-import { getColorMode, styled } from '~/theme'
+import { styled } from '~/theme'
 import { IconButton } from '../Input/Button/IconButton'
 import { Tooltip } from '../Feedback'
 
@@ -18,31 +17,25 @@ export const ToggleThemeButton = forwardRef<
 >((properties, forwardedRef) => {
   const { ...remainingProps } = properties
 
-  const hasLoaded = useHasLoaded()
-  const { setTheme } = useTheme()
+  const { activeTheme, setActiveTheme, getNextTheme } = useTheme()
 
   const toggleTheme = useCallback(() => {
-    const targetTheme = getColorMode() === 'light' ? 'dark' : 'light'
-
-    setTheme(targetTheme)
-  }, [setTheme])
-
-  if (!hasLoaded) {
-    return null
-  }
+    const nextTheme = getNextTheme()
+    setActiveTheme(nextTheme)
+  }, [activeTheme])
 
   return (
     <StyledToggleThemeButton ref={forwardedRef} {...remainingProps}>
       <Tooltip
-        label={getColorMode() === 'light' ? 'Light mode' : 'Dark mode'}
+        label={activeTheme === 'light' ? 'Dark mode' : 'Light mode'}
         position="bottom"
         placement="start"
         gutter={8}
       >
         <IconButton
           mode="ghost"
+          icon={activeTheme === 'light' ? 'IconDark' : 'IconLight'}
           onClick={toggleTheme}
-          icon={getColorMode() === 'light' ? 'IconDark' : 'IconLight'}
         />
       </Tooltip>
     </StyledToggleThemeButton>
