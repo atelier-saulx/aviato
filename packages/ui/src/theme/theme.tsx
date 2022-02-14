@@ -37,7 +37,7 @@ export const getCssAndReset = () => {
   return css
 }
 
-export const darkTheme = createTheme(DarkTheme)
+export const darkTheme = createTheme('dark', DarkTheme)
 
 export const themes = {
   light: 'light',
