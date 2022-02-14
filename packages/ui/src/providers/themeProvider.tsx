@@ -6,6 +6,7 @@ import React, {
   useMemo,
   FunctionComponent,
 } from 'react'
+
 import { LocalStorage } from '@aviato/utils'
 
 import { themes } from '../theme/theme'
@@ -20,10 +21,11 @@ export const ThemeContext = createContext<ThemeProps>({
 
 export const useTheme = () => useContext(ThemeContext)
 
-function baseSetColorMode(newValue: ColorMode): void {
+function baseSetColorMode(targetValue: ColorMode): void {
   document.documentElement.classList.remove(themes.dark)
   document.documentElement.classList.remove(themes.light)
-  document.documentElement.classList.add(themes[newValue])
+  document.documentElement.classList.add(themes[targetValue])
+  document.documentElement.setAttribute('data-theme', targetValue)
 }
 
 export const ThemeProvider: FunctionComponent = ({ children }) => {
