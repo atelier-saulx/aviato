@@ -1,4 +1,4 @@
-import React, { useCallback, ElementRef, forwardRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { useTheme } from '~/providers'
