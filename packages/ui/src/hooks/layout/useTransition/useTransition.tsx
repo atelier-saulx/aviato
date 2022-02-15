@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
-import { useReducedMotion, useDidUpdate } from '~/hooks'
+import { useDidUpdate } from '~/hooks/lifecycle/useDidUpdate'
+import { useReducedMotion } from '~/hooks/utility/useReducedMotion'
 
 export type TransitionStatus =
   | 'entered'

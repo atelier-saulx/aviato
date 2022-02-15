@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 
 import { styled } from '~/theme'
-import { Conditional } from '~/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { getLettersFromLabel } from './utils'
 import { useImagePreloader } from '~/hooks'
 

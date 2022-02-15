@@ -2,7 +2,9 @@ import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
-import { Conditional, IconExternalLink, Text } from '~/components'
+import { Text } from '~/components/Text'
+import { IconExternalLink } from '~/components/Icons/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 
 const StyledLink = styled('a', {
   position: 'relative',

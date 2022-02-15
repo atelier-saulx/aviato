@@ -34,7 +34,7 @@ async function formatIcons() {
 
   try {
     await exec(formatIconsCommand)
-  } catch (error) {
+  } catch (error: any) {
     const message = (error && error.message) || ''
     const noSVGMessage = 'No SVG files have been found'
 
@@ -52,7 +52,7 @@ async function formatIcons() {
 export async function startIconFormatting() {
   try {
     await formatIcons()
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 }

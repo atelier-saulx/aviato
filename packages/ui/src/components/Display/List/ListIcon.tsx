@@ -2,7 +2,7 @@ import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
-import { getIconFromName, IconName } from '~/components'
+import { getIconFromName, IconName } from '~/components/Icons/collection'
 
 const StyledListIcon = styled('div', {
   display: 'flex',

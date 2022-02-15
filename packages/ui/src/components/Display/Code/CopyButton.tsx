@@ -1,7 +1,7 @@
 import React, { forwardRef, ElementRef } from 'react'
-import { IconCheck, IconCopy } from '~/components/Icons'
+import { IconCopy, IconCheck } from '~/components/Icons/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { styled } from '~/theme'
-import { Conditional } from '../..'
 
 const StyledCopyButton = styled('div', {
   position: 'relative',

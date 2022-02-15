@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 
 import { classNames, StitchedCSS, styled } from '~/theme'
 import { BaseSize } from '~/types'
-import { Conditional } from '~/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 
 const PrimaryBadgeCSS: StitchedCSS = {
   '&.isLight': {

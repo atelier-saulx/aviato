@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react'
 
 import { DialogContext, DialogContextType } from './DialogContext'
-import { Backdrop, Input } from '~/components'
+import { Input } from '~/components/Input/Input'
+import { Backdrop } from '~/components/Feedback/Backdrop'
 import { Dialog } from './Dialog'
 import { useHotkeys, HotkeyItem } from '~/hooks'
 

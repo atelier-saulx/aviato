@@ -7,7 +7,10 @@ import React, {
   ReactNode,
 } from 'react'
 
-import { Conditional, IconPlaceholder, Text } from '~/components'
+import { Conditional } from '~/components/Utilities/Conditional'
+import { IconPlaceholder } from '~/components/Icons/components'
+import { Text } from '~/components/Text'
+
 import { useImagePreloader, useMergedRef } from '~/hooks'
 import { styled } from '~/theme'
 

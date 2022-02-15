@@ -4,7 +4,7 @@ import { styled } from '~/theme'
 import { Text } from '../../Text'
 import { IconChevronDown } from '~/components/Icons/components'
 import { AccordionContext } from './AccordionContext'
-import { Conditional } from '~/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 
 const ItemContainer = styled('div', {
   width: '100%',

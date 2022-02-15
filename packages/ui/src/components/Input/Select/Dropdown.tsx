@@ -4,7 +4,7 @@ import { noop } from '@aviato/utils'
 import { onChange } from '~/types'
 import { SelectItem } from './types'
 import { ContextMenu, ContextItem } from '~/components/Overlay'
-import { Popper } from '~/components'
+import { Popper } from '~/components/Utilities/Popper'
 import { getZIndex } from '~/theme'
 
 export interface OnDropdownChange extends onChange {

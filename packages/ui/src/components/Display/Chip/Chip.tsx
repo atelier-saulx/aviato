@@ -2,9 +2,9 @@ import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { filterChildrenByType, noop } from '@aviato/utils'
 
+import { Group } from '~/components/Layout/Group'
 import { useUncontrolled } from '~/hooks'
 import { styled } from '~/theme'
-import { Group } from '~/components'
 import { ChipItem, ChipType } from './ChipItem'
 
 const StyledChip = styled('div', {})

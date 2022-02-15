@@ -10,7 +10,8 @@ import { isText, noop } from '@aviato/utils'
 
 import { mergeRefs } from '~/hooks'
 import { styled } from '~/theme'
-import { Text, Popper, SharedPopperProps } from '~/components'
+import { Popper, SharedPopperProps } from '~/components/Utilities/Popper'
+import { Text } from '~/components/Text'
 
 const StyledTooltip = styled('div', {
   position: 'relative',

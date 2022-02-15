@@ -5,7 +5,7 @@ import { noop } from '@aviato/utils'
 
 import { flipPlacement, flipPosition } from './utils'
 import { getZIndex, styled } from '~/theme'
-import { Portal } from '~/components'
+import { Portal } from '~/components/Utilities/Portal'
 import { Transition, TransitionPrimitive } from '../Transition'
 import { BasePlacement, BasePosition, Placement } from './types'
 

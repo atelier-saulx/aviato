@@ -8,7 +8,7 @@ import React, {
 import { ComponentProps } from '@stitches/react'
 
 import { StitchedCSS, styled } from '~/theme'
-import { Text } from '~/components'
+import { Text } from '~/components/Text'
 
 const StyledBreadcrumbs = styled('div', {
   display: 'flex',

@@ -4,3 +4,5 @@ dist
 
 docs
 dependencies/icons/parsed
+cjs
+esm

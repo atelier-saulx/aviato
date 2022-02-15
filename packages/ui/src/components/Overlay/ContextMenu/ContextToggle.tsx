@@ -2,8 +2,8 @@ import React, { ComponentProps, forwardRef, ElementRef } from 'react'
 import { styled } from '@stitches/react'
 import { isText } from '@aviato/utils'
 
-import { Text } from '~/components/Text'
-import { Switch } from '~/components/Input'
+import { Text } from '~/components/Text/Text'
+import { Switch } from '~/components/Input/Switch'
 
 const StyledContextToggle = styled('div', {
   display: 'flex',

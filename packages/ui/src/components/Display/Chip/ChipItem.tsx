@@ -1,5 +1,6 @@
 import React, { forwardRef, ElementRef, ComponentProps } from 'react'
-import { IconCheck } from '~/components'
+
+import { IconCheck } from '~/components/Icons/components'
 
 import { StitchedCSS, styled } from '~/theme'
 import { Badge, BadgeType, BadgeVariant } from '../Badge'

@@ -2,7 +2,8 @@ import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { classNames, styled } from '~/theme'
-import { Conditional, IconDragDrop } from '~/components'
+import { IconDragDrop } from '~/components/Icons/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 
 const StyledListItem = styled('div', {
   display: 'flex',

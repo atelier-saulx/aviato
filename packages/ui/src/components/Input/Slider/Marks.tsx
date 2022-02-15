@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Conditional } from '~/components'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { styled } from '~/theme'
 import { isMarkFilled, getPosition } from './utils'
 import { Mark } from './types'

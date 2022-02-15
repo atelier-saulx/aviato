@@ -2,8 +2,9 @@ import React, { forwardRef, ElementRef, ReactChildren, ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { IconCloseCircle, IconClose } from '~/components/Icons'
+import { Conditional } from '~/components/Utilities/Conditional'
+import { Text } from '~/components/Text'
 import { StitchedCSS, styled } from '~/theme'
-import { Conditional, Text } from '~/components'
 
 const Container = styled('div', {
   position: 'relative',

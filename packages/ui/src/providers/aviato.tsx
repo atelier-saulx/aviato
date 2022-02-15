@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
-import { MenuProvider, ThemeProvider } from '~/providers'
+
+import { MenuProvider } from './menuProvider'
+import { ThemeProvider } from './themeProvider'
 
 export interface AviatoProviderProps {
   children: ReactNode

@@ -7,7 +7,8 @@ import React, {
 } from 'react'
 
 import { styled } from '~/theme'
-import { Text, Button } from '~/components'
+import { Button } from '~/components/Input/Button'
+import { Text } from '~/components/Text'
 
 const Container = styled('div', {
   width: 520,
