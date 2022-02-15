@@ -11,9 +11,7 @@ import { CopyButton } from './CopyButton'
 import { getPrismTheme } from './theme'
 import { ComponentProps } from '@stitches/react'
 
-const StyledEditor = styled('div', {
-  position: 'relative',
-})
+const StyledEditor = styled('div', {})
 
 const TooltipContainer = styled('div', {
   display: 'inline-block',
@@ -22,6 +20,18 @@ const TooltipContainer = styled('div', {
   right: '0px',
   padding: '16px',
   zIndex: '2',
+})
+
+const EditorWrapper = styled('div', {
+  fontFamily: 'monospace',
+  background: '$Background0dp',
+
+  lineHeight: '1.55',
+  fontSize: '15px',
+
+  '* > textarea:focus': {
+    outline: 'none',
+  },
 })
 
 type StitchedProps = Omit<ComponentProps<typeof StyledEditor>, 'onChange'>
@@ -75,17 +85,14 @@ export const CodeEditor = forwardRef<
         </Tooltip>
       </TooltipContainer>
 
-      <LiveEditor
-        code={trimmedCode}
-        language={language}
-        theme={prismTheme}
-        onChange={(value) => {
-          handleChange(value)
-        }}
-        style={{
-          fontSize: '15px',
-        }}
-      />
+      <EditorWrapper>
+        <LiveEditor
+          theme={prismTheme}
+          code={trimmedCode}
+          language={language}
+          onChange={(value) => handleChange(value)}
+        />
+      </EditorWrapper>
     </StyledEditor>
   )
 })
