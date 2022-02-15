@@ -2,6 +2,7 @@ import chalk from 'chalk'
 import path from 'path'
 import compile from './compile'
 import fs from 'fs-extra'
+import generateDts from './generate-dts'
 
 import { createPackageConfig } from './create-package-config'
 
@@ -17,6 +18,7 @@ async function buildPackage() {
 
   try {
     const startTime = Date.now()
+    await generateDts(packagePath)
 
     for (const format of ['es', 'cjs']) {
       const configOptions: any = {

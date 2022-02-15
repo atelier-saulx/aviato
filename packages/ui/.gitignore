@@ -6,3 +6,4 @@ docs
 dependencies/icons/parsed
 cjs
 esm
+lib

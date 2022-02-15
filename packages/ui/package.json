@@ -69,6 +69,7 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
+    "types": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir ./lib",
     "nodemon": "nodemon --exec yarn parse",
     "parse": "run-s parse:*",
     "parse:tokens": "esno scripts/parseTokens",
