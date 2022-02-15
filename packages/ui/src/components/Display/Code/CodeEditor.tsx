@@ -11,7 +11,9 @@ import { CopyButton } from './CopyButton'
 import { getPrismTheme } from './theme'
 import { ComponentProps } from '@stitches/react'
 
-const StyledEditor = styled('div', {})
+const StyledEditor = styled('div', {
+  position: 'relative',
+})
 
 const TooltipContainer = styled('div', {
   display: 'inline-block',
