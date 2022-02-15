@@ -7,4 +7,7 @@ export interface ThemeProps {
 
   /** Get next available theme */
   getNextTheme: () => string
+
+  /** Toggle to next available theme */
+  toggleTheme: () => void
 }

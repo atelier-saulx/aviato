@@ -26,6 +26,7 @@ export const ThemeContext = createContext<ThemeProps>({
   activeTheme: defaultTheme,
   setActiveTheme: () => {},
   getNextTheme: () => defaultTheme,
+  toggleTheme: () => {},
 })
 
 export const useTheme = () => useContext(ThemeContext)
@@ -66,6 +67,15 @@ export const ThemeProvider: FunctionComponent = ({ children }) => {
 
     const nextAvailableTheme = availableThemes[nextIndex]
     return nextAvailableTheme
+  }
+
+  /**
+   * Toggle to next available theme
+   */
+  function toggleTheme() {
+    const nextAvailableTheme = getNextTheme()
+
+    setActiveTheme(nextAvailableTheme)
   }
 
   /**
@@ -141,6 +151,7 @@ export const ThemeProvider: FunctionComponent = ({ children }) => {
       activeTheme: storedTheme,
       setActiveTheme,
       getNextTheme,
+      toggleTheme,
     }),
     [storedTheme]
   )

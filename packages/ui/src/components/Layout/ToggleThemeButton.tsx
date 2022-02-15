@@ -17,12 +17,7 @@ export const ToggleThemeButton = forwardRef<
 >((properties, forwardedRef) => {
   const { ...remainingProps } = properties
 
-  const { activeTheme, setActiveTheme, getNextTheme } = useTheme()
-
-  const toggleTheme = useCallback(() => {
-    const nextTheme = getNextTheme()
-    setActiveTheme(nextTheme)
-  }, [activeTheme])
+  const { activeTheme, toggleTheme } = useTheme()
 
   return (
     <StyledToggleThemeButton ref={forwardedRef} {...remainingProps}>
