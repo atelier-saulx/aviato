@@ -9,6 +9,10 @@
   "module": "dist/index.mjs",
   "iife": "dist/index.global.js",
   "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
+  },
   "dependencies": {
     "@aviato/utils": "*",
     "@popperjs/core": "^2.11.2",
