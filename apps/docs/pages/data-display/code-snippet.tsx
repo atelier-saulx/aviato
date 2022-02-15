@@ -2,6 +2,17 @@ import { Page, Column, CodeSnippet } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
+const CodeToDisplay = `
+import { CodeSnippet } from '@aviato/ui'
+
+<CodeSnippet language="tsx">
+  // Import component
+  import { Button } from '@aviato/ui'
+
+  <Button>Lorem</Button>
+</CodeSnippet>
+`
+
 const CodeSnippetPage = () => {
   return (
     <Page>
@@ -11,17 +22,9 @@ const CodeSnippetPage = () => {
         Show, copy and paste in a inline editor.
       </NextText>
 
-      <ShowcaseComponent
-        codeBlock={`
-import { CodeSnippet } from '@aviato/ui'
-
-<CodeSnippet language="bash">
-npm install @aviato/ui
-</CodeSnippet>
-      `}
-      >
+      <ShowcaseComponent codeBlock={CodeToDisplay}>
         <Column css={{ width: '100%' }}>
-          <CodeSnippet language="bash">npm install @aviato/ui</CodeSnippet>
+          <CodeSnippet language="tsx">{CodeToDisplay}</CodeSnippet>
         </Column>
       </ShowcaseComponent>
     </Page>

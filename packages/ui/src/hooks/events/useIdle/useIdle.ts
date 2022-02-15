@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { throttle } from 'throttle-debounce'
-import { off, on, Milliseconds } from '@aviato/utils'
+import { off, on, Milliseconds, throttle } from '@aviato/utils'
 
 const defaultEvents = [
   'mousemove',

@@ -24,6 +24,18 @@ const TooltipContainer = styled('div', {
   zIndex: '2',
 })
 
+const EditorWrapper = styled('div', {
+  fontFamily: 'monospace',
+  background: '$Background0dp',
+
+  lineHeight: '1.55',
+  fontSize: '15px',
+
+  '* > textarea:focus': {
+    outline: 'none',
+  },
+})
+
 type StitchedProps = Omit<ComponentProps<typeof StyledEditor>, 'onChange'>
 
 export interface EditorProps extends StitchedProps {
@@ -75,17 +87,14 @@ export const CodeEditor = forwardRef<
         </Tooltip>
       </TooltipContainer>
 
-      <LiveEditor
-        code={trimmedCode}
-        language={language}
-        theme={prismTheme}
-        onChange={(value) => {
-          handleChange(value)
-        }}
-        style={{
-          fontSize: '15px',
-        }}
-      />
+      <EditorWrapper>
+        <LiveEditor
+          theme={prismTheme}
+          code={trimmedCode}
+          language={language}
+          onChange={(value) => handleChange(value)}
+        />
+      </EditorWrapper>
     </StyledEditor>
   )
 })
