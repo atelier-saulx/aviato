@@ -9,6 +9,10 @@ import { Conditional, Portal } from '~/components'
 import { Transition, TransitionPrimitive } from '../Transition'
 import { BasePlacement, BasePosition, Placement } from './types'
 
+const Container = styled('div', {
+  position: 'relative',
+})
+
 const PopperElement = styled('div', {})
 const Arrow = styled('div', {})
 
@@ -112,17 +116,13 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
       onExited={onTransitionEnd}
     >
       {(transitionStyles) => (
-        <div>
+        <Container>
           <Portal disablePortal={disablePortal} zIndex={zIndex}>
             <PopperElement
               ref={setPopperElement}
               style={{
                 ...styles.popper,
                 pointerEvents: 'none',
-                position: 'fixed',
-                // Fix Popper.js display issue
-                top: 0,
-                left: 0,
               }}
               {...attributes.popper}
             >
@@ -135,7 +135,7 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
               </div>
             </PopperElement>
           </Portal>
-        </div>
+        </Container>
       )}
     </Transition>
   )
