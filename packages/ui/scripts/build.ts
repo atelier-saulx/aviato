@@ -3,25 +3,41 @@ import path from 'path'
 import compile from './compile'
 import fs from 'fs-extra'
 import generateDts from './generate-dts'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
 
 import { createPackageConfig } from './create-package-config'
 
-async function buildPackage() {
+const { argv }: { argv: any } = yargs(hideBin(process.argv))
+  .option('is-watching', {
+    type: 'boolean',
+    default: false,
+    description: 'Is user watching?',
+  })
+  .example([['$0 --is-watching', 'User is watching.']])
+
+export type BuildOptions = {
+  isWatching: boolean
+}
+
+const { isWatching } = argv as BuildOptions
+
+async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
   const packagePath = path.join(__dirname, '../')
   const packageJsonPath = path.join(packagePath, '/package.json')
 
   const packageJson = await fs.readJSON(packageJsonPath)
   const packageName = packageJson.name
-  const options = {}
 
   console.info(`Building package ${chalk.cyan(packageName)}`)
 
   try {
     const startTime = Date.now()
 
-    for (const format of ['es', 'cjs']) {
+    const targetFormats = isWatching ? ['es'] : ['es', 'cjs']
+
+    for (const format of targetFormats) {
       const configOptions: any = {
-        ...options,
         basePath: packagePath,
         format,
       }
@@ -36,7 +52,7 @@ async function buildPackage() {
     await generateDts(packagePath)
 
     console.info(
-      `Package ${chalk.cyan(packageName)} was build in ${chalk.green(
+      `Package ${chalk.cyan(packageName)} was built in ${chalk.green(
         `${((Date.now() - startTime) / 1000).toFixed(2)}s`
       )}`
     )
@@ -48,5 +64,5 @@ async function buildPackage() {
 }
 
 ;(async () => {
-  buildPackage()
+  buildPackage({ isWatching })
 })()
