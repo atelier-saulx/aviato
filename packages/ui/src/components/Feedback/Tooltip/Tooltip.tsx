@@ -12,7 +12,9 @@ import { mergeRefs } from '~/hooks'
 import { styled } from '~/theme'
 import { Text, Popper, SharedPopperProps } from '~/components'
 
-const StyledTooltip = styled('div', {})
+const StyledTooltip = styled('div', {
+  position: 'relative',
+})
 
 const TooltipContainer = styled('div', {
   background: '$CalloutMain',
@@ -102,7 +104,6 @@ export const Tooltip = forwardRef<
     position = 'bottom',
     placement = 'center',
     gutter = 5,
-    arrowSize = 2,
     delay = 0,
     opened,
     disabled = false,
@@ -110,7 +111,6 @@ export const Tooltip = forwardRef<
     onMouseLeave = noop,
     onMouseEnter = noop,
     width = 'auto',
-    withArrow = false,
     wrapLines = false,
     allowPointerEvents = false,
     children,
@@ -168,8 +168,6 @@ export const Tooltip = forwardRef<
         position={position}
         placement={placement}
         gutter={gutter}
-        withArrow={withArrow}
-        arrowSize={arrowSize}
       >
         <TooltipContainer
           ref={tooltipRef}
