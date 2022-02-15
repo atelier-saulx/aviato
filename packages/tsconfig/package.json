@@ -1,7 +1,7 @@
 {
   "name": "@aviato/tsconfig",
   "description": "Aviato Shareable TSConfig",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
