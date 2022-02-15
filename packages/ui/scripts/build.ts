@@ -18,7 +18,6 @@ async function buildPackage() {
 
   try {
     const startTime = Date.now()
-    await generateDts(packagePath)
 
     for (const format of ['es', 'cjs']) {
       const configOptions: any = {
@@ -33,6 +32,8 @@ async function buildPackage() {
 
       await compile(config)
     }
+
+    await generateDts(packagePath)
 
     console.info(
       `Package ${chalk.cyan(packageName)} was build in ${chalk.green(
