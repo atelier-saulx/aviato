@@ -4,7 +4,7 @@ import path from "path";
 import chalk from "chalk";
 import { execa } from "execa";
 
-export default async function generateDts(packagePath: string) {
+export async function generateDts(packagePath: string) {
   console.info("Generating types...");
 
   const startTime = Date.now();

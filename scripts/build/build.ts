@@ -3,10 +3,10 @@ import chalk from "chalk";
 import path from "path";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import json from "@rollup/plugin-json";
 
 import { build, Options } from "tsup";
 import { getDirectories } from "../utilities";
+import { generateDts } from "./generate-dts";
 
 const { argv }: { argv: any } = yargs(hideBin(process.argv))
   .option("watch", {
@@ -22,6 +22,28 @@ export type BuildOptions = {
 
 const { watch } = argv as BuildOptions;
 
+const generateDTS = async () => {
+  const packagePath = path.resolve(process.env.PWD || "");
+  await generateDts(packagePath);
+};
+
+/**
+ * Not yet working, figure out why...
+ */
+const dtsAviatoPlugin = {
+  name: "dtsAviatoPlugin",
+
+  setup(build) {
+    build.onEnd((result) => {
+      process.stdout.write(`Build ended with ${result.errors.length} errors`);
+    });
+  },
+
+  // buildStart: async () => {
+  //   await generateDTS();
+  // },
+};
+
 async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
   const packagePath = path.resolve(process.env.PWD || "");
   const packageJsonPath = path.join(packagePath, "/package.json");
@@ -31,8 +53,11 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
 
   console.info(`Building package ${chalk.cyan(packageName)}`);
 
+  console.log("Version 1");
+
   if (!isWatching) {
     const distPath = path.join(packagePath, "dist");
+    await fs.emptyDir(distPath);
     await cleanupDistFolder(distPath);
   }
 
@@ -49,9 +74,11 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
       splitting: true,
       sourcemap: isWatching,
       minify: !isWatching,
-      plugins: [json],
       external: ["react"],
       watch: isWatching,
+      onSuccess: "esno ../../scripts/exec types packages/utils",
+      dts: false,
+      plugins: [dtsAviatoPlugin],
       env: {
         NODE_ENV: isWatching ? "development" : "production",
       },
