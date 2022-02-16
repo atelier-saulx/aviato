@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "dist/types",
-    "declarationDir": "dist/types",
+    "outDir": "dist/types.d",
+    "declarationDir": "dist/types.d",
     "composite": true,
   }
 }
