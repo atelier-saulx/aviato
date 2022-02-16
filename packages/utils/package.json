@@ -9,8 +9,11 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "iife": "dist/index.global.js",
-  "dependencies": {
+  "peerDependencies": {
     "react": ">=17.0.2"
+  },
+  "dependencies": {
+    "react": "17.0.2"
   },
   "devDependencies": {
     "@aviato/eslint-config": "*",
@@ -36,7 +39,7 @@
     "watch": "esno ../../scripts/exec watch packages/utils",
     "build": "esno ../../scripts/exec build packages/utils",
     "docs": "rimraf docs && typedoc --out docs src/index.ts",
-    "lint": "TIMING=1 run-p lint:*",
+    "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
     "lint:eslint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:prettier": "prettier --write './src/**/*.ts{,x}'"
