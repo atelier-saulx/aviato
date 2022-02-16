@@ -4,7 +4,6 @@ import path from "path";
 import { execa } from "execa";
 import chalk from "chalk";
 import fs from "fs-extra";
-const chokidar = require("chokidar");
 
 const packagePath = path.resolve(process.env.PWD || "");
 const packageJsonPath = path.join(packagePath, "/package.json");
@@ -16,7 +15,7 @@ const logInfo = console.log.bind(console);
 const logError = console.error.bind(console);
 
 const triggerBuild = () => {
-  execa("esno", ["../../scripts/build/build", "--is-watching"], {
+  execa("esno", ["../../scripts/build/build", "--watch"], {
     stdio: "inherit",
     cwd: packagePath,
   }).catch((error) => {
@@ -27,29 +26,3 @@ const triggerBuild = () => {
 logInfo(`Started up watcher in ${chalk.green(packageName)}`);
 
 triggerBuild();
-
-let lastBuildTime = new Date().getTime() / 1000;
-
-const rebuild = () => {
-  const buildTime = new Date().getTime() / 1000;
-
-  const deltaBetweenBuilds = buildTime - lastBuildTime;
-
-  const hasPassedDelta = deltaBetweenBuilds > 5;
-  if (hasPassedDelta) {
-    lastBuildTime = buildTime;
-
-    logInfo("Files have changed, rebuilding...");
-    triggerBuild();
-  }
-};
-
-const sourcePath = path.join(packagePath, "src");
-
-const watcher = chokidar.watch(sourcePath, {
-  ignored: /(^|[/\\])\../,
-  persistent: true,
-});
-
-watcher.on("change", rebuild);
-watcher.on("unlink", rebuild);

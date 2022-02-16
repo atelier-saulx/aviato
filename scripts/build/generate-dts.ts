@@ -22,7 +22,7 @@ export default async function generateDts(packagePath: string) {
       "--declaration",
       "--emitDeclarationOnly",
       "--outDir",
-      "./dist/types",
+      "./dist/types.d",
     ],
     {
       cwd: packagePath,
