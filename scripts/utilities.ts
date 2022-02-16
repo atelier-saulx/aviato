@@ -1,4 +1,6 @@
 import chalk from "chalk";
+import fs from "fs-extra";
+
 import { ReleaseType, Inquiry, Prompts, Question } from "types";
 
 /**
@@ -118,4 +120,22 @@ export function validateReleaseType(input: ReleaseType): string {
   }
 
   return input;
+}
+
+export async function getDirectories(path: string) {
+  let filesAndDirectories = await fs.readdir(path);
+
+  let directories: string[] = [];
+
+  await Promise.all(
+    filesAndDirectories.map((name: string) => {
+      return fs.stat(path + name).then((stat) => {
+        if (stat.isDirectory()) {
+          directories.push(name);
+        }
+      });
+    })
+  );
+
+  return directories;
 }

@@ -5,10 +5,9 @@
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "iife": "dist/index.global.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "dependencies": {
     "react": ">=17.0.2"
   },
@@ -24,6 +23,7 @@
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "tsup": "5.11.13",
+    "esno": "^0.14.0",
     "typedoc": "^0.22.11",
     "typescript": "4.5.4"
   },
@@ -32,9 +32,9 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
-    "types": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir ./dist",
-    "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",
-    "build": "tsup ./src/index.ts",
+    "types": "esno ../../scripts/exec types packages/utils",
+    "watch": "esno ../../scripts/exec watch packages/utils",
+    "build": "esno ../../scripts/exec build packages/utils",
     "docs": "rimraf docs && typedoc --out docs src/index.ts",
     "lint": "TIMING=1 run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",

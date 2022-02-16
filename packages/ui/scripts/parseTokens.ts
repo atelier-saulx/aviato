@@ -30,7 +30,7 @@ logInfo('')
 async function start() {
   try {
     await parseTokens()
-  } catch (error) {
+  } catch (error: any) {
     logError(`\nError parsing tokens. ${error}\n`)
     throw new Error(error)
   } finally {
@@ -115,7 +115,7 @@ async function parseTokens() {
     await fs.mkdir(outputDir, { recursive: true })
   }
 
-  const writeFilesPromises = []
+  const writeFilesPromises: any = []
 
   mappedJsons.forEach((jsonOutput) => {
     writeFilesPromises.push(writeTypescriptFiles({ outputDir, jsonOutput }))
@@ -190,24 +190,24 @@ function lookupVariablesAndReplace(object) {
       })[0]
 
       return tokenTuple[1]
-    } catch (error) {
+    } catch (error: any) {
       logWarning(`\n\nError: Could not find token: ${token}`)
 
       throw new Error(error)
     }
   }
 
-  _.each(object, (value, key) => {
+  _.each(object, (value: any, key: any) => {
     if (isTemplateToken(value)) {
       let outputValue = ''
 
-      const sanitisedToken = braceRegex
+      const sanitisedToken = (braceRegex as any)
         .exec(value)[0]
         .replace('{', '')
         .replace('}', '')
 
       if (value.startsWith('rgba')) {
-        const tokenPartial = braceRegex.exec(value)[0]
+        const tokenPartial = (braceRegex as any).exec(value)[0]
         const converted = findToken(sanitisedToken, object)
         const toRgba = convertHexToRGBA(converted)
         const strippedColor = stripRGB(toRgba)
@@ -221,7 +221,7 @@ function lookupVariablesAndReplace(object) {
 
       object[key] = outputValue
     } else if (isDollarToken(value)) {
-      let mappedOutput = []
+      let mappedOutput: any = []
 
       const splitString = value.split('$')
 
@@ -244,7 +244,7 @@ function lookupVariablesAndReplace(object) {
           return partial
         })
       } else {
-        const matchingToken = findToken(splitString[1], object)
+        const matchingToken: any = findToken(splitString[1], object)
         if (matchingToken) {
           mappedOutput.push(matchingToken)
         }

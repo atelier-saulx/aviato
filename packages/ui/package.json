@@ -68,14 +68,14 @@
     "extends": "@aviato/eslint-config"
   },
   "scripts": {
+    "types": "esno ../../scripts/exec types packages/ui",
+    "watch": "esno ../../scripts/exec watch packages/ui",
+    "build": "esno ../../scripts/exec build packages/ui",
     "nodemon": "nodemon --exec yarn parse",
     "parse": "run-s parse:*",
     "parse:tokens": "esno scripts/parseTokens",
     "parse:icons": "esno scripts/reactFromSVG",
     "parse:lint": "yarn lint",
-    "types": "esno scripts/build/generate-types",
-    "build": "esno scripts/build/build",
-    "watch": "esno scripts/build/watch",
     "start": "yarn watch",
     "docs": "rimraf docs && typedoc --out docs src/index.ts",
     "lint": "run-p lint:*",
