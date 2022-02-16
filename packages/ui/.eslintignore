@@ -2,3 +2,4 @@ src/icons/svg/**/*
 src/icons/parsed/**/*
 
 dist/**/*
+types/**/*

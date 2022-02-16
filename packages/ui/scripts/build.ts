@@ -1,28 +1,13 @@
+import fs from 'fs-extra'
 import chalk from 'chalk'
 import path from 'path'
+
 import compile from './compile'
-import fs from 'fs-extra'
 import generateDts from './generate-dts'
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
 
 import { createPackageConfig } from './create-package-config'
 
-const { argv }: { argv: any } = yargs(hideBin(process.argv))
-  .option('is-watching', {
-    type: 'boolean',
-    default: false,
-    description: 'Is user watching?',
-  })
-  .example([['$0 --is-watching', 'User is watching.']])
-
-export type BuildOptions = {
-  isWatching: boolean
-}
-
-const { isWatching } = argv as BuildOptions
-
-async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
+async function buildPackage() {
   const packagePath = path.join(__dirname, '../')
   const packageJsonPath = path.join(packagePath, '/package.json')
 
@@ -34,7 +19,7 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
   try {
     const startTime = Date.now()
 
-    const targetFormats = isWatching ? ['es'] : ['es', 'cjs']
+    const targetFormats = ['es', 'cjs']
 
     for (const format of targetFormats) {
       const configOptions: any = {
@@ -64,5 +49,5 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
 }
 
 ;(async () => {
-  buildPackage({ isWatching })
+  buildPackage()
 })()

@@ -76,18 +76,18 @@ export async function createPackageConfig(
   }
 
   if (config.format === 'es') {
-    output.dir = path.resolve(config.basePath, 'esm')
+    output.dir = path.resolve(config.basePath, 'dist', 'esm')
     output.preserveModules = true
   }
 
   if (config.format === 'cjs') {
-    output.dir = path.resolve(config.basePath, 'cjs')
+    output.dir = path.resolve(config.basePath, 'dist', 'cjs')
     output.preserveModules = true
     output.exports = 'named'
   }
 
   if (config.format === 'umd') {
-    output.file = path.resolve(config.basePath, 'lib/index.umd.js')
+    output.file = path.resolve(config.basePath, 'umd/index.umd.js')
 
     output.globals = {
       react: 'React',

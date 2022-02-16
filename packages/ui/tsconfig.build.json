@@ -9,17 +9,15 @@
     "./cjs",
     "**/*.story.tsx",
     "**/*.test.tsx",
-    "**/*.test.ts",
-    "**/styles.api.ts",
-    "src/components/*/demos/*",
-    "src/demos.ts"
+    "**/*.test.ts"
   ],
   "compilerOptions": {
     "rootDir": "src",
     "baseUrl": ".",
-    "outDir": "lib",
+    "outDir": "types",
     "declaration": true,
     "declarationMap": true,
-    "declarationDir": "lib"
+    "declarationDir": "types",
+    "composite": true,
   }
 }
