@@ -24,21 +24,6 @@ export type BuildOptions = {
 
 const { isWatching } = argv as BuildOptions;
 
-async function cleanupDistFolder(distPath: string) {
-  if (!fs.existsSync(distPath)) {
-    await fs.mkdir(distPath, { recursive: true });
-  } else {
-    const dirsInFolder = await getDirectories(`${distPath}/`);
-
-    const emptyDirPromises = dirsInFolder.map((directory) => {
-      const directoryPath = path.resolve(distPath, directory);
-      return fs.emptyDir(directoryPath);
-    });
-
-    await Promise.all(emptyDirPromises);
-  }
-}
-
 async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
   const packagePath = path.resolve(process.env.PWD || "");
   const packageJsonPath = path.join(packagePath, "/package.json");
@@ -82,6 +67,21 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
     console.error(`Failed to compile package: ${chalk.cyan(packageName)}`);
     process.stdout.write(`${error.toString("minimal")}\n`);
     process.exit(1);
+  }
+}
+
+async function cleanupDistFolder(distPath: string) {
+  if (!fs.existsSync(distPath)) {
+    await fs.mkdir(distPath, { recursive: true });
+  } else {
+    const dirsInFolder = await getDirectories(`${distPath}/`);
+
+    const emptyDirPromises = dirsInFolder.map((directory) => {
+      const directoryPath = path.resolve(distPath, directory);
+      return fs.emptyDir(directoryPath);
+    });
+
+    await Promise.all(emptyDirPromises);
   }
 }
 
