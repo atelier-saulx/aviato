@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import fs from 'fs-extra'
 const chokidar = require('chokidar')
 
-const packagePath = path.join(__dirname, '../')
+const packagePath = path.join(__dirname, '../../')
 const packageJsonPath = path.join(packagePath, '/package.json')
 
 const packageJson = fs.readJSONSync(packageJsonPath)
@@ -33,6 +33,7 @@ const rebuild = () => {
   const buildTime = new Date().getTime() / 1000
 
   const deltaBetweenBuilds = buildTime - lastBuildTime
+
   const hasPassedDelta = deltaBetweenBuilds > 5
   if (hasPassedDelta) {
     lastBuildTime = buildTime

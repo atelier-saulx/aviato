@@ -8,7 +8,7 @@ import generateDts from './generate-dts'
 import { createPackageConfig } from './create-package-config'
 
 async function buildPackage() {
-  const packagePath = path.join(__dirname, '../')
+  const packagePath = path.join(__dirname, '../../')
   const packageJsonPath = path.join(packagePath, '/package.json')
 
   const packageJson = await fs.readJSON(packageJsonPath)
@@ -48,6 +48,6 @@ async function buildPackage() {
   }
 }
 
-;(async () => {
+;(() => {
   buildPackage()
 })()
