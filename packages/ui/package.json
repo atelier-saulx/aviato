@@ -7,8 +7,8 @@
   "sideEffects": false,
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "iife": "dist/index.global.js",
-  "types": "dist/types.d/index.d.ts",
   "peerDependencies": {
     "react": ">=17.0.2",
     "react-dom": ">=17.0.2"

@@ -6,7 +6,6 @@ import { hideBin } from "yargs/helpers";
 
 import { build, Options } from "tsup";
 import { getDirectories } from "../utilities";
-import { generateDts } from "./generate-dts";
 
 const { argv }: { argv: any } = yargs(hideBin(process.argv))
   .option("watch", {
@@ -21,28 +20,6 @@ export type BuildOptions = {
 };
 
 const { watch } = argv as BuildOptions;
-
-const generateDTS = async () => {
-  const packagePath = path.resolve(process.env.PWD || "");
-  await generateDts(packagePath);
-};
-
-/**
- * Not yet working, figure out why...
- */
-const dtsAviatoPlugin = {
-  name: "dtsAviatoPlugin",
-
-  setup(build) {
-    build.onEnd((result) => {
-      process.stdout.write(`Build ended with ${result.errors.length} errors`);
-    });
-  },
-
-  // buildStart: async () => {
-  //   await generateDTS();
-  // },
-};
 
 async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
   const packagePath = path.resolve(process.env.PWD || "");
@@ -68,17 +45,18 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
 
     const buildOptions: Options = {
       platform: "browser",
+      watch: isWatching,
       entry: [entryFile],
       format: ["esm", "cjs", "iife"],
-      clean: !isWatching,
       splitting: true,
+      clean: !isWatching,
       sourcemap: isWatching,
       minify: !isWatching,
       external: ["react"],
-      watch: isWatching,
-      onSuccess: "esno ../../scripts/exec types packages/utils",
-      dts: false,
-      plugins: [dtsAviatoPlugin],
+      dts: !isWatching,
+      onSuccess: isWatching
+        ? "esno ../../scripts/exec types packages/utils"
+        : "",
       env: {
         NODE_ENV: isWatching ? "development" : "production",
       },

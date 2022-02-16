@@ -4,20 +4,17 @@
     "src/**/*"
   ],
   "exclude": [
-    "./lib",
-    "./esm",
-    "./cjs",
-    "**/*.story.tsx",
-    "**/*.test.tsx",
-    "**/*.test.ts"
+    "dist",
+    "node_modules",
+    "src/__test__/**/*",
   ],
   "compilerOptions": {
     "rootDir": "src",
     "baseUrl": ".",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "dist/types.d",
-    "declarationDir": "dist/types.d",
+    "outDir": "dist",
+    "declarationDir": "dist",
     "composite": true,
   }
 }
