@@ -1,7 +1,7 @@
 {
   "name": "@aviato/ui",
   "description": "A library of Front-end React components",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
