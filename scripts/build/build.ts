@@ -1,6 +1,8 @@
 import fs from "fs-extra";
 import chalk from "chalk";
 import path from "path";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
 import compile from "./compile";
 import generateDts from "./generate-dts";
@@ -8,17 +10,21 @@ import generateDts from "./generate-dts";
 import { createPackageConfig } from "./create-package-config";
 import { getDirectories } from "../utilities";
 
-async function buildPackage() {
-  const packagePath = path.resolve(process.env.PWD || "");
-  const packageJsonPath = path.join(packagePath, "/package.json");
+const { argv }: { argv: any } = yargs(hideBin(process.argv))
+  .option("is-watching", {
+    type: "boolean",
+    default: false,
+    description: "Is user watching?",
+  })
+  .example([["$0 --is-watching", "User is watching."]]);
 
-  const packageJson = await fs.readJSON(packageJsonPath);
-  const packageName = packageJson.name;
+export type BuildOptions = {
+  isWatching: boolean;
+};
 
-  console.info(`Building package ${chalk.cyan(packageName)}`);
+const { isWatching } = argv as BuildOptions;
 
-  const distPath = path.join(packagePath, "dist");
-
+async function cleanupDistFolder(distPath: string) {
   if (!fs.existsSync(distPath)) {
     await fs.mkdir(distPath, { recursive: true });
   } else {
@@ -30,6 +36,21 @@ async function buildPackage() {
     });
 
     await Promise.all(emptyDirPromises);
+  }
+}
+
+async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
+  const packagePath = path.resolve(process.env.PWD || "");
+  const packageJsonPath = path.join(packagePath, "/package.json");
+
+  const packageJson = await fs.readJSON(packageJsonPath);
+  const packageName = packageJson.name;
+
+  console.info(`Building package ${chalk.cyan(packageName)}`);
+
+  if (!isWatching) {
+    const distPath = path.join(packagePath, "dist");
+    await cleanupDistFolder(distPath);
   }
 
   try {
@@ -65,5 +86,5 @@ async function buildPackage() {
 }
 
 (() => {
-  buildPackage();
+  buildPackage({ isWatching });
 })();

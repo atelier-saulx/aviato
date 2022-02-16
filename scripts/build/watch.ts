@@ -16,11 +16,12 @@ const logInfo = console.log.bind(console);
 const logError = console.error.bind(console);
 
 const triggerBuild = () => {
-  execa("yarn", ["build", "--is-watching"], { stdio: "inherit" }).catch(
-    (error) => {
-      logError("Something went wrong: ", error);
-    }
-  );
+  execa("esno", ["../../scripts/build/build", "--is-watching"], {
+    stdio: "inherit",
+    cwd: packagePath,
+  }).catch((error) => {
+    logError("Something went wrong: ", error);
+  });
 };
 
 logInfo(`Started up watcher in ${chalk.green(packageName)}`);

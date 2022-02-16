@@ -1,11 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
-import concurrently from "concurrently";
 import process from "process";
-
-const log = (data) => {
-  process.stdout.write(data);
-};
+import { execa } from "execa";
 
 const args = process.argv.slice(2);
 
@@ -48,35 +44,11 @@ async function exec() {
     return process.exit(1);
   }
 
-  const stream: any = {};
-
-  stream.writable = true;
-  stream.write = (data) => {
-    log(data);
-  };
-
-  const execCommand = [
-    {
-      name: "watch",
-      command: `esno ../../scripts/build/${targetCommand}`,
-    },
-  ];
-
-  concurrently(execCommand, {
-    prefix: "none",
-    killOthers: ["failure", "success"],
-    restartTries: 0,
-    maxProcesses: 1,
-    outputStream: stream,
-    cwd: projectPath,
-  }).then(
-    function onSuccess() {
-      process.exit();
-    },
-    function onFailure() {
-      process.exit();
-    }
-  );
+  execa("esno", [`../../scripts/build/${targetCommand}`], {
+    stdio: "inherit",
+  }).catch((error) => {
+    console.error("Something went wrong: ", error);
+  });
 }
 
 (() => {
