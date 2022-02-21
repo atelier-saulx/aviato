@@ -12,178 +12,6 @@ import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 
-const PrimaryButtonCSS: StitchedCSS = {
-  '&.isFilled': {
-    color: '$PrimaryMainContrast',
-    background: '$PrimaryMain',
-    border: '1px solid $PrimaryMain',
-
-    '&:hover': {
-      background: '$PrimaryMainHover',
-      border: '1px solid $PrimaryMainHover',
-    },
-    '&:active': {
-      background: '$PrimaryMainSelected',
-      border: '1px solid $PrimaryMainSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      background: '$OtherDisabledBackground',
-      border: '1px solid $OtherDisabledBackground',
-    },
-  },
-
-  '&.isOutlined': {
-    color: '$PrimaryMain',
-    border: '1px solid $PrimaryOutline',
-
-    '&:hover': {
-      backgroundColor: '$PrimaryLightHover',
-    },
-    '&:active': {
-      background: '$PrimaryLightSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      border: '1px solid $OtherDisabledOutline',
-      background: 'transparent',
-    },
-  },
-
-  '&.isTransparent': {
-    color: '$PrimaryMain',
-    border: '1px solid transparent',
-
-    '&:hover': {
-      backgroundColor: '$PrimaryLightHover',
-    },
-    '&:active': {
-      background: '$PrimaryLightSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      background: 'transparent',
-    },
-  },
-}
-
-const GhostButtonCSS: StitchedCSS = {
-  '&.isFilled': {
-    color: '$ActionMainContrast',
-    background: '$ActionMain',
-    border: '1px solid $ActionMain',
-
-    '&:hover': {
-      background: '$ActionMainHover',
-    },
-    '&:active': {
-      background: '$ActionMainSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      background: '$OtherDisabledBackground',
-      border: '1px solid $OtherDisabledBackground',
-    },
-  },
-
-  '&.isOutlined': {
-    color: '$ActionMainContrast',
-    border: '1px solid $ActionOutline',
-
-    '&:hover': {
-      backgroundColor: '$ActionLightHover',
-    },
-    '&:active': {
-      background: '$ActionMainSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      border: '1px solid $OtherDisabledOutline',
-      background: 'transparent',
-    },
-  },
-
-  '&.isTransparent': {
-    color: '$ActionMainContrast',
-    border: '1px solid transparent',
-
-    '&:hover': {
-      backgroundColor: '$ActionMainHover',
-    },
-    '&:active': {
-      background: '$ActionMainSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      background: 'transparent',
-    },
-  },
-}
-
-const ErrorButtonCSS: StitchedCSS = {
-  '&.isFilled': {
-    color: '$ErrorMainContrast',
-    background: '$ErrorMain',
-    border: '1px solid $ErrorMain',
-
-    '&:hover': {
-      background: '$ErrorMainHover',
-      border: '1px solid $ErrorMainHover',
-    },
-    '&:active': {
-      background: '$ErrorMainSelected',
-      border: '1px solid $ErrorMainSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      background: '$OtherDisabledBackground',
-      border: '1px solid $OtherDisabledBackground',
-    },
-  },
-
-  '&.isOutlined': {
-    color: '$ErrorLightContrast',
-    border: '1px solid $ErrorOutline',
-
-    '&:hover': {
-      backgroundColor: '$ErrorLightHover',
-    },
-    '&:active': {
-      background: '$ErrorLightSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      border: '1px solid $OtherDisabledOutline',
-      background: 'transparent',
-    },
-  },
-
-  '&.isTransparent': {
-    color: '$ErrorMain',
-    border: '1px solid transparent',
-
-    '&:hover': {
-      backgroundColor: '$ErrorLightHover',
-    },
-    '&:active': {
-      background: '$ErrorLightSelected',
-    },
-
-    '&:disabled': {
-      color: '$OtherDisabledContent',
-      background: 'transparent',
-    },
-  },
-}
-
 const IconContainer = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
@@ -211,22 +39,20 @@ export const StyledButton = styled('button', {
   '&:disabled': {
     cursor: 'not-allowed',
   },
-
-  variants: {
-    mode: {
-      primary: PrimaryButtonCSS,
-      ghost: GhostButtonCSS,
-      error: ErrorButtonCSS,
-    },
-  },
 })
 
-export type ButtonMode = 'primary' | 'ghost' | 'error'
-export type ButtonVariant = 'filled' | 'outlined' | 'transparent'
+export type ButtonVariant =
+  | 'main'
+  | 'light'
+  | 'ghost'
+  | 'outline'
+  | 'outline-light'
+
+export type ButtonColor = 'primary' | 'action' | 'error'
 
 export interface ButtonProps extends ComponentProps<typeof StyledButton> {
-  mode?: ButtonMode
   variant?: ButtonVariant
+  color?: ButtonColor
   disabled?: boolean
   leftIcon?: ReactNode
   rightIcon?: ReactNode
@@ -237,8 +63,8 @@ export interface ButtonProps extends ComponentProps<typeof StyledButton> {
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
   (properties, forwardedRef) => {
     const {
-      mode = 'primary',
-      variant = 'filled',
+      color = 'primary',
+      variant = 'main',
       disabled = false,
       leftIcon = null,
       rightIcon = null,
@@ -247,14 +73,18 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       ...remainingProps
     } = properties
 
-    const isFilled = variant === 'filled'
-    const isOutlined = variant === 'outlined'
-    const isTransparent = variant === 'transparent'
+    const isMain = variant === 'main'
+    const isLight = variant === 'light'
+    const isGhost = variant === 'ghost'
+    const isOutline = variant === 'outline'
+    const isOutlineLight = variant === 'outline-light'
 
     const classes = classNames({
-      isFilled,
-      isOutlined,
-      isTransparent,
+      isMain,
+      isLight,
+      isGhost,
+      isOutline,
+      isOutlineLight,
     })
 
     const ChildVariant = isText(children) ? (
@@ -267,18 +97,14 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
 
     const handleClick = useCallback(
       (event) => {
-        if (disabled) {
-          return noop()
-        }
-
-        return onClick(event)
+        return disabled ? noop() : onClick(event)
       },
       [disabled]
     )
 
     return (
       <StyledButton
-        mode={mode}
+        color={color}
         disabled={disabled}
         className={classes}
         ref={forwardedRef}

@@ -29,7 +29,7 @@ export const ToggleMenuButton = forwardRef<
       ref={forwardedRef}
       {...remainingProps}
     >
-      <IconButton mode="ghost" icon="IconAlignJustify" />
+      <IconButton variant="ghost" icon="IconAlignJustify" />
     </StyledToggleMenuButton>
   )
 })

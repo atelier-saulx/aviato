@@ -1,25 +1,17 @@
-import { useState, useMemo } from 'react'
 import {
   Page,
-  Switch,
   Button,
   Column,
-  Row,
-  ButtonMode,
-  IconButton,
-  getRandomIcon,
-  getRandomIconName,
+  ButtonColor,
+  ButtonVariant,
   useHasLoaded,
+  Group,
+  getRandomIcon,
 } from '@aviato/ui'
-import { log, capitalize } from '@aviato/utils'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-  Spacer,
-} from '../../components'
+import { useMemo } from 'react'
+
+import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 /**
  * TODO: Fix SSR issue with Vector Icons!
@@ -30,108 +22,57 @@ const ButtonPage = () => {
     return null
   }
 
-  const ShowButtons = ({ mode }: { mode: ButtonMode }) => {
-    const uppercasedMode = capitalize(mode)
-    const [isDisabled, setIsDisabled] = useState(false)
-
+  const ShowButtonMatrix = () => {
     const Icon = useMemo(() => {
       const RandomIcon = getRandomIcon()
       return <RandomIcon />
     }, [])
 
-    const IconString = useMemo(() => {
-      return getRandomIconName()
-    }, [])
+    const buttonColors: ButtonColor[] = ['primary', 'action', 'error']
 
-    return (
-      <>
-        <Column>
-          <NextTitle size="small">{uppercasedMode}</NextTitle>
+    const buttonVariants: ButtonVariant[] = [
+      'main',
+      'light',
+      'ghost',
+      'outline',
+      'outline-light',
+    ]
 
-          <Row>
-            <Switch
-              text="Disable buttons?"
-              onChange={(isChecked) => {
-                setIsDisabled(isChecked)
-              }}
-            />
-          </Row>
+    const getButtonVariants = (color: ButtonColor) => {
+      return buttonVariants.map((variant, index) => {
+        return (
+          <Group key={`BadgeVariant-${index}`} direction="row">
+            <Button color={color} variant={variant} leftIcon={Icon}>
+              {color} - {variant}
+            </Button>
 
-          <BigSpacer />
+            <Button color={color} variant={variant}>
+              {color} - {variant}
+            </Button>
 
-          <Row>
-            <Column>
-              <Row>
-                <Button
-                  mode={mode}
-                  variant="filled"
-                  leftIcon={Icon}
-                  disabled={isDisabled}
-                  onClick={() => {
-                    log.global.debug('Button clicked')
-                  }}
-                >
-                  Lorem
-                </Button>
+            <Button color={color} variant={variant} rightIcon={Icon}>
+              {color} - {variant}
+            </Button>
+          </Group>
+        )
+      })
+    }
 
-                <Spacer />
+    const getButtons = () => {
+      return buttonColors.map((color, index) => {
+        return (
+          <Group
+            key={`ButtonColor-${index}`}
+            direction="column"
+            css={{ paddingBottom: 20 }}
+          >
+            {getButtonVariants(color)}
+          </Group>
+        )
+      })
+    }
 
-                <IconButton
-                  mode={mode}
-                  variant="filled"
-                  icon={IconString}
-                  disabled={isDisabled}
-                />
-              </Row>
-
-              <BigSpacer />
-
-              <Row>
-                <Button
-                  mode={mode}
-                  variant="outlined"
-                  leftIcon={Icon}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <IconButton
-                  mode={mode}
-                  variant="outlined"
-                  icon={IconString}
-                  disabled={isDisabled}
-                />
-              </Row>
-
-              <BigSpacer />
-
-              <Row>
-                <Button
-                  mode={mode}
-                  variant="transparent"
-                  leftIcon={Icon}
-                  disabled={isDisabled}
-                >
-                  Lorem
-                </Button>
-
-                <Spacer />
-
-                <IconButton
-                  mode={mode}
-                  variant="transparent"
-                  icon={IconString}
-                  disabled={isDisabled}
-                />
-              </Row>
-            </Column>
-          </Row>
-        </Column>
-      </>
-    )
+    return <Column>{getButtons()}</Column>
   }
 
   return (
@@ -144,56 +85,8 @@ const ButtonPage = () => {
         a delete operation.
       </NextText>
 
-      <ShowcaseComponent
-        background="transparent"
-        codeBlock={`
-import { Button, IconButton } from '@aviato/ui'
-
-<Button
-  type='primary'
-  variant={'filled' | 'outlined' | 'transparent'}
-  leftIcon={<IconPlus />}
-  rightIcon={<IconCheck />}
-  onClick={() => {
-    console.log('Button clicked')
-  }}
->
-  Lorem
-</Button>
-
-<IconButton
-  type='primary'
-  variant={'filled' | 'outlined' | 'transparent'}
-  icon="IconPlus"
-  onClick={() => {
-    console.log('Button clicked')
-  }}
-/>
-      `}
-      >
-        <ShowButtons mode="primary" />
-      </ShowcaseComponent>
-
-      <ShowcaseComponent
-        background="transparent"
-        codeBlock={`
-<Button type='ghost'>Ipsum</Button>
-
-<IconButton type='ghost' />
-      `}
-      >
-        <ShowButtons mode="ghost" />
-      </ShowcaseComponent>
-
-      <ShowcaseComponent
-        background="transparent"
-        codeBlock={`
-<Button type='error'>Dolor</Button>
-
-<IconButton type='error' />
-      `}
-      >
-        <ShowButtons mode="error" />
+      <ShowcaseComponent background="transparent">
+        <ShowButtonMatrix />
       </ShowcaseComponent>
     </Page>
   )
