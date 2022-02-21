@@ -30,8 +30,6 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
 
   console.info(`Building package ${chalk.cyan(packageName)}`);
 
-  console.log("Version 1");
-
   if (!isWatching) {
     const distPath = path.join(packagePath, "dist");
     await fs.emptyDir(distPath);
@@ -49,7 +47,7 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
       entry: [entryFile],
       format: ["esm", "cjs", "iife"],
       splitting: true,
-      clean: !isWatching,
+      clean: false,
       sourcemap: isWatching,
       minify: !isWatching,
       external: ["react"],
