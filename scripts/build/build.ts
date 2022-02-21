@@ -51,10 +51,7 @@ async function buildPackage({ isWatching = false }: { isWatching?: boolean }) {
       sourcemap: isWatching,
       minify: !isWatching,
       external: ["react"],
-      dts: !isWatching,
-      onSuccess: isWatching
-        ? "esno ../../scripts/exec types packages/utils"
-        : "",
+      dts: true,
       env: {
         NODE_ENV: isWatching ? "development" : "production",
       },
