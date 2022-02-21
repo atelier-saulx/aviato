@@ -1,9 +1,9 @@
 import React, {
   forwardRef,
   ElementRef,
-  ReactNode,
   useCallback,
   MouseEventHandler,
+  ReactElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 
@@ -41,8 +41,8 @@ export interface TabProps extends ComponentProps<typeof StyledTab> {
   value?: string
   isActive?: boolean
   disabled?: boolean
-  leftIcon?: ReactNode
-  rightIcon?: ReactNode
+  leftIcon?: ReactElement
+  rightIcon?: ReactElement
   onClick?: MouseEventHandler<HTMLDivElement>
 }
 
