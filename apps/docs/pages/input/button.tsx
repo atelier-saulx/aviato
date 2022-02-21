@@ -11,6 +11,7 @@ import {
   getRandomIcon,
   Row,
   Switch,
+  styled,
 } from '@aviato/ui'
 
 import {
@@ -19,6 +20,12 @@ import {
   ShowcaseComponent,
   Spacer,
 } from '../../components'
+
+const Divider = styled('div', {
+  width: '100%',
+  height: 1,
+  background: '$OtherDivider',
+})
 
 /**
  * TODO: Fix SSR issue with Vector Icons!
@@ -50,7 +57,11 @@ const ButtonPage = () => {
     const getButtonVariants = (color: ButtonColor) => {
       return buttonVariants.map((variant, index) => {
         return (
-          <Group key={`Button-${color}-${variant}-${index}`} direction="column">
+          <Group
+            key={`Button-${color}-${variant}-${index}`}
+            direction="column"
+            align="center"
+          >
             <Button
               color={color}
               variant={variant}
@@ -80,20 +91,20 @@ const ButtonPage = () => {
     const getButtons = () => {
       return buttonColors.map((color, index) => {
         return (
-          <Group
-            key={`ButtonColor-${index}`}
-            direction="row"
-            css={{ paddingBottom: 20 }}
-          >
-            {getButtonVariants(color)}
-          </Group>
+          <div key={`ButtonColor-${index}`}>
+            <Spacer />
+            <Divider />
+            <Spacer />
+
+            <Group direction="row">{getButtonVariants(color)}</Group>
+          </div>
         )
       })
     }
 
     return (
       <Column>
-        <Row>
+        <Row style={{ justifyContent: 'center' }}>
           <Switch
             text="Disable buttons?"
             onChange={(isChecked) => {
@@ -101,8 +112,6 @@ const ButtonPage = () => {
             }}
           />
         </Row>
-
-        <Spacer />
 
         {getButtons()}
       </Column>

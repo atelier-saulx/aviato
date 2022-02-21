@@ -27,6 +27,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:disabled': {
       color: '$OtherDisabledContent',
       background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
     },
   },
 
@@ -44,6 +45,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:disabled': {
       color: '$OtherDisabledContent',
       background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
     },
   },
 
@@ -61,6 +63,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:disabled': {
       color: '$OtherDisabledContent',
       background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
     },
   },
 
@@ -79,6 +82,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:disabled': {
       color: '$OtherDisabledContent',
       background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
     },
   },
 
@@ -97,13 +101,198 @@ const PrimaryCSS: StitchedCSS = {
     '&:disabled': {
       color: '$OtherDisabledContent',
       background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
     },
   },
 }
 
-const ActionCSS: StitchedCSS = {}
+const ActionCSS: StitchedCSS = {
+  '&.isMain': {
+    color: '$ActionMainContrast',
+    background: '$ActionMain',
 
-const ErrorCSS: StitchedCSS = {}
+    '&:hover': {
+      background: '$ActionMainHover',
+    },
+    '&:active': {
+      background: '$ActionMainSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isLight': {
+    color: '$ActionLightContrast',
+    background: '$ActionLight',
+
+    '&:hover': {
+      background: '$ActionLightHover',
+    },
+    '&:active': {
+      background: '$ActionLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isGhost': {
+    color: '$ActionLightContrast',
+    background: 'none',
+
+    '&:hover': {
+      background: '$ActionLightHover',
+    },
+    '&:active': {
+      background: '$ActionLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isOutline': {
+    color: '$ActionLightContrast',
+    background: 'none',
+    outline: '1px solid $ActionMainOutline',
+
+    '&:hover': {
+      background: '$ActionLightHover',
+    },
+    '&:active': {
+      background: '$ActionLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isOutlineLight': {
+    color: '$ActionLightContrast',
+    background: 'none',
+    outline: '1px solid $ActionLightOutline',
+
+    '&:hover': {
+      background: '$ActionLightHover',
+    },
+    '&:active': {
+      background: '$ActionLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+}
+
+const ErrorCSS: StitchedCSS = {
+  '&.isMain': {
+    color: '$ErrorMainContrast',
+    background: '$ErrorMain',
+
+    '&:hover': {
+      background: '$ErrorMainHover',
+    },
+    '&:active': {
+      background: '$ErrorMainSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isLight': {
+    color: '$ErrorLightContrast',
+    background: '$ErrorLight',
+
+    '&:hover': {
+      background: '$ErrorLightHover',
+    },
+    '&:active': {
+      background: '$ErrorLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isGhost': {
+    color: '$ErrorLightContrast',
+    background: 'none',
+
+    '&:hover': {
+      background: '$ErrorLightHover',
+    },
+    '&:active': {
+      background: '$ErrorLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isOutline': {
+    color: '$ErrorLightContrast',
+    background: 'none',
+    outline: '1px solid $ErrorMainOutline',
+
+    '&:hover': {
+      background: '$ErrorLightHover',
+    },
+    '&:active': {
+      background: '$ErrorLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+
+  '&.isOutlineLight': {
+    color: '$ErrorLightContrast',
+    background: 'none',
+    outline: '1px solid $ErrorLightOutline',
+
+    '&:hover': {
+      background: '$ErrorLightHover',
+    },
+    '&:active': {
+      background: '$ErrorLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+      outline: '1px solid $OtherDisabledBackground',
+    },
+  },
+}
 
 const IconContainer = styled('span', {
   display: 'inline-flex',
