@@ -30,7 +30,7 @@ logInfo('')
 async function start() {
   try {
     await parseTokens()
-  } catch (error) {
+  } catch (error: any) {
     logError(`\nError parsing tokens. ${error}\n`)
     throw new Error(error)
   } finally {
@@ -81,9 +81,6 @@ async function parseTokens() {
         return [fileName, undefined]
       }
 
-      const parsedJSON = JSON.parse(stringData)
-      const parsedObject = formatJSON(parsedJSON)
-
       const validThemeNames = ['light', 'dark']
 
       const themeName = validThemeNames
@@ -101,6 +98,9 @@ async function parseTokens() {
         return [fileName, undefined]
       }
 
+      const parsedJSON = JSON.parse(stringData)
+      const parsedObject = formatJSON(parsedJSON)
+
       return [themeName, parsedObject]
     })
     .filter(([, data]) => data !== undefined)
@@ -115,7 +115,7 @@ async function parseTokens() {
     await fs.mkdir(outputDir, { recursive: true })
   }
 
-  const writeFilesPromises = []
+  const writeFilesPromises: any[] = []
 
   mappedJsons.forEach((jsonOutput) => {
     writeFilesPromises.push(writeTypescriptFiles({ outputDir, jsonOutput }))
@@ -190,7 +190,7 @@ function lookupVariablesAndReplace(object) {
       })[0]
 
       return tokenTuple[1]
-    } catch (error) {
+    } catch (error: any) {
       logWarning(`\n\nError: Could not find token: ${token}`)
 
       throw new Error(error)
@@ -201,13 +201,11 @@ function lookupVariablesAndReplace(object) {
     if (isTemplateToken(value)) {
       let outputValue = ''
 
-      const sanitisedToken = braceRegex
-        .exec(value)[0]
-        .replace('{', '')
-        .replace('}', '')
+      const regexOutput = braceRegex!.exec(value)?.[0] ?? ''
+      const sanitisedToken = regexOutput.replace('{', '').replace('}', '')
 
       if (value.startsWith('rgba')) {
-        const tokenPartial = braceRegex.exec(value)[0]
+        const tokenPartial = regexOutput
         const converted = findToken(sanitisedToken, object)
         const toRgba = convertHexToRGBA(converted)
         const strippedColor = stripRGB(toRgba)
@@ -221,7 +219,7 @@ function lookupVariablesAndReplace(object) {
 
       object[key] = outputValue
     } else if (isDollarToken(value)) {
-      let mappedOutput = []
+      let mappedOutput: any[] = []
 
       const splitString = value.split('$')
 
