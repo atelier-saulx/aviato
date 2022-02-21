@@ -50,7 +50,7 @@ const ButtonPage = () => {
     const getButtonVariants = (color: ButtonColor) => {
       return buttonVariants.map((variant, index) => {
         return (
-          <Group key={`Button-${color}-${variant}-${index}`} direction="row">
+          <Group key={`Button-${color}-${variant}-${index}`} direction="column">
             <Button
               color={color}
               variant={variant}
@@ -82,7 +82,7 @@ const ButtonPage = () => {
         return (
           <Group
             key={`ButtonColor-${index}`}
-            direction="column"
+            direction="row"
             css={{ paddingBottom: 20 }}
           >
             {getButtonVariants(color)}

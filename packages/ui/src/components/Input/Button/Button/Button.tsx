@@ -64,13 +64,41 @@ const PrimaryCSS: StitchedCSS = {
     },
   },
 
-  /**
-   *
-    isGhost,
-    isOutline,
-    isOutlineLight,
+  '&.isOutline': {
+    color: '$PrimaryLightContrast',
+    background: 'none',
+    outline: '1px solid $PrimaryMainOutline',
 
-   */
+    '&:hover': {
+      background: '$PrimaryLightHover',
+    },
+    '&:active': {
+      background: '$PrimaryLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+    },
+  },
+
+  '&.isOutlineLight': {
+    color: '$PrimaryLightContrast',
+    background: 'none',
+    outline: '1px solid $PrimaryLightOutline',
+
+    '&:hover': {
+      background: '$PrimaryLightHover',
+    },
+    '&:active': {
+      background: '$PrimaryLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+    },
+  },
 }
 
 const ActionCSS: StitchedCSS = {}
