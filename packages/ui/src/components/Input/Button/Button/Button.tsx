@@ -422,7 +422,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
 const IconWithSize = (icon: ReactElement | null) => {
   if (!icon) return null
 
-  cloneElement(icon, {
+  return cloneElement(icon, {
     width: 16,
     height: 16,
   })
