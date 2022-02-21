@@ -1,7 +1,7 @@
 {
   "name": "@aviato/ui",
   "description": "A library of Front-end React components",
-  "version": "0.3.10",
+  "version": "0.3.13",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
@@ -21,7 +21,7 @@
     "@stitches/react": "^1.2.6",
     "prism-react-renderer": "^1.2.1",
     "react-dom": "17.0.2",
-    "react-live": "3.0.0",
+    "react-live": "2.4.1",
     "react-popper": "^2.2.5",
     "react-textarea-autosize": "^8.3.3",
     "react": "17.0.2"
@@ -33,7 +33,6 @@
     "@svgr/cli": "^5.1.0",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
-    "@types/throttle-debounce": "^2.1.0",
     "chalk": "^5.0.0",
     "eslint": "7.28.0",
     "esm": "^3.2.25",
