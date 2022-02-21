@@ -12,6 +12,71 @@ import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 
+const PrimaryCSS: StitchedCSS = {
+  '&.isMain': {
+    color: '$PrimaryMainContrast',
+    background: '$PrimaryMain',
+
+    '&:hover': {
+      background: '$PrimaryMainHover',
+    },
+    '&:active': {
+      background: '$PrimaryMainSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+    },
+  },
+
+  '&.isLight': {
+    color: '$PrimaryLightContrast',
+    background: '$PrimaryLight',
+
+    '&:hover': {
+      background: '$PrimaryLightHover',
+    },
+    '&:active': {
+      background: '$PrimaryLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+    },
+  },
+
+  '&.isGhost': {
+    color: '$PrimaryLightContrast',
+    background: 'none',
+
+    '&:hover': {
+      background: '$PrimaryLightHover',
+    },
+    '&:active': {
+      background: '$PrimaryLightSelected',
+    },
+
+    '&:disabled': {
+      color: '$OtherDisabledContent',
+      background: '$OtherDisabledBackground',
+    },
+  },
+
+  /**
+   *
+    isGhost,
+    isOutline,
+    isOutlineLight,
+
+   */
+}
+
+const ActionCSS: StitchedCSS = {}
+
+const ErrorCSS: StitchedCSS = {}
+
 const IconContainer = styled('span', {
   display: 'inline-flex',
   alignSelf: 'center',
@@ -38,6 +103,14 @@ export const StyledButton = styled('button', {
 
   '&:disabled': {
     cursor: 'not-allowed',
+  },
+
+  variants: {
+    color: {
+      primary: PrimaryCSS,
+      action: ActionCSS,
+      error: ErrorCSS,
+    },
   },
 })
 

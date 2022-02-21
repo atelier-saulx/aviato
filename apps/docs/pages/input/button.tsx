@@ -1,3 +1,5 @@
+import { useMemo, useState } from 'react'
+
 import {
   Page,
   Button,
@@ -7,11 +9,16 @@ import {
   useHasLoaded,
   Group,
   getRandomIcon,
+  Row,
+  Switch,
 } from '@aviato/ui'
 
-import { useMemo } from 'react'
-
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import {
+  NextTitle,
+  NextText,
+  ShowcaseComponent,
+  Spacer,
+} from '../../components'
 
 /**
  * TODO: Fix SSR issue with Vector Icons!
@@ -23,6 +30,8 @@ const ButtonPage = () => {
   }
 
   const ShowButtonMatrix = () => {
+    const [isDisabled, setIsDisabled] = useState(false)
+
     const Icon = useMemo(() => {
       const RandomIcon = getRandomIcon()
       return <RandomIcon />
@@ -41,17 +50,27 @@ const ButtonPage = () => {
     const getButtonVariants = (color: ButtonColor) => {
       return buttonVariants.map((variant, index) => {
         return (
-          <Group key={`BadgeVariant-${index}`} direction="row">
-            <Button color={color} variant={variant} leftIcon={Icon}>
-              {color} - {variant}
+          <Group key={`Button-${color}-${variant}-${index}`} direction="row">
+            <Button
+              color={color}
+              variant={variant}
+              leftIcon={Icon}
+              disabled={isDisabled}
+            >
+              Settings
             </Button>
 
-            <Button color={color} variant={variant}>
-              {color} - {variant}
+            <Button color={color} variant={variant} disabled={isDisabled}>
+              Settings
             </Button>
 
-            <Button color={color} variant={variant} rightIcon={Icon}>
-              {color} - {variant}
+            <Button
+              color={color}
+              variant={variant}
+              rightIcon={Icon}
+              disabled={isDisabled}
+            >
+              Settings
             </Button>
           </Group>
         )
@@ -72,7 +91,22 @@ const ButtonPage = () => {
       })
     }
 
-    return <Column>{getButtons()}</Column>
+    return (
+      <Column>
+        <Row>
+          <Switch
+            text="Disable buttons?"
+            onChange={(isChecked) => {
+              setIsDisabled(isChecked)
+            }}
+          />
+        </Row>
+
+        <Spacer />
+
+        {getButtons()}
+      </Column>
+    )
   }
 
   return (
