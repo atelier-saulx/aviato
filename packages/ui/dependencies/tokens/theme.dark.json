@@ -55,6 +55,10 @@
         "value": "rgba($Colors.Greyscale.Grey-100, 1)",
         "type": "color"
       },
+      "Main-contrast-secondary": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.60)",
+        "type": "color"
+      },
       "Light": {
         "value": "rgba({Colors.Primary.Main}, 0.12)",
         "description": "",
@@ -72,6 +76,10 @@
       },
       "Light-contrast": {
         "value": "{Colors.Primary.Main}",
+        "type": "color"
+      },
+      "Light-contrast-secondary": {
+        "value": "rgba($Colors.Primary.Main, 0.60)",
         "type": "color"
       },
       "Main-outline": {
@@ -100,6 +108,10 @@
         "value": "rgba($Colors.Greyscale.Grey-100, 1)",
         "type": "color"
       },
+      "Main-contrast-secondary": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.60)",
+        "type": "color"
+      },
       "Light": {
         "value": "rgba($Colors.White.White-100, 0.06)",
         "type": "color"
@@ -113,7 +125,11 @@
         "type": "color"
       },
       "Light-contrast": {
-        "value": "{Colors.Text.Primary}",
+        "value": "{Colors.Action.Main}",
+        "type": "color"
+      },
+      "Light-contrast-secondary": {
+        "value": "rgba($Colors.Action.Main, 0.60)",
         "type": "color"
       },
       "Main-outline": {
@@ -184,6 +200,10 @@
         "value": "rgba($Colors.Greyscale.Grey-100, 1)",
         "type": "color"
       },
+      "Main-contrast-secondary": {
+        "value": "rgba($Colors.Greyscale.Grey-100, 0.60)",
+        "type": "color"
+      },
       "Light": {
         "value": "rgba($Colors.Error.Main, 0.16)",
         "type": "color"
@@ -198,6 +218,10 @@
       },
       "Light-contrast": {
         "value": "{Colors.Error.Main}",
+        "type": "color"
+      },
+      "Light-contrast-secondary": {
+        "value": "rgba($Colors.Error.Main, 0.60)",
         "type": "color"
       },
       "Main-outline": {
