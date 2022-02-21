@@ -8,10 +8,12 @@ import {
   ButtonVariant,
   useHasLoaded,
   Group,
-  getRandomIcon,
   Row,
   Switch,
   styled,
+  getRandomIconName,
+  IconButton,
+  getIconFromName,
 } from '@aviato/ui'
 
 import {
@@ -39,10 +41,14 @@ const ButtonPage = () => {
   const ShowButtonMatrix = () => {
     const [isDisabled, setIsDisabled] = useState(false)
 
-    const Icon = useMemo(() => {
-      const RandomIcon = getRandomIcon()
-      return <RandomIcon />
+    const IconString = useMemo(() => {
+      return getRandomIconName()
     }, [])
+
+    const Icon = useMemo(() => {
+      const Icon = getIconFromName(IconString)
+      return <Icon />
+    }, [IconString])
 
     const buttonColors: ButtonColor[] = ['primary', 'action', 'error']
 
@@ -58,9 +64,9 @@ const ButtonPage = () => {
       return buttonVariants.map((variant, index) => {
         return (
           <Group
-            key={`Button-${color}-${variant}-${index}`}
-            direction="column"
+            direction="row"
             align="center"
+            key={`Button-${color}-${variant}-${index}`}
           >
             <Button
               color={color}
@@ -83,6 +89,13 @@ const ButtonPage = () => {
             >
               Settings
             </Button>
+
+            <IconButton
+              color={color}
+              variant={variant}
+              icon={IconString}
+              disabled={isDisabled}
+            />
           </Group>
         )
       })
@@ -96,7 +109,7 @@ const ButtonPage = () => {
             <Divider />
             <Spacer />
 
-            <Group direction="row">{getButtonVariants(color)}</Group>
+            <Group direction="column">{getButtonVariants(color)}</Group>
           </div>
         )
       })
