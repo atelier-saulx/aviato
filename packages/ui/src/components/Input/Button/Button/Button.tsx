@@ -1,9 +1,10 @@
 import React, {
   forwardRef,
-  ReactNode,
+  ReactElement,
   ElementRef,
   MouseEventHandler,
   useCallback,
+  cloneElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { isText, noop } from '@aviato/utils'
@@ -344,8 +345,8 @@ export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   variant?: ButtonVariant
   color?: ButtonColor
   disabled?: boolean
-  leftIcon?: ReactNode
-  rightIcon?: ReactNode
+  leftIcon?: ReactElement
+  rightIcon?: ReactElement
   onClick?: MouseEventHandler<HTMLButtonElement>
   css?: StitchedCSS
 }
@@ -392,6 +393,9 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       [disabled]
     )
 
+    const LeftIcon = IconWithSize(leftIcon)
+    const RightIcon = IconWithSize(rightIcon)
+
     return (
       <StyledButton
         color={color}
@@ -401,18 +405,27 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         onClick={(event) => handleClick(event)}
         {...remainingProps}
       >
-        <Conditional test={leftIcon}>
-          <IconContainer type="start">{leftIcon}</IconContainer>
+        <Conditional test={LeftIcon}>
+          <IconContainer type="start">{LeftIcon}</IconContainer>
         </Conditional>
 
         {ChildVariant}
 
-        <Conditional test={rightIcon}>
-          <IconContainer type="end">{rightIcon}</IconContainer>
+        <Conditional test={RightIcon}>
+          <IconContainer type="end">{RightIcon}</IconContainer>
         </Conditional>
       </StyledButton>
     )
   }
 )
+
+const IconWithSize = (icon: ReactElement | null) => {
+  if (!icon) return null
+
+  cloneElement(icon, {
+    width: 16,
+    height: 16,
+  })
+}
 
 Button.displayName = 'Button'
