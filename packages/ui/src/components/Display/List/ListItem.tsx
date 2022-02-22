@@ -17,7 +17,7 @@ const StyledListItem = styled('div', {
     padding: '8px 16px',
 
     '&:hover': {
-      background: '$ActionMain',
+      background: '$ActionLight',
     },
   },
 
@@ -33,7 +33,7 @@ const StyledListItem = styled('div', {
   },
 
   '&.isHeader': {
-    background: '$ActionMain',
+    background: '$ActionLight',
     padding: '13px 16px',
     borderBottom: '1px solid $OtherDivider',
   },
@@ -46,7 +46,7 @@ const StyledListItem = styled('div', {
   },
 
   '&.isActive': {
-    background: '$ActionMainSelected',
+    background: '$ActionLightSelected',
   },
 })
 
