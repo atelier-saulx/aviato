@@ -9,12 +9,12 @@ import React, {
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
-import { useUncontrolled, useUuid } from '~/hooks'
 
+import { useUncontrolled, useUuid } from '~/hooks'
 import { classNames, styled } from '~/theme'
 import { Conditional } from '~/components/Utilities'
+import { onChange } from '~/types'
 import { InputType, InputVariant } from './types'
-import { onChange } from '~/types/events'
 
 /**
  * NOTICE
@@ -50,24 +50,24 @@ const Container = styled('div', {
 
   '&.isInvalid': {
     '&::after': {
-      border: '2px solid $ErrorOutline',
+      border: '2px solid $ErrorMainOutline',
     },
 
     '&:hover': {
       '&::after': {
-        border: '2px solid $ErrorOutline',
+        border: '2px solid $ErrorMainOutline',
       },
 
       '&.isActive': {
         '&::after': {
-          border: '2px solid $ErrorOutline',
+          border: '2px solid $ErrorMainOutline',
         },
       },
     },
 
     '&.isActive': {
       '&::after': {
-        border: '2px solid $ErrorOutline',
+        border: '2px solid $ErrorMainOutline',
       },
     },
   },
@@ -104,10 +104,10 @@ const Container = styled('div', {
         },
 
         '&:not(.isActive):not(.isDisabled)': {
-          background: '$ActionMain',
+          background: '$ActionLight',
 
           '&:hover': {
-            background: '$ActionMainHover',
+            background: '$ActionLightHover',
           },
         },
 
@@ -123,13 +123,6 @@ const Container = styled('div', {
               border: '2px solid $OtherInputBorderActive',
             },
           },
-        },
-      },
-
-      unstyled: {
-        '&.isDisabled': {
-          background: 'none',
-          border: '1px solid transparent',
         },
       },
     },

@@ -9,7 +9,7 @@ import { ComponentProps } from '@stitches/react'
 import { isText, noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
-import { onChange } from '~/types/events'
+import { onChange } from '~/types'
 import { Group } from '~/components/Layout'
 import { Text } from '~/components/Text'
 import { InputWrapper } from '~/components/Input/InputWrapper'

@@ -1,4 +1,4 @@
-export type InputVariant = 'outlined' | 'filled' | 'unstyled'
+export type InputVariant = 'outlined' | 'filled'
 
 export type InputType =
   | 'text'
