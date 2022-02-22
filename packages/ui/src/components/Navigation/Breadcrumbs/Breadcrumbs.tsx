@@ -7,21 +7,23 @@ import React, {
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 
-import { StitchedCSS, styled } from '~/theme'
-import { Text } from '~/components'
+import { styled } from '~/theme'
+import { getIconFromName, IconName } from '~/components'
 
 const StyledBreadcrumbs = styled('div', {
   display: 'flex',
+  alignItems: 'center',
 })
 
-const SeparatorCSS: StitchedCSS = {
+const StyledSeparator = styled('div', {
   marginLeft: '8px',
   marginRight: '8px',
-}
+})
 
 export interface BreadcrumbsProps
   extends ComponentProps<typeof StyledBreadcrumbs> {
   separator?: ReactNode
+  separatorIcon?: IconName
   children: ReactNode
 }
 
@@ -29,7 +31,18 @@ export const Breadcrumbs = forwardRef<
   ElementRef<typeof StyledBreadcrumbs>,
   BreadcrumbsProps
 >((properties, forwardedRef) => {
-  const { children, separator = '/', ...remainingProps } = properties
+  const { children, separator, separatorIcon, ...remainingProps } = properties
+
+  const DefaultIcon = getIconFromName('IconChevronRight')
+
+  let TargetSeparator: ReactNode = <DefaultIcon />
+
+  if (separator) {
+    TargetSeparator = separator
+  } else if (separatorIcon) {
+    const TargetIcon = getIconFromName(separatorIcon)
+    TargetSeparator = <TargetIcon />
+  }
 
   const breadcrumbs = Children.toArray(children).reduce(
     (accumulator: ReactNode[], child: any, index, array) => {
@@ -37,9 +50,9 @@ export const Breadcrumbs = forwardRef<
 
       if (index !== array.length - 1) {
         accumulator.push(
-          <Text key={`separator-${index}`} css={SeparatorCSS}>
-            {separator}
-          </Text>
+          <StyledSeparator key={`separator-${index}`}>
+            {TargetSeparator}
+          </StyledSeparator>
         )
       }
 
