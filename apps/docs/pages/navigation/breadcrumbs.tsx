@@ -1,4 +1,12 @@
-import { Column, Row, Page, Breadcrumbs, Link, Avatar } from '@aviato/ui'
+import {
+  Column,
+  Row,
+  Page,
+  Breadcrumbs,
+  Link,
+  Avatar,
+  Button,
+} from '@aviato/ui'
 
 import {
   NextTitle,
@@ -40,6 +48,22 @@ const BreadcrumbsPage = () => {
               <Link href="https://aviato.design">Aviato</Link>
               <Link href="https://aviato.design">Components</Link>
               <Link href="https://aviato.design">Breadcrumbs</Link>
+            </Breadcrumbs>
+          </Row>
+
+          <SmallSpacer />
+
+          <Row>
+            <Breadcrumbs>
+              <Button color="action" variant="ghost">
+                Aviato
+              </Button>
+              <Button color="action" variant="ghost">
+                Components
+              </Button>
+              <Button color="action" variant="ghost">
+                Breadcrumbs
+              </Button>
             </Breadcrumbs>
           </Row>
         </Column>
