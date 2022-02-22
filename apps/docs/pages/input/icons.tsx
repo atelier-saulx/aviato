@@ -1,15 +1,6 @@
-import {
-  Page,
-  styled,
-  icons,
-  Column,
-  Row,
-  Tooltip,
-  useHasLoaded,
-} from '@aviato/ui'
-import { chunk } from '@aviato/utils'
+import { Page, styled, icons, useHasLoaded, CodeSnippet } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { NextTitle, NextText } from '../../components'
 
 const GridItem = styled('div', {
   padding: 20,
@@ -17,26 +8,17 @@ const GridItem = styled('div', {
   minHeight: 20,
 })
 
-const IconsPage = () => {
-  const iconArray = Object.keys(icons)
-  const iconGroups = chunk(iconArray, 6)
+const Item = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  paddingBottom: 20,
+})
 
-  const hasLoaded = useHasLoaded()
-  if (!hasLoaded) {
-    return null
-  }
+const CustomSpacer = styled('div', {
+  marginLeft: 20,
+})
 
-  return (
-    <Page>
-      <NextTitle>Icons</NextTitle>
-
-      <NextText color="Secondary">
-        Aviato provides multiple ways to use icons in your project
-      </NextText>
-
-      <ShowcaseComponent
-        background="transparent"
-        codeBlock={`
+const CodeToDisplay = `
 import { IconPlus, icons } from '@aviato/ui'
 
 const TestComponent = () => {
@@ -52,38 +34,39 @@ const OtherTestComponent = () => {
 
   return <IconPlus />
 }
+`
 
-      `}
-      >
-        <Column
-          css={{
-            flexWrap: 'wrap',
-          }}
-        >
-          {iconGroups.map((iconGroup, groupIndex) => {
-            return (
-              <Row
-                key={groupIndex}
-                css={{
-                  flexWrap: 'wrap',
-                }}
-              >
-                {iconGroup.map((key, index) => {
-                  const Icon = icons[key]
+const IconsPage = () => {
+  const hasLoaded = useHasLoaded()
+  if (!hasLoaded) {
+    return null
+  }
 
-                  return (
-                    <GridItem key={`GridItem-${index}`}>
-                      <Tooltip label={key}>
-                        <Icon width={16} height={16} />
-                      </Tooltip>
-                    </GridItem>
-                  )
-                })}
-              </Row>
-            )
-          })}
-        </Column>
-      </ShowcaseComponent>
+  const mappedIconNames = Object.keys(icons).map((keyName, index) => {
+    const TargetIcon = icons[keyName]
+
+    return (
+      <Item key={`Icons${index}`}>
+        <TargetIcon />
+        <CustomSpacer />
+        <p>{keyName}</p>
+      </Item>
+    )
+  })
+
+  return (
+    <Page>
+      <NextTitle>Icons</NextTitle>
+
+      <NextText color="Secondary">
+        Aviato provides multiple ways to use icons in your project
+      </NextText>
+
+      <CodeSnippet language="tsx">{CodeToDisplay}</CodeSnippet>
+
+      <GridItem>
+        <>{mappedIconNames}</>
+      </GridItem>
     </Page>
   )
 }
