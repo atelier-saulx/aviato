@@ -29,6 +29,24 @@ const Divider = styled('div', {
   background: '$OtherDivider',
 })
 
+const colorArray = <T extends ButtonColor[]>(
+  array: T & ([ButtonColor] extends [T[number]] ? unknown : 'Invalid')
+) => array
+
+const buttonColors = colorArray(['primary', 'action', 'error'])
+
+const variantArray = <T extends ButtonVariant[]>(
+  array: T & ([ButtonVariant] extends [T[number]] ? unknown : 'Invalid')
+) => array
+
+const buttonVariants = variantArray([
+  'main',
+  'light',
+  'ghost',
+  'outline',
+  'outline-light',
+])
+
 /**
  * TODO: Fix SSR issue with Vector Icons!
  */
@@ -49,16 +67,6 @@ const ButtonPage = () => {
       const Icon = getIconFromName(IconString)
       return <Icon />
     }, [IconString])
-
-    const buttonColors: ButtonColor[] = ['primary', 'action', 'error']
-
-    const buttonVariants: ButtonVariant[] = [
-      'main',
-      'light',
-      'ghost',
-      'outline',
-      'outline-light',
-    ]
 
     const getButtonVariants = (color: ButtonColor) => {
       return buttonVariants.map((variant, index) => {
@@ -141,7 +149,33 @@ const ButtonPage = () => {
         a delete operation.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+import { Button, IconButton } from '@aviato/ui'
+
+<Button
+  variant={'main' | 'light' | 'ghost' | 'outline' | 'outline-light'}
+  color={'primary' | 'action' | 'error'}
+  leftIcon={<IconPlus />}
+  rightIcon={<IconCheck />}
+  onClick={() => {
+    console.log('Button clicked')
+  }}
+>
+  Lorem
+</Button>
+
+<IconButton
+  variant='main'
+  color='primary'
+  icon="IconPlus"
+  onClick={() => {
+    console.log('IconButton clicked')
+  }}
+/>
+      `}
+      >
         <ShowButtonMatrix />
       </ShowcaseComponent>
     </Page>
