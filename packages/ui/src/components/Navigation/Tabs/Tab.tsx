@@ -23,12 +23,12 @@ const Indicator = styled('div', {
   bottom: 0,
   width: '100%',
   height: '3px',
-  background: '$PrimaryMain',
+  background: '$ActionMain',
 
   variants: {
     isActive: {
       true: {
-        background: '$PrimaryMain',
+        background: '$ActionMain',
       },
       false: {
         background: 'none',
@@ -78,6 +78,8 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
         {...remainingProps}
       >
         <Button
+          color="action"
+          variant="ghost"
           leftIcon={leftIcon}
           rightIcon={rightIcon}
           disabled={disabled}
