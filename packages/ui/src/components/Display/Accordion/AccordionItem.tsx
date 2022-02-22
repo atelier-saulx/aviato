@@ -10,11 +10,13 @@ const ItemContainer = styled('div', {
   width: '100%',
   cursor: 'pointer',
   borderBottom: '1px solid $OtherDivider',
+
   '&:hover': {
     '>header': {
       background: '$ActionLightHover',
     },
   },
+
   '&:active': {
     '>header': {
       background: '$ActionLightSelected',
@@ -43,6 +45,7 @@ const Icon = styled(IconChevronDown, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+
   variants: {
     state: {
       active: {
@@ -63,9 +66,9 @@ const Body = styled(Text, {
 
 export interface AccordionItemProps {
   title: string
-  index: number
-  active: boolean
   children: ReactNode
+  active?: boolean
+  index?: number
 }
 
 export const AccordionItem: FunctionComponent<AccordionItemProps> = (
@@ -78,6 +81,7 @@ export const AccordionItem: FunctionComponent<AccordionItemProps> = (
 
   if (activeRef.current !== active) {
     activeRef.current = active
+
     if (active) {
       selected.add(index)
     } else {

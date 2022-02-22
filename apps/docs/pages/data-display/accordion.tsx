@@ -15,7 +15,25 @@ const AccordionPage = () => {
         Divide content into collapsible sections.
       </NextText>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Accordion>
+  <Accordion.Item title="Multiple Section 1" active>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Accordion.Item>
+  <Accordion.Item title="Multiple Section 2">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Accordion.Item>
+  <Accordion.Item title="Multiple Section 3">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Accordion.Item>
+</Accordion>
+      `}
+      >
         <Accordion>
           <Accordion.Item title="Multiple Section 1" active>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -32,7 +50,25 @@ const AccordionPage = () => {
         </Accordion>
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Accordion type="single">
+  <Accordion.Item title="Single Section 1" active>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Accordion.Item>
+  <Accordion.Item title="Single Section 2">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Accordion.Item>
+  <Accordion.Item title="Single Section 3">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </Accordion.Item>
+</Accordion>
+      `}
+      >
         <Accordion type="single">
           <Accordion.Item title="Single Section 1" active>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
