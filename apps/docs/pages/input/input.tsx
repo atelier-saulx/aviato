@@ -110,7 +110,7 @@ const InputPage = () => {
               variant={variant}
               leftIcon={Icon}
               rightIcon={Icon}
-              placeholder="Type something here"
+              placeholder="Disabled"
               disabled
             />
           </Row>
@@ -143,15 +143,49 @@ const InputPage = () => {
 
       <NextText color="Secondary">Capture string input from user</NextText>
 
-      <ShowcaseComponent background="transparent" padding="small">
+      <ShowcaseComponent
+        background="transparent"
+        padding="small"
+        codeBlock={`
+<Input
+  variant={variant}
+  value={inputValue}
+  invalid={isInvalid}
+  onChange={(value, payload) => {
+    console.log('Input change: ', { value, payload })
+  }}
+/>
+        `}
+      >
         <ShowInput variant="outlined" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent" padding="small">
+      <ShowcaseComponent
+        background="transparent"
+        padding="small"
+        codeBlock={`
+<Input
+  variant={variant}
+  leftIcon={Icon}
+  rightIcon={Icon}
+  placeholder="Type something here"
+/>
+      `}
+      >
         <ShowInput variant="filled" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent" padding="small">
+      <ShowcaseComponent
+        background="transparent"
+        padding="small"
+        codeBlock={`
+<Input
+  placeholder="Type something here"
+  label="This is a label"
+  description="This is a description"
+/>
+      `}
+      >
         <ShowComplexInput />
       </ShowcaseComponent>
     </Page>

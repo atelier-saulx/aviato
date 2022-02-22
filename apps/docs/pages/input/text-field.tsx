@@ -83,6 +83,12 @@ const TextFieldPage = () => {
               }}
             />
           </Row>
+
+          <BigSpacer />
+
+          <Row css={{ width: '100%' }}>
+            <TextField variant={variant} placeholder="Disabled" disabled />
+          </Row>
         </Column>
       </>
     )
@@ -112,15 +118,47 @@ const TextFieldPage = () => {
 
       <NextText color="Secondary">Capture string input from user</NextText>
 
-      <ShowcaseComponent background="transparent" padding="small">
+      <ShowcaseComponent
+        background="transparent"
+        padding="small"
+        codeBlock={`
+<TextField
+  variant={variant}
+  value={inputValue}
+  invalid={isInvalid}
+  onChange={(value, payload) => {
+    console.log('TextField change: ', { value, payload })
+  }}
+/>
+        `}
+      >
         <ShowTextField variant="outlined" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent" padding="small">
+      <ShowcaseComponent
+        background="transparent"
+        padding="small"
+        codeBlock={`
+<TextField
+  variant={variant}
+  placeholder="Type something here"
+/>
+      `}
+      >
         <ShowTextField variant="filled" />
       </ShowcaseComponent>
 
-      <ShowcaseComponent background="transparent" padding="small">
+      <ShowcaseComponent
+        background="transparent"
+        padding="small"
+        codeBlock={`
+<TextField
+  placeholder="Type something here"
+  label="This is a label"
+  description="This is a description"
+/>
+      `}
+      >
         <ShowComplexTextField />
       </ShowcaseComponent>
     </Page>
