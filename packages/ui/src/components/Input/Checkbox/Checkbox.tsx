@@ -15,7 +15,7 @@ import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { Column } from '~/components/Layout'
 import { IconCheck, IconMinus } from '~/components/Icons'
-import { onChange } from '~/types/events'
+import { onChange } from '~/types'
 
 const Container = styled('div', {
   position: 'relative',

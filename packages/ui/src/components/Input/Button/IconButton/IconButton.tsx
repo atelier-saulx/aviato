@@ -5,7 +5,7 @@ import { IconName, getIconFromName } from '~/components/Icons'
 import {
   Button,
   ButtonVariant,
-  ButtonMode,
+  ButtonColor,
   StyledButton,
 } from '~/components/Input/Button/Button'
 
@@ -16,8 +16,8 @@ const IconButtonStyles: StitchedCSS = {
 }
 
 export interface IconButtonProps {
-  mode?: ButtonMode
   variant?: ButtonVariant
+  color?: ButtonColor
   disabled?: boolean
   icon?: IconName
   onClick?: MouseEventHandler<HTMLButtonElement>
@@ -29,8 +29,8 @@ export const IconButton = forwardRef<
   IconButtonProps
 >((properties, forwardedRef) => {
   const {
-    mode = 'primary',
-    variant = 'filled',
+    color = 'primary',
+    variant = 'main',
     disabled = false,
     icon = 'IconPlus',
     ...remainingProps
@@ -40,7 +40,7 @@ export const IconButton = forwardRef<
 
   return (
     <Button
-      mode={mode}
+      color={color}
       variant={variant}
       disabled={disabled}
       css={IconButtonStyles}

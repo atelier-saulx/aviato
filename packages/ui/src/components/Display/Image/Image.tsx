@@ -7,7 +7,7 @@ import React, {
   ReactNode,
 } from 'react'
 
-import { Conditional, IconPlaceholder, Text } from '~/components'
+import { Conditional, IconModel, Text } from '~/components'
 import { useImagePreloader, useMergedRef } from '~/hooks'
 import { styled } from '~/theme'
 
@@ -91,7 +91,7 @@ export const Image = forwardRef<ElementRef<typeof Figure>, ImageProps>(
       placeholder
     )
 
-    const placeholderIcon = <IconPlaceholder />
+    const placeholderIcon = <IconModel />
 
     return (
       <Figure ref={forwardedRef} {...remainingProps}>

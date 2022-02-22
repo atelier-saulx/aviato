@@ -24,7 +24,7 @@ const IconContainer = styled('div', {
 })
 
 const ExpandIndicator = styled(IconChevronDown, {
-  color: '$ActionMainContrast',
+  color: '$TextPrimary',
 
   variants: {
     state: {
@@ -49,11 +49,15 @@ const StyledMenuItem = styled('button', {
   color: '$TextPrimary',
 
   '&:hover': {
-    background: '$ActionMainHover',
+    background: '$ActionLightHover',
   },
 
-  '&:active, &.isActive': {
-    color: '$TextPrimary',
+  '&:active': {
+    color: '$ActionLightContrast',
+    background: '$ActionLightSelected',
+  },
+  '&.isActive': {
+    color: '$ActionLightContrast',
     background: '$PrimaryLightSelected',
   },
 

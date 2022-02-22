@@ -5,7 +5,7 @@ import { noop, filterChildrenByType } from '@aviato/utils'
 import { useUncontrolled, useUuid } from '~/hooks'
 import { styled } from '~/theme'
 import { Group } from '~/components/Layout'
-import { onChange } from '~/types/events'
+import { onChange } from '~/types'
 import { Radio } from './Radio'
 import { InputWrapper } from '../InputWrapper'
 

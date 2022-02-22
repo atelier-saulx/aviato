@@ -28,7 +28,8 @@ export const ToggleThemeButton = forwardRef<
         gutter={8}
       >
         <IconButton
-          mode="ghost"
+          color="action"
+          variant="outline-light"
           icon={activeTheme === 'light' ? 'IconDark' : 'IconLight'}
           onClick={toggleTheme}
         />
