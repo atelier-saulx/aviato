@@ -29,7 +29,7 @@ export const ToggleThemeButton = forwardRef<
       >
         <IconButton
           color="action"
-          variant="main"
+          variant="outline-light"
           icon={activeTheme === 'light' ? 'IconDark' : 'IconLight'}
           onClick={toggleTheme}
         />
