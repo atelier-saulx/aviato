@@ -18,6 +18,8 @@ const AccordionPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { Accordion } from '@aviato/ui'
+
 <Accordion>
   <Accordion.Item title="Multiple Section 1" active>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -53,6 +55,8 @@ const AccordionPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
+import { Accordion } from '@aviato/ui'
+
 <Accordion type="single">
   <Accordion.Item title="Single Section 1" active>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
