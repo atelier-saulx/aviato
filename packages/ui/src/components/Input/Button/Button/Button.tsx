@@ -332,14 +332,19 @@ export const StyledButton = styled('button', {
   },
 })
 
-export type ButtonVariant =
-  | 'main'
-  | 'light'
-  | 'ghost'
-  | 'outline'
-  | 'outline-light'
+export const buttonVariants = [
+  'main',
+  'light',
+  'ghost',
+  'outline',
+  'outline-light',
+] as const
 
-export type ButtonColor = 'primary' | 'action' | 'error'
+export type ButtonVariant = typeof buttonVariants[number]
+
+export const buttonColors = ['primary', 'action', 'error'] as const
+
+export type ButtonColor = typeof buttonColors[number]
 
 export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   variant?: ButtonVariant

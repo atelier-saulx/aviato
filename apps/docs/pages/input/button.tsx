@@ -4,8 +4,6 @@ import {
   Page,
   Button,
   Column,
-  ButtonColor,
-  ButtonVariant,
   useHasLoaded,
   Group,
   Row,
@@ -14,6 +12,10 @@ import {
   getRandomIconName,
   IconButton,
   getIconFromName,
+  buttonColors,
+  ButtonColor,
+  buttonVariants,
+  ButtonVariant,
 } from '@aviato/ui'
 
 import {
@@ -28,24 +30,6 @@ const Divider = styled('div', {
   height: 1,
   background: '$OtherDivider',
 })
-
-const colorArray = <T extends ButtonColor[]>(
-  array: T & ([ButtonColor] extends [T[number]] ? unknown : 'Invalid')
-) => array
-
-const buttonColors = colorArray(['primary', 'action', 'error'])
-
-const variantArray = <T extends ButtonVariant[]>(
-  array: T & ([ButtonVariant] extends [T[number]] ? unknown : 'Invalid')
-) => array
-
-const buttonVariants = variantArray([
-  'main',
-  'light',
-  'ghost',
-  'outline',
-  'outline-light',
-])
 
 /**
  * TODO: Fix SSR issue with Vector Icons!
@@ -69,7 +53,7 @@ const ButtonPage = () => {
     }, [IconString])
 
     const getButtonVariants = (color: ButtonColor) => {
-      return buttonVariants.map((variant, index) => {
+      return buttonVariants.map((variant: ButtonVariant, index) => {
         return (
           <Group
             direction="row"
