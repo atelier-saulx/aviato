@@ -12,12 +12,12 @@ const ItemContainer = styled('div', {
   borderBottom: '1px solid $OtherDivider',
   '&:hover': {
     '>header': {
-      background: '$ActionMainHover',
+      background: '$ActionLightHover',
     },
   },
   '&:active': {
     '>header': {
-      background: '$ActionMainSelected',
+      background: '$ActionLightSelected',
     },
   },
 })
@@ -29,7 +29,7 @@ const ItemHeader = styled('header', {
   variants: {
     state: {
       active: {
-        backgroundColor: '$ActionMain',
+        backgroundColor: '$ActionLight',
       },
       inactive: {
         backgroundColor: null,
