@@ -82,7 +82,9 @@ const Confirm = ({ children = 'OK', ...props }) => (
 )
 
 const Cancel = ({ children = 'Cancel', ...props }) => (
-  <Button {...props}>{children}</Button>
+  <Button color="action" variant="outline-light" {...props}>
+    {children}
+  </Button>
 )
 
 export interface DialogProps extends ComponentProps<typeof Container> {
