@@ -6,10 +6,10 @@ import React, {
   ReactElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Button } from '~/components/Input'
-import { noop } from '@aviato/utils'
 
 const StyledTab = styled('div', {
   position: 'relative',
