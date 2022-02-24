@@ -43,7 +43,9 @@ const BadgePage = () => {
 
         return (
           <div key={`BadgeExample${index}`}>
-            {variant}
+            <div>Type: {type}</div>
+            <div>Variant: {variant}</div>
+
             <Badge type={type} variant={variant} size={size}>
               {mappedSize}
             </Badge>

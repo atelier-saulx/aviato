@@ -64,8 +64,11 @@ const Container = styled('span', {
 
   variants: {
     type: {
+      drag: {
+        marginRight: 12,
+      },
       start: {
-        marginRight: 10,
+        marginRight: 16,
       },
       end: {
         marginLeft: 'auto',
@@ -131,7 +134,7 @@ export const ListItem = forwardRef<
   return (
     <StyledListItem className={classes} ref={forwardedRef} {...remainingProps}>
       <Conditional test={isDraggable}>
-        <Container type="start">{dragIcon}</Container>
+        <Container type="drag">{dragIcon}</Container>
       </Conditional>
 
       <Conditional test={leftArea}>

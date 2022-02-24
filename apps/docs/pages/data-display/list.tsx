@@ -142,7 +142,21 @@ const ListPage = () => {
               >
                 <ListSection
                   top="Title"
-                  bottom={<Badge variant="light">String</Badge>}
+                  bottom={
+                    <>
+                      <Group space="xxs">
+                        <Badge type="action" variant="light" size="small">
+                          String
+                        </Badge>
+                        <Badge type="action" variant="light" size="small">
+                          Required
+                        </Badge>
+                        <Badge type="action" variant="light" size="small">
+                          Title
+                        </Badge>
+                      </Group>
+                    </>
+                  }
                 />
               </ListItem>
               <ListItem
