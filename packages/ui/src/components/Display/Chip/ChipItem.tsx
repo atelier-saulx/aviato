@@ -7,7 +7,7 @@ import { Badge, BadgeType, BadgeVariant } from '../Badge'
 const Container = styled('div', {})
 
 const IconContainer = styled('div', {
-  color: '$PrimaryMain',
+  color: '$TextPrimary',
 })
 
 export type ChipType = 'light' | 'outline'
@@ -49,7 +49,7 @@ export const ChipItem = forwardRef<ElementRef<typeof Badge>, ChipItemProps>(
       if (isSelected) {
         return chipType === 'light' ? 'light' : 'outline'
       } else {
-        return chipType === 'light' ? 'filled' : 'outline'
+        return chipType === 'light' ? 'light' : 'outline'
       }
     }
 
