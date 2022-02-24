@@ -24,16 +24,19 @@ const StyledList = styled('div', {
         borderRadius: 4,
         border: '1px solid $OtherDivider',
       },
+
+      floating: {},
     },
   },
 })
 
-export type ListType = 'simple' | 'complex'
+export type ListType = 'simple' | 'complex' | 'floating'
 
 export interface ListProps extends ComponentProps<typeof StyledList> {
   type?: ListType
   header?: ListItemProps
   footer?: ListItemProps
+  isDraggable?: boolean
 }
 
 export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
@@ -43,6 +46,7 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
       header,
       footer,
       type = header || footer ? 'complex' : 'simple',
+      isDraggable = false,
       ...remainingProps
     } = properties
 
@@ -55,10 +59,13 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
           key={`ListItem-${index}`}
           type={type}
           isFirstItem={index === 0}
+          isDraggable={isDraggable}
           isLastItem={index === listItemChildren.length - 1}
         />
       )
     })
+
+    const spacing = type === 'floating' ? 'sm' : 'none'
 
     return (
       <StyledList type={type} ref={forwardedRef} {...remainingProps}>
@@ -66,7 +73,7 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
           <ListItem {...header} type="header" />
         </Conditional>
 
-        <Group role="list" direction="column" space="none">
+        <Group role="list" direction="column" space={spacing}>
           {listItems}
         </Group>
 

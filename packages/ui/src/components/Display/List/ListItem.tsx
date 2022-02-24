@@ -32,6 +32,13 @@ const StyledListItem = styled('div', {
     '&.isLastItem': {},
   },
 
+  '&.isFloating': {
+    background: '$Background1dp',
+    padding: '13px 16px',
+    border: '1px solid $OtherDivider',
+    borderRadius: 4,
+  },
+
   '&.isHeader': {
     background: '$ActionLight',
     padding: '13px 16px',
@@ -57,8 +64,11 @@ const Container = styled('span', {
 
   variants: {
     type: {
+      drag: {
+        marginRight: 12,
+      },
       start: {
-        marginRight: 10,
+        marginRight: 16,
       },
       end: {
         marginLeft: 'auto',
@@ -68,14 +78,19 @@ const Container = styled('span', {
   },
 })
 
-export type ListItemType = 'simple' | 'complex' | 'header' | 'footer'
+export type ListItemType =
+  | 'simple'
+  | 'complex'
+  | 'header'
+  | 'footer'
+  | 'floating'
 
 export interface ListItemProps extends ComponentProps<typeof StyledListItem> {
   type?: ListItemType
   leftArea?: ReactNode
   rightArea?: ReactNode
   isActive?: boolean
-  showDragIcon?: boolean
+  isDraggable?: boolean
   isFirstItem?: boolean
   isLastItem?: boolean
   children?: ReactNode
@@ -88,7 +103,7 @@ export const ListItem = forwardRef<
   const {
     type = 'simple',
     isActive = false,
-    showDragIcon = false,
+    isDraggable = false,
     isFirstItem = false,
     isLastItem = false,
     leftArea,
@@ -101,10 +116,12 @@ export const ListItem = forwardRef<
   const isComplex = type === 'complex'
   const isHeader = type === 'header'
   const isFooter = type === 'footer'
+  const isFloating = type === 'floating'
 
   const classes = classNames({
     isSimple,
     isComplex,
+    isFloating,
     isHeader,
     isFooter,
     isActive,
@@ -116,8 +133,8 @@ export const ListItem = forwardRef<
 
   return (
     <StyledListItem className={classes} ref={forwardedRef} {...remainingProps}>
-      <Conditional test={showDragIcon}>
-        <Container type="start">{dragIcon}</Container>
+      <Conditional test={isDraggable}>
+        <Container type="drag">{dragIcon}</Container>
       </Conditional>
 
       <Conditional test={leftArea}>

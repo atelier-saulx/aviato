@@ -9,12 +9,33 @@ const StyledListIcon = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: 4,
+  color: '$TextPrimary',
 
   variants: {
     background: {
-      default: {
-        background: '$PrimaryLight',
-        color: '$PrimaryMain',
+      purple: {
+        background: '$AccentPurpleLight',
+      },
+      yellow: {
+        background: '$AccentYellowLight',
+      },
+      pink: {
+        background: '$AccentPinkLight',
+      },
+      sailorBlue: {
+        background: '$AccentSailorblueLight',
+      },
+      blue: {
+        background: '$AccentBabyblueLight',
+      },
+      orange: {
+        background: '$AccentOrangeLight',
+      },
+      teal: {
+        background: '$AccentTealLight',
+      },
+      red: {
+        background: '$AccentRedLight',
       },
     },
 
@@ -33,7 +54,16 @@ const StyledListIcon = styled('div', {
 })
 
 export type ListIconSize = 'default' | 'large'
-export type ListIconBackground = 'default'
+
+export type ListIconBackground =
+  | 'purple'
+  | 'yellow'
+  | 'pink'
+  | 'sailorBlue'
+  | 'blue'
+  | 'orange'
+  | 'teal'
+  | 'red'
 
 export interface ListIconProps extends ComponentProps<typeof StyledListIcon> {
   icon: IconName
@@ -47,7 +77,7 @@ export const ListIcon = forwardRef<
 >((properties, forwardedRef) => {
   const {
     icon,
-    background = 'default',
+    background = 'blue',
     size = 'default',
     ...remainingProps
   } = properties

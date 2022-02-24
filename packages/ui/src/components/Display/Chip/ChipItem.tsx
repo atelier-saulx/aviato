@@ -7,10 +7,10 @@ import { Badge, BadgeType, BadgeVariant } from '../Badge'
 const Container = styled('div', {})
 
 const IconContainer = styled('div', {
-  color: '$PrimaryMain',
+  color: '$TextPrimary',
 })
 
-export type ChipType = 'light' | 'outlined'
+export type ChipType = 'light' | 'outline'
 
 export interface ChipItemProps extends ComponentProps<typeof Container> {
   value: string
@@ -47,9 +47,9 @@ export const ChipItem = forwardRef<ElementRef<typeof Badge>, ChipItemProps>(
       isSelected: boolean
     ): BadgeVariant {
       if (isSelected) {
-        return chipType === 'light' ? 'light' : 'outlined'
+        return chipType === 'light' ? 'light' : 'outline'
       } else {
-        return chipType === 'light' ? 'filled' : 'outlined'
+        return chipType === 'light' ? 'light' : 'outline'
       }
     }
 

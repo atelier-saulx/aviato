@@ -19,7 +19,7 @@ const BadgePage = () => {
   const ShowBadgeMatrix = () => {
     const badgeTypes: BadgeType[] = ['primary', 'action']
 
-    const badgeVariants: BadgeVariant[] = ['light', 'filled', 'outlined']
+    const badgeVariants: BadgeVariant[] = ['light', 'filled', 'outline']
 
     const badgeSizes: BadgeSize[] = [
       'extrasmall',
@@ -39,7 +39,7 @@ const BadgePage = () => {
           extralarge: 'XL',
         }
 
-        const mappedSize = `${mappedSizes[size]} SIZE`
+        const mappedSize = mappedSizes[size]
 
         return (
           <Badge
@@ -48,7 +48,7 @@ const BadgePage = () => {
             size={size}
             key={`BadgeExample${index}`}
           >
-            {mappedSize}
+            {mappedSize} size
           </Badge>
         )
       })
@@ -57,7 +57,7 @@ const BadgePage = () => {
     const getBadgeVariants = (type: BadgeType) => {
       return badgeVariants.map((variant, index) => {
         return (
-          <Group key={`BadgeVariant-${index}`} direction="row">
+          <Group key={`BadgeVariant-${index}`} direction="column">
             {getBadgeSizes(type, variant)}
           </Group>
         )
@@ -69,7 +69,7 @@ const BadgePage = () => {
         return (
           <Group
             key={`BadgeType-${index}`}
-            direction="column"
+            direction="row"
             css={{ paddingBottom: 20 }}
           >
             {getBadgeVariants(type)}

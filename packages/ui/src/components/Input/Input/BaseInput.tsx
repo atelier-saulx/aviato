@@ -74,7 +74,7 @@ const Container = styled('div', {
 
   variants: {
     variant: {
-      outlined: {
+      outline: {
         '&::after': {
           border: '1px solid $OtherInputBorderDefault',
         },
@@ -233,7 +233,7 @@ export const BaseInput = forwardRef<
     component = 'input',
     leftIcon = null,
     rightIcon = null,
-    variant = 'outlined',
+    variant = 'outline',
     disabled: isDisabled = false,
     invalid: isInvalid = false,
     onChange = noop,
