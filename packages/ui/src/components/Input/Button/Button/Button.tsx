@@ -395,7 +395,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       (event) => {
         return disabled ? noop() : onClick(event)
       },
-      [disabled]
+      [disabled, onClick]
     )
 
     const LeftIcon = IconWithSize(leftIcon)
