@@ -159,23 +159,32 @@ const ListPage = () => {
                   }
                 />
               </ListItem>
+
               <ListItem
-                leftArea={<ListIcon icon="IconModel" size="large" />}
+                leftArea={
+                  <ListIcon
+                    icon="IconEdit"
+                    size="large"
+                    background="sailorBlue"
+                  />
+                }
                 rightArea={<IconMore />}
               >
-                Name
-              </ListItem>
-              <ListItem
-                leftArea={<ListIcon icon="IconModel" size="large" />}
-                rightArea={<IconMore />}
-              >
-                Name
-              </ListItem>
-              <ListItem
-                leftArea={<ListIcon icon="IconLink" size="large" />}
-                rightArea={<IconMore />}
-              >
-                Name
+                <ListSection
+                  top="Content"
+                  bottom={
+                    <>
+                      <Group space="xxs">
+                        <Badge type="action" variant="light" size="small">
+                          Rich text
+                        </Badge>
+                        <Badge type="action" variant="light" size="small">
+                          Required
+                        </Badge>
+                      </Group>
+                    </>
+                  }
+                />
               </ListItem>
             </List>
           </Row>
