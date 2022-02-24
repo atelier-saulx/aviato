@@ -29,8 +29,8 @@ const ActionBadgeCSS: StitchedCSS = {
   },
 
   '&.isFilled': {
-    background: '$ActionLight',
-    color: '$ActionLightContrast',
+    background: '$ActionMain',
+    color: '$ActionMainContrast',
   },
 
   '&.isOutlined': {
