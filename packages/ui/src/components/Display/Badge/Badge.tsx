@@ -16,7 +16,7 @@ const PrimaryBadgeCSS: StitchedCSS = {
     color: '$PrimaryMainContrast',
   },
 
-  '&.isOutlined': {
+  '&.isOutline': {
     color: '$PrimaryMain',
     outline: '1px solid $PrimaryLightOutline',
   },
@@ -33,7 +33,7 @@ const ActionBadgeCSS: StitchedCSS = {
     color: '$ActionMainContrast',
   },
 
-  '&.isOutlined': {
+  '&.isOutline': {
     background: 'transparent',
     outline: '1px solid $ActionLightOutline',
     color: '$ActionLightContrast',
@@ -126,7 +126,7 @@ const Container = styled('span', {
 })
 
 export type BadgeType = 'primary' | 'action'
-export type BadgeVariant = 'light' | 'filled' | 'outlined'
+export type BadgeVariant = 'light' | 'filled' | 'outline'
 export type BadgeSize = BaseSize
 
 export interface BadgeProps extends ComponentProps<typeof StyledBadge> {
@@ -156,12 +156,12 @@ export const Badge = forwardRef<ElementRef<typeof StyledBadge>, BadgeProps>(
 
     const isLight = variant === 'light'
     const isFilled = variant === 'filled'
-    const isOutlined = variant === 'outlined'
+    const isOutline = variant === 'outline'
 
     const classes = classNames({
       isLight,
       isFilled,
-      isOutlined,
+      isOutline,
       fullWidth,
       overflow,
     })

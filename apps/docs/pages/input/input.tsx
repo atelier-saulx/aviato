@@ -157,7 +157,7 @@ const InputPage = () => {
 />
         `}
       >
-        <ShowInput variant="outlined" />
+        <ShowInput variant="outline" />
       </ShowcaseComponent>
 
       <ShowcaseComponent

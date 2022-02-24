@@ -132,7 +132,7 @@ const TextFieldPage = () => {
 />
         `}
       >
-        <ShowTextField variant="outlined" />
+        <ShowTextField variant="outline" />
       </ShowcaseComponent>
 
       <ShowcaseComponent

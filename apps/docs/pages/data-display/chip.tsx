@@ -46,7 +46,7 @@ const ChipPage = () => {
 
           <BigSpacer />
 
-          <NextText color="Secondary">Outlined</NextText>
+          <NextText color="Secondary">Outline</NextText>
           <Row>
             <Chip type="outline">
               <ChipItem value="option-1">Option 1</ChipItem>

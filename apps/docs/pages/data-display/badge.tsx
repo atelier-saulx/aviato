@@ -19,7 +19,7 @@ const BadgePage = () => {
   const ShowBadgeMatrix = () => {
     const badgeTypes: BadgeType[] = ['primary', 'action']
 
-    const badgeVariants: BadgeVariant[] = ['light', 'filled', 'outlined']
+    const badgeVariants: BadgeVariant[] = ['light', 'filled', 'outline']
 
     const badgeSizes: BadgeSize[] = [
       'extrasmall',
