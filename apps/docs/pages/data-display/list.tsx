@@ -12,6 +12,7 @@ import {
   IconPlus,
   ListIcon,
   ListSection,
+  Badge,
 } from '@aviato/ui'
 
 import {
@@ -138,7 +139,10 @@ const ListPage = () => {
                 }
                 rightArea={<IconMore />}
               >
-                Name
+                <ListSection
+                  top="Title"
+                  bottom={<Badge variant="light">String</Badge>}
+                />
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
