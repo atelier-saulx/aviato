@@ -3,7 +3,6 @@ import React, {
   ReactElement,
   ElementRef,
   MouseEventHandler,
-  useCallback,
   cloneElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
@@ -391,13 +390,6 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       children
     )
 
-    const handleClick = useCallback(
-      (event) => {
-        return disabled ? noop() : onClick(event)
-      },
-      [disabled, onClick]
-    )
-
     const LeftIcon = IconWithSize(leftIcon)
     const RightIcon = IconWithSize(rightIcon)
 
@@ -407,7 +399,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         disabled={disabled}
         className={classes}
         ref={forwardedRef}
-        onClick={(event) => handleClick(event)}
+        onClick={(event) => (disabled ? noop() : onClick(event))}
         {...remainingProps}
       >
         <Conditional test={LeftIcon}>
