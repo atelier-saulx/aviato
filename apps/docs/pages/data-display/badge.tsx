@@ -42,14 +42,14 @@ const BadgePage = () => {
         const mappedSize = mappedSizes[size]
 
         return (
-          <div key={`BadgeExample${index}`}>
-            <div>Type: {type}</div>
-            <div>Variant: {variant}</div>
-
-            <Badge type={type} variant={variant} size={size}>
-              {mappedSize}
-            </Badge>
-          </div>
+          <Badge
+            type={type}
+            variant={variant}
+            size={size}
+            key={`BadgeExample${index}`}
+          >
+            {mappedSize} size
+          </Badge>
         )
       })
     }

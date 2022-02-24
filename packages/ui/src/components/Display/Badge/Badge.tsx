@@ -18,7 +18,7 @@ const PrimaryBadgeCSS: StitchedCSS = {
 
   '&.isOutlined': {
     color: '$PrimaryMain',
-    outline: '1px solid $PrimaryOutline',
+    outline: '1px solid $PrimaryLightOutline',
   },
 }
 
@@ -35,7 +35,7 @@ const ActionBadgeCSS: StitchedCSS = {
 
   '&.isOutlined': {
     background: 'transparent',
-    outline: '1px solid $ActionOutline',
+    outline: '1px solid $ActionLightOutline',
     color: '$ActionLightContrast',
   },
 }
