@@ -1,4 +1,15 @@
-import { Page, styled, icons, useHasLoaded, CodeSnippet } from '@aviato/ui'
+import {
+  Page,
+  styled,
+  icons,
+  useHasLoaded,
+  CodeSnippet,
+  Text,
+  Row,
+  Column,
+  Tooltip,
+} from '@aviato/ui'
+import { chunk } from '@aviato/utils'
 
 import { NextTitle, NextText } from '../../components'
 
@@ -12,6 +23,7 @@ const Item = styled('div', {
   display: 'flex',
   alignItems: 'center',
   paddingBottom: 20,
+  color: '$TextPrimary',
 })
 
 const CustomSpacer = styled('div', {
@@ -49,10 +61,46 @@ const IconsPage = () => {
       <Item key={`Icons${index}`}>
         <TargetIcon />
         <CustomSpacer />
-        <p>{keyName}</p>
+        <Text>{keyName}</Text>
       </Item>
     )
   })
+
+  const IconView = () => {
+    const iconArray = Object.keys(icons)
+    const iconGroups = chunk(iconArray, 6)
+
+    return (
+      <Column
+        css={{
+          flexWrap: 'wrap',
+        }}
+      >
+        {iconGroups.map((iconGroup, groupIndex) => {
+          return (
+            <Row
+              key={groupIndex}
+              css={{
+                flexWrap: 'wrap',
+              }}
+            >
+              {iconGroup.map((key, index) => {
+                const Icon = icons[key]
+
+                return (
+                  <GridItem key={`GridItem-${index}`}>
+                    <Tooltip label={key}>
+                      <Icon />
+                    </Tooltip>
+                  </GridItem>
+                )
+              })}
+            </Row>
+          )
+        })}
+      </Column>
+    )
+  }
 
   return (
     <Page>
@@ -61,6 +109,8 @@ const IconsPage = () => {
       <NextText color="Secondary">
         Aviato provides multiple ways to use icons in your project
       </NextText>
+
+      <IconView />
 
       <CodeSnippet language="tsx">{CodeToDisplay}</CodeSnippet>
 

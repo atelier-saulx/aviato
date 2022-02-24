@@ -13,7 +13,7 @@ const HeaderDiv = styled('div', {
   padding: '8px',
   paddingBottom: '20px',
   cursor: 'pointer',
-  color: '$Primary',
+  color: '$TextPrimary',
 })
 
 const SideMenuPage = () => {

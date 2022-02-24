@@ -12,7 +12,7 @@ const LogoContainer = styled('div', {
   justifyContent: 'flex-start',
   alignItems: 'flex-start',
   cursor: 'pointer',
-  color: '$Primary',
+  color: '$TextPrimary',
   display: 'none',
 
   '@breakpoint1': {
