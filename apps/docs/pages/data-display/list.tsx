@@ -62,7 +62,6 @@ const ListPage = () => {
             <List
               header={{
                 leftArea: <ListIcon icon="IconModel" />,
-                rightArea: <IconMore />,
                 children: 'Header Title',
               }}
               footer={{
@@ -106,29 +105,53 @@ const ListPage = () => {
       <>
         <Column>
           <Row css={{ minWidth: 600 }}>
-            <List type="complex">
+            <List type="complex" isDraggable>
+              <ListItem leftArea={<ListIcon icon="IconModel" size="large" />}>
+                Name
+              </ListItem>
+              <ListItem leftArea={<ListIcon icon="IconModel" size="large" />}>
+                Name
+              </ListItem>
+              <ListItem leftArea={<ListIcon icon="IconModel" size="large" />}>
+                Name
+              </ListItem>
+              <ListItem leftArea={<ListIcon icon="IconLink" size="large" />}>
+                Name
+              </ListItem>
+            </List>
+          </Row>
+        </Column>
+      </>
+    )
+  }
+
+  const ShowFloatingList = () => {
+    return (
+      <>
+        <Column>
+          <Row css={{ minWidth: 600 }}>
+            <List type="floating" isDraggable>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
                 rightArea={<IconMore />}
-                showDragIcon
               >
                 Name
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
-                showDragIcon
+                rightArea={<IconMore />}
               >
                 Name
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconModel" size="large" />}
-                showDragIcon
+                rightArea={<IconMore />}
               >
                 Name
               </ListItem>
               <ListItem
                 leftArea={<ListIcon icon="IconLink" size="large" />}
-                showDragIcon
+                rightArea={<IconMore />}
               >
                 Name
               </ListItem>
@@ -157,6 +180,10 @@ const ListPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowLargeList />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowFloatingList />
       </ShowcaseComponent>
     </Page>
   )
