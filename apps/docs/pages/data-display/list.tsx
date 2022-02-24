@@ -13,6 +13,7 @@ import {
   ListIcon,
   ListSection,
   Badge,
+  Group,
 } from '@aviato/ui'
 
 import {
@@ -170,53 +171,100 @@ const ListPage = () => {
   }
 
   const ShowPrimitives = () => {
+    const leftSide = (
+      <Row css={{ minWidth: 250 }}>
+        <List type="floating">
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconText" size="large" background="purple" />
+            }
+          >
+            <ListSection top="String" bottom="Text, word, etc." />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconMarkdown" size="large" background="purple" />
+            }
+          >
+            <ListSection top="Markdown" bottom="Markdown editor" />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconEdit" size="large" background="purple" />
+            }
+          >
+            <ListSection top="Rich text" bottom="Editor with formatting" />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon
+                icon="IconAttachment"
+                size="large"
+                background="orange"
+              />
+            }
+          >
+            <ListSection top="Asset" bottom="Supports any file type" />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconJson" size="large" background="red" />
+            }
+          >
+            <ListSection top="JSON Editor" bottom="JSON structures" />
+          </ListItem>
+        </List>
+      </Row>
+    )
+
+    const rightSide = (
+      <Row css={{ minWidth: 250 }}>
+        <List type="floating">
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconInteger" size="large" background="yellow" />
+            }
+          >
+            <ListSection top="Number" bottom="Amount, ID, etc." />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconFloat" size="large" background="pink" />
+            }
+          >
+            <ListSection top="Float" bottom="Price, percentage, etc." />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconBoolean" size="large" background="blue" />
+            }
+          >
+            <ListSection top="Boolean" bottom="True or false" />
+          </ListItem>
+
+          <ListItem
+            leftArea={
+              <ListIcon icon="IconReference" size="large" background="teal" />
+            }
+          >
+            <ListSection top="Reference" bottom="Data relations" />
+          </ListItem>
+        </List>
+      </Row>
+    )
+
     return (
       <>
-        <Column>
-          <Row css={{ minWidth: 300 }}>
-            <List type="floating">
-              <ListItem
-                leftArea={
-                  <ListIcon icon="IconText" size="large" background="purple" />
-                }
-              >
-                <ListSection top="String" bottom="Text, word, etc." />
-              </ListItem>
-
-              <ListItem
-                leftArea={
-                  <ListIcon
-                    icon="IconMarkdown"
-                    size="large"
-                    background="purple"
-                  />
-                }
-              >
-                <ListSection top="Markdown" bottom="Markdown editor" />
-              </ListItem>
-
-              <ListItem
-                leftArea={
-                  <ListIcon
-                    icon="IconInteger"
-                    size="large"
-                    background="yellow"
-                  />
-                }
-              >
-                <ListSection top="Number" bottom="Amount, ID, etc." />
-              </ListItem>
-
-              <ListItem
-                leftArea={
-                  <ListIcon icon="IconFloat" size="large" background="pink" />
-                }
-              >
-                <ListSection top="Float" bottom="Price, percentage, etc." />
-              </ListItem>
-            </List>
-          </Row>
-        </Column>
+        <Group align="start">
+          {leftSide}
+          {rightSide}
+        </Group>
       </>
     )
   }
