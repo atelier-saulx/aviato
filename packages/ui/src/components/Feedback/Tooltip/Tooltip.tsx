@@ -92,7 +92,7 @@ export interface TooltipProps extends SharedPopperProps {
   /**
    * Whether to render the target element in a Portal
    */
-  withinPortal?: boolean
+  disablePortal?: boolean
 }
 
 export const Tooltip = forwardRef<
@@ -113,6 +113,7 @@ export const Tooltip = forwardRef<
     width = 'auto',
     wrapLines = false,
     allowPointerEvents = false,
+    disablePortal = false,
     children,
     ...remainingProps
   } = properties
@@ -168,6 +169,7 @@ export const Tooltip = forwardRef<
         position={position}
         placement={placement}
         gutter={gutter}
+        disablePortal={disablePortal}
       >
         <TooltipContainer
           ref={tooltipRef}
