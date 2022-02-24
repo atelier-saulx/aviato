@@ -11,6 +11,7 @@ import {
   IconMore,
   IconPlus,
   ListIcon,
+  ListSection,
 } from '@aviato/ui'
 
 import {
@@ -132,7 +133,9 @@ const ListPage = () => {
           <Row css={{ minWidth: 600 }}>
             <List type="floating" isDraggable>
               <ListItem
-                leftArea={<ListIcon icon="IconModel" size="large" />}
+                leftArea={
+                  <ListIcon icon="IconText" size="large" background="purple" />
+                }
                 rightArea={<IconMore />}
               >
                 Name
@@ -162,6 +165,58 @@ const ListPage = () => {
     )
   }
 
+  const ShowPrimitives = () => {
+    return (
+      <>
+        <Column>
+          <Row css={{ minWidth: 300 }}>
+            <List type="floating">
+              <ListItem
+                leftArea={
+                  <ListIcon icon="IconText" size="large" background="purple" />
+                }
+              >
+                <ListSection top="String" bottom="Text, word, etc." />
+              </ListItem>
+
+              <ListItem
+                leftArea={
+                  <ListIcon
+                    icon="IconMarkdown"
+                    size="large"
+                    background="purple"
+                  />
+                }
+              >
+                <ListSection top="Markdown" bottom="Markdown editor" />
+              </ListItem>
+
+              <ListItem
+                leftArea={
+                  <ListIcon
+                    icon="IconInteger"
+                    size="large"
+                    background="yellow"
+                  />
+                }
+              >
+                <ListSection top="Number" bottom="Amount, ID, etc." />
+              </ListItem>
+
+              <ListItem
+                leftArea={
+                  <ListIcon icon="IconFloat" size="large" background="pink" />
+                }
+              >
+                <ListSection top="Float" bottom="Price, percentage, etc." />
+              </ListItem>
+            </List>
+          </Row>
+        </Column>
+      </>
+    )
+  }
+
   return (
     <Page>
       <NextTitle>List</NextTitle>
@@ -169,6 +224,14 @@ const ListPage = () => {
       <NextText color="Secondary">
         Lists are continuous, vertical indexes of text or images.
       </NextText>
+
+      <ShowcaseComponent background="transparent">
+        <ShowFloatingList />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowPrimitives />
+      </ShowcaseComponent>
 
       <ShowcaseComponent>
         <ShowSimpleList />
@@ -180,10 +243,6 @@ const ListPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowLargeList />
-      </ShowcaseComponent>
-
-      <ShowcaseComponent background="transparent">
-        <ShowFloatingList />
       </ShowcaseComponent>
     </Page>
   )
