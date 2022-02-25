@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementRef, useCallback } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
@@ -56,11 +56,11 @@ export const NativeSelect = forwardRef<
 
   const isInvalid = Boolean(error || invalid)
 
-  const handleChange = useCallback((value, { event }) => {
+  const handleChange = (value, { event }) => {
     const index = formattedData.findIndex((item) => item.value === value)
 
     onChange(value, { event, value, index })
-  }, [])
+  }
 
   return (
     <InputWrapper
@@ -74,7 +74,7 @@ export const NativeSelect = forwardRef<
         id={uuid}
         invalid={isInvalid}
         ref={forwardedRef}
-        onChange={handleChange}
+        onChange={(value, { event }) => handleChange(value, { event })}
         {...remainingProps}
       >
         {options}

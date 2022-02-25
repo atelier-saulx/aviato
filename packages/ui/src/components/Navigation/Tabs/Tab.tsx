@@ -1,12 +1,10 @@
 import React, {
   forwardRef,
   ElementRef,
-  useCallback,
   MouseEventHandler,
   ReactElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Button } from '~/components/Input'
@@ -54,20 +52,8 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
       leftIcon = null,
       rightIcon = null,
       disabled = false,
-      onClick = noop,
       ...remainingProps
     } = properties
-
-    const handleClick = useCallback(
-      (event) => {
-        if (disabled) {
-          return noop()
-        }
-
-        return onClick(event)
-      },
-      [disabled]
-    )
 
     return (
       <StyledTab
@@ -83,7 +69,6 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
           leftIcon={leftIcon}
           rightIcon={rightIcon}
           disabled={disabled}
-          onClick={(event) => handleClick(event)}
         >
           {children}
         </Button>

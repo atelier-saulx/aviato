@@ -1,4 +1,4 @@
-import React, { ElementRef, forwardRef, useCallback } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { IconButton } from '../Input/Button/IconButton'
@@ -18,10 +18,10 @@ export const ToggleMenuButton = forwardRef<
 
   const { isMenuOpen, setIsMenuOpen } = useMenuContext()
 
-  const handleMenuButtonClick = useCallback(() => {
+  const handleMenuButtonClick = () => {
     const newState = !isMenuOpen
     setIsMenuOpen(newState)
-  }, [isMenuOpen])
+  }
 
   return (
     <StyledToggleMenuButton

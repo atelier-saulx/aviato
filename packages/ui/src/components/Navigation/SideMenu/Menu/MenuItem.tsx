@@ -1,10 +1,4 @@
-import React, {
-  ElementRef,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import React, { ElementRef, forwardRef, useEffect, useState } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
@@ -122,7 +116,7 @@ export const MenuItem = forwardRef<
     }
   }, [isOpen])
 
-  const toggle = useCallback(() => {
+  const toggle = () => {
     if (!isCollapsible) {
       return onClick()
     }
@@ -132,7 +126,7 @@ export const MenuItem = forwardRef<
     } else {
       onClick()
     }
-  }, [isCollapsible, isOpenState, hasChildren])
+  }
 
   const classes = classNames({
     isActive,

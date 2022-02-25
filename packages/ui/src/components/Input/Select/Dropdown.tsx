@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react'
+import React, { FunctionComponent } from 'react'
 import { noop } from '@aviato/utils'
 
 import { onChange } from '~/types'
@@ -30,13 +30,13 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
     zIndex = getZIndex('Popover'),
   } = properties
 
-  const handleSelect = useCallback((event, { value, index, disabled }) => {
+  const handleSelect = (event, { value, index, disabled }) => {
     if (disabled) {
       return
     }
 
     onChange(value, { event, value, index })
-  }, [])
+  }
 
   const MenuItems = items.map(({ value, label, disabled }, index) => (
     <ContextItem
