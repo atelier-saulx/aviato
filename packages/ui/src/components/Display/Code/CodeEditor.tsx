@@ -78,7 +78,7 @@ export const CodeEditor = forwardRef<
           label={clipboard.copied ? copiedLabel : copyLabel}
           position="left"
           placement="center"
-          gutter={8}
+          padding={8}
         >
           <CopyButton
             wasCopied={clipboard.copied}

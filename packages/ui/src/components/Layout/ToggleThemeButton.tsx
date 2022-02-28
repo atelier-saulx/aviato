@@ -25,7 +25,6 @@ export const ToggleThemeButton = forwardRef<
         label={activeTheme === 'light' ? 'Dark mode' : 'Light mode'}
         position="bottom"
         placement="start"
-        gutter={8}
       >
         <IconButton
           color="action"

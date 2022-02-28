@@ -4,7 +4,7 @@ import { noop } from '@aviato/utils'
 import { onChange } from '~/types'
 import { SelectItem } from './types'
 import { ContextMenu, ContextItem } from '~/components/Overlay'
-import { Popper } from '~/components'
+import { Popover } from '~/components'
 import { getZIndex } from '~/theme'
 
 export interface OnDropdownChange extends onChange {
@@ -50,7 +50,7 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
   ))
 
   return (
-    <Popper
+    <Popover
       referenceElement={referenceElement}
       mounted={mounted}
       position="bottom"
@@ -64,6 +64,6 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
       ]}
     >
       <ContextMenu id={`${uuid}-items`}>{MenuItems}</ContextMenu>
-    </Popper>
+    </Popover>
   )
 }
