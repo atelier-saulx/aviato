@@ -56,12 +56,6 @@ export const Dropdown: FunctionComponent<DropdownMenuProps> = (properties) => {
       position="bottom"
       placement="start"
       zIndex={zIndex}
-      modifiers={[
-        {
-          name: 'preventOverflow',
-          enabled: false,
-        },
-      ]}
     >
       <ContextMenu id={`${uuid}-items`}>{MenuItems}</ContextMenu>
     </Popper>

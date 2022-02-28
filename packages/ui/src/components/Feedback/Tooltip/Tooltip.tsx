@@ -103,7 +103,6 @@ export const Tooltip = forwardRef<
     label,
     position = 'bottom',
     placement = 'center',
-    gutter = 5,
     delay = 0,
     opened,
     disabled = false,
@@ -113,7 +112,6 @@ export const Tooltip = forwardRef<
     width = 'auto',
     wrapLines = false,
     allowPointerEvents = false,
-    disablePortal = false,
     children,
     ...remainingProps
   } = properties
@@ -168,8 +166,6 @@ export const Tooltip = forwardRef<
         mounted={isVisible}
         position={position}
         placement={placement}
-        gutter={gutter}
-        disablePortal={disablePortal}
       >
         <TooltipContainer
           ref={tooltipRef}
