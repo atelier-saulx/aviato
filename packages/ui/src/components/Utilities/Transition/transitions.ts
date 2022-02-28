@@ -26,7 +26,7 @@ export type TransitionName =
   | 'pop-bottom-left'
   | 'pop-bottom-right'
 
-export type TransitionPrimitive = TransitionName | TransitionStyles
+export type TransitionPrimitive = TransitionName | TransitionStyles | 'none'
 
 const popIn = {
   in: { opacity: 1, transform: 'scale(1)' },

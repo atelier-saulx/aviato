@@ -10,7 +10,7 @@ import { isText, noop } from '@aviato/utils'
 
 import { mergeRefs } from '~/hooks'
 import { styled } from '~/theme'
-import { Text, Popper, SharedPopperProps } from '~/components'
+import { Text, Popover, SharedPopoverProps } from '~/components'
 
 const StyledTooltip = styled('div', {
   position: 'relative',
@@ -28,7 +28,7 @@ const TextContainer = styled('div', {
   color: '$TextPrimary',
 })
 
-export interface TooltipProps extends SharedPopperProps {
+export interface TooltipProps extends SharedPopoverProps {
   /**
    * Text or component to show when label is active
    */
@@ -161,7 +161,7 @@ export const Tooltip = forwardRef<
       ref={mergeRefs(setReferenceElement, forwardedRef)}
       {...remainingProps}
     >
-      <Popper
+      <Popover
         referenceElement={referenceElement}
         mounted={isVisible}
         position={position}
@@ -177,7 +177,7 @@ export const Tooltip = forwardRef<
         >
           {label}
         </TooltipContainer>
-      </Popper>
+      </Popover>
 
       <TextContainer>{ChildVariant}</TextContainer>
     </StyledTooltip>

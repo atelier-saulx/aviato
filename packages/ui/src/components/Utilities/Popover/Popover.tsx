@@ -5,23 +5,25 @@ import { noop } from '@aviato/utils'
 
 import { BasePlacement, BasePosition, Placement } from './types'
 import { flipPlacement, flipPosition } from './utils'
-import { getZIndex, styled } from '~/theme'
-import { Transition, TransitionPrimitive } from '../Transition'
+import { getZIndex } from '~/theme'
+import {
+  Transition,
+  TransitionPrimitive,
+} from '~/components/Utilities/Transition'
 
-const PopperElement = styled('div', {})
-
-export interface SharedPopperProps {
+export interface SharedPopoverProps {
   position?: BasePosition
   placement?: BasePlacement
   role?: AriaRole
   padding?: number
-  transition?: TransitionPrimitive | 'none'
+  transition?: TransitionPrimitive
   transitionDuration?: number
   exitTransitionDuration?: number
   transitionTimingFunction?: string
 }
 
-export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
+export interface PopoverProps<T extends HTMLElement>
+  extends SharedPopoverProps {
   referenceElement: T
   mounted: boolean
   zIndex?: number
@@ -30,7 +32,7 @@ export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
   children: ReactNode
 }
 
-export function Popper<T extends HTMLElement = HTMLDivElement>({
+export function Popover<T extends HTMLElement = HTMLDivElement>({
   referenceElement,
   position = 'top',
   placement = 'center',
@@ -45,7 +47,7 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   transitionTimingFunction,
   onTransitionEnd = noop,
   children,
-}: PopperProps<T>) {
+}: PopoverProps<T>) {
   const internalPlacement = flipPlacement(placement, 'ltr')
   const internalPosition = flipPosition(position, 'ltr')
 
@@ -98,9 +100,9 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
             unmountTippyInstance = instance.unmount
           }}
           render={(attributes) => (
-            <PopperElement tabIndex={-1} {...attributes}>
+            <div tabIndex={-1} {...attributes}>
               <div style={transitionStyles}>{children}</div>
-            </PopperElement>
+            </div>
           )}
         />
       )}
@@ -108,4 +110,4 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   )
 }
 
-Popper.displayName = 'Popper'
+Popover.displayName = 'Popper'
