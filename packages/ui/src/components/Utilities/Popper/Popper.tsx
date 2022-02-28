@@ -42,7 +42,7 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
       ? internalPosition
       : `${internalPosition}-${internalPlacement}`
 
-  const baseModifiers = [
+  const popperModifiers = [
     {
       name: 'offset',
       options: {
@@ -53,7 +53,7 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   ]
 
   const popperOptions = {
-    modifiers: baseModifiers,
+    modifiers: popperModifiers,
   }
 
   return (
@@ -64,8 +64,8 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
       zIndex={zIndex}
       role={role}
       popperOptions={popperOptions}
-      render={(attrs) => (
-        <PopperElement tabIndex={-1} style={{ zIndex }} {...attrs}>
+      render={(attributes) => (
+        <PopperElement tabIndex={-1} {...attributes}>
           {children}
         </PopperElement>
       )}
