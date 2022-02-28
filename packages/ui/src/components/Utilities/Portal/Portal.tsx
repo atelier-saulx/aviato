@@ -77,7 +77,7 @@ export interface PortalProps {
   /**
    * Children - any React node
    */
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function Portal({

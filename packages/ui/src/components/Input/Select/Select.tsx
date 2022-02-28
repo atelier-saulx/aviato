@@ -4,6 +4,7 @@ import React, {
   ElementRef,
   useState,
   useEffect,
+  KeyboardEvent,
 } from 'react'
 
 import { useMergedRef, useUuid, useUncontrolled } from '~/hooks'
@@ -154,9 +155,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       ? filteredData.findIndex((element) => element.value === _value)
       : 0
 
-    const handleInputKeydown = (
-      event: React.KeyboardEvent<HTMLInputElement>
-    ) => {
+    const handleInputKeydown = (event: KeyboardEvent<HTMLInputElement>) => {
       const { code } = event?.nativeEvent ?? {}
 
       switch (code) {

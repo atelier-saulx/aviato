@@ -1,4 +1,4 @@
-import React, { forwardRef, ElementRef } from 'react'
+import React, { forwardRef, ElementRef, MouseEvent, TouchEvent } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
@@ -60,9 +60,7 @@ const Label = styled('div', {
   },
 })
 
-type ThumbEvent =
-  | React.MouseEvent<HTMLDivElement>
-  | React.TouchEvent<HTMLDivElement>
+type ThumbEvent = MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>
 
 export interface ThumbProps extends ComponentProps<typeof StyledThumb> {
   label: string

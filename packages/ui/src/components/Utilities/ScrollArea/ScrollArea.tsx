@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import * as RadixScrollArea from '@radix-ui/react-scroll-area'
 import { noop } from '@aviato/utils'
@@ -67,7 +67,7 @@ export interface ScrollAreaProps
   offsetScrollbars?: boolean
 
   /** Get viewport ref */
-  viewportRef?: React.ForwardedRef<HTMLDivElement>
+  viewportRef?: ForwardedRef<HTMLDivElement>
 
   /** Subscribe to scroll position changes */
   onScrollPositionChange?(position: { x: number; y: number }): void
