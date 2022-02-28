@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  ElementRef,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import React, { forwardRef, ElementRef, useEffect, useState } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { isText, noop } from '@aviato/utils'
 
@@ -181,23 +175,20 @@ export const Switch = forwardRef<ElementRef<typeof StyledSwitch>, SwitchProps>(
       setIsChecked(checked)
     }, [checked, disabled])
 
-    const handleChange = useCallback(
-      (event) => {
-        if (isDisabled) {
-          return noop()
-        }
+    const handleChange = (event) => {
+      if (isDisabled) {
+        return noop()
+      }
 
-        const isSwitchChecked = !isChecked
-        setIsChecked(isSwitchChecked)
+      const isSwitchChecked = !isChecked
+      setIsChecked(isSwitchChecked)
 
-        onChange(isSwitchChecked, {
-          isChecked: isSwitchChecked,
-          isDisabled,
-          event,
-        })
-      },
-      [isChecked]
-    )
+      onChange(isSwitchChecked, {
+        isChecked: isSwitchChecked,
+        isDisabled,
+        event,
+      })
+    }
 
     const SwitchVariant = isText(text) ? (
       <Group>

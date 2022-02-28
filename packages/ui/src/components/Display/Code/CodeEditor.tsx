@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, ElementRef, useCallback } from 'react'
+import React, { useState, forwardRef, ElementRef } from 'react'
 import { LiveEditor } from 'react-live'
 import { noop } from '@aviato/utils'
 
@@ -66,10 +66,10 @@ export const CodeEditor = forwardRef<
 
   const [activeCode, setActiveCode] = useState(trimmedCode)
 
-  const handleChange = useCallback((value: string) => {
+  const handleChange = (value: string) => {
     setActiveCode(value)
     onChange(value)
-  }, [])
+  }
 
   return (
     <StyledEditor ref={forwardedRef} {...remainingProps}>

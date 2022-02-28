@@ -1,6 +1,5 @@
 import React, {
   ElementRef,
-  useCallback,
   BaseSyntheticEvent,
   ElementType,
   ReactNode,
@@ -261,12 +260,12 @@ export const BaseInput = forwardRef<
     isInvalid,
   })
 
-  const handleChange = useCallback((event: BaseSyntheticEvent) => {
+  const handleChange = (event: BaseSyntheticEvent) => {
     const { value } = event?.target ?? {}
 
     setInputValue(value)
     onChange(value, { value, event })
-  }, [])
+  }
 
   return (
     <Container variant={variant} className={classes}>

@@ -3,7 +3,6 @@ import React, {
   ElementRef,
   forwardRef,
   FunctionComponent,
-  useCallback,
   useEffect,
   useState,
 } from 'react'
@@ -179,29 +178,26 @@ export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
       setIsChecked(checked)
     }, [checked, disabled])
 
-    const handleChange = useCallback(
-      (event: BaseSyntheticEvent) => {
-        if (isDisabled) {
-          return noop()
-        }
+    const handleChange = (event: BaseSyntheticEvent) => {
+      if (isDisabled) {
+        return noop()
+      }
 
-        const isCheckboxChecked = !isChecked
-        setIsChecked(isCheckboxChecked)
+      const isCheckboxChecked = !isChecked
+      setIsChecked(isCheckboxChecked)
 
-        const checkboxState = isCheckboxChecked
-          ? CHECKBOX_STATES.Checked
-          : CHECKBOX_STATES.Unchecked
+      const checkboxState = isCheckboxChecked
+        ? CHECKBOX_STATES.Checked
+        : CHECKBOX_STATES.Unchecked
 
-        onChange(isCheckboxChecked, {
-          isChecked: isCheckboxChecked,
-          checkboxState: checkboxState,
-          isDisabled,
-          index,
-          event,
-        })
-      },
-      [isChecked]
-    )
+      onChange(isCheckboxChecked, {
+        isChecked: isCheckboxChecked,
+        checkboxState: checkboxState,
+        isDisabled,
+        index,
+        event,
+      })
+    }
 
     const CheckboxComponent: FunctionComponent = (properties) => (
       <Column>
