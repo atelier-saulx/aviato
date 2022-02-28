@@ -1,10 +1,12 @@
 import React, { AriaRole, ReactNode } from 'react'
 import Tippy from '@tippyjs/react/headless'
 import { StrictModifiers } from '@popperjs/core'
+import { noop } from '@aviato/utils'
 
 import { BasePlacement, BasePosition, Placement } from './types'
 import { flipPlacement, flipPosition } from './utils'
 import { getZIndex, styled } from '~/theme'
+import { Transition, TransitionPrimitive } from '../Transition'
 
 const PopperElement = styled('div', {})
 
@@ -13,6 +15,10 @@ export interface SharedPopperProps {
   placement?: BasePlacement
   role?: AriaRole
   padding?: number
+  transition?: TransitionPrimitive | 'none'
+  transitionDuration?: number
+  exitTransitionDuration?: number
+  transitionTimingFunction?: string
 }
 
 export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
@@ -20,6 +26,7 @@ export interface PopperProps<T extends HTMLElement> extends SharedPopperProps {
   mounted: boolean
   zIndex?: number
   modifiers?: StrictModifiers[]
+  onTransitionEnd?(): void
   children: ReactNode
 }
 
@@ -32,6 +39,11 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
   role = 'tooltip',
   padding = 8,
   modifiers = [],
+  transition = 'none',
+  transitionDuration = 0,
+  exitTransitionDuration = transitionDuration,
+  transitionTimingFunction,
+  onTransitionEnd = noop,
   children,
 }: PopperProps<T>) {
   const internalPlacement = flipPlacement(placement, 'ltr')
@@ -56,20 +68,43 @@ export function Popper<T extends HTMLElement = HTMLDivElement>({
     modifiers: popperModifiers,
   }
 
+  /**
+   * Unmount Tippy instance after animation ends
+   */
+  let unmountTippyInstance = () => {}
+
   return (
-    <Tippy
-      reference={referenceElement}
-      placement={initialPlacement}
-      visible={mounted}
-      zIndex={zIndex}
-      role={role}
-      popperOptions={popperOptions}
-      render={(attributes) => (
-        <PopperElement tabIndex={-1} {...attributes}>
-          {children}
-        </PopperElement>
+    <Transition
+      mounted={mounted && !!referenceElement}
+      duration={transitionDuration}
+      exitDuration={exitTransitionDuration}
+      transition={transition}
+      timingFunction={transitionTimingFunction}
+      onExited={() => {
+        unmountTippyInstance()
+        onTransitionEnd()
+      }}
+    >
+      {(transitionStyles) => (
+        <Tippy
+          reference={referenceElement}
+          placement={initialPlacement}
+          visible={mounted}
+          zIndex={zIndex}
+          role={role}
+          popperOptions={popperOptions}
+          animation
+          onHide={(instance) => {
+            unmountTippyInstance = instance.unmount
+          }}
+          render={(attributes) => (
+            <PopperElement tabIndex={-1} {...attributes}>
+              <div style={transitionStyles}>{children}</div>
+            </PopperElement>
+          )}
+        />
       )}
-    />
+    </Transition>
   )
 }
 

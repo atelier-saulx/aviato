@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react'
 import { TransitionPrimitive, transitions } from './transitions'
 
 const transitionStatuses = {
@@ -18,8 +19,8 @@ export function getTransitionStyles({
   transition: TransitionPrimitive
   state: keyof typeof transitionStatuses
   duration: number
-  timingFunction: React.CSSProperties['transitionTimingFunction']
-}): React.CSSProperties {
+  timingFunction: CSSProperties['transitionTimingFunction']
+}): CSSProperties {
   const shared = {
     transitionDuration: `${duration}ms`,
     transitionTimingFunction: timingFunction,
