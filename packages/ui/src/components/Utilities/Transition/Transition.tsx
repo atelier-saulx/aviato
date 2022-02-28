@@ -4,7 +4,7 @@ import { TransitionPrimitive } from './transitions'
 import { useTransition } from '~/hooks'
 
 export interface TransitionProps {
-  transition: TransitionPrimitive | 'none'
+  transition: TransitionPrimitive
   duration?: number
   exitDuration?: number
   timingFunction?: string
@@ -48,7 +48,7 @@ export function Transition({
     <>
       {children(
         getTransitionStyles({
-          transition: transition as TransitionPrimitive,
+          transition,
           duration: transitionDuration,
           state: transitionStatus,
           timingFunction: transitionTimingFunction,

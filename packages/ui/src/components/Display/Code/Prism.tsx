@@ -78,6 +78,7 @@ export const Prism = forwardRef<ElementRef<typeof StyledPrism>, PrismProps>(
             label={clipboard.copied ? copiedLabel : copyLabel}
             position="left"
             placement="center"
+            padding={8}
           >
             <CopyButton
               wasCopied={clipboard.copied}
