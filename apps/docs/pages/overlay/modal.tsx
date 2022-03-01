@@ -1,14 +1,19 @@
-import { Column, Row, Page } from '@aviato/ui'
+import { useState } from 'react'
+import { Page, Modal, Button } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const ModalPage = () => {
   const ShowModal = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
       <>
-        <Column>
-          <Row>Modal</Row>
-        </Column>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          Booyah!
+        </Modal>
+
+        <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
       </>
     )
   }
