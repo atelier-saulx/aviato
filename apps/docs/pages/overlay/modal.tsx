@@ -2,14 +2,16 @@ import { useState } from 'react'
 import {
   Page,
   Modal,
-  ModalElement,
   Button,
   Input,
   Group,
   Text,
+  ModalElement,
+  ModalButton,
 } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { log } from '@aviato/utils'
 
 const ModalPage = () => {
   const ModalContent = () => {
@@ -33,12 +35,29 @@ const ModalPage = () => {
     )
   }
 
+  const modalButtons: () => ModalButton[] = () => [
+    {
+      text: 'Primary',
+      type: 'primary',
+      onClick: () => log.global.debug('Primary'),
+    },
+    {
+      text: 'Secondary',
+      type: 'outline',
+      onClick: () => log.global.debug('Secondary'),
+    },
+  ]
+
   const ShowModal = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
       <>
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          buttons={modalButtons()}
+        >
           <ModalContent />
         </Modal>
 
@@ -49,7 +68,7 @@ const ModalPage = () => {
 
   const ShowModalElement = () => {
     return (
-      <ModalElement>
+      <ModalElement buttons={modalButtons()}>
         <ModalContent />
       </ModalElement>
     )

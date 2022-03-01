@@ -6,6 +6,7 @@ import { getZIndex, styled } from '~/theme'
 import { GroupedTransition, Portal, TransitionPrimitive } from '~/components'
 import { useFocusReturn, useFocusTrap, useScrollLock } from '~/hooks'
 import { ModalElement } from './ModalElement'
+import { ModalButton } from '.'
 
 type CaptureEvent = React.KeyboardEvent<HTMLDivElement>
 
@@ -45,6 +46,7 @@ const StyledModal = styled('div', {})
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
   onClose(): void
+  buttons?: ModalButton[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   zIndex?: number
@@ -67,6 +69,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       transitionDuration = 300,
       zIndex = getZIndex('Modal'),
       target,
+      buttons = [],
       ...remainingProps
     } = properties
 
@@ -131,6 +134,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
               >
                 <ModalElement
                   ref={forwardedRef}
+                  buttons={buttons}
                   onMouseDown={(event) => event.stopPropagation()}
                   role="dialog"
                   tabIndex={-1}
