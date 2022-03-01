@@ -31,15 +31,18 @@ function visible(element: HTMLElement) {
 
 function getElementTabIndex(element: HTMLElement) {
   let tabIndex = element.getAttribute('tabindex')
+
   if (tabIndex === null) {
     tabIndex = undefined
   }
+
   return parseInt(tabIndex, 10)
 }
 
 export function focusable(element: HTMLElement) {
   const nodeName = element.nodeName.toLowerCase()
   const isTabIndexNotNaN = !Number.isNaN(getElementTabIndex(element))
+
   const results =
     (TABBABLE_NODES.test(nodeName) && !(element as any).disabled) ||
     (element instanceof HTMLAnchorElement

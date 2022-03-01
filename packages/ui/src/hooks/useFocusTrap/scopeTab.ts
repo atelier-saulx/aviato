@@ -6,6 +6,7 @@ export function scopeTab(node: HTMLElement, event: KeyboardEvent) {
     event.preventDefault()
     return
   }
+
   const finalTabbable = tabbable[event.shiftKey ? 0 : tabbable.length - 1]
   const leavingFinalTabbable =
     finalTabbable === document.activeElement || node === document.activeElement
