@@ -1,4 +1,4 @@
-import React from 'react'
+import { RefObject } from 'react'
 import { useDimensions } from '../useDimensions'
 import { Rect } from '@aviato/utils'
 
@@ -9,7 +9,7 @@ import { Rect } from '@aviato/utils'
  * @param shouldObserve - if `true`, resize and scroll observers will be turned on
  */
 export function useElementRect(
-  ref: React.RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement>,
   shouldObserve: boolean = false,
   preciseNumbers: boolean = false
 ): Rect {

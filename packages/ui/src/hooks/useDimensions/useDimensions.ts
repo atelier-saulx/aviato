@@ -1,4 +1,4 @@
-import React from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { useSafeLayoutEffect } from '../useSafeLayoutEffect'
 import { BoxModel, getBox, defaultBox, off, on } from '@aviato/utils'
 
@@ -9,11 +9,11 @@ import { BoxModel, getBox, defaultBox, off, on } from '@aviato/utils'
  * @param shouldObserve - if `true`, resize and scroll observers will be turned on
  */
 export function useDimensions(
-  ref: React.RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement>,
   shouldObserve: boolean = false
 ): BoxModel {
-  const [dimensions, setDimensions] = React.useState<BoxModel>(defaultBox)
-  const rafId = React.useRef<number>()
+  const [dimensions, setDimensions] = useState<BoxModel>(defaultBox)
+  const rafId = useRef<number>()
 
   useSafeLayoutEffect(() => {
     if (!ref.current) return undefined

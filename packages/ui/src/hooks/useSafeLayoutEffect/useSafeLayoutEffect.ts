@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { isBrowser } from '@aviato/utils'
 
 /**
@@ -7,8 +7,6 @@ import { isBrowser } from '@aviato/utils'
  *
  * Mantine calls this 'useIsomorphicEffect', hence the double export.
  */
-export const useSafeLayoutEffect = isBrowser
-  ? React.useLayoutEffect
-  : React.useEffect
+export const useSafeLayoutEffect = isBrowser ? useLayoutEffect : useEffect
 
 export const useIsomorphicEffect = useSafeLayoutEffect

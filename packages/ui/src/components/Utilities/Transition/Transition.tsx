@@ -57,3 +57,5 @@ export function Transition({
     </>
   )
 }
+
+Transition.displayName = 'Transition'
