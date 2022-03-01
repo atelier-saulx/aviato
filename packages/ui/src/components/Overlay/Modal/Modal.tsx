@@ -5,6 +5,7 @@ import { noop } from '@aviato/utils'
 import { getZIndex, styled } from '~/theme'
 import { GroupedTransition, Portal, TransitionPrimitive } from '~/components'
 import { useFocusReturn, useFocusTrap, useScrollLock } from '~/hooks'
+import { ModalElement } from './ModalElement'
 
 type CaptureEvent = React.KeyboardEvent<HTMLDivElement>
 
@@ -39,28 +40,11 @@ const Backdrop = styled('div', {
   zIndex: 0,
 })
 
-const StyledModal = styled('div', {
-  position: 'relative',
-  minWidth: '600px',
-  background: '$Background1dp',
-  zIndex: 5,
-})
-
-const ContentArea = styled('div', {
-  padding: '24px',
-})
-
-const ButtonArea = styled('div', {})
-
-export type ModalButton = {
-  label: string
-  onClose: () => {}
-}
+const StyledModal = styled('div', {})
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
   onClose(): void
-  buttons?: ModalButton[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   zIndex?: number
@@ -145,7 +129,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
                 onMouseDown={() => closeOnClickOutside && onClose()}
                 onKeyDownCapture={onKeydownCapture}
               >
-                <StyledModal
+                <ModalElement
                   ref={forwardedRef}
                   onMouseDown={(event) => event.stopPropagation()}
                   role="dialog"
@@ -155,10 +139,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
                   }}
                   {...remainingProps}
                 >
-                  <ContentArea>{children}</ContentArea>
-
-                  <ButtonArea />
-                </StyledModal>
+                  {children}
+                </ModalElement>
               </Inner>
 
               <Backdrop style={transitionStyles.overlay} />
