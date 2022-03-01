@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  ElementRef,
-  useEffect,
-  ComponentPropsWithoutRef,
-} from 'react'
+import React, { forwardRef, ElementRef, useEffect } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
@@ -75,115 +70,104 @@ export interface ModalProps extends ComponentProps<typeof StyledModal> {
   target?: HTMLElement | string
 }
 
-export const ModalElement = forwardRef<
-  ElementRef<typeof StyledModal>,
-  ModalProps
->((properties, forwardedRef) => {
-  const {
-    children,
-    isOpen,
-    onClose = noop,
-    noFocusTrap = false,
-    closeOnEscape = true,
-    closeOnClickOutside = true,
-    transition = 'pop',
-    transitionDuration = 300,
-    ...remainingProps
-  } = properties
+export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
+  (properties, forwardedRef) => {
+    const {
+      children,
+      isOpen,
+      onClose = noop,
+      noFocusTrap = false,
+      closeOnEscape = true,
+      closeOnClickOutside = true,
+      transition = 'pop',
+      transitionDuration = 300,
+      zIndex = getZIndex('Modal'),
+      target,
+      ...remainingProps
+    } = properties
 
-  const focusTrapRef = useFocusTrap(!noFocusTrap && isOpen)
+    const focusTrapRef = useFocusTrap(!noFocusTrap && isOpen)
 
-  const [, lockScroll] = useScrollLock()
+    const [, lockScroll] = useScrollLock()
 
-  useFocusReturn({ isOpen, transitionDuration })
+    useFocusReturn({ isOpen, transitionDuration })
 
-  const closeOnEscapePress = (event: KeyboardEvent) => {
-    if (noFocusTrap && event.code === 'Escape' && closeOnEscape) {
-      onClose()
-    }
-  }
-
-  const onKeydownCapture = (event: CaptureEvent) => {
-    const stopPropagationAttr = (event.target as any)?.getAttribute(
-      'data-aviato-stop-propagation'
-    )
-    const shouldTrigger = stopPropagationAttr !== 'true'
-
-    shouldTrigger &&
-      event.nativeEvent.code === 'Escape' &&
-      closeOnEscape &&
-      onClose()
-  }
-
-  useEffect(() => {
-    if (noFocusTrap) {
-      window.addEventListener('keydown', closeOnEscapePress)
-
-      return () => {
-        window.removeEventListener('keydown', closeOnEscapePress)
+    const closeOnEscapePress = (event: KeyboardEvent) => {
+      if (noFocusTrap && event.code === 'Escape' && closeOnEscape) {
+        onClose()
       }
     }
-  }, [noFocusTrap])
 
-  return (
-    <GroupedTransition
-      onExited={() => lockScroll(false)}
-      onEntered={() => lockScroll(true)}
-      mounted={isOpen}
-      transitions={{
-        modal: {
-          duration: transitionDuration,
-          transition,
-        },
-        overlay: {
-          duration: transitionDuration / 2,
-          transition: 'fade',
-          timingFunction: 'ease',
-        },
-      }}
-    >
-      {(transitionStyles) => (
-        <Root>
-          <Inner
-            ref={focusTrapRef}
-            onMouseDown={() => closeOnClickOutside && onClose()}
-            onKeyDownCapture={onKeydownCapture}
-          >
-            <StyledModal
-              ref={forwardedRef}
-              onMouseDown={(event) => event.stopPropagation()}
-              role="dialog"
-              tabIndex={-1}
-              style={{
-                ...transitionStyles.modal,
-              }}
-              {...remainingProps}
-            >
-              <ContentArea>{children}</ContentArea>
+    const onKeydownCapture = (event: CaptureEvent) => {
+      const stopPropagationAttr = (event.target as any)?.getAttribute(
+        'data-aviato-stop-propagation'
+      )
+      const shouldTrigger = stopPropagationAttr !== 'true'
 
-              <ButtonArea />
-            </StyledModal>
-          </Inner>
+      shouldTrigger &&
+        event.nativeEvent.code === 'Escape' &&
+        closeOnEscape &&
+        onClose()
+    }
 
-          <Backdrop style={transitionStyles.overlay} />
-        </Root>
-      )}
-    </GroupedTransition>
-  )
-})
+    useEffect(() => {
+      if (noFocusTrap) {
+        window.addEventListener('keydown', closeOnEscapePress)
 
-ModalElement.displayName = 'ModalElement'
+        return () => {
+          window.removeEventListener('keydown', closeOnEscapePress)
+        }
+      }
+    }, [noFocusTrap])
 
-export function Modal({
-  zIndex = getZIndex('Modal'),
-  target,
-  ...properties
-}: ComponentPropsWithoutRef<typeof ModalElement>) {
-  return (
-    <Portal zIndex={zIndex} target={target}>
-      <ModalElement {...properties} />
-    </Portal>
-  )
-}
+    return (
+      <Portal zIndex={zIndex} target={target}>
+        <GroupedTransition
+          onExited={() => lockScroll(false)}
+          onEntered={() => lockScroll(true)}
+          mounted={isOpen}
+          transitions={{
+            modal: {
+              duration: transitionDuration,
+              transition,
+            },
+            overlay: {
+              duration: transitionDuration / 2,
+              transition: 'fade',
+              timingFunction: 'ease',
+            },
+          }}
+        >
+          {(transitionStyles) => (
+            <Root>
+              <Inner
+                ref={focusTrapRef}
+                onMouseDown={() => closeOnClickOutside && onClose()}
+                onKeyDownCapture={onKeydownCapture}
+              >
+                <StyledModal
+                  ref={forwardedRef}
+                  onMouseDown={(event) => event.stopPropagation()}
+                  role="dialog"
+                  tabIndex={-1}
+                  style={{
+                    ...transitionStyles.modal,
+                  }}
+                  {...remainingProps}
+                >
+                  <ContentArea>{children}</ContentArea>
+
+                  <ButtonArea />
+                </StyledModal>
+              </Inner>
+
+              <Backdrop style={transitionStyles.overlay} />
+            </Root>
+          )}
+        </GroupedTransition>
+      </Portal>
+    )
+  }
+)
 
 Modal.displayName = 'Modal'
