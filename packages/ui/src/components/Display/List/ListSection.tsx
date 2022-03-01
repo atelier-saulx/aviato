@@ -51,7 +51,7 @@ export const ListSection = forwardRef<
 
   return (
     <StyledListSection ref={forwardedRef} {...remainingProps}>
-      <Group direction="column" space="xxs">
+      <Group direction="horizontal" space="xxs">
         <Container>{TopChild}</Container>
         <Container>{BottomChild}</Container>
       </Group>

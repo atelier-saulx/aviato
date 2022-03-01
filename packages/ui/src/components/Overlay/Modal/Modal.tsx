@@ -21,6 +21,19 @@ const Root = styled('div', {
   bottom: 0,
 })
 
+const Inner = styled('div', {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: 4,
+  overflowY: 'auto',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+})
+
 const Backdrop = styled('div', {
   backgroundColor: '$OtherOverlay',
   position: 'absolute',
@@ -34,12 +47,25 @@ const Backdrop = styled('div', {
 const StyledModal = styled('div', {
   position: 'relative',
   minWidth: '600px',
+  background: '$Background1dp',
   zIndex: 5,
 })
+
+const ContentArea = styled('div', {
+  padding: '24px',
+})
+
+const ButtonArea = styled('div', {})
+
+export type ModalButton = {
+  label: string
+  onClose: () => {}
+}
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
   onClose(): void
+  buttons?: ModalButton[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   zIndex?: number
@@ -118,7 +144,7 @@ export const ModalElement = forwardRef<
     >
       {(transitionStyles) => (
         <Root>
-          <div
+          <Inner
             ref={focusTrapRef}
             onMouseDown={() => closeOnClickOutside && onClose()}
             onKeyDownCapture={onKeydownCapture}
@@ -133,9 +159,11 @@ export const ModalElement = forwardRef<
               }}
               {...remainingProps}
             >
-              {children}
+              <ContentArea>{children}</ContentArea>
+
+              <ButtonArea />
             </StyledModal>
-          </div>
+          </Inner>
 
           <Backdrop style={transitionStyles.overlay} />
         </Root>

@@ -106,7 +106,7 @@ export const Chip = forwardRef<ElementRef<typeof StyledChip>, ChipProps>(
 
     return (
       <StyledChip ref={forwardedRef} {...remainingProps}>
-        <Group direction="row">{mappedChips}</Group>
+        <Group direction="vertical">{mappedChips}</Group>
       </StyledChip>
     )
   }

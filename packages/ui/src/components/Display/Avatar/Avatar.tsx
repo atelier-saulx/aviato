@@ -4,6 +4,7 @@ import { styled } from '~/theme'
 import { Conditional } from '~/components'
 import { getLettersFromLabel } from './utils'
 import { useImagePreloader } from '~/hooks'
+import { BaseSize } from '~/types'
 
 const StyledAvatar = styled('div', {
   display: 'flex',
@@ -49,12 +50,10 @@ const StyledAvatar = styled('div', {
   },
 })
 
-type AvatarSize = 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge'
-
 export interface AvatarProps {
   src?: string
   label: string
-  size?: AvatarSize
+  size?: BaseSize
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({

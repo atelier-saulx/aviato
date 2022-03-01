@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Page, Modal, Button } from '@aviato/ui'
+import { Page, Modal, Button, Input, Group, Text } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
@@ -10,7 +10,20 @@ const ModalPage = () => {
     return (
       <>
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          Booyah!
+          <Text>Register</Text>
+
+          <Group direction="horizontal">
+            <Input
+              type="text"
+              placeholder="Type something here"
+              label="First Name"
+            />
+            <Input
+              type="text"
+              placeholder="Type something here"
+              label="Last Name"
+            />
+          </Group>
         </Modal>
 
         <Button onClick={() => setIsOpen(true)}>Open Modal</Button>

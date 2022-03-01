@@ -73,7 +73,7 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
           <ListItem {...header} type="header" />
         </Conditional>
 
-        <Group role="list" direction="column" space={spacing}>
+        <Group role="list" direction="horizontal" space={spacing}>
           {listItems}
         </Group>
 
