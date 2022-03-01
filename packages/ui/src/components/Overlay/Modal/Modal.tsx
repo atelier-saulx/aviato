@@ -33,6 +33,7 @@ const Backdrop = styled('div', {
 
 const StyledModal = styled('div', {
   position: 'relative',
+  minWidth: '600px',
   zIndex: 5,
 })
 
@@ -148,11 +149,11 @@ ModalElement.displayName = 'ModalElement'
 export function Modal({
   zIndex = getZIndex('Modal'),
   target,
-  ...props
+  ...properties
 }: ComponentPropsWithoutRef<typeof ModalElement>) {
   return (
     <Portal zIndex={zIndex} target={target}>
-      <ModalElement {...props} />
+      <ModalElement {...properties} />
     </Portal>
   )
 }
