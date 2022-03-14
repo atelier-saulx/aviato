@@ -37,14 +37,14 @@ const ModalPage = () => {
 
   const modalButtons: () => ModalButton[] = () => [
     {
-      text: 'Primary',
-      type: 'primary',
-      onClick: () => log.global.debug('Primary'),
-    },
-    {
       text: 'Secondary',
       type: 'outline',
       onClick: () => log.global.debug('Secondary'),
+    },
+    {
+      text: 'Primary',
+      type: 'primary',
+      onClick: () => log.global.debug('Primary'),
     },
   ]
 
@@ -56,6 +56,8 @@ const ModalPage = () => {
         <Modal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          onConfirm={() => log.global.debug('Confirm')}
+          onCancel={() => log.global.debug('Cancel')}
           buttons={modalButtons()}
         >
           <ModalContent />

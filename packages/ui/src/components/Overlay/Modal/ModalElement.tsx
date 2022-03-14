@@ -1,8 +1,11 @@
 import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Conditional, Button, ButtonVariant, Group } from '~/components'
+
+type MouseEvent = React.MouseEvent<HTMLButtonElement>
 
 const StyledModalElement = styled('div', {
   position: 'relative',
@@ -15,7 +18,13 @@ const ContentArea = styled('div', {
   padding: '24px',
 })
 
-const ButtonArea = styled('div', {})
+const ButtonArea = styled('div', {
+  padding: '24px',
+  display: 'flex',
+  justifyContent: 'end',
+  borderTop: '1px solid $OtherDivider',
+  marginTop: '12px',
+})
 
 export interface ModalButton {
   text: string
@@ -26,13 +35,28 @@ export interface ModalButton {
 export interface ModalElementProps
   extends ComponentProps<typeof StyledModalElement> {
   buttons?: ModalButton[]
+  onModalAction?: (button: ModalButton) => void
 }
 
 export const ModalElement = forwardRef<
   ElementRef<typeof StyledModalElement>,
   ModalElementProps
 >((properties, forwardedRef) => {
-  const { children, buttons = [], ...remainingProps } = properties
+  const {
+    children,
+    buttons = [],
+    onModalAction = noop,
+    ...remainingProps
+  } = properties
+
+  const handleModalClick = (
+    event: MouseEvent,
+    button: ModalButton,
+    callback
+  ) => {
+    onModalAction(button)
+    callback(event)
+  }
 
   const mappedButtons = buttons.map((button, index) => {
     const { text, type = 'primary', onClick } = button
@@ -48,7 +72,9 @@ export const ModalElement = forwardRef<
       <Button
         variant={buttonVariant}
         key={`ModalButton-${index}`}
-        onClick={(event) => onClick(event)}
+        onClick={(event) => {
+          handleModalClick(event, button, () => onClick(event))
+        }}
       >
         {text}
       </Button>

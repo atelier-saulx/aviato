@@ -46,6 +46,8 @@ const StyledModal = styled('div', {})
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
   onClose(): void
+  onConfirm?(): void
+  onCancel?(): void
   buttons?: ModalButton[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
@@ -62,6 +64,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       children,
       isOpen,
       onClose = noop,
+      onConfirm = noop,
+      onCancel = noop,
       noFocusTrap = false,
       closeOnEscape = true,
       closeOnClickOutside = true,
@@ -86,15 +90,21 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
     }
 
     const onKeydownCapture = (event: CaptureEvent) => {
-      const stopPropagationAttr = (event.target as any)?.getAttribute(
-        'data-aviato-stop-propagation'
-      )
-      const shouldTrigger = stopPropagationAttr !== 'true'
-
-      shouldTrigger &&
-        event.nativeEvent.code === 'Escape' &&
-        closeOnEscape &&
+      const isEscapeKey = event.nativeEvent.code === 'Escape'
+      const hasValidKey = isEscapeKey && closeOnEscape
+      if (hasValidKey) {
         onClose()
+      }
+    }
+
+    const handleModalAction = (button: ModalButton) => {
+      if (button.type === 'primary') {
+        onConfirm()
+      } else {
+        onCancel()
+      }
+
+      onClose()
     }
 
     useEffect(() => {
@@ -136,6 +146,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
                   ref={forwardedRef}
                   buttons={buttons}
                   onMouseDown={(event) => event.stopPropagation()}
+                  onModalAction={handleModalAction}
                   role="dialog"
                   tabIndex={-1}
                   style={{
