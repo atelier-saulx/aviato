@@ -51,13 +51,21 @@ const ModalPage = () => {
   const ShowModal = () => {
     const [isOpen, setIsOpen] = useState(false)
 
+    const closeDialogAction = (wasConfirmed: boolean) => {
+      setIsOpen(false)
+
+      log.global.debug(
+        `Dialog was closed - Confirmed? ${wasConfirmed ? 'Yes' : 'No'}.`
+      )
+    }
+
     return (
       <>
         <Modal
           isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onConfirm={() => log.global.debug('Confirm')}
-          onCancel={() => log.global.debug('Cancel')}
+          onClose={(wasConfirmed) => closeDialogAction(wasConfirmed)}
+          onConfirm={() => log.global.debug('Confirm and close')}
+          onCancel={() => log.global.debug('Close without confirming')}
           buttons={modalButtons()}
         >
           <ModalContent />

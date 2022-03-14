@@ -1,14 +1,17 @@
-import React, { forwardRef, ElementRef, useEffect } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
 import { GroupedTransition, Portal, TransitionPrimitive } from '~/components'
-import { useFocusReturn, useFocusTrap, useScrollLock } from '~/hooks'
+import {
+  useFocusReturn,
+  useFocusTrap,
+  useScrollLock,
+  useHotkeys,
+} from '~/hooks'
 import { ModalElement } from './ModalElement'
 import { ModalButton } from '.'
-
-type CaptureEvent = React.KeyboardEvent<HTMLDivElement>
 
 const Root = styled('div', {
   position: 'fixed',
@@ -45,12 +48,13 @@ const StyledModal = styled('div', {})
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
-  onClose(): void
+  onClose(isConfirm?: boolean): void
   onConfirm?(): void
   onCancel?(): void
   buttons?: ModalButton[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
+  closeOnEnter?: boolean
   zIndex?: number
   noFocusTrap?: boolean
   transition?: TransitionPrimitive
@@ -62,13 +66,14 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
   (properties, forwardedRef) => {
     const {
       children,
-      isOpen,
+      isOpen = false,
       onClose = noop,
       onConfirm = noop,
       onCancel = noop,
       noFocusTrap = false,
-      closeOnEscape = true,
       closeOnClickOutside = true,
+      closeOnEscape = true,
+      closeOnEnter = true,
       transition = 'pop',
       transitionDuration = 300,
       zIndex = getZIndex('Modal'),
@@ -83,39 +88,34 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
 
     useFocusReturn({ isOpen, transitionDuration })
 
-    const closeOnEscapePress = (event: KeyboardEvent) => {
-      if (noFocusTrap && event.code === 'Escape' && closeOnEscape) {
-        onClose()
-      }
-    }
+    const handleClose = (isConfirm: boolean = false) => {
+      if (!isOpen) return
 
-    const onKeydownCapture = (event: CaptureEvent) => {
-      const isEscapeKey = event.nativeEvent.code === 'Escape'
-      const hasValidKey = isEscapeKey && closeOnEscape
-      if (hasValidKey) {
-        onClose()
-      }
-    }
-
-    const handleModalAction = (button: ModalButton) => {
-      if (button.type === 'primary') {
+      if (isConfirm) {
         onConfirm()
       } else {
         onCancel()
       }
 
-      onClose()
+      onClose(isConfirm)
     }
 
-    useEffect(() => {
-      if (noFocusTrap) {
-        window.addEventListener('keydown', closeOnEscapePress)
+    const handleModalAction = (button: ModalButton) => {
+      const isConfirmAction = button.type === 'primary'
 
-        return () => {
-          window.removeEventListener('keydown', closeOnEscapePress)
-        }
-      }
-    }, [noFocusTrap])
+      handleClose(isConfirmAction)
+    }
+
+    const handleHotkey = (shouldTrigger, callback) => {
+      if (!isOpen || !shouldTrigger) return
+
+      callback()
+    }
+
+    useHotkeys([
+      ['enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
+      ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
+    ])
 
     return (
       <Portal zIndex={zIndex} target={target}>
@@ -140,7 +140,6 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
               <Inner
                 ref={focusTrapRef}
                 onMouseDown={() => closeOnClickOutside && onClose()}
-                onKeyDownCapture={onKeydownCapture}
               >
                 <ModalElement
                   ref={forwardedRef}
