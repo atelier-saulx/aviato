@@ -37,12 +37,12 @@ const ModalPage = () => {
 
   const modalButtons: () => ModalButton[] = () => [
     {
-      text: 'Secondary',
+      text: 'Cancel (Esc)',
       type: 'outline',
       onClick: () => log.global.debug('Secondary'),
     },
     {
-      text: 'Primary',
+      text: 'Register (Cmd+Enter)',
       type: 'primary',
       onClick: () => log.global.debug('Primary'),
     },
