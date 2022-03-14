@@ -105,7 +105,7 @@ const ModalPage = () => {
   const ShowModalElement = () => {
     const modalButtons: ModalButton[] = [
       {
-        text: 'Options (Cmd+O)',
+        text: 'Options (CTRL+O)',
         type: 'primary',
         hotkey: 'ctrl+o',
         onClick: () => log.global.debug('Options'),
