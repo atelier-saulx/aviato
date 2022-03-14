@@ -70,6 +70,8 @@ export const ModalElement = forwardRef<
       return [hotkey, (event) => handleModalClick(event, button, onClick)]
     })
 
+  useHotkeys(mappedHotKeys)
+
   const mappedButtons = buttons.map((button, index) => {
     const { text, type = 'primary', onClick } = button
 
@@ -92,8 +94,6 @@ export const ModalElement = forwardRef<
       </Button>
     )
   })
-
-  useHotkeys(mappedHotKeys)
 
   return (
     <StyledModalElement ref={forwardedRef} {...remainingProps}>
