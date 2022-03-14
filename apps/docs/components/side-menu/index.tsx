@@ -177,7 +177,6 @@ const overlayMenuItems: MenuDataItem[] = [
   {
     title: 'Modal',
     route: '/overlay/modal',
-    isMissing: true,
   },
 ]
 
