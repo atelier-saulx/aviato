@@ -39,17 +39,21 @@ const ModalPage = () => {
   const ShowSimpleModal = () => {
     const [isOpen, setIsOpen] = useState(false)
 
-    const closeDialogAction = () => {
+    const openDialog = () => {
+      setIsOpen(true)
+    }
+
+    const closeDialog = () => {
       setIsOpen(false)
     }
 
     return (
       <>
-        <Modal isOpen={isOpen} onClose={closeDialogAction}>
+        <Button onClick={openDialog}>Open Simple Modal</Button>
+
+        <Modal isOpen={isOpen} onClose={closeDialog}>
           <Text>This is a simple modal.</Text>
         </Modal>
-
-        <Button onClick={() => setIsOpen(true)}>Open Simple Modal</Button>
       </>
     )
   }
@@ -57,7 +61,11 @@ const ModalPage = () => {
   const ShowComplexModal = () => {
     const [isOpen, setIsOpen] = useState(false)
 
-    const closeDialogAction = (wasConfirmed: boolean) => {
+    const openDialog = () => {
+      setIsOpen(true)
+    }
+
+    const closeDialog = (wasConfirmed: boolean) => {
       setIsOpen(false)
 
       log.global.debug(
@@ -86,9 +94,11 @@ const ModalPage = () => {
 
     return (
       <>
+        <Button onClick={openDialog}>Open Modal</Button>
+
         <Modal
           isOpen={isOpen}
-          onClose={(wasConfirmed) => closeDialogAction(wasConfirmed)}
+          onClose={(wasConfirmed) => closeDialog(wasConfirmed)}
           onConfirm={() => log.global.debug('Confirm and close')}
           onCancel={() => log.global.debug('Close without confirming')}
           buttons={modalButtons}
@@ -96,8 +106,6 @@ const ModalPage = () => {
         >
           <ModalContent />
         </Modal>
-
-        <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
       </>
     )
   }
@@ -132,17 +140,21 @@ import { Modal, Button, Text } from '@aviato/ui'
 
 const [isOpen, setIsOpen] = useState(false)
 
-const closeDialogAction = () => {
+const openDialog = () => {
+  setIsOpen(true)
+}
+
+const closeDialog = () => {
   setIsOpen(false)
 }
 
 return (
   <>
-    <Modal isOpen={isOpen} onClose={closeDialogAction}>
+    <Button onClick={openDialog}>Open Simple Modal</Button>
+
+    <Modal isOpen={isOpen} onClose={closeDialog}>
       <Text>This is a simple modal.</Text>
     </Modal>
-
-    <Button onClick={() => setIsOpen(true)}>Open Simple Modal</Button>
   </>
 )
       `}
@@ -157,7 +169,11 @@ import { Modal, Button, Text, Group, Input } from '@aviato/ui'
 
 const [isOpen, setIsOpen] = useState(false)
 
-const closeDialogAction = (wasConfirmed: boolean) => {
+const openDialog = () => {
+  setIsOpen(true)
+}
+
+const closeDialog = (wasConfirmed: boolean) => {
   setIsOpen(false)
 }
 
@@ -182,9 +198,11 @@ const modalHotkeys: ModalHotkey[] = [
 
 return (
   <>
+    <Button onClick={openDialog}>Open Modal</Button>
+
     <Modal
       isOpen={isOpen}
-      onClose={(wasConfirmed) => closeDialogAction(wasConfirmed)}
+      onClose={(wasConfirmed) => closeDialog(wasConfirmed)}
       onConfirm={() => log.global.debug('Confirm and close')}
       onCancel={() => log.global.debug('Close without confirming')}
       buttons={modalButtons}
@@ -205,8 +223,6 @@ return (
         />
       </Group>
     </Modal>
-
-    <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
   </>
 )
       `}
