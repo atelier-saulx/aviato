@@ -35,18 +35,23 @@ const ModalPage = () => {
     )
   }
 
-  const modalButtons: () => ModalButton[] = () => [
-    {
-      text: 'Cancel (Esc)',
-      type: 'outline',
-      onClick: () => log.global.debug('Secondary'),
-    },
-    {
-      text: 'Register (Cmd+Enter)',
-      type: 'primary',
-      onClick: () => log.global.debug('Primary'),
-    },
-  ]
+  const ShowSimpleModal = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const closeDialogAction = () => {
+      setIsOpen(false)
+    }
+
+    return (
+      <>
+        <Modal isOpen={isOpen} onClose={() => closeDialogAction()}>
+          <Text>This is a simple modal.</Text>
+        </Modal>
+
+        <Button onClick={() => setIsOpen(true)}>Open Simple Modal</Button>
+      </>
+    )
+  }
 
   const ShowModal = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -59,6 +64,20 @@ const ModalPage = () => {
       )
     }
 
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Cancel (Esc)',
+        type: 'outline',
+        onClick: () => log.global.debug('Cancel'),
+      },
+      {
+        text: 'Register (Cmd+Enter)',
+        type: 'primary',
+        hotkey: 'ctrl+enter',
+        onClick: () => log.global.debug('Register'),
+      },
+    ]
+
     return (
       <>
         <Modal
@@ -66,7 +85,7 @@ const ModalPage = () => {
           onClose={(wasConfirmed) => closeDialogAction(wasConfirmed)}
           onConfirm={() => log.global.debug('Confirm and close')}
           onCancel={() => log.global.debug('Close without confirming')}
-          buttons={modalButtons()}
+          buttons={modalButtons}
         >
           <ModalContent />
         </Modal>
@@ -77,8 +96,17 @@ const ModalPage = () => {
   }
 
   const ShowModalElement = () => {
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Options (Cmd+O)',
+        type: 'primary',
+        hotkey: 'ctrl+o',
+        onClick: () => log.global.debug('Options'),
+      },
+    ]
+
     return (
-      <ModalElement buttons={modalButtons()}>
+      <ModalElement buttons={modalButtons}>
         <ModalContent />
       </ModalElement>
     )
@@ -89,6 +117,10 @@ const ModalPage = () => {
       <NextTitle>Modal</NextTitle>
 
       <NextText color="Secondary">Overlay with interactive elements.</NextText>
+
+      <ShowcaseComponent background="transparent">
+        <ShowSimpleModal />
+      </ShowcaseComponent>
 
       <ShowcaseComponent background="transparent">
         <ShowModal />

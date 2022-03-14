@@ -9,6 +9,7 @@ import {
   useFocusTrap,
   useScrollLock,
   useHotkeys,
+  HotkeyItem,
 } from '~/hooks'
 import { ModalElement } from './ModalElement'
 import { ModalButton } from '.'
@@ -112,10 +113,23 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       callback()
     }
 
-    useHotkeys([
-      ['ctrl+enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
+    const defaultHotkeys: HotkeyItem[] = [
+      ['enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
       ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
-    ])
+    ]
+
+    const buttonHotkeys = buttons
+      .map(({ hotkey }) => hotkey)
+      .filter((hotkey) => typeof hotkey === 'string')
+
+    const modalHotkeys: HotkeyItem[] = defaultHotkeys.filter((hotkey) => {
+      const targetKey = hotkey[0] as string
+      const hotkeyIsAssigned = buttonHotkeys.includes(targetKey)
+
+      return !hotkeyIsAssigned
+    }) as HotkeyItem[]
+
+    useHotkeys(modalHotkeys)
 
     return (
       <Portal zIndex={zIndex} target={target}>
