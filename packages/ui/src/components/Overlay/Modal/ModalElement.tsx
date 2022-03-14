@@ -4,7 +4,7 @@ import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Conditional, Button, ButtonVariant, Group } from '~/components'
-import { useHotkeys } from '~/hooks'
+import { useHotkeys, HotkeyItem } from '~/hooks'
 
 type MouseEvent = React.MouseEvent<HTMLButtonElement>
 
@@ -33,6 +33,8 @@ export interface ModalButton {
   hotkey?: string
   type?: 'primary' | 'outline'
 }
+
+export type ModalHotkey = HotkeyItem
 
 export interface ModalElementProps
   extends ComponentProps<typeof StyledModalElement> {

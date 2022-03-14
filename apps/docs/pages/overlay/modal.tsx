@@ -8,6 +8,7 @@ import {
   Text,
   ModalElement,
   ModalButton,
+  ModalHotkey,
 } from '@aviato/ui'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
@@ -68,14 +69,19 @@ const ModalPage = () => {
       {
         text: 'Cancel (Esc)',
         type: 'outline',
+        hotkey: 'escape',
         onClick: () => log.global.debug('Cancel'),
       },
       {
-        text: 'Register (Cmd+Enter)',
+        text: 'Register (CTRL+Enter)',
         type: 'primary',
         hotkey: 'ctrl+enter',
         onClick: () => log.global.debug('Register'),
       },
+    ]
+
+    const modalHotkeys: ModalHotkey[] = [
+      ['ctrl+t', () => log.global.debug('CTRL+T was pressed.')],
     ]
 
     return (
@@ -86,6 +92,7 @@ const ModalPage = () => {
           onConfirm={() => log.global.debug('Confirm and close')}
           onCancel={() => log.global.debug('Close without confirming')}
           buttons={modalButtons}
+          hotkeys={modalHotkeys}
         >
           <ModalContent />
         </Modal>

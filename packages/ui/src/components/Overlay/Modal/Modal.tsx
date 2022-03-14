@@ -53,6 +53,7 @@ export interface ModalProps extends ComponentProps<typeof StyledModal> {
   onConfirm?(): void
   onCancel?(): void
   buttons?: ModalButton[]
+  hotkeys?: HotkeyItem[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   closeOnEnter?: boolean
@@ -71,6 +72,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       onClose = noop,
       onConfirm = noop,
       onCancel = noop,
+      buttons = [],
+      hotkeys = [],
       noFocusTrap = false,
       closeOnClickOutside = true,
       closeOnEscape = true,
@@ -79,7 +82,6 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       transitionDuration = 300,
       zIndex = getZIndex('Modal'),
       target,
-      buttons = [],
       ...remainingProps
     } = properties
 
@@ -122,7 +124,9 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       .map(({ hotkey }) => hotkey)
       .filter((hotkey) => typeof hotkey === 'string')
 
-    const modalHotkeys: HotkeyItem[] = defaultHotkeys.filter((hotkey) => {
+    const combinedHotkeys = [...defaultHotkeys, ...hotkeys]
+
+    const modalHotkeys: HotkeyItem[] = combinedHotkeys.filter((hotkey) => {
       const targetKey = hotkey[0] as string
       const hotkeyIsAssigned = buttonHotkeys.includes(targetKey)
 
