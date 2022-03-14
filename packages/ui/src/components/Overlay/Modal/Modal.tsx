@@ -113,7 +113,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
     }
 
     useHotkeys([
-      ['enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
+      ['ctrl+enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
       ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
     ])
 
