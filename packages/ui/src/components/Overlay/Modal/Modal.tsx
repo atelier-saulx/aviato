@@ -138,9 +138,9 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
     return (
       <Portal zIndex={zIndex} target={target}>
         <GroupedTransition
-          onExited={() => lockScroll(false)}
-          onEntered={() => lockScroll(true)}
           mounted={isOpen}
+          onEnter={() => lockScroll(true)}
+          onExited={() => lockScroll(false)}
           transitions={{
             modal: {
               duration: transitionDuration,
