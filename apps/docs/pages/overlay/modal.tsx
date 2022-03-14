@@ -73,9 +73,9 @@ const ModalPage = () => {
         onClick: () => log.global.debug('Cancel'),
       },
       {
-        text: 'Register (CTRL+Enter)',
+        text: 'Register (Cmd+Enter)',
         type: 'primary',
-        hotkey: 'ctrl+enter',
+        hotkey: 'cmd+enter',
         onClick: () => log.global.debug('Register'),
       },
     ]
@@ -105,10 +105,10 @@ const ModalPage = () => {
   const ShowModalElement = () => {
     const modalButtons: ModalButton[] = [
       {
-        text: 'Options (CTRL+O)',
+        text: 'Register User (Cmd+O)',
         type: 'primary',
-        hotkey: 'ctrl+o',
-        onClick: () => log.global.debug('Options'),
+        hotkey: 'cmd+o',
+        onClick: () => log.global.debug('Register User'),
       },
     ]
 
