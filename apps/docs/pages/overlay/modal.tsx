@@ -216,6 +216,8 @@ return (
 
       <ShowcaseComponent
         codeBlock={`
+import { ModalElement, Text, Group, Input } from '@aviato/ui'
+
 const modalButtons: ModalButton[] = [
   {
     text: 'Register User (Cmd+O)',
