@@ -56,7 +56,7 @@ const ButtonPage = () => {
       return buttonVariants.map((variant: ButtonVariant, index) => {
         return (
           <Group
-            direction="row"
+            direction="vertical"
             align="center"
             key={`Button-${color}-${variant}-${index}`}
           >
@@ -101,7 +101,7 @@ const ButtonPage = () => {
             <Divider />
             <Spacer />
 
-            <Group direction="column">{getButtonVariants(color)}</Group>
+            <Group direction="horizontal">{getButtonVariants(color)}</Group>
           </div>
         )
       })

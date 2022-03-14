@@ -6,6 +6,7 @@ import { styled } from '~/theme'
 import { BaseFontVariants, BaseTextStyles } from './styles'
 
 import { FontWeight, FontColor } from './types'
+import { BaseSize } from '~/types'
 
 const StyledText = styled('p', {
   ...BaseTextStyles,
@@ -38,10 +39,8 @@ const StyledText = styled('p', {
   },
 })
 
-type TextSize = 'extrasmall' | 'small' | 'medium' | 'large' | 'extralarge'
-
 export interface TextProps extends ComponentProps<typeof StyledText> {
-  size?: TextSize
+  size?: BaseSize
   weight?: FontWeight
   color?: FontColor
   as?: any

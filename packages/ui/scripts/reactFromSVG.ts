@@ -58,7 +58,7 @@ async function generateReactFromSVG() {
 async function start() {
   try {
     await generateReactFromSVG()
-  } catch (error) {
+  } catch (error: any) {
     logError('parseIcons error: ', error)
     throw new Error(error)
   }

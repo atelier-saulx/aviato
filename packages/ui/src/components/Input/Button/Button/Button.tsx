@@ -20,7 +20,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:hover': {
       background: '$PrimaryMainHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$PrimaryMainSelected',
     },
 
@@ -38,7 +38,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:hover': {
       background: '$PrimaryLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$PrimaryLightSelected',
     },
 
@@ -56,7 +56,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:hover': {
       background: '$PrimaryLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$PrimaryLightSelected',
     },
 
@@ -75,7 +75,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:hover': {
       background: '$PrimaryLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$PrimaryLightSelected',
     },
 
@@ -94,7 +94,7 @@ const PrimaryCSS: StitchedCSS = {
     '&:hover': {
       background: '$PrimaryLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$PrimaryLightSelected',
     },
 
@@ -114,7 +114,7 @@ const ActionCSS: StitchedCSS = {
     '&:hover': {
       background: '$ActionMainHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ActionMainSelected',
     },
 
@@ -132,7 +132,7 @@ const ActionCSS: StitchedCSS = {
     '&:hover': {
       background: '$ActionLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ActionLightSelected',
     },
 
@@ -150,7 +150,7 @@ const ActionCSS: StitchedCSS = {
     '&:hover': {
       background: '$ActionLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ActionLightSelected',
     },
 
@@ -169,7 +169,7 @@ const ActionCSS: StitchedCSS = {
     '&:hover': {
       background: '$ActionLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ActionLightSelected',
     },
 
@@ -188,7 +188,7 @@ const ActionCSS: StitchedCSS = {
     '&:hover': {
       background: '$ActionLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ActionLightSelected',
     },
 
@@ -208,7 +208,7 @@ const ErrorCSS: StitchedCSS = {
     '&:hover': {
       background: '$ErrorMainHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ErrorMainSelected',
     },
 
@@ -226,7 +226,7 @@ const ErrorCSS: StitchedCSS = {
     '&:hover': {
       background: '$ErrorLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ErrorLightSelected',
     },
 
@@ -244,7 +244,7 @@ const ErrorCSS: StitchedCSS = {
     '&:hover': {
       background: '$ErrorLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ErrorLightSelected',
     },
 
@@ -263,7 +263,7 @@ const ErrorCSS: StitchedCSS = {
     '&:hover': {
       background: '$ErrorLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ErrorLightSelected',
     },
 
@@ -282,7 +282,7 @@ const ErrorCSS: StitchedCSS = {
     '&:hover': {
       background: '$ErrorLightHover',
     },
-    '&:active': {
+    '&:active, &:focus': {
       background: '$ErrorLightSelected',
     },
 
@@ -398,6 +398,8 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         disabled={disabled}
         className={classes}
         ref={forwardedRef}
+        role="button"
+        tabIndex={0}
         {...remainingProps}
       >
         <Conditional test={LeftIcon}>

@@ -9,11 +9,11 @@ const StyledGroup = styled('div', {
 
   variants: {
     direction: {
-      row: {
+      vertical: {
         flexDirection: 'row',
       },
 
-      column: {
+      horizontal: {
         flexDirection: 'column',
       },
     },
@@ -59,7 +59,7 @@ const mappedPositions = {
 }
 
 export type GroupPosition = 'left' | 'center' | 'right' | 'apart'
-export type GroupDirection = 'row' | 'column'
+export type GroupDirection = 'vertical' | 'horizontal'
 
 export interface GroupProps extends ComponentProps<typeof StyledGroup> {
   direction?: GroupDirection
@@ -73,7 +73,7 @@ export interface GroupProps extends ComponentProps<typeof StyledGroup> {
 export const Group = forwardRef<ElementRef<typeof StyledGroup>, GroupProps>(
   (properties, forwardedRef) => {
     const {
-      direction = 'row',
+      direction = 'vertical',
       position = 'left',
       wrap = true,
       grow = false,
@@ -85,7 +85,7 @@ export const Group = forwardRef<ElementRef<typeof StyledGroup>, GroupProps>(
 
     const alignItems =
       align ||
-      (direction === 'row'
+      (direction === 'vertical'
         ? 'center'
         : grow
         ? 'stretch'
@@ -98,7 +98,7 @@ export const Group = forwardRef<ElementRef<typeof StyledGroup>, GroupProps>(
       alignItems,
     }
 
-    if (direction === 'row') {
+    if (direction === 'vertical') {
       styledCSS.justifyContent = mappedPositions[position]
     }
 

@@ -155,7 +155,7 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
         <Group
           role="tablist"
           aria-orientation="horizontal"
-          direction="row"
+          direction="vertical"
           spacing="xxl"
         >
           {TabChildren}

@@ -57,7 +57,7 @@ const BadgePage = () => {
     const getBadgeVariants = (type: BadgeType) => {
       return badgeVariants.map((variant, index) => {
         return (
-          <Group key={`BadgeVariant-${index}`} direction="column">
+          <Group key={`BadgeVariant-${index}`} direction="horizontal">
             {getBadgeSizes(type, variant)}
           </Group>
         )
@@ -69,7 +69,7 @@ const BadgePage = () => {
         return (
           <Group
             key={`BadgeType-${index}`}
-            direction="row"
+            direction="vertical"
             css={{ paddingBottom: 20 }}
           >
             {getBadgeVariants(type)}
@@ -83,7 +83,7 @@ const BadgePage = () => {
 
   const ShowBadgeExamples = () => {
     return (
-      <Group direction="column">
+      <Group direction="horizontal">
         <Column>
           <NextText color="Secondary">Left area</NextText>
           <Row css={{ width: 200 }}>

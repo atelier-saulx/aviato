@@ -93,7 +93,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof Group>, RadioGroupProps>(
         <StyledRadioGroup ref={forwardedRef} {...remainingProps}>
           <Group
             role="radiogroup"
-            direction={direction === 'horizontal' ? 'row' : 'column'}
+            direction={direction}
             css={{ paddingTop: '$xxs', paddingBottom: '$xxs' }}
           >
             {mappedRadioChildren}

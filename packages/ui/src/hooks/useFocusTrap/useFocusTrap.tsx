@@ -5,14 +5,14 @@ import { createAriaHider } from './createAriaHider'
 import { log } from '@aviato/utils'
 
 export function useFocusTrap(
-  active = true
+  isActive = true
 ): (instance: HTMLElement | null) => void {
   const ref = useRef<HTMLElement | null>()
   const restoreAria = useRef<Function | null>(null)
 
   const setRef = useCallback(
     (node: HTMLElement | null) => {
-      if (!active) {
+      if (!isActive) {
         return
       }
 
@@ -59,11 +59,11 @@ export function useFocusTrap(
         ref.current = null
       }
     },
-    [active]
+    [isActive]
   )
 
   useEffect(() => {
-    if (!active) {
+    if (!isActive) {
       return undefined
     }
 
@@ -78,7 +78,7 @@ export function useFocusTrap(
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [active])
+  }, [isActive])
 
   return setRef
 }
