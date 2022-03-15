@@ -1,7 +1,7 @@
 import { Column, Row, Select, Page } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const SelectPage = () => {
   const ShowSelect = () => {
@@ -30,13 +30,15 @@ const SelectPage = () => {
 
   return (
     <Page>
-      <NextTitle>Select</NextTitle>
-
-      <NextText color="Secondary">
-        Select component is a component that allows users pick a value from
-        predefined options. Ideally, it should be used when there are more than
-        5 options, otherwise you might consider using a radio group instead.
-      </NextText>
+      <ShowcaseHeader
+        title="Select"
+        description={`
+          Select component is a component that allows users to
+          pick a value from predefined options. Ideally, it should be used when
+          there are more than 5 options, otherwise you might consider using
+          a <RadioGroup /> instead.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowSelect />

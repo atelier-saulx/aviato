@@ -122,7 +122,10 @@ const ButtonPage = () => {
     <Page>
       <ShowcaseHeader
         title="Button"
-        description="The Button component is used to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation."
+        description={`
+          The Button component is used to trigger an action or event, such as submitting
+          a form, opening a dialog, canceling an action, or performing a delete operation.
+        `}
         code={`
 type ButtonVariants =
   | 'main'

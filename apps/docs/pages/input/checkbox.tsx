@@ -79,7 +79,9 @@ const CheckboxPage = () => {
     <Page>
       <ShowcaseHeader
         title="Checkbox"
-        description="A control that allows the user to toggle between checked and not checked."
+        description={`
+          A control that allows the user to toggle between checked and not checked.
+        `}
         code={`
 type CheckboxSize = 'small' | 'medium'
 

@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { Page, RadioGroup, Radio, Column, Row } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-} from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
 const RadioGroupPage = () => {
   const ShowRadiogroup = () => {
@@ -71,12 +66,12 @@ const RadioGroupPage = () => {
 
   return (
     <Page>
-      <NextTitle>Radio Group</NextTitle>
-
-      <NextText color="Secondary">
-        A control that allows the user to toggle selection within a small set of
-        options.
-      </NextText>
+      <ShowcaseHeader
+        title="Radio Group"
+        description={`
+          A control that allows the user to toggle selection within a small set of options.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"

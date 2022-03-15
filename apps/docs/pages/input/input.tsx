@@ -7,12 +7,13 @@ import {
   getRandomIcon,
   InputVariant,
   useHasLoaded,
+  Title,
 } from '@aviato/ui'
 import { log, capitalize } from '@aviato/utils'
 
 import {
   NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   BigSpacer,
 } from '../../components'
@@ -45,7 +46,9 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle size="small">{uppercaseVariant}</NextTitle>
+          <Title size="small" css={{ paddingBottom: 12 }}>
+            {uppercaseVariant}
+          </Title>
 
           <Row css={{ width: '100%' }}>
             <Input
@@ -139,9 +142,12 @@ const InputPage = () => {
 
   return (
     <Page>
-      <NextTitle>Input</NextTitle>
-
-      <NextText color="Secondary">Capture string input from user</NextText>
+      <ShowcaseHeader
+        title="Input"
+        description={`
+          Capture string input from user
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"
