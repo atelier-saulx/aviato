@@ -9,8 +9,6 @@ import {
 } from '../../components'
 
 const ComponentProps = `
-type CheckboxSize = 'small' | 'medium'
-
 interface CheckboxProps {
   size?: CheckboxSize
   checked?: boolean
@@ -21,6 +19,8 @@ interface CheckboxProps {
   index?: number
   onChange?: (value: boolean, payload: OnCheckboxChange) => void
 }
+
+type CheckboxSize = 'small' | 'medium'
 `
 
 const CheckboxPage = () => {
