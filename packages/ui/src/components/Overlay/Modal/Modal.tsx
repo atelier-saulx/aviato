@@ -49,7 +49,7 @@ const StyledModal = styled('div', {})
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
-  onClose(isConfirm?: boolean): void
+  onClose(didUserConfirm?: boolean): void
   onConfirm?(): void
   onCancel?(): void
   buttons?: ModalButton[]
@@ -77,7 +77,6 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       noFocusTrap = false,
       closeOnClickOutside = true,
       closeOnEscape = true,
-      closeOnEnter = true,
       transition = 'pop',
       transitionDuration = 300,
       zIndex = getZIndex('Modal'),
@@ -116,7 +115,6 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
     }
 
     const defaultHotkeys: HotkeyItem[] = [
-      ['enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
       ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
     ]
 
@@ -160,15 +158,13 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
                 onMouseDown={() => closeOnClickOutside && onClose()}
               >
                 <ModalElement
+                  tabIndex={-1}
                   ref={forwardedRef}
                   buttons={buttons}
                   onMouseDown={(event) => event.stopPropagation()}
                   onModalAction={handleModalAction}
                   role="dialog"
-                  tabIndex={-1}
-                  style={{
-                    ...transitionStyles.modal,
-                  }}
+                  style={transitionStyles.modal}
                   {...remainingProps}
                 >
                   {children}
