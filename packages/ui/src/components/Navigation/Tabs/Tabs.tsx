@@ -22,8 +22,6 @@ const StyledTabs = styled('div', {
   display: 'flex',
   alignItems: 'center',
   height: '64px',
-  background: '$Background1dp',
-  padding: '0 $xxl',
 })
 
 export interface OnTabChange extends onChange {

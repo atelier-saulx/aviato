@@ -10,6 +10,7 @@ import {
   IconUploadCloud,
   IconEmail,
   IconAttachment,
+  styled,
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
@@ -19,6 +20,11 @@ import {
   ShowcaseComponent,
   BigSpacer,
 } from '../../components'
+
+const TabContainer = styled('div', {
+  padding: '0 $xxl',
+  background: '$Background1dp',
+})
 
 const TabsPage = () => {
   const hasLoaded = useHasLoaded()
@@ -31,38 +37,42 @@ const TabsPage = () => {
       <>
         <Column>
           <Row>
-            <Tabs
-              onChange={(value, payload) => {
-                log.global.debug('Tab change: ', { value, payload })
-              }}
-            >
-              <Tab value="components">Components</Tab>
-              <Tab value="design">Design</Tab>
-              <Tab value="docs">Docs</Tab>
-              <Tab value="resources">Resources</Tab>
-            </Tabs>
+            <TabContainer>
+              <Tabs
+                onChange={(value, payload) => {
+                  log.global.debug('Tab change: ', { value, payload })
+                }}
+              >
+                <Tab value="components">Components</Tab>
+                <Tab value="design">Design</Tab>
+                <Tab value="docs">Docs</Tab>
+                <Tab value="resources">Resources</Tab>
+              </Tabs>
+            </TabContainer>
           </Row>
 
           <BigSpacer />
 
           <Row>
-            <Tabs>
-              <Tab value="components" leftIcon={<IconAperture />}>
-                Components
-              </Tab>
-              <Tab value="design" leftIcon={<IconSchedule />}>
-                Design
-              </Tab>
-              <Tab value="docs" leftIcon={<IconUploadCloud />}>
-                Docs
-              </Tab>
-              <Tab value="resources" leftIcon={<IconEmail />} disabled>
-                Resources
-              </Tab>
-              <Tab value="files" leftIcon={<IconAttachment />}>
-                Files
-              </Tab>
-            </Tabs>
+            <TabContainer>
+              <Tabs>
+                <Tab value="components" leftIcon={<IconAperture />}>
+                  Components
+                </Tab>
+                <Tab value="design" leftIcon={<IconSchedule />}>
+                  Design
+                </Tab>
+                <Tab value="docs" leftIcon={<IconUploadCloud />}>
+                  Docs
+                </Tab>
+                <Tab value="resources" leftIcon={<IconEmail />} disabled>
+                  Resources
+                </Tab>
+                <Tab value="files" leftIcon={<IconAttachment />}>
+                  Files
+                </Tab>
+              </Tabs>
+            </TabContainer>
           </Row>
         </Column>
       </>
