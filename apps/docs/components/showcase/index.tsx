@@ -58,3 +58,5 @@ export const ShowcaseComponent: FunctionComponent<DisplayComponentProps> = ({
     </Container>
   )
 }
+
+export { ShowcaseHeader } from './showcaseHeader'

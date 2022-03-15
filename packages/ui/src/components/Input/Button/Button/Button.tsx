@@ -2,7 +2,6 @@ import React, {
   forwardRef,
   ReactElement,
   ElementRef,
-  MouseEventHandler,
   cloneElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
@@ -351,7 +350,6 @@ export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   disabled?: boolean
   leftIcon?: ReactElement
   rightIcon?: ReactElement
-  onClick?: MouseEventHandler<HTMLButtonElement>
   css?: StitchedCSS
 }
 
