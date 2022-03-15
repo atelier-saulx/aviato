@@ -13,6 +13,22 @@ import { log } from '@aviato/utils'
 
 import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
+const ComponentProps = `
+interface ToggleGroupProps {
+  type?: 'single' | 'multiple'
+  value?: string
+  defaultValue: string
+  children: any
+  onValueChange?(value: string | string[]): void
+  disabled?: boolean
+}
+
+interface ToggleItemProps {
+  value: string
+  disabled?: boolean
+}
+`
+
 const ToggleGroupPage = () => {
   const ShowToggleGroup = () => {
     return (
@@ -62,6 +78,7 @@ const ToggleGroupPage = () => {
         description={`
           A set of two-state buttons that can be toggled on or off.
         `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

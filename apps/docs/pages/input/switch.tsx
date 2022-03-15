@@ -3,6 +3,21 @@ import { Column, Row, Switch, SwitchSize, Page } from '@aviato/ui'
 
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
+const ComponentProps = `
+interface SwitchProps {
+  size?: SwitchSize
+  checked?: boolean
+  disabled?: boolean
+  text?: string
+  label?: string
+  description?: string
+  error?: string
+  onChange?: (value: boolean, payload: OnSwitchChange) => void
+}
+
+type SwitchSize = 'normal' | 'large'
+`
+
 const SwitchPage = () => {
   const ShowSwitch = ({ size }: { size: SwitchSize }) => {
     return (
@@ -31,6 +46,7 @@ const SwitchPage = () => {
         description={`
           Capture boolean input from user.
         `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

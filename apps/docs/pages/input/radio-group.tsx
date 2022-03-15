@@ -4,6 +4,18 @@ import { log } from '@aviato/utils'
 
 import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
+const ComponentProps = `
+interface RadioGroupProps {
+  value?: string
+  defaultValue?: string
+  label?: string
+  description?: string
+  error?: string
+  direction?: 'horizontal' | 'vertical'
+  onChange?: (value: string, payload: OnRadioGroupChange) => void
+}
+`
+
 const RadioGroupPage = () => {
   const ShowRadiogroup = () => {
     const [value, setValue] = useState('Thing 2')
@@ -71,6 +83,7 @@ const RadioGroupPage = () => {
         description={`
           A control that allows the user to toggle selection within a small set of options.
         `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

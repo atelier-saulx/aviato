@@ -18,6 +18,33 @@ import {
   BigSpacer,
 } from '../../components'
 
+const ComponentProps = `
+interface InputProps extends BaseInputProps {
+  label?: string
+  description?: string
+  error?: string
+  invalid?: boolean
+}
+
+interface BaseInputProps {
+  value?: string
+  defaultValue?: string
+  component?: ElementType
+  type?: InputType
+  placeholder?: string
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
+  variant?: InputVariant
+  disabled?: boolean
+  invalid?: boolean
+  multiline?: boolean
+  maxRows?: number
+  minRows?: number
+  onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
+}
+`
+
 /**
  * TODO: Fix SSR issue with Vector Icons!
  */
@@ -147,6 +174,7 @@ const InputPage = () => {
         description={`
           Capture string input from user
         `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

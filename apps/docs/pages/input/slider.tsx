@@ -9,7 +9,7 @@ import {
 } from '../../components'
 
 const ComponentProps = `
-export interface SliderProps {
+interface SliderProps {
   value?: number
   defaultValue?: number
   min?: number

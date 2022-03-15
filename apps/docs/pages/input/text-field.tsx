@@ -4,6 +4,37 @@ import { log, capitalize } from '@aviato/utils'
 
 import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
+const ComponentProps = `
+interface TextFieldProps extends BaseInputProps {
+  autosize?: boolean
+  maxRows?: number
+  minRows?: number
+  label?: string
+  description?: string
+  error?: string
+  invalid?: boolean
+}
+
+interface BaseInputProps {
+  value?: string
+  defaultValue?: string
+  component?: ElementType
+  type?: InputType
+  placeholder?: string
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
+  variant?: InputVariant
+  disabled?: boolean
+  invalid?: boolean
+  multiline?: boolean
+  maxRows?: number
+  minRows?: number
+  onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
+}
+
+`
+
 const TextFieldPage = () => {
   const ShowTextField = ({ variant }: { variant: InputVariant }) => {
     const uppercaseVariant = capitalize(variant)
@@ -118,6 +149,7 @@ const TextFieldPage = () => {
         description={`
           Capture string input from user
         `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

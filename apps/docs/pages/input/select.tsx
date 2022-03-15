@@ -3,6 +3,40 @@ import { log } from '@aviato/utils'
 
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
+const ComponentProps = `
+interface SelectProps extends BaseInputProps {
+  value?: string
+  defaultValue?: string
+  data: SelectItem[]
+  label?: string
+  description?: string
+  error?: string
+  invalid?: boolean
+  searchable?: boolean
+  disabled?: boolean
+  limit?: number
+  filter?(value: string, item: SelectItem): boolean
+}
+
+interface BaseInputProps {
+  value?: string
+  defaultValue?: string
+  component?: ElementType
+  type?: InputType
+  placeholder?: string
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
+  variant?: InputVariant
+  disabled?: boolean
+  invalid?: boolean
+  multiline?: boolean
+  maxRows?: number
+  minRows?: number
+  onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
+}
+`
+
 const SelectPage = () => {
   const ShowSelect = () => {
     return (
@@ -38,9 +72,27 @@ const SelectPage = () => {
           there are more than 5 options, otherwise you might consider using
           a <RadioGroup /> instead.
         `}
+        props={ComponentProps}
       />
 
-      <ShowcaseComponent background="transparent">
+      <ShowcaseComponent
+        background="transparent"
+        codeBlock={`
+<Select
+  placeholder="Select a thing"
+  label="This is a label"
+  description="This is a description"
+  onChange={(value, payload) => {
+    log.global.debug('Select change: ', { value, payload })
+  }}
+  data={[
+    { value: 'flurpy', label: 'Flurpy' },
+    { value: 'snark', label: 'Snark' },
+    { value: 'snorkles', label: 'Snorkles' },
+  ]}
+/>
+      `}
+      >
         <ShowSelect />
       </ShowcaseComponent>
     </Page>
