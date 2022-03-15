@@ -69,6 +69,7 @@ export const Tab = forwardRef<ElementRef<typeof StyledTab>, TabProps>(
           leftIcon={leftIcon}
           rightIcon={rightIcon}
           disabled={disabled}
+          tabIndex={-1}
         >
           {children}
         </Button>

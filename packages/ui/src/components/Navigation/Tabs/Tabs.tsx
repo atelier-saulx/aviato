@@ -8,7 +8,7 @@ import { ComponentProps } from '@stitches/react'
 import { clamp, filterChildrenByType, noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
-import { Tab } from './Tab'
+import { Tab, TabProps } from './Tab'
 import { useUncontrolled } from '~/hooks'
 import { Group } from '~/components/Layout'
 import { findInitialTab, getNextTab, getPreviousTab } from './utils'
@@ -32,7 +32,7 @@ type StitchedProps = Omit<ComponentProps<typeof StyledTabs>, 'onChange'>
 
 export interface TabsProps extends StitchedProps {
   initialTab?: number
-  active?: number
+  activeIndex?: number
   onChange?: (value: string | number, payload: OnTabChange) => void
 }
 
@@ -40,7 +40,7 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
   (properties, forwardedRef) => {
     const {
       initialTab,
-      active,
+      activeIndex,
       onChange = noop,
       children,
       ...remainingProps
@@ -49,11 +49,10 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
     const tabChildren = filterChildrenByType(children, Tab)
 
     const [_activeTabIndex, setActiveTabIndex] = useUncontrolled({
-      value: active,
+      value: activeIndex,
       defaultValue: initialTab,
       finalValue: findInitialTab(tabChildren),
       rule: (value) => typeof value === 'number',
-      onChange: () => {},
     })
 
     const activeTabIndex = clamp({
@@ -136,13 +135,19 @@ export const Tabs = forwardRef<ElementRef<typeof StyledTabs>, TabsProps>(
       }
     }
 
-    const TabChildren = tabChildren.map((tab, index) => (
+    type TabChild = {
+      props: TabProps
+    }
+
+    const TabChildren = tabChildren.map((tab: TabChild, index) => (
       <Tab
         {...tab.props}
         key={`TabItem-${index}`}
         isActive={activeTabIndex === index}
         onKeyDown={handleKeyDown}
         onClick={(event) => {
+          if (tab.props.disabled) return
+
           return setActiveTab({ index, event })
         }}
       />
