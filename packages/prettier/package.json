@@ -1,7 +1,7 @@
 {
   "name": "@aviato/prettier-config",
   "description": "Aviato Shareable Prettier Config",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
