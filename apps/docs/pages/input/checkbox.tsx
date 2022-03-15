@@ -8,6 +8,21 @@ import {
   Spacer,
 } from '../../components'
 
+const ComponentProps = `
+type CheckboxSize = 'small' | 'medium'
+
+interface CheckboxProps {
+  size?: CheckboxSize
+  checked?: boolean
+  disabled?: boolean
+  indeterminate?: boolean
+  label?: string
+  description?: string
+  index?: number
+  onChange?: (value: boolean, payload: OnCheckboxChange) => void
+}
+`
+
 const CheckboxPage = () => {
   const ShowCheckboxes = () => {
     return (
@@ -82,20 +97,7 @@ const CheckboxPage = () => {
         description={`
           A control that allows the user to toggle between checked and not checked.
         `}
-        code={`
-type CheckboxSize = 'small' | 'medium'
-
-interface CheckboxProps {
-  size?: CheckboxSize
-  checked?: boolean
-  disabled?: boolean
-  indeterminate?: boolean
-  label?: string
-  description?: string
-  index?: number
-  onChange?: (value: boolean, payload: OnCheckboxChange) => void
-}
-      `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

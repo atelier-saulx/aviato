@@ -26,6 +26,26 @@ const Divider = styled('div', {
   background: '$OtherDivider',
 })
 
+const ComponentProps = `
+type ButtonVariants =
+  | 'main'
+  | 'light'
+  | 'ghost'
+  | 'outline'
+  | 'outline-light'
+
+type ButtonColors = 'primary' | 'action' | 'error'
+
+interface ButtonProps {
+  variant?: ButtonVariant
+  color?: ButtonColor
+  disabled?: boolean
+  leftIcon?: ReactElement
+  rightIcon?: ReactElement
+  css?: StitchedCSS
+}
+`
+
 /**
  * TODO: Fix SSR issue with Vector Icons!
  */
@@ -126,25 +146,7 @@ const ButtonPage = () => {
           The Button component is used to trigger an action or event, such as submitting
           a form, opening a dialog, canceling an action, or performing a delete operation.
         `}
-        code={`
-type ButtonVariants =
-  | 'main'
-  | 'light'
-  | 'ghost'
-  | 'outline'
-  | 'outline-light'
-
-type ButtonColors = 'primary' | 'action' | 'error'
-
-interface ButtonProps {
-  variant?: ButtonVariant
-  color?: ButtonColor
-  disabled?: boolean
-  leftIcon?: ReactElement
-  rightIcon?: ReactElement
-  css?: StitchedCSS
-}
-      `}
+        props={ComponentProps}
       />
 
       <ShowcaseComponent

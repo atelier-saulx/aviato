@@ -1,7 +1,7 @@
 import { log } from '@aviato/utils'
 import { Column, Row, Switch, SwitchSize, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const SwitchPage = () => {
   const ShowSwitch = ({ size }: { size: SwitchSize }) => {
@@ -26,9 +26,12 @@ const SwitchPage = () => {
 
   return (
     <Page>
-      <NextTitle>Switch</NextTitle>
-
-      <NextText color="Secondary">Capture boolean input from user.</NextText>
+      <ShowcaseHeader
+        title="Switch"
+        description={`
+          Capture boolean input from user.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"

@@ -6,13 +6,13 @@ import { NextText, NextTitle } from '../text'
 export interface ShowcaseHeaderProps {
   title: string
   description: string
-  code?: string
+  props?: string
 }
 
 export const ShowcaseHeader: FunctionComponent<ShowcaseHeaderProps> = ({
   title,
   description,
-  code,
+  props: componentProperties,
 }) => {
   return (
     <>
@@ -20,7 +20,7 @@ export const ShowcaseHeader: FunctionComponent<ShowcaseHeaderProps> = ({
 
       <NextText color="Secondary">{description}</NextText>
 
-      <Conditional test={code}>
+      <Conditional test={componentProperties}>
         <NextText
           weight="semibold"
           size="large"
@@ -29,7 +29,7 @@ export const ShowcaseHeader: FunctionComponent<ShowcaseHeaderProps> = ({
           Component Properties
         </NextText>
 
-        <CodeSnippet language="typescript">{code}</CodeSnippet>
+        <CodeSnippet language="typescript">{componentProperties}</CodeSnippet>
       </Conditional>
 
       <NextText weight="semibold" size="large" css={{ paddingTop: 20 }}>

@@ -1,12 +1,28 @@
 import { Column, Row, Slider, Page } from '@aviato/ui'
 
 import {
-  NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
+  NextText,
   SmallSpacer,
   HugeSpacer,
 } from '../../components'
+
+const ComponentProps = `
+export interface SliderProps {
+  value?: number
+  defaultValue?: number
+  min?: number
+  max?: number
+  step?: number
+  marks?: Mark[]
+  label?: ReactNode | ((value: number) => ReactNode)
+  showLabelOnHover?: boolean
+  labelAlwaysVisible?: boolean
+  smoothDrag?: boolean
+  onChange?(value: string): void
+}
+`
 
 const SliderPage = () => {
   const simpleMarks = [
@@ -150,11 +166,13 @@ const SliderPage = () => {
 
   return (
     <Page>
-      <NextTitle>Slider</NextTitle>
-
-      <NextText color="Secondary">
-        Sliders allow users to make selections from a range of values.
-      </NextText>
+      <ShowcaseHeader
+        title="Slider"
+        description={`
+          Sliders allow users to make selections from a range of values.
+        `}
+        props={ComponentProps}
+      />
 
       <ShowcaseComponent
         background="transparent"
