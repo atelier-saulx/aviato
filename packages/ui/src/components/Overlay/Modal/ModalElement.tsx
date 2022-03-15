@@ -4,6 +4,7 @@ import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { Conditional, Button, ButtonVariant, Group } from '~/components'
+import { useHotkeys, HotkeyItem } from '~/hooks'
 
 type MouseEvent = React.MouseEvent<HTMLButtonElement>
 
@@ -29,8 +30,11 @@ const ButtonArea = styled('div', {
 export interface ModalButton {
   text: string
   onClick: (event) => void
+  hotkey?: string
   type?: 'primary' | 'outline'
 }
+
+export type ModalHotkey = HotkeyItem
 
 export interface ModalElementProps
   extends ComponentProps<typeof StyledModalElement> {
@@ -57,6 +61,16 @@ export const ModalElement = forwardRef<
     onModalAction(button)
     callback(event)
   }
+
+  const mappedHotKeys: any = buttons
+    .filter((button) => typeof button.hotkey === 'string')
+    .map((button) => {
+      const { hotkey, onClick } = button
+
+      return [hotkey, (event) => handleModalClick(event, button, onClick)]
+    })
+
+  useHotkeys(mappedHotKeys)
 
   const mappedButtons = buttons.map((button, index) => {
     const { text, type = 'primary', onClick } = button

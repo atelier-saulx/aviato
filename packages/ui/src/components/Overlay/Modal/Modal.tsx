@@ -9,6 +9,7 @@ import {
   useFocusTrap,
   useScrollLock,
   useHotkeys,
+  HotkeyItem,
 } from '~/hooks'
 import { ModalElement } from './ModalElement'
 import { ModalButton } from '.'
@@ -52,6 +53,7 @@ export interface ModalProps extends ComponentProps<typeof StyledModal> {
   onConfirm?(): void
   onCancel?(): void
   buttons?: ModalButton[]
+  hotkeys?: HotkeyItem[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   closeOnEnter?: boolean
@@ -70,6 +72,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       onClose = noop,
       onConfirm = noop,
       onCancel = noop,
+      buttons = [],
+      hotkeys = [],
       noFocusTrap = false,
       closeOnClickOutside = true,
       closeOnEscape = true,
@@ -78,7 +82,6 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       transitionDuration = 300,
       zIndex = getZIndex('Modal'),
       target,
-      buttons = [],
       ...remainingProps
     } = properties
 
@@ -112,17 +115,32 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       callback()
     }
 
-    useHotkeys([
-      ['ctrl+enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
+    const defaultHotkeys: HotkeyItem[] = [
+      ['enter', () => handleHotkey(closeOnEnter, () => handleClose(true))],
       ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
-    ])
+    ]
+
+    const buttonHotkeys = buttons
+      .map(({ hotkey }) => hotkey)
+      .filter((hotkey) => typeof hotkey === 'string')
+
+    const combinedHotkeys = [...defaultHotkeys, ...hotkeys]
+
+    const modalHotkeys: HotkeyItem[] = combinedHotkeys.filter((hotkey) => {
+      const targetKey = hotkey[0] as string
+      const hotkeyIsAssigned = buttonHotkeys.includes(targetKey)
+
+      return !hotkeyIsAssigned
+    }) as HotkeyItem[]
+
+    useHotkeys(modalHotkeys)
 
     return (
       <Portal zIndex={zIndex} target={target}>
         <GroupedTransition
-          onExited={() => lockScroll(false)}
-          onEntered={() => lockScroll(true)}
           mounted={isOpen}
+          onEnter={() => lockScroll(true)}
+          onExited={() => lockScroll(false)}
           transitions={{
             modal: {
               duration: transitionDuration,

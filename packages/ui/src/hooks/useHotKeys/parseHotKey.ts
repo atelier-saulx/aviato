@@ -13,7 +13,9 @@ export type Hotkey = KeyboardModifiers & {
 type CheckHotkeyMatch = (event: KeyboardEvent) => boolean
 
 export function parseHotkey(hotkey: string): Hotkey {
-  const keys = hotkey
+  const cleanedKey = hotkey.replace('cmd', 'meta')
+
+  const keys = cleanedKey
     .toLowerCase()
     .split('+')
     .map((part) => part.trim())
