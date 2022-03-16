@@ -98,7 +98,7 @@ const ModalPage = () => {
 
         <Modal
           isOpen={isOpen}
-          onClose={(wasConfirmed) => closeDialog(wasConfirmed)}
+          onClose={closeDialog}
           onConfirm={() => log.global.debug('Confirm and close')}
           onCancel={() => log.global.debug('Close without confirming')}
           buttons={modalButtons}
@@ -151,11 +151,7 @@ const ModalPage = () => {
       <>
         <Button onClick={openDialog}>Open Large Modal</Button>
 
-        <Modal
-          isOpen={isOpen}
-          onClose={() => closeDialog()}
-          buttons={modalButtons}
-        >
+        <Modal isOpen={isOpen} onClose={closeDialog} buttons={modalButtons}>
           {repeatedContent}
         </Modal>
       </>
