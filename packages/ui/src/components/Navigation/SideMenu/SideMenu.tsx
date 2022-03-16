@@ -2,7 +2,7 @@ import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { styled } from '~/theme'
-import { ScrollArea } from '../../Utilities'
+import { ScrollArea } from '~/components'
 
 const Padding = styled('div', {
   padding: 8,

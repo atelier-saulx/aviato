@@ -3,7 +3,13 @@ import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { styled } from '~/theme'
-import { Conditional, Button, ButtonVariant, Group } from '~/components'
+import {
+  Conditional,
+  Button,
+  ButtonVariant,
+  Group,
+  ScrollArea,
+} from '~/components'
 import { useHotkeys, HotkeyItem } from '~/hooks'
 
 type MouseEvent = React.MouseEvent<HTMLButtonElement>
@@ -16,6 +22,10 @@ const StyledModalElement = styled('div', {
 })
 
 const ContentArea = styled('div', {
+  maxHeight: '600px',
+})
+
+const Padding = styled('div', {
   padding: '24px',
 })
 
@@ -24,7 +34,6 @@ const ButtonArea = styled('div', {
   display: 'flex',
   justifyContent: 'end',
   borderTop: '1px solid $OtherDivider',
-  marginTop: '12px',
 })
 
 export interface ModalButton {
@@ -97,7 +106,11 @@ export const ModalElement = forwardRef<
 
   return (
     <StyledModalElement ref={forwardedRef} {...remainingProps}>
-      <ContentArea>{children}</ContentArea>
+      <ScrollArea type="scroll">
+        <ContentArea>
+          <Padding>{children}</Padding>
+        </ContentArea>
+      </ScrollArea>
 
       <Conditional test={buttons.length > 0}>
         <ButtonArea>
