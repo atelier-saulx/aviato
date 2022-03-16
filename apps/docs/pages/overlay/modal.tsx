@@ -136,6 +136,17 @@ const ModalPage = () => {
       },
     ]
 
+    const repeatedContent = Array(50)
+      .fill(null)
+      .map((_, index) => {
+        return (
+          <div key={`SimpleContent-${index}`} style={{ paddingBottom: 12 }}>
+            <Text>Repeated content</Text>
+            <Input type="text" placeholder="Type something here" />
+          </div>
+        )
+      })
+
     return (
       <>
         <Button onClick={openDialog}>Open Large Modal</Button>
@@ -145,14 +156,7 @@ const ModalPage = () => {
           onClose={() => closeDialog()}
           buttons={modalButtons}
         >
-          <ModalContent />
-          <ModalContent />
-          <ModalContent />
-          <ModalContent />
-          <ModalContent />
-          <ModalContent />
-          <ModalContent />
-          <ModalContent />
+          {repeatedContent}
         </Modal>
       </>
     )
