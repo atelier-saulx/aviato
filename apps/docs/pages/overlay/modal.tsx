@@ -110,6 +110,54 @@ const ModalPage = () => {
     )
   }
 
+  const ShowLargeModal = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openDialog = () => {
+      setIsOpen(true)
+    }
+
+    const closeDialog = () => {
+      setIsOpen(false)
+    }
+
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Cancel (Esc)',
+        type: 'outline',
+        hotkey: 'escape',
+        onClick: () => log.global.debug('Cancel'),
+      },
+      {
+        text: 'Register (Cmd+Enter)',
+        type: 'primary',
+        hotkey: 'cmd+enter',
+        onClick: () => log.global.debug('Register'),
+      },
+    ]
+
+    return (
+      <>
+        <Button onClick={openDialog}>Open Large Modal</Button>
+
+        <Modal
+          isOpen={isOpen}
+          onClose={() => closeDialog()}
+          buttons={modalButtons}
+        >
+          <ModalContent />
+          <ModalContent />
+          <ModalContent />
+          <ModalContent />
+          <ModalContent />
+          <ModalContent />
+          <ModalContent />
+          <ModalContent />
+        </Modal>
+      </>
+    )
+  }
+
   const ShowModalElement = () => {
     const modalButtons: ModalButton[] = [
       {
@@ -228,6 +276,10 @@ return (
       `}
       >
         <ShowComplexModal />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent>
+        <ShowLargeModal />
       </ShowcaseComponent>
 
       <ShowcaseComponent
