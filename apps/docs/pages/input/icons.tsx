@@ -11,7 +11,7 @@ import {
 } from '@aviato/ui'
 import { chunk } from '@aviato/utils'
 
-import { NextTitle, NextText } from '../../components'
+import { ShowcaseHeader } from '../../components'
 
 const GridItem = styled('div', {
   padding: 20,
@@ -104,11 +104,12 @@ const IconsPage = () => {
 
   return (
     <Page>
-      <NextTitle>Icons</NextTitle>
-
-      <NextText color="Secondary">
-        Aviato provides multiple ways to use icons in your project
-      </NextText>
+      <ShowcaseHeader
+        title="Icons"
+        description={`
+          Aviato provides multiple ways to use icons in your project.
+        `}
+      />
 
       <IconView />
 

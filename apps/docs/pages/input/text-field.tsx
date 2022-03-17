@@ -32,7 +32,6 @@ interface BaseInputProps {
   onChange?: (value: string, payload: OnInputChange) => void
   autoFocus?: boolean
 }
-
 `
 
 const TextFieldPage = () => {
