@@ -105,11 +105,15 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
   const modals = modalsRef.current.map(({ id, children, props }) => {
     const randomId = getRandomId()
 
+    const onClose = () => {
+      modalRef.current.close(id)
+    }
+
     return (
       <Modal
         {...props}
         isOpen
-        onClose={() => modalRef.current.close(id)}
+        onClose={onClose}
         key={`Modal-${id}-${randomId}`}
       >
         {children}

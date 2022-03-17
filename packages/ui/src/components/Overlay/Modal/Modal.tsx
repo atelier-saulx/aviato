@@ -49,9 +49,11 @@ const StyledModal = styled('div', {})
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
-  onClose(didUserConfirm?: boolean): void
+  onOpened?(): void
   onConfirm?(): void
   onCancel?(): void
+  onClose(didUserConfirm?: boolean): void
+  onClosed?(): void
   buttons?: ModalButton[]
   hotkeys?: HotkeyItem[]
   closeOnClickOutside?: boolean
@@ -69,9 +71,11 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
     const {
       children,
       isOpen = false,
+      onOpened = noop,
       onClose = noop,
       onConfirm = noop,
       onCancel = noop,
+      onClosed = noop,
       buttons = [],
       hotkeys = [],
       noFocusTrap = false,
@@ -100,6 +104,16 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       }
 
       onClose(isConfirm)
+    }
+
+    const handleEntered = () => {
+      lockScroll(true)
+      onOpened()
+    }
+
+    const handleExited = () => {
+      lockScroll(false)
+      onClosed()
     }
 
     const handleModalAction = (button: ModalButton) => {
@@ -137,8 +151,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       <Portal zIndex={zIndex} target={target}>
         <GroupedTransition
           mounted={isOpen}
-          onEnter={() => lockScroll(true)}
-          onExited={() => lockScroll(false)}
+          onEnter={handleEntered}
+          onExited={handleExited}
           transitions={{
             modal: {
               duration: transitionDuration,
