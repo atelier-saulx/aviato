@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const TopBarPage = () => {
   const ShowTopBar = () => {
@@ -15,11 +15,12 @@ const TopBarPage = () => {
 
   return (
     <Page>
-      <NextTitle>TopBar</NextTitle>
-
-      <NextText color="Secondary">
-        Secondary navigation that can be used for tabs, search, actions, etc.
-      </NextText>
+      <ShowcaseHeader
+        title="TopBar"
+        description={`
+          Secondary navigation that can be used for tabs, search, actions, etc.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowTopBar />

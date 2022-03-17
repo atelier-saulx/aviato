@@ -14,12 +14,7 @@ import {
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-} from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
 const TabContainer = styled('div', {
   padding: '0 $xxl',
@@ -81,12 +76,13 @@ const TabsPage = () => {
 
   return (
     <Page>
-      <NextTitle>Tabs</NextTitle>
-
-      <NextText color="Secondary">
-        Can be used to switch between different views, features and
-        environments.
-      </NextText>
+      <ShowcaseHeader
+        title="Tabs"
+        description={`
+          Can be used to switch between different views, features and
+          environments.
+        `}
+      />
 
       <ShowcaseComponent
         codeBlock={`

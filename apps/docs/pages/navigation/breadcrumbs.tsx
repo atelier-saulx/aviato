@@ -9,8 +9,7 @@ import {
 } from '@aviato/ui'
 
 import {
-  NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   SmallSpacer,
 } from '../../components'
@@ -73,11 +72,12 @@ const BreadcrumbsPage = () => {
 
   return (
     <Page>
-      <NextTitle>Breadcrumbs</NextTitle>
-
-      <NextText color="Secondary">
-        Separate navigational items with a given separator.
-      </NextText>
+      <ShowcaseHeader
+        title="Breadcrumbs"
+        description={`
+          Separate navigational items with a given separator.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"
