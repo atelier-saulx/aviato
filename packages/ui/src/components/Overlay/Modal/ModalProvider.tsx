@@ -118,8 +118,19 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
         modalRef.current.close(id)
       }
 
+      /**
+       * TODO: Add back closing animation
+       * Not added due to race-condition causing unmount mem-leaks
+       */
+      const onClosed = () => {}
+
       return (
-        <Modal {...props} isOpen={isVisible} onClose={onClose}>
+        <Modal
+          {...props}
+          isOpen={isVisible}
+          onClose={onClose}
+          onClosed={onClosed}
+        >
           {children}
         </Modal>
       )

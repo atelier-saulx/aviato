@@ -1,9 +1,14 @@
-import React, { forwardRef, ElementRef, useEffect } from 'react'
+import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
-import { GroupedTransition, Portal, TransitionPrimitive } from '~/components'
+import {
+  GroupedTransition,
+  GroupedTransitionItem,
+  Portal,
+  TransitionPrimitive,
+} from '~/components'
 import {
   useFocusReturn,
   useFocusTrap,
@@ -52,6 +57,7 @@ export interface ModalProps extends ComponentProps<typeof StyledModal> {
   onConfirm?(): void
   onCancel?(): void
   onClose(didUserConfirm?: boolean): void
+  onClosed?(): void
   buttons?: ModalButton[]
   hotkeys?: HotkeyItem[]
   closeOnClickOutside?: boolean
@@ -72,6 +78,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       onClose = noop,
       onConfirm = noop,
       onCancel = noop,
+      onClosed = noop,
       buttons = [],
       hotkeys = [],
       noFocusTrap = false,
@@ -102,14 +109,6 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       onClose(isConfirm)
     }
 
-    useEffect(() => {
-      lockScroll(true)
-
-      return () => {
-        lockScroll(false)
-      }
-    }, [])
-
     const handleModalAction = (button: ModalButton) => {
       const isConfirmAction = button.type === 'primary'
 
@@ -120,6 +119,15 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       if (!isOpen || !shouldTrigger) return
 
       callback()
+    }
+
+    const handleEnter = () => {
+      lockScroll(true)
+    }
+
+    const handleExited = () => {
+      lockScroll(false)
+      onClosed()
     }
 
     const defaultHotkeys: HotkeyItem[] = [
@@ -141,22 +149,24 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
 
     useHotkeys(modalHotkeys)
 
+    const transitions: Record<string, GroupedTransitionItem> = {
+      modal: {
+        duration: transitionDuration,
+        transition,
+      },
+      overlay: {
+        duration: transitionDuration / 2,
+        transition: 'fade',
+        timingFunction: 'ease',
+      },
+    }
+
     return (
       <GroupedTransition
         mounted={isOpen}
-        onEnter={() => lockScroll(true)}
-        onExited={() => lockScroll(false)}
-        transitions={{
-          modal: {
-            duration: transitionDuration,
-            transition,
-          },
-          overlay: {
-            duration: transitionDuration / 2,
-            transition: 'fade',
-            timingFunction: 'ease',
-          },
-        }}
+        onEnter={handleEnter}
+        onExited={handleExited}
+        transitions={transitions}
       >
         {(transitionStyles) => (
           <Portal zIndex={zIndex} target={target}>

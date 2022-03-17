@@ -4,7 +4,7 @@ import { useTransition } from '~/hooks'
 import { TransitionPrimitive } from './transitions'
 import { getTransitionStyles } from './utils'
 
-interface GroupedTransitionItem {
+export interface GroupedTransitionItem {
   duration: number
   timingFunction?: CSSProperties['transitionTimingFunction']
   transition: TransitionPrimitive
