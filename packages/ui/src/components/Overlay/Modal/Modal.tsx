@@ -3,7 +3,7 @@ import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
-import { Portal } from '~/components'
+import { GroupedTransition, Portal, TransitionPrimitive } from '~/components'
 import {
   useFocusReturn,
   useFocusTrap,
@@ -57,6 +57,8 @@ export interface ModalProps extends ComponentProps<typeof StyledModal> {
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   closeOnEnter?: boolean
+  transition?: TransitionPrimitive
+  transitionDuration?: number
   zIndex?: number
   noFocusTrap?: boolean
   target?: HTMLElement | string
@@ -75,6 +77,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       noFocusTrap = false,
       closeOnClickOutside = true,
       closeOnEscape = true,
+      transition = 'pop',
+      transitionDuration = 300,
       zIndex = getZIndex('Modal'),
       target,
       ...remainingProps
@@ -138,28 +142,48 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
     useHotkeys(modalHotkeys)
 
     return (
-      <Portal zIndex={zIndex} target={target}>
-        <Root>
-          <Inner
-            ref={focusTrapRef}
-            onMouseDown={() => closeOnClickOutside && onClose()}
-          >
-            <ModalElement
-              tabIndex={-1}
-              ref={forwardedRef}
-              buttons={buttons}
-              onMouseDown={(event) => event.stopPropagation()}
-              onModalAction={handleModalAction}
-              role="dialog"
-              {...remainingProps}
-            >
-              {children}
-            </ModalElement>
-          </Inner>
+      <GroupedTransition
+        mounted={isOpen}
+        onEnter={() => lockScroll(true)}
+        onExited={() => lockScroll(false)}
+        transitions={{
+          modal: {
+            duration: transitionDuration,
+            transition,
+          },
+          overlay: {
+            duration: transitionDuration / 2,
+            transition: 'fade',
+            timingFunction: 'ease',
+          },
+        }}
+      >
+        {(transitionStyles) => (
+          <Portal zIndex={zIndex} target={target}>
+            <Root>
+              <Inner
+                ref={focusTrapRef}
+                onMouseDown={() => closeOnClickOutside && onClose()}
+              >
+                <ModalElement
+                  tabIndex={-1}
+                  ref={forwardedRef}
+                  buttons={buttons}
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onModalAction={handleModalAction}
+                  style={transitionStyles.modal}
+                  role="dialog"
+                  {...remainingProps}
+                >
+                  {children}
+                </ModalElement>
+              </Inner>
 
-          <Backdrop />
-        </Root>
-      </Portal>
+              <Backdrop style={transitionStyles.overlay} />
+            </Root>
+          </Portal>
+        )}
+      </GroupedTransition>
     )
   }
 )
