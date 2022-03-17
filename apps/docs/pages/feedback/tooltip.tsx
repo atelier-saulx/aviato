@@ -1,15 +1,16 @@
 import { Button, Page, Tooltip } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const TooltipPage = () => {
   return (
     <Page>
-      <NextTitle>Tooltip</NextTitle>
-
-      <NextText color="Secondary">
-        Renders tooltip at given element on mouse over or any other event
-      </NextText>
+      <ShowcaseHeader
+        title="Tooltip"
+        description={`
+          Renders tooltip at given element on mouse over or any other event.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"

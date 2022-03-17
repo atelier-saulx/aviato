@@ -7,12 +7,7 @@ import {
   Page,
 } from '@aviato/ui'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-} from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
 const ContextMenuPage = () => {
   const ShowContextMenu = () => {
@@ -43,12 +38,13 @@ const ContextMenuPage = () => {
 
   return (
     <Page>
-      <NextTitle>Context Menu</NextTitle>
-
-      <NextText color="Secondary">
-        This component can be used anywhere to prompt a menu near the area where
-        you click a select or button component.
-      </NextText>
+      <ShowcaseHeader
+        title="Context Menu"
+        description={`
+          This component can be used anywhere to prompt a menu near the area where
+          you click a select or button component.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowContextMenu />

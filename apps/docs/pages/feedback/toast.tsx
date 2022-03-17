@@ -8,7 +8,7 @@ import {
   useHasLoaded,
 } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const Notification = ({ children }) => {
   const toast = useToast()
@@ -65,12 +65,14 @@ const ToastPage = () => {
 
   return (
     <Page>
-      <NextTitle>Toast</NextTitle>
+      <ShowcaseHeader
+        title="Toast"
+        description={`
+          Show dynamic notifications and alerts to user, part of notifications
+          system.
+        `}
+      />
 
-      <NextText color="Secondary">
-        Show dynamic notifications and alerts to user, part of notifications
-        system
-      </NextText>
       <ShowcaseComponent background="transparent">
         <ToastProvider>
           <div>

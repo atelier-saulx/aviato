@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const DrawerPage = () => {
   const ShowDrawer = () => {
@@ -15,9 +15,12 @@ const DrawerPage = () => {
 
   return (
     <Page>
-      <NextTitle>Drawer</NextTitle>
-
-      <NextText color="Secondary">Drawer.</NextText>
+      <ShowcaseHeader
+        title="Drawer"
+        description={`
+          Drawer.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowDrawer />

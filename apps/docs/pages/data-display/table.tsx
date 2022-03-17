@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const TablePage = () => {
   const ShowTable = () => {
@@ -15,11 +15,12 @@ const TablePage = () => {
 
   return (
     <Page>
-      <NextTitle>Table</NextTitle>
-
-      <NextText color="Secondary">
-        Tables are used to organize and display data efficiently.
-      </NextText>
+      <ShowcaseHeader
+        title="Table"
+        description={`
+          Tables are used to organize and display data efficiently.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowTable />

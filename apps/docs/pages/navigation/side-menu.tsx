@@ -1,10 +1,6 @@
 import { Page, Column, SideMenu, Menu, MenuItem, styled } from '@aviato/ui'
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  AviatoLogo,
-} from '../../components'
+
+import { ShowcaseHeader, ShowcaseComponent, AviatoLogo } from '../../components'
 
 const HeaderDiv = styled('div', {
   display: 'flex',
@@ -19,12 +15,13 @@ const HeaderDiv = styled('div', {
 const SideMenuPage = () => {
   return (
     <Page>
-      <NextTitle>Side Menu</NextTitle>
-
-      <NextText color="Secondary">
-        A navigational list of primary sections combined into a single
-        interactive area.
-      </NextText>
+      <ShowcaseHeader
+        title="Side Menu"
+        description={`
+          A navigational list of primary sections combined into a single
+          interactive area.
+        `}
+      />
 
       <ShowcaseComponent>
         <Column>

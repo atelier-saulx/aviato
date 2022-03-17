@@ -1,8 +1,7 @@
 import { Column, Row, Page, Link } from '@aviato/ui'
 
 import {
-  NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   SmallSpacer,
 } from '../../components'
@@ -38,11 +37,12 @@ const LinkPage = () => {
 
   return (
     <Page>
-      <NextTitle>Link</NextTitle>
-
-      <NextText color="Secondary">
-        Links are accessible elements used primarily for navigation.
-      </NextText>
+      <ShowcaseHeader
+        title="Link"
+        description={`
+          Links are accessible elements used primarily for navigation.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowLink />

@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const ColorPickerPage = () => {
   const ShowColorPicker = () => {
@@ -15,9 +15,12 @@ const ColorPickerPage = () => {
 
   return (
     <Page>
-      <NextTitle>ColorPicker</NextTitle>
-
-      <NextText color="Secondary">Capture color data from user.</NextText>
+      <ShowcaseHeader
+        title="ColorPicker"
+        description={`
+          Capture color data from user.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowColorPicker />

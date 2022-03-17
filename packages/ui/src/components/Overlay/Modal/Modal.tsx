@@ -3,7 +3,12 @@ import { ComponentProps } from '@stitches/react'
 import { noop } from '@aviato/utils'
 
 import { getZIndex, styled } from '~/theme'
-import { GroupedTransition, Portal, TransitionPrimitive } from '~/components'
+import {
+  GroupedTransition,
+  GroupedTransitionItem,
+  Portal,
+  TransitionPrimitive,
+} from '~/components'
 import {
   useFocusReturn,
   useFocusTrap,
@@ -49,18 +54,19 @@ const StyledModal = styled('div', {})
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
-  onClose(didUserConfirm?: boolean): void
   onConfirm?(): void
   onCancel?(): void
+  onClose(didUserConfirm?: boolean): void
+  onClosed?(): void
   buttons?: ModalButton[]
   hotkeys?: HotkeyItem[]
   closeOnClickOutside?: boolean
   closeOnEscape?: boolean
   closeOnEnter?: boolean
-  zIndex?: number
-  noFocusTrap?: boolean
   transition?: TransitionPrimitive
   transitionDuration?: number
+  zIndex?: number
+  noFocusTrap?: boolean
   target?: HTMLElement | string
 }
 
@@ -72,6 +78,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       onClose = noop,
       onConfirm = noop,
       onCancel = noop,
+      onClosed = noop,
       buttons = [],
       hotkeys = [],
       noFocusTrap = false,
@@ -88,7 +95,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
 
     const [, lockScroll] = useScrollLock()
 
-    useFocusReturn({ isOpen, transitionDuration })
+    useFocusReturn({ isOpen, transitionDuration: 0 })
 
     const handleClose = (isConfirm: boolean = false) => {
       if (!isOpen) return
@@ -114,6 +121,15 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       callback()
     }
 
+    const handleEnter = () => {
+      lockScroll(true)
+    }
+
+    const handleExited = () => {
+      lockScroll(false)
+      onClosed()
+    }
+
     const defaultHotkeys: HotkeyItem[] = [
       ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
     ]
@@ -133,25 +149,27 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
 
     useHotkeys(modalHotkeys)
 
+    const transitions: Record<string, GroupedTransitionItem> = {
+      modal: {
+        duration: transitionDuration,
+        transition,
+      },
+      overlay: {
+        duration: transitionDuration / 2,
+        transition: 'fade',
+        timingFunction: 'ease',
+      },
+    }
+
     return (
-      <Portal zIndex={zIndex} target={target}>
-        <GroupedTransition
-          mounted={isOpen}
-          onEnter={() => lockScroll(true)}
-          onExited={() => lockScroll(false)}
-          transitions={{
-            modal: {
-              duration: transitionDuration,
-              transition,
-            },
-            overlay: {
-              duration: transitionDuration / 2,
-              transition: 'fade',
-              timingFunction: 'ease',
-            },
-          }}
-        >
-          {(transitionStyles) => (
+      <GroupedTransition
+        mounted={isOpen}
+        onEnter={handleEnter}
+        onExited={handleExited}
+        transitions={transitions}
+      >
+        {(transitionStyles) => (
+          <Portal zIndex={zIndex} target={target}>
             <Root>
               <Inner
                 ref={focusTrapRef}
@@ -163,8 +181,8 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
                   buttons={buttons}
                   onMouseDown={(event) => event.stopPropagation()}
                   onModalAction={handleModalAction}
-                  role="dialog"
                   style={transitionStyles.modal}
+                  role="dialog"
                   {...remainingProps}
                 >
                   {children}
@@ -173,9 +191,9 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
 
               <Backdrop style={transitionStyles.overlay} />
             </Root>
-          )}
-        </GroupedTransition>
-      </Portal>
+          </Portal>
+        )}
+      </GroupedTransition>
     )
   }
 )

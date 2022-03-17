@@ -1,22 +1,33 @@
-import { useState } from 'react'
 import {
   Page,
-  Modal,
   Button,
-  Input,
-  Group,
+  useModal,
   Text,
-  ModalElement,
   ModalButton,
   ModalHotkey,
+  Group,
+  Input,
+  ModalElement,
 } from '@aviato/ui'
-
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 import { log } from '@aviato/utils'
 
+import { ShowcaseHeader, ShowcaseComponent, NextText } from '../../components'
+
 const ModalPage = () => {
-  const ModalContent = () => {
-    return (
+  const ShowSimpleModal = () => {
+    const { open } = useModal()
+
+    const openSimpleModal = () => {
+      open(<Text>This is a simple modal.</Text>)
+    }
+
+    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
+  }
+
+  const ShowComplexModal = () => {
+    const { open } = useModal()
+
+    const ComplexModal = (
       <>
         <Text weight="semibold">Register</Text>
 
@@ -34,44 +45,6 @@ const ModalPage = () => {
         </Group>
       </>
     )
-  }
-
-  const ShowSimpleModal = () => {
-    const [isOpen, setIsOpen] = useState(false)
-
-    const openDialog = () => {
-      setIsOpen(true)
-    }
-
-    const closeDialog = () => {
-      setIsOpen(false)
-    }
-
-    return (
-      <>
-        <Button onClick={openDialog}>Open Simple Modal</Button>
-
-        <Modal isOpen={isOpen} onClose={closeDialog}>
-          <Text>This is a simple modal.</Text>
-        </Modal>
-      </>
-    )
-  }
-
-  const ShowComplexModal = () => {
-    const [isOpen, setIsOpen] = useState(false)
-
-    const openDialog = () => {
-      setIsOpen(true)
-    }
-
-    const closeDialog = (wasConfirmed: boolean) => {
-      setIsOpen(false)
-
-      log.global.debug(
-        `Dialog was closed - Confirmed? ${wasConfirmed ? 'Yes' : 'No'}.`
-      )
-    }
 
     const modalButtons: ModalButton[] = [
       {
@@ -92,49 +65,18 @@ const ModalPage = () => {
       ['ctrl+t', () => log.global.debug('CTRL+T was pressed.')],
     ]
 
-    return (
-      <>
-        <Button onClick={openDialog}>Open Modal</Button>
+    const openComplexModal = () => {
+      open(ComplexModal, {
+        buttons: modalButtons,
+        hotkeys: modalHotkeys,
+      })
+    }
 
-        <Modal
-          isOpen={isOpen}
-          onClose={closeDialog}
-          onConfirm={() => log.global.debug('Confirm and close')}
-          onCancel={() => log.global.debug('Close without confirming')}
-          buttons={modalButtons}
-          hotkeys={modalHotkeys}
-        >
-          <ModalContent />
-        </Modal>
-      </>
-    )
+    return <Button onClick={openComplexModal}>Open Complex Modal</Button>
   }
 
   const ShowLargeModal = () => {
-    const [isOpen, setIsOpen] = useState(false)
-
-    const openDialog = () => {
-      setIsOpen(true)
-    }
-
-    const closeDialog = () => {
-      setIsOpen(false)
-    }
-
-    const modalButtons: ModalButton[] = [
-      {
-        text: 'Cancel (Esc)',
-        type: 'outline',
-        hotkey: 'escape',
-        onClick: () => log.global.debug('Cancel'),
-      },
-      {
-        text: 'Register (Cmd+Enter)',
-        type: 'primary',
-        hotkey: 'cmd+enter',
-        onClick: () => log.global.debug('Register'),
-      },
-    ]
+    const { open } = useModal()
 
     const repeatedContent = Array(50)
       .fill(null)
@@ -147,15 +89,26 @@ const ModalPage = () => {
         )
       })
 
-    return (
+    const LargeModal = (
       <>
-        <Button onClick={openDialog}>Open Large Modal</Button>
-
-        <Modal isOpen={isOpen} onClose={closeDialog} buttons={modalButtons}>
-          {repeatedContent}
-        </Modal>
+        <NextText weight="semibold">Repeated input fields</NextText>
+        <div>{repeatedContent}</div>
       </>
     )
+
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Confirm',
+      },
+    ]
+
+    const openLargeModal = () => {
+      open(LargeModal, {
+        buttons: modalButtons,
+      })
+    }
+
+    return <Button onClick={openLargeModal}>Open Large Modal</Button>
   }
 
   const ShowModalElement = () => {
@@ -170,151 +123,47 @@ const ModalPage = () => {
 
     return (
       <ModalElement buttons={modalButtons}>
-        <ModalContent />
+        <Text weight="semibold">Register</Text>
+
+        <Group direction="horizontal">
+          <Input
+            type="text"
+            placeholder="Type something here"
+            label="First Name"
+          />
+          <Input
+            type="text"
+            placeholder="Type something here"
+            label="Last Name"
+          />
+        </Group>
       </ModalElement>
     )
   }
 
   return (
     <Page>
-      <NextTitle>Modal</NextTitle>
+      <ShowcaseHeader
+        title="Modal"
+        description={`
+          Window with interactive elements. Content behind a modal is inert, meaning that users cannot interact with it
+          Modal windows, by their nature, are compulsory and require the user to act immediately. A modal can either be within an overlay, or embedded in a page.
+        `}
+      />
 
-      <NextText color="Secondary">Overlay with interactive elements.</NextText>
-
-      <ShowcaseComponent
-        background="transparent"
-        codeBlock={`
-import { Modal, Button, Text } from '@aviato/ui'
-
-const [isOpen, setIsOpen] = useState(false)
-
-const openDialog = () => {
-  setIsOpen(true)
-}
-
-const closeDialog = () => {
-  setIsOpen(false)
-}
-
-return (
-  <>
-    <Button onClick={openDialog}>Open Simple Modal</Button>
-
-    <Modal isOpen={isOpen} onClose={closeDialog}>
-      <Text>This is a simple modal.</Text>
-    </Modal>
-  </>
-)
-      `}
-      >
+      <ShowcaseComponent background="transparent">
         <ShowSimpleModal />
       </ShowcaseComponent>
 
-      <ShowcaseComponent
-        background="transparent"
-        codeBlock={`
-import { Modal, Button, Text, Group, Input } from '@aviato/ui'
-
-const [isOpen, setIsOpen] = useState(false)
-
-const openDialog = () => {
-  setIsOpen(true)
-}
-
-const closeDialog = (wasConfirmed: boolean) => {
-  setIsOpen(false)
-}
-
-const modalButtons: ModalButton[] = [
-  {
-    text: 'Cancel (Esc)',
-    type: 'outline',
-    hotkey: 'escape',
-    onClick: () => log.global.debug('Cancel'),
-  },
-  {
-    text: 'Register (Cmd+Enter)',
-    type: 'primary',
-    hotkey: 'cmd+enter',
-    onClick: () => log.global.debug('Register'),
-  },
-]
-
-const modalHotkeys: ModalHotkey[] = [
-  ['ctrl+t', () => log.global.debug('CTRL+T was pressed.')],
-]
-
-return (
-  <>
-    <Button onClick={openDialog}>Open Modal</Button>
-
-    <Modal
-      isOpen={isOpen}
-      onClose={(wasConfirmed) => closeDialog(wasConfirmed)}
-      onConfirm={() => log.global.debug('Confirm and close')}
-      onCancel={() => log.global.debug('Close without confirming')}
-      buttons={modalButtons}
-      hotkeys={modalHotkeys}
-    >
-      <Text weight="semibold">Register</Text>
-
-      <Group direction="horizontal">
-        <Input
-          type="text"
-          placeholder="Type something here"
-          label="First Name"
-        />
-        <Input
-          type="text"
-          placeholder="Type something here"
-          label="Last Name"
-        />
-      </Group>
-    </Modal>
-  </>
-)
-      `}
-      >
+      <ShowcaseComponent background="transparent">
         <ShowComplexModal />
       </ShowcaseComponent>
 
-      <ShowcaseComponent>
+      <ShowcaseComponent background="transparent">
         <ShowLargeModal />
       </ShowcaseComponent>
 
-      <ShowcaseComponent
-        codeBlock={`
-import { ModalElement, Text, Group, Input } from '@aviato/ui'
-
-const modalButtons: ModalButton[] = [
-  {
-    text: 'Register User (Cmd+O)',
-    type: 'primary',
-    hotkey: 'cmd+o',
-    onClick: () => log.global.debug('Register User'),
-  },
-]
-
-return (
-  <ModalElement buttons={modalButtons}>
-    <Text weight="semibold">Register</Text>
-
-    <Group direction="horizontal">
-      <Input
-        type="text"
-        placeholder="Type something here"
-        label="First Name"
-      />
-      <Input
-        type="text"
-        placeholder="Type something here"
-        label="Last Name"
-      />
-    </Group>
-  </ModalElement>
-)
-      `}
-      >
+      <ShowcaseComponent>
         <ShowModalElement />
       </ShowcaseComponent>
     </Page>

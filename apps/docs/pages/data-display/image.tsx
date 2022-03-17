@@ -1,11 +1,6 @@
 import { Column, Row, Page, Image } from '@aviato/ui'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-} from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
 
 const ImagePage = () => {
   const ShowImage = () => {
@@ -63,9 +58,12 @@ const ImagePage = () => {
 
   return (
     <Page>
-      <NextTitle>Image</NextTitle>
-
-      <NextText color="Secondary">Show an image in your app.</NextText>
+      <ShowcaseHeader
+        title="Image"
+        description={`
+          Show an image in your app.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"
