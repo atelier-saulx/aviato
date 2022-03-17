@@ -14,8 +14,20 @@ import { log } from '@aviato/utils'
 import { ShowcaseHeader, ShowcaseComponent, NextText } from '../../components'
 
 const ModalPage = () => {
-  const ModalContent = () => {
-    return (
+  const ShowSimpleModal = () => {
+    const { open } = useModal()
+
+    const openSimpleModal = () => {
+      open(<Text>This is a simple modal.</Text>)
+    }
+
+    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
+  }
+
+  const ShowComplexModal = () => {
+    const { open } = useModal()
+
+    const ComplexModal = (
       <>
         <Text weight="semibold">Register</Text>
 
@@ -33,22 +45,6 @@ const ModalPage = () => {
         </Group>
       </>
     )
-  }
-
-  const ShowSimpleModal = () => {
-    const { open } = useModal()
-
-    const openSimpleModal = () => {
-      open(<Text>This is a simple modal.</Text>)
-    }
-
-    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
-  }
-
-  const ShowComplexModal = () => {
-    const { open } = useModal()
-
-    const ComplexModal = <>{ModalContent}</>
 
     const modalButtons: ModalButton[] = [
       {
@@ -127,7 +123,20 @@ const ModalPage = () => {
 
     return (
       <ModalElement buttons={modalButtons}>
-        <ModalContent />
+        <Text weight="semibold">Register</Text>
+
+        <Group direction="horizontal">
+          <Input
+            type="text"
+            placeholder="Type something here"
+            label="First Name"
+          />
+          <Input
+            type="text"
+            placeholder="Type something here"
+            label="Last Name"
+          />
+        </Group>
       </ModalElement>
     )
   }
