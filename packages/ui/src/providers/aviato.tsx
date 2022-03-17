@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
+
 import { MenuProvider, ThemeProvider } from '~/providers'
+import { ModalProvider } from '~/components/Overlay'
 
 export interface AviatoProviderProps {
   children: ReactNode
@@ -8,7 +10,9 @@ export interface AviatoProviderProps {
 export function AviatoProvider({ children }: AviatoProviderProps) {
   return (
     <ThemeProvider>
-      <MenuProvider>{children}</MenuProvider>
+      <MenuProvider>
+        <ModalProvider>{children}</ModalProvider>
+      </MenuProvider>
     </ThemeProvider>
   )
 }
