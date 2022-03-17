@@ -98,13 +98,61 @@ const ModalPage = () => {
 
         <Modal
           isOpen={isOpen}
-          onClose={(wasConfirmed) => closeDialog(wasConfirmed)}
+          onClose={closeDialog}
           onConfirm={() => log.global.debug('Confirm and close')}
           onCancel={() => log.global.debug('Close without confirming')}
           buttons={modalButtons}
           hotkeys={modalHotkeys}
         >
           <ModalContent />
+        </Modal>
+      </>
+    )
+  }
+
+  const ShowLargeModal = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openDialog = () => {
+      setIsOpen(true)
+    }
+
+    const closeDialog = () => {
+      setIsOpen(false)
+    }
+
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Cancel (Esc)',
+        type: 'outline',
+        hotkey: 'escape',
+        onClick: () => log.global.debug('Cancel'),
+      },
+      {
+        text: 'Register (Cmd+Enter)',
+        type: 'primary',
+        hotkey: 'cmd+enter',
+        onClick: () => log.global.debug('Register'),
+      },
+    ]
+
+    const repeatedContent = Array(50)
+      .fill(null)
+      .map((_, index) => {
+        return (
+          <div key={`SimpleContent-${index}`} style={{ paddingBottom: 12 }}>
+            <Text>Repeated content</Text>
+            <Input type="text" placeholder="Type something here" />
+          </div>
+        )
+      })
+
+    return (
+      <>
+        <Button onClick={openDialog}>Open Large Modal</Button>
+
+        <Modal isOpen={isOpen} onClose={closeDialog} buttons={modalButtons}>
+          {repeatedContent}
         </Modal>
       </>
     )
@@ -228,6 +276,10 @@ return (
       `}
       >
         <ShowComplexModal />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent>
+        <ShowLargeModal />
       </ShowcaseComponent>
 
       <ShowcaseComponent
