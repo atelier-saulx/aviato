@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { getRandomId } from '@aviato/utils'
 
 import { Modal, ModalProps } from './Modal'
 
@@ -14,7 +15,6 @@ type ModalPartialProps = Partial<ModalProps>
 
 interface ModalItem {
   id: number
-  isOpen: boolean
   children: ReactNode
   props: ModalPartialProps
 }
@@ -62,7 +62,6 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
           id,
           children,
           props,
-          isOpen: true,
         })
       })
 
@@ -103,13 +102,15 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
     modalRef.current = ModalInstance
   }
 
-  const modals = modalsRef.current.map(({ id, children, props, isOpen }) => {
+  const modals = modalsRef.current.map(({ id, children, props }) => {
+    const randomId = getRandomId()
+
     return (
       <Modal
         {...props}
-        isOpen={isOpen}
+        isOpen
         onClose={() => modalRef.current.close(id)}
-        key={`Modal${id}`}
+        key={`Modal-${id}-${randomId}`}
       >
         {children}
       </Modal>
