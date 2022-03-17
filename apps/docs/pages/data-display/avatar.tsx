@@ -1,8 +1,7 @@
 import { Column, Row, Page, Avatar } from '@aviato/ui'
 
 import {
-  NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   SmallSpacer,
 } from '../../components'
@@ -100,11 +99,12 @@ const AvatarPage = () => {
 
   return (
     <Page>
-      <NextTitle>Avatar</NextTitle>
-
-      <NextText color="Secondary">
-        Display user profile image, initials or fallback icon.
-      </NextText>
+      <ShowcaseHeader
+        title="Avatar"
+        description={`
+          Display user profile image, initials or fallback icon.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"

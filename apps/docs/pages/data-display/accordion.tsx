@@ -1,5 +1,6 @@
 import { Page, Accordion, useHasLoaded } from '@aviato/ui'
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const AccordionPage = () => {
   const hasLoaded = useHasLoaded()
@@ -9,11 +10,12 @@ const AccordionPage = () => {
 
   return (
     <Page>
-      <NextTitle>Accordion</NextTitle>
-
-      <NextText color="Secondary">
-        Divide content into collapsible sections.
-      </NextText>
+      <ShowcaseHeader
+        title="Accordion"
+        description={`
+          Divide content into collapsible sections.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"
