@@ -115,19 +115,11 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
 
       const onClose = () => {
         setVisibility(false)
-      }
-
-      const onClosed = () => {
         modalRef.current.close(id)
       }
 
       return (
-        <Modal
-          {...props}
-          isOpen={isVisible}
-          onClose={onClose}
-          onClosed={onClosed}
-        >
+        <Modal {...props} isOpen={isVisible} onClose={onClose}>
           {children}
         </Modal>
       )
