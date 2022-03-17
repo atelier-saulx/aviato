@@ -10,7 +10,7 @@ import {
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const DialogButton = ({ level = 1 }) => {
   const { confirm, alert, prompt } = useDialog()
@@ -85,12 +85,13 @@ const DialogPage = () => {
   return (
     <Page>
       <DialogProvider>
-        <NextTitle>Dialog</NextTitle>
-
-        <NextText color="Secondary">
-          Show dynamic notifications and alerts to user, part of notifications
-          system
-        </NextText>
+        <ShowcaseHeader
+          title="Dialog"
+          description={`
+            Show dynamic notifications and alerts to user, part of notifications
+            system.
+          `}
+        />
 
         <ShowcaseComponent background="transparent">
           <div style={{ maxWidth: '100%' }}>
