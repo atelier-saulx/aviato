@@ -1,6 +1,6 @@
 import { Page, Column, CodeSnippet } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const CodeToDisplay = `
 import { CodeSnippet } from '@aviato/ui'
@@ -16,11 +16,12 @@ import { CodeSnippet } from '@aviato/ui'
 const CodeSnippetPage = () => {
   return (
     <Page>
-      <NextTitle>Code Snippet</NextTitle>
-
-      <NextText color="Secondary">
-        Show, copy and paste in a inline editor.
-      </NextText>
+      <ShowcaseHeader
+        title="Code Snippet"
+        description={`
+          Show, copy and paste in a inline editor.
+        `}
+      />
 
       <ShowcaseComponent codeBlock={CodeToDisplay}>
         <Column css={{ width: '100%' }}>

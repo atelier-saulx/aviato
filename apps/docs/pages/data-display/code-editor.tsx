@@ -1,7 +1,7 @@
 import { Page, Column, CodeEditor } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const CodeToDisplay = `
 import { CodeEditor } from '@aviato/ui'
@@ -17,9 +17,12 @@ import { CodeEditor } from '@aviato/ui'
 const CodeEditorPage = () => {
   return (
     <Page>
-      <NextTitle>Code Editor</NextTitle>
-
-      <NextText color="Secondary">Edit code in an inline editor.</NextText>
+      <ShowcaseHeader
+        title="Code Editor"
+        description={`
+          Edit code in an inline editor.
+        `}
+      />
 
       <ShowcaseComponent codeBlock={CodeToDisplay}>
         <Column css={{ width: '100%' }}>

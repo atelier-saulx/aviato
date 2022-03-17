@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const StatPage = () => {
   const ShowStat = () => {
@@ -15,11 +15,12 @@ const StatPage = () => {
 
   return (
     <Page>
-      <NextTitle>Stat</NextTitle>
-
-      <NextText color="Secondary">
-        Show data in a number or a graphical visual.
-      </NextText>
+      <ShowcaseHeader
+        title="Stat"
+        description={`
+          Show data in a number or a graphical visual.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowStat />

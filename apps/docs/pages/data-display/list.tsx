@@ -17,8 +17,7 @@ import {
 } from '@aviato/ui'
 
 import {
-  NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   SmallSpacer,
 } from '../../components'
@@ -294,11 +293,12 @@ const ListPage = () => {
 
   return (
     <Page>
-      <NextTitle>List</NextTitle>
-
-      <NextText color="Secondary">
-        Lists are continuous, vertical indexes of text or images.
-      </NextText>
+      <ShowcaseHeader
+        title="List"
+        description={`
+          Lists are continuous, vertical indexes of text or images.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowFloatingList />

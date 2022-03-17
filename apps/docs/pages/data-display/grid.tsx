@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const GridPage = () => {
   const ShowGrid = () => {
@@ -15,9 +15,12 @@ const GridPage = () => {
 
   return (
     <Page>
-      <NextTitle>Grid</NextTitle>
-
-      <NextText color="Secondary">Show information in a grid view.</NextText>
+      <ShowcaseHeader
+        title="Grid"
+        description={`
+          Show information in a grid view.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowGrid />
