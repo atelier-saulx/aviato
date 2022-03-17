@@ -1,6 +1,6 @@
 import { Page, Alert, IconCheck, useHasLoaded } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const AlertPage = () => {
   const hasLoaded = useHasLoaded()
@@ -10,11 +10,12 @@ const AlertPage = () => {
 
   return (
     <Page>
-      <NextTitle>Alert</NextTitle>
-
-      <NextText color="Secondary">
-        Attract user attention with important static message
-      </NextText>
+      <ShowcaseHeader
+        title="Alert"
+        description={`
+          Attract user attention with important static message.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <div>
