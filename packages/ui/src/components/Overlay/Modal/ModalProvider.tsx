@@ -10,14 +10,16 @@ import React, {
 
 import { Modal, ModalProps } from './Modal'
 
+type ModalPartialProps = Partial<ModalProps>
+
 interface ModalItem {
   id: number
   children: ReactNode
-  props: ModalProps
+  props: ModalPartialProps
 }
 
 interface ModalType {
-  open: (children: ReactNode, props?: ModalProps) => void
+  open: (children: ReactNode, props?: ModalPartialProps) => void
   close: (id: number) => void
   count: () => number
 }
@@ -35,10 +37,10 @@ export const useModal: () => ModalType = () => {
 export const ModalProvider: FunctionComponent = ({ children }) => {
   const [count, setCount] = useState(0)
 
-  const ModalsRef = useRef<ModalItem[]>()
-  const ModalRef = useRef<ModalType>()
+  const modalsRef = useRef<ModalItem[]>()
+  const modalRef = useRef<ModalType>()
 
-  if (!ModalRef.current) {
+  if (!modalRef.current) {
     let ModalCount = 0
 
     const listeners = new Set([setCount])
@@ -49,11 +51,11 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
 
     const Modal = () => {}
 
-    Modal.open = (children: ReactNode, props: ModalProps) => {
+    Modal.open = (children: ReactNode, props: ModalPartialProps) => {
       const id = ModalCount++
 
       update(
-        ModalsRef.current.push({
+        modalsRef.current.push({
           id,
           children,
           props,
@@ -64,13 +66,13 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
     }
 
     Modal.close = (id: number) => {
-      const ModalIndex = ModalsRef.current.findIndex(
+      const ModalIndex = modalsRef.current.findIndex(
         ({ id: ModalId }) => ModalId === id
       )
 
       if (ModalIndex !== -1) {
-        ModalsRef.current.splice(ModalIndex, 1)
-        update(ModalsRef.current.length)
+        modalsRef.current.splice(ModalIndex, 1)
+        update(modalsRef.current.length)
       }
     }
 
@@ -88,16 +90,16 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
       return state
     }
 
-    ModalsRef.current = []
-    ModalRef.current = Modal
+    modalsRef.current = []
+    modalRef.current = Modal
   }
 
-  const Modals = ModalsRef.current.map(({ id, children, props }, index) => {
+  const Modals = modalsRef.current.map(({ id, children, props }, index) => {
     return (
       <Modal
         {...props}
         isOpen
-        onClose={() => ModalRef.current.close(id)}
+        onClose={() => modalRef.current.close(id)}
         key={`Modal${id}${index}`}
       >
         {children}
@@ -106,7 +108,7 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
   })
 
   return (
-    <ModalContext.Provider value={ModalRef.current}>
+    <ModalContext.Provider value={modalRef.current}>
       {children}
       {Modals}
     </ModalContext.Provider>
