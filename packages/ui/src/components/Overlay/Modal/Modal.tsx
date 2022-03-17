@@ -49,7 +49,6 @@ const StyledModal = styled('div', {})
 
 export interface ModalProps extends ComponentProps<typeof StyledModal> {
   isOpen: boolean
-  onOpened?(): void
   onConfirm?(): void
   onCancel?(): void
   onClose(didUserConfirm?: boolean): void
