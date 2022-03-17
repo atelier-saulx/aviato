@@ -1,6 +1,6 @@
 import { Column, Row, Page } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const CardPage = () => {
   const ShowCard = () => {
@@ -15,9 +15,12 @@ const CardPage = () => {
 
   return (
     <Page>
-      <NextTitle>Card</NextTitle>
-
-      <NextText color="Secondary">Show information in a Card view.</NextText>
+      <ShowcaseHeader
+        title="Card"
+        description={`
+          Show information in a Card view.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowCard />

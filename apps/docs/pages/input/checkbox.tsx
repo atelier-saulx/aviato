@@ -2,12 +2,26 @@ import { Page, Checkbox, Text, Column, Row } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import {
-  NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   BigSpacer,
   Spacer,
 } from '../../components'
+
+const ComponentProps = `
+interface CheckboxProps {
+  size?: CheckboxSize
+  checked?: boolean
+  disabled?: boolean
+  indeterminate?: boolean
+  label?: string
+  description?: string
+  index?: number
+  onChange?: (value: boolean, payload: OnCheckboxChange) => void
+}
+
+type CheckboxSize = 'small' | 'medium'
+`
 
 const CheckboxPage = () => {
   const ShowCheckboxes = () => {
@@ -78,12 +92,13 @@ const CheckboxPage = () => {
 
   return (
     <Page>
-      <NextTitle>Checkbox</NextTitle>
-
-      <NextText color="Secondary">
-        A control that allows the user to toggle between checked and not
-        checked.
-      </NextText>
+      <ShowcaseHeader
+        title="Checkbox"
+        description={`
+          A control that allows the user to toggle between checked and not checked.
+        `}
+        props={ComponentProps}
+      />
 
       <ShowcaseComponent
         background="transparent"

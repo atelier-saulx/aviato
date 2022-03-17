@@ -1,13 +1,39 @@
 import { useEffect, useState } from 'react'
-import { Column, Row, TextField, Page, InputVariant } from '@aviato/ui'
+import { Column, Row, TextField, Page, InputVariant, Title } from '@aviato/ui'
 import { log, capitalize } from '@aviato/utils'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-} from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
+
+const ComponentProps = `
+interface TextFieldProps extends BaseInputProps {
+  autosize?: boolean
+  maxRows?: number
+  minRows?: number
+  label?: string
+  description?: string
+  error?: string
+  invalid?: boolean
+}
+
+interface BaseInputProps {
+  value?: string
+  defaultValue?: string
+  component?: ElementType
+  type?: InputType
+  placeholder?: string
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
+  variant?: InputVariant
+  disabled?: boolean
+  invalid?: boolean
+  multiline?: boolean
+  maxRows?: number
+  minRows?: number
+  onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
+}
+
+`
 
 const TextFieldPage = () => {
   const ShowTextField = ({ variant }: { variant: InputVariant }) => {
@@ -23,7 +49,9 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle size="small">{uppercaseVariant}</NextTitle>
+          <Title size="small" css={{ paddingBottom: 12 }}>
+            {uppercaseVariant}
+          </Title>
 
           <Row css={{ width: '100%' }}>
             <TextField
@@ -98,7 +126,9 @@ const TextFieldPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle size="small">Form</NextTitle>
+          <Title size="small" css={{ paddingBottom: 12 }}>
+            Form
+          </Title>
 
           <Row css={{ width: '100%' }}>
             <TextField
@@ -114,9 +144,13 @@ const TextFieldPage = () => {
 
   return (
     <Page>
-      <NextTitle>Text Field</NextTitle>
-
-      <NextText color="Secondary">Capture string input from user</NextText>
+      <ShowcaseHeader
+        title="Text Field"
+        description={`
+          Capture string input from user
+        `}
+        props={ComponentProps}
+      />
 
       <ShowcaseComponent
         background="transparent"

@@ -2,8 +2,8 @@ import { Column, Row, Page, Chip, ChipItem } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import {
-  NextTitle,
   NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   BigSpacer,
 } from '../../components'
@@ -62,11 +62,12 @@ const ChipPage = () => {
 
   return (
     <Page>
-      <NextTitle>Chip</NextTitle>
-
-      <NextText color="Secondary">
-        Alternative to Select and Radio Button.
-      </NextText>
+      <ShowcaseHeader
+        title="Chip"
+        description={`
+          Alternative to Select and Radio Button.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowChip />

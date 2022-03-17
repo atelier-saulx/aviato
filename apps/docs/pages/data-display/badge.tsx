@@ -13,7 +13,7 @@ import {
   IconLoading,
 } from '@aviato/ui'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, NextText } from '../../components'
 
 const BadgePage = () => {
   const ShowBadgeMatrix = () => {
@@ -126,9 +126,12 @@ const BadgePage = () => {
 
   return (
     <Page>
-      <NextTitle>Badge</NextTitle>
-
-      <NextText color="Secondary">Display badge, pill or tag.</NextText>
+      <ShowcaseHeader
+        title="Badge"
+        description={`
+          Display badge, pill or tag.
+        `}
+      />
 
       <ShowcaseComponent
         background="transparent"

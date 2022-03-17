@@ -11,12 +11,23 @@ import {
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import {
-  NextTitle,
-  NextText,
-  ShowcaseComponent,
-  BigSpacer,
-} from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
+
+const ComponentProps = `
+interface ToggleGroupProps {
+  type?: 'single' | 'multiple'
+  value?: string
+  defaultValue: string
+  children: any
+  onValueChange?(value: string | string[]): void
+  disabled?: boolean
+}
+
+interface ToggleItemProps {
+  value: string
+  disabled?: boolean
+}
+`
 
 const ToggleGroupPage = () => {
   const ShowToggleGroup = () => {
@@ -62,11 +73,13 @@ const ToggleGroupPage = () => {
 
   return (
     <Page>
-      <NextTitle>Toggle Group</NextTitle>
-
-      <NextText color="Secondary">
-        A set of two-state buttons that can be toggled on or off.
-      </NextText>
+      <ShowcaseHeader
+        title="Toggle Group"
+        description={`
+          A set of two-state buttons that can be toggled on or off.
+        `}
+        props={ComponentProps}
+      />
 
       <ShowcaseComponent
         background="transparent"

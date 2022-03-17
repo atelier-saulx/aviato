@@ -32,7 +32,7 @@ const StyledSlider = styled('div', {
 
 type StitchedProps = Omit<ComponentProps<typeof StyledSlider>, 'onChange'>
 
-interface SliderProps extends StitchedProps {
+export interface SliderProps extends StitchedProps {
   value?: number
   defaultValue?: number
   min?: number

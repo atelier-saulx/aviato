@@ -7,15 +7,43 @@ import {
   getRandomIcon,
   InputVariant,
   useHasLoaded,
+  Title,
 } from '@aviato/ui'
 import { log, capitalize } from '@aviato/utils'
 
 import {
   NextTitle,
-  NextText,
+  ShowcaseHeader,
   ShowcaseComponent,
   BigSpacer,
 } from '../../components'
+
+const ComponentProps = `
+interface InputProps extends BaseInputProps {
+  label?: string
+  description?: string
+  error?: string
+  invalid?: boolean
+}
+
+interface BaseInputProps {
+  value?: string
+  defaultValue?: string
+  component?: ElementType
+  type?: InputType
+  placeholder?: string
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
+  variant?: InputVariant
+  disabled?: boolean
+  invalid?: boolean
+  multiline?: boolean
+  maxRows?: number
+  minRows?: number
+  onChange?: (value: string, payload: OnInputChange) => void
+  autoFocus?: boolean
+}
+`
 
 /**
  * TODO: Fix SSR issue with Vector Icons!
@@ -45,7 +73,9 @@ const InputPage = () => {
     return (
       <>
         <Column css={{ width: '100%' }}>
-          <NextTitle size="small">{uppercaseVariant}</NextTitle>
+          <Title size="small" css={{ paddingBottom: 12 }}>
+            {uppercaseVariant}
+          </Title>
 
           <Row css={{ width: '100%' }}>
             <Input
@@ -139,9 +169,13 @@ const InputPage = () => {
 
   return (
     <Page>
-      <NextTitle>Input</NextTitle>
-
-      <NextText color="Secondary">Capture string input from user</NextText>
+      <ShowcaseHeader
+        title="Input"
+        description={`
+          Capture string input from user
+        `}
+        props={ComponentProps}
+      />
 
       <ShowcaseComponent
         background="transparent"
