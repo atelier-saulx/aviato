@@ -11,7 +11,7 @@ import {
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
-import { NextTitle, NextText, ShowcaseComponent } from '../../components'
+import { ShowcaseHeader, ShowcaseComponent, NextText } from '../../components'
 
 const ModalPage = () => {
   const ModalContent = () => {
@@ -134,9 +134,13 @@ const ModalPage = () => {
 
   return (
     <Page>
-      <NextTitle>Modal</NextTitle>
-
-      <NextText color="Secondary">Overlay with interactive elements.</NextText>
+      <ShowcaseHeader
+        title="Modal"
+        description={`
+          Window with interactive elements. Content behind a modal is inert, meaning that users cannot interact with it
+          Modal windows, by their nature, are compulsory and require the user to act immediately. A modal can either be within an overlay, or embedded in a page.
+        `}
+      />
 
       <ShowcaseComponent background="transparent">
         <ShowSimpleModal />
