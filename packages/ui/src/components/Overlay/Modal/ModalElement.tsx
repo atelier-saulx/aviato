@@ -38,7 +38,7 @@ const ButtonArea = styled('div', {
 
 export interface ModalButton {
   text: string
-  onClick: (event) => void
+  onClick?: (event) => void
   hotkey?: string
   type?: 'primary' | 'outline'
 }
@@ -82,7 +82,7 @@ export const ModalElement = forwardRef<
   useHotkeys(mappedHotKeys)
 
   const mappedButtons = buttons.map((button, index) => {
-    const { text, type = 'primary', onClick } = button
+    const { text, type = 'primary', onClick = noop } = button
 
     const buttonMap: { [key: string]: ButtonVariant } = {
       primary: 'main',

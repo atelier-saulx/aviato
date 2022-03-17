@@ -7,26 +7,15 @@ import {
   ModalHotkey,
   Group,
   Input,
+  ModalElement,
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
 import { NextTitle, NextText, ShowcaseComponent } from '../../components'
 
 const ModalPage = () => {
-  const ShowSimpleModal = () => {
-    const { open } = useModal()
-
-    const openSimpleModal = () => {
-      open(<Text>This is a simple modal.</Text>)
-    }
-
-    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
-  }
-
-  const ShowComplexModal = () => {
-    const { open } = useModal()
-
-    const ComplexModal = (
+  const ModalContent = () => {
+    return (
       <>
         <Text weight="semibold">Register</Text>
 
@@ -44,6 +33,22 @@ const ModalPage = () => {
         </Group>
       </>
     )
+  }
+
+  const ShowSimpleModal = () => {
+    const { open } = useModal()
+
+    const openSimpleModal = () => {
+      open(<Text>This is a simple modal.</Text>)
+    }
+
+    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
+  }
+
+  const ShowComplexModal = () => {
+    const { open } = useModal()
+
+    const ComplexModal = <>{ModalContent}</>
 
     const modalButtons: ModalButton[] = [
       {
@@ -71,7 +76,60 @@ const ModalPage = () => {
       })
     }
 
-    return <Button onClick={openComplexModal}>Open Modal</Button>
+    return <Button onClick={openComplexModal}>Open Complex Modal</Button>
+  }
+
+  const ShowLargeModal = () => {
+    const { open } = useModal()
+
+    const repeatedContent = Array(50)
+      .fill(null)
+      .map((_, index) => {
+        return (
+          <div key={`SimpleContent-${index}`} style={{ paddingBottom: 12 }}>
+            <Text>Repeated content</Text>
+            <Input type="text" placeholder="Type something here" />
+          </div>
+        )
+      })
+
+    const LargeModal = (
+      <>
+        <NextText weight="semibold">Repeated input fields</NextText>
+        <div>{repeatedContent}</div>
+      </>
+    )
+
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Confirm',
+      },
+    ]
+
+    const openLargeModal = () => {
+      open(LargeModal, {
+        buttons: modalButtons,
+      })
+    }
+
+    return <Button onClick={openLargeModal}>Open Large Modal</Button>
+  }
+
+  const ShowModalElement = () => {
+    const modalButtons: ModalButton[] = [
+      {
+        text: 'Register User (Cmd+O)',
+        type: 'primary',
+        hotkey: 'cmd+o',
+        onClick: () => log.global.debug('Register User'),
+      },
+    ]
+
+    return (
+      <ModalElement buttons={modalButtons}>
+        <ModalContent />
+      </ModalElement>
+    )
   }
 
   return (
@@ -86,6 +144,14 @@ const ModalPage = () => {
 
       <ShowcaseComponent background="transparent">
         <ShowComplexModal />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent background="transparent">
+        <ShowLargeModal />
+      </ShowcaseComponent>
+
+      <ShowcaseComponent>
+        <ShowModalElement />
       </ShowcaseComponent>
     </Page>
   )
