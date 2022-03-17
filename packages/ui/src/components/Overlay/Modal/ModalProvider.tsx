@@ -69,9 +69,8 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
     }
 
     ModalInstance.close = (id: number) => {
-      const modalIndex = modalsRef.current.findIndex(
-        ({ id: ModalId }) => ModalId === id
-      )
+      const predicate = ({ id: ModalId }) => ModalId === id
+      const modalIndex = modalsRef.current.findIndex(predicate)
 
       if (modalIndex !== -1) {
         modalsRef.current.splice(modalIndex, 1)
