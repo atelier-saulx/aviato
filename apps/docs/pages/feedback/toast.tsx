@@ -28,7 +28,7 @@ const Notification = ({ children }) => {
 
 const CloseAllButton = () => {
   const toast = useToast()
-  const amount = toast.getAmount()
+  const amount = toast.useCount()
 
   return (
     <>

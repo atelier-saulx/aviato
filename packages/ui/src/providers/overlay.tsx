@@ -23,14 +23,14 @@ interface OverlayType<T extends BaseOverlayProps> {
   open: (children: ReactNode, props: T) => void
   close: (id: number) => void
   closeAll: () => void
-  count: () => number
+  useCount: () => number
 }
 
 export const OverlayContext = createContext<OverlayType<any>>({
   open: () => {},
   close: () => {},
   closeAll: () => {},
-  count: () => 0,
+  useCount: () => 0,
 })
 
 export const useOverlay: () => OverlayType<any> = () => {
@@ -78,7 +78,12 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
       }
     }
 
-    OverlayInstance.count = () => {
+    OverlayInstance.closeAll = () => {
+      overlaysRef.current = []
+      update(0)
+    }
+
+    OverlayInstance.useCount = () => {
       const [state, setState] = useState(count)
 
       useEffect(() => {
@@ -90,11 +95,6 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
       }, [])
 
       return state
-    }
-
-    OverlayInstance.closeAll = () => {
-      overlaysRef.current = []
-      update(0)
     }
 
     overlaysRef.current = []

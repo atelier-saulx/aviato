@@ -14,7 +14,7 @@ export const useToast: () => ToastContextType = () => {
 
   noContext.add = noContext as any
   noContext.close = noContext as any
-  noContext.getAmount = noContext as any
+  noContext.useCount = noContext as any
 
   return noContext
 }

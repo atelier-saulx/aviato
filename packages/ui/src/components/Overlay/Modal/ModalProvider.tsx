@@ -23,14 +23,14 @@ interface ModalType {
   open: (children: ReactNode, props?: ModalPartialProps) => void
   close: (id: number) => void
   closeAll: () => void
-  count: () => number
+  useCount: () => number
 }
 
 export const ModalContext = createContext<ModalType>({
   open: () => {},
   close: () => {},
   closeAll: () => {},
-  count: () => 0,
+  useCount: () => 0,
 })
 
 export const useModal: () => ModalType = () => {
@@ -44,7 +44,7 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
   const modalRef = useRef<ModalType>()
 
   if (!modalRef.current) {
-    let ModalCount = 0
+    let modalCount = 0
 
     const listeners = new Set([setCount])
 
@@ -55,7 +55,7 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
     const ModalInstance = () => {}
 
     ModalInstance.open = (children: ReactNode, props: ModalPartialProps) => {
-      const id = ModalCount++
+      const id = modalCount++
 
       update(() => {
         modalsRef.current.push({
@@ -78,7 +78,12 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
       }
     }
 
-    ModalInstance.count = () => {
+    ModalInstance.closeAll = () => {
+      modalsRef.current = []
+      update(0)
+    }
+
+    ModalInstance.useCount = () => {
       const [state, setState] = useState(count)
 
       useEffect(() => {
@@ -90,11 +95,6 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
       }, [])
 
       return state
-    }
-
-    ModalInstance.closeAll = () => {
-      modalsRef.current = []
-      update(0)
     }
 
     modalsRef.current = []
