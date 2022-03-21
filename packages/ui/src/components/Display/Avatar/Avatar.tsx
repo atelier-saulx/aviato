@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, SyntheticEvent } from 'react'
 
 import { styled } from '~/theme'
 import { Conditional } from '~/components'
@@ -50,11 +50,11 @@ const StyledAvatar = styled('div', {
   },
 })
 
-export interface AvatarProps {
+export type AvatarProps = {
   src?: string
   label: string
   size?: BaseSize
-  onClick?: () => void
+  onClick?: (e?: SyntheticEvent) => void
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
