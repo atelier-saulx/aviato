@@ -1,5 +1,5 @@
 import React from 'react'
-import { SVGProperties } from '../types'
+import { SVGProperties } from '../../types'
 
 const SvgCloseCircle = (props: SVGProperties) => {
   return (
