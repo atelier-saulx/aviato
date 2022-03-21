@@ -1,6 +1,6 @@
 import React, { forwardRef, ElementRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { filterChildrenByType } from '@aviato/utils'
+// import { filterChildrenByType } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { ListItem, ListItemProps } from './ListItem'
@@ -50,7 +50,10 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
       ...remainingProps
     } = properties
 
-    const listItemChildren = filterChildrenByType(children, ListItem)
+    const listItemChildren = Array.isArray(children) ? children : [children]
+
+    // const listItemChildren = filterChildrenByType(children, ListItem)
+    // console.info(children, listItemChildren)
 
     const listItems = listItemChildren.map((listItem, index) => {
       return (
