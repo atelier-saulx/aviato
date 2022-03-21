@@ -12,7 +12,6 @@ const StyledAvatar = styled('div', {
   backgroundColor: '$PrimaryMain',
   color: '$PrimaryMainContrast',
   overflow: 'hidden',
-
   variants: {
     size: {
       extrasmall: {
