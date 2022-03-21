@@ -8,10 +8,13 @@ import React, {
   useState,
 } from 'react'
 import { getRandomId } from '@aviato/utils'
+import { Backdrop } from '~/components'
 
 // TODO: Find best way to infer prop typings
 
-interface BaseOverlayProps {}
+interface BaseOverlayProps {
+  onClose: (id: number) => void
+}
 
 interface OverlayItem<T extends BaseOverlayProps> {
   id: number
@@ -20,20 +23,26 @@ interface OverlayItem<T extends BaseOverlayProps> {
 }
 
 interface OverlayType<T extends BaseOverlayProps> {
-  open: (children: ReactNode, props: T) => void
+  open: (children: ReactNode, props?: T) => void
   close: (id: number) => void
   closeAll: () => void
   useCount: () => number
 }
 
-export const OverlayContext = createContext<OverlayType<any>>({
-  open: () => {},
-  close: () => {},
-  closeAll: () => {},
-  useCount: () => 0,
-})
+function CreateOverlayContext<T extends BaseOverlayProps>(): React.Context<
+  OverlayType<T>
+> {
+  return createContext<OverlayType<T>>({
+    open: () => {},
+    close: () => {},
+    closeAll: () => {},
+    useCount: () => 0,
+  })
+}
 
-export const useOverlay: () => OverlayType<any> = () => {
+const OverlayContext = CreateOverlayContext()
+
+export function useOverlay<T extends BaseOverlayProps>(): OverlayType<T> {
   return useContext(OverlayContext)
 }
 
@@ -54,7 +63,7 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
 
     const OverlayInstance = () => {}
 
-    OverlayInstance.open = (children: ReactNode, props: BaseOverlayProps) => {
+    OverlayInstance.open = (children: ReactNode, props?: BaseOverlayProps) => {
       const id = overlayCount++
 
       update(() => {
@@ -106,7 +115,20 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
 
     const randomId = getRandomId()
 
-    return <div key={`Overlay-${id}-${randomId}`}>{children}</div>
+    return (
+      <Backdrop
+        key={`Overlay-${id}-${randomId}`}
+        css={{
+          position: 'fixed',
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          padding: 20,
+        }}
+      >
+        {children}
+      </Backdrop>
+    )
   })
 
   return (

@@ -1,16 +1,16 @@
-import { Column, Row, Page } from '@aviato/ui'
+import { Page, Button, Text, useOverlay } from '@aviato/ui'
 
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const OverlayPage = () => {
-  const ShowOverlay = () => {
-    return (
-      <>
-        <Column>
-          <Row>Overlay</Row>
-        </Column>
-      </>
-    )
+  const ShowSimpleOverlay = () => {
+    const { open } = useOverlay()
+
+    const openSimpleModal = () => {
+      open(<Text>This is a simple modal.</Text>)
+    }
+
+    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
   }
 
   return (
@@ -23,7 +23,7 @@ const OverlayPage = () => {
       />
 
       <ShowcaseComponent background="transparent">
-        <ShowOverlay />
+        <ShowSimpleOverlay />
       </ShowcaseComponent>
     </Page>
   )
