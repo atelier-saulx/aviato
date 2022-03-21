@@ -50,7 +50,10 @@ export const List = forwardRef<ElementRef<typeof StyledList>, ListProps>(
       ...remainingProps
     } = properties
 
-    const listItemChildren = filterChildrenByType(children, ListItem)
+    const listItemChildren = Array.isArray(children) ? children : [children]
+    // filterChildrenByType(children, ListItem)
+
+    // console.info(children, listItemChildren)
 
     const listItems = listItemChildren.map((listItem, index) => {
       return (

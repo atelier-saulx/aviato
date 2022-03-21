@@ -18,8 +18,9 @@ const updateReducer = (
   return state
 }
 
-export function useObjectState(
-  initialState?: GenericObject
-): [GenericObject, (val: GenericObject | null | undefined) => void] {
-  return useReducer(updateReducer, initialState)
+export function useObjectState<T = GenericObject>(
+  initialState?: T
+): [T, (val: T | null | undefined) => void] {
+  // @ts-ignore
+  return useReducer(updateReducer, initialState || {})
 }
