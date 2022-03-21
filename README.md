@@ -88,10 +88,6 @@ npm install --save @aviato/ui
 
 _We do not currently accept community-driven code contributions_, as Aviato is still in concept phase, but feel free to fork Aviato for your own use. This is subject to change in the future.
 
-<a href="https://github.com/atelier-saulx/aviato-ui/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=atelier-saulx/aviato-ui" />
-</a>
-
 ---
 
 ## ✍️ Authors
