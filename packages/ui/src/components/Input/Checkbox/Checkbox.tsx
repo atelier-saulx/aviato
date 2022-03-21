@@ -226,7 +226,11 @@ export const Checkbox = forwardRef<ElementRef<typeof Container>, CheckboxProps>(
 
     if (hasLabelOrDescription) {
       return (
-        <Container>
+        <Container
+          css={{
+            justifyContent: 'flex-start',
+          }}
+        >
           <AlignmentContainer>
             <CheckboxComponent ref={forwardedRef} {...remainingProps} />
 
