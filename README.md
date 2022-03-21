@@ -18,7 +18,7 @@
 
 ## 🔍 Description
 
-Aviato is a React components and hooks library with focus on usability, accessibility and developer experience.
+Aviato's goal is to be a React components and hooks library with focus on usability, accessibility and developer experience.
 
 You can use these components either as the base layer of your application, or adopt them incrementally.
 
