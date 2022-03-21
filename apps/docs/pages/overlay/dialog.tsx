@@ -61,7 +61,7 @@ const DialogButtonAndClose = () => {
   return (
     <Button
       onClick={() => {
-        const id = dialog.add(
+        const id = dialog.open(
           <Dialog title="I will dissappear!">Oh noooo!</Dialog>
         )
 

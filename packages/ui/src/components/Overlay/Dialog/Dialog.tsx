@@ -4,10 +4,13 @@ import React, {
   ComponentProps,
   ReactNode,
   Fragment,
+  useRef,
 } from 'react'
 
 import { styled } from '~/theme'
 import { Text, Button } from '~/components'
+import { useDialog } from './useDialog'
+import { useHotkeys } from '~/hooks'
 
 const Container = styled('div', {
   width: 520,
@@ -77,15 +80,64 @@ const Buttons = ({ children }) => {
   return <StyledButtons>{children}</StyledButtons>
 }
 
-const Confirm = ({ children = 'OK', ...props }) => (
-  <Button {...props}>{children}</Button>
-)
+const Confirm = ({ children = 'OK', onConfirm, ...props }) => {
+  const dialog = useDialog()
+  const { current: myId } = useRef(dialog._id)
+  const onClick = onConfirm
+    ? async () => {
+        if (!props.disabled && myId === dialog._id) {
+          try {
+            await onConfirm()
+            dialog.close(myId)
+          } catch (e) {
+            console.error(e)
+          }
+        }
+      }
+    : () => {
+        if (!props.disabled && myId === dialog._id) {
+          dialog.close(myId)
+        }
+      }
 
-const Cancel = ({ children = 'Cancel', ...props }) => (
-  <Button color="action" variant="outline-light" {...props}>
-    {children}
-  </Button>
-)
+  useHotkeys([['enter', onClick]])
+
+  return (
+    <Button onClick={onClick} {...props}>
+      {children}
+    </Button>
+  )
+}
+
+const Cancel = ({ children = 'Cancel', onCancel = null, ...props }) => {
+  const dialog = useDialog()
+  const { current: myId } = useRef(dialog._id)
+
+  const onClick = onCancel
+    ? async () => {
+        if (!props.disabled && myId === dialog._id) {
+          try {
+            await onCancel()
+            dialog.close(myId)
+          } catch (e) {
+            console.error(e)
+          }
+        }
+      }
+    : () => {
+        if (!props.disabled && myId === dialog._id) {
+          dialog.close(myId)
+        }
+      }
+
+  useHotkeys([['escape', onClick]])
+
+  return (
+    <Button onClick={onClick} color="action" variant="outline-light" {...props}>
+      {children}
+    </Button>
+  )
+}
 
 export interface DialogProps extends ComponentProps<typeof Container> {
   children?: ReactNode

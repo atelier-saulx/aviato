@@ -3,24 +3,11 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import { DialogContext, DialogContextType } from './DialogContext'
 import { Backdrop, Input } from '~/components'
 import { Dialog } from './Dialog'
-import { useHotkeys, HotkeyItem } from '~/hooks'
 
-const Prompt = ({
-  type = 'prompt',
-  onCancel,
-  onConfirm,
-  hotKeys = ['enter'],
-  ...props
-}) => {
+const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
   const ref = useRef<HTMLInputElement>()
   const isPrompt = type === 'prompt'
   const isAlert = type === 'alert'
-  const confirm = isPrompt ? () => onConfirm(ref.current.value) : onConfirm
-
-  useHotkeys([
-    ...hotKeys.map((key) => [key, confirm] as HotkeyItem),
-    ['escape', onCancel],
-  ])
 
   return (
     <Dialog {...props}>
@@ -30,8 +17,12 @@ const Prompt = ({
         </Dialog.Body>
       ) : null}
       <Dialog.Buttons>
-        {isAlert ? null : <Dialog.Cancel onClick={onCancel} />}
-        <Dialog.Confirm onClick={onConfirm} />
+        {isAlert ? null : <Dialog.Cancel onCancel={onCancel} />}
+        <Dialog.Confirm
+          onConfirm={() =>
+            isPrompt ? onConfirm(ref.current.value) : onConfirm(true)
+          }
+        />
       </Dialog.Buttons>
     </Dialog>
   )
@@ -54,35 +45,10 @@ export const DialogProvider = ({ children, fixed = true }) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const dialog = () => {}
-
-    const prompt = (type, props) => {
-      return new Promise((resolve) => {
-        if (typeof props === 'string') {
-          props = {
-            title: props,
-          }
-        }
-
-        const id = dialog.add(
-          <Prompt
-            {...props}
-            type={type}
-            onCancel={() => {
-              dialog.close(id)
-              resolve(false)
-            }}
-            onConfirm={(value) => {
-              dialog.close(id)
-              resolve(value)
-            }}
-          />
-        )
-      })
-    }
-
-    dialog.add = (children) => {
+    const dialog = (children) => {
       const id = count++
+      // this is only used internally
+      dialog._id = id
 
       update(
         dialogsRef.current.push({
@@ -94,6 +60,29 @@ export const DialogProvider = ({ children, fixed = true }) => {
       return id
     }
 
+    dialog._id = null
+
+    const prompt = (type, props) => {
+      return new Promise((resolve) => {
+        if (typeof props === 'string') {
+          props = {
+            title: props,
+          }
+        }
+
+        dialog.open(
+          <Prompt
+            {...props}
+            type={type}
+            onCancel={() => resolve(false)}
+            onConfirm={resolve}
+          />
+        )
+      })
+    }
+
+    dialog.open = dialog
+
     dialog.close = (id) => {
       if (typeof id === 'number') {
         const index = dialogsRef.current.findIndex(
@@ -101,11 +90,16 @@ export const DialogProvider = ({ children, fixed = true }) => {
         )
         if (index !== -1) {
           dialogsRef.current.splice(index, 1)
-          update(dialogsRef.current.length)
+          const { length } = dialogsRef.current
+          dialog._id = length ? dialogsRef.current[length - 1].id : null
+          update(length)
         }
       } else {
         dialogsRef.current = []
+        dialog._id = null
         update(0)
+        // dialogsRef.current.pop()
+        // update(dialogsRef.current.length)
       }
     }
 

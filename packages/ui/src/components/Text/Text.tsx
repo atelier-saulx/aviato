@@ -36,6 +36,13 @@ const StyledText = styled('p', {
         lineHeight: '$xl',
       },
     },
+    mode: {
+      singleLine: {
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+      },
+    },
   },
 })
 
@@ -44,6 +51,7 @@ export interface TextProps extends ComponentProps<typeof StyledText> {
   weight?: FontWeight
   color?: FontColor
   as?: any
+  singleLine?: boolean
 }
 
 export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
@@ -55,6 +63,7 @@ export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
         size = 'medium',
         weight = 'regular',
         color = 'Primary',
+        singleLine,
         ...remainingProps
       } = properties
 
@@ -63,6 +72,7 @@ export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
           color={color}
           size={size}
           weight={weight}
+          mode={singleLine ? 'singleLine' : null}
           ref={forwardedRef}
           {...remainingProps}
         />

@@ -13,9 +13,39 @@ import { log } from '@aviato/utils'
 
 import { ShowcaseHeader, ShowcaseComponent, NextText } from '../../components'
 
+// const AddProject = () => {
+
+//   return <Modal
+//       buttons={
+//         [
+//           {
+//             text: 'Cancel (Esc)',
+//             type: 'outline',
+//             hotkey: 'escape',
+//             onClick: () => log.global.debug('Cancel'),
+//           },
+//           {
+//             text: 'Register (Cmd+Enter)',
+//             type: 'primary',
+//             hotkey: 'cmd+enter',
+//             onClick: () => log.global.debug('Register'),
+//           },
+//         ]
+//       }
+//   >
+
+//       <div>
+
+//         fevgicuewrferiug
+//       </div>
+
+//   </Modal>
+
+// }
+
 const ModalPage = () => {
   const ShowSimpleModal = () => {
-    const { open } = useModal()
+    const { open } = useModal() // useOverlay
 
     const openSimpleModal = () => {
       open(<Text>This is a simple modal.</Text>)

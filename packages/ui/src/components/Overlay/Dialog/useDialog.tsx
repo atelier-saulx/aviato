@@ -12,7 +12,7 @@ export const useDialog: () => DialogContextType = () => {
     console.warn('No DialogContext found')
   }
 
-  noContext.add = noContext as any
+  noContext.open = noContext as any
   noContext.close = noContext as any
   noContext.confirm = noContext as any
   noContext.alert = noContext as any
