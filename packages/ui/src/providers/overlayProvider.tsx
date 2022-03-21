@@ -12,6 +12,7 @@ import { Backdrop } from '~/components'
 
 export interface BaseOverlayProps {
   onClose: (id: number) => void
+  backdrop?: ReactNode
 }
 
 interface OverlayItem<T extends BaseOverlayProps> {
@@ -27,7 +28,7 @@ interface OverlayType<T extends BaseOverlayProps> {
   useCount: () => number
 }
 
-function CreateOverlayContext<T extends BaseOverlayProps>(): React.Context<
+function createOverlayContext<T extends BaseOverlayProps>(): React.Context<
   OverlayType<T>
 > {
   return createContext<OverlayType<T>>({
@@ -38,7 +39,7 @@ function CreateOverlayContext<T extends BaseOverlayProps>(): React.Context<
   })
 }
 
-const OverlayContext = CreateOverlayContext()
+const OverlayContext = createOverlayContext()
 
 export function useOverlay<T extends BaseOverlayProps>(): OverlayType<T> {
   return useContext(OverlayContext)
@@ -109,22 +110,32 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
   }
 
   const overlays = overlaysRef.current.map((properties) => {
-    const { id, children } = properties
+    const { id, children, props = {} } = properties
+    const { backdrop: CustomBackdrop } = props
+
+    const BaseBackdrop = ({ children }) => {
+      return (
+        <Backdrop
+          css={{
+            position: 'fixed',
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          {children}
+        </Backdrop>
+      )
+    }
+
+    const BackdropElement = CustomBackdrop ?? BaseBackdrop
 
     const randomId = getRandomId()
 
     return (
-      <Backdrop
-        key={`Overlay-${id}-${randomId}`}
-        css={{
-          position: 'fixed',
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
+      <BackdropElement key={`Overlay-${id}-${randomId}`}>
         {children}
-      </Backdrop>
+      </BackdropElement>
     )
   })
 
