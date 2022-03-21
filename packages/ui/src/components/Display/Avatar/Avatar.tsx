@@ -73,7 +73,6 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
       <Conditional test={imagesPreloaded}>
         <img src={src} alt={label} />
       </Conditional>
-
       <Conditional test={!imagesPreloaded}>
         <div title={label}>{fallbackLetters ?? children}</div>
       </Conditional>
