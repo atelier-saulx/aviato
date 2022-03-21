@@ -89,12 +89,10 @@ import WaitingScreenSvg from './Components/WaitingScreen'
 import WelcomeScreenSvg from './Components/WelcomeScreen'
 import useMultipleEvents from '../hooks/events/useMultipleEvents'
 
-import { Color } from '../theme'
-
 export type SvgProps = {
-  color?: Color
+  color?: any
   framed?: boolean
-  frameColor?: Color
+  frameColor?: any
   size?: number
 }
 
@@ -103,9 +101,9 @@ type GenericEventHandler = EventHandler<SyntheticEvent>
 export type Icon = FunctionComponent<IconProps>
 
 export type IconStyleProps = {
-  color?: Color
+  color?: any
   framed?: boolean
-  frameColor?: Color
+  frameColor?: any
   size?: number
 }
 
@@ -149,7 +147,7 @@ const EventIcon: Icon = ({
     }
   }
 
-  let events: any = {}
+  const events: any = {}
 
   if (onClick) events.onClick = onClick
   if (onDown) events.onMouseDown = onDown

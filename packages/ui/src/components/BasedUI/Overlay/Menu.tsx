@@ -77,7 +77,7 @@ export type ContextualMenuItemProps = {
   label?: TextValue
   onClick?: DataEventHandler
   style?: CSSProperties
-  color?: Color
+  color?: any
   border?: boolean
   iconProps?: IconProps
   onOptions?: DataEventHandler
