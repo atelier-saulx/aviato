@@ -2,12 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { useColor } from '../../useColor'
 import { SvgProps } from '..'
 
-const Germany: FunctionComponent<SvgProps> = ({
-  color,
-  framed,
-  size,
-  frameColor,
-}) => {
+const Germany: FunctionComponent<SvgProps> = ({ framed, size, frameColor }) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       {framed ? (

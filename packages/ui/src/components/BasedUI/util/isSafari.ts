@@ -1,4 +1,5 @@
 export default (): boolean => {
-  const isSafari = safari !== undefined
+  // @ts-ignore
+  const isSafari = typeof safari !== undefined
   return isSafari
 }

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 
 import { DialogContext, DialogContextType } from './DialogContext'
 
+// @ts-ignore
 export const useDialog: () => DialogContextType = () => {
   const Dialog = useContext(DialogContext)
   if (Dialog) {

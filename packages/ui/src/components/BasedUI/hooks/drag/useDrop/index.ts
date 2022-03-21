@@ -6,7 +6,6 @@ import {
   DragEvent,
 } from 'react'
 import { clearSelection, getSelection } from '../../useSelect'
-import readFiles from './readFiles'
 import { Data, File } from '../../../types'
 import { deepEqual } from '@saulx/utils'
 
@@ -88,46 +87,21 @@ const useDrop = (
           let promise
           setDropLoading(true)
 
-          if (props.readFiles) {
+          if (data) {
+            promise = onDrop(event, { data, files: [] })
+          } else {
+            promise = onDrop(event, { files: [] })
+          }
+          if (promise instanceof Promise) {
             event.stopPropagation()
-            readFiles(event.dataTransfer).then((files) => {
-              if (data) {
-                promise = onDrop(event, { files, data })
-              } else {
-                promise = onDrop(event, { files })
-              }
-
-              if (promise instanceof Promise) {
-                promise.then(() => {
-                  setDropLoading(false)
-                  requestAnimationFrame(() => {
-                    baseTarget.dispatchEvent(nativeEvent)
-                  })
-                })
-              } else {
-                setDropLoading(false)
-                requestAnimationFrame(() => {
-                  baseTarget.dispatchEvent(nativeEvent)
-                })
-              }
+            promise.then(() => {
+              setDropLoading(false)
+              requestAnimationFrame(() => {
+                baseTarget.dispatchEvent(nativeEvent)
+              })
             })
           } else {
-            if (data) {
-              promise = onDrop(event, { data, files: [] })
-            } else {
-              promise = onDrop(event, { files: [] })
-            }
-            if (promise instanceof Promise) {
-              event.stopPropagation()
-              promise.then(() => {
-                setDropLoading(false)
-                requestAnimationFrame(() => {
-                  baseTarget.dispatchEvent(nativeEvent)
-                })
-              })
-            } else {
-              setDropLoading(false)
-            }
+            setDropLoading(false)
           }
         }
       }

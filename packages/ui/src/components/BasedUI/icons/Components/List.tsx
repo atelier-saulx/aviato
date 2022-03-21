@@ -2,12 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { useColor } from '../../useColor'
 import { SvgProps } from '..'
 
-const Hide: FunctionComponent<SvgProps> = ({
-  color,
-  framed,
-  size,
-  frameColor,
-}) => {
+const Hide: FunctionComponent<SvgProps> = ({ color }) => {
   return (
     <svg width="25" height="20" viewBox="0 0 25 20" fill="none">
       <path

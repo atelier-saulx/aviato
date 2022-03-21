@@ -19,7 +19,7 @@ export type ModalHeaderProps = PropsWithChildren<{
   noBorder?: boolean
 }>
 
-export type ConfirmButton = ButtonProps
+export type ConfirmButton = any
 export type ModalProps = {
   onClose?: OnClose
   height?: number | 'string'
@@ -34,7 +34,6 @@ export const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
   onEditTitle,
   editableTitlePlaceholder,
   editableTitlePlaceholderAsDefault,
-  noBorder,
   children,
   icon,
   framed,
@@ -71,6 +70,7 @@ export const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
         ) : null}
         {title || editableTitlePlaceholderAsDefault ? (
           <EditableTitle
+            // @ts-ignore
             onChange={onEditTitle}
             placeholder={editableTitlePlaceholder}
             placeholderAsDefault={editableTitlePlaceholderAsDefault}

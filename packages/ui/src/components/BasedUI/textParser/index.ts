@@ -25,7 +25,7 @@ export type TextValueFormat = {
   format: TextFormat
 }
 
-export { Language }
+export type { Language }
 
 let fromDefault: boolean = true
 let defaultLanguage: Language = 'en'

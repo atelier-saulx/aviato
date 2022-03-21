@@ -35,7 +35,10 @@ type SelectInputProps = {
   multi?: boolean
   value?: DropdownOption | DropdownOption[]
   items?: DropdownOption[]
-  // color?: Color
+  color?: {
+    color: string
+    tone?: number
+  }
   weight?: 'semibold' | 'medium' | 'regular'
   registerDoubleClick?: boolean
 }

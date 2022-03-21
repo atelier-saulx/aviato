@@ -3,7 +3,6 @@ import { useColor } from '../../useColor'
 import { SvgProps } from '..'
 
 const GoogleColor: FunctionComponent<SvgProps> = ({
-  color,
   framed,
   size,
   frameColor,

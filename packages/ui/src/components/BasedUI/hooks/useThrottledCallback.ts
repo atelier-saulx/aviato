@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect, MouseEventHandler } from 'react'
+import { useCallback, useRef, useEffect } from 'react'
 
 const isEventCheck = (e) => {
   return !!e

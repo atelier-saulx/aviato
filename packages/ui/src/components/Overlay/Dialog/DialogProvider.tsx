@@ -120,6 +120,7 @@ export const DialogProvider = ({ children, fixed = true }) => {
       return state
     }
 
+    // @ts-ignore
     dialogRef.current = dialog
     dialogsRef.current = []
   }

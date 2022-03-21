@@ -59,7 +59,7 @@ const Next: FunctionComponent<NextProps> = ({ label, children }) => {
         <Text
           weight="medium"
           singleLine
-          noSelect
+          // noSelect
           style={{
             marginLeft: 4,
           }}
@@ -100,7 +100,6 @@ export const ContextualMenuItem: FunctionComponent<ContextualMenuItemProps> = ({
   onOptions,
   border,
   Icon = icon ? iconFromString(icon) : null,
-  first,
 }) => {
   const [hover, isHover] = useHover()
   const context = useContext(OverlayContext)
@@ -168,7 +167,7 @@ export const ContextualMenuItem: FunctionComponent<ContextualMenuItemProps> = ({
             }}
             weight={weight}
             singleLine
-            noSelect
+            // noSelect
           >
             {label}
           </Text>

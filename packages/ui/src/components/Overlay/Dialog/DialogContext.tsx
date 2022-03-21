@@ -4,8 +4,8 @@ export interface DialogContextType {
   open: (children: ReactNode) => number
   close: (id?: number) => void
   confirm: (id?: string | number) => boolean
-  alert: (id?: string | number) => void
-  prompt: (id?: string | number) => void
+  alert: (id?: string | number) => boolean
+  prompt: (id?: string | number) => boolean | string
   useCount: () => number
   _id: number
 }

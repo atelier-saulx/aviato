@@ -97,7 +97,7 @@ const Option: FunctionComponent<OptionProps> = (props) => {
       >
         <Text
           singleLine
-          noSelect
+          // noSelect
           weight="semibold"
           style={{
             position: 'absolute',
@@ -107,7 +107,7 @@ const Option: FunctionComponent<OptionProps> = (props) => {
         </Text>
         <Text
           singleLine
-          noSelect
+          // noSelect
           style={{
             opacity: 0,
           }}
@@ -116,7 +116,11 @@ const Option: FunctionComponent<OptionProps> = (props) => {
         </Text>
       </div>
     ) : (
-      <Text style={{ marginRight: 16 }} singleLine noSelect>
+      <Text
+        style={{ marginRight: 16 }}
+        singleLine
+        // noSelect
+      >
         {label}
       </Text>
     )
@@ -245,14 +249,14 @@ export const Dropdown: FunctionComponent<PositionPropsFn & DropdownProps> = (
           }}
         >
           <Input
-            iconColor={{ color: 'foreground' }}
+            // iconColor={{ color: 'foreground' }}
             type="search"
-            noBackground
+            // noBackground
             onChange={(v) => {
               setFilter(v ? String(v).toLowerCase() : '')
             }}
-            noBorder
-            noBordeRadius
+            // noBorder
+            // noBordeRadius
             placeholder="Filter"
           />
         </div>

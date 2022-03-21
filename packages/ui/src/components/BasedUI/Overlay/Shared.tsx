@@ -1,12 +1,11 @@
 import React, { CSSProperties, forwardRef, PropsWithChildren } from 'react'
 import { useColor } from '../useColor'
-import { Position, Align } from '../../hooks/overlay/useOverlayPosition'
+import { Position, Align } from '../hooks/overlay/useOverlayPosition'
 
 export const InnerShared = forwardRef<
   HTMLDivElement,
   PropsWithChildren<{
     width?: number | string
-    minWidth?: number | string
     style: CSSProperties
   }>
 >(({ width, style, children }, ref) => {
