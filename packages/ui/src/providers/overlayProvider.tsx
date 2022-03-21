@@ -12,8 +12,8 @@ import { Backdrop } from '~/components'
 
 // TODO: Find best way to infer prop typings
 
-interface BaseOverlayProps {
-  onClose: (id: number) => void
+export interface BaseOverlayProps {
+  onClosed: (id: number) => void
 }
 
 interface OverlayItem<T extends BaseOverlayProps> {
@@ -46,6 +46,11 @@ export function useOverlay<T extends BaseOverlayProps>(): OverlayType<T> {
   return useContext(OverlayContext)
 }
 
+interface OpenOverlayProps {
+  children: ReactNode
+  props?: BaseOverlayProps
+}
+
 export const OverlayProvider: FunctionComponent = ({ children }) => {
   const [count, setCount] = useState(0)
 
@@ -63,7 +68,9 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
 
     const OverlayInstance = () => {}
 
-    OverlayInstance.open = (children: ReactNode, props?: BaseOverlayProps) => {
+    OverlayInstance.open = (properties: OpenOverlayProps) => {
+      const { children, props } = properties
+
       const id = overlayCount++
 
       update(() => {
@@ -123,7 +130,6 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
-          padding: 20,
         }}
       >
         {children}
