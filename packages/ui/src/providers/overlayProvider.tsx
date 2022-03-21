@@ -44,11 +44,6 @@ export function useOverlay<T extends BaseOverlayProps>(): OverlayType<T> {
   return useContext(OverlayContext)
 }
 
-interface OpenOverlayProps {
-  children: ReactNode
-  props?: BaseOverlayProps
-}
-
 export const OverlayProvider: FunctionComponent = ({ children }) => {
   const [count, setCount] = useState(0)
 
@@ -66,9 +61,7 @@ export const OverlayProvider: FunctionComponent = ({ children }) => {
 
     const OverlayInstance = () => {}
 
-    OverlayInstance.open = (properties: OpenOverlayProps) => {
-      const { children, props } = properties
-
+    OverlayInstance.open = (children: ReactNode, props?: BaseOverlayProps) => {
       const id = overlayCount++
 
       update(() => {
