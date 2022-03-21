@@ -6,11 +6,11 @@ const OverlayPage = () => {
   const ShowSimpleOverlay = () => {
     const { open } = useOverlay()
 
-    const openSimpleModal = () => {
-      open(<Text>This is a simple modal.</Text>)
+    const openSimpleOverlay = () => {
+      open(<Text>This is a simple overlay.</Text>)
     }
 
-    return <Button onClick={openSimpleModal}>Open Simple Modal</Button>
+    return <Button onClick={openSimpleOverlay}>Open Simple Overlay</Button>
   }
 
   return (
