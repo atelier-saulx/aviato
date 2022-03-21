@@ -13,7 +13,7 @@ import { useDialog } from './useDialog'
 import { useHotkeys } from '~/hooks'
 
 const Container = styled('div', {
-  width: 520,
+  width: 632, // 520
   maxWidth: '100%',
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
@@ -31,11 +31,25 @@ const StyledButtons = styled('div', {
   paddingTop: 24,
 })
 
+const ButtonsWithBorder = styled(StyledButtons, {
+  borderTop: '1px solid $OtherDivider',
+  marginTop: 48,
+  paddingTop: 20,
+  paddingLeft: 24,
+  paddingRight: 24,
+  marginLeft: -24,
+  marginRight: -24,
+})
+
 const ButtonSpacer = styled('div', {
   width: 16,
 })
 
 const BodySpacer = styled('div', {
+  height: 24,
+})
+
+const TitleSpacer = styled('div', {
   height: 16,
 })
 
@@ -43,28 +57,30 @@ const Title = ({ children }) => {
   return <Text weight="semibold">{children}</Text>
 }
 
-const Body = ({ children }) => {
+const Body = ({ children, index = 0 }) => {
   if (typeof children === 'string') {
     return <Text css={{ paddingTop: 8 }}>{children}</Text>
   } else if (Array.isArray(children)) {
     return (
       <>
         {children.map((child, index) => (
-          <Body key={index}>{child}</Body>
+          <Body key={index} index={index}>
+            {child}
+          </Body>
         ))}
       </>
     )
   } else {
     return (
       <>
-        <BodySpacer />
+        {index ? <BodySpacer /> : <TitleSpacer />}
         {children}
       </>
     )
   }
 }
 
-const Buttons = ({ children }) => {
+const Buttons = ({ children, border = null }) => {
   if (Array.isArray(children)) {
     children = children.map((child, index) => {
       return index ? (
@@ -77,7 +93,11 @@ const Buttons = ({ children }) => {
       )
     })
   }
-  return <StyledButtons>{children}</StyledButtons>
+  return border ? (
+    <ButtonsWithBorder>{children}</ButtonsWithBorder>
+  ) : (
+    <StyledButtons>{children}</StyledButtons>
+  )
 }
 
 const Confirm = ({ children = 'OK', onConfirm, ...props }) => {
