@@ -54,6 +54,7 @@ export interface AvatarProps {
   src?: string
   label: string
   size?: BaseSize
+  onClick?: () => void
 }
 
 export const Avatar: FunctionComponent<AvatarProps> = ({
