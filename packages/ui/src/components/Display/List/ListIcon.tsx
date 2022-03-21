@@ -40,11 +40,14 @@ const StyledListIcon = styled('div', {
     },
 
     size: {
-      default: {
+      small: {
         width: 20,
         height: 20,
       },
-
+      medium: {
+        width: 32,
+        height: 32,
+      },
       large: {
         width: 48,
         height: 48,
@@ -53,7 +56,7 @@ const StyledListIcon = styled('div', {
   },
 })
 
-export type ListIconSize = 'default' | 'large'
+export type ListIconSize = 'small' | 'medium' | 'large'
 
 export type ListIconBackground =
   | 'purple'
@@ -78,14 +81,15 @@ export const ListIcon = forwardRef<
   const {
     icon,
     background = 'blue',
-    size = 'default',
+    size = 'small',
     ...remainingProps
   } = properties
 
   const TargetIcon = getIconFromName(icon)
 
   const mappedIconSize = {
-    default: 16,
+    small: 16,
+    medium: 16,
     large: 20,
   }
 
