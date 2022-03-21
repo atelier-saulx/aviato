@@ -1,14 +1,10 @@
-import { Page, Button, Text, useOverlay } from '@aviato/ui'
+import { Page, Button } from '@aviato/ui'
 
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const OverlayPage = () => {
   const ShowSimpleOverlay = () => {
-    const { open } = useOverlay()
-
-    const openSimpleOverlay = () => {
-      open(<Text>This is a simple overlay.</Text>)
-    }
+    const openSimpleOverlay = () => {}
 
     return <Button onClick={openSimpleOverlay}>Open Simple Overlay</Button>
   }
