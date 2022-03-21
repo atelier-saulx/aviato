@@ -1,7 +1,6 @@
 import React, { FunctionComponent, SyntheticEvent } from 'react'
 
 import { styled } from '~/theme'
-import { Conditional } from '~/components'
 import { getLettersFromLabel } from './utils'
 import { useImagePreloader } from '~/hooks'
 import { BaseSize } from '~/types'
@@ -70,12 +69,11 @@ export const Avatar: FunctionComponent<AvatarProps> = ({
 
   return (
     <StyledAvatar size={size} {...remainingProps}>
-      <Conditional test={imagesPreloaded}>
+      {imagesPreloaded ? (
         <img src={src} alt={label} />
-      </Conditional>
-      <Conditional test={!imagesPreloaded}>
+      ) : (
         <div title={label}>{fallbackLetters ?? children}</div>
-      </Conditional>
+      )}
     </StyledAvatar>
   )
 }
