@@ -107,19 +107,12 @@ export const ModalProvider: FunctionComponent = ({ children }) => {
     const randomId = getRandomId()
 
     const TargetModal = React.memo(() => {
-      const [isVisible, setVisibility] = useState(false)
-
-      useEffect(() => {
-        setVisibility(true)
-      }, [])
-
       const onClose = () => {
-        setVisibility(false)
         modalRef.current.close(id)
       }
 
       return (
-        <Modal {...props} isOpen={isVisible} onClose={onClose}>
+        <Modal {...props} isOpen onClose={onClose}>
           {children}
         </Modal>
       )

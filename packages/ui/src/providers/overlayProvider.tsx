@@ -10,10 +10,8 @@ import React, {
 import { getRandomId } from '@aviato/utils'
 import { Backdrop } from '~/components'
 
-// TODO: Find best way to infer prop typings
-
 export interface BaseOverlayProps {
-  onClosed: (id: number) => void
+  onClose: (id: number) => void
 }
 
 interface OverlayItem<T extends BaseOverlayProps> {
