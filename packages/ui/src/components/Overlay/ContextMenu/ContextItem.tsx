@@ -10,10 +10,6 @@ const StyledContextItem = styled('div', {
   justifyContent: 'start',
   alignItems: 'center',
   paddingLeft: '16px',
-
-  '&:hover': {
-    background: '$ActionMain',
-  },
 })
 
 export interface ContextItemProps

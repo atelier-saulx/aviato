@@ -100,7 +100,7 @@ export const ToastProvider = ({
       }
     }
 
-    toast.getAmount = () => {
+    toast.useCount = () => {
       const [state, setState] = useState(length)
 
       useEffect(() => {

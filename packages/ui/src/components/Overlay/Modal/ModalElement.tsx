@@ -22,7 +22,7 @@ const StyledModalElement = styled('div', {
 })
 
 const ContentArea = styled('div', {
-  maxHeight: '600px',
+  maxHeight: 'calc(100vh - 140px)',
 })
 
 const Padding = styled('div', {

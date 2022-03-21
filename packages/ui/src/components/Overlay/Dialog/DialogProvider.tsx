@@ -113,7 +113,7 @@ export const DialogProvider = ({ children, fixed = true }) => {
     dialog.alert = (props) => prompt('alert', props)
     dialog.confirm = (props) => prompt('confirm', props)
 
-    dialog.getAmount = () => {
+    dialog.useCount = () => {
       const [state, setState] = useState(length)
 
       useEffect(() => {

@@ -42,6 +42,7 @@ const inputMenuItems: MenuDataItem[] = [
   {
     title: 'Select',
     route: '/input/select',
+    isMissing: true,
   },
   {
     title: 'Slider',
@@ -164,6 +165,7 @@ const overlayMenuItems: MenuDataItem[] = [
   {
     title: 'Context Menu',
     route: '/overlay/context-menu',
+    isMissing: true,
   },
   {
     title: 'Dialog',
@@ -177,6 +179,11 @@ const overlayMenuItems: MenuDataItem[] = [
   {
     title: 'Modal',
     route: '/overlay/modal',
+  },
+  {
+    title: 'Overlay',
+    route: '/overlay/overlay',
+    isMissing: true,
   },
 ]
 
