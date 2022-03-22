@@ -111,7 +111,6 @@ export const ModalElement = forwardRef<
           <Padding>{children}</Padding>
         </ContentArea>
       </ScrollArea>
-
       <Conditional test={buttons.length > 0}>
         <ButtonArea>
           <Group direction="vertical">{mappedButtons}</Group>
