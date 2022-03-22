@@ -99,7 +99,7 @@ const Overlay = () => {
       style={{
         position: 'fixed',
         // TODO FIX THIS
-        zIndex: 9999,
+        zIndex: 999999999999,
         top: 0,
         left: 0,
       }}

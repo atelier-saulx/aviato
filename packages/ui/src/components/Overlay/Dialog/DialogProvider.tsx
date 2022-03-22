@@ -10,7 +10,7 @@ const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
   const isAlert = type === 'alert'
 
   return (
-    <Dialog {...props}>
+    <Dialog mode="dialog" {...props}>
       {isPrompt ? (
         <Dialog.Body>
           <Input autoFocus ref={ref} />
@@ -129,6 +129,8 @@ export const DialogProvider = ({ children, fixed = true }) => {
     return (
       <Backdrop
         key={id}
+        // TODO please don't make backgdrop use portal!
+        disablePortal
         css={{
           position: fixed ? 'fixed' : 'absolute',
           alignItems: 'center',

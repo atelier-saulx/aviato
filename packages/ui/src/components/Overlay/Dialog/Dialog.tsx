@@ -6,29 +6,51 @@ import React, {
   Fragment,
   useRef,
 } from 'react'
-
 import { styled } from '~/theme'
-import { Text, Button } from '~/components'
+import { Text, Button, ScrollArea } from '~/components'
 import { useDialog } from './useDialog'
 import { useHotkeys } from '~/hooks'
 
 const Container = styled('div', {
   width: 632, // 520
   maxWidth: '100%',
+  maxHeight: 'calc(100vh - 32px)', // ??
+  display: 'flex', // ??
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
   backgroundColor: '$Background1dp',
+  '&>div': {
+    // need flex to make scrollarea work...  but messes up width
+    width: '100%',
+  },
+  variants: {
+    mode: {
+      dialog: {
+        width: 520,
+      },
+    },
+  },
+})
+
+const ScrollBody = styled('div', {
   paddingTop: 24,
   paddingLeft: 24,
   paddingRight: 24,
-  paddingBottom: 24,
+  width: '100%',
+  '&>:last-child': {
+    paddingBottom: 24,
+  },
 })
 
 const StyledButtons = styled('div', {
+  position: 'sticky',
+  bottom: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
   paddingTop: 24,
+  backgroundColor: '$Background1dp',
+  paddingBottom: 24,
 })
 
 const ButtonsWithBorder = styled(StyledButtons, {
@@ -177,8 +199,12 @@ export const Dialog = Object.assign(
       }
       return (
         <Container ref={forwardedRef} {...props}>
-          <Dialog.Title>{title}</Dialog.Title>
-          {children}
+          <ScrollArea>
+            <ScrollBody>
+              <Dialog.Title>{title}</Dialog.Title>
+              {children}
+            </ScrollBody>
+          </ScrollArea>
         </Container>
       )
     }
