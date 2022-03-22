@@ -69,33 +69,30 @@ const ButtonSpacer = styled('div', {
 
 const BodySpacer = styled('div', {
   height: 24,
-})
-
-const TitleSpacer = styled('div', {
-  height: 16,
+  '&:first-child': {
+    display: 'none',
+  },
 })
 
 const Title = ({ children }) => {
   return <Text weight="semibold">{children}</Text>
 }
 
-const Body = ({ children, index = 0 }) => {
+const Body = ({ children }) => {
   if (typeof children === 'string') {
     return <Text css={{ paddingTop: 8 }}>{children}</Text>
   } else if (Array.isArray(children)) {
     return (
       <>
         {children.map((child, index) => (
-          <Body key={index} index={index}>
-            {child}
-          </Body>
+          <Body key={index}>{child}</Body>
         ))}
       </>
     )
   } else {
     return (
       <>
-        {index ? <BodySpacer /> : <TitleSpacer />}
+        <BodySpacer />
         {children}
       </>
     )

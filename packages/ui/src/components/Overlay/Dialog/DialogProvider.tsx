@@ -31,10 +31,14 @@ const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
 interface DialogItem {
   id: number
   children: ReactNode
+  options?: {
+    target?: HTMLElement
+  }
 }
 
 export const DialogProvider = ({ children, fixed = true }) => {
   const [length, setLength] = useState(0)
+  const [, setId] = useState(0)
   const dialogsRef = useRef<DialogItem[]>()
   const dialogRef = useRef<DialogContextType>()
 
@@ -45,17 +49,19 @@ export const DialogProvider = ({ children, fixed = true }) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const dialog = (children) => {
+    const dialog = (children, options = null) => {
       const id = count++
       // this is only used internally
       dialog._id = id
-
       update(
         dialogsRef.current.push({
           id,
           children,
+          options,
         })
       )
+      // this is to force an update, when length does not change
+      setId(id)
 
       return id
     }
