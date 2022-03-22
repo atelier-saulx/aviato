@@ -118,10 +118,7 @@ export const Modal = forwardRef<ElementRef<typeof StyledModal>, ModalProps>(
       .map(({ hotkey }) => hotkey)
       .filter((hotkey) => typeof hotkey === 'string')
 
-    const combinedHotkeys = [
-      ['escape', () => handleHotkey(closeOnEscape, () => handleClose(false))],
-      ...hotkeys,
-    ]
+    const combinedHotkeys = [...defaultHotkeys, ...hotkeys]
 
     const modalHotkeys: HotkeyItem[] = combinedHotkeys.filter((hotkey) => {
       const targetKey = hotkey[0] as string
