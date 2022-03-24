@@ -43,6 +43,8 @@ export const themes = {
   dark: darkTheme.className,
 }
 
+export { LightTheme, DarkTheme }
+
 export type StitchedCSS = Stitches.CSS<typeof config>
 
 export { classNames } from './utils'
