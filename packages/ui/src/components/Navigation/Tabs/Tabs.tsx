@@ -12,7 +12,6 @@ import { Tab, TabProps } from './Tab'
 import { useUncontrolled } from '~/hooks'
 import { Group } from '~/components/Layout'
 import { findInitialTab, getNextTab, getPreviousTab } from './utils'
-import { onChange } from '~/types'
 
 type CaptureEvent = KeyboardEvent<HTMLDivElement>
 type Direction = 'left' | 'right' | 'none'
@@ -24,8 +23,10 @@ const StyledTabs = styled('div', {
   height: '64px',
 })
 
-export interface OnTabChange extends onChange {
-  value: string | number
+export interface OnTabChange {
+  value: number
+  index: number
+  event: SyntheticEvent<Element, Event>
 }
 
 type StitchedProps = Omit<ComponentProps<typeof StyledTabs>, 'onChange'>
