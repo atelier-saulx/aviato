@@ -364,10 +364,6 @@
       }
     }
   },
-  "##212121": {
-    "value": "rgba($Colors.Greyscale.Grey-100, 0.06)",
-    "type": "color"
-  },
   "fontFamilies": {
     "inter": {
       "value": "Inter",
@@ -702,6 +698,30 @@
     "none": {
       "value": "none",
       "type": "textDecoration"
+    }
+  },
+  "shadow": {
+    "3dp": {
+      "value": {
+        "x": "0",
+        "y": "8",
+        "blur": "20",
+        "spread": "0",
+        "color": "#0f10131f",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
+    },
+    "2dp": {
+      "value": {
+        "x": "0",
+        "y": "2",
+        "blur": "8",
+        "spread": "0",
+        "color": "#0f10130f",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
     }
   }
 }

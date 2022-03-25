@@ -85,7 +85,6 @@ export const theme = {
     AccentBrightpurpleLight: 'rgba(199,74,246, 0.20)',
     AccentPink: '#eb45b5',
     AccentPinkLight: 'rgba(235,69,181, 0.20)',
-    '##212121': 'rgba(15,16,19, 0.06)',
   },
   fontSizes: {
     xxxs: '11px',

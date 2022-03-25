@@ -259,107 +259,107 @@
     },
     "Accent": {
       "Red": {
-        "value": "#ed6762",
+        "value": "#FA8E8A",
         "type": "color"
       },
       "Red-light": {
-        "value": "rgba($Colors.Accent.Red, 0.20)",
+        "value": "rgba($Colors.Accent.Red, 0.60)",
         "type": "color"
       },
       "Orange": {
-        "value": "#ec946a",
+        "value": "#F6AE8C",
         "type": "color"
       },
       "Orange-light": {
-        "value": "rgba($Colors.Accent.Orange, 0.20)",
+        "value": "rgba($Colors.Accent.Orange, 0.60)",
         "type": "color"
       },
       "Yellow": {
-        "value": "#e3b751",
+        "value": "#F3D07F",
         "type": "color"
       },
       "Yellow-light": {
-        "value": "rgba($Colors.Accent.Yellow, 0.20)",
+        "value": "rgba($Colors.Accent.Yellow, 0.60)",
         "type": "color"
       },
       "Mustard": {
-        "value": "#c5bb44",
+        "value": "#E5DD78",
         "type": "color"
       },
       "Mustard-light": {
-        "value": "rgba($Colors.Accent.Mustard, 0.20)",
+        "value": "rgba($Colors.Accent.Mustard, 0.60)",
         "type": "color"
       },
       "Forestgreen": {
-        "value": "#97c241",
+        "value": "#B8DA74",
         "type": "color"
       },
       "Forestgreen-light": {
-        "value": "rgba($Colors.Accent.Forestgreen, 0.20)",
+        "value": "rgba($Colors.Accent.Forestgreen, 0.60)",
         "type": "color"
       },
       "Green": {
-        "value": "#56bb70",
+        "value": "#83DB9A",
         "type": "color"
       },
       "Green-light": {
-        "value": "rgba($Colors.Accent.Green, 0.20)",
+        "value": "rgba($Colors.Accent.Green, 0.60)",
         "type": "color"
       },
       "Teal": {
-        "value": "#59c4c5",
+        "value": "#8FE3E3",
         "type": "color"
       },
       "Teal-light": {
-        "value": "rgba($Colors.Accent.Teal, 0.20)",
+        "value": "rgba($Colors.Accent.Teal, 0.60)",
         "type": "color"
       },
       "Babyblue": {
-        "value": "#4faff8",
+        "value": "#8CC8F6",
         "type": "color"
       },
       "Babyblue-light": {
-        "value": "rgba($Colors.Accent.Babyblue, 0.20)",
+        "value": "rgba($Colors.Accent.Babyblue, 0.60)",
         "type": "color"
       },
       "Sailorblue": {
-        "value": "#5584f7",
+        "value": "#84A8FF",
         "type": "color"
       },
       "Sailorblue-light": {
-        "value": "rgba($Colors.Accent.Sailorblue, 0.20)",
+        "value": "rgba($Colors.Accent.Sailorblue, 0.60)",
         "type": "color"
       },
       "Darkpurple": {
-        "value": "#7359f6",
+        "value": "#9A86FF",
         "type": "color"
       },
       "Darkpurple-light": {
-        "value": "rgba($Colors.Accent.Darkpurple, 0.20)",
+        "value": "rgba($Colors.Accent.Darkpurple, 0.30)",
         "type": "color"
       },
       "Purple": {
-        "value": "#9a52f6",
+        "value": "#B47EFA",
         "type": "color"
       },
       "Purple-light": {
-        "value": "rgba($Colors.Accent.Purple, 0.20)",
+        "value": "rgba($Colors.Accent.Purple, 0.60)",
         "type": "color"
       },
       "Brightpurple": {
-        "value": "#c74af6",
+        "value": "#E192FF",
         "type": "color"
       },
       "Brightpurple-light": {
-        "value": "rgba($Colors.Accent.Brightpurple, 0.20)",
+        "value": "rgba($Colors.Accent.Brightpurple, 0.60)",
         "type": "color"
       },
       "Pink": {
-        "value": "#eb45b5",
+        "value": "#FC79D1",
         "type": "color"
       },
       "Pink-light": {
-        "value": "rgba($Colors.Accent.Pink, 0.20)",
+        "value": "rgba($Colors.Accent.Pink, 0.60)",
         "type": "color"
       }
     }
@@ -698,6 +698,30 @@
     "none": {
       "value": "none",
       "type": "textDecoration"
+    }
+  },
+  "shadows": {
+    "2dp": {
+      "value": {
+        "x": "0",
+        "y": "2",
+        "blur": "8",
+        "spread": "0",
+        "color": "#0f10130f",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
+    },
+    "3dp": {
+      "value": {
+        "x": "0",
+        "y": "8",
+        "blur": "20",
+        "spread": "0",
+        "color": "#0f10131f",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
     }
   }
 }
