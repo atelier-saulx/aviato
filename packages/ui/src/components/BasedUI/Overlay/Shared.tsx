@@ -1,44 +1,37 @@
 import React, { CSSProperties, forwardRef, PropsWithChildren } from 'react'
-import { useColor } from '../useColor'
 import { Position, Align } from '../hooks/overlay/useOverlayPosition'
+import { styled, StitchedCSS } from '~/theme'
+
+const InnerSharedStyled = styled('div', {
+  pointerEvents: 'all',
+  borderRadius: 4,
+  background: '$Background2dp',
+  overflowY: 'auto',
+  overflowX: 'hidden',
+  paddingTop: 4,
+  border: '1px solid $OtherDivider',
+  paddingBottom: 4,
+  maxHeight: 'calc(100vh - 30px)',
+  boxShadow: `0px 3px 16px 1px rgba(0,0,0,0.05)`,
+})
 
 export const InnerShared = forwardRef<
   HTMLDivElement,
   PropsWithChildren<{
     width?: number | string
-    style: CSSProperties
+    css?: StitchedCSS
   }>
->(({ width, style, children }, ref) => {
+>(({ width, css, children }, ref) => {
   return (
-    <div
+    <InnerSharedStyled
       ref={ref}
-      style={{
-        pointerEvents: 'all',
-        borderRadius: 4,
+      css={{
         width: width,
-        background: useColor({ color: 'background' }),
-        overflowY: 'auto',
-        overflowX: 'hidden',
-        paddingTop: 10,
-
-        border: '1px solid lightgrey' /* +
-          useColor({
-            color: 'grey',
-            tone: 2,
-            opacity: 0.05,
-           }) */,
-        paddingBottom: 10,
-        maxHeight: 'calc(100vh - 30px)',
-        boxShadow: `0px 3px 16px 1px ${useColor({
-          color: 'foreground',
-          tone: 2,
-          opacity: 0.15,
-        })}`,
-        ...style,
+        ...css,
       }}
     >
       {children}
-    </div>
+    </InnerSharedStyled>
   )
 })
 

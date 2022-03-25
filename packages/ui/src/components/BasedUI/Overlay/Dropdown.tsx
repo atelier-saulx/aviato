@@ -1,24 +1,27 @@
 import React, {
   ComponentType,
-  FunctionComponent,
+  forwardRef,
   PropsWithChildren,
   ReactNode,
   useRef,
   useState,
+  FC,
+  SyntehticEvent,
 } from 'react'
 import useOverlayPosition, {
   PositionPropsFn,
 } from '../hooks/overlay/useOverlayPosition'
 import useOverlayProps from '../hooks/overlay/useOverlayProps'
-import { useColor } from '../useColor'
 import { Checked, iconFromString, IconName, IconProps } from '../icons'
 import { Text } from '~/components/Text'
-import useHover from '../hooks/events/useHover'
 import Shared from './Shared'
 import { TextValue, isTextValue, getStringValue } from '../textParser'
 import { Data, OnValueChange } from '../types'
 import { deepEqual } from '@saulx/utils'
 import { Input } from '~/components/Input'
+import { useHover } from '~/hooks'
+
+import { StitchedCSS, styled } from '~/theme'
 
 export type DropdownOption = {
   icon?: IconName
@@ -38,10 +41,21 @@ export type OptionProps = {
   registerDoubleClick?: boolean
 }
 
-const DoubleClicker = ({ onClick, onDoubleClick = null, ...props }) => {
+type EventHandler = (e: SyntehticEvent) => void
+
+// const StyledDropdown = styled('div', {})
+
+const StyledDoubleClicker = styled('div', {})
+
+const DoubleClicker: FC<{
+  onClick?: EventHandler
+  onDoubleClick?: EventHandler
+  css?: StitchedCSS
+}> = forwardRef(({ onClick, onDoubleClick = null, ...props }, ref) => {
   const timer = useRef() as { current: NodeJS.Timeout }
   return (
-    <div
+    <StyledDoubleClicker
+      ref={ref}
       onClick={
         onDoubleClick
           ? () => {
@@ -61,12 +75,13 @@ const DoubleClicker = ({ onClick, onDoubleClick = null, ...props }) => {
       {...props}
     />
   )
-}
+})
 
-const Option: FunctionComponent<OptionProps> = (props) => {
+const Option: FC<OptionProps> = (props) => {
   let { option, isActive, onChange, index, registerDoubleClick } = props
+
   const [hover, isHover] = useHover()
-  const Icon: FunctionComponent<IconProps> = iconFromString(option.icon)
+  const Icon: FC<IconProps> = iconFromString(option.icon)
   let isSelectNone: boolean
 
   if (option.value === undefined) {
@@ -128,8 +143,8 @@ const Option: FunctionComponent<OptionProps> = (props) => {
 
   return (
     <DoubleClicker
-      {...hover}
-      style={{
+      ref={hover}
+      css={{
         opacity: isSelectNone ? 0.5 : 1,
         width: '100%',
         paddingTop: option.action ? 0 : 5,
@@ -138,8 +153,7 @@ const Option: FunctionComponent<OptionProps> = (props) => {
         paddingRight: option.action ? 0 : 8,
         display: 'flex',
         cursor: 'pointer',
-        backgroundColor:
-          !option.action && isHover ? useColor({ color: 'divider' }) : null,
+        backgroundColor: !option.action && isHover ? '$ActionLightHover' : null,
       }}
       onClick={() => {
         if (!option.action) {
@@ -169,10 +183,10 @@ const Option: FunctionComponent<OptionProps> = (props) => {
         {!option.action ? (
           <Checked
             style={{ opacity: isActive ? 1 : 0, marginLeft: 16 }}
-            color={{
-              color: isActive ? 'primary' : 'foreground',
-              opacity: isActive ? 1 : 0,
-            }}
+            // color={{
+            //   color: isActive ? 'primary' : 'foreground',
+            //   opacity: isActive ? 1 : 0,
+            // }}
           />
         ) : null}
       </div>
@@ -239,13 +253,13 @@ export const Dropdown: FunctionComponent<PositionPropsFn & DropdownProps> = (
           style={{
             marginTop: -12,
             paddingTop: 2,
-            background: useColor({
-              color: 'background',
-              tone: 2,
-            }),
+            // background: useColor({
+            //   color: 'background',
+            //   tone: 2,
+            // }),
             marginBottom: 8,
             paddingBottom: 2,
-            borderBottom: '1px solid ' + useColor({ color: 'divider' }),
+            // borderBottom: '1px solid ' + useColor({ color: 'divider' }),
           }}
         >
           <Input

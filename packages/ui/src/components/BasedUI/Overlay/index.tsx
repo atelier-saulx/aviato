@@ -7,7 +7,7 @@ import React, {
   FunctionComponent,
   ReactNode,
 } from 'react'
-import { useColor } from '../useColor'
+import { styled } from '~/theme'
 
 export type OnClose = () => void
 
@@ -26,6 +26,17 @@ type OverlayItemProps = {
 let listeners: (() => void)[] = []
 let overlays: Overlays = []
 
+const OverlayItemStyled = styled('div', {
+  transition: 'opacity 0.15s',
+  // backdropFilter: 'blur(4px)',
+
+  width: '100vw',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  height: '100vh',
+})
+
 const OverlayItem: FunctionComponent<OverlayItemProps> = ({
   children,
   options,
@@ -38,24 +49,16 @@ const OverlayItem: FunctionComponent<OverlayItemProps> = ({
 
   const hidden = options && options.overlay === false
 
-  const transparent = options && options.transparent
+  // const transparent = options && options.transparent
 
   return (
-    <div
+    <OverlayItemStyled
       ref={ref}
-      style={{
+      css={{
         opacity: visible ? 1 : 0,
-        transition: 'opacity 0.15s',
-        // backdropFilter: 'blur(4px)',
-        backgroundColor:
-          hidden || transparent
-            ? null
-            : useColor({ color: 'foreground', tone: 4, opacity: 0.5 }),
-        width: '100vw',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '100vh',
+
+        // backgroundColor: hidden || transparent ? undefined : '$Background0dp',
+
         pointerEvents: hidden ? 'none' : 'all',
       }}
       onMouseDown={
@@ -72,7 +75,7 @@ const OverlayItem: FunctionComponent<OverlayItemProps> = ({
       }
     >
       {children}
-    </div>
+    </OverlayItemStyled>
   )
 }
 

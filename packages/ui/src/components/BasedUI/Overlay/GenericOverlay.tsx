@@ -11,6 +11,13 @@ import useOverlayProps from '../hooks/overlay/useOverlayProps'
 import Shared from './Shared'
 import { Text } from '~/components/Text'
 import { Data } from '../types'
+import { styled } from '~/theme'
+
+const GenericOverlayStyledBody = styled('div', {
+  width: '100%',
+  paddingLeft: 15,
+  paddingRight: 15,
+})
 
 export type GenericOverlayProps = {
   Component?: ComponentType
@@ -31,17 +38,11 @@ export const GenericOverlay: FunctionComponent<GenericOverlayProps> = ({
     const type = typeof props.children
     if (type === 'string' || type === 'number') {
       body = (
-        <div
-          style={{
-            width: '100%',
-            paddingLeft: 15,
-            paddingRight: 15,
-          }}
-        >
+        <GenericOverlayStyledBody>
           <Text weight="medium" singleLine>
             {props.children}
           </Text>
-        </div>
+        </GenericOverlayStyledBody>
       )
     } else {
       body = props.children

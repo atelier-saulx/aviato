@@ -1,47 +1,44 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  FunctionComponent,
-  CSSProperties,
-} from 'react'
+import React, { useCallback, useContext, useEffect, FC } from 'react'
 import useOverlayPosition from '../hooks/overlay/useOverlayPosition'
 import useOverlayProps, {
   OverlayContext,
 } from '../hooks/overlay/useOverlayProps'
-import { useColor } from '../useColor'
-import {
-  ChevronRight,
-  ChevronLeft,
-  iconFromString,
-  IconName,
-  IconProps,
-} from '../icons'
+// import { ChevronLeft } from '../icons'
 import { Text } from '~/components'
-import useHover from '../hooks/events/useHover'
 import Shared from './Shared'
 import { removeOverlay } from './index'
 import { GenericOverlayProps } from './GenericOverlay'
-import { TextValue } from '../textParser'
 import renderChildren from '../util/renderChildren'
 import { DataEventHandler } from '../types'
+import { styled, StitchedCSS } from '~/theme'
+import { useHover } from '~/hooks'
 
 export type NextProps = {
-  label?: TextValue
+  label?: string
 }
 
-const Next: FunctionComponent<NextProps> = ({ label, children }) => {
+const StyledNextNested = styled('div', {
+  display: 'flex',
+  paddingTop: 4,
+  paddingBottom: 4,
+  paddingLeft: 4,
+  paddingRight: 4,
+  width: '100%',
+  alignItems: 'center',
+  cursor: 'pointer',
+})
+
+const Next: FC<NextProps> = ({ label, children }) => {
   const [hover, isHover] = useHover()
   const context = useContext(OverlayContext)
 
   return (
-    <div>
-      <div
-        {...hover}
+    <div ref={hover}>
+      <StyledNextNested
         onClick={useCallback(() => {
           context.current.merge({ content: undefined })
         }, [])}
-        style={{
+        css={{
           display: 'flex',
           paddingTop: 5,
           paddingBottom: 5,
@@ -50,59 +47,59 @@ const Next: FunctionComponent<NextProps> = ({ label, children }) => {
           width: '100%',
           alignItems: 'center',
           cursor: 'pointer',
-          backgroundColor: isHover
-            ? useColor({ color: 'foreground', opacity: 0.05 })
-            : null,
+          backgroundColor: isHover ? '$ActionLightHover' : null,
         }}
       >
-        <ChevronLeft />
+        {/* <ChevronLeft /> */}
         <Text
           weight="medium"
           singleLine
-          // noSelect
-          style={{
+          css={{
             marginLeft: 4,
+            userSelect: 'none',
           }}
         >
           {label}
         </Text>
-      </div>
+      </StyledNextNested>
       {renderChildren(children, {})}
     </div>
   )
 }
 
+const StyledContextualMenuItem = styled('div', {
+  display: 'flex',
+  padding: 4,
+  width: '100%',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  cursor: 'pointer',
+})
+
+const Box = styled('div', {
+  display: 'flex',
+})
+
 export type ContextualMenuItemProps = {
-  icon?: IconName
-  label?: TextValue
+  label?: string
   onClick?: DataEventHandler
-  style?: CSSProperties
+  css?: StitchedCSS
   color?: any
-  border?: boolean
-  iconProps?: IconProps
-  onOptions?: DataEventHandler
-  optionsIcon?: IconName
   weight?: 'semibold' | 'medium' | 'regular'
-  Icon?: FunctionComponent<IconProps>
-  first?: boolean
 }
 
-export const ContextualMenuItem: FunctionComponent<ContextualMenuItemProps> = ({
-  icon,
+export const ContextualMenuItem: FC<ContextualMenuItemProps> = ({
   label,
   weight,
   color,
   children,
   onClick,
-  style,
-  iconProps,
-  optionsIcon,
-  onOptions,
-  border,
-  Icon = icon ? iconFromString(icon) : null,
+  css,
 }) => {
-  const [hover, isHover] = useHover()
+  const [hover, isHover, isActive] = useHover()
   const context = useContext(OverlayContext)
+
+  // ListItem in aviato
 
   const click = useCallback(
     (event) => {
@@ -118,78 +115,39 @@ export const ContextualMenuItem: FunctionComponent<ContextualMenuItemProps> = ({
     },
     [onClick, children, context]
   )
+
   return (
-    <div
-      style={{
-        borderColor: useColor({
-          color: 'foreground',
-          tone: 5,
-          opacity: 0.33,
-        }),
-        borderStyle: 'solid',
-        borderWidth: 0,
-        borderTopWidth: border ? 1 : 'inherit',
+    <StyledContextualMenuItem
+      ref={hover}
+      onClick={click}
+      css={{
+        backgroundColor: isActive
+          ? '$ActionLightSelected'
+          : isHover
+          ? '$ActionLightHover'
+          : null,
+        ...css,
       }}
     >
-      <div
-        {...hover}
-        onClick={click}
-        style={{
-          display: 'flex',
-          paddingTop: 5,
-          paddingBottom: 5,
-          paddingLeft: 8,
-          paddingRight: 8,
-          width: '100%',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          cursor: 'pointer',
-          backgroundColor: isHover ? useColor({ color: 'divider' }) : null,
-          ...style,
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
+      <Box>
+        <Text
+          color={color}
+          css={{
+            marginLeft: 8,
+            marginRight: 8,
+            userSelect: 'none',
           }}
+          weight={weight}
+          singleLine
         >
-          {Icon ? (
-            <Icon
-              color={color || { color: 'foreground', tone: 1 }}
-              {...iconProps}
-            />
-          ) : null}
-          <Text
-            color={color}
-            style={{
-              marginLeft: !Icon ? 8 + 24 : 8,
-              marginRight: 8,
-            }}
-            weight={weight}
-            singleLine
-            // noSelect
-          >
-            {label}
-          </Text>
-        </div>
-        {onOptions
-          ? React.createElement(iconFromString(optionsIcon || 'more'), {
-              onClick: (event) => {
-                event.preventDefault()
-                event.stopPropagation()
-                onOptions(event)
-              },
-            })
-          : null}
-        {children && !onClick && !onOptions ? (
-          <ChevronRight color={{ color: 'foreground', tone: 3 }} />
-        ) : null}
-      </div>
-    </div>
+          {label}
+        </Text>
+      </Box>
+    </StyledContextualMenuItem>
   )
 }
 
-export const Menu: FunctionComponent<GenericOverlayProps> = (initialProps) => {
+export const Menu: FC<GenericOverlayProps> = (initialProps) => {
   const props = useOverlayProps(initialProps)
 
   const { align, target, selectTarget, width = 256, y, x, maxY, maxX } = props
