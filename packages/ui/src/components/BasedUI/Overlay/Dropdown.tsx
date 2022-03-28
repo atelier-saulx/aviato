@@ -243,7 +243,7 @@ export const Dropdown: FC<PositionPropsFn & DropdownProps> = (initialProps) => {
       position={position}
       align={align}
       ref={elementRef}
-      style={{
+      css={{
         minWidth: filterValue ? minWidth : null,
         overflowY: 'auto',
         maxHeight: 'calc(100vh - 32px)',
