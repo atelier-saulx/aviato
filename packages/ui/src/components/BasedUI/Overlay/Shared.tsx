@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, PropsWithChildren } from 'react'
+import React, { forwardRef, PropsWithChildren } from 'react'
 import { Position, Align } from '../hooks/overlay/useOverlayPosition'
 import { styled, StitchedCSS } from '~/theme'
 
@@ -37,13 +37,13 @@ export const InnerShared = forwardRef<
 
 export type SharedOverlayProps = PropsWithChildren<{
   width?: number | string
-  style?: CSSProperties
+  css?: StitchedCSS
   position?: Position
   align?: Align
 }>
 
 export default forwardRef<HTMLDivElement, SharedOverlayProps>(
-  ({ position, align = 'center', children, style, width = 'auto' }, ref) => {
+  ({ position, align = 'center', children, css, width = 'auto' }, ref) => {
     return (
       <div
         style={{
@@ -69,9 +69,7 @@ export default forwardRef<HTMLDivElement, SharedOverlayProps>(
           <InnerShared
             ref={ref}
             width={position ? position.width : width}
-            style={{
-              ...style,
-            }}
+            css={css}
           >
             {children}
           </InnerShared>
