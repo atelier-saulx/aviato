@@ -1,7 +1,7 @@
 {
   "name": "@aviato/docs",
   "description": "Aviato Documentation & Design Suite",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "dev": "yarn watch",
