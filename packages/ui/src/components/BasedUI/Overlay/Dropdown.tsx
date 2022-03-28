@@ -42,8 +42,6 @@ export type OptionProps = {
 
 type EventHandler = (e: SyntheticEvent) => void
 
-// const StyledDropdown = styled('div', {})
-
 const StyledDoubleClicker = styled('div', {})
 
 const DoubleClicker: FC<{

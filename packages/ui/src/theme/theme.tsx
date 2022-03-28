@@ -49,3 +49,5 @@ export type StitchedCSS = Stitches.CSS<typeof config>
 
 export { classNames } from './utils'
 export { getZIndex } from './zIndex'
+
+export type Color = keyof typeof theme.colors | 'inherit'
