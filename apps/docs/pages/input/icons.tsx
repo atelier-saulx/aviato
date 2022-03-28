@@ -8,7 +8,6 @@ import {
   Row,
   Column,
   Tooltip,
-  IconFile,
 } from '@aviato/ui'
 import { chunk } from '@aviato/utils'
 
@@ -118,8 +117,6 @@ const IconsPage = () => {
       />
 
       <IconView />
-
-      {/* <IconFile color="" /> */}
 
       <CodeSnippet language="tsx">{CodeToDisplay}</CodeSnippet>
 
