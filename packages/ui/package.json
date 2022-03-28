@@ -70,7 +70,7 @@
     "parse:icons": "esno scripts/reactFromSVG",
     "parse:lint": "yarn lint",
     "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",
-    "build": "tsup ./src/index.ts",
+    "build": "tsup ./src/index.ts --onSuccess 'yarn types'",
     "docs": "rimraf docs && typedoc --out docs src/index.ts",
     "lint": "run-p lint:*",
     "lint:typescript": "tsc --project ./tsconfig.json --noEmit",
