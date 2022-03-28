@@ -119,7 +119,7 @@ const IconsPage = () => {
 
       <IconView />
 
-      <IconFile />
+      {/* <IconFile color="" /> */}
 
       <CodeSnippet language="tsx">{CodeToDisplay}</CodeSnippet>
 
