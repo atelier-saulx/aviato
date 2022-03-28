@@ -67,6 +67,7 @@
     "nodemon": "nodemon --exec yarn parse",
     "parse": "run-s parse:*",
     "parse:tokens": "esno scripts/parseTokens",
+    "parse:makeColor": "esno scripts/makeColor",
     "parse:icons": "esno scripts/reactFromSVG",
     "parse:lint": "yarn lint",
     "watch": "tsup ./src/index.ts --watch --onSuccess 'yarn types'",

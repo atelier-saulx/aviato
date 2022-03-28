@@ -11,6 +11,8 @@ const createdConfig = createStitches({
   },
 })
 
+export type { Color } from './colorType'
+
 export const {
   config,
   createTheme,
@@ -49,5 +51,3 @@ export type StitchedCSS = Stitches.CSS<typeof config>
 
 export { classNames } from './utils'
 export { getZIndex } from './zIndex'
-
-export type Color = keyof typeof theme.colors | 'inherit'
