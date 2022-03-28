@@ -5,8 +5,8 @@ import React, {
   ReactNode,
   useRef,
   useState,
+  SyntheticEvent,
   FC,
-  SyntehticEvent,
 } from 'react'
 import useOverlayPosition, {
   PositionPropsFn,
@@ -41,7 +41,7 @@ export type OptionProps = {
   registerDoubleClick?: boolean
 }
 
-type EventHandler = (e: SyntehticEvent) => void
+type EventHandler = (e: SyntheticEvent) => void
 
 // const StyledDropdown = styled('div', {})
 
@@ -55,11 +55,13 @@ const DoubleClicker: FC<{
   const timer = useRef() as { current: NodeJS.Timeout }
   return (
     <StyledDoubleClicker
+      //  @ts-ignore
       ref={ref}
       onClick={
         onDoubleClick
           ? () => {
               clearTimeout(timer.current)
+              //  @ts-ignore
               timer.current = setTimeout(onClick, 200)
             }
           : onClick
@@ -143,6 +145,7 @@ const Option: FC<OptionProps> = (props) => {
 
   return (
     <DoubleClicker
+      // @ts-ignore
       ref={hover}
       css={{
         opacity: isSelectNone ? 0.5 : 1,
@@ -225,9 +228,7 @@ const filterFunction = (v: DropdownOption, filterValue: string): boolean => {
   return false
 }
 
-export const Dropdown: FunctionComponent<PositionPropsFn & DropdownProps> = (
-  initialProps
-) => {
+export const Dropdown: FC<PositionPropsFn & DropdownProps> = (initialProps) => {
   const props = useOverlayProps<PositionPropsFn & DropdownProps>(initialProps)
   const { align, value, onChange, items, filter } = props
   const [filterValue, setFilter] = useState<string>()
