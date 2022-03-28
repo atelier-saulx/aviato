@@ -37,11 +37,14 @@ async function generateReactFromSVG() {
     '--index-template ./scripts/svgrIndexTemplate.js',
     '--out-dir ./dependencies/icons/parsed/react',
     './dependencies/icons/parsed/svg',
+    // align-center.svg
   ]
 
   const parseIconsCommand = parseCommand.join(' ')
 
-  await exec(parseIconsCommand)
+  const { stdout } = await exec(parseIconsCommand)
+
+  console.info(stdout)
 
   const overrideComponents = true
   if (overrideComponents) {

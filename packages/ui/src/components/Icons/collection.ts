@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react'
+import { FC } from 'react'
 
 import * as IconComponents from './components'
-import { SVGProperties } from './types'
+import { IconProps } from './types'
 
 export const icons = {
   ...IconComponents,
@@ -9,7 +9,7 @@ export const icons = {
 
 export type IconName = keyof typeof icons
 
-export type Icon = FunctionComponent<SVGProperties>
+export type Icon = FC<IconProps>
 
 /**
  * Returns the corresponding icon, based on the input string.

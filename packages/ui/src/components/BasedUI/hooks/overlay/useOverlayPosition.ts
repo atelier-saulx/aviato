@@ -5,6 +5,9 @@ import { useEffect, useRef, useState, useReducer, RefObject } from 'react'
 // variant: 'over' | 'detached'
 // offset: { x, y } // auto inverse based on where you can put
 
+// MenuItem
+// icon
+
 export type Align = 'flex-start' | 'center' | 'flex-end'
 
 export type Target = (Element | Node) & {

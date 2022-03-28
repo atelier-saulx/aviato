@@ -90,7 +90,12 @@ const IconsPage = () => {
                 return (
                   <GridItem key={`GridItem-${index}`}>
                     <Tooltip label={key}>
-                      <Icon />
+                      <Icon
+                        // color
+                        onClick={() => {
+                          global.alert('snurpi!')
+                        }}
+                      />
                     </Tooltip>
                   </GridItem>
                 )

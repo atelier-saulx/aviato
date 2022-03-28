@@ -5,9 +5,7 @@ import {
   Button,
   useMenu,
   useDropdown,
-  useBasedModal,
   ContextualMenuItem,
-  Title,
   Text,
 } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
@@ -25,11 +23,11 @@ const Flap: FC<{}> = () => {
         label="Flur"
         onClick={useDropdown(
           [
-            { value: 'fuck', children: 'hello', icon: 'skip' },
-            { value: 'my life', children: 'bye', icon: 'smartCopy' },
+            { value: 'fuck', children: 'hello' },
+            { value: 'my life', children: 'bye' },
           ],
           (value, index) => {
-            console.log('-->', value, index)
+            console.info('-->', value, index)
           },
           undefined,
           { multi: true }
@@ -40,14 +38,12 @@ const Flap: FC<{}> = () => {
         // icon="skip"
       >
         <ContextualMenuItem
-          border
           label={`Edit ${data.text}`}
           // icon="search"
-          onClick={useBasedModal(<Title>Modal!</Title>)}
+          onClick={() => {}}
         />
       </ContextualMenuItem>
       <ContextualMenuItem
-        border
         label="Delete"
         // icon="close"
       >
@@ -60,7 +56,7 @@ const Flap: FC<{}> = () => {
                 { value: 'snurky pants for you' },
               ],
               (value, index) => {
-                console.log('-->', value, index)
+                console.info('-->', value, index)
               }
             )}
           >

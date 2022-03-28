@@ -1,18 +1,7 @@
-function template({ template }, opts, { componentName, jsx }) {
-  const typeScriptTpl = template.smart({
-    plugins: ['typescript'],
-  })
+const astTemplate = require('./astTemplate')
 
-  return typeScriptTpl.ast`
-    import React from 'react';
-    import { SVGProperties } from '../types';
-
-    const ${componentName} = (props: SVGProperties) => {
-      return ${jsx};
-    }
-
-    export default ${componentName};
-  `
+function template(_flap, opts, { jsx, componentName }) {
+  return astTemplate(jsx, componentName.name.replace('Svg', 'Icon'))
 }
 
 module.exports = template
