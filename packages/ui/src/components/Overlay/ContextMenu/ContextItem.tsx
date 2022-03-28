@@ -12,6 +12,9 @@ const StyledContextItem = styled('div', {
   paddingLeft: '16px',
 })
 
+// makr it with everything
+
+// try to use type wherever is possible
 export interface ContextItemProps
   extends ComponentProps<typeof StyledContextItem> {}
 
