@@ -2,12 +2,8 @@
   "extends": "@aviato/tsconfig/src/node14.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "./",
+    "rootDir": "./"
   },
-  "include": [
-    "./**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules"]
 }

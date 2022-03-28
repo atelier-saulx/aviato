@@ -2,7 +2,7 @@ import { StitchedCSS, Color } from '~/theme'
 
 import { SVGProps } from 'react'
 
-type SvgElementProperties = SVGProps<SVGSVGElement>
+export type SvgElementProperties = SVGProps<SVGSVGElement>
 
 // SvgElementProperties &
 export type IconProps = {

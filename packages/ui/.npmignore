@@ -16,6 +16,5 @@ tsup.config.js
 
 dependencies/
 docs/
-src/
 scripts/
 .turbo

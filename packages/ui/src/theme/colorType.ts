@@ -84,5 +84,4 @@ export type Color =
   | '$AccentBrightpurpleLight'
   | '$AccentPink'
   | '$AccentPinkLight'
-  | '$##212121'
   | 'inherit'

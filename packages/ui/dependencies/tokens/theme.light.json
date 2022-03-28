@@ -364,10 +364,6 @@
       }
     }
   },
-  "##212121": {
-    "value": "rgba($Colors.Greyscale.Grey-100, 0.06)",
-    "type": "color"
-  },
   "fontFamilies": {
     "inter": {
       "value": "Inter",
