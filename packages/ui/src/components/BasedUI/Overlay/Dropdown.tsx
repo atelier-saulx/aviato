@@ -12,7 +12,6 @@ import useOverlayPosition, {
   PositionPropsFn,
 } from '../hooks/overlay/useOverlayPosition'
 import useOverlayProps from '../hooks/overlay/useOverlayProps'
-import { Checked, iconFromString, IconName, IconProps } from '../icons'
 import { Text } from '~/components/Text'
 import Shared from './Shared'
 import { TextValue, isTextValue, getStringValue } from '../textParser'
@@ -24,7 +23,7 @@ import { useHover } from '~/hooks'
 import { StitchedCSS, styled } from '~/theme'
 
 export type DropdownOption = {
-  icon?: IconName
+  // icon?: IconName
   value: TextValue
   framed?: boolean
   data?: Data
@@ -83,7 +82,7 @@ const Option: FC<OptionProps> = (props) => {
   let { option, isActive, onChange, index, registerDoubleClick } = props
 
   const [hover, isHover] = useHover()
-  const Icon: FC<IconProps> = iconFromString(option.icon)
+  // const Icon: FC<IconProps> = iconFromString(option.icon)
   let isSelectNone: boolean
 
   if (option.value === undefined) {
@@ -152,7 +151,7 @@ const Option: FC<OptionProps> = (props) => {
         width: '100%',
         paddingTop: option.action ? 0 : 5,
         paddingBottom: option.action ? 0 : 5,
-        paddingLeft: option.action ? 0 : Icon ? 8 : 16,
+        // paddingLeft: option.action ? 0 : Icon ? 8 : 16,
         paddingRight: option.action ? 0 : 8,
         display: 'flex',
         cursor: 'pointer',
@@ -173,7 +172,7 @@ const Option: FC<OptionProps> = (props) => {
           : null
       }
     >
-      {Icon ? <Icon style={{ marginRight: 8 }} framed={option.framed} /> : null}
+      {/* {Icon ? <Icon style={{ marginRight: 8 }} framed={option.framed} /> : null} */}
       <div
         style={{
           width: '100%',
@@ -183,7 +182,7 @@ const Option: FC<OptionProps> = (props) => {
         }}
       >
         {body}
-        {!option.action ? (
+        {/* {!option.action ? (
           <Checked
             style={{ opacity: isActive ? 1 : 0, marginLeft: 16 }}
             // color={{
@@ -191,7 +190,7 @@ const Option: FC<OptionProps> = (props) => {
             //   opacity: isActive ? 1 : 0,
             // }}
           />
-        ) : null}
+        ) : null} */}
       </div>
     </DoubleClicker>
   )
