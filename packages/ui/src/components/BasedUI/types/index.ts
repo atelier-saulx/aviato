@@ -14,13 +14,11 @@ export type File = {
   name: string
 }
 
-export type PropsEventHandler<T = any> = (
-  e?: Event | SyntheticEvent,
-  props?: T
+// props is for later...
+export type PropsEventHandler<E = Element, T = Event, P = any> = (
+  e?: SyntheticEvent<E, T>,
+  props?: P
 ) => void | Promise<void> | boolean | Promise<boolean>
-
-// use this
-export type AsyncEvent = (e: Event | SyntheticEvent) => void | Promise<void>
 
 export type Children<T = PropsWithChildren<any>> =
   | ReactChild

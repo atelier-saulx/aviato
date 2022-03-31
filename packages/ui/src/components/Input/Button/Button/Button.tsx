@@ -4,11 +4,8 @@ import React, {
   ElementRef,
   cloneElement,
 } from 'react'
-import { ComponentProps } from '@stitches/react'
 import { isText } from '@aviato/utils'
-
 import { classNames, styled, StitchedCSS } from '~/theme'
-import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { PropsEventHandler } from '~/components/BasedUI/types'
 
@@ -345,18 +342,19 @@ export const buttonColors = ['primary', 'action', 'error'] as const
 
 export type ButtonColor = typeof buttonColors[number]
 
-export interface ButtonProps extends ComponentProps<typeof StyledButton> {
+export type ButtonProps = {
   variant?: ButtonVariant
   color?: ButtonColor
   disabled?: boolean
   leftIcon?: ReactElement
   rightIcon?: ReactElement
   css?: StitchedCSS
-  onClick?: PropsEventHandler
+  // for async (potentialy)
+  onClick?: PropsEventHandler<HTMLElement, MouseEvent>
 }
 
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
-  (properties, forwardedRef) => {
+  (props, forwardedRef) => {
     const {
       color = 'primary',
       variant = 'main',
@@ -364,8 +362,9 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       leftIcon = null,
       rightIcon = null,
       children,
-      ...remainingProps
-    } = properties
+      css,
+      onClick,
+    } = props
 
     const isMain = variant === 'main'
     const isLight = variant === 'light'
@@ -400,17 +399,16 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         ref={forwardedRef}
         role="button"
         tabIndex={0}
-        {...remainingProps}
+        css={css}
+        onClick={onClick}
       >
-        <Conditional test={LeftIcon}>
+        {LeftIcon ? (
           <IconContainer type="start">{LeftIcon}</IconContainer>
-        </Conditional>
-
+        ) : null}
         {ChildVariant}
-
-        <Conditional test={RightIcon}>
+        {RightIcon ? (
           <IconContainer type="end">{RightIcon}</IconContainer>
-        </Conditional>
+        ) : null}
       </StyledButton>
     )
   }
