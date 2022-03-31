@@ -93,3 +93,5 @@
 //     [ctx]
 //   )
 // }
+
+export const Nothing = 'Nothing'
