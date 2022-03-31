@@ -11,7 +11,7 @@ import { useMergedRef, useUuid, useUncontrolled } from '~/hooks'
 import { StitchedCSS } from '~/theme'
 import { BaseInput, BaseInputProps, StyledInput } from '../Input/BaseInput'
 import { SelectItem } from './types'
-import { Dropdown } from './Dropdown'
+// import { Dropdown } from './Dropdown'
 import { InputWrapper } from '../InputWrapper'
 import { onChange } from '~/types'
 import { defaultFilter, filterData, groupOptions } from './utils'
@@ -213,7 +213,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
       }
     }
 
-    const shouldShowDropdown = dropdownOpened
+    // const shouldShowDropdown = dropdownOpened
 
     return (
       <InputWrapper
@@ -239,7 +239,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           {...remainingProps}
         />
 
-        <Dropdown
+        {/* <Dropdown
           items={formattedData}
           mounted={shouldShowDropdown}
           onChange={(_, payload) => {
@@ -247,7 +247,7 @@ export const Select = forwardRef<ElementRef<typeof StyledInput>, SelectProps>(
           }}
           referenceElement={inputRef.current}
           uuid={uuid}
-        />
+        /> */}
       </InputWrapper>
     )
   }
