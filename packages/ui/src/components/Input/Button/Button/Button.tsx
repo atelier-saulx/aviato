@@ -3,6 +3,8 @@ import React, {
   ReactElement,
   ElementRef,
   cloneElement,
+  ReactChildren,
+  ReactNode,
 } from 'react'
 import { isText } from '@aviato/utils'
 import { classNames, styled, StitchedCSS } from '~/theme'
@@ -351,6 +353,7 @@ export type ButtonProps = {
   css?: StitchedCSS
   // for async (potentialy)
   onClick?: PropsEventHandler<HTMLElement, MouseEvent>
+  children?: ReactChildren | string | ReactNode
 }
 
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
