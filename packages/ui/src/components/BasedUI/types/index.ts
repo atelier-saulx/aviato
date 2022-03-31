@@ -15,8 +15,8 @@ export type File = {
 }
 
 // props is for later...
-export type PropsEventHandler<E = Element, T = Event, P = any> = (
-  e?: SyntheticEvent<E, T>,
+export type PropsEventHandler<E = SyntheticEvent, P = any> = (
+  e?: E,
   props?: P
 ) => void | Promise<void> | boolean | Promise<boolean>
 

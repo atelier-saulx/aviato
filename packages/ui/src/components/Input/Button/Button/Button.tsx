@@ -3,11 +3,12 @@ import React, {
   ReactElement,
   ElementRef,
   cloneElement,
-  ReactChildren,
-  ReactNode,
 } from 'react'
+import { ComponentProps } from '@stitches/react'
 import { isText } from '@aviato/utils'
+
 import { classNames, styled, StitchedCSS } from '~/theme'
+import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { PropsEventHandler } from '~/components/BasedUI/types'
 
@@ -344,20 +345,18 @@ export const buttonColors = ['primary', 'action', 'error'] as const
 
 export type ButtonColor = typeof buttonColors[number]
 
-export type ButtonProps = {
+export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   variant?: ButtonVariant
   color?: ButtonColor
   disabled?: boolean
   leftIcon?: ReactElement
   rightIcon?: ReactElement
   css?: StitchedCSS
-  // for async (potentialy)
-  onClick?: PropsEventHandler<HTMLElement, MouseEvent>
-  children?: ReactChildren | string | ReactNode
+  onClick?: PropsEventHandler<React.MouseEvent<HTMLButtonElement, MouseEvent>>
 }
 
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
-  (props, forwardedRef) => {
+  (properties, forwardedRef) => {
     const {
       color = 'primary',
       variant = 'main',
@@ -365,9 +364,8 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       leftIcon = null,
       rightIcon = null,
       children,
-      css,
-      onClick,
-    } = props
+      ...remainingProps
+    } = properties
 
     const isMain = variant === 'main'
     const isLight = variant === 'light'
@@ -402,16 +400,17 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         ref={forwardedRef}
         role="button"
         tabIndex={0}
-        css={css}
-        onClick={onClick}
+        {...remainingProps}
       >
-        {LeftIcon ? (
+        <Conditional test={LeftIcon}>
           <IconContainer type="start">{LeftIcon}</IconContainer>
-        ) : null}
+        </Conditional>
+
         {ChildVariant}
-        {RightIcon ? (
+
+        <Conditional test={RightIcon}>
           <IconContainer type="end">{RightIcon}</IconContainer>
-        ) : null}
+        </Conditional>
       </StyledButton>
     )
   }
