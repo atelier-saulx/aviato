@@ -1,5 +1,7 @@
-import { Column, Row, Select, Page } from '@aviato/ui'
+import { Column, Row, Page } from '@aviato/ui'
 import { log } from '@aviato/utils'
+
+// Select
 
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
@@ -43,7 +45,7 @@ const SelectPage = () => {
       <>
         <Column css={{ width: '100%', maxWidth: '400px' }}>
           <Row css={{ width: '100%' }}>
-            <Select
+            {/* <Select
               placeholder="Select a thing"
               label="This is a label"
               description="This is a description"
@@ -55,7 +57,7 @@ const SelectPage = () => {
                 { value: 'snark', label: 'Snark' },
                 { value: 'snorkles', label: 'Snorkles' },
               ]}
-            />
+            /> */}
           </Row>
         </Column>
       </>
