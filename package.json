@@ -38,7 +38,7 @@
     "clean": "rimraf packages/*/{.turbo,dist,node_modules} apps/*/{.turbo,dist,node_modules} && rimraf node_modules && yarn"
   },
   "dependencies": {
-    "turbo": "1.1.2"
+    "turbo": "^1.1.10"
   },
   "devDependencies": {
     "@types/yargs": "^17.0.0",

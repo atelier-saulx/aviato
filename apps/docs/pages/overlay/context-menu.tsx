@@ -1,41 +1,59 @@
 import {
-  ContextMenu,
+  useContextMenu,
   ContextItem,
-  ContextToggle,
-  Column,
-  Row,
   Page,
+  Button,
+  IconMore,
+  IconSchedule,
 } from '@aviato/ui'
+import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
-import { ShowcaseHeader, ShowcaseComponent, BigSpacer } from '../../components'
+const SimpleMenu = () => {
+  return (
+    <>
+      <ContextItem>Do something</ContextItem>
+      <ContextItem inset>Do something else</ContextItem>
+      <ContextItem
+        onClick={() => {
+          alert('close it')
+        }}
+        leftIcon={<IconSchedule color="$PrimaryMain" />}
+        // right icon only show on hover
+        // rightOnHover
+        rightIcon={
+          <IconMore
+            onClick={() => {
+              alert('snapje')
+            }}
+          />
+        }
+      >
+        Flap
+      </ContextItem>
+    </>
+  )
+}
+
+const LargeMenu = () => {
+  const a = []
+  for (let i = 0; i < 100; i++) {
+    a.push(i)
+  }
+  console.info(a)
+  return (
+    <>
+      {a.map((v, i) => {
+        return (
+          <ContextItem inset key={i}>
+            {i} Do something
+          </ContextItem>
+        )
+      })}
+    </>
+  )
+}
 
 const ContextMenuPage = () => {
-  const ShowContextMenu = () => {
-    return (
-      <>
-        <Column>
-          <Row>
-            <ContextMenu>
-              <ContextItem>Test 1</ContextItem>
-              <ContextItem>Test 2</ContextItem>
-              <ContextToggle>Test 3</ContextToggle>
-            </ContextMenu>
-          </Row>
-
-          <BigSpacer />
-
-          <Row>
-            <ContextMenu>
-              <ContextItem>Floop 1</ContextItem>
-              <ContextItem>Floop 2</ContextItem>
-              <ContextToggle>Floop 3</ContextToggle>
-            </ContextMenu>
-          </Row>
-        </Column>
-      </>
-    )
-  }
-
   return (
     <Page>
       <ShowcaseHeader
@@ -45,9 +63,20 @@ const ContextMenuPage = () => {
           you click a select or button component.
         `}
       />
-
       <ShowcaseComponent background="transparent">
-        <ShowContextMenu />
+        <div>
+          <Button
+            onClick={useContextMenu(SimpleMenu)}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu
+          </Button>
+          <Button onClick={useContextMenu(LargeMenu)}>
+            Menu withe xtra overlay variation
+          </Button>
+        </div>
       </ShowcaseComponent>
     </Page>
   )

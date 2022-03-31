@@ -7,25 +7,24 @@ import { styled } from '~/theme'
 
 const StyledScrollArea = styled(RadixScrollArea.Root, {
   borderRadius: 4,
+  width: '100%',
+  height: '100%',
   overflow: 'hidden',
 })
 
 const StyledViewport = styled(RadixScrollArea.Viewport, {
-  width: '100%',
+  boxSizing: 'border-box',
   height: '100%',
+  width: '100%',
   borderRadius: 'inherit',
 })
-
-const Container = styled('div', {})
 
 const Scrollbar = styled(RadixScrollArea.Scrollbar, {
   display: 'flex',
   userSelect: 'none',
   touchAction: 'none',
   boxSizing: 'border-box',
-
   '&:hover': {},
-
   '&[data-state="hidden"]': {
     opacity: 0,
   },
@@ -36,7 +35,6 @@ const Thumb = styled(RadixScrollArea.Thumb, {
   position: 'relative',
   backgroundColor: '$ActionLightHover',
   transition: 'background-color 150ms ease',
-
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -80,10 +78,10 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       scrollbarSize = 8,
       scrollHideDelay = 1000,
       type = 'hover',
+      css,
       viewportRef,
       offsetScrollbars = false,
       onScrollPositionChange = noop,
-      ...remainingProps
     } = properties
 
     return (
@@ -92,52 +90,51 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
         scrollHideDelay={scrollHideDelay}
         dir="ltr"
         ref={forwardedRef}
-        asChild
+        // asChild
       >
-        <Container {...remainingProps}>
-          <StyledViewport
-            ref={viewportRef}
-            css={{
-              paddingRight: offsetScrollbars ? scrollbarSize : null,
-            }}
-            onScroll={({ currentTarget }) => {
-              onScrollPositionChange({
-                x: currentTarget.scrollLeft,
-                y: currentTarget.scrollTop,
-              })
-            }}
-          >
-            {children}
-          </StyledViewport>
+        <StyledViewport
+          ref={viewportRef}
+          css={{
+            paddingRight: offsetScrollbars ? scrollbarSize : null,
+            ...css,
+          }}
+          onScroll={({ currentTarget }) => {
+            onScrollPositionChange({
+              x: currentTarget.scrollLeft,
+              y: currentTarget.scrollTop,
+            })
+          }}
+        >
+          {children}
+        </StyledViewport>
 
-          <Scrollbar
-            orientation="horizontal"
-            forceMount
-            css={{
-              padding: scrollbarSize / 5,
-              height: scrollbarSize,
-            }}
-          >
-            <Thumb />
-          </Scrollbar>
+        <Scrollbar
+          orientation="horizontal"
+          forceMount
+          css={{
+            padding: scrollbarSize / 5,
+            height: scrollbarSize,
+          }}
+        >
+          <Thumb />
+        </Scrollbar>
 
-          <Scrollbar
-            orientation="vertical"
-            forceMount
+        <Scrollbar
+          orientation="vertical"
+          forceMount
+          css={{
+            padding: scrollbarSize / 5,
+            width: scrollbarSize,
+          }}
+        >
+          <Thumb
             css={{
-              padding: scrollbarSize / 5,
-              width: scrollbarSize,
+              borderRadius: scrollbarSize,
             }}
-          >
-            <Thumb
-              css={{
-                borderRadius: scrollbarSize,
-              }}
-            />
-          </Scrollbar>
+          />
+        </Scrollbar>
 
-          <Corner />
-        </Container>
+        <Corner />
       </StyledScrollArea>
     )
   }

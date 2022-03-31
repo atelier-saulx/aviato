@@ -1,16 +1,14 @@
 import React, { forwardRef, PropsWithChildren } from 'react'
 import { Position, Align } from '../hooks/overlay/useOverlayPosition'
 import { styled, StitchedCSS } from '~/theme'
+import { ScrollArea } from '~/components'
 
 const InnerSharedStyled = styled('div', {
   pointerEvents: 'all',
   borderRadius: 4,
   background: '$Background2dp',
-  overflowY: 'auto',
-  overflowX: 'hidden',
-  paddingTop: 4,
+  // overflow: 'hidden',
   border: '1px solid $OtherDivider',
-  paddingBottom: 4,
   maxHeight: 'calc(100vh - 30px)',
   boxShadow: `0px 3px 16px 1px rgba(0,0,0,0.05)`,
 })
@@ -26,11 +24,11 @@ export const InnerShared = forwardRef<
     <InnerSharedStyled
       ref={ref}
       css={{
-        width: width,
         ...css,
+        width: width,
       }}
     >
-      {children}
+      <ScrollArea>{children}</ScrollArea>
     </InnerSharedStyled>
   )
 })

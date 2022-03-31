@@ -1,30 +1,58 @@
-import React, { forwardRef, ElementRef } from 'react'
-import { ComponentProps } from '@stitches/react'
+import React, { useContext, useEffect, FC } from 'react'
+import useOverlayPosition from '../../BasedUI/hooks/overlay/useOverlayPosition'
+import useOverlayProps, {
+  OverlayContext,
+} from '../../BasedUI/hooks/overlay/useOverlayProps'
+import Shared from '../../BasedUI/Overlay/Shared'
+import { GenericOverlayProps } from '../../BasedUI/Overlay/GenericOverlay'
 
-import { styled } from '~/theme'
+export const ContextMenu: FC<GenericOverlayProps> = (initialProps) => {
+  const props = useOverlayProps(initialProps)
 
-const StyledBase = styled('div', {
-  background: '$Background2dp',
-  minWidth: '256px',
-  width: '100%',
-  border: '1px solid $OtherDivider',
-  borderRadius: '4px',
-  pointerEvents: 'all',
-})
+  const { align, target, selectTarget, width = 256, y, x, maxY, maxX } = props
 
-export interface ContextMenuProps extends ComponentProps<typeof StyledBase> {}
+  const [elementRef, position, resize] = useOverlayPosition({
+    align,
+    y,
+    x,
+    target,
+    selectTarget,
+    width,
+    maxY,
+    maxX,
+  })
 
-export const ContextMenu = forwardRef<
-  ElementRef<typeof StyledBase>,
-  ContextMenuProps
->((properties, forwardedRef) => {
-  const { children, ...remainingProps } = properties
+  const context = useContext(OverlayContext)
+
+  useEffect(() => {
+    const x = () => {
+      resize()
+      setTimeout(() => resize, 200)
+    }
+    context.current.listeners.add(x)
+    return () => {
+      context.current.listeners.delete(x)
+    }
+  }, [context, resize])
 
   return (
-    <StyledBase ref={forwardedRef} {...remainingProps}>
-      {children}
-    </StyledBase>
+    <Shared
+      width={props.width}
+      ref={elementRef}
+      position={position}
+      align={align}
+    >
+      <div
+        style={{
+          minWidth: props.width,
+        }}
+      >
+        {React.createElement(props.Component, {
+          resize,
+          position,
+          ...props,
+        })}
+      </div>
+    </Shared>
   )
-})
-
-ContextMenu.displayName = 'ContextMenu'
+}

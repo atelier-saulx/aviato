@@ -10,16 +10,21 @@ import React, {
   SyntheticEvent,
   useCallback,
 } from 'react'
-import { OverlayContext, createOverlayContextRef } from './useOverlayProps'
-import { DataEventHandler } from '../../types'
 
+// maybe keet it is pretty usefull
+import { OverlayContext, createOverlayContextRef } from './useOverlayProps'
+
+// this gone
+import { PropsEventHandler } from '../../types'
+
+// make it nice here
 export default function useOverlay<P, T = PropsWithChildren<any>>(
   component: ComponentType<P>,
   props?: PropsWithChildren<P & PositionProps>,
   handler?: (selection: Event | any) => OnClose | undefined,
   Overlay: ComponentType<GenericOverlayProps & T> = GenericOverlay,
   options: OverlayOptions = { transparent: true }
-): DataEventHandler {
+): PropsEventHandler {
   const ctx = createOverlayContextRef(props)
   return useCallback(
     (e: Event | SyntheticEvent, selectionProps) => {

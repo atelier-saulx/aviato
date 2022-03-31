@@ -11,19 +11,19 @@ import { useEffect, useRef, useState, useReducer, RefObject } from 'react'
 export type Align = 'flex-start' | 'center' | 'flex-end'
 
 export type Target = (Element | Node) & {
-  rect?: ClientRect
+  rect?: DOMRect
 }
 
 export type PosCalculation<T = number> =
-  | ((targetRect: ClientRect, elementRect: ClientRect, align: Align) => T)
+  | ((targetRect: DOMRect, elementRect: DOMRect, align: Align) => T)
   | T
 
 export type MaxMinCalculation<T = number> =
   | ((
       value: T,
-      elementRect: ClientRect,
+      elementRect: DOMRect,
       align: Align,
-      targetRect: ClientRect,
+      targetRect: DOMRect,
       position: Position
     ) => T)
   | T

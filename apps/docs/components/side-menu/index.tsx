@@ -165,37 +165,14 @@ const overlayMenuItems: MenuDataItem[] = [
   {
     title: 'Context Menu',
     route: '/overlay/context-menu',
-    isMissing: true,
   },
   {
     title: 'Dialog',
     route: '/overlay/dialog',
   },
   {
-    title: 'Drawer',
-    route: '/overlay/drawer',
-    isMissing: true,
-  },
-  {
     title: 'Modal',
     route: '/overlay/modal',
-  },
-  {
-    title: 'Overlay',
-    route: '/overlay/overlay',
-    isMissing: true,
-  },
-]
-
-// BASED UI PORTING
-const basedUiMenuItems: MenuDataItem[] = [
-  {
-    title: 'menu',
-    route: '/based-ui/menu',
-  },
-  {
-    title: 'select',
-    route: '/based-ui/select',
   },
 ]
 
@@ -232,11 +209,6 @@ const rootMenu: MenuDataItem[] = [
         title: 'Overlay',
         route: '/overlay',
         subMenu: overlayMenuItems,
-      },
-      {
-        title: 'BASED UI',
-        route: '/based-ui',
-        subMenu: basedUiMenuItems,
       },
     ],
   },

@@ -91,6 +91,7 @@ const IconsPage = () => {
                   <GridItem key={`GridItem-${index}`}>
                     <Tooltip label={key}>
                       <Icon
+                        color="$ActionPrimary"
                         // color
                         onClick={() => {
                           global.alert('snurpi!')
