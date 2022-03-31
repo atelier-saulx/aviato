@@ -1,4 +1,4 @@
-// import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 // import { noop } from '@aviato/utils'
 
 // import { onChange } from '~/types'
@@ -68,4 +68,4 @@
 //   )
 // }
 
-export const Dropdown = () => 'x'
+export const Dropdown: FunctionComponent<{}> = () => <>DROPDOWN</>
