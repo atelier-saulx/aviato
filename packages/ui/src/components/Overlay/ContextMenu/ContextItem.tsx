@@ -41,6 +41,12 @@ export type ContextItemProps = {
   children?: ReactNode | string
 }
 
+export const ContextDivider = styled('div', {
+  marginTop: 4,
+  borderTop: '1px solid $OtherDivider',
+  marginBottom: 4,
+})
+
 export const ContextItem = forwardRef<
   ElementRef<typeof StyledContextItem>,
   ContextItemProps

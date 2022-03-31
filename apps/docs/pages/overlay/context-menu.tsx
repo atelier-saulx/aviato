@@ -5,6 +5,7 @@ import {
   Button,
   IconMore,
   IconSchedule,
+  ContextDivider,
 } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
@@ -39,7 +40,6 @@ const LargeMenu = () => {
   for (let i = 0; i < 100; i++) {
     a.push(i)
   }
-  console.info(a)
   return (
     <>
       {a.map((v, i) => {
@@ -49,6 +49,24 @@ const LargeMenu = () => {
           </ContextItem>
         )
       })}
+    </>
+  )
+}
+
+const DoubleOverlayMenu = () => {
+  return (
+    <>
+      <ContextItem>Keep it 💯</ContextItem>
+      <ContextItem>yes</ContextItem>
+      <ContextItem>yolo</ContextItem>
+      <ContextDivider />
+      <ContextItem>Keep it 💯</ContextItem>
+      <ContextItem>yes</ContextItem>
+      <ContextItem>yolo</ContextItem>
+      <ContextDivider />
+      <ContextItem>Keep it 💯</ContextItem>
+      <ContextItem>yes</ContextItem>
+      <ContextItem>yolo</ContextItem>
     </>
   )
 }
@@ -66,15 +84,44 @@ const ContextMenuPage = () => {
       <ShowcaseComponent background="transparent">
         <div>
           <Button
-            onClick={useContextMenu(SimpleMenu)}
+            onClick={useContextMenu(SimpleMenu, {}, { placement: 'center' })}
             css={{
               marginBottom: 24,
             }}
           >
-            Menu
+            Menu (position: center)
           </Button>
-          <Button onClick={useContextMenu(LargeMenu)}>
-            Menu withe xtra overlay variation
+
+          <Button
+            onClick={useContextMenu(SimpleMenu, {}, { placement: 'left' })}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu (position: left)
+          </Button>
+
+          <Button
+            onClick={useContextMenu(SimpleMenu, {}, { placement: 'right' })}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu (position: right)
+          </Button>
+
+          <Button
+            css={{
+              marginBottom: 24,
+            }}
+            onClick={useContextMenu(LargeMenu)}
+          >
+            Menu (large menu)
+          </Button>
+          <Button
+            onClick={useContextMenu(DoubleOverlayMenu, { props: { flap: 1 } })}
+          >
+            Menu (double overlays)
           </Button>
         </div>
       </ShowcaseComponent>

@@ -1,5 +1,9 @@
-import React, { forwardRef, PropsWithChildren } from 'react'
-import { Position, Align } from '../hooks/overlay/useOverlayPosition'
+import React, { forwardRef, FC, PropsWithChildren, ComponentType } from 'react'
+import {
+  Position,
+  PositionProps,
+  Target,
+} from '../hooks/overlay/useOverlayPosition'
 import { styled, StitchedCSS } from '~/theme'
 import { ScrollArea } from '~/components'
 
@@ -12,6 +16,17 @@ const InnerSharedStyled = styled('div', {
   maxHeight: 'calc(100vh - 30px)',
   boxShadow: `0px 3px 16px 1px rgba(0,0,0,0.05)`,
 })
+
+export type OverlayProps<P = any> = {
+  Component: ComponentType<P>
+  props: P
+  target: Target
+  positionProps: PositionProps
+}
+
+export const GenericOverlay: FC<OverlayProps> = () => {
+  return <div>'x'</div>
+}
 
 export const InnerShared = forwardRef<
   HTMLDivElement,
@@ -34,14 +49,19 @@ export const InnerShared = forwardRef<
 })
 
 export type SharedOverlayProps = PropsWithChildren<{
-  width?: number | string
   css?: StitchedCSS
-  position?: Position
-  align?: Align
+  position: Position
 }>
 
 export default forwardRef<HTMLDivElement, SharedOverlayProps>(
-  ({ position, align = 'center', children, css, width = 'auto' }, ref) => {
+  ({ position, children, css }, ref) => {
+    const placement =
+      position.placement === 'left'
+        ? 'flex-start'
+        : position.placement === 'right'
+        ? 'flex-end'
+        : 'center'
+
     return (
       <div
         style={{
@@ -52,7 +72,7 @@ export default forwardRef<HTMLDivElement, SharedOverlayProps>(
           left: position ? position.x : 0,
           bottom: position ? position.bottom : null,
           display: 'flex',
-          justifyContent: align,
+          justifyContent: placement,
           pointerEvents: 'none',
         }}
       >
@@ -64,11 +84,7 @@ export default forwardRef<HTMLDivElement, SharedOverlayProps>(
               position && position.spaceOnTop ? 'flex-end' : 'flex-start',
           }}
         >
-          <InnerShared
-            ref={ref}
-            width={position ? position.width : width}
-            css={css}
-          >
+          <InnerShared ref={ref} width={position.width} css={css}>
             {children}
           </InnerShared>
         </div>

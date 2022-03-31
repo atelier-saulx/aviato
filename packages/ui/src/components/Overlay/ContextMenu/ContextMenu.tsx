@@ -1,58 +1,28 @@
-import React, { useContext, useEffect, FC } from 'react'
+import React, { FC } from 'react'
 import useOverlayPosition from '../../BasedUI/hooks/overlay/useOverlayPosition'
-import useOverlayProps, {
-  OverlayContext,
-} from '../../BasedUI/hooks/overlay/useOverlayProps'
-import Shared from '../../BasedUI/Overlay/Shared'
-import { GenericOverlayProps } from '../../BasedUI/Overlay/GenericOverlay'
+import Shared, { OverlayProps } from '../../BasedUI/Overlay/Shared'
 
-export const ContextMenu: FC<GenericOverlayProps> = (initialProps) => {
-  const props = useOverlayProps(initialProps)
-
-  const { align, target, selectTarget, width = 256, y, x, maxY, maxX } = props
-
-  const [elementRef, position, resize] = useOverlayPosition({
-    align,
-    y,
-    x,
+export const ContextMenu: FC<OverlayProps> = ({
+  positionProps = {},
+  target,
+  props,
+  Component,
+}) => {
+  if (!positionProps.width) {
+    positionProps.width = 256
+  }
+  const [elementRef, position, resize] = useOverlayPosition(
     target,
-    selectTarget,
-    width,
-    maxY,
-    maxX,
-  })
-
-  const context = useContext(OverlayContext)
-
-  useEffect(() => {
-    const x = () => {
-      resize()
-      setTimeout(() => resize, 200)
-    }
-    context.current.listeners.add(x)
-    return () => {
-      context.current.listeners.delete(x)
-    }
-  }, [context, resize])
+    positionProps
+  )
 
   return (
-    <Shared
-      width={props.width}
-      ref={elementRef}
-      position={position}
-      align={align}
-    >
-      <div
-        style={{
-          minWidth: props.width,
-        }}
-      >
-        {React.createElement(props.Component, {
-          resize,
-          position,
-          ...props,
-        })}
-      </div>
+    <Shared ref={elementRef} position={position}>
+      {React.createElement(Component, {
+        resize,
+        position,
+        ...props,
+      })}
     </Shared>
   )
 }

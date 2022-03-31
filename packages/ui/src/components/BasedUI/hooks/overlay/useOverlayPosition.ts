@@ -1,29 +1,23 @@
 import { useEffect, useRef, useState, useReducer, RefObject } from 'react'
 
-// position: left / right / top / bottom
-// placement: center, left, right
-// variant: 'over' | 'detached'
-// offset: { x, y } // auto inverse based on where you can put
-
-// MenuItem
-// icon
-
-export type Align = 'flex-start' | 'center' | 'flex-end'
-
-export type Target = (Element | Node) & {
+export type Target = (EventTarget | Element | Node) & {
   rect?: DOMRect
 }
 
 export type PosCalculation<T = number> =
-  | ((targetRect: DOMRect, elementRect: DOMRect, align: Align) => T)
+  | ((
+      targetRect: DOMRect,
+      elementRect: DOMRect,
+      positionProps: PositionProps
+    ) => T)
   | T
 
 export type MaxMinCalculation<T = number> =
   | ((
       value: T,
-      elementRect: DOMRect,
-      align: Align,
       targetRect: DOMRect,
+      elementRect: DOMRect,
+      positionProps: PositionProps,
       position: Position
     ) => T)
   | T
@@ -31,21 +25,12 @@ export type MaxMinCalculation<T = number> =
 export type SelectTarget = (t: Target) => Target
 
 export type PositionProps = {
+  width?: string | number | undefined
+  position?: 'left' | 'right' | 'top' | 'bottom'
+  placement?: 'center' | 'left' | 'right'
+  variant?: 'over' | 'detached'
+  offset?: { x: number; y: number }
   selectTarget?: SelectTarget
-  width?: PosCalculation<string | number>
-  x?: PosCalculation
-  y?: PosCalculation
-  maxY?: MaxMinCalculation
-  maxX?: MaxMinCalculation
-  align?: Align
-}
-
-export type PositionPropsFn = PositionProps & {
-  target: Target
-}
-
-export type PositionPropsFnOptional = PositionProps & {
-  target?: Target
 }
 
 export type Position = {
@@ -56,43 +41,55 @@ export type Position = {
   width?: number | string
   spaceOnTop?: boolean
   correctedY?: number
-  elementRect?: ClientRect
-  targetRect?: ClientRect
+  elementRect?: DOMRect
+  targetRect?: DOMRect
   minWidth?: number | string
+  position?: 'left' | 'right' | 'top' | 'bottom'
+  placement?: 'center' | 'left' | 'right'
 }
 
 const selectSelf: SelectTarget = (t) => t
 
-// @ts-ignore
 const xCalculation: PosCalculation = ({ left, x }) => {
   return left === undefined ? x : left
 }
 
-// @ts-ignore
 const yCalculation: PosCalculation = ({ top, height, y }) =>
   (top === undefined ? y : top) + height + 10
 
-const maxYCalculation: MaxMinCalculation = (y, elem) => {
+const maxYCalculation: MaxMinCalculation = (
+  y,
+  targetRect,
+  elementRect
+  // posProps
+  // pos
+) => {
   const maxH = innerHeight - 30
-  if (y + elem.height > maxH) {
-    const over = y + elem.height - maxH
+  if (y + elementRect.height > maxH) {
+    const over = y + elementRect.height - maxH
     return y - over
   }
   return y
 }
 
-const maxXCalculation: MaxMinCalculation = (x, elem, align, _rect, pos) => {
-  let w = elem.width
+const maxXCalculation: MaxMinCalculation = (
+  x,
+  targetRect,
+  elementRect,
+  posProps,
+  pos
+) => {
+  let w = elementRect.width
   if (typeof pos.width === 'number') {
     w = pos.width
   }
   const maxW = innerWidth - 30
-  if (align === 'flex-end') {
+  if (posProps.placement === 'right') {
     const diff = pos.containerWidth - w
     if (x + diff < 15) {
       x = -1 * diff + 15
     }
-  } else if (align === 'center') {
+  } else if (posProps.placement === 'center') {
     const diff = pos.containerWidth - w
     if (x + diff < 15) {
       x = (-1 * diff) / 2 + 15
@@ -116,10 +113,7 @@ const maxXCalculation: MaxMinCalculation = (x, elem, align, _rect, pos) => {
 
 export type Resize = () => void
 
-const getTargetRect = (
-  target: Target,
-  selectTarget: SelectTarget
-): ClientRect => {
+const getTargetRect = (target: Target, selectTarget: SelectTarget): DOMRect => {
   const t = selectTarget(target)
   // @ts-ignore
   if (t.getBoundingClientRect) {
@@ -130,48 +124,41 @@ const getTargetRect = (
   return { left: 0, top: 0, height: 0, width: 0, bottom: 0, right: 0 }
 }
 
-export default ({
-  target,
-  selectTarget = selectSelf,
-  width = 'auto',
-  x = xCalculation,
-  y = yCalculation,
-  maxY = maxYCalculation,
-  maxX = maxXCalculation,
-  align = 'center',
-}: PositionPropsFn): [
-  RefObject<HTMLDivElement>,
-  Position | undefined,
-  Resize
-] => {
+export default (
+  target: Target,
+  positionProps: PositionProps = {}
+): [RefObject<HTMLDivElement>, Position | undefined, Resize] => {
+  const { selectTarget = selectSelf, width } = positionProps
+
   const elementRef: RefObject<HTMLDivElement> = useRef()
-  const [position, setPosition] = useState<Position>()
+  const [position, setPosition] = useState<Position>({
+    width: positionProps.width,
+    position: positionProps.position,
+    placement: positionProps.placement,
+  })
   const [sizeForceUpdate, resize] = useReducer((x) => x + 1, 0)
   useEffect(() => {
     const calcSize = () => {
       const rect = target.rect || getTargetRect(target, selectTarget)
       const elementRect = elementRef.current.getBoundingClientRect()
-      const pos: Position = {}
+      const pos: Position = {
+        position: positionProps.position,
+        placement: positionProps.placement,
+      }
       pos.elementRect = elementRect
       pos.targetRect = rect
 
-      pos.width =
-        typeof width === 'function' ? width(rect, elementRect, align) : width
+      pos.width = width
 
       pos.containerWidth = rect.width
 
-      const calcedX = typeof x === 'function' ? x(rect, elementRect, align) : x
-      const calcedY = typeof y === 'function' ? y(rect, elementRect, align) : y
+      const calcedX = xCalculation(rect, elementRect, positionProps)
 
-      pos.x =
-        typeof maxX === 'function'
-          ? maxX(calcedX, elementRect, align, rect, pos)
-          : Math.min(maxX, calcedX)
+      const calcedY = yCalculation(rect, elementRect, positionProps)
 
-      pos.y =
-        typeof maxY === 'function'
-          ? maxY(calcedY, elementRect, align, rect, pos)
-          : Math.min(maxY, calcedY)
+      pos.x = maxXCalculation(calcedX, rect, elementRect, positionProps, pos)
+
+      pos.y = maxYCalculation(calcedY, rect, elementRect, positionProps, pos)
 
       pos.bottom = null
 
