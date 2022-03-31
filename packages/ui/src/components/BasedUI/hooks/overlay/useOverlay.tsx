@@ -35,5 +35,6 @@ export default function useOverlay<P = any>(
       },
       options
     )
+    return true
   }, [])
 }

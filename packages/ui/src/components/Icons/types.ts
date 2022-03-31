@@ -1,4 +1,5 @@
 import { StitchedCSS, Color } from '~/theme'
+import { PropsEventHandler } from '~/components/BasedUI/types'
 
 import { SVGProps } from 'react'
 
@@ -10,5 +11,5 @@ export type IconProps = {
   height?: number
   css?: StitchedCSS
   color?: Color
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onClick?: PropsEventHandler
 }

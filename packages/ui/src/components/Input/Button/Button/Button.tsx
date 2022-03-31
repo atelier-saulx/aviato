@@ -10,6 +10,7 @@ import { isText } from '@aviato/utils'
 import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
+import { PropsEventHandler } from '~/components/BasedUI/types'
 
 const PrimaryCSS: StitchedCSS = {
   '&.isMain': {
@@ -351,6 +352,7 @@ export interface ButtonProps extends ComponentProps<typeof StyledButton> {
   leftIcon?: ReactElement
   rightIcon?: ReactElement
   css?: StitchedCSS
+  onClick?: PropsEventHandler
 }
 
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(

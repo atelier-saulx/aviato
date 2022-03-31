@@ -17,7 +17,11 @@ export const ContextMenu: FC<OverlayProps> = ({
   )
 
   return (
-    <Shared ref={elementRef} position={position}>
+    <Shared
+      css={{ paddingTop: 4, paddingBottom: 4 }}
+      ref={elementRef}
+      position={position}
+    >
       {React.createElement(Component, {
         resize,
         position,

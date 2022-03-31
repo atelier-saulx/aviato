@@ -10,7 +10,6 @@ import {
   Tooltip,
 } from '@aviato/ui'
 import { chunk } from '@aviato/utils'
-
 import { ShowcaseHeader } from '../../components'
 
 const GridItem = styled('div', {

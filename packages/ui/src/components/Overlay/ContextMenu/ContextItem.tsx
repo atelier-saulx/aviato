@@ -1,8 +1,9 @@
-import React, { forwardRef, ElementRef, SyntheticEvent, ReactNode } from 'react'
+import React, { forwardRef, ElementRef, ReactNode } from 'react'
 import { isText } from '@aviato/utils'
 import { Text } from '~/components/Text'
 import { StitchedCSS, Color, styled } from '~/theme'
 import { removeOverlay } from '~/components/BasedUI/Overlay'
+import { PropsEventHandler } from '~/components/BasedUI/types'
 
 const StyledContextItem = styled('div', {
   display: 'flex',
@@ -34,7 +35,7 @@ const IconMarginWrapper = styled('div', {
 export type ContextItemProps = {
   css?: StitchedCSS
   color?: Color
-  onClick?: (e?: SyntheticEvent) => void | true | false
+  onClick?: PropsEventHandler
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   inset?: boolean
@@ -72,6 +73,7 @@ export const ContextItem = forwardRef<
           removeOverlay()
         }
       } catch (err) {
+        console.error(err)
         // send animation
       }
     }

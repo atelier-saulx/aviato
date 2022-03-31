@@ -4,23 +4,19 @@ export type Target = (EventTarget | Element | Node) & {
   rect?: DOMRect
 }
 
-export type PosCalculation<T = number> =
-  | ((
-      targetRect: DOMRect,
-      elementRect: DOMRect,
-      positionProps: PositionProps
-    ) => T)
-  | T
+export type PosCalculation = (
+  targetRect: DOMRect,
+  elementRect: DOMRect,
+  positionProps: PositionProps
+) => number
 
-export type MaxMinCalculation<T = number> =
-  | ((
-      value: T,
-      targetRect: DOMRect,
-      elementRect: DOMRect,
-      positionProps: PositionProps,
-      position: Position
-    ) => T)
-  | T
+export type MaxMinCalculation = (
+  value: number,
+  targetRect: DOMRect,
+  elementRect: DOMRect,
+  positionProps: PositionProps,
+  position: Position
+) => number
 
 export type SelectTarget = (t: Target) => Target
 
@@ -50,20 +46,35 @@ export type Position = {
 
 const selectSelf: SelectTarget = (t) => t
 
-const xCalculation: PosCalculation = ({ left, x }) => {
-  return left === undefined ? x : left
+const xCalculation: PosCalculation = (rect, elemRect, { position }) => {
+  let x = rect.left === undefined ? rect.x : rect.left
+
+  if (position === 'left') {
+    x -= rect.width + 10
+  }
+
+  if (position === 'right') {
+    x += rect.width + 10
+  }
+
+  return x
 }
 
-const yCalculation: PosCalculation = ({ top, height, y }) =>
-  (top === undefined ? y : top) + height + 10
+const yCalculation: PosCalculation = (rect, elementRect, posProps) => {
+  const y = (rect.top === undefined ? rect.y : rect.top) + rect.height + 10
 
-const maxYCalculation: MaxMinCalculation = (
-  y,
-  targetRect,
-  elementRect
-  // posProps
-  // pos
-) => {
+  if (
+    posProps.position === 'left' ||
+    posProps.position === 'right' ||
+    posProps.variant === 'over'
+  ) {
+    return y - (rect.height + 10)
+  }
+
+  return y
+}
+
+const maxYCalculation: MaxMinCalculation = (y, targetRect, elementRect) => {
   const maxH = innerHeight - 30
   if (y + elementRect.height > maxH) {
     const over = y + elementRect.height - maxH
@@ -128,7 +139,26 @@ export default (
   target: Target,
   positionProps: PositionProps = {}
 ): [RefObject<HTMLDivElement>, Position | undefined, Resize] => {
-  const { selectTarget = selectSelf, width } = positionProps
+  const { selectTarget = selectSelf } = positionProps
+
+  if (positionProps.position === 'top') {
+    console.warn('Top position is not supported yet')
+  }
+
+  if (
+    (positionProps.position === 'left' || positionProps.position === 'right') &&
+    positionProps.variant === 'over'
+  ) {
+    console.warn('Left/Right position + variant: over is not supported yet')
+  }
+
+  if (positionProps.position === 'left' && !positionProps.placement) {
+    positionProps.placement = 'right'
+  }
+
+  if (positionProps.position === 'right' && !positionProps.placement) {
+    positionProps.placement = 'left'
+  }
 
   const elementRef: RefObject<HTMLDivElement> = useRef()
   const [position, setPosition] = useState<Position>({
@@ -136,6 +166,7 @@ export default (
     position: positionProps.position,
     placement: positionProps.placement,
   })
+
   const [sizeForceUpdate, resize] = useReducer((x) => x + 1, 0)
   useEffect(() => {
     const calcSize = () => {
@@ -144,11 +175,10 @@ export default (
       const pos: Position = {
         position: positionProps.position,
         placement: positionProps.placement,
+        width: positionProps.width,
       }
       pos.elementRect = elementRect
       pos.targetRect = rect
-
-      pos.width = width
 
       pos.containerWidth = rect.width
 
@@ -171,7 +201,14 @@ export default (
             pos.bottom = null
           }
         } else {
-          pos.bottom = windowHeight - rect.top + 15
+          if (
+            positionProps.position === 'left' ||
+            positionProps.position === 'right'
+          ) {
+            pos.bottom = windowHeight - (rect.top + rect.height)
+          } else {
+            pos.bottom = windowHeight - rect.top + 15
+          }
         }
         pos.y = 15
       } else {

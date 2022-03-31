@@ -56,17 +56,22 @@ const LargeMenu = () => {
 const DoubleOverlayMenu = () => {
   return (
     <>
-      <ContextItem>Keep it 💯</ContextItem>
+      <ContextItem onClick={() => {}}>Keep it 💯</ContextItem>
       <ContextItem>yes</ContextItem>
       <ContextItem>yolo</ContextItem>
       <ContextDivider />
-      <ContextItem>Keep it 💯</ContextItem>
+      <ContextItem onClick={() => {}}>Keep it 💯</ContextItem>
       <ContextItem>yes</ContextItem>
       <ContextItem>yolo</ContextItem>
       <ContextDivider />
-      <ContextItem>Keep it 💯</ContextItem>
+      <ContextItem onClick={() => {}}>Keep it 💯</ContextItem>
       <ContextItem>yes</ContextItem>
-      <ContextItem>yolo</ContextItem>
+      <ContextItem
+        rightIcon={<IconSchedule />}
+        onClick={useContextMenu(LargeMenu, {}, { position: 'left' })}
+      >
+        Click me!
+      </ContextItem>
     </>
   )
 }
@@ -89,7 +94,7 @@ const ContextMenuPage = () => {
               marginBottom: 24,
             }}
           >
-            Menu (position: center)
+            Menu (placement: center)
           </Button>
 
           <Button
@@ -98,7 +103,7 @@ const ContextMenuPage = () => {
               marginBottom: 24,
             }}
           >
-            Menu (position: left)
+            Menu (placement: left)
           </Button>
 
           <Button
@@ -107,7 +112,60 @@ const ContextMenuPage = () => {
               marginBottom: 24,
             }}
           >
+            Menu (placement: right)
+          </Button>
+
+          <Button
+            onClick={useContextMenu(SimpleMenu, {}, { position: 'top' })}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu (position: top)
+          </Button>
+
+          <Button
+            onClick={useContextMenu(SimpleMenu, {}, { position: 'left' })}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu (position: left)
+          </Button>
+
+          <Button
+            onClick={useContextMenu(SimpleMenu, {}, { position: 'right' })}
+            css={{
+              marginBottom: 24,
+            }}
+          >
             Menu (position: right)
+          </Button>
+
+          <Button
+            onClick={useContextMenu(
+              SimpleMenu,
+              {},
+              { position: 'left', variant: 'over' }
+            )}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu (variant: over / position: left)
+          </Button>
+
+          <Button
+            onClick={useContextMenu(
+              SimpleMenu,
+              {},
+              { variant: 'over', placement: 'left' }
+            )}
+            css={{
+              marginBottom: 24,
+            }}
+          >
+            Menu (variant: over / placement: left)
           </Button>
 
           <Button
