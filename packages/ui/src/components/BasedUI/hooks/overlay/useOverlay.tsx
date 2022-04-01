@@ -3,6 +3,7 @@ import { PositionProps } from './useOverlayPosition'
 import React, { ComponentType, SyntheticEvent, useCallback } from 'react'
 import { GenericOverlay, OverlayProps } from '../../Overlay/Shared'
 import { PropsEventHandler } from '../../types'
+import { hash } from '@saulx/hash'
 
 export default function useOverlay<P = any>(
   Component: ComponentType<P>, // hint to geuss from useOverlay
@@ -10,7 +11,8 @@ export default function useOverlay<P = any>(
   positionProps?: PositionProps,
   handler?: (selection: Event | any) => OnClose | undefined,
   Overlay: ComponentType<OverlayProps<P>> = GenericOverlay,
-  options: OverlayOptions = { transparent: true }
+  options: OverlayOptions = { transparent: true },
+  callBackRef: null | any[] = null
 ): PropsEventHandler {
   // maybe remove selectionProps :/
   return useCallback((e: Event | SyntheticEvent, selectionProps) => {
@@ -36,5 +38,5 @@ export default function useOverlay<P = any>(
       options
     )
     return true
-  }, [])
+  }, callBackRef || [props ? hash(props) : null])
 }

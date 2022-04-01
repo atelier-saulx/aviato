@@ -171,8 +171,8 @@ const overlayMenuItems: MenuDataItem[] = [
     route: '/overlay/dialog',
   },
   {
-    title: 'Modal',
-    route: '/overlay/modal',
+    title: 'Select',
+    route: '/overlay/select',
   },
 ]
 

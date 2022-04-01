@@ -14,7 +14,7 @@ const StyledContextItem = styled('div', {
   paddingRight: '16px',
   cursor: 'pointer',
   '&:hover': {
-    backgroundColor: '$ActionLight',
+    backgroundColor: '$ActionLightHover',
   },
   '&:active': {
     backgroundColor: '$ActionLightSelected',
@@ -106,12 +106,7 @@ export const ContextItem = forwardRef<
   }
 
   return (
-    <StyledContextItem
-      onClick={onClick}
-      css={css}
-      color={color}
-      ref={forwardedRef}
-    >
+    <StyledContextItem onClick={onClick} css={css} ref={forwardedRef}>
       {child}
       {rightIcon}
     </StyledContextItem>

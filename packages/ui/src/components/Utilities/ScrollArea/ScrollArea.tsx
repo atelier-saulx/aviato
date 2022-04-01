@@ -6,7 +6,6 @@ import { noop } from '@aviato/utils'
 import { styled } from '~/theme'
 
 const StyledScrollArea = styled(RadixScrollArea.Root, {
-  borderRadius: 4,
   width: '100%',
   height: '100%',
   overflow: 'hidden',
@@ -16,7 +15,6 @@ const StyledViewport = styled(RadixScrollArea.Viewport, {
   boxSizing: 'border-box',
   height: '100%',
   width: '100%',
-  borderRadius: 'inherit',
 })
 
 const Scrollbar = styled(RadixScrollArea.Scrollbar, {

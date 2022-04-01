@@ -46,7 +46,7 @@ export type Position = {
 
 const selectSelf: SelectTarget = (t) => t
 
-const xCalculation: PosCalculation = (rect, elemRect, { position }) => {
+const xCalculation: PosCalculation = (rect, elemRect, { position, offset }) => {
   let x = rect.left === undefined ? rect.x : rect.left
 
   if (position === 'left') {
@@ -57,17 +57,25 @@ const xCalculation: PosCalculation = (rect, elemRect, { position }) => {
     x += rect.width + 10
   }
 
+  if (offset?.x) {
+    x += offset.x
+  }
+
   return x
 }
 
-const yCalculation: PosCalculation = (rect, elementRect, posProps) => {
-  const y = (rect.top === undefined ? rect.y : rect.top) + rect.height + 10
+const yCalculation: PosCalculation = (
+  rect,
+  elementRect,
+  { position, variant, offset }
+) => {
+  let y = (rect.top === undefined ? rect.y : rect.top) + rect.height + 10
 
-  if (
-    posProps.position === 'left' ||
-    posProps.position === 'right' ||
-    posProps.variant === 'over'
-  ) {
+  if (offset?.y) {
+    y += offset.y
+  }
+
+  if (position === 'left' || position === 'right' || variant === 'over') {
     return y - (rect.height + 10)
   }
 
@@ -192,7 +200,9 @@ export default (
 
       pos.bottom = null
 
-      if (pos.y < rect.top) {
+      const offsetY = positionProps.offset?.y || 0
+
+      if (pos.y < rect.top + offsetY) {
         pos.spaceOnTop = true
         const windowHeight = innerHeight
 

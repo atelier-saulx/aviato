@@ -64,8 +64,24 @@ const DoubleOverlayMenu = () => {
       <ContextItem>yes</ContextItem>
       <ContextItem>yolo</ContextItem>
       <ContextDivider />
-      <ContextItem onClick={() => {}}>Keep it 💯</ContextItem>
-      <ContextItem>yes</ContextItem>
+      <ContextItem
+        onClick={useContextMenu(
+          SimpleMenu,
+          {},
+          { position: 'right', offset: { x: -20, y: 10 } }
+        )}
+      >
+        Keep it 💯
+      </ContextItem>
+      <ContextItem
+        onClick={useContextMenu(
+          SimpleMenu,
+          {},
+          { position: 'left', offset: { x: 20, y: 10 } }
+        )}
+      >
+        yes + offset
+      </ContextItem>
       <ContextItem
         rightIcon={<IconSchedule />}
         onClick={useContextMenu(LargeMenu, {}, { position: 'left' })}
@@ -88,6 +104,13 @@ const ContextMenuPage = () => {
       />
       <ShowcaseComponent background="transparent">
         <div>
+          <Button
+            css={{ marginBottom: 24 }}
+            onClick={useContextMenu(DoubleOverlayMenu, { flap: 1 })}
+          >
+            Menu (double overlays)
+          </Button>
+
           <Button
             onClick={useContextMenu(SimpleMenu, {}, { placement: 'center' })}
             css={{
