@@ -12,7 +12,7 @@ import { hash } from '@saulx/hash'
 
 export function useSelect(
   items: (Option | Value)[] = [],
-  initialValue: Value,
+  initialValue?: Value,
   position?: PositionProps,
   handler?: (selection: Event | any) => () => void | undefined
 ): [string | number | undefined, PropsEventHandler] {

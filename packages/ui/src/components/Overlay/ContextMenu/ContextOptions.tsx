@@ -47,8 +47,8 @@ export const ContextOptionItem: FC<{
           setIsSelected(2)
           setTimeout(() => {
             removeOverlay()
-          }, 150)
-        }, 100)
+          }, 125)
+        }, 75)
         return true
       }}
     >

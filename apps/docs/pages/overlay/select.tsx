@@ -1,15 +1,61 @@
-import { Page, Button, useSelect } from '@aviato/ui'
+import { Page, Button, useSelect, styled } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
-const ContextMenuPage = () => {
-  const [value, open] = useSelect(
-    [{ label: <div>Hello (X)</div>, value: 'x' }, 'y', 'z'],
-    'x',
-    {
-      position: 'left',
-    }
+const SimpleSelect = () => {
+  const [value, open] = useSelect(['x', 'y', 'z'], 'x')
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      Select ({value})
+    </Button>
   )
+}
 
+const LabelSelect = () => {
+  const [value, open] = useSelect(
+    [
+      { label: 'my label X', value: 'x' },
+      { label: 'my label Y', value: 'y' },
+    ],
+    'y'
+  )
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      Select label ({value})
+    </Button>
+  )
+}
+
+const AnimatingLabel = styled('div', {
+  animationName: 'fadeIn',
+  border: '1px solid black',
+  padding: 3,
+  animationIterationCount: 'infinite',
+  '@keyframes fadeIn': {
+    '0%': {
+      opacity: 0,
+    },
+    '100%': {
+      opacity: 1,
+    },
+  },
+})
+
+const LabelSelectWithElement = () => {
+  const [value, open] = useSelect(
+    [
+      { label: <AnimatingLabel>X for you</AnimatingLabel>, value: 'x' },
+      { label: 'my label Y', value: 'y' },
+    ],
+    'y'
+  )
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      Select select with element ({value})
+    </Button>
+  )
+}
+
+const ContextMenuPage = () => {
   return (
     <Page>
       <ShowcaseHeader
@@ -20,9 +66,9 @@ const ContextMenuPage = () => {
       />
       <ShowcaseComponent background="transparent">
         <div>
-          <Button css={{ marginBottom: 24 }} onClick={open}>
-            Select ({value})
-          </Button>
+          <SimpleSelect />
+          <LabelSelect />
+          <LabelSelectWithElement />
         </div>
       </ShowcaseComponent>
     </Page>
