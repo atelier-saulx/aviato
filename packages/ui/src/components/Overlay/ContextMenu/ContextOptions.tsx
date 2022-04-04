@@ -11,20 +11,29 @@ import { IconCheck, IconSearch, IconClose, Text } from '~/components'
 import { styled } from '~/theme'
 import { ContextItem } from '.'
 
+const FilterInputHolderSticky = styled('div', {
+  width: '100%',
+  position: 'sticky',
+  borderTopLeftRadius: 4,
+  borderTopRightRadius: 4,
+  top: 0,
+  backgroundColor: '$Background2dp',
+})
+
 const FilterInputHolder = styled('div', {
   paddingTop: 4,
   paddingBottom: 4,
   height: 36,
-  paddingLeft: 12,
+  paddingLeft: 22,
   paddingRight: 12,
-  borderTopLeftRadius: 4,
-  borderBottom: '1px solid $OtherDivider',
-  borderTopRightRadius: 4,
+  borderTopLeftRadius: 3,
+  borderTopRightRadius: 3,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  borderBottom: '1px solid $OtherDivider',
   width: '100%',
-  backgroundColor: '$ActionLight',
+  backgroundColor: '$ActionLightHover',
 })
 
 const FilterInput = styled('input', {
@@ -80,8 +89,18 @@ export const ContextOptionItem = forwardRef<
   }
 >(({ option, onChange, selected, tabIndex, noRemove }, forwardedRef) => {
   const [isSelected, setIsSelected] = useState(0)
+
+  if (option.value === '$-no-results-aviato') {
+    return (
+      <ContextItem inset noFocus color="$TextSecondary">
+        {option.label}
+      </ContextItem>
+    )
+  }
+
   return (
     <ContextItem
+      inset
       ref={forwardedRef}
       tabIndex={tabIndex}
       css={{
@@ -98,7 +117,6 @@ export const ContextOptionItem = forwardRef<
           backgroundColor: '$ActionLightHover',
         },
       }}
-      inset
       leftIcon={selected ? <IconCheck /> : null}
       onClick={() => {
         setIsSelected(1)
@@ -123,7 +141,7 @@ export const ContextOptionItem = forwardRef<
 
 const filterItems = (items: Option[], filter?: string): Option[] => {
   if (filter) {
-    return items.filter((opt) => {
+    const filtered = items.filter((opt) => {
       const s = String(opt.value)
       const splitFilter = filter.split(' ')
       let correct = 0
@@ -137,6 +155,12 @@ const filterItems = (items: Option[], filter?: string): Option[] => {
       }
       return false
     })
+
+    if (filtered.length === 0) {
+      return [{ value: '$-no-results-aviato', label: 'No results' }]
+    }
+
+    return filtered
   }
   return items
 }
@@ -157,14 +181,16 @@ const FilterableContextOptions: FC<
   const filteredItems = filterItems(items, f)
   return (
     <>
-      <FilterInputHolder>
-        <IconSearch color="$TextSecondary" />
-        <FilterInput
-          data-aviato-context-item
-          placeholder={placeholder || 'Filter...'}
-          onChange={onFilter}
-        />
-      </FilterInputHolder>
+      <FilterInputHolderSticky>
+        <FilterInputHolder>
+          <IconSearch color="$TextSecondary" />
+          <FilterInput
+            data-aviato-context-item
+            placeholder={placeholder || 'Filter...'}
+            onChange={onFilter}
+          />
+        </FilterInputHolder>
+      </FilterInputHolderSticky>
       <ContextItems items={filteredItems} onChange={onChange} value={value} />
     </>
   )
@@ -313,6 +339,9 @@ const FilterableContextMultiOptions: FC<
         onChange={(v) => {
           setValue(v)
           onChange(selectValuesReducer(currentValues, v))
+          if (resize) {
+            resize()
+          }
         }}
         option={opt}
         noRemove
@@ -323,31 +352,36 @@ const FilterableContextMultiOptions: FC<
 
   return (
     <>
-      <FilterInputMultiHolder>
-        {/* <IconSearch color="$TextSecondary" /> */}
-        {currentValues.map((v) => {
-          return (
-            <FilterSelectedBadge key={v}>
-              <Text>{items.find((opt) => opt.value === v)?.label || v}</Text>
-              <IconClose
-                onClick={() => {
-                  setValue(v)
-                  onChange(selectValuesReducer(currentValues, v))
-                }}
-                css={{
-                  marginLeft: 16,
-                }}
-              />
-            </FilterSelectedBadge>
-          )
-        })}
-        <FilterMultiInput
-          size={f ? f.length : placeholder.length}
-          data-aviato-context-item
-          placeholder={placeholder}
-          onChange={onFilter}
-        />
-      </FilterInputMultiHolder>
+      <FilterInputHolderSticky>
+        <FilterInputMultiHolder>
+          {/* <IconSearch color="$TextSecondary" /> */}
+          {currentValues.map((v) => {
+            return (
+              <FilterSelectedBadge key={v}>
+                <Text>{items.find((opt) => opt.value === v)?.label || v}</Text>
+                <IconClose
+                  onClick={() => {
+                    setValue(v)
+                    onChange(selectValuesReducer(currentValues, v))
+                    if (resize) {
+                      resize()
+                    }
+                  }}
+                  css={{
+                    marginLeft: 16,
+                  }}
+                />
+              </FilterSelectedBadge>
+            )
+          })}
+          <FilterMultiInput
+            size={f ? f.length : placeholder.length}
+            data-aviato-context-item
+            placeholder={placeholder}
+            onChange={onFilter}
+          />
+        </FilterInputMultiHolder>
+      </FilterInputHolderSticky>
       {children}
     </>
   )

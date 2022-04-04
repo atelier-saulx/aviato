@@ -42,6 +42,7 @@ export type ContextItemProps = {
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   inset?: boolean
+  noFocus?: boolean
   tabIndex?: number
   children?: ReactNode | string
 }
@@ -64,6 +65,7 @@ export const ContextItem = forwardRef<
     leftIcon = null,
     inset,
     tabIndex = 0,
+    noFocus,
     rightIcon = null,
   } = props
 
@@ -109,6 +111,15 @@ export const ContextItem = forwardRef<
 
   if (!css.color) {
     css.color = color
+  }
+
+  if (noFocus) {
+    return (
+      <StyledContextItem ref={forwardedRef} onClick={onClick} css={css}>
+        {child}
+        {rightIcon}
+      </StyledContextItem>
+    )
   }
 
   return (
