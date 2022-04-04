@@ -5,10 +5,10 @@ import React, {
   cloneElement,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
+import { useMenuContext } from '~/providers'
 
 import { styled } from '~/theme'
 import { headerHeight } from './Header'
-import { useMenuContext } from '~/providers'
 
 const MENU_WIDTH = 224
 
@@ -87,7 +87,6 @@ export const ApplicationRoot = forwardRef<
 
   const NavigationComponent = navigation ? cloneElement(navigation) : null
   const HeaderComponent = header ? cloneElement(header) : null
-
   const { isMenuOpen } = useMenuContext()
 
   return (

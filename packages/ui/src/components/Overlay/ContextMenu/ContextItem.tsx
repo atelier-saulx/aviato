@@ -19,6 +19,9 @@ const StyledContextItem = styled('div', {
   '&:active': {
     backgroundColor: '$ActionLightSelected',
   },
+  '&:focus': {
+    backgroundColor: '$ActionLightHover',
+  },
 })
 
 const LeftWrapper = styled('div', {
@@ -39,6 +42,7 @@ export type ContextItemProps = {
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   inset?: boolean
+  tabIndex?: number
   children?: ReactNode | string
 }
 
@@ -59,11 +63,13 @@ export const ContextItem = forwardRef<
     children,
     leftIcon = null,
     inset,
+    tabIndex = 0,
     rightIcon = null,
   } = props
 
   if (onClick) {
     const onClickOriginal = onClick
+    // will become a  hook (a useCallback)
     // @ts-ignore - this is a hack to make the onClick work, async is very important
     onClick = async (e) => {
       e.preventDefault()
@@ -106,7 +112,13 @@ export const ContextItem = forwardRef<
   }
 
   return (
-    <StyledContextItem onClick={onClick} css={css} ref={forwardedRef}>
+    <StyledContextItem
+      data-aviato-context-item
+      tabIndex={tabIndex}
+      ref={forwardedRef}
+      onClick={onClick}
+      css={css}
+    >
       {child}
       {rightIcon}
     </StyledContextItem>

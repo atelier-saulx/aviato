@@ -1,4 +1,4 @@
 export * from './aviato'
 export * from './themeProvider'
-export * from './menuProvider'
-export * from './overlayProvider'
+// TODO rename the use of this to useSideMenu (else confision with context menu)
+export * from './sideMenu'

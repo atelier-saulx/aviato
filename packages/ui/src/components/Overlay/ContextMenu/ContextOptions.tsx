@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react'
+import React, { FC, useCallback, useState, forwardRef, ElementRef } from 'react'
 import { removeOverlay } from '~/components/BasedUI/Overlay'
 import { IconCheck, IconSearch } from '~/components'
 import { styled } from '~/theme'
@@ -17,6 +17,7 @@ export type ContextOptionsProps = {
   onChange: (value: string | number | undefined) => void
   filterable?: boolean
   placeholder?: string
+  resize?: () => void
 }
 
 const FilterInputHolder = styled('div', {
@@ -50,14 +51,20 @@ const FilterInput = styled('input', {
   userSelect: 'text',
 })
 
-export const ContextOptionItem: FC<{
-  option: Option
-  onChange: (value: Value) => void
-  value: Value
-}> = ({ option, onChange, value }) => {
+export const ContextOptionItem = forwardRef<
+  ElementRef<typeof ContextItem>,
+  {
+    option: Option
+    onChange: (value: Value) => void
+    value: Value
+    tabIndex?: number
+  }
+>(({ option, onChange, value, tabIndex }, forwardedRef) => {
   const [isSelected, setIsSelected] = useState(0)
   return (
     <ContextItem
+      ref={forwardedRef}
+      tabIndex={tabIndex}
       css={{
         backgroundColor:
           isSelected === 1
@@ -89,12 +96,27 @@ export const ContextOptionItem: FC<{
       {option.label || option.value}
     </ContextItem>
   )
-}
+})
+
+// max height
+// multi select
+// move based ui in
+// fix arrows
+// enter key
+// focus
+
+// select component
+// multi select + filter
+
+// "creatable" option where you create the options yes
+
+// SelectBage
 
 const FilterableContextOptions: FC<ContextOptionsProps> = ({
   items,
   value,
   onChange,
+  resize,
   placeholder,
 }) => {
   const [v, setValue] = useState(value)
@@ -102,16 +124,27 @@ const FilterableContextOptions: FC<ContextOptionsProps> = ({
   const onFilter: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       setFilter(e.target.value)
+      if (resize) {
+        resize()
+      }
     },
     []
   )
 
   const children = items
     .filter((opt) => {
-      return String(opt.value)
-        .replace(/\s/g, '')
-        .toLowerCase()
-        .includes(f.replace(/\s/g, '').toLowerCase())
+      const s = String(opt.value)
+      const splitFilter = f.split(' ')
+      let correct = 0
+      for (const segment of splitFilter) {
+        if (s.includes(segment.toLocaleLowerCase())) {
+          correct++
+          if (correct === splitFilter.length) {
+            return true
+          }
+        }
+      }
+      return false
     })
     .map((opt, i) => {
       return (
@@ -147,6 +180,7 @@ export const ContextOptions: FC<ContextOptionsProps> = ({
   onChange,
   filterable,
   placeholder,
+  resize,
 }) => {
   const [v, setValue] = useState(value)
 
@@ -158,6 +192,7 @@ export const ContextOptions: FC<ContextOptionsProps> = ({
         onChange={onChange}
         filterable={filterable}
         placeholder={placeholder}
+        resize={resize}
       />
     )
   } else {
@@ -177,3 +212,5 @@ export const ContextOptions: FC<ContextOptionsProps> = ({
     return <>{children}</>
   }
 }
+
+// multi select

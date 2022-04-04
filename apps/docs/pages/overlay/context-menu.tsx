@@ -57,7 +57,9 @@ const LargeMenu = () => {
 const DoubleOverlayMenu = () => {
   return (
     <>
-      <ContextItem onClick={() => {}}>Keep it 💯</ContextItem>
+      <ContextItem isFocused onClick={() => {}}>
+        Keep it 💯!!
+      </ContextItem>
       <ContextItem>yes</ContextItem>
       <ContextItem>yolo</ContextItem>
       <ContextDivider />

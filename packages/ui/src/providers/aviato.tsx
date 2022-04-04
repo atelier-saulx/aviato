@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 
-// remove this OverlayProvider
-import { MenuProvider, ThemeProvider, OverlayProvider } from '~/providers'
+import { ThemeProvider } from '~/providers'
 import { Overlay } from '~/components/BasedUI/Overlay'
 
 export interface AviatoProviderProps {
@@ -11,9 +10,7 @@ export interface AviatoProviderProps {
 export function AviatoProvider({ children }: AviatoProviderProps) {
   return (
     <ThemeProvider>
-      <MenuProvider>
-        <OverlayProvider>{children}</OverlayProvider>
-      </MenuProvider>
+      {children}
       <Overlay />
     </ThemeProvider>
   )

@@ -27,7 +27,7 @@ const LabelSelect = () => {
 
 const LabelSelectFilter = () => {
   const x = []
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 200; i++) {
     x.push(i + ' my snur')
   }
 
