@@ -7,6 +7,7 @@ export const ContextMenu: FC<OverlayProps> = ({
   target,
   props,
   Component,
+  css,
 }) => {
   if (!positionProps.width) {
     positionProps.width = 256
@@ -16,12 +17,14 @@ export const ContextMenu: FC<OverlayProps> = ({
     positionProps
   )
 
+  const s = { paddingTop: 4, paddingBottom: 4, ...css }
+
+  if (props.filterable) {
+    s.paddingTop = 0
+  }
+
   return (
-    <Shared
-      css={{ paddingTop: 4, paddingBottom: 4 }}
-      ref={elementRef}
-      position={position}
-    >
+    <Shared css={s} ref={elementRef} position={position}>
       {React.createElement(Component, {
         resize,
         position,

@@ -22,6 +22,7 @@ export type OverlayProps<P = any> = {
   props: P
   target: Target
   positionProps: PositionProps
+  css?: StitchedCSS
 }
 
 export const GenericOverlay: FC<OverlayProps> = () => {

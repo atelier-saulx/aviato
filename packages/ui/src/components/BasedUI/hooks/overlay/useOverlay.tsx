@@ -28,6 +28,7 @@ export default function useOverlay<P = any>(
         target={e.currentTarget}
         props={{ ...props, ...selectionProps }}
         positionProps={positionProps}
+        css={options.css}
       />
     )
     addOverlay(

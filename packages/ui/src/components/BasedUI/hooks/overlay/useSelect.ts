@@ -13,7 +13,7 @@ import { hash } from '@saulx/hash'
 export function useSelect(
   items: (Option | Value)[] = [],
   initialValue?: Value,
-  position?: PositionProps,
+  position?: PositionProps & { filterable?: boolean; placeholder?: string },
   handler?: (selection: Event | any) => () => void | undefined
 ): [string | number | undefined, PropsEventHandler] {
   const [value, setValue] = useState(initialValue)
@@ -31,6 +31,8 @@ export function useSelect(
     useOverlay(
       ContextOptions,
       {
+        filterable: position?.filterable,
+        placeholder: position?.placeholder,
         items: n,
         value,
         onChange: useCallback((value) => {

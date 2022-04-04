@@ -25,6 +25,20 @@ const LabelSelect = () => {
   )
 }
 
+const LabelSelectFilter = () => {
+  const x = []
+  for (let i = 0; i < 10; i++) {
+    x.push(i + ' my snur')
+  }
+
+  const [value, open] = useSelect(x, null, { filterable: true })
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      Select label filter ({value})
+    </Button>
+  )
+}
+
 const AnimatingLabel = styled('div', {
   animationName: 'fadeIn',
   border: '1px solid black',
@@ -69,6 +83,7 @@ const ContextMenuPage = () => {
           <SimpleSelect />
           <LabelSelect />
           <LabelSelectWithElement />
+          <LabelSelectFilter />
         </div>
       </ShowcaseComponent>
     </Page>

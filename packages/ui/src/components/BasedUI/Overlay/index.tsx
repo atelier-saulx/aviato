@@ -7,7 +7,7 @@ import React, {
   FunctionComponent,
   ReactNode,
 } from 'react'
-import { styled } from '~/theme'
+import { StitchedCSS, styled } from '~/theme'
 
 export type OnClose = () => void
 
@@ -15,6 +15,7 @@ export type OnClose = () => void
 export type OverlayOptions = {
   overlay?: boolean
   transparent?: boolean
+  css?: StitchedCSS
 }
 
 export type Overlays = [ReactNode, OnClose, OverlayOptions][]
