@@ -164,7 +164,7 @@ const FilterableContextOptions: FC<ContextOptionsProps> = ({
       <FilterInputHolder>
         <IconSearch color="$TextSecondary" />
         <FilterInput
-          autoFocus
+          data-aviato-context-item
           placeholder={placeholder || 'Filter...'}
           onChange={onFilter}
         />

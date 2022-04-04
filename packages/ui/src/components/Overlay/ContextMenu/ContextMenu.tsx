@@ -15,15 +15,14 @@ export const ContextMenu: FC<OverlayProps> = ({
   )
 
   useEffect(() => {
-    const elems = elementRef.current.querySelectorAll(
-      '[data-aviato-context-item]'
-    )
-
-    console.info(elems)
-
     let currentFocus: number = 0
     let elem: any
-    const focus = () => {
+    const focus = (elems?: any) => {
+      if (!elems) {
+        elems = elementRef.current.querySelectorAll(
+          '[data-aviato-context-item]'
+        )
+      }
       elem = elems[currentFocus]
       if (elem) {
         elem.focus()
@@ -41,17 +40,23 @@ export const ContextMenu: FC<OverlayProps> = ({
         }
       } else if (key === 'Tab' || key === 'ArrowDown') {
         currentFocus++
+        const elems = elementRef.current.querySelectorAll(
+          '[data-aviato-context-item]'
+        )
         if (currentFocus > elems.length - 1) {
           currentFocus = 0
         }
-        focus()
+        focus(elems)
         e.preventDefault()
       } else if (key === 'ArrowUp') {
         currentFocus--
+        const elems = elementRef.current.querySelectorAll(
+          '[data-aviato-context-item]'
+        )
         if (currentFocus < 0) {
           currentFocus = elems.length - 1
         }
-        focus()
+        focus(elems)
         e.preventDefault()
       }
     }

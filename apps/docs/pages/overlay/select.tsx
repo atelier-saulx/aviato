@@ -31,7 +31,10 @@ const LabelSelectFilter = () => {
     x.push(i + ' my snur')
   }
 
-  const [value, open] = useSelect(x, null, { filterable: true })
+  const [value, open] = useSelect(x, null, {
+    filterable: true,
+    position: 'right',
+  })
   return (
     <Button css={{ marginBottom: 24 }} onClick={open}>
       Select label filter ({value})
