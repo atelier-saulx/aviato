@@ -1,4 +1,4 @@
-import { Page, Button, useSelect, styled } from '@aviato/ui'
+import { Page, Button, useSelect, useMultiSelect, styled } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const SimpleSelect = () => {
@@ -38,7 +38,6 @@ const LabelSelectFilter = () => {
       maxHeight: 300,
     },
   })
-
   return (
     <Button css={{ marginBottom: 24 }} onClick={open}>
       Select label filter ({value})
@@ -76,6 +75,46 @@ const LabelSelectWithElement = () => {
   )
 }
 
+const MultiSelect = () => {
+  const [values, open] = useMultiSelect([1, 2, 3, 4], [1, 2])
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      MultiSelect ({values.join(', ')})
+    </Button>
+  )
+}
+
+const MultiSelectFilter = () => {
+  const [values, open] = useMultiSelect([1, 2, 3, 4], [1, 2], {
+    filterable: true,
+  })
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      MultiSelect + filter ({values.join(', ')})
+    </Button>
+  )
+}
+
+const MultiSelectFilterLabel = () => {
+  const [values, open] = useMultiSelect(
+    [
+      { label: 'Maarten de Winter', value: 1 },
+      { label: 'Jim de Beer', value: 2 },
+      { label: 'Maarten de Winter!', value: 3 },
+      { label: 'Jim de Beer!', value: 4 },
+    ],
+    [1, 2],
+    {
+      filterable: true,
+    }
+  )
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      MultiSelect + filter ({values.join(', ')})
+    </Button>
+  )
+}
+
 const ContextMenuPage = () => {
   return (
     <Page>
@@ -91,6 +130,9 @@ const ContextMenuPage = () => {
           <LabelSelect />
           <LabelSelectWithElement />
           <LabelSelectFilter />
+          <MultiSelect />
+          <MultiSelectFilter />
+          <MultiSelectFilterLabel />
         </div>
       </ShowcaseComponent>
     </Page>

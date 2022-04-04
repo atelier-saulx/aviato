@@ -1,24 +1,15 @@
-import React, { FC, useCallback, useState, forwardRef, ElementRef } from 'react'
+import React, {
+  FC,
+  useCallback,
+  useState,
+  forwardRef,
+  ElementRef,
+  useReducer,
+} from 'react'
 import { removeOverlay } from '~/components/BasedUI/Overlay'
-import { IconCheck, IconSearch } from '~/components'
+import { IconCheck, IconSearch, IconClose, Text } from '~/components'
 import { styled } from '~/theme'
 import { ContextItem } from '.'
-
-export type Value = string | number | undefined
-
-export type Option = {
-  value: Value
-  label?: React.ReactNode | string
-}
-
-export type ContextOptionsProps = {
-  items: Option[] | null | undefined
-  value: undefined | string | number
-  onChange: (value: string | number | undefined) => void
-  filterable?: boolean
-  placeholder?: string
-  resize?: () => void
-}
 
 const FilterInputHolder = styled('div', {
   paddingTop: 4,
@@ -27,6 +18,7 @@ const FilterInputHolder = styled('div', {
   paddingLeft: 12,
   paddingRight: 12,
   borderTopLeftRadius: 4,
+  borderBottom: '1px solid $OtherDivider',
   borderTopRightRadius: 4,
   display: 'flex',
   justifyContent: 'space-between',
@@ -51,15 +43,42 @@ const FilterInput = styled('input', {
   userSelect: 'text',
 })
 
+export type Value = string | number | undefined
+
+export type Option = {
+  value: Value
+  label?: React.ReactNode | string
+}
+
+export type ContextOptionsFilterProps = {
+  filterable?: boolean
+  placeholder?: string
+  resize?: () => void
+  multiSelect?: boolean
+}
+
+export type ContextOptionsProps = {
+  items: Option[] | null | undefined
+  value?: Value
+  onChange: (value: Value) => void
+}
+
+export type ContextMultiOptionsProps = {
+  items: Option[] | null | undefined
+  values?: Value[]
+  onChange: (values: Value[]) => void
+}
+
 export const ContextOptionItem = forwardRef<
   ElementRef<typeof ContextItem>,
   {
     option: Option
     onChange: (value: Value) => void
-    value: Value
+    selected: boolean
     tabIndex?: number
+    noRemove?: boolean
   }
->(({ option, onChange, value, tabIndex }, forwardedRef) => {
+>(({ option, onChange, selected, tabIndex, noRemove }, forwardedRef) => {
   const [isSelected, setIsSelected] = useState(0)
   return (
     <ContextItem
@@ -80,14 +99,18 @@ export const ContextOptionItem = forwardRef<
         },
       }}
       inset
-      leftIcon={value === option.value ? <IconCheck /> : null}
+      leftIcon={selected ? <IconCheck /> : null}
       onClick={() => {
         setIsSelected(1)
         onChange(option.value)
         setTimeout(() => {
           setIsSelected(2)
           setTimeout(() => {
-            removeOverlay()
+            if (!noRemove) {
+              removeOverlay()
+            } else {
+              setIsSelected(0)
+            }
           }, 125)
         }, 75)
         return true
@@ -98,43 +121,11 @@ export const ContextOptionItem = forwardRef<
   )
 })
 
-// max height
-// multi select
-// move based ui in
-// fix arrows
-// enter key
-// focus
-
-// select component
-// multi select + filter
-
-// "creatable" option where you create the options yes
-
-// SelectBage
-
-const FilterableContextOptions: FC<ContextOptionsProps> = ({
-  items,
-  value,
-  onChange,
-  resize,
-  placeholder,
-}) => {
-  const [v, setValue] = useState(value)
-  const [f, setFilter] = useState('')
-  const onFilter: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      setFilter(e.target.value)
-      if (resize) {
-        resize()
-      }
-    },
-    []
-  )
-
-  const children = items
-    .filter((opt) => {
+const filterItems = (items: Option[], filter?: string): Option[] => {
+  if (filter) {
+    return items.filter((opt) => {
       const s = String(opt.value)
-      const splitFilter = f.split(' ')
+      const splitFilter = filter.split(' ')
       let correct = 0
       for (const segment of splitFilter) {
         if (s.includes(segment.toLocaleLowerCase())) {
@@ -146,19 +137,24 @@ const FilterableContextOptions: FC<ContextOptionsProps> = ({
       }
       return false
     })
-    .map((opt, i) => {
-      return (
-        <ContextOptionItem
-          key={i}
-          onChange={(v) => {
-            setValue(v)
-            onChange(v)
-          }}
-          option={opt}
-          value={v}
-        />
-      )
-    })
+  }
+  return items
+}
+
+const FilterableContextOptions: FC<
+  ContextOptionsProps & ContextOptionsFilterProps
+> = ({ items, value, onChange, resize, placeholder }) => {
+  const [f, setFilter] = useState('')
+  const onFilter: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setFilter(e.target.value)
+      if (resize) {
+        resize()
+      }
+    },
+    []
+  )
+  const filteredItems = filterItems(items, f)
   return (
     <>
       <FilterInputHolder>
@@ -169,21 +165,32 @@ const FilterableContextOptions: FC<ContextOptionsProps> = ({
           onChange={onFilter}
         />
       </FilterInputHolder>
-      {children}
+      <ContextItems items={filteredItems} onChange={onChange} value={value} />
     </>
   )
 }
 
-export const ContextOptions: FC<ContextOptionsProps> = ({
-  items = [],
-  value,
-  onChange,
-  filterable,
-  placeholder,
-  resize,
-}) => {
+const ContextItems: FC<ContextOptionsProps> = ({ items, value, onChange }) => {
   const [v, setValue] = useState(value)
+  const children = items.map((opt, i) => {
+    return (
+      <ContextOptionItem
+        key={i}
+        onChange={(v) => {
+          setValue(v)
+          onChange(v)
+        }}
+        option={opt}
+        selected={v === opt.value}
+      />
+    )
+  })
+  return <>{children}</>
+}
 
+export const ContextOptions: FC<
+  ContextOptionsProps & ContextOptionsFilterProps
+> = ({ items = [], value, onChange, filterable, placeholder, resize }) => {
   if (filterable) {
     return (
       <FilterableContextOptions
@@ -196,21 +203,173 @@ export const ContextOptions: FC<ContextOptionsProps> = ({
       />
     )
   } else {
-    const children = items.map((opt, i) => {
-      return (
-        <ContextOptionItem
-          key={i}
-          onChange={(v) => {
-            setValue(v)
-            onChange(v)
-          }}
-          option={opt}
-          value={v}
-        />
-      )
-    })
-    return <>{children}</>
+    return <ContextItems items={items} onChange={onChange} value={value} />
   }
 }
 
-// multi select
+// -------------------------- MULTI ------------------------
+
+// move based ui in
+// select component
+// multi select + filter
+// "creatable" option where you create the options yes
+// SelectBadge
+
+const selectValuesReducer = (state: Value[], action: Value): Value[] => {
+  if (state.includes(action)) {
+    return state.filter((v) => v !== action)
+  } else {
+    return [...state, action]
+  }
+}
+
+const ContextMultiItems: FC<ContextMultiOptionsProps> = ({
+  items,
+  values = [],
+  onChange,
+}) => {
+  const [currentValues, setValue] = useReducer(selectValuesReducer, values)
+  const children = items.map((opt, i) => {
+    return (
+      <ContextOptionItem
+        key={i}
+        onChange={(v) => {
+          setValue(v)
+          onChange(selectValuesReducer(currentValues, v))
+        }}
+        option={opt}
+        noRemove
+        selected={currentValues.includes(opt.value)}
+      />
+    )
+  })
+  return <>{children}</>
+}
+
+const FilterInputMultiHolder = styled('div', {
+  paddingBottom: 4,
+  flexWrap: 'wrap',
+  paddingTop: 4,
+  borderTopLeftRadius: 4,
+  borderBottom: '1px solid $OtherDivider',
+  borderTopRightRadius: 4,
+  display: 'flex',
+  width: '100%',
+  backgroundColor: '$ActionLight',
+})
+
+const FilterMultiInput = styled('input', {
+  position: 'relative',
+  display: 'block',
+  width: 'auto',
+  flexGrow: 1,
+  minWidth: '0px',
+  maxWidth: 260,
+  paddingRight: 12,
+  textAlign: 'left',
+  paddingLeft: 12,
+  background: 'transparent',
+  lineHeight: '$md',
+  marginBottom: 4,
+  marginTop: 4,
+  fontSize: '$md',
+  color: '$TextPrimary',
+  userSelect: 'text',
+})
+
+const FilterSelectedBadge = styled('div', {
+  height: 32,
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: 8,
+  marginBottom: 4,
+  marginTop: 4,
+  borderRadius: 4,
+  paddingLeft: 8,
+  color: '$TextPrimary',
+  paddingRight: 8,
+  backgroundColor: '$ActionLight',
+})
+
+const FilterableContextMultiOptions: FC<
+  ContextMultiOptionsProps & ContextOptionsFilterProps
+> = ({ items, values, onChange, resize, placeholder = 'Filter...' }) => {
+  const [f, setFilter] = useState('')
+  const onFilter: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setFilter(e.target.value)
+      if (resize) {
+        resize()
+      }
+    },
+    []
+  )
+  const filteredItems = filterItems(items, f)
+  const [currentValues, setValue] = useReducer(selectValuesReducer, values)
+  const children = filteredItems.map((opt, i) => {
+    return (
+      <ContextOptionItem
+        key={i}
+        onChange={(v) => {
+          setValue(v)
+          onChange(selectValuesReducer(currentValues, v))
+        }}
+        option={opt}
+        noRemove
+        selected={currentValues.includes(opt.value)}
+      />
+    )
+  })
+
+  return (
+    <>
+      <FilterInputMultiHolder>
+        {/* <IconSearch color="$TextSecondary" /> */}
+        {currentValues.map((v) => {
+          return (
+            <FilterSelectedBadge key={v}>
+              <Text>{items.find((opt) => opt.value === v)?.label || v}</Text>
+              <IconClose
+                onClick={() => {
+                  setValue(v)
+                  onChange(selectValuesReducer(currentValues, v))
+                }}
+                css={{
+                  marginLeft: 16,
+                }}
+              />
+            </FilterSelectedBadge>
+          )
+        })}
+        <FilterMultiInput
+          size={f ? f.length : placeholder.length}
+          data-aviato-context-item
+          placeholder={placeholder}
+          onChange={onFilter}
+        />
+      </FilterInputMultiHolder>
+      {children}
+    </>
+  )
+}
+
+export const ContextMultiOptions: FC<
+  ContextMultiOptionsProps & ContextOptionsFilterProps
+> = ({ items = [], values, onChange, filterable, placeholder, resize }) => {
+  if (filterable) {
+    return (
+      <FilterableContextMultiOptions
+        items={items}
+        values={values}
+        onChange={onChange}
+        filterable={filterable}
+        resize={resize}
+        placeholder={placeholder}
+      />
+    )
+  } else {
+    return (
+      <ContextMultiItems items={items} onChange={onChange} values={values} />
+    )
+  }
+}

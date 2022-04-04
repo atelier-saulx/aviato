@@ -20,5 +20,11 @@ export const Wrapper: FC<IconProps> = (p) => {
       }
     }
   }
-  return <StyledWrapper onClick={onClick} {...props} />
+  return (
+    <StyledWrapper
+      css={{ cursor: onClick ? 'pointer' : 'default' }}
+      onClick={onClick}
+      {...props}
+    />
+  )
 }
