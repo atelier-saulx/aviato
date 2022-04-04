@@ -34,7 +34,11 @@ const LabelSelectFilter = () => {
   const [value, open] = useSelect(x, null, {
     filterable: true,
     position: 'right',
+    css: {
+      maxHeight: 300,
+    },
   })
+
   return (
     <Button css={{ marginBottom: 24 }} onClick={open}>
       Select label filter ({value})

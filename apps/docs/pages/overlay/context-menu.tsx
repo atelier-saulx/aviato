@@ -170,13 +170,17 @@ const ContextMenuPage = () => {
             onClick={useContextMenu(
               SimpleMenu,
               {},
-              { position: 'left', variant: 'over' }
+              {
+                position: 'left',
+                variant: 'over',
+                css: { border: '3px solid $PrimaryMain', borderRadius: 0 },
+              }
             )}
             css={{
               marginBottom: 24,
             }}
           >
-            Menu (variant: over / position: left)
+            Menu (variant: over / position: left) css override
           </Button>
 
           <Button

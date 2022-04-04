@@ -9,11 +9,16 @@ import { PositionProps } from './useOverlayPosition'
 import { useCallback, useState } from 'react'
 import { PropsEventHandler } from '../../types'
 import { hash } from '@saulx/hash'
+import { StitchedCSS } from '~/theme'
 
 export function useSelect(
   items: (Option | Value)[] = [],
   initialValue?: Value,
-  position?: PositionProps & { filterable?: boolean; placeholder?: string },
+  position?: PositionProps & {
+    filterable?: boolean
+    placeholder?: string
+    css?: StitchedCSS
+  },
   handler?: (selection: Event | any) => () => void | undefined
 ): [string | number | undefined, PropsEventHandler] {
   const [value, setValue] = useState(initialValue)
@@ -42,7 +47,7 @@ export function useSelect(
       position,
       handler,
       ContextMenu,
-      { transparent: true },
+      { transparent: true, css: position?.css },
       [n]
     ),
   ]
