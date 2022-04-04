@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { ForwardedRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
 import * as RadixScrollArea from '@radix-ui/react-scroll-area'

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { FunctionComponent, ReactNode, useContext, useRef } from 'react'
 
 import { styled } from '~/theme'
