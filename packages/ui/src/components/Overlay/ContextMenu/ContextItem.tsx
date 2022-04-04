@@ -1,4 +1,12 @@
-import React, { forwardRef, ElementRef, ReactNode } from 'react'
+import React, {
+  forwardRef,
+  ElementRef,
+  ReactNode,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react'
 import { isText } from '@aviato/utils'
 import { Text } from '~/components/Text'
 import { StitchedCSS, Color, styled } from '~/theme'
@@ -13,9 +21,9 @@ const StyledContextItem = styled('div', {
   paddingLeft: '16px',
   paddingRight: '16px',
   cursor: 'pointer',
-  '&:hover': {
-    backgroundColor: '$ActionLightHover',
-  },
+  // '&:hover': {
+  //   backgroundColor: '$ActionLightHover',
+  // },
   '&:active': {
     backgroundColor: '$ActionLightSelected',
   },
@@ -122,13 +130,43 @@ export const ContextItem = forwardRef<
     )
   }
 
+  // only relevant if focusable
+
+  const [isHover, setHover] = useState(false)
+
+  const ref = useRef(forwardRef)
+
+  useEffect(() => {
+    if (isHover) {
+      // @ts-ignore
+      ref.current.focus()
+    } else {
+      // @ts-ignore
+      ref.current.blur()
+    }
+  }, [isHover, ref])
+
   return (
     <StyledContextItem
       data-aviato-context-item
       tabIndex={tabIndex}
-      ref={forwardedRef}
+      // @ts-ignore
+      ref={ref}
+      onMouseEnter={useCallback(() => setHover(true), [])}
+      onMouseLeave={useCallback(() => setHover(false), [])}
       onClick={onClick}
       css={css}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === 'Enter') {
+                if (onClick) {
+                  onClick(e)
+                }
+              }
+            }
+          : null
+      }
     >
       {child}
       {rightIcon}

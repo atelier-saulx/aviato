@@ -31,13 +31,8 @@ export const ContextMenu: FC<OverlayProps> = ({
     focus()
     const setFocus = (e) => {
       const { key } = e
-
       if (key === 'Escape') {
         focus()
-      } else if (key === 'Enter') {
-        if (elem) {
-          elem.click(e)
-        }
       } else if (key === 'Tab' || key === 'ArrowDown') {
         currentFocus++
         const elems = elementRef.current.querySelectorAll(
