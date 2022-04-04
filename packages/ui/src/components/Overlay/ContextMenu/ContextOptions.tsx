@@ -27,15 +27,15 @@ export const ContextOptionItem: FC<{
       css={{
         backgroundColor:
           isSelected === 1
-            ? 'transparent !important'
+            ? '$ActionLightSelected !important'
             : isSelected === 1
-            ? '$PrimaryLightSelected'
+            ? '$ActionLightHover'
             : null,
         '&:hover': {
-          backgroundColor: '$PrimaryLightSelected',
+          backgroundColor: '$ActionLightHover',
         },
         '&:active': {
-          backgroundColor: '$PrimaryLightSelected',
+          backgroundColor: '$ActionLightHover',
         },
       }}
       inset
