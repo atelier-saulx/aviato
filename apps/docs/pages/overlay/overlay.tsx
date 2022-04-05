@@ -4,6 +4,7 @@ import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const OverlayPage = () => {
   const ShowSimpleOverlay = () => {
+    // @ts-ignore // TODO: Fix TS issue
     const { open } = useOverlay()
 
     const openSimpleOverlay = () => {

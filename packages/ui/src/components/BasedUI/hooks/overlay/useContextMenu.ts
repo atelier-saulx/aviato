@@ -1,5 +1,5 @@
 import { ContextMenu } from '../../../Overlay/ContextMenu'
-import useOverlay from './useOverlay'
+import { useOverlay } from './useOverlay'
 import { PositionProps } from './useOverlayPosition'
 import { ComponentType, PropsWithChildren } from 'react'
 import { PropsEventHandler } from '../../types'

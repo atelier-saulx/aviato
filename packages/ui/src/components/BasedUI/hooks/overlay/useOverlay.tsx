@@ -5,7 +5,7 @@ import { GenericOverlay, OverlayProps } from '../../Overlay/Shared'
 import { PropsEventHandler } from '../../types'
 import { hash } from '@saulx/hash'
 
-export default function useOverlay<P = any>(
+export function useOverlay<P = any>(
   Component: ComponentType<P>, // hint to geuss from useOverlay
   props?: P,
   positionProps?: PositionProps,
