@@ -5,7 +5,7 @@ import {
   Value,
 } from '../../../Overlay/ContextMenu/ContextOptions'
 import { ContextMenu } from '../../../Overlay/ContextMenu'
-import useOverlay from './useOverlay'
+import { useOverlay } from './useOverlay'
 import { PositionProps } from './useOverlayPosition'
 import { useCallback, useState } from 'react'
 import { PropsEventHandler } from '../../types'
