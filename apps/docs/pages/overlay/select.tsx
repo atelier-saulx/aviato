@@ -106,6 +106,7 @@ const MultiSelectFilterLabel = () => {
     [1, 2],
     {
       filterable: true,
+      placement: 'left',
     }
   )
   return (

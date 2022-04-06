@@ -237,7 +237,6 @@ export const ContextOptions: FC<
 
 // move based ui in
 // select component
-// multi select + filter
 // "creatable" option where you create the options yes
 // SelectBadge
 
