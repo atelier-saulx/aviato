@@ -10,7 +10,7 @@ import { isText } from '@aviato/utils'
 import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
-import { PropsEventHandler } from '~/components/BasedUI/types'
+import { PropsEventHandler } from '~/types'
 
 const PrimaryCSS: StitchedCSS = {
   '&.isMain': {

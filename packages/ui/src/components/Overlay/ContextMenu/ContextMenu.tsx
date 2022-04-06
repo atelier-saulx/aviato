@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
-import useOverlayPosition from '../../BasedUI/hooks/overlay/useOverlayPosition'
-import Shared, { OverlayProps } from '../../BasedUI/Overlay/Shared'
+import { useOverlayPosition } from '~/hooks'
+import Shared, { OverlayProps } from '../Shared'
 
 export const ContextMenu: FC<OverlayProps> = ({
   positionProps = {},

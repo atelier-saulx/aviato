@@ -1,9 +1,5 @@
 import React, { forwardRef, FC, PropsWithChildren, ComponentType } from 'react'
-import {
-  Position,
-  PositionProps,
-  Target,
-} from '../hooks/overlay/useOverlayPosition'
+import { Position, PositionProps, Target } from '~/types'
 import { styled, StitchedCSS } from '~/theme'
 import { ScrollArea } from '~/components'
 
@@ -11,7 +7,6 @@ const InnerSharedStyled = styled('div', {
   pointerEvents: 'all',
   borderRadius: 4,
   background: '$Background2dp',
-  // overflow: 'hidden',
   border: '1px solid $OtherDivider',
   maxHeight: 'calc(100vh - 30px)',
   boxShadow: `0px 3px 16px 1px rgba(0,0,0,0.05)`,

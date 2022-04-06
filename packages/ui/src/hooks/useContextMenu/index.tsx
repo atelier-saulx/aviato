@@ -1,11 +1,10 @@
-import { ContextMenu } from '../../../Overlay/ContextMenu'
-import { useOverlay } from './useOverlay'
-import { PositionProps } from './useOverlayPosition'
+import { ContextMenu } from '../../components/Overlay/ContextMenu'
+import { useOverlay } from '../useOverlay'
+import { PositionProps, PropsEventHandler } from '~/types'
 import { ComponentType, PropsWithChildren } from 'react'
-import { PropsEventHandler } from '../../types'
 import { StitchedCSS } from '~/theme'
 
-export default function useContextMenu<P = { [key: string]: any }>(
+export function useContextMenu<P = { [key: string]: any }>(
   component: ComponentType<PropsWithChildren<P>>,
   props?: P | PropsWithChildren<P>,
   position?: PositionProps & { css?: StitchedCSS },

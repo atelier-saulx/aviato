@@ -80,7 +80,7 @@ const OverlayItem: FunctionComponent<OverlayItemProps> = ({
   )
 }
 
-const Overlay = () => {
+const OverlayPortal = () => {
   const [, update] = useReducer((x) => x + 1, 0)
   // const notifictions = useNotifications({ update })
 
@@ -161,4 +161,4 @@ const removeOverlay = (overlay?: ReactNode) => {
   listeners.forEach((update) => update())
 }
 
-export { Overlay, addOverlay, removeOverlay, removeAllOverlays }
+export { OverlayPortal, addOverlay, removeOverlay, removeAllOverlays }

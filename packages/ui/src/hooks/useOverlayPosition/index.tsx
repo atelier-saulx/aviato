@@ -1,48 +1,19 @@
 import { useEffect, useRef, useState, useReducer, RefObject } from 'react'
+import { Target, SelectTarget, PositionProps, Position } from '~/types'
 
-export type Target = (EventTarget | Element | Node) & {
-  rect?: DOMRect
-}
-
-export type PosCalculation = (
+type PosCalculation = (
   targetRect: DOMRect,
   elementRect: DOMRect,
   positionProps: PositionProps
 ) => number
 
-export type MaxMinCalculation = (
+type MaxMinCalculation = (
   value: number,
   targetRect: DOMRect,
   elementRect: DOMRect,
   positionProps: PositionProps,
   position: Position
 ) => number
-
-export type SelectTarget = (t: Target) => Target
-
-export type PositionProps = {
-  width?: string | number | undefined
-  position?: 'left' | 'right' | 'top' | 'bottom'
-  placement?: 'center' | 'left' | 'right'
-  variant?: 'over' | 'detached'
-  offset?: { x: number; y: number }
-  selectTarget?: SelectTarget
-}
-
-export type Position = {
-  containerWidth?: number
-  y?: number
-  x?: number
-  bottom?: number
-  width?: number | string
-  spaceOnTop?: boolean
-  correctedY?: number
-  elementRect?: DOMRect
-  targetRect?: DOMRect
-  minWidth?: number | string
-  position?: 'left' | 'right' | 'top' | 'bottom'
-  placement?: 'center' | 'left' | 'right'
-}
 
 const selectSelf: SelectTarget = (t) => t
 
@@ -143,7 +114,7 @@ const getTargetRect = (target: Target, selectTarget: SelectTarget): DOMRect => {
   return { left: 0, top: 0, height: 0, width: 0, bottom: 0, right: 0 }
 }
 
-export default (
+export const useOverlayPosition = (
   target: Target,
   positionProps: PositionProps = {}
 ): [RefObject<HTMLDivElement>, Position | undefined, Resize] => {

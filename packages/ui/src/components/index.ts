@@ -1,4 +1,3 @@
-export * from './BasedUI'
 export * from './Display'
 export * from './Feedback'
 export * from './Icons'

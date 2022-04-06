@@ -10,8 +10,8 @@ import React, {
 import { isText } from '@aviato/utils'
 import { Text } from '~/components/Text'
 import { StitchedCSS, Color, styled } from '~/theme'
-import { removeOverlay } from '~/components/BasedUI/Overlay'
-import { PropsEventHandler } from '~/components/BasedUI/types'
+import { removeOverlay } from '~/components/Overlay/OverlayPortal'
+import { PropsEventHandler } from '~/types'
 
 const StyledContextItem = styled('div', {
   display: 'flex',

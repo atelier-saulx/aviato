@@ -7,7 +7,7 @@ import React, {
   ElementRef,
   useReducer,
 } from 'react'
-import { removeOverlay } from '~/components/BasedUI/Overlay'
+import { removeOverlay } from '~/components/Overlay'
 import { IconCheck, IconSearch, IconClose, Text } from '~/components'
 import { styled } from '~/theme'
 import { ContextItem } from '.'

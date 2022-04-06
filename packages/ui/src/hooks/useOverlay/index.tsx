@@ -1,8 +1,12 @@
-import { addOverlay, OnClose, OverlayOptions } from '../../Overlay'
-import { PositionProps } from './useOverlayPosition'
+import {
+  addOverlay,
+  OnClose,
+  OverlayOptions,
+  GenericOverlay,
+  OverlayProps,
+} from '~/components/Overlay'
 import React, { ComponentType, SyntheticEvent, useCallback } from 'react'
-import { GenericOverlay, OverlayProps } from '../../Overlay/Shared'
-import { PropsEventHandler } from '../../types'
+import { PropsEventHandler, PositionProps } from '../../types'
 import { hash } from '@saulx/hash'
 
 export function useOverlay<P = any>(

@@ -1,5 +1,5 @@
 import { StitchedCSS, Color } from '~/theme'
-import { PropsEventHandler } from '~/components/BasedUI/types'
+import { PropsEventHandler } from '~/types'
 
 import { SVGProps } from 'react'
 

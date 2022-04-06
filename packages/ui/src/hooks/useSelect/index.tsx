@@ -3,12 +3,11 @@ import {
   Option,
   ContextMultiOptions,
   Value,
-} from '../../../Overlay/ContextMenu/ContextOptions'
-import { ContextMenu } from '../../../Overlay/ContextMenu'
-import { useOverlay } from './useOverlay'
-import { PositionProps } from './useOverlayPosition'
+  ContextMenu,
+} from '~/components/Overlay'
+import { useOverlay } from '../useOverlay'
 import { useCallback, useState } from 'react'
-import { PropsEventHandler } from '../../types'
+import { PropsEventHandler, PositionProps } from '~/types'
 import { hash } from '@saulx/hash'
 import { StitchedCSS } from '~/theme'
 
