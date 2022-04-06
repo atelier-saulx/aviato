@@ -14,6 +14,7 @@ export const ContextMenu: FC<OverlayProps> = ({
     positionProps
   )
 
+  // make into hook
   useEffect(() => {
     let currentFocus: number = 0
     let elem: any

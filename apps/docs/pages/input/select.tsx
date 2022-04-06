@@ -1,41 +1,15 @@
-import { Column, Row, Page } from '@aviato/ui'
-// import { log } from '@aviato/utils'
-
-// Select
-
+import { Column, Page, Select } from '@aviato/ui'
+import { log } from '@aviato/utils'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
 const ComponentProps = `
-interface SelectProps extends BaseInputProps {
-  value?: string
-  defaultValue?: string
-  data: SelectItem[]
-  label?: string
-  description?: string
-  error?: string
-  invalid?: boolean
-  searchable?: boolean
-  disabled?: boolean
-  limit?: number
-  filter?(value: string, item: SelectItem): boolean
-}
-
-interface BaseInputProps {
-  value?: string
-  defaultValue?: string
-  component?: ElementType
-  type?: InputType
+type SelectProps {
+  options: (Option | Value)[],
+  value?: Value,
+  onChange?: (value: Value) => void,
+  color?: Color,
   placeholder?: string
-  leftIcon?: ReactNode
-  rightIcon?: ReactNode
-  variant?: InputVariant
-  disabled?: boolean
-  invalid?: boolean
-  multiline?: boolean
-  maxRows?: number
-  minRows?: number
-  onChange?: (value: string, payload: OnInputChange) => void
-  autoFocus?: boolean
+  filterable?: boolean,
 }
 `
 
@@ -44,21 +18,41 @@ const SelectPage = () => {
     return (
       <>
         <Column css={{ width: '100%', maxWidth: '400px' }}>
-          <Row css={{ width: '100%' }}>
-            {/* <Select
-              placeholder="Select a thing"
-              label="This is a label"
-              description="This is a description"
-              onChange={(value, payload) => {
-                log.global.debug('Select change: ', { value, payload })
-              }}
-              data={[
-                { value: 'flurpy', label: 'Flurpy' },
-                { value: 'snark', label: 'Snark' },
-                { value: 'snorkles', label: 'Snorkles' },
-              ]}
-            /> */}
-          </Row>
+          <Select
+            css={{
+              marginBottom: 32,
+            }}
+            // placeholder="Select a thing"
+            // label="This is a label"
+            // description="This is a description"
+            onChange={(value) => {
+              log.global.debug('Select change: ', { value })
+            }}
+            options={[
+              { value: 'flurpy', label: 'Flurpy' },
+              { value: 'snark', label: 'Snark' },
+              { value: 'snorkles', label: 'Snorkles' },
+            ]}
+          />
+
+          <Select
+            overlay={{
+              width: 300,
+              position: 'right',
+              variant: 'detatched',
+            }}
+            placeholder="Select a thing"
+            // label="This is a label"
+            // description="This is a description"
+            onChange={(value) => {
+              log.global.debug('Select change: ', { value })
+            }}
+            options={[
+              { value: 'flurpy', label: 'Flurpy' },
+              { value: 'snark', label: 'Snark' },
+              { value: 'snorkles', label: 'Snorkles' },
+            ]}
+          />
         </Column>
       </>
     )
@@ -80,19 +74,17 @@ const SelectPage = () => {
       <ShowcaseComponent
         background="transparent"
         codeBlock={`
-<Select
-  placeholder="Select a thing"
-  label="This is a label"
-  description="This is a description"
-  onChange={(value, payload) => {
-    log.global.debug('Select change: ', { value, payload })
-  }}
-  data={[
-    { value: 'flurpy', label: 'Flurpy' },
-    { value: 'snark', label: 'Snark' },
-    { value: 'snorkles', label: 'Snorkles' },
-  ]}
-/>
+        <Select
+          placeholder="Pick a snurkels!"
+          onChange={(value) => {
+            log.global.debug('Select change: ', { value })
+          }}
+          options={[
+            { value: 'flurpy', label: 'Flurpy' },
+            { value: 'snark', label: 'Snark' },
+            { value: 'snorkles', label: 'Snorkles' },
+          ]}
+       />
       `}
       >
         <ShowSelect />

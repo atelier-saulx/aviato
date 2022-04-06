@@ -21,9 +21,6 @@ const StyledContextItem = styled('div', {
   paddingLeft: '16px',
   paddingRight: '16px',
   cursor: 'pointer',
-  // '&:hover': {
-  //   backgroundColor: '$ActionLightHover',
-  // },
   '&:active': {
     backgroundColor: '$ActionLightSelected',
   },
@@ -130,18 +127,16 @@ export const ContextItem = forwardRef<
     )
   }
 
-  // only relevant if focusable
-
   const [isHover, setHover] = useState(false)
 
   const ref = useRef(forwardRef)
 
   useEffect(() => {
     if (isHover) {
-      // @ts-ignore
+      // @ts-ignore - easier to not have to type multi-refs
       ref.current.focus()
     } else {
-      // @ts-ignore
+      // @ts-ignore - easier to not have to type multi-refs
       ref.current.blur()
     }
   }, [isHover, ref])
@@ -150,7 +145,7 @@ export const ContextItem = forwardRef<
     <StyledContextItem
       data-aviato-context-item
       tabIndex={tabIndex}
-      // @ts-ignore
+      // @ts-ignore - easier to not have to type multi-refs
       ref={ref}
       onMouseEnter={useCallback(() => setHover(true), [])}
       onMouseLeave={useCallback(() => setHover(false), [])}

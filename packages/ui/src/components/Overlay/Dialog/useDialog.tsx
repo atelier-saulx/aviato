@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { DialogContext, DialogContextType } from './DialogContext'
 
-// @ts-ignore
+// @ts-ignore - TODO: yuzi fix this - we use types - add a provider on top
 export const useDialog: () => DialogContextType = () => {
   const Dialog = useContext(DialogContext)
   if (Dialog) {

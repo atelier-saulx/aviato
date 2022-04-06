@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
 import React, {
   FC,
   useCallback,
@@ -233,13 +232,6 @@ export const ContextOptions: FC<
     return <ContextItems items={items} onChange={onChange} value={value} />
   }
 }
-
-// -------------------------- MULTI ------------------------
-
-// move based ui in
-// select component
-// "creatable" option where you create the options yes
-// SelectBadge
 
 const selectValuesReducer = (state: Value[], action: Value): Value[] => {
   if (state.includes(action)) {

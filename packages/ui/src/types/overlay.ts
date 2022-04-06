@@ -5,7 +5,7 @@ export type Target = (EventTarget | Element | Node) & {
 export type SelectTarget = (t: Target) => Target
 
 export type PositionProps = {
-  width?: string | number | undefined
+  width?: number | '100%' | 'target' | 'auto'
   position?: 'left' | 'right' | 'top' | 'bottom'
   placement?: 'center' | 'left' | 'right'
   variant?: 'over' | 'detached'
@@ -18,7 +18,7 @@ export type Position = {
   y?: number
   x?: number
   bottom?: number
-  width?: number | string
+  width?: number | '100%' | 'target' | 'auto'
   spaceOnTop?: boolean
   correctedY?: number
   elementRect?: DOMRect

@@ -1,8 +1,10 @@
 import { Page, Button, useSelect, useMultiSelect, styled } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
+// deselect
+
 const SimpleSelect = () => {
-  const [value, open] = useSelect(['x', 'y', 'z'], 'x')
+  const [value, open] = useSelect(['x', 'y', 'z'])
   return (
     <Button css={{ marginBottom: 24 }} onClick={open}>
       Select ({value})
@@ -87,6 +89,7 @@ const MultiSelect = () => {
 const MultiSelectFilter = () => {
   const [values, open] = useMultiSelect([1, 2, 3, 4], [1, 2], {
     filterable: true,
+    placement: 'right',
   })
   return (
     <Button css={{ marginBottom: 24 }} onClick={open}>

@@ -21,6 +21,6 @@ const updateReducer = (
 export function useObjectState<T = GenericObject>(
   initialState?: T
 ): [T, (val: T | null | undefined) => void] {
-  // @ts-ignore
+  // @ts-ignore - not valid react dont worry
   return useReducer(updateReducer, initialState || {})
 }

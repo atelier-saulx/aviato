@@ -131,17 +131,17 @@ export const useOverlayPosition = (
     console.warn('Left/Right position + variant: over is not supported yet')
   }
 
-  if (positionProps.position === 'left' && !positionProps.placement) {
+  if (positionProps.position === 'left') {
     positionProps.placement = 'right'
   }
 
-  if (positionProps.position === 'right' && !positionProps.placement) {
+  if (positionProps.position === 'right') {
     positionProps.placement = 'left'
   }
 
   const elementRef: RefObject<HTMLDivElement> = useRef()
   const [position, setPosition] = useState<Position>({
-    width: positionProps.width,
+    width: positionProps.width === 'target' ? 'auto' : positionProps.width,
     position: positionProps.position,
     placement: positionProps.placement,
   })
@@ -154,7 +154,8 @@ export const useOverlayPosition = (
       const pos: Position = {
         position: positionProps.position,
         placement: positionProps.placement,
-        width: positionProps.width,
+        width:
+          positionProps.width === 'target' ? rect.width : positionProps.width,
       }
       pos.elementRect = elementRect
       pos.targetRect = rect

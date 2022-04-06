@@ -121,6 +121,7 @@ const ContextMenuPage = () => {
             Menu (placement: center)
           </Button>
 
+          {/* make nice with it */}
           <Button
             onClick={useContextMenu(SimpleMenu, {}, { placement: 'left' })}
             css={{
