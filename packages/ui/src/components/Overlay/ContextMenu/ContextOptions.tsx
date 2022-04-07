@@ -62,7 +62,7 @@ export type Option = {
 
 export type ContextOptionsFilterProps = {
   // eslint-disable-next-line
-  filterable?: boolean
+  filterable?: boolean | 'create'
   placeholder?: string
   resize?: () => void
   // eslint-disable-next-line
@@ -186,7 +186,7 @@ const filterItems = (
 
 const FilterableContextOptions: FC<
   ContextOptionsProps & ContextOptionsFilterProps
-> = ({ items, value, onChange, resize, placeholder }) => {
+> = ({ items, value, onChange, resize, placeholder, filterable }) => {
   const [f, setFilter] = useState('')
   const onFilter: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
@@ -197,7 +197,20 @@ const FilterableContextOptions: FC<
     },
     []
   )
-  const filteredItems = filterItems(items, f)
+  let filteredItems = filterItems(items, f)
+
+  if (filterable === 'create' && f && !items.find((o) => o.value === f)) {
+    if (
+      filteredItems.length === 1 &&
+      filteredItems[0].value === '$-no-results-aviato'
+    ) {
+      filteredItems = [{ value: f, label: `Add "${f}"` }]
+    } else {
+      // clear input on click on this...
+      filteredItems.push({ value: f, label: `Add "${f}"` })
+    }
+  }
+
   return (
     <>
       <FilterInputHolderSticky>
@@ -292,10 +305,10 @@ const FilterInputMultiHolder = styled('div', {
   paddingBottom: 4,
   flexWrap: 'wrap',
   paddingTop: 2,
-  borderTopLeftRadius: 4,
+  borderTopLeftRadius: 3,
   paddingLeft: 4,
   borderBottom: '1px solid $OtherDivider',
-  borderTopRightRadius: 4,
+  borderTopRightRadius: 3,
   display: 'flex',
   width: '100%',
   backgroundColor: '$ActionLight',
@@ -325,13 +338,13 @@ const StyledFilterSelectedBadge = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
+  color: '$TextPrimary',
   marginBottom: 4,
   userSelect: 'none',
   marginTop: 4,
   flexShrink: 0,
   borderRadius: 4,
   paddingLeft: 8,
-  color: '$TextPrimary',
   paddingRight: 8,
   backgroundColor: '$ActionLight',
 })
@@ -351,8 +364,10 @@ export const FilterSelectBadge: FC<{
   }
   return (
     <StyledFilterSelectedBadge css={css}>
-      <Text>{label}</Text>
+      {/* TODO: fix in text that you can pass numbers */}
+      <Text>{String(label)}</Text>
       <IconClose
+        color="$TextPrimary"
         onClick={onClose}
         css={{
           flexShrink: 0,
@@ -379,15 +394,26 @@ export const FilterSelectMoreBadge: FC<{
   }
   return (
     <StyledFilterSelectedBadge css={css} data-aviato-select-more>
-      <IconPlus css={{ marginRight: 8 }} onClick={onClick} />
-      <Text>{number}</Text>
+      <IconPlus
+        color="$TextPrimary"
+        css={{ marginRight: 8 }}
+        onClick={onClick}
+      />
+      <Text>{String(number)}</Text>
     </StyledFilterSelectedBadge>
   )
 }
 
 const FilterableContextMultiOptions: FC<
   ContextMultiOptionsProps & ContextOptionsFilterProps
-> = ({ items, values, onChange, resize, placeholder = 'Filter...' }) => {
+> = ({
+  items,
+  values,
+  onChange,
+  resize,
+  placeholder = 'Filter...',
+  filterable,
+}) => {
   const [f, setFilter] = useState('')
   const onFilter: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
@@ -400,13 +426,29 @@ const FilterableContextMultiOptions: FC<
   )
   const [currentValues, setValue] = useReducer(selectValuesReducer, values)
 
-  const filteredItems = filterItems(items, f, currentValues)
+  let filteredItems = filterItems(items, f, currentValues)
+
+  if (filterable === 'create' && f && !items.find((o) => o.value === f)) {
+    if (
+      filteredItems.length === 1 &&
+      filteredItems[0].value === '$-no-results-aviato'
+    ) {
+      filteredItems = [{ value: f, label: `Add "${f}"` }]
+    } else {
+      // clear input on click on this...
+      filteredItems.push({ value: f, label: `Add "${f}"` })
+    }
+  }
+
   const children = filteredItems.map((opt, i) => {
     return (
       <ContextOptionItem
         key={i}
         noInset
         onChange={(v) => {
+          if (v === f && filterable === 'create') {
+            setFilter('')
+          }
           setValue(v)
           onChange(selectValuesReducer(currentValues, v))
           if (resize) {
@@ -443,6 +485,7 @@ const FilterableContextMultiOptions: FC<
           <FilterMultiInput
             size={f ? f.length : placeholder.length}
             data-aviato-context-item
+            value={f}
             placeholder={placeholder}
             onChange={onFilter}
           />

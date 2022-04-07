@@ -47,6 +47,22 @@ const LabelSelectFilter = () => {
   )
 }
 
+const LabelSelectFilterCreate = () => {
+  const x = []
+  for (let i = 0; i < 5; i++) {
+    x.push(i + ' my snur')
+  }
+
+  const [value, open] = useSelect(x, null, {
+    filterable: 'create',
+  })
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      Select label filter + create ({value})
+    </Button>
+  )
+}
+
 const AnimatingLabel = styled('div', {
   animationName: 'fadeIn',
   border: '1px solid black',
@@ -119,6 +135,23 @@ const MultiSelectFilterLabel = () => {
   )
 }
 
+const CreateSomething = () => {
+  const [values, open] = useMultiSelect(
+    ['hello', 'snapje', 'snurx', 'yes'],
+    ['hello'],
+    {
+      // also on single
+      filterable: 'create',
+      placement: 'left',
+    }
+  )
+  return (
+    <Button css={{ marginBottom: 24 }} onClick={open}>
+      MultiSelect + create filter ({values.join(', ')})
+    </Button>
+  )
+}
+
 const ContextMenuPage = () => {
   return (
     <Page>
@@ -137,6 +170,8 @@ const ContextMenuPage = () => {
           <MultiSelect />
           <MultiSelectFilter />
           <MultiSelectFilterLabel />
+          <CreateSomething />
+          <LabelSelectFilterCreate />
         </div>
       </ShowcaseComponent>
     </Page>

@@ -15,7 +15,7 @@ export function useSelect(
   items: (Option | Value)[] = [],
   initialValue?: Value,
   position?: PositionProps & {
-    filterable?: boolean
+    filterable?: boolean | 'create'
     placeholder?: string
     css?: StitchedCSS
   },
@@ -56,7 +56,7 @@ export function useMultiSelect(
   items: (Option | Value)[] = [],
   initialValues?: Value[],
   position?: PositionProps & {
-    filterable?: boolean
+    filterable?: boolean | 'create'
     placeholder?: string
     css?: StitchedCSS
   },

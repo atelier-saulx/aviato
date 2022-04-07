@@ -12,9 +12,10 @@ export type SelectProps = {
   options: (Option | Value)[]
   onChange: (value: Value) => void
   color?: Color
-  filterable?: boolean
+  filterable?: boolean | 'create'
   placeholder?: string
   overlay?: PositionProps
+  label?: string
   css?: StitchedCSS
 }
 
@@ -27,6 +28,7 @@ export const Select: FC<SelectProps> = ({
   color = '$TextPrimary',
   placeholder = 'Select an option',
   overlay,
+  label,
 }) => {
   const [currentValue, open] = useSelect(options, value, {
     variant: 'over',
@@ -40,6 +42,18 @@ export const Select: FC<SelectProps> = ({
       onChange(currentValue)
     }
   }, [currentValue])
+
+  if (label) {
+    return (
+      <StyledSelect onClick={open} css={css}>
+        <Text color={!currentValue ? 'Secondary' : 'Primary'}>
+          {currentValue || placeholder}
+        </Text>
+        <IconChevronDown color={color} />
+      </StyledSelect>
+    )
+  }
+
   return (
     <StyledSelect onClick={open} css={css}>
       <Text color={!currentValue ? 'Secondary' : 'Primary'}>

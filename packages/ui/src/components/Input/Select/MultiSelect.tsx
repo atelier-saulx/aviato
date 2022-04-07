@@ -18,7 +18,7 @@ export type MultiSelectProps = {
   options: (Option | Value)[]
   onChange: (values: Value[]) => void
   color?: Color
-  filterable?: boolean
+  filterable?: boolean | 'create'
   placeholder?: string
   overlay?: PositionProps
   css?: StitchedCSS

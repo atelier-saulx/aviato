@@ -74,6 +74,7 @@ const SelectPage = () => {
           />
 
           <MultiSelect
+            css={{ marginBottom: 32 }}
             filterable
             placeholder="Select many things"
             onChange={(value) => {
@@ -88,6 +89,24 @@ const SelectPage = () => {
               { value: 'bedroloeloe', label: 'Bedroloeloe' },
               { value: 'kakkie', label: 'Kakkie' },
               { value: 'snak', label: 'Snak' },
+            ]}
+          />
+
+          <MultiSelect
+            filterable="create"
+            placeholder="Faka snorkles"
+            onChange={(value) => {
+              console.info('Select change: ', { value })
+            }}
+            values={['flurpy', 'snark', 'snorkels']}
+            options={[
+              'flurpy',
+              'snark',
+              'snorkels',
+              'gurken',
+              'bedroloeloe',
+              'kakkie',
+              'snak',
             ]}
           />
         </Column>

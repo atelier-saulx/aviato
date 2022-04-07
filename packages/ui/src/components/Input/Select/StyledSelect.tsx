@@ -13,9 +13,16 @@ export const StyledSelect = styled('div', {
   cursor: 'pointer',
   userSelect: 'none',
   height: 38,
+  overflow: 'hidden',
   display: 'flex',
   width: '100%',
   '&:hover': {
     border: '1px solid $OtherInputBorderHover',
   },
+})
+
+export const StyledLeftLabel = styled('div', {
+  width: '50%',
+  backgroundColor: '$Background3dp',
+  borderRight: '1px solid $OtherDivider',
 })
