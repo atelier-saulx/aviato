@@ -36,12 +36,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   css,
   filterable,
   color = '$TextPrimary',
-  placeholder = 'Select an option',
+  placeholder = 'Select options',
   overlay,
 }) => {
   const ref = useRef()
-
-  const [displayIndex, setDisplayIndex] = useState(1)
 
   // if these values update force update on the dropdown
   const [currentValues, open, setValues] = useMultiSelect(options, values, {
@@ -52,14 +50,68 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     ...overlay,
   })
 
+  const [displayIndex, setDisplayIndex] = useState(values?.length || 0)
+
   useEffect(() => {
     if (!deepEqual(currentValues, values)) {
       onChange(currentValues)
     }
 
-    setDisplayIndex(1)
+    setDisplayIndex(currentValues.length)
 
-    // check if it fits
+    let handle: any
+
+    const correctIt = (time = 0) => {
+      clearTimeout(handle)
+      handle = setTimeout(() => {
+        // @ts-ignore
+        if (ref.current.children[0]?.children?.length) {
+          // @ts-ignore
+          const { width } = ref.current.getBoundingClientRect()
+          // @ts-ignore
+          const innerWidth = ref.current.children[0].clientWidth
+
+          if (innerWidth > width - 60) {
+            // width - 60
+            let targetW = innerWidth
+            for (
+              // @ts-ignore
+              let i = ref.current.children[0].children.length - 1;
+              i >= 0;
+              i--
+            ) {
+              // @ts-ignore
+              const child = ref.current.children[0].children[i]
+              if (!child.getAttribute('data-aviato-select-more')) {
+                targetW -= child.getBoundingClientRect().width + 8
+                if (targetW <= width - 120) {
+                  setDisplayIndex(i)
+                  correctIt(25)
+                  break
+                }
+              }
+            }
+          } else {
+            for (
+              let i = 0;
+              // @ts-ignore
+              i < ref.current.children[0].children.length;
+              i++
+            ) {
+              // @ts-ignore
+              const child = ref.current.children[0].children[i]
+              child.style.opacity = 1
+            }
+          }
+        }
+      }, time)
+    }
+
+    correctIt()
+
+    return () => {
+      clearTimeout(handle)
+    }
   }, [currentValues, ref])
 
   let optionsBadges: ReactNode
@@ -83,7 +135,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       c.push(
         <FilterSelectBadge
           key={v}
-          css={{ marginRight: 8 }}
+          css={{ marginRight: 8, opacity: 0 }}
           // @ts-ignore not rly great
           label={opt ? opt.label : v}
           onClose={() => {
@@ -98,6 +150,9 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     if (displayIndex < currentValues.length) {
       c.push(
         <FilterSelectMoreBadge
+          css={{
+            opacity: 0,
+          }}
           number={currentValues.length - displayIndex}
           key={currentValues.length}
         />
@@ -108,15 +163,15 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   return (
-    <StyledSelect ref={ref} onClick={open} css={css}>
+    <StyledSelect
+      ref={ref}
+      onClick={open}
+      css={{
+        ...css,
+      }}
+    >
       {optionsBadges}
       <IconChevronDown color={color} />
     </StyledSelect>
   )
 }
-
-// select badge
-// -------------------------- MULTI ------------------------
-// select component
-// "creatable" option where you create the options yes
-// SelectBadge

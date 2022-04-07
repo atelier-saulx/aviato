@@ -4,6 +4,14 @@ import { IconProps } from './types'
 
 const StyledWrapper = styled('div', {})
 
+const StyledClickableWrapper = styled('div', {
+  '&:hover': {
+    transform: 'scale(1.1)',
+  },
+  transition: 'transform 0.15s',
+  cursor: 'pointer',
+})
+
 export const Wrapper: FC<IconProps> = (p) => {
   let { onClick, ...props } = p
 
@@ -19,12 +27,7 @@ export const Wrapper: FC<IconProps> = (p) => {
         // do nothing shake icon or something
       }
     }
+    return <StyledClickableWrapper onClick={onClick} {...props} />
   }
-  return (
-    <StyledWrapper
-      css={{ cursor: onClick ? 'pointer' : 'default' }}
-      onClick={onClick}
-      {...props}
-    />
-  )
+  return <StyledWrapper {...props} />
 }

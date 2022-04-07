@@ -142,9 +142,13 @@ export const ContextOptionItem = forwardRef<
   )
 })
 
-const filterItems = (items: Option[], filter?: string): Option[] => {
+const filterItems = (
+  items: Option[],
+  filter?: string,
+  values?: Value[]
+): Option[] => {
   if (filter) {
-    const filtered = items.filter((opt) => {
+    items = items.filter((opt) => {
       const s = String(opt.value)
       const splitFilter = filter.split(' ')
       let correct = 0
@@ -159,12 +163,21 @@ const filterItems = (items: Option[], filter?: string): Option[] => {
       return false
     })
 
-    if (filtered.length === 0) {
+    if (items.length === 0) {
       return [{ value: '$-no-results-aviato', label: 'No results' }]
     }
-
-    return filtered
   }
+
+  if (values) {
+    items = items.filter((opt) => {
+      return !values.includes(opt.value)
+    })
+
+    if (items.length === 0) {
+      return [{ value: '$-no-results-aviato', label: 'No options left' }]
+    }
+  }
+
   return items
 }
 
@@ -275,8 +288,9 @@ const ContextMultiItems: FC<ContextMultiOptionsProps> = ({
 const FilterInputMultiHolder = styled('div', {
   paddingBottom: 4,
   flexWrap: 'wrap',
-  paddingTop: 4,
+  paddingTop: 2,
   borderTopLeftRadius: 4,
+  paddingLeft: 4,
   borderBottom: '1px solid $OtherDivider',
   borderTopRightRadius: 4,
   display: 'flex',
@@ -304,12 +318,14 @@ const FilterMultiInput = styled('input', {
 })
 
 const StyledFilterSelectedBadge = styled('div', {
-  height: 32,
+  height: 24,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
   marginBottom: 4,
+  userSelect: 'none',
   marginTop: 4,
+  flexShrink: 0,
   borderRadius: 4,
   paddingLeft: 8,
   color: '$TextPrimary',
@@ -336,7 +352,8 @@ export const FilterSelectBadge: FC<{
       <IconClose
         onClick={onClose}
         css={{
-          marginLeft: 16,
+          flexShrink: 0,
+          marginLeft: 8,
         }}
       />
     </StyledFilterSelectedBadge>
@@ -358,7 +375,7 @@ export const FilterSelectMoreBadge: FC<{
     }
   }
   return (
-    <StyledFilterSelectedBadge css={css}>
+    <StyledFilterSelectedBadge css={css} data-aviato-select-more>
       <IconPlus css={{ marginRight: 8 }} onClick={onClick} />
       <Text>{number}</Text>
     </StyledFilterSelectedBadge>
@@ -378,8 +395,9 @@ const FilterableContextMultiOptions: FC<
     },
     []
   )
-  const filteredItems = filterItems(items, f)
   const [currentValues, setValue] = useReducer(selectValuesReducer, values)
+
+  const filteredItems = filterItems(items, f, currentValues)
   const children = filteredItems.map((opt, i) => {
     return (
       <ContextOptionItem
@@ -405,7 +423,7 @@ const FilterableContextMultiOptions: FC<
           {currentValues.map((v) => {
             return (
               <FilterSelectBadge
-                css={{ marginRight: 8 }}
+                css={{ marginLeft: 8 }}
                 key={v}
                 label={items.find((opt) => opt.value === v)?.label || v}
                 onClose={() => {

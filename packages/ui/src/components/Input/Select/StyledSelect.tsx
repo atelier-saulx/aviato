@@ -8,13 +8,14 @@ export const StyledSelect = styled('div', {
   backgroundColor: '$Background1dp',
   paddingLeft: 12,
   paddingRight: 12,
-  paddingTop: 6,
-  paddingBottom: 6,
+  paddingTop: 7,
+  paddingBottom: 7,
   cursor: 'pointer',
   userSelect: 'none',
+  height: 38,
   display: 'flex',
   width: '100%',
   '&:hover': {
-    backgroundColor: '$ActionLightHover',
+    border: '1px solid $OtherInputBorderHover',
   },
 })

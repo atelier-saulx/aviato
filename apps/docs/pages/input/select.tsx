@@ -56,6 +56,7 @@ const SelectPage = () => {
           />
 
           <MultiSelect
+            filterable
             placeholder="Select many things"
             onChange={(value) => {
               console.info('Select change: ', { value })
