@@ -89,58 +89,64 @@ export const ContextOptionItem = forwardRef<
     selected: boolean
     tabIndex?: number
     noRemove?: boolean
+    noInset?: boolean
   }
->(({ option, onChange, selected, tabIndex, noRemove }, forwardedRef) => {
-  const [isSelected, setIsSelected] = useState(0)
+>(
+  (
+    { option, onChange, selected, tabIndex, noRemove, noInset },
+    forwardedRef
+  ) => {
+    const [isSelected, setIsSelected] = useState(0)
 
-  if (option.value === '$-no-results-aviato') {
+    if (option.value === '$-no-results-aviato') {
+      return (
+        <ContextItem inset={!noInset} noFocus color="$TextSecondary">
+          {option.label}
+        </ContextItem>
+      )
+    }
+
     return (
-      <ContextItem inset noFocus color="$TextSecondary">
-        {option.label}
+      <ContextItem
+        inset={!noInset}
+        ref={forwardedRef}
+        tabIndex={tabIndex}
+        css={{
+          backgroundColor:
+            isSelected === 1
+              ? '$ActionLightSelected !important'
+              : isSelected === 1
+              ? '$ActionLightHover'
+              : null,
+          '&:hover': {
+            backgroundColor: '$ActionLightHover',
+          },
+          '&:active': {
+            backgroundColor: '$ActionLightHover',
+          },
+        }}
+        leftIcon={!noInset && selected ? <IconCheck /> : null}
+        onClick={() => {
+          setIsSelected(1)
+          onChange(option.value)
+          setTimeout(() => {
+            setIsSelected(2)
+            setTimeout(() => {
+              if (!noRemove) {
+                removeOverlay()
+              } else {
+                setIsSelected(0)
+              }
+            }, 125)
+          }, 75)
+          return true
+        }}
+      >
+        {option.label || option.value}
       </ContextItem>
     )
   }
-
-  return (
-    <ContextItem
-      inset
-      ref={forwardedRef}
-      tabIndex={tabIndex}
-      css={{
-        backgroundColor:
-          isSelected === 1
-            ? '$ActionLightSelected !important'
-            : isSelected === 1
-            ? '$ActionLightHover'
-            : null,
-        '&:hover': {
-          backgroundColor: '$ActionLightHover',
-        },
-        '&:active': {
-          backgroundColor: '$ActionLightHover',
-        },
-      }}
-      leftIcon={selected ? <IconCheck /> : null}
-      onClick={() => {
-        setIsSelected(1)
-        onChange(option.value)
-        setTimeout(() => {
-          setIsSelected(2)
-          setTimeout(() => {
-            if (!noRemove) {
-              removeOverlay()
-            } else {
-              setIsSelected(0)
-            }
-          }, 125)
-        }, 75)
-        return true
-      }}
-    >
-      {option.label || option.value}
-    </ContextItem>
-  )
-})
+)
 
 const filterItems = (
   items: Option[],
@@ -402,6 +408,7 @@ const FilterableContextMultiOptions: FC<
     return (
       <ContextOptionItem
         key={i}
+        noInset
         onChange={(v) => {
           setValue(v)
           onChange(selectValuesReducer(currentValues, v))
