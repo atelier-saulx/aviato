@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { wait } from '@saulx/utils'
 
 import {
   Page,
@@ -12,6 +13,7 @@ import {
   getRandomIconName,
   IconButton,
   getIconFromName,
+  Loader,
   buttonColors,
   ButtonColor,
   buttonVariants,
@@ -134,6 +136,25 @@ const ButtonPage = () => {
         </Row>
 
         {getButtons()}
+
+        <div
+          style={{
+            marginTop: 32,
+            width: 200,
+          }}
+        >
+          <Button
+            onClick={async () => {
+              await wait(1000)
+              throw new Error('Nope!')
+            }}
+            css={{ marginTop: 16, marginBottom: 16 }}
+          >
+            Async button error
+          </Button>
+
+          <Loader />
+        </div>
       </Column>
     )
   }

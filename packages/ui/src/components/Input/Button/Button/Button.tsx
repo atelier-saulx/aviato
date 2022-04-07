@@ -3,6 +3,7 @@ import React, {
   ReactElement,
   ElementRef,
   cloneElement,
+  useState,
 } from 'react'
 import { ComponentProps } from '@stitches/react'
 import { isText } from '@aviato/utils'
@@ -11,8 +12,11 @@ import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { PropsEventHandler } from '~/types'
+import { Loader } from '~/components'
 
 const PrimaryCSS: StitchedCSS = {
+  transition: 'width 0.15s, transform 0.1s',
+
   '&.isMain': {
     color: '$PrimaryMainContrast',
     background: '$PrimaryMain',
@@ -211,7 +215,6 @@ const ErrorCSS: StitchedCSS = {
     '&:active, &:focus': {
       background: '$ErrorMainSelected',
     },
-
     '&:disabled': {
       color: '$OtherDisabledContent',
       background: '$OtherDisabledBackground',
@@ -357,13 +360,14 @@ export interface ButtonProps extends ComponentProps<typeof StyledButton> {
 
 export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
   (properties, forwardedRef) => {
-    const {
+    let {
       color = 'primary',
       variant = 'main',
       disabled = false,
       leftIcon = null,
       rightIcon = null,
       children,
+      onClick,
       ...remainingProps
     } = properties
 
@@ -389,7 +393,44 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       children
     )
 
-    const LeftIcon = IconWithSize(leftIcon)
+    const [isLoading, setIsLoading] = useState(false)
+
+    // transition width and use effect
+
+    if (onClick) {
+      const onClickOrginal = onClick
+      // @ts-ignore wrapper for error handling
+      onClick = async (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        const t = e.currentTarget
+        let isSet = false
+        const timer = setTimeout(() => {
+          if (!isSet) {
+            setIsLoading(true)
+          }
+        }, 100)
+        try {
+          await onClickOrginal(e)
+        } catch (e) {
+          console.error(`Unhandled error from async click "${e.message}"`)
+          t.style.transform = 'translateX(-10px)'
+          setTimeout(() => {
+            t.style.transform = 'translateX(10px)'
+            setTimeout(() => {
+              t.style.transform = 'translateX(0px)'
+            }, 100)
+          }, 100)
+        }
+        isSet = true
+        setIsLoading(false)
+        clearTimeout(timer)
+      }
+    }
+
+    const LeftIcon = isLoading
+      ? IconWithSize(<Loader color="inherit" />)
+      : IconWithSize(leftIcon)
     const RightIcon = IconWithSize(rightIcon)
 
     return (
@@ -400,6 +441,7 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         ref={forwardedRef}
         role="button"
         tabIndex={0}
+        onClick={onClick}
         {...remainingProps}
       >
         <Conditional test={LeftIcon}>

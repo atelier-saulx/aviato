@@ -27,6 +27,7 @@
     "@aviato/tsconfig": "*",
     "@aviato/ui": "*",
     "@aviato/utils": "*",
+    "@saulx/utils": "^2.2.1",
     "@babel/core": "^7.0.0-0",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
