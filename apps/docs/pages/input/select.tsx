@@ -55,6 +55,24 @@ const SelectPage = () => {
             ]}
           />
 
+          <Select
+            css={{
+              marginBottom: 32,
+            }}
+            overlay={{
+              variant: 'detatched',
+            }}
+            placeholder="Select a thing"
+            onChange={(value) => {
+              log.global.debug('Select change: ', { value })
+            }}
+            options={[
+              { value: 'flurpy', label: 'Flurpy' },
+              { value: 'snark', label: 'Snark' },
+              { value: 'snorkles', label: 'Snorkles' },
+            ]}
+          />
+
           <MultiSelect
             filterable
             placeholder="Select many things"

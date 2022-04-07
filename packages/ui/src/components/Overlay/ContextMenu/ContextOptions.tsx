@@ -118,9 +118,6 @@ export const ContextOptionItem = forwardRef<
               : isSelected === 1
               ? '$ActionLightHover'
               : null,
-          '&:hover': {
-            backgroundColor: '$ActionLightHover',
-          },
           '&:active': {
             backgroundColor: '$ActionLightHover',
           },
