@@ -20,7 +20,7 @@ export function useSelect(
     css?: StitchedCSS
   },
   handler?: (selection: Event | any) => () => void | undefined
-): [string | number | undefined, PropsEventHandler] {
+): [string | number | undefined, PropsEventHandler, (value: Value) => void] {
   const [value, setValue] = useState(initialValue)
   let id: number
   const n = items.map((v) => {
@@ -48,6 +48,7 @@ export function useSelect(
       { transparent: true, css: position?.css },
       [n]
     ),
+    setValue,
   ]
 }
 
@@ -60,7 +61,11 @@ export function useMultiSelect(
     css?: StitchedCSS
   },
   handler?: (selection: Event | any) => () => void | undefined
-): [Value[] | null | undefined, PropsEventHandler] {
+): [
+  Value[] | null | undefined,
+  PropsEventHandler,
+  (value: Value[] | undefined) => void
+] {
   const [values, setValues] = useState(initialValues)
   let id: number
   const n = items.map((v) => {
@@ -98,5 +103,6 @@ export function useMultiSelect(
       { transparent: true, css: position?.css },
       [n]
     ),
+    setValues,
   ]
 }

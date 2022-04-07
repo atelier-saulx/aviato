@@ -5,10 +5,11 @@ import React, {
   forwardRef,
   ElementRef,
   useReducer,
+  SyntheticEvent,
 } from 'react'
 import { removeOverlay } from '~/components/Overlay'
-import { IconCheck, IconSearch, IconClose, Text } from '~/components'
-import { styled } from '~/theme'
+import { IconCheck, IconSearch, IconClose, Text, IconPlus } from '~/components'
+import { Color, styled, StitchedCSS } from '~/theme'
 import { ContextItem } from '.'
 
 const FilterInputHolderSticky = styled('div', {
@@ -60,9 +61,11 @@ export type Option = {
 }
 
 export type ContextOptionsFilterProps = {
+  // eslint-disable-next-line
   filterable?: boolean
   placeholder?: string
   resize?: () => void
+  // eslint-disable-next-line
   multiSelect?: boolean
 }
 
@@ -197,17 +200,22 @@ const FilterableContextOptions: FC<
 }
 
 const ContextItems: FC<ContextOptionsProps> = ({ items, value, onChange }) => {
-  const [v, setValue] = useState(value)
+  const [currentValue, setValue] = useState(value)
   const children = items.map((opt, i) => {
     return (
       <ContextOptionItem
         key={i}
         onChange={(v) => {
-          setValue(v)
-          onChange(v)
+          if (v === currentValue) {
+            setValue(undefined)
+            onChange(undefined)
+          } else {
+            setValue(v)
+            onChange(v)
+          }
         }}
         option={opt}
-        selected={v === opt.value}
+        selected={currentValue === opt.value}
       />
     )
   })
@@ -295,11 +303,11 @@ const FilterMultiInput = styled('input', {
   userSelect: 'text',
 })
 
-const FilterSelectedBadge = styled('div', {
+const StyledFilterSelectedBadge = styled('div', {
   height: 32,
   display: 'flex',
   alignItems: 'center',
-  marginLeft: 8,
+  justifyContent: 'flex-start',
   marginBottom: 4,
   marginTop: 4,
   borderRadius: 4,
@@ -308,6 +316,54 @@ const FilterSelectedBadge = styled('div', {
   paddingRight: 8,
   backgroundColor: '$ActionLight',
 })
+
+export const FilterSelectBadge: FC<{
+  label: string | React.ReactNode
+  onClose: () => void
+  color?: Color
+  css?: StitchedCSS
+}> = ({ label, onClose, color = 'inherit', css }) => {
+  if (color) {
+    if (!css) {
+      css = { color }
+    } else {
+      css.color = color
+    }
+  }
+  return (
+    <StyledFilterSelectedBadge css={css}>
+      <Text>{label}</Text>
+      <IconClose
+        onClick={onClose}
+        css={{
+          marginLeft: 16,
+        }}
+      />
+    </StyledFilterSelectedBadge>
+  )
+}
+
+export const FilterSelectMoreBadge: FC<{
+  onClick?: (e: SyntheticEvent) => void
+  number: number
+  color?: Color
+  css?: StitchedCSS
+}> = ({ number, onClick, color = 'inherit', css }) => {
+  // make a function for this
+  if (color) {
+    if (!css) {
+      css = { color }
+    } else {
+      css.color = color
+    }
+  }
+  return (
+    <StyledFilterSelectedBadge css={css}>
+      <IconPlus css={{ marginRight: 8 }} onClick={onClick} />
+      <Text>{number}</Text>
+    </StyledFilterSelectedBadge>
+  )
+}
 
 const FilterableContextMultiOptions: FC<
   ContextMultiOptionsProps & ContextOptionsFilterProps
@@ -346,24 +402,20 @@ const FilterableContextMultiOptions: FC<
     <>
       <FilterInputHolderSticky>
         <FilterInputMultiHolder>
-          {/* <IconSearch color="$TextSecondary" /> */}
           {currentValues.map((v) => {
             return (
-              <FilterSelectedBadge key={v}>
-                <Text>{items.find((opt) => opt.value === v)?.label || v}</Text>
-                <IconClose
-                  onClick={() => {
-                    setValue(v)
-                    onChange(selectValuesReducer(currentValues, v))
-                    if (resize) {
-                      resize()
-                    }
-                  }}
-                  css={{
-                    marginLeft: 16,
-                  }}
-                />
-              </FilterSelectedBadge>
+              <FilterSelectBadge
+                css={{ marginRight: 8 }}
+                key={v}
+                label={items.find((opt) => opt.value === v)?.label || v}
+                onClose={() => {
+                  setValue(v)
+                  onChange(selectValuesReducer(currentValues, v))
+                  if (resize) {
+                    resize()
+                  }
+                }}
+              />
             )
           })}
           <FilterMultiInput

@@ -1,4 +1,4 @@
-import { Column, Page, Select } from '@aviato/ui'
+import { Column, Page, Select, MultiSelect } from '@aviato/ui'
 import { log } from '@aviato/utils'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
@@ -36,14 +36,15 @@ const SelectPage = () => {
           />
 
           <Select
+            css={{
+              marginBottom: 32,
+            }}
             overlay={{
               width: 300,
               position: 'right',
               variant: 'detatched',
             }}
             placeholder="Select a thing"
-            // label="This is a label"
-            // description="This is a description"
             onChange={(value) => {
               log.global.debug('Select change: ', { value })
             }}
@@ -51,6 +52,23 @@ const SelectPage = () => {
               { value: 'flurpy', label: 'Flurpy' },
               { value: 'snark', label: 'Snark' },
               { value: 'snorkles', label: 'Snorkles' },
+            ]}
+          />
+
+          <MultiSelect
+            placeholder="Select many things"
+            onChange={(value) => {
+              console.info('Select change: ', { value })
+            }}
+            values={['flurpy', 'snark', 'snorkels']}
+            options={[
+              { value: 'flurpy', label: 'Flurpy' },
+              { value: 'snark', label: 'Snark' },
+              { value: 'snorkels', label: 'Snorkles' },
+              { value: 'gurken', label: 'Gurken' },
+              { value: 'bedroloeloe', label: 'Bedroloeloe' },
+              { value: 'kakkie', label: 'Kakkie' },
+              { value: 'snak', label: 'Snak' },
             ]}
           />
         </Column>
