@@ -11,7 +11,7 @@ import { Text } from '~/components/Text'
 import { Color, StitchedCSS, styled } from '~/theme'
 import { PositionProps } from '~/types'
 import { deepEqual } from '@saulx/utils'
-import { StyledSelect } from './StyledSelect'
+import { SelectLabel, StyledSelect } from './StyledSelect'
 
 export type MultiSelectProps = {
   values?: Value[]
@@ -20,12 +20,20 @@ export type MultiSelectProps = {
   color?: Color
   filterable?: boolean | 'create'
   placeholder?: string
+  label?: string
   overlay?: PositionProps
   css?: StitchedCSS
 }
 
 const StyledBadgeContainer = styled('div', {
   display: 'flex',
+  alignItems: 'center',
+})
+
+const StyledLabelContainer = styled('div', {
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'space-between',
   alignItems: 'center',
 })
 
@@ -38,6 +46,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   color = '$TextPrimary',
   placeholder = 'Select options',
   overlay,
+  label,
 }) => {
   const ref = useRef()
 
@@ -162,14 +171,19 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     optionsBadges = <StyledBadgeContainer>{c}</StyledBadgeContainer>
   }
 
+  if (label) {
+    return (
+      <SelectLabel label={label} onClick={open} css={css}>
+        <StyledLabelContainer ref={ref}>
+          {optionsBadges}
+          <IconChevronDown color={color} />
+        </StyledLabelContainer>
+      </SelectLabel>
+    )
+  }
+
   return (
-    <StyledSelect
-      ref={ref}
-      onClick={open}
-      css={{
-        ...css,
-      }}
-    >
+    <StyledSelect ref={ref} onClick={open} css={css}>
       {optionsBadges}
       <IconChevronDown color={color} />
     </StyledSelect>

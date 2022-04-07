@@ -36,6 +36,21 @@ const SelectPage = () => {
           />
 
           <Select
+            label="Env"
+            css={{
+              marginBottom: 32,
+            }}
+            onChange={(value) => {
+              log.global.debug('Select change: ', { value })
+            }}
+            options={[
+              { value: 'flurpy', label: 'Flurpy' },
+              { value: 'snark', label: 'Snark' },
+              { value: 'snorkles', label: 'Snorkles' },
+            ]}
+          />
+
+          <Select
             css={{
               marginBottom: 32,
             }}
@@ -93,6 +108,7 @@ const SelectPage = () => {
           />
 
           <MultiSelect
+            label="Hello"
             filterable="create"
             placeholder="Faka snorkles"
             onChange={(value) => {

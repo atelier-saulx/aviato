@@ -5,17 +5,17 @@ import { IconChevronDown } from '~/components/Icons'
 import { Text } from '~/components/Text'
 import { Color, StitchedCSS } from '~/theme'
 import { PositionProps } from '~/types'
-import { StyledSelect } from './StyledSelect'
+import { StyledSelect, SelectLabel } from './StyledSelect'
 
 export type SelectProps = {
   value?: Value
   options: (Option | Value)[]
   onChange: (value: Value) => void
-  color?: Color
   filterable?: boolean | 'create'
   placeholder?: string
   overlay?: PositionProps
   label?: string
+  color?: Color
   css?: StitchedCSS
 }
 
@@ -43,23 +43,26 @@ export const Select: FC<SelectProps> = ({
     }
   }, [currentValue])
 
+  const children = (
+    <>
+      <Text color={!currentValue ? 'Secondary' : 'Primary'}>
+        {currentValue || placeholder}
+      </Text>
+      <IconChevronDown color={color} />
+    </>
+  )
+
   if (label) {
     return (
-      <StyledSelect onClick={open} css={css}>
-        <Text color={!currentValue ? 'Secondary' : 'Primary'}>
-          {currentValue || placeholder}
-        </Text>
-        <IconChevronDown color={color} />
-      </StyledSelect>
+      <SelectLabel label={label} onClick={open} css={css}>
+        {children}
+      </SelectLabel>
     )
   }
 
   return (
     <StyledSelect onClick={open} css={css}>
-      <Text color={!currentValue ? 'Secondary' : 'Primary'}>
-        {currentValue || placeholder}
-      </Text>
-      <IconChevronDown color={color} />
+      {children}
     </StyledSelect>
   )
 }
