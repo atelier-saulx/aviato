@@ -8,14 +8,35 @@ import React, {
 import { ComponentProps } from '@stitches/react'
 import { isText } from '@aviato/utils'
 
-import { classNames, styled, StitchedCSS } from '~/theme'
+import { classNames, styled, StitchedCSS, keyframes } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { PropsEventHandler } from '~/types'
-import { Loader } from '~/components'
+// import { Loader } from '~/components'
+
+const spin = keyframes({
+  from: { transform: 'translateX(-100%)' },
+  to: { transform: 'translatex(100%)' },
+})
+
+const LoaderStyled = styled('div', {
+  animationName: `${spin}`,
+  animationDuration: '0.75s',
+  transform: 'rotate(-90deg)',
+  animationTimingFunction: 'linear',
+  animationIterationCount: 'infinite',
+  height: 3,
+  // top: 0,
+  right: 0,
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+})
 
 const PrimaryCSS: StitchedCSS = {
   transition: 'width 0.15s, transform 0.1s',
+  position: 'relative',
+  overflow: 'hidden',
 
   '&.isMain': {
     color: '$PrimaryMainContrast',
@@ -428,10 +449,12 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
       }
     }
 
-    const LeftIcon = isLoading
-      ? IconWithSize(<Loader color="inherit" />)
-      : IconWithSize(leftIcon)
+    const LeftIcon = IconWithSize(leftIcon)
     const RightIcon = IconWithSize(rightIcon)
+
+    // const RightIcon = isLoading
+    //   ? IconWithSize(<Loader color="inherit" />)
+    //   : IconWithSize(rightIcon)
 
     return (
       <StyledButton
@@ -453,6 +476,14 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         <Conditional test={RightIcon}>
           <IconContainer type="end">{RightIcon}</IconContainer>
         </Conditional>
+
+        {isLoading ? (
+          <LoaderStyled
+            css={{
+              background: `linear-gradient(to right, transparent, $AccentSailorblue)`,
+            }}
+          />
+        ) : null}
       </StyledButton>
     )
   }

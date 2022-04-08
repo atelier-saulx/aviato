@@ -153,6 +153,25 @@ const ButtonPage = () => {
             Async button error
           </Button>
 
+          <Button
+            onClick={async () => {
+              await wait(20000)
+            }}
+            css={{ marginTop: 16, marginBottom: 16 }}
+          >
+            Load loong
+          </Button>
+
+          <Button
+            variant="outline"
+            onClick={async () => {
+              await wait(20000)
+            }}
+            css={{ marginTop: 16, marginBottom: 16 }}
+          >
+            Load loong
+          </Button>
+
           <Loader />
         </div>
       </Column>
