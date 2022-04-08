@@ -70,7 +70,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
     let handle: any
 
-    const correctIt = (time = 0) => {
+    const correctIt = (time = 0, cnt = 0) => {
       clearTimeout(handle)
       handle = setTimeout(() => {
         // @ts-ignore
@@ -80,7 +80,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
           // @ts-ignore
           const innerWidth = ref.current.children[0].clientWidth
 
-          if (innerWidth > width - 60) {
+          if (innerWidth > width - 80) {
             // width - 60
             let targetW = innerWidth
             for (
@@ -93,7 +93,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
               const child = ref.current.children[0].children[i]
               if (!child.getAttribute('data-aviato-select-more')) {
                 targetW -= child.getBoundingClientRect().width + 8
-                if (targetW <= width - 120) {
+                if (targetW <= width - 80) {
                   setDisplayIndex(i)
                   correctIt(25)
                   break
@@ -111,6 +111,9 @@ export const MultiSelect: FC<MultiSelectProps> = ({
               const child = ref.current.children[0].children[i]
               child.style.opacity = 1
             }
+          }
+          if (cnt < 3) {
+            correctIt(25, ++cnt)
           }
         }
       }, time)

@@ -105,7 +105,6 @@ export default forwardRef<HTMLDivElement, SharedOverlayProps>(
             width={position.width}
             css={css}
             style={{
-              // transitionTimingFunction: 'ease-in-out-elastic',
               transition: 'transform 0.15s, opacity 0.15s',
               opacity: go ? 1 : 0,
               transform: go ? 'scale(1)' : 'scale(0.9)',
