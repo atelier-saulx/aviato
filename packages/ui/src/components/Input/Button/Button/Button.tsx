@@ -8,7 +8,7 @@ import React, {
 import { ComponentProps } from '@stitches/react'
 import { isText } from '@aviato/utils'
 
-import { classNames, styled, StitchedCSS, keyframes } from '~/theme'
+import { classNames, styled, StitchedCSS } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { PropsEventHandler } from '~/types'
