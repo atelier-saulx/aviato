@@ -29,7 +29,7 @@ export const StyledLeftLabel = styled('div', {
   alignItems: 'center',
   paddingLeft: 12,
   paddingRight: 12,
-  backgroundColor: '$Background3dp',
+  backgroundColor: '$ActionLight',
   borderRight: '1px solid $OtherDivider',
 })
 

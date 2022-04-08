@@ -1,4 +1,12 @@
-import React, { forwardRef, FC, PropsWithChildren, ComponentType } from 'react'
+import React, {
+  forwardRef,
+  FC,
+  PropsWithChildren,
+  ComponentType,
+  useRef,
+  useEffect,
+  useState,
+} from 'react'
 import { Position, PositionProps, Target } from '~/types'
 import { styled, StitchedCSS } from '~/theme'
 import { ScrollArea } from '~/components'
@@ -29,8 +37,9 @@ export const InnerShared = forwardRef<
   PropsWithChildren<{
     width?: number | string
     css?: StitchedCSS
+    style?: any
   }>
->(({ width, css, children }, ref) => {
+>(({ width, css, children, style }, ref) => {
   return (
     <InnerSharedStyled
       ref={ref}
@@ -38,6 +47,7 @@ export const InnerShared = forwardRef<
         ...css,
         width: width,
       }}
+      style={style}
     >
       <ScrollArea>{children}</ScrollArea>
     </InnerSharedStyled>
@@ -51,12 +61,23 @@ export type SharedOverlayProps = PropsWithChildren<{
 
 export default forwardRef<HTMLDivElement, SharedOverlayProps>(
   ({ position, children, css }, ref) => {
+    const [go, setgo] = useState(false)
+
     const placement =
       position.placement === 'left'
         ? 'flex-start'
         : position.placement === 'right'
         ? 'flex-end'
         : 'center'
+
+    useEffect(() => {
+      const x = requestAnimationFrame(() => {
+        setgo(true)
+      })
+      return () => {
+        cancelAnimationFrame(x)
+      }
+    }, [])
 
     return (
       <div
@@ -80,7 +101,17 @@ export default forwardRef<HTMLDivElement, SharedOverlayProps>(
               position && position.spaceOnTop ? 'flex-end' : 'flex-start',
           }}
         >
-          <InnerShared ref={ref} width={position.width} css={css}>
+          <InnerShared
+            ref={ref}
+            width={position.width}
+            css={css}
+            style={{
+              // transitionTimingFunction: 'ease-in-out-elastic',
+              transition: 'transform 0.15s, opacity 0.15s',
+              opacity: go ? 1 : 0,
+              transform: go ? 'scale(1)' : 'scale(0.8)',
+            }}
+          >
             {children}
           </InnerShared>
         </div>
