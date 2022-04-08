@@ -42,7 +42,6 @@ const inputMenuItems: MenuDataItem[] = [
   {
     title: 'Select',
     route: '/input/select',
-    isMissing: true,
   },
   {
     title: 'Slider',

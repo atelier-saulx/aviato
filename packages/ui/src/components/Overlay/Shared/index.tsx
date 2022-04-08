@@ -108,7 +108,7 @@ export default forwardRef<HTMLDivElement, SharedOverlayProps>(
               // transitionTimingFunction: 'ease-in-out-elastic',
               transition: 'transform 0.15s, opacity 0.15s',
               opacity: go ? 1 : 0,
-              transform: go ? 'scale(1)' : 'scale(0.8)',
+              transform: go ? 'scale(1)' : 'scale(0.9)',
             }}
           >
             {children}
