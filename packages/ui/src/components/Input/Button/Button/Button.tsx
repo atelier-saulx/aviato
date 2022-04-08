@@ -12,21 +12,13 @@ import { classNames, styled, StitchedCSS, keyframes } from '~/theme'
 import { Conditional } from '~/components/Utilities/Conditional'
 import { Text } from '~/components/Text'
 import { PropsEventHandler } from '~/types'
-// import { Loader } from '~/components'
-
-const spin = keyframes({
-  from: { transform: 'translateX(-100%)' },
-  to: { transform: 'translatex(100%)' },
-})
+import { Loader } from '~/components'
 
 const LoaderStyled = styled('div', {
-  animationName: `${spin}`,
-  animationDuration: '0.75s',
-  transform: 'rotate(-90deg)',
-  animationTimingFunction: 'linear',
-  animationIterationCount: 'infinite',
-  height: 3,
-  // top: 0,
+  top: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   right: 0,
   position: 'absolute',
   bottom: 0,
@@ -34,7 +26,7 @@ const LoaderStyled = styled('div', {
 })
 
 const PrimaryCSS: StitchedCSS = {
-  transition: 'width 0.15s, transform 0.1s',
+  transition: 'width 0.15s, transform 0.1s, opacity 0.15s',
   position: 'relative',
   overflow: 'hidden',
 
@@ -450,11 +442,12 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
     }
 
     const LeftIcon = IconWithSize(leftIcon)
-    const RightIcon = IconWithSize(rightIcon)
 
-    // const RightIcon = isLoading
+    // isLoading
     //   ? IconWithSize(<Loader color="inherit" />)
-    //   : IconWithSize(rightIcon)
+    //   : IconWithSize(leftIcon)
+
+    const RightIcon = IconWithSize(rightIcon)
 
     return (
       <StyledButton
@@ -465,24 +458,34 @@ export const Button = forwardRef<ElementRef<typeof StyledButton>, ButtonProps>(
         role="button"
         tabIndex={0}
         onClick={onClick}
+        style={{
+          opacity: isLoading ? 0.8 : 1,
+        }}
         {...remainingProps}
       >
-        <Conditional test={LeftIcon}>
-          <IconContainer type="start">{LeftIcon}</IconContainer>
-        </Conditional>
+        <div
+          style={{
+            opacity: isLoading ? 0 : 1,
+            transition: 'opacity 0.15s',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <Conditional test={LeftIcon}>
+            <IconContainer type="start">{LeftIcon}</IconContainer>
+          </Conditional>
 
-        {ChildVariant}
+          {ChildVariant}
 
-        <Conditional test={RightIcon}>
-          <IconContainer type="end">{RightIcon}</IconContainer>
-        </Conditional>
+          <Conditional test={RightIcon}>
+            <IconContainer type="end">{RightIcon}</IconContainer>
+          </Conditional>
+        </div>
 
         {isLoading ? (
-          <LoaderStyled
-            css={{
-              background: `linear-gradient(to right, transparent, $AccentSailorblue)`,
-            }}
-          />
+          <LoaderStyled>
+            <Loader width={18} height={18} color="inherit" />
+          </LoaderStyled>
         ) : null}
       </StyledButton>
     )
