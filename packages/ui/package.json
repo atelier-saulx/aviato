@@ -16,7 +16,6 @@
   "dependencies": {
     "@aviato/utils": "*",
     "@saulx/hash": "^1.1.0",
-    "@saulx/utils": "^2.2.1",
     "@based/pretty-date": "^1.0.4",
     "@based/pretty-number": "^1.0.3",
     "@popperjs/core": "^2.11.2",
