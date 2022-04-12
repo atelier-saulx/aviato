@@ -32,9 +32,6 @@ const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
 interface DialogItem {
   id: number
   children: ReactNode
-  options?: {
-    target?: HTMLElement
-  }
 }
 
 export const DialogProvider = ({ children, fixed = true }) => {
@@ -50,10 +47,7 @@ export const DialogProvider = ({ children, fixed = true }) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const dialog = (
-      children,
-      options = null // maybe remove
-    ) => {
+    const dialog = (children, onClose = null) => {
       const id = count++
       // this is only used internally
       dialog._id = id
@@ -80,13 +74,12 @@ export const DialogProvider = ({ children, fixed = true }) => {
         </Backdrop>
       )
 
-      addOverlay(children)
+      addOverlay(children, onClose)
 
       update(
         dialogsRef.current.push({
           id,
           children,
-          options,
         })
       )
       // this is to force an update, when length does not change
@@ -105,13 +98,8 @@ export const DialogProvider = ({ children, fixed = true }) => {
           }
         }
 
-        dialog.open(
-          <Prompt
-            {...props}
-            type={type}
-            onCancel={() => resolve(false)}
-            onConfirm={resolve}
-          />
+        dialog.open(<Prompt {...props} type={type} onConfirm={resolve} />, () =>
+          resolve(false)
         )
       })
     }
