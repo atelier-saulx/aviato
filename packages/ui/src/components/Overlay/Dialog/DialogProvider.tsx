@@ -32,28 +32,20 @@ const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
 interface DialogItem {
   id: number
   children: ReactNode
-  options?: {
-    target?: HTMLElement
-  }
 }
 
 export const DialogProvider = ({ children, fixed = true }) => {
-  const [length, setLength] = useState(0)
-  const [, setId] = useState(0)
   const dialogsRef = useRef<DialogItem[]>()
   const dialogRef = useRef<DialogContextType>()
 
   if (!dialogRef.current) {
     let count = 0
-    const listeners = new Set([setLength])
+    const listeners = new Set<React.Dispatch<React.SetStateAction<number>>>()
     const update = (length) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const dialog = (
-      children,
-      options = null // maybe remove
-    ) => {
+    const dialog = (children, onClose = null) => {
       const id = count++
       // this is only used internally
       dialog._id = id
@@ -80,17 +72,15 @@ export const DialogProvider = ({ children, fixed = true }) => {
         </Backdrop>
       )
 
-      addOverlay(children)
-
-      update(
-        dialogsRef.current.push({
-          id,
-          children,
-          options,
-        })
-      )
-      // this is to force an update, when length does not change
-      setId(id)
+      requestAnimationFrame(() => {
+        addOverlay(children, onClose)
+        update(
+          dialogsRef.current.push({
+            id,
+            children,
+          })
+        )
+      })
 
       return id
     }
@@ -105,13 +95,8 @@ export const DialogProvider = ({ children, fixed = true }) => {
           }
         }
 
-        dialog.open(
-          <Prompt
-            {...props}
-            type={type}
-            onCancel={() => resolve(false)}
-            onConfirm={resolve}
-          />
+        dialog.open(<Prompt {...props} type={type} onConfirm={resolve} />, () =>
+          resolve(false)
         )
       })
     }
@@ -135,8 +120,6 @@ export const DialogProvider = ({ children, fixed = true }) => {
         dialog._id = null
         update(0)
         removeAllOverlays()
-        // dialogsRef.current.pop()
-        // update(dialogsRef.current.length)
       }
     }
 
@@ -145,7 +128,7 @@ export const DialogProvider = ({ children, fixed = true }) => {
     dialog.confirm = (props) => prompt('confirm', props)
 
     dialog.useCount = () => {
-      const [state, setState] = useState(length)
+      const [state, setState] = useState(dialogsRef.current.length)
 
       useEffect(() => {
         listeners.add(setState)
@@ -162,34 +145,9 @@ export const DialogProvider = ({ children, fixed = true }) => {
     dialogsRef.current = []
   }
 
-  // const dialogs = dialogsRef.current.map(({ id, children }) => {
-  //   return (
-  //     <Backdrop
-  //       key={id}
-  //       // TODO please don't make backgdrop use portal!
-  //       disablePortal
-  //       css={{
-  //         position: fixed ? 'fixed' : 'absolute',
-  //         alignItems: 'center',
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //         padding: 20,
-  //       }}
-  //       onClick={(event) => {
-  //         if (event.currentTarget === event.target) {
-  //           dialogRef.current.close(id)
-  //         }
-  //       }}
-  //     >
-  //       {children}
-  //     </Backdrop>
-  //   )
-  // })
-
   return (
     <DialogContext.Provider value={dialogRef.current}>
       {children}
-      {/* {dialogs} */}
     </DialogContext.Provider>
   )
 }
