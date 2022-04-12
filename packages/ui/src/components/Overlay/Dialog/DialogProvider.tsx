@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react'
 
 import { DialogContext, DialogContextType } from './DialogContext'
-import { Backdrop, Input } from '~/components'
+import { addOverlay, Backdrop, Input, removeOverlay } from '~/components'
 import { Dialog } from './Dialog'
+import { removeAllOverlays } from '..'
 
 const Prompt = ({ type = 'prompt', onCancel, onConfirm, ...props }) => {
   const ref = useRef<HTMLInputElement>()
@@ -49,10 +50,38 @@ export const DialogProvider = ({ children, fixed = true }) => {
       listeners.forEach((fn) => fn(length))
     }
 
-    const dialog = (children, options = null) => {
+    const dialog = (
+      children,
+      options = null // maybe remove
+    ) => {
       const id = count++
       // this is only used internally
       dialog._id = id
+
+      children = (
+        <Backdrop
+          key={id}
+          // TODO please don't make backgdrop use portal!
+          disablePortal
+          css={{
+            position: fixed ? 'fixed' : 'absolute',
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            padding: 20,
+          }}
+          onClick={(event) => {
+            if (event.currentTarget === event.target) {
+              dialogRef.current.close(id)
+            }
+          }}
+        >
+          {children}
+        </Backdrop>
+      )
+
+      addOverlay(children)
+
       update(
         dialogsRef.current.push({
           id,
@@ -95,15 +124,17 @@ export const DialogProvider = ({ children, fixed = true }) => {
           ({ id: dialogId }) => dialogId === id
         )
         if (index !== -1) {
-          dialogsRef.current.splice(index, 1)
+          const removed = dialogsRef.current.splice(index, 1)
           const { length } = dialogsRef.current
           dialog._id = length ? dialogsRef.current[length - 1].id : null
           update(length)
+          removeOverlay(removed?.[0].children)
         }
       } else {
         dialogsRef.current = []
         dialog._id = null
         update(0)
+        removeAllOverlays()
         // dialogsRef.current.pop()
         // update(dialogsRef.current.length)
       }
@@ -131,34 +162,34 @@ export const DialogProvider = ({ children, fixed = true }) => {
     dialogsRef.current = []
   }
 
-  const dialogs = dialogsRef.current.map(({ id, children }) => {
-    return (
-      <Backdrop
-        key={id}
-        // TODO please don't make backgdrop use portal!
-        disablePortal
-        css={{
-          position: fixed ? 'fixed' : 'absolute',
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'center',
-          padding: 20,
-        }}
-        onClick={(event) => {
-          if (event.currentTarget === event.target) {
-            dialogRef.current.close(id)
-          }
-        }}
-      >
-        {children}
-      </Backdrop>
-    )
-  })
+  // const dialogs = dialogsRef.current.map(({ id, children }) => {
+  //   return (
+  //     <Backdrop
+  //       key={id}
+  //       // TODO please don't make backgdrop use portal!
+  //       disablePortal
+  //       css={{
+  //         position: fixed ? 'fixed' : 'absolute',
+  //         alignItems: 'center',
+  //         display: 'flex',
+  //         justifyContent: 'center',
+  //         padding: 20,
+  //       }}
+  //       onClick={(event) => {
+  //         if (event.currentTarget === event.target) {
+  //           dialogRef.current.close(id)
+  //         }
+  //       }}
+  //     >
+  //       {children}
+  //     </Backdrop>
+  //   )
+  // })
 
   return (
     <DialogContext.Provider value={dialogRef.current}>
       {children}
-      {dialogs}
+      {/* {dialogs} */}
     </DialogContext.Provider>
   )
 }

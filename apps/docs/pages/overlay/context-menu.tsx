@@ -7,13 +7,37 @@ import {
   IconMore,
   IconSchedule,
   ContextDivider,
+  useDialog,
+  Dialog,
 } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
+const DialogWithMenu = () => {
+  return (
+    <Dialog>
+      <Button
+        onClick={useContextMenu(SimpleMenu, {}, { placement: 'center' })}
+        css={{
+          marginBottom: 24,
+        }}
+      >
+        Menu (placement: center)
+      </Button>
+    </Dialog>
+  )
+}
+
 const SimpleMenu = () => {
+  const dialog = useDialog()
   return (
     <>
-      <ContextItem>Do something</ContextItem>
+      <ContextItem
+        onClick={() => {
+          dialog.open(<DialogWithMenu />)
+        }}
+      >
+        Open dialog
+      </ContextItem>
       <ContextItem inset>Do something else</ContextItem>
       <ContextItem
         onClick={() => {
