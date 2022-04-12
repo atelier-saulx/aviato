@@ -34,6 +34,7 @@ const SimpleMenu = () => {
       <ContextItem
         onClick={() => {
           dialog.open(<DialogWithMenu />)
+          // dialog.prompt('hello')
         }}
       >
         Open dialog

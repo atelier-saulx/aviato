@@ -36,7 +36,6 @@ interface DialogItem {
 
 export const DialogProvider = ({ children, fixed = true }) => {
   const [length, setLength] = useState(0)
-  const [, setId] = useState(0)
   const dialogsRef = useRef<DialogItem[]>()
   const dialogRef = useRef<DialogContextType>()
 
@@ -74,16 +73,15 @@ export const DialogProvider = ({ children, fixed = true }) => {
         </Backdrop>
       )
 
-      addOverlay(children, onClose)
-
-      update(
-        dialogsRef.current.push({
-          id,
-          children,
-        })
-      )
-      // this is to force an update, when length does not change
-      setId(id)
+      requestAnimationFrame(() => {
+        addOverlay(children, onClose)
+        update(
+          dialogsRef.current.push({
+            id,
+            children,
+          })
+        )
+      })
 
       return id
     }
@@ -150,34 +148,9 @@ export const DialogProvider = ({ children, fixed = true }) => {
     dialogsRef.current = []
   }
 
-  // const dialogs = dialogsRef.current.map(({ id, children }) => {
-  //   return (
-  //     <Backdrop
-  //       key={id}
-  //       // TODO please don't make backgdrop use portal!
-  //       disablePortal
-  //       css={{
-  //         position: fixed ? 'fixed' : 'absolute',
-  //         alignItems: 'center',
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //         padding: 20,
-  //       }}
-  //       onClick={(event) => {
-  //         if (event.currentTarget === event.target) {
-  //           dialogRef.current.close(id)
-  //         }
-  //       }}
-  //     >
-  //       {children}
-  //     </Backdrop>
-  //   )
-  // })
-
   return (
     <DialogContext.Provider value={dialogRef.current}>
       {children}
-      {/* {dialogs} */}
     </DialogContext.Provider>
   )
 }
