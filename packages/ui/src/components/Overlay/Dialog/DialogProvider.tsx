@@ -35,13 +35,12 @@ interface DialogItem {
 }
 
 export const DialogProvider = ({ children, fixed = true }) => {
-  const [length, setLength] = useState(0)
   const dialogsRef = useRef<DialogItem[]>()
   const dialogRef = useRef<DialogContextType>()
 
   if (!dialogRef.current) {
     let count = 0
-    const listeners = new Set([setLength])
+    const listeners = new Set<React.Dispatch<React.SetStateAction<number>>>()
     const update = (length) => {
       listeners.forEach((fn) => fn(length))
     }
@@ -121,8 +120,6 @@ export const DialogProvider = ({ children, fixed = true }) => {
         dialog._id = null
         update(0)
         removeAllOverlays()
-        // dialogsRef.current.pop()
-        // update(dialogsRef.current.length)
       }
     }
 
@@ -131,7 +128,7 @@ export const DialogProvider = ({ children, fixed = true }) => {
     dialog.confirm = (props) => prompt('confirm', props)
 
     dialog.useCount = () => {
-      const [state, setState] = useState(length)
+      const [state, setState] = useState(dialogsRef.current.length)
 
       useEffect(() => {
         listeners.add(setState)
