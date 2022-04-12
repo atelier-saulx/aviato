@@ -1,6 +1,6 @@
 import { Page, Button, useSelect, useMultiSelect, styled } from '@aviato/ui'
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
-
+import { useState } from 'react'
 // deselect
 
 const SimpleSelect = () => {
@@ -13,17 +13,37 @@ const SimpleSelect = () => {
 }
 
 const LabelSelect = () => {
-  const [value, open] = useSelect(
-    [
-      { label: 'my label X', value: 'x' },
-      { label: 'my label Y', value: 'y' },
-    ],
-    'y'
-  )
+  const [v, update] = useState('y')
+  const opts = [
+    { label: 'my label X', value: 'x' },
+    { label: 'my label Y', value: 'y' },
+    { label: 'my label Z', value: 'z' },
+    { label: 'my label A', value: 'a' },
+    { label: 'my label B', value: 'b' },
+    { label: 'my label C', value: 'c' },
+  ]
+  const [value, open] = useSelect(opts, v)
   return (
-    <Button css={{ marginBottom: 24 }} onClick={open}>
-      Select label ({value})
-    </Button>
+    <div
+      style={{
+        display: 'flex',
+        borderBottom: '1px solid grey',
+        paddingBottom: 8,
+        marginBottom: 24,
+      }}
+    >
+      <Button css={{ marginRight: 24 }} onClick={open}>
+        Select label ({value})
+      </Button>
+
+      <Button
+        onClick={() => {
+          update(opts[~~(Math.random() * opts.length)].value)
+        }}
+      >
+        Update external
+      </Button>
+    </div>
   )
 }
 

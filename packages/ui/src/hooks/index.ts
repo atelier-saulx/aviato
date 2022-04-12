@@ -30,7 +30,7 @@ export * from './useUuid'
 export * from './useWhyDidYouUpdate'
 export * from './useWindowSize'
 export * from './useObjectState'
-
+export * from './useScopedState'
 export * from './useOverlay'
 export * from './useOverlayPosition'
 export * from './useContextMenu'

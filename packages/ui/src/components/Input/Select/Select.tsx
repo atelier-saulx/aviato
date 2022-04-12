@@ -37,6 +37,7 @@ export const Select: FC<SelectProps> = ({
     width: 'target',
     ...overlay,
   })
+
   useEffect(() => {
     if (currentValue !== value) {
       onChange(currentValue)

@@ -6,14 +6,14 @@ import {
   ContextMenu,
 } from '~/components/Overlay'
 import { useOverlay } from '../useOverlay'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { PropsEventHandler, PositionProps } from '~/types'
 import { hash } from '@saulx/hash'
 import { StitchedCSS } from '~/theme'
 
 export function useSelect(
   items: (Option | Value)[] = [],
-  initialValue?: Value,
+  value?: Value,
   position?: PositionProps & {
     filterable?: boolean | 'create'
     placeholder?: string
@@ -21,7 +21,10 @@ export function useSelect(
   },
   handler?: (selection: Event | any) => () => void | undefined
 ): [string | number | undefined, PropsEventHandler, (value: Value) => void] {
-  const [value, setValue] = useState(initialValue)
+  const [v, setValue] = useState(value)
+  useEffect(() => {
+    setValue(value)
+  }, [value])
   let id: number
   const n = items.map((v) => {
     const opt = typeof v === 'object' ? v : { value: v }
@@ -30,14 +33,14 @@ export function useSelect(
     return opt
   })
   return [
-    value,
+    v,
     useOverlay(
       ContextOptions,
       {
         filterable: position?.filterable,
         placeholder: position?.placeholder,
         items: n,
-        value,
+        value: v,
         onChange: useCallback((value) => {
           setValue(value)
         }, []),
@@ -67,6 +70,9 @@ export function useMultiSelect(
   (value: Value[] | undefined) => void
 ] {
   const [values, setValues] = useState(initialValues)
+  useEffect(() => {
+    setValues(initialValues)
+  }, [initialValues])
   let id: number
   const n = items.map((v) => {
     const opt = typeof v === 'object' ? v : { value: v }
