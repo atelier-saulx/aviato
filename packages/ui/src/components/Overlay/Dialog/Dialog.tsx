@@ -125,12 +125,8 @@ const Confirm = ({ children = 'OK', onConfirm, ...props }) => {
   const onClick = onConfirm
     ? async () => {
         if (!props.disabled && myId === dialog._id) {
-          try {
-            await onConfirm()
-            dialog.close(myId)
-          } catch (e) {
-            console.error(e)
-          }
+          await onConfirm()
+          dialog.close(myId)
         }
       }
     : () => {
