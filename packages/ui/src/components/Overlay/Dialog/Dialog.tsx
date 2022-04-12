@@ -151,12 +151,8 @@ const Cancel = ({ children = 'Cancel', onCancel = null, ...props }) => {
   const onClick = onCancel
     ? async () => {
         if (!props.disabled && myId === dialog._id) {
-          try {
-            await onCancel()
-            dialog.close(myId)
-          } catch (e) {
-            console.error(e)
-          }
+          await onCancel()
+          dialog.close(myId)
         }
       }
     : () => {
