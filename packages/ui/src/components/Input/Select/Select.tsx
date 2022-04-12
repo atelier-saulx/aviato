@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, ReactNode } from 'react'
 import { useSelect } from '~/hooks/useSelect'
 import { Value, Option } from '~/components/Overlay'
 import { IconChevronDown } from '~/components/Icons'
@@ -43,10 +43,20 @@ export const Select: FC<SelectProps> = ({
     }
   }, [currentValue])
 
+  let labelValue: ReactNode = currentValue
+
+  if (currentValue) {
+    for (const opt of options) {
+      if (typeof opt === 'object' && opt.value === currentValue && opt.label) {
+        labelValue = opt.label
+      }
+    }
+  }
+
   const children = (
     <>
       <Text color={!currentValue ? 'Secondary' : 'Primary'}>
-        {currentValue || placeholder}
+        {labelValue || placeholder}
       </Text>
       <IconChevronDown color={color} />
     </>

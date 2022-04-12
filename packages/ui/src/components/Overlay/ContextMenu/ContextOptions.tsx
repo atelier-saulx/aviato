@@ -8,9 +8,17 @@ import React, {
   SyntheticEvent,
 } from 'react'
 import { removeOverlay } from '~/components/Overlay'
-import { IconCheck, IconSearch, IconClose, Text, IconPlus } from '~/components'
+import {
+  IconCheck,
+  IconSearch,
+  IconClose,
+  Text,
+  IconPlus,
+  icons,
+  IconName,
+} from '~/components'
 import { Color, styled, StitchedCSS } from '~/theme'
-import { ContextItem } from '.'
+import { ContextDivider, ContextItem } from '.'
 
 const FilterInputHolderSticky = styled('div', {
   width: '100%',
@@ -58,6 +66,12 @@ export type Value = string | number | undefined
 export type Option = {
   value: Value
   label?: React.ReactNode | string
+  icon?: IconName
+  divider?: boolean
+  onSelect?: (
+    e?: React.SyntheticEvent<Element, Event>,
+    opt?: Option
+  ) => true | void // (true means dont close)
 }
 
 export type ContextOptionsFilterProps = {
@@ -106,41 +120,55 @@ export const ContextOptionItem = forwardRef<
       )
     }
 
+    // option
+
+    const Icon = option.icon ? icons[option.icon] : null
+
     return (
-      <ContextItem
-        inset={!noInset}
-        ref={forwardedRef}
-        tabIndex={tabIndex}
-        css={{
-          backgroundColor:
-            isSelected === 1
-              ? '$ActionLightSelected !important'
-              : isSelected === 1
-              ? '$ActionLightHover'
-              : null,
-          '&:active': {
-            backgroundColor: '$ActionLightHover',
-          },
-        }}
-        leftIcon={!noInset && selected ? <IconCheck /> : null}
-        onClick={() => {
-          setIsSelected(1)
-          onChange(option.value)
-          setTimeout(() => {
-            setIsSelected(2)
-            setTimeout(() => {
-              if (!noRemove) {
-                removeOverlay()
-              } else {
-                setIsSelected(0)
-              }
-            }, 125)
-          }, 75)
-          return true
-        }}
-      >
-        {option.label || option.value}
-      </ContextItem>
+      <>
+        {option.divider ? <ContextDivider /> : null}
+        <ContextItem
+          inset={!noInset}
+          ref={forwardedRef}
+          tabIndex={tabIndex}
+          css={{
+            backgroundColor:
+              isSelected === 1
+                ? '$ActionLightSelected !important'
+                : isSelected === 1
+                ? '$ActionLightHover'
+                : null,
+            '&:active': {
+              backgroundColor: '$ActionLightHover',
+            },
+          }}
+          leftIcon={
+            Icon ? <Icon /> : !noInset && selected ? <IconCheck /> : null
+          }
+          onClick={(e) => {
+            setIsSelected(1)
+
+            if (option.onSelect) {
+              return option.onSelect(e, option)
+            } else {
+              onChange(option.value)
+              setTimeout(() => {
+                setIsSelected(2)
+                setTimeout(() => {
+                  if (!noRemove) {
+                    removeOverlay()
+                  } else {
+                    setIsSelected(0)
+                  }
+                }, 125)
+              }, 75)
+              return true
+            }
+          }}
+        >
+          {option.label || option.value}
+        </ContextItem>
+      </>
     )
   }
 )

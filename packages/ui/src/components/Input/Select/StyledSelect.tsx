@@ -76,7 +76,7 @@ export const SelectLabel = forwardRef<
   return (
     <StyledSelectLabel ref={ref} onClick={onClick} css={{ color, ...css }}>
       <StyledLeftLabel>
-        <Text>{label}</Text>
+        <Text css={{ whiteSpace: 'nowrap' }}>{label}</Text>
       </StyledLeftLabel>
       <StyledRightLabel>{children}</StyledRightLabel>
     </StyledSelectLabel>

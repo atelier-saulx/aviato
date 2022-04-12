@@ -51,6 +51,31 @@ const SelectPage = () => {
           />
 
           <Select
+            label="Env (add)"
+            css={{
+              marginBottom: 32,
+            }}
+            onChange={(value) => {
+              log.global.debug('Select change: ', { value })
+            }}
+            value="flurpy"
+            options={[
+              { value: 'flurpy', label: 'Flurpy' },
+              { value: 'snark', label: 'Snark' },
+              { value: 'snorkles', label: 'Snorkles' },
+              {
+                label: 'Add item',
+                divider: true,
+                icon: 'IconPlus',
+                onSelect: () => {
+                  // eslint-disable-next-line
+                  alert('Add icon')
+                },
+              },
+            ]}
+          />
+
+          <Select
             css={{
               marginBottom: 32,
             }}
