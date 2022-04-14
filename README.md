@@ -7,7 +7,7 @@
     A UI component library for building high-quality CMS & DMS interfaces and web apps.
   </p>
 
-[![Repo status](https://www.repostatus.org/badges/latest/concept.svg)](./README)
+[![Repo status](https://www.repostatus.org/badges/latest/concept.svg)](./README.md)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/atelier-saulx/aviato-ui/graphs/commit-activity)
 [![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
