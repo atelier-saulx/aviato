@@ -242,6 +242,7 @@ async function releaseProject() {
     try {
       await execa("yarn", ["build"], { stdio: "inherit" });
     } catch (error) {
+      console.log(error);
       throw "Error encountered when building project.";
     }
   }
