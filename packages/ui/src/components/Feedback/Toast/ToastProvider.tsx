@@ -66,9 +66,7 @@ export const ToastProvider = ({
       listeners.forEach((fn) => fn(length))
     }
 
-    const toast = () => {}
-
-    toast.add = (child) => {
+    const toast = (child) => {
       const id = count++
 
       update(
@@ -84,6 +82,8 @@ export const ToastProvider = ({
 
       return id
     }
+
+    toast.add = toast
 
     toast.close = (id?: number) => {
       if (typeof id === 'number') {
