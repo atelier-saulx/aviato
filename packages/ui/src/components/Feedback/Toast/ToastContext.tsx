@@ -1,7 +1,9 @@
 import { createContext, ReactNode } from 'react'
 
-export interface ToastContextType {
-  add: (children: ReactNode) => void
+type add = (children: ReactNode) => number
+
+export type ToastContextType = add & {
+  add: add
   close: (id?: number) => void
   useCount: () => number
 }

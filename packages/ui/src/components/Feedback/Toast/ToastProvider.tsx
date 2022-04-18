@@ -1,17 +1,26 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react'
-
 import { ToastContext, ToastContextType } from './ToastContext'
 
-const ToastContainer = ({ id, children, onClick = null, toast }) => {
-  const [fade, setFade] = useState(0)
+const ToastContainer = ({
+  id,
+  children,
+  onClick = null,
+  toast,
+  first = false,
+}) => {
+  const [fade, setFade] = useState(first)
   const close = () => toast.close(id)
 
   useEffect(() => {
-    const fadeout = () => {
-      setFade(300)
+    if (first) {
+      requestAnimationFrame(() => {
+        setFade(false)
+      })
     }
 
-    const timer = setTimeout(fadeout, 5e3)
+    const timer = setTimeout(() => {
+      setFade(true)
+    }, 5e3)
 
     return () => clearTimeout(timer)
   }, [])
@@ -20,7 +29,7 @@ const ToastContainer = ({ id, children, onClick = null, toast }) => {
     <div
       style={{
         opacity: fade ? 0 : 1,
-        transition: `opacity ${fade}ms`,
+        transition: `opacity 300ms`,
         cursor: 'pointer',
       }}
       onTransitionEnd={fade ? close : null}
@@ -73,7 +82,11 @@ export const ToastProvider = ({
         toastsRef.current.unshift({
           id,
           children: (
-            <ToastContainer id={id} toast={toast}>
+            <ToastContainer
+              id={id}
+              toast={toast}
+              first={!toastsRef.current.length}
+            >
               {child}
             </ToastContainer>
           ),
@@ -149,6 +162,8 @@ export const ToastProvider = ({
       <div
         key={id}
         style={{
+          // TODO FIX THIS
+          zIndex: 99999999999,
           position: fixed ? 'fixed' : 'absolute',
           transform: `translate3d(0,${y}px,0)`,
           transition: 'transform 0.3s',

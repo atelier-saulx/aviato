@@ -236,6 +236,8 @@ export const BaseInput = forwardRef<
     disabled: isDisabled = false,
     invalid: isInvalid = false,
     onChange = noop,
+    onFocus,
+    onBlur,
     ...remainingProps
   } = properties
 
@@ -282,8 +284,14 @@ export const BaseInput = forwardRef<
         className={classes}
         value={inputValue}
         onInput={handleChange}
-        onFocus={() => setIsActive(true)}
-        onBlur={() => setIsActive(false)}
+        onFocus={(e) => {
+          setIsActive(true)
+          onFocus?.(e)
+        }}
+        onBlur={(e) => {
+          setIsActive(false)
+          onBlur?.(e)
+        }}
         disabled={isDisabled}
         {...remainingProps}
       />

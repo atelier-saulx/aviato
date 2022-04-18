@@ -103,7 +103,7 @@ const OverlayPortal = () => {
       style={{
         position: 'fixed',
         // TODO FIX THIS
-        zIndex: 999999999999,
+        zIndex: 99999999999,
         top: 0,
         left: 0,
       }}

@@ -1,7 +1,9 @@
 import { createContext, ReactNode } from 'react'
 
-export type DialogContextType = {
-  open: (children: ReactNode) => number
+type open = (children: ReactNode) => number
+
+export type DialogContextType = open & {
+  open
   close: (id?: number) => void
   confirm: (id?: string | number) => boolean
   alert: (id?: string | number) => boolean
