@@ -251,6 +251,11 @@
   resolved "https://registry.npmjs.org/@based/pretty-number/-/pretty-number-1.0.3.tgz"
   integrity sha512-DGeZzJCsrWyBbpIUvBPuaDhs+kYeXuw7zSZuAAwmcKmI8eSRDJwhYMiNO+RpGKQMycaKKi7rPt/7AjcC1xLsKQ==
 
+"@based/use-global-state@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@based/use-global-state/-/use-global-state-0.3.0.tgz#e2982e704fd96ef050fd30d6204c129fce0d0000"
+  integrity sha512-cvTY7EG0qTBTZmZ+JESpQtZJpZ6eIl6QiMK8z3UGOvB9G/6DklK3fVdcRrXfs+rG79BnwzAJZb4gf5acV4vsvQ==
+
 "@eslint/eslintrc@^0.4.2":
   version "0.4.3"
   resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-0.4.3.tgz"

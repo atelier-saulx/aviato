@@ -11,6 +11,8 @@ export interface InputProps extends BaseInputProps {
   invalid?: boolean
 }
 
+export { InputWrapper }
+
 export const Input = forwardRef<ElementRef<typeof StyledInput>, InputProps>(
   (properties, forwardedRef) => {
     const { label, description, error, invalid, ...remainingProps } = properties
