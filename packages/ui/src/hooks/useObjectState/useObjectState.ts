@@ -1,7 +1,6 @@
-import { useReducer, useRef } from 'react'
+import { useReducer } from 'react'
 import { deepMerge } from '@saulx/utils'
 import { hash } from '@saulx/hash'
-import useGlobalState from '@based/use-global-state'
 
 type GenericObject = { [key: string]: any }
 
