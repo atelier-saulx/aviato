@@ -12,7 +12,7 @@ import { useDialog } from './useDialog'
 import { useHotkeys } from '~/hooks'
 
 const Container = styled('div', {
-  border: '1px solid blue',
+  border: '3px solid blue',
   width: 632, // 520
   // maxWidth: '100%',
   maxHeight: 'calc(100vh - 30px)',
@@ -186,11 +186,10 @@ export const Dialog = Object.assign(
       return (
         <Container ref={forwardedRef} {...props}>
           <ScrollArea>
-            {children}
-            {/* <ScrollBody>
+            <ScrollBody>
               <Dialog.Title>{title}</Dialog.Title>
               {children}
-            </ScrollBody> */}
+            </ScrollBody>
           </ScrollArea>
         </Container>
       )
