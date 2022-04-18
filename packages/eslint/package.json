@@ -1,7 +1,7 @@
 {
   "name": "@aviato/eslint-config",
   "description": "Aviato Shareable ESLint Config",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "license": "MIT",
   "repository": "https://github.com/atelier-saulx/aviato-ui",
   "sideEffects": false,
