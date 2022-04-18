@@ -5,6 +5,8 @@ import React, {
   ReactNode,
   Fragment,
   useRef,
+  useState,
+  useEffect,
 } from 'react'
 import { styled } from '~/theme'
 import { Text, Button, ScrollArea } from '~/components'
@@ -12,11 +14,10 @@ import { useDialog } from './useDialog'
 import { useHotkeys } from '~/hooks'
 
 const Container = styled('div', {
-  border: '3px solid blue',
   width: 632, // 520
-  // maxWidth: '100%',
   maxHeight: 'calc(100vh - 30px)',
-  // display: 'flex', // ??
+  display: 'flex',
+  flexDirection: 'column',
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
   backgroundColor: '$Background1dp',
@@ -174,7 +175,7 @@ export interface DialogProps extends ComponentProps<typeof Container> {
 
 export const Dialog = Object.assign(
   forwardRef<ElementRef<typeof Container>, DialogProps>(
-    ({ children, title, ...props }, forwardedRef) => {
+    ({ children, title, style, ...props }, forwardedRef) => {
       if (typeof children === 'string') {
         if (!title) {
           title = children
@@ -183,8 +184,28 @@ export const Dialog = Object.assign(
           children = <Body>{children}</Body>
         }
       }
+
+      const [go, setgo] = useState(false)
+      useEffect(() => {
+        const x = requestAnimationFrame(() => {
+          setgo(true)
+        })
+        return () => {
+          cancelAnimationFrame(x)
+        }
+      }, [])
+
       return (
-        <Container ref={forwardedRef} {...props}>
+        <Container
+          style={{
+            transition: 'transform 0.15s, opacity 0.15s',
+            opacity: go ? 1 : 0,
+            transform: go ? 'scale(1)' : 'scale(0.9)',
+            ...style,
+          }}
+          ref={forwardedRef}
+          {...props}
+        >
           <ScrollArea>
             <ScrollBody>
               <Dialog.Title>{title}</Dialog.Title>

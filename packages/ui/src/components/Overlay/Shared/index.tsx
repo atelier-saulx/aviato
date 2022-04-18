@@ -60,14 +60,14 @@ export type SharedOverlayProps = PropsWithChildren<{
 
 export default forwardRef<HTMLDivElement, SharedOverlayProps>(
   ({ position, children, css }, ref) => {
-    const [go, setgo] = useState(false)
-
     const placement =
       position.placement === 'left'
         ? 'flex-start'
         : position.placement === 'right'
         ? 'flex-end'
         : 'center'
+
+    const [go, setgo] = useState(false)
 
     useEffect(() => {
       const x = requestAnimationFrame(() => {

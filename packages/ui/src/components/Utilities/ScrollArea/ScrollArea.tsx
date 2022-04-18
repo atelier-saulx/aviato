@@ -10,12 +10,16 @@ const StyledScrollArea = styled(RadixScrollArea.Root, {
   width: '100%',
   height: '100%',
   overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
 })
 
 const StyledViewport = styled(RadixScrollArea.Viewport, {
   boxSizing: 'border-box',
   height: '100%',
   width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
 })
 
 const Scrollbar = styled(RadixScrollArea.Scrollbar, {
