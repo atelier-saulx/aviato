@@ -12,17 +12,14 @@ import { useDialog } from './useDialog'
 import { useHotkeys } from '~/hooks'
 
 const Container = styled('div', {
+  border: '1px solid blue',
   width: 632, // 520
-  maxWidth: '100%',
-  maxHeight: 'calc(100vh - 32px)', // ??
-  display: 'flex', // ??
+  // maxWidth: '100%',
+  maxHeight: 'calc(100vh - 30px)',
+  // display: 'flex', // ??
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
   backgroundColor: '$Background1dp',
-  '&>div': {
-    // need flex to make scrollarea work...  but messes up width
-    width: '100%',
-  },
   variants: {
     mode: {
       dialog: {
@@ -119,7 +116,7 @@ const Buttons = ({ children, border = null }) => {
   )
 }
 
-const Confirm = ({ children = 'OK', onConfirm, ...props }) => {
+const Confirm = ({ children = 'OK', onConfirm = () => {}, ...props }) => {
   const dialog = useDialog()
   const { current: myId } = useRef(dialog._id)
   const onClick = onConfirm
@@ -189,10 +186,11 @@ export const Dialog = Object.assign(
       return (
         <Container ref={forwardedRef} {...props}>
           <ScrollArea>
-            <ScrollBody>
+            {children}
+            {/* <ScrollBody>
               <Dialog.Title>{title}</Dialog.Title>
               {children}
-            </ScrollBody>
+            </ScrollBody> */}
           </ScrollArea>
         </Container>
       )

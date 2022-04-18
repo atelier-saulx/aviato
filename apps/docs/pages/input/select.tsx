@@ -150,6 +150,16 @@ const SelectPage = () => {
               'snak',
             ]}
           />
+
+          <MultiSelect
+            label="Hello"
+            filterable="create"
+            placeholder="Faka snorkles"
+            onChange={(value) => {
+              console.info('Select change: ', { value })
+            }}
+            options={['flurpy', 'snark', 'snorkels']}
+          />
         </Column>
       </>
     )

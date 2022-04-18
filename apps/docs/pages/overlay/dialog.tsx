@@ -12,11 +12,30 @@ import { log } from '@aviato/utils'
 
 import { ShowcaseHeader, ShowcaseComponent } from '../../components'
 
+const DialogLarge = () => {
+  const myLongList = []
+
+  for (let i = 0; i < 1000; i++) {
+    myLongList.push(<div key={i}>{i} 🤥</div>)
+  }
+
+  return <Dialog>{myLongList}</Dialog>
+}
+
 const DialogButton = ({ level = 1 }) => {
-  const { confirm, alert, prompt } = useDialog()
+  const { confirm, alert, prompt, open } = useDialog()
 
   return (
     <>
+      <Button
+        leftIcon={<>🤡</>}
+        onClick={() => {
+          open(<DialogLarge />)
+        }}
+      >
+        HUGE DIALOG
+      </Button>
+
       <Button
         onClick={async () => {
           const ok = await confirm('Confirm please')
@@ -153,6 +172,7 @@ const DialogPage = () => {
             <DialogButton />
             <br />
             <DialogButtonAndClose />
+            <br />
           </div>
         </ShowcaseComponent>
       </DialogProvider>

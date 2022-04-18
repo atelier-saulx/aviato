@@ -39,7 +39,7 @@ const StyledLabelContainer = styled('div', {
 
 export const MultiSelect: FC<MultiSelectProps> = ({
   options,
-  values,
+  values = [],
   onChange,
   css,
   filterable,
