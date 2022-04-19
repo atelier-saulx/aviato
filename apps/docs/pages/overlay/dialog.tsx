@@ -7,6 +7,7 @@ import {
   Button,
   Input,
   useHasLoaded,
+  Text,
 } from '@aviato/ui'
 import { log } from '@aviato/utils'
 
@@ -19,7 +20,15 @@ const DialogLarge = () => {
     myLongList.push(<div key={i}>{i} 🤥</div>)
   }
 
-  return <Dialog>{myLongList}</Dialog>
+  return (
+    <Dialog>
+      <Text color="Secondary">
+        This action cannot be undone. This will permanently delete the project{' '}
+        <b>Demo</b>, environment <b>Production</b>
+      </Text>
+      {myLongList}
+    </Dialog>
+  )
 }
 
 const DialogButton = ({ level = 1 }) => {
@@ -111,10 +120,20 @@ const DialogPage = () => {
             system.
           `}
         />
-
         <ShowcaseComponent background="transparent">
           <div style={{ maxWidth: '100%' }}>
             <Dialog>Only title</Dialog>
+
+            <br />
+
+            <Dialog>
+              <Text color="Primary">Primary Text</Text>
+              <Text color="Secondary">
+                {' '}
+                This action cannot be undone. This will permanently delete the
+                project <b>Demo</b>, environment <b>Production</b>
+              </Text>
+            </Dialog>
 
             <br />
 
@@ -122,8 +141,8 @@ const DialogPage = () => {
 
             <br />
 
-            <Dialog title="Title and buttons">
-              <Dialog.Buttons>
+            <Dialog title="Title and buttons" padding={0}>
+              <Dialog.Buttons border>
                 <Dialog.Cancel />
                 <Dialog.Confirm />
               </Dialog.Buttons>

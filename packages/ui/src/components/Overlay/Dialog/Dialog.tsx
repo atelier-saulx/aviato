@@ -20,7 +20,7 @@ const Container = styled('div', {
   flexDirection: 'column',
   borderRadius: 4,
   boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.12)',
-  backgroundColor: '$Background1dp',
+  backgroundColor: '$Background2dp',
   variants: {
     mode: {
       dialog: {
@@ -31,9 +31,9 @@ const Container = styled('div', {
 })
 
 const ScrollBody = styled('div', {
-  paddingTop: 24,
-  paddingLeft: 24,
-  paddingRight: 24,
+  paddingTop: '$$dialogPadding',
+  paddingLeft: '$$dialogPadding',
+  paddingRight: '$$dialogPadding',
   width: '100%',
   '&>:last-child': {
     paddingBottom: 24,
@@ -46,9 +46,9 @@ const StyledButtons = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  paddingTop: 24,
-  backgroundColor: '$Background1dp',
-  paddingBottom: 24,
+  paddingTop: '$$dialogPadding',
+  backgroundColor: '$Background2dp',
+  paddingBottom: '$$dialogPadding',
 })
 
 const ButtonsWithBorder = styled(StyledButtons, {
@@ -57,8 +57,8 @@ const ButtonsWithBorder = styled(StyledButtons, {
   paddingTop: 20,
   paddingLeft: 24,
   paddingRight: 24,
-  marginLeft: -24,
-  marginRight: -24,
+  marginLeft: 'calc(-1 * $$dialogPadding)',
+  marginRight: 'calc(-1 * $$dialogPadding)',
 })
 
 const ButtonSpacer = styled('div', {
@@ -72,8 +72,8 @@ const BodySpacer = styled('div', {
   },
 })
 
-const Title = ({ children }) => {
-  return <Text weight="semibold">{children}</Text>
+const Title = (props) => {
+  return <Text weight="semibold" {...props} />
 }
 
 const Body = ({ children }) => {
@@ -171,11 +171,12 @@ const Cancel = ({ children = 'Cancel', onCancel = null, ...props }) => {
 export interface DialogProps extends ComponentProps<typeof Container> {
   children?: ReactNode
   title?: string
+  padding?: number
 }
 
 export const Dialog = Object.assign(
   forwardRef<ElementRef<typeof Container>, DialogProps>(
-    ({ children, title, style, ...props }, forwardedRef) => {
+    ({ children, title, padding = 24, style, ...props }, forwardedRef) => {
       if (typeof children === 'string') {
         if (!title) {
           title = children
@@ -207,7 +208,11 @@ export const Dialog = Object.assign(
           {...props}
         >
           <ScrollArea>
-            <ScrollBody>
+            <ScrollBody
+              css={{
+                $$dialogPadding: `${padding}px`,
+              }}
+            >
               <Dialog.Title>{title}</Dialog.Title>
               {children}
             </ScrollBody>

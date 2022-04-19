@@ -1,6 +1,6 @@
 import React, { ElementRef, forwardRef } from 'react'
 import { ComponentProps } from '@stitches/react'
-import { isText } from '@aviato/utils'
+// import { isText } from '@aviato/utils'
 
 import { styled } from '~/theme'
 import { BaseFontVariants, BaseTextStyles } from './styles'
@@ -58,26 +58,27 @@ export const Text = forwardRef<ElementRef<typeof StyledText>, TextProps>(
   (properties, forwardedRef) => {
     const { children } = properties
 
-    if (isText(children)) {
-      const {
-        size = 'medium',
-        weight = 'regular',
-        color = 'Primary',
-        singleLine,
-        ...remainingProps
-      } = properties
+    // Youri: I disabled this because it prevents you from doing things like: <Text>foo <b>bar</b></Text>
+    // if (isText(children)) {
+    const {
+      size = 'medium',
+      weight = 'regular',
+      color = 'Primary',
+      singleLine,
+      ...remainingProps
+    } = properties
 
-      return (
-        <StyledText
-          color={color}
-          size={size}
-          weight={weight}
-          mode={singleLine ? 'singleLine' : null}
-          ref={forwardedRef}
-          {...remainingProps}
-        />
-      )
-    }
+    return (
+      <StyledText
+        color={color}
+        size={size}
+        weight={weight}
+        mode={singleLine ? 'singleLine' : null}
+        ref={forwardedRef}
+        {...remainingProps}
+      />
+    )
+    // }
 
     return children || (null as any)
   }
