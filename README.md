@@ -92,7 +92,7 @@ _We do not currently accept community-driven code contributions_, as Aviato is s
 ## ✍️ Authors
 
 - Morten Broesby-Olsen ([@mortenbroesby](https://github.com/mortenbroesby))
-- Maarten de Winther ([@maartensaulx](https://github.com/maartensaulx))
+- Maarten ([@maartensaulx](https://github.com/maartensaulx))
 - Youri Daamen ([@youzi](https://github.com/youzi))
 - Yves Beer ([@cowboybeer](https://github.com/cowboybeer))
 - Atelier Saulx ([@atelier-saulx](https://github.com/atelier-saulx)) - [Saulx](https://www.saulx.com/)
